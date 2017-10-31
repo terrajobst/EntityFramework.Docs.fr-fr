@@ -22,6 +22,7 @@
         "files": [
           "api/**.yml",
           "api/index.md"
+
         ]
       },
       {
@@ -72,7 +73,8 @@
       "ms.reviewer": "divega",
       "ms.prod": "entity-framework",
       "ms.tgt_pltfrm": "dotnet",
-      "ms.devlang": "dotnet"
+      "ms.devlang": "dotnet",
+      "bilingual_type": "hover over"
     },
     "dest": "_site",
     "template": [
