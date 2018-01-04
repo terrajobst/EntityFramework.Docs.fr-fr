@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: b9d9662ce277e4f7b3d6f997a5117a0592f59fa3
-ms.sourcegitcommit: c72d85805db0aa95f980514a18381fdc5e17c786
+ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/01/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -19,7 +19,7 @@ Une instance de DbContext suivre automatiquement les entités retournées à par
 Toutefois, parfois, les entités sont interrogées à l’aide d’une instance de contexte et puis enregistré à l’aide d’une autre instance. Cela se produit souvent dans les scénarios « déconnectés » telle qu’une application web où les entités sont interrogées, envoyées au client, modifiées, envoyées sur le serveur dans une demande et puis enregistrées. Dans ce cas, le deuxième contexte d’instance doit savoir si les entités sont nouvelle (doit être inséré) existant (doit être mis à jour).
 
 > [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) sur GitHub.
 
 ## <a name="identifying-new-entities"></a>Identification des entités
 
@@ -46,7 +46,7 @@ Toutefois, EF a également un moyen intégré pour n’importe quel type d’ent
 
 ### <a name="with-other-keys"></a>Avec les autres clés
 
-Un autre mécanisme est nécessaire pour les nouvelles entités d’identité lorsque les valeurs de clés ne sont pas générés automatiquement. Il existe deux approches générales pour cela :
+Un autre mécanisme est nécessaire pour identifier les nouvelles entités lorsque les valeurs de clés ne sont pas générés automatiquement. Il existe deux approches générales pour cela :
  * Requête pour l’entité
  * Passez un indicateur à partir du client
 

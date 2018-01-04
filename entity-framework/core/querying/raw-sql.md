@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: ddf3a841800684688d50dcf9323f4d83c851222f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 79894c7b9fd9e40cdf14460abf5d872ee2f4b9f0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brut
 
 Entity Framework Core permet de liste déroulante pour les requêtes SQL bruts lorsque vous travaillez avec une base de données relationnelle. Cela peut être utile si la requête que vous voulez effectuer ne peut pas être exprimée à l’aide de LINQ ou à l’aide d’une requête LINQ se traduit par inefficace SQL envoyée à la base de données.
 
 > [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
 
 ## <a name="limitations"></a>Limitations
 
@@ -29,6 +29,13 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 * Les noms de colonnes dans le jeu de résultats doivent correspondre aux noms de colonnes mappées aux propriétés. Notez que cela est différent d’EF6 où mappage de propriété/colonne a été ignorée pour les requêtes SQL bruts et noms devaient correspondre aux noms de propriété de colonne de jeu de résultats.
 
 * La requête SQL ne peut pas contenir les données associées. Toutefois, dans de nombreux cas, vous pouvez composer au-dessus de la requête à l’aide de la `Include` opérateur pour retourner les données associées (consultez [, y compris les données associées](#including-related-data)).
+
+* `SELECT`instructions passées à cette méthode doivent généralement être composables : si Core d’EF a besoin évaluer les opérateurs de requête supplémentaires sur le serveur (par exemple, pour traduire les opérateurs LINQ appliquées après `FromSql`), le SQL fourni sera considéré comme une sous-requête. Cela signifie que l’instruction SQL passée ne doit pas contenir tous les caractères ou les options qui ne sont pas valides sur une sous-requête, telles que :
+  * un point-virgule de fin
+  * Sur le serveur SQL Server, au niveau des requêtes de fin l’indicateur, par exemple`OPTION (HASH JOIN)`
+  * Sur le serveur SQL Server, un `ORDER BY` clause n’est pas accompagné de `TOP 100 PERCENT` dans le `SELECT` clause
+
+* Les instructions SQL autres que `SELECT` sont reconnus automatiquement en tant que non composable. Par conséquent, les résultats complets de procédures stockées sont toujours retournées au client et tous les opérateurs LINQ appliquée après `FromSql` sont évaluées en mémoire. 
 
 ## <a name="basic-raw-sql-queries"></a>Requêtes SQL brutes de base
 

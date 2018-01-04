@@ -6,24 +6,27 @@ ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
 ms.technology: entity-framework-core
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: a7f697dfe2b93c7b93a2dd14945732db4f37628c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 55286adf08a6a1c3286b7059d747a62e1feffd22
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="inheritance-relational-database"></a>Héritage (base de données relationnelle)
 
 > [!NOTE]  
-> La configuration de cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiqués ici devient disponibles lorsque vous installez un fournisseur de base de données relationnelle (en raison de l’élément partagé *Microsoft.EntityFrameworkCore.Relational* package).
+> La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
 L’héritage dans le modèle EF est utilisé pour contrôler la façon dont l’héritage dans les classes d’entité est représentée dans la base de données.
+
+> [!NOTE]  
+> Actuellement, uniquement le table par hiérarchie (TPH) implémentation du modèle dans EF Core. Autres modèles courants tels que table par type (TPT) et table par-type concret (TPC) ne sont pas encore disponibles.
 
 ## <a name="conventions"></a>Conventions
 
 Par convention, l’héritage sera mappé à l’aide du modèle de table par hiérarchie (TPH). TPH utilise une seule table pour stocker les données pour tous les types dans la hiérarchie. Une colonne de discriminateur est utilisée pour identifier le type de chaque ligne représente.
 
-EF va installer uniquement l’héritage si deux ou plusieurs types hérités sont explicitement inclus dans le modèle (voir [héritage](../inheritance.md) pour plus d’informations).
+EF Core va installer uniquement l’héritage si deux ou plusieurs types hérités sont explicitement inclus dans le modèle (voir [héritage](../inheritance.md) pour plus d’informations).
 
 Voici un exemple d’un scénario simple d’héritage et les données stockées dans une table de base de données relationnelle à l’aide du modèle TPH. Le *discriminateur* colonne identifie le type de *Blog* est stocké dans chaque ligne.
 
