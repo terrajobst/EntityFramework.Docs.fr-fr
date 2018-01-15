@@ -56,7 +56,7 @@
       "Publish", 
       "Pdf" 
     ] 
-  },
+  }, 
   "Targets": {
     "Pdf": {
       "template_folder": "_themes.pdf"
