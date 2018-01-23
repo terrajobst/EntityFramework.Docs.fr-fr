@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: a9481fe851cc264ab3eaecad052c2e683ae57a44
-ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
-ms.translationtype: HT
+ms.openlocfilehash: e1cb194d7c7472af59eb44fe2a084fa16c40c186
+ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/08/2017
+ms.lasthandoff: 01/22/2018
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -36,18 +36,18 @@ Il existe quatre supprimer des comportements, répertoriés dans les tableaux ci
 | Nom du comportement | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données
 |-|-|-
 | **Cascade** | Les entités sont supprimées. | Les entités sont supprimées.
-| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | None
+| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | Aucun.
 | **SetNull** | Propriétés de clé étrangère sont définies avec la valeur null | Propriétés de clé étrangère sont définies avec la valeur null
-| **Restreindre** | None | None
+| **Restrict** | Aucun. | Aucun.
 
 Pour les relations requises (clé étrangère non nullable) il est _pas_ possible d’enregistrer une valeur null valeur de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données
 |-|-|-
 | **Cascade** (par défaut) | Les entités sont supprimées. | Les entités sont supprimées.
-| **ClientSetNull** | Lève une exception SaveChanges | None
+| **ClientSetNull** | Lève une exception SaveChanges | Aucun.
 | **SetNull** | Lève une exception SaveChanges | Lève une exception SaveChanges
-| **Restreindre** | None | None
+| **Restrict** | Aucun. | Aucun.
 
 Dans les tableaux ci-dessus, *aucun* peut entraîner une violation de contrainte. Par exemple, si une entité principal/enfant est supprimée, mais aucune action n’est effectuée pour modifier la clé étrangère de dépendant/enfant, puis la base de données probablement lève sur SaveChanges en raison d’une violation de contrainte foreign.
 
@@ -67,7 +67,7 @@ Dans les tableaux ci-dessus, *aucun* peut entraîner une violation de contrainte
 
 ## <a name="entity-deletion-examples"></a>Exemples de suppression d’entité
 
-Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) une exécution qui peut être téléchargé. L’exemple montre que se passe-t-il pour chaque comportement de suppression pour les relations facultatives et requises lorsqu’une entité parente est supprimée.
+Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre que se passe-t-il pour chaque comportement de suppression pour les relations facultatives et requises lorsqu’une entité parente est supprimée.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
