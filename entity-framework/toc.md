@@ -16,7 +16,7 @@
 #### [EF Core 1.0 (version précédente)](core/what-is-new/ef-core-1.0.md)
 #### [EF Core 1.1 (version précédente)](core/what-is-new/ef-core-1.1.md)
 
-### [Bien démarrer](core/get-started/index.md)
+### [Prise en main](core/get-started/index.md)
 #### [Installation d’EF Core](core/get-started/install/index.md)
 #### [.NET Framework (Console, WinForms, WPF, etc.)](core/get-started/full-dotnet/index.md)
 ##### [.NET framework - Nouvelle base de données](core/get-started/full-dotnet/new-db.md)
@@ -55,7 +55,7 @@
 ##### [Séquences](core/modeling/relational/sequences.md)
 ##### [Valeurs par défaut](core/modeling/relational/default-values.md)
 ##### [Index](core/modeling/relational/indexes.md)
-##### [Foreign Key Constraints](core/modeling/relational/fk-constraints.md)
+##### [Contraintes de clé étrangère](core/modeling/relational/fk-constraints.md)
 ##### [Clés secondaires (contraintes uniques)](core/modeling/relational/unique-constraints.md)
 ##### [Héritage (base de données relationnelle)](core/modeling/relational/inheritance.md)
 
@@ -83,7 +83,7 @@
 
 ### [Fournisseurs de bases de données](core/providers/index.md)
 #### [Microsoft SQL Server](core/providers/sql-server/index.md)
-##### [Tables optimisées en mémoire](core/providers/sql-server/memory-optimized-tables.md)
+##### [Tables à mémoire optimisée](core/providers/sql-server/memory-optimized-tables.md)
 #### [SQLite](core/providers/sqlite/index.md)
 ##### [Limitations de SQLite](core/providers/sqlite/limitations.md)
 #### [PostgreSQL (Npgsql)](core/providers/npgsql/index.md)
@@ -129,6 +129,7 @@
 #### [Microsoft.EntityFrameworkCore.AutoHistory](core/extensions/autohistory.md)
 #### [Microsoft.EntityFrameworkCore.DynamicLinq](core/extensions/dynamiclinq.md)
 #### [Microsoft.EntityFrameworkCore.UnitOfWork](core/extensions/unitofwork.md)
+#### [NeinLinq.EntityFrameworkCore](core/extensions/neinlinq.md)
 
 ### Divers
 #### [Chaînes de connexion](core/miscellaneous/connection-strings.md)
