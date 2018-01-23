@@ -8,7 +8,7 @@ ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
 ms.openlocfilehash: a9481fe851cc264ab3eaecad052c2e683ae57a44
 ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/08/2017
 ---
@@ -16,7 +16,7 @@ ms.lasthandoff: 11/08/2017
 
 Suppression en cascade est couramment utilisée dans la terminologie de base de données pour décrire une caractéristique qui permet la suppression d’une ligne pour déclencher automatiquement la suppression de lignes connexes. Un concept étroitement lié également couvert par les comportements de suppression EF cœur est la suppression automatique d’une entité enfant lorsqu’il est la relation à un parent a été interrompue--cette i communément appelée « suppression des orphelins ».
 
-EF Core implémente plusieurs comportements de suppression différente et permet la configuration des comportements de suppression de relations individuelles. EF Core implémente également des conventions de configurer automatiquement les comportements de suppression par défaut utiles pour chaque relation basée sur le [requiredness de la relation] (.. /Modeling/Relationships.MD#Required-and-Optional-Relationships).
+EF Core implémente plusieurs comportements de suppression différente et permet la configuration des comportements de suppression de relations individuelles. EF Core implémente également des conventions de configurer automatiquement les comportements de suppression par défaut utiles pour chaque relation basée sur le [requiredness de la relation] (../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Supprimer des comportements
 Supprimer les comportements sont définis dans le *deleteBehavior()* énumérateur de type et peut être passée à la *OnDelete* API fluent au contrôle si la suppression d’une entité principal/le parent ou l’interruption de la relation à des entités dépendantes/enfant doit avoir un effet secondaire sur les entités dépendantes/enfant.
