@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 ms.technology: entity-framework-core
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: de26e3b28851d4dc4e50f0490093dd05ad489b31
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 6980acd53b0a74055af7a1e04b476f4625c327c9
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="configuring-a-dbcontext"></a>Configuration d’un DbContext
 
@@ -18,15 +18,15 @@ Cet article explique les modèles de base pour la configuration d’un `DbContex
 
 ## <a name="design-time-dbcontext-configuration"></a>Configuration de DbContext au moment du design
 
-EF Core au moment du design des outils tels que [migrations](xref:core/managing-schemas/migrations/index) doivent être en mesure de découvrir et de créer une instance de l’utilisation d’un `DbContext` type afin de regrouper des informations sur les types d’entité et comment ils sont mappés à un schéma de base de données de l’application. Ce processus peut être automatique, que l’outil peut facilement créer le `DbContext` de sorte qu’il sera configuré de la même façon à la façon dont il est configuré au moment de l’afficher.
+EF Core au moment du design des outils tels que [migrations](xref:core/managing-schemas/migrations/index) doivent être en mesure de découvrir et de créer une instance de l’utilisation d’un `DbContext` type afin de regrouper des informations sur les types d’entité et comment ils sont mappés à un schéma de base de données de l’application. Ce processus peut être automatique, que l’outil peut facilement créer le `DbContext` de sorte qu’il sera configuré de la même façon à la façon dont il est configuré au moment de l’exécution.
 
 Lors d’un modèle qui fournit les informations de configuration nécessaires à la `DbContext` peut utiliser au moment de l’exécution, les outils qui requièrent l’utilisation d’un `DbContext` au moment du design ne fonctionnent qu’avec un nombre limité de modèles. Elles sont traitées plus en détail dans les [la création du contexte au moment du Design](xref:core/miscellaneous/cli/dbcontext-creation) section.
 
 ## <a name="configuring-dbcontextoptions"></a>Configuration DbContextOptions
 
-`DbContext`doit avoir une instance de `DbContextOptions` afin d’effectuer des tâches. Le `DbContextOptions` instance transfère les informations de configuration telles que :
+`DbContext` doit avoir une instance de `DbContextOptions` afin d’effectuer des tâches. Le `DbContextOptions` instance transfère les informations de configuration telles que :
 
-- Le fournisseur de base de données à utiliser, généralement sélectionné en appelant une méthode comme `UseSqlServer` ou`UseSqlite`
+- Le fournisseur de base de données à utiliser, généralement sélectionné en appelant une méthode comme `UseSqlServer` ou `UseSqlite`
 - Toute chaîne de connexion nécessaire ou d’un identificateur de l’instance de la base de données, généralement passé en tant qu’argument à la méthode de sélection de fournisseur mentionnée ci-dessus
 - Tous les sélecteurs de comportement de facultatif au niveau du fournisseur, en général également chaînés à l’intérieur de l’appel à la méthode de sélection du fournisseur
 - Tous les sélecteurs de comportement générales EF Core, généralement chaînés après ou avant la méthode de sélection du fournisseur
@@ -108,7 +108,7 @@ using (var context = new BloggingContext())
 
 EF Core prend en charge à l’aide de `DbContext` avec un conteneur d’injection de dépendance. Le type DbContext peut être ajouté au conteneur de service à l’aide de la `AddDbContext<TContext>` (méthode).
 
-`AddDbContext<TContext>`permettront à la fois votre type DbContext, `TContext`et le correspondant `DbContextOptions<TContext>` disponibles pour l’injection de code à partir du conteneur de service.
+`AddDbContext<TContext>` permettront à la fois votre type DbContext, `TContext`et le correspondant `DbContextOptions<TContext>` disponibles pour l’injection de code à partir du conteneur de service.
 
 Consultez [lecture plus](#more-reading) ci-dessous pour plus d’informations sur l’injection de dépendances.
 

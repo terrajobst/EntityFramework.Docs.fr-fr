@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 0b145217d40027c4b8e4746e9c5651652a28c9eb
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -20,6 +20,9 @@ Toutefois, parfois, les entités sont interrogées à l’aide d’une instance 
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) sur GitHub.
+
+> [!TIP]
+> EF Core peut suivre seulement une seule instance d’une entité avec une valeur de clé primaire donnée. La meilleure façon d’éviter ce problème consiste à utiliser un contexte de courte durée de vie pour chaque unité de travail tels que le contexte est vide, au démarrage en cours a entités associées, enregistre ces entités, puis le contexte est supprimé et ignorée.
 
 ## <a name="identifying-new-entities"></a>Identification des entités
 
@@ -85,6 +88,10 @@ Les étapes ici sont :
 > SetValues uniquement marque a modifié les propriétés qui ont des valeurs différentes à ceux de l’entité suivie. Cela signifie que lorsque la mise à jour est envoyée, uniquement les colonnes qui ont été modifiées seront mise à jour. (Et si rien n’a changé, alors aucune mise à jour ne sera envoyé à tout).
 
 ## <a name="working-with-graphs"></a>Utilisation des graphiques
+
+### <a name="identity-resolution"></a>Résolution d’identité
+
+Comme indiqué ci-dessus, EF Core peut suivre uniquement une seule instance d’une entité avec une valeur de clé primaire donnée. Lorsque vous travaillez avec des graphiques le graphique doit être créé dans l’idéal, telle que cet invariant est géré, et le contexte doit être utilisé pour qu’une seule unité de travail. Si le graphique ne contient pas les doublons, il sera nécessaire traiter le graphique avant de l’envoyer à EF de consolider plusieurs instances en un seul. Cela peut être non trivial où les instances ont des valeurs en conflit et les relations, donc les doublons de consolidation doivent être effectuées dès que possible dans le pipeline de votre application afin d’éviter la résolution des conflits.
 
 ### <a name="all-newall-existing-entities"></a>Toutes les entités de nouveau ou l’ensemble existantes
 
