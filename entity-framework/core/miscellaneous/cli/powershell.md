@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: b4ecb27edf94e7b9ad6c7fe65a891dcbf1593309
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: aacf8c8564a3966db6202c9ff1c1c02a19a10814
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 <a name="ef-core-package-manager-console-tools"></a>Outils de la Console Gestionnaire de Package EF Core
 =====================================
@@ -42,14 +42,14 @@ Get-Help about_EntityFrameworkCore
 ---------------
 Chaque fois que vous appelez une commande, il existe deux projets concernés :
 
-Le projet cible est où les fichiers sont ajoutés (ou dans certains cas supprimés). Le projet cible par défaut est la **projet par défaut** sélectionné dans la Console du Gestionnaire de Package, mais peut également être spécifié à l’aide de-paramètre du projet.
+Le projet cible contient les fichiers qui sont ajoutés (ou dans certains cas supprimés). Le projet cible par défaut est la **projet par défaut** sélectionné dans la Console du Gestionnaire de Package, mais peut également être spécifié à l’aide de-paramètre du projet.
 
-Le projet de démarrage est celui émulé par les outils lors de l’exécution de code de votre projet. La valeur par défaut une **définir comme projet de démarrage** dans l’Explorateur de solutions. Il peut également être spécifié à l’aide du paramètre - StartupProject.
+Le projet de démarrage est le projet qu’émulent les outils durant l’exécution du code de votre projet. La valeur par défaut une **définir comme projet de démarrage** dans l’Explorateur de solutions. Il peut également être spécifié à l’aide du paramètre - StartupProject.
 
 Paramètres communs :
 
 |                           |                             |
-| ------------------------- | --------------------------- |
+|:--------------------------|:----------------------------|
 | -Contexte \<chaîne >        | DbContext à utiliser.       |
 | -Projet \<chaîne >        | Le projet à utiliser.         |
 | -StartupProject \<chaîne > | Le projet de démarrage à utiliser. |
@@ -70,12 +70,12 @@ Pour afficher les informations d’aide sur une commande, utilisez PowerShell `G
 
 Ajoute une nouvelle migration.
 
-Paramètres :
+Paramètres :
 
-|                                    |                                                                                 |
-| ---------------------------------- | ------------------------------------------------------------------------------- |
-| ***-Name*** \<chaîne >              | Le nom de la migration.                                                      |
-| <nobr>-OutputDir \<chaîne ></nobr>  | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatif au répertoire du projet. La valeur par défaut est « Migration ». |
+|                                   |                                                                                                                  |
+|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
+| ***-Name*** \<String>             | Le nom de la migration.                                                                                       |
+| <nobr>-OutputDir \<String></nobr> | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatif au répertoire du projet. La valeur par défaut est « Migration ». |
 
 > [!NOTE]
 > Paramètres de **gras** sont requis et celles dans *italique* sont positionnels.
@@ -84,11 +84,11 @@ Paramètres :
 
 Supprime la base de données.
 
-Paramètres :
+Paramètres :
 
-|          |                                                          |
-| -------- | -------------------------------------------------------- |
-| -WhatIf  | Afficher la base de données qui seront supprimés, mais ne pas supprimer. |
+|         |                                                          |
+|:--------|:---------------------------------------------------------|
+| -WhatIf | Afficher la base de données qui seront supprimés, mais ne pas supprimer. |
 
 ### <a name="get-dbcontext"></a>Get-DbContext
 
@@ -98,51 +98,51 @@ Obtient des informations sur un type de DbContext.
 
 Supprime la dernière migration.
 
-Paramètres :
+Paramètres :
 
 |        |                                                                       |
-| ------ | --------------------------------------------------------------------- |
+|:-------|:----------------------------------------------------------------------|
 | -Force | Ne pas vérifier si la migration a été appliquée à la base de données. |
 
-### <a name="scaffold-dbcontext"></a>Une vue de structure-DbContext
+### <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
 Structures un types DbContext et l’entité pour une base de données.
 
-Paramètres :
+Paramètres :
 
-|                                          |                                                                           |
-| ---------------------------------------- | ------------------------------------------------------------------------- |
-| <nobr>***-Connexion*** \<chaîne ></nobr> | La chaîne de connexion à la base de données.                                    |
-| ***-Fournisseur*** \<chaîne >                | Le fournisseur à utiliser. (Par exemple : Microsoft.EntityFrameworkCore.SqlServer)       |
-| -OutputDir \<chaîne >                     | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire du projet. |
-| -Contexte \<chaîne >                       | Le nom de la DbContext à générer.                                    |
-| -Schémas \<String [] >                     | Les schémas des tables pour générer des types d’entités.                       |
-| -Tables \<String [] >                      | Les tables pour générer des types d’entités.                                  |
+|                                          |                                                                                                  |
+|:-----------------------------------------|:-------------------------------------------------------------------------------------------------|
+| <nobr>***-Connection*** \<String></nobr> | La chaîne de connexion à la base de données.                                                           |
+| ***-Provider*** \<String>                | Le fournisseur à utiliser. (Par exemple) Microsoft.EntityFrameworkCore.SqlServer)                              |
+| -OutputDir \<String>                     | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire du projet.                      |
+| -Contexte \<chaîne >                       | Le nom de la DbContext à générer.                                                           |
+| -Schemas \<String[]>                     | Les schémas des tables pour générer des types d’entités.                                              |
+| -Tables \<String [] >                      | Les tables pour générer des types d’entités.                                                         |
 | -DataAnnotations                         | Utilisez des attributs pour configurer le modèle (le cas échéant). Si omis, uniquement l’API fluent est utilisé. |
-| -UseDatabaseNames                        | Utilisez des noms de table et de colonne directement à partir de la base de données.                    |
-| -Force                                   | Remplacer les fichiers existants.                                                 |
+| -UseDatabaseNames                        | Utilisez des noms de table et de colonne directement à partir de la base de données.                                           |
+| -Force                                   | Remplacer les fichiers existants.                                                                        |
 
-### <a name="script-migration"></a>Migration de script
+### <a name="script-migration"></a>Script-Migration
 
 Génère un script SQL à partir de la migration.
 
-Paramètres :
+Paramètres :
 
 |                   |                                                                    |
-| ----------------- | ------------------------------------------------------------------ |
-| *-From* \<chaîne > | La migration de départ. La valeur par défaut est 0 (base de données initiale).      |
-| *-* \<Chaîne >   | La fin de la migration. Valeur par défaut est la dernière migration.              |
+|:------------------|:-------------------------------------------------------------------|
+| *-From* \<String> | La migration de départ. La valeur par défaut est 0 (base de données initiale).      |
+| *-To* \<String>   | La fin de la migration. Valeur par défaut est la dernière migration.              |
 | -Idempotent       | Générer un script qui peut être utilisé sur toute migration, une base de données. |
 | -Sortie \<chaîne > | Le fichier dans lequel écrire le résultat à.                                   |
 
 > [!TIP]
 > To, From, et les paramètres de sortie prend en charge le développement par tabulation.
 
-### <a name="update-database"></a>Base de données de mise à jour
+### <a name="update-database"></a>Update-Database
 
-|                                     |                                                                                |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
-| <nobr>*-Migration* \<chaîne ></nobr> | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
+|                                     |                                                                                                |
+|:------------------------------------|:-----------------------------------------------------------------------------------------------|
+| <nobr>*-Migration* \<String></nobr> | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
 
 > [!TIP]
 > Le paramètre de la Migration prend en charge le développement par tabulation.

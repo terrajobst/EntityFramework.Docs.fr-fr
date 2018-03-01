@@ -1,21 +1,21 @@
 ---
-title: Index - EF Core
+title: Indexes - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
 ms.technology: entity-framework-core
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 683b580bb155e0416f13c5d63e3280078fbcee21
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: f577fccfefc6908edf2ac47ae630323d7a9f5f2b
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="indexes"></a>Index
 
 > [!NOTE]  
-> La configuration de cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiqués ici devient disponibles lorsque vous installez un fournisseur de base de données relationnelle (en raison de l’élément partagé *Microsoft.EntityFrameworkCore.Relational* package).
+> La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
 Un index dans une base de données relationnelle est mappé au même concept en tant qu’index dans le cœur d’Entity Framework.
 
@@ -31,23 +31,12 @@ Les index ne peuvent pas être configurés à l’aide des Annotations de donné
 
 Vous pouvez utiliser l’API Fluent pour configurer le nom d’un index.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/IndexName.cs?highlight=9)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexName.cs?name=Model&highlight=9)]
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .HasIndex(b => b.Url)
-            .HasName("Index_Url");
-    }
-}
+Vous pouvez également spécifier un filtre.
 
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexFilter.cs?name=Model&highlight=9)]
+
+Lors de l’utilisation du fournisseur SQL Server EF ajoute un 'IS NOT NULL' filtrer pour toutes les colonnes qui font partie d’un index unique. Pour remplacer cette convention, vous pouvez fournir un `null` valeur.
+
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexNoFilter.cs?name=Model&highlight=10)]

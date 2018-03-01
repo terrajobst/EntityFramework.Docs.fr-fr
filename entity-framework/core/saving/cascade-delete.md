@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: e1cb194d7c7472af59eb44fe2a084fa16c40c186
-ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/22/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -33,21 +33,21 @@ Pour la seconde action ci-dessus, il n’est pas valide si la clé étrangère n
 
 Il existe quatre supprimer des comportements, répertoriés dans les tableaux ci-dessous. Pour les relations facultatif (clé étrangère nullable) il _est_ possible d’enregistrer une valeur null valeur de clé étrangère, ce qui entraîne les conséquences suivantes :
 
-| Nom du comportement | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données
-|-|-|-
-| **Cascade** | Les entités sont supprimées. | Les entités sont supprimées.
-| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | Aucun.
-| **SetNull** | Propriétés de clé étrangère sont définies avec la valeur null | Propriétés de clé étrangère sont définies avec la valeur null
-| **Restrict** | Aucun. | Aucun.
+| Nom du comportement               | Effet sur dépendant/enfant dans la mémoire    | Effet sur dépendant/enfant dans la base de données  |
+|:----------------------------|:---------------------------------------|:---------------------------------------|
+| **Cascade**                 | Les entités sont supprimées.                   | Les entités sont supprimées.                   |
+| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | Aucun.                                   |
+| **SetNull**                 | Propriétés de clé étrangère sont définies avec la valeur null | Propriétés de clé étrangère sont définies avec la valeur null |
+| **Restrict**                | Aucun.                                   | Aucun.                                   |
 
 Pour les relations requises (clé étrangère non nullable) il est _pas_ possible d’enregistrer une valeur null valeur de clé étrangère, ce qui entraîne les conséquences suivantes :
 
-| Nom du comportement | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données
-|-|-|-
-| **Cascade** (par défaut) | Les entités sont supprimées. | Les entités sont supprimées.
-| **ClientSetNull** | Lève une exception SaveChanges | Aucun.
-| **SetNull** | Lève une exception SaveChanges | Lève une exception SaveChanges
-| **Restrict** | Aucun. | Aucun.
+| Nom du comportement         | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données |
+|:----------------------|:------------------------------------|:--------------------------------------|
+| **Cascade** (par défaut) | Les entités sont supprimées.                | Les entités sont supprimées.                  |
+| **ClientSetNull**     | Lève une exception SaveChanges                  | Aucun.                                  |
+| **SetNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
+| **Restrict**          | Aucun.                                | Aucun.                                  |
 
 Dans les tableaux ci-dessus, *aucun* peut entraîner une violation de contrainte. Par exemple, si une entité principal/enfant est supprimée, mais aucune action n’est effectuée pour modifier la clé étrangère de dépendant/enfant, puis la base de données probablement lève sur SaveChanges en raison d’une violation de contrainte foreign.
 
