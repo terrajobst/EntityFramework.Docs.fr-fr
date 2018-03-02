@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 ms.technology: entity-framework-core
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 2d79bf1339ebe522c39fe8971d908c30e1f4dca0
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 892494461bcf49ee10d05c972da0ba19ca003c35
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="generated-values"></a>Valeur générée
 
@@ -50,7 +50,7 @@ Comme `value generated on add`, si vous spécifiez une valeur pour la propriét�
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, les clés primaires sont d’un entier ou un type de données GUID sera installé pour que les valeurs générées sur Ajouter. Toutes les autres propriétés sera installé avec aucune génération de valeur.
+Par convention, les clés primaires non composites de type short, int, long ou Guid sera installé pour que les valeurs générées sur Ajouter. Toutes les autres propriétés sera installé avec aucune génération de valeur.
 
 ## <a name="data-annotations"></a>Annotations de données
 
@@ -85,7 +85,7 @@ Vous pouvez utiliser l’API Fluent à modifier le modèle de génération de va
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/ValueGeneratedOnAdd.cs#Sample)]
 
 > [!WARNING]  
-> `ValueGeneratedOnAdd()`permet simplement EF de savoir que les valeurs sont générées pour les entités ajoutées, il ne garantit pas que EF va installer le mécanisme pour générer des valeurs.  Consultez [ajouter de la valeur générée sur](#value-generated-on-add) section pour plus d’informations.
+> `ValueGeneratedOnAdd()` permet simplement EF de savoir que les valeurs sont générées pour les entités ajoutées, il ne garantit pas que EF va installer le mécanisme pour générer des valeurs.  Consultez [ajouter de la valeur générée sur](#value-generated-on-add) section pour plus d’informations.
 
 ### <a name="value-generated-on-add-or-update-fluent-api"></a>Valeur générée sur Ajouter ou mettre à jour (API Fluent)
 

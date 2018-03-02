@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: ec69bb128890a1e0b72fe77014f37747585bb5a5
-ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.openlocfilehash: dadc6235c3879ae27ad5c99988a5e594872045df
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/22/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="loading-related-data"></a>Chargement de données connexes
 
 Entity Framework Core vous permet d’utiliser les propriétés de navigation dans votre modèle pour charger des entités associées. Il existe trois modèles d’O/RM communs utilisés pour charger les données associées.
 * **Chargement hâtif** signifie que les données associées sont chargées à partir de la base de données dans le cadre de la requête initiale.
 * **Chargement explicite** signifie que les données associées sont explicitement chargées à partir de la base de données à une date ultérieure.
-* **Chargement différé** signifie que les données associées en toute transparence sont chargées à partir de la base de données que lorsque la propriété de navigation est accessible. Chargement différé n’est pas encore possible avec EF de base.
+* **Chargement différé** signifie que les données associées en toute transparence sont chargées à partir de la base de données que lorsque la propriété de navigation est accessible.
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
@@ -57,6 +57,61 @@ Voulez-vous inclure plusieurs entités associées pour l’une des entités qui 
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
+### <a name="include-on-derived-types"></a>Inclure dans les types dérivés
+
+Vous pouvez inclure des données liées provenant uniquement définies sur un type dérivé à l’aide de navigations `Include` et `ThenInclude`. 
+
+Étant donné le modèle suivant :
+
+```Csharp
+    public class SchoolContext : DbContext
+    {
+        public DbSet<Person> People { get; set; }
+        public DbSet<School> Schools { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<School>().HasMany(s => s.Students).WithOne(s => s.School);
+        }
+    }
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Student : Person
+    {
+        public School School { get; set; }
+    }
+
+    public class School
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public List<Student> Students { get; set; }
+    }
+```
+
+Contenu de `School` navigation de toutes les personnes qui sont les étudiants peut être chargée dynamiquement à l’aide d’un certain nombre de modèles :
+
+- utilisation de cast
+```Csharp
+context.People.Include(person => ((Student)person).School).ToList()
+```
+
+- à l’aide de `as` (opérateur)
+```Csharp
+context.People.Include(person => (person as Student).School).ToList()
+```
+
+- à l’aide de la surcharge de `Include` qui accepte le paramètre de type `string`
+```Csharp
+context.People.Include("Student").ToList()
+```
+
 ### <a name="ignored-includes"></a>Ignoré inclut
 
 Si vous modifiez la requête afin qu’elle retourne ne sont plus des instances de la requête a commencé avec le type d’entité, les opérateurs include sont ignorés.
@@ -94,13 +149,174 @@ Vous pouvez également filtrer les entités associées sont chargées en mémoir
 
 ## <a name="lazy-loading"></a>Chargement différé
 
-Chargement différé n’est pas encore pris en charge par EF Core. Vous pouvez afficher le [élément chargement différé notre backlog](https://github.com/aspnet/EntityFramework/issues/3797) pour effectuer le suivi de cette fonctionnalité.
+> [!NOTE]  
+> Cette fonctionnalité a été introduite dans EF Core 2.1.
+
+La façon la plus simple d’utiliser le chargement différé est en installant le [Microsoft.EntityFramworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) package et l’activer avec un appel à `UseLazyLoadingProxies`. Exemple :
+```Csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLazyLoadingProxies()
+        .UseSqlServer(myConnectionString);
+```
+Ou bien, lors de l’utilisation de AddDbContext :
+```Csharp
+    .AddDbContext<BloggingContext>(
+        b => b.UseLazyLoadingProxies()
+              .UseSqlServer(myConnectionString));
+```
+EF Core ensuite d’activer le chargement différé pour n’importe quelle propriété de navigation qui peut être substituée--qui est, elle doit être `virtual` et sur une classe qui peut être héritée. Par exemple, dans les entités suivantes, le `Post.Blog` et `Blog.Posts` propriétés de navigation seront chargées en différé.
+```Csharp
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public virtual ICollection<Post> Posts { get; set; }
+}
+
+public class Post
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public virtual Blog Blog { get; set; }
+}
+```
+### <a name="lazy-loading-without-proxies"></a>Lazy-chargement sans proxy
+
+Chargement Lazy proxys fonctionnent en injectant le `ILazyLoader` de service dans une entité, comme décrit dans [constructeurs de Type d’entité](../modeling/constructors.md). Exemple :
+```Csharp
+public class Blog
+{
+    private ICollection<Post> _posts;
+
+    public Blog()
+    {
+    }
+
+    private Blog(ILazyLoader lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private ILazyLoader LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public ICollection<Post> Posts
+    {
+        get => LazyLoader?.Load(this, ref _posts);
+        set => _posts = value;
+    }
+}
+
+public class Post
+{
+    private Blog _blog;
+
+    public Post()
+    {
+    }
+
+    private Post(ILazyLoader lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private ILazyLoader LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public Blog Blog
+    {
+        get => LazyLoader?.Load(this, ref _blog);
+        set => _blog = value;
+    }
+}
+```
+Cela ne nécessite pas hérité de types d’entité ou de propriétés de navigation à être des ordinateurs virtuels et permet aux instances d’entité créées avec `new` charger en différé-une fois attaché à un contexte. Toutefois, il requiert une référence à le `ILazyLoader` service, qui combine des types d’entités à l’assembly EF Core. Pour éviter ce cœur EF permet la `ILazyLoader.Load` méthode être ajoutés en tant que délégué. Exemple :
+```Csharp
+public class Blog
+{
+    private ICollection<Post> _posts;
+
+    public Blog()
+    {
+    }
+
+    private Blog(Action<object, string> lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private Action<object, string> LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public ICollection<Post> Posts
+    {
+        get => LazyLoader?.Load(this, ref _posts);
+        set => _posts = value;
+    }
+}
+
+public class Post
+{
+    private Blog _blog;
+
+    public Post()
+    {
+    }
+
+    private Post(Action<object, string> lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private Action<object, string> LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public Blog Blog
+    {
+        get => LazyLoader?.Load(this, ref _blog);
+        set => _blog = value;
+    }
+}
+```
+Le code ci-dessus utilise un `Load` pour rendre l’utilisation du délégué un peu plus propre méthode d’extension :
+```Csharp
+public static class PocoLoadingExtensions
+{
+    public static TRelated Load<TRelated>(
+        this Action<object, string> loader,
+        object entity,
+        ref TRelated navigationField,
+        [CallerMemberName] string navigationName = null)
+        where TRelated : class
+    {
+        loader?.Invoke(entity, navigationName);
+
+        return navigationField;
+    }
+}
+```
+> [!NOTE]  
+> Le paramètre de constructeur pour le chargement différé de délégué doit être appelé « lazyLoader ». Configuration à utiliser un nom différent, qu'il est prévu pour une version ultérieure.
 
 ## <a name="related-data-and-serialization"></a>Sérialisation et les données associées
 
 Étant donné que les propriétés de EF Core sera automatiquement correctives navigation, vous pouvez retrouver avec des cycles dans votre graphique d’objets. Par exemple, le chargement d’un blog et il est lié billets aboutit à un objet de blog qui fait référence à une collection de publications. Chacune de ces publications aura une référence vers le blog.
 
-Certaines infrastructures de sérialisation n’autorisent pas ces cycles. Par exemple, Json.NET lève l’exception suivante si un cycle est prématurément.
+Certaines infrastructures de sérialisation n’autorisent pas ces cycles. Par exemple, Json.NET lève l’exception suivante si un cycle est rencontré.
 
 > Newtonsoft.Json.JsonSerializationException : Self faisant référence à la boucle détectée pour la propriété « Blog » avec le type 'MyApplication.Models.Blog'.
 
