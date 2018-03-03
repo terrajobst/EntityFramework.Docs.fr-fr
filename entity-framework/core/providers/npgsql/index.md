@@ -7,10 +7,10 @@ ms.assetid: 5ecd1b22-c68e-4d87-ba39-b0761f4d5b90
 ms.technology: entity-framework-core
 uid: core/providers/npgsql/index
 ms.openlocfilehash: acf2e18d7a608b0d75b571a5ac0199d84f86066b
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="npgsql-ef-core-database-provider-for-postgresql"></a>Fournisseur de base de données EF Core Npgsql pour PostgreSQL
 
@@ -19,7 +19,7 @@ Ce fournisseur de base de données permet d’utiliser Entity Framework Core ave
 > [!NOTE]  
 > Il n’est pas géré dans le cadre du projet Entity Framework Core. Quand vous envisagez un fournisseur tiers, veillez à évaluer la qualité, la gestion des licences, la prise en charge, etc., pour vous assurer qu’il répond à vos besoins.
 
-## <a name="install"></a>Installer
+## <a name="install"></a>Installez
 
 Installez le [package NuGet Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL).
 
