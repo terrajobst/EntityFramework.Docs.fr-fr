@@ -6,11 +6,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 2632488569c538a11c7a31a9a866d2fadb29eeb5
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 38ab0c1c3cd8c490875abf30b8478c99bc58630f
+ms.sourcegitcommit: 60b831318c4f5ec99061e8af6a7c9e7c03b3469c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entités avec des constructeurs
 
@@ -96,7 +96,7 @@ Certains points à noter :
 ### <a name="read-only-properties"></a>Propriétés en lecture seule
 
 Une fois que les propriétés sont définies via le constructeur, il peut être judicieux pour rendre certains d'entre eux en lecture seule. EF Core prend en charge, mais certains éléments à prendre en compte :
-* Par convention, les propriétés sans accesseurs Get ne sont pas mappées. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
+* Propriétés sans méthodes setter ne sont pas mappées par convention. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
 * À l’aide des valeurs de clés générées automatiquement nécessite une propriété de clé qui est en lecture-écriture, étant donné que la valeur de clé doit être définie par le Générateur de clé lors de l’insertion de nouvelles entités.
 
 Un moyen simple pour éviter ces éléments consiste à utiliser les méthodes setter privé. Exemple :
