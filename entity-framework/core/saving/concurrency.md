@@ -1,33 +1,61 @@
 ---
-title: "La gestion des accès concurrentiel - EF Core"
+title: "La gestion des conflits d’accès concurrentiel - EF Core"
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: bce0539d-b0cd-457d-be71-f7ca16f3baea
+ms.date: 03/03/2018
 ms.technology: entity-framework-core
 uid: core/saving/concurrency
-ms.openlocfilehash: bbd3e154c1b27b16c7d8f8fbf9ed51df0849795c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 288d9c6fced5ebbaa2c366248c68547502c3698e
+ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/05/2018
 ---
-# <a name="handling-concurrency"></a>Gestion de l'accès concurrentiel
+# <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
 
-Si une propriété est configurée comme un jeton d’accès concurrentiel EF Vérifiez qu’aucun autre utilisateur n’a modifié cette valeur dans la base de données lors de l’enregistrement des modifications apportées à cet enregistrement.
+> [!NOTE]
+> Cette page décrit le fonctionne de la concurrence dans EF Core et comment gérer les conflits d’accès concurrentiel dans votre application. Consultez [jetons d’accès concurrentiel](xref:core/modeling/concurrency) pour plus d’informations sur la configuration des jetons d’accès concurrentiel dans votre modèle.
 
-> [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) sur GitHub.
+> [!TIP]
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) sur GitHub.
 
-## <a name="how-concurrency-handling-works-in-ef-core"></a>Fonctionne de la gestion d’accès concurrentiel dans EF Core
+_Concurrence de la base de données_ fait référence aux situations dans lesquelles plusieurs processus ou les utilisateurs accéder ou modifier les mêmes données dans une base de données en même temps. _Contrôle d’accès concurrentiel_ fait référence à des mécanismes spécifiques permettant de garantir la cohérence des données en présence de modifications simultanées.
 
-Pour obtenir une description détaillée du fonctionne de la gestion d’accès concurrentiel dans Entity Framework Core, consultez [jetons d’accès concurrentiel](../modeling/concurrency.md).
+EF Core implémente _contrôle d’accès concurrentiel optimiste_, ce qui signifie qu’il vous permet de plusieurs processus ou utilisateurs apportent des modifications indépendamment sans la surcharge de synchronisation ou de verrouillage. Dans l’idéal, ces modifications n’interfèrent pas avec eux et seront donc en mesure de réussir. Dans le pire des cas, deux ou plusieurs processus va tenter d’apporter des modifications en conflit et seulement un d’eux doit réussir.
+
+## <a name="how-concurrency-control-works-in-ef-core"></a>Fonctionne du contrôle d’accès concurrentiel dans EF Core
+
+Propriétés configurées en tant que jetons d’accès concurrentiel sont utilisés pour implémenter un contrôle d’accès concurrentiel optimiste : chaque fois qu’une opération update ou delete est effectuée pendant `SaveChanges`, la valeur du jeton d’accès concurrentiel sur la base de données est comparée à la version d’origine valeur lue EF Core.
+
+- Si les valeurs correspondent, l’opération peut s’effectuer.
+- Si les valeurs ne correspondent pas, EF Core suppose qu’un autre utilisateur a effectué une opération conflictuelle et abandonne la transaction en cours.
+
+Le cas où un autre utilisateur a effectué une opération qui est en conflit avec l’opération en cours est appelé _conflit d’accès concurrentiel_.
+
+Les fournisseurs de base de données sont responsables de l’implémentation de la comparaison des valeurs de jeton d’accès concurrentiel.
+
+Sur les bases de données relationnelles EF Core inclut une vérification de la valeur du jeton d’accès concurrentiel dans le `WHERE` clause de n’importe quel `UPDATE` ou `DELETE` instructions. Après l’exécution des instructions, EF Core lit le nombre de lignes qui ont été affectés.
+
+Si aucune ligne n’est affectée, un conflit d’accès concurrentiel est détecté, et EF Core lève `DbUpdateConcurrencyException`.
+
+Par exemple, nous pouvons choisir de configurer `LastName` sur `Person` un jeton d’accès concurrentiel. Toute opération de mise à jour sur la personne qui inclut le contrôle d’accès concurrentiel dans le `WHERE` clause :
+
+``` sql
+UPDATE [Person] SET [FirstName] = @p1
+WHERE [PersonId] = @p0 AND [LastName] = @p2;
+```
 
 ## <a name="resolving-concurrency-conflicts"></a>Résolution des conflits d’accès concurrentiel
 
-Résoudre un conflit d’accès concurrentiel implique l’utilisation d’un algorithme pour fusionner les modifications en attente à partir de l’utilisateur actuel avec les modifications apportées dans la base de données. L’approche exacte peut varier en fonction de votre application, mais une approche courante consiste à afficher les valeurs à l’utilisateur et demandez-lui de déterminer les valeurs correctes à stocker dans la base de données.
+Poursuivre l’exemple précédent, si un utilisateur tente d’enregistrer certaines modifications apportées à un `Person`, mais un autre utilisateur a déjà modifié le `LastName` l’une exception sera levée.
 
-**Il existe trois ensembles de valeurs disponibles pour aider à résoudre un conflit d’accès concurrentiel.**
+À ce stade, l’application peut simplement indiquer à l’utilisateur que la mise à jour a échoué en raison de modifications en conflit et déplacer sur. Mais il peut être souhaitable pour inviter l’utilisateur pour s’assurer de que cet enregistrement représente toujours la même personne réelle et recommencez l’opération.
+
+Ce processus est un exemple de _résoudre un conflit d’accès concurrentiel_.
+
+Résolution d’un conflit d’accès concurrentiel consiste à fusionner les modifications en attente à partir du `DbContext` avec les valeurs dans la base de données. Les valeurs de fusion varie en fonction de l’application et peut être dirigé par l’utilisateur.
+
+**Il existe trois ensembles de valeurs disponibles pour aider à résoudre un conflit d’accès concurrentiel :**
 
 * **Valeurs actuelles** sont les valeurs que l’application a tenté d’écrire dans la base de données.
 
@@ -35,106 +63,13 @@ Résoudre un conflit d’accès concurrentiel implique l’utilisation d’un al
 
 * **Valeurs de base de données** sont les valeurs actuellement stockées dans la base de données.
 
-Pour gérer un conflit d’accès concurrentiel, intercepter un `DbUpdateConcurrencyException` pendant `SaveChanges()`, utilisez `DbUpdateConcurrencyException.Entries` pour préparer un nouvel ensemble de modifications pour les entités concernées, puis réessayez la `SaveChanges()` opération.
+L’approche générale pour gérer les conflits d’accès concurrentiel est la suivante :
 
-Dans l’exemple suivant, `Person.FirstName` et `Person.LastName` sont configurés en tant que jeton d’accès concurrentiel. Il existe un `// TODO:` commentaire à l’emplacement où vous devez inclure la logique spécifique de l’application pour choisir la valeur à enregistrer dans la base de données.
+1. Catch `DbUpdateConcurrencyException` pendant `SaveChanges`.
+2. Utilisez `DbUpdateConcurrencyException.Entries` pour préparer un nouvel ensemble de modifications pour les entités concernées.
+3. Actualiser les valeurs d’origine du jeton d’accès concurrentiel pour refléter les valeurs actuelles dans la base de données.
+4. Recommencez le processus jusqu'à ce qu’aucun conflit se produire.
 
-<!-- [!code-csharp[Main](samples/core/Saving/Saving/Concurrency/Sample.cs?highlight=53,54)] -->
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+Dans l’exemple suivant, `Person.FirstName` et `Person.LastName` sont configurés en tant que jetons d’accès concurrentiel. Il existe un `// TODO:` commentaire à l’emplacement où vous inclure la logique spécifique de l’application pour choisir la valeur doit être enregistré.
 
-namespace EFSaving.Concurrency
-{
-    public class Sample
-    {
-        public static void Run()
-        {
-            // Ensure database is created and has a person in it
-            using (var context = new PersonContext())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-                context.People.Add(new Person { FirstName = "John", LastName = "Doe" });
-                context.SaveChanges();
-            }
-
-            using (var context = new PersonContext())
-            {
-                // Fetch a person from database and change phone number
-                var person = context.People.Single(p => p.PersonId == 1);
-                person.PhoneNumber = "555-555-5555";
-
-                // Change the persons name in the database (will cause a concurrency conflict)
-                context.Database.ExecuteSqlCommand("UPDATE dbo.People SET FirstName = 'Jane' WHERE PersonId = 1");
-
-                try
-                {
-                    // Attempt to save changes to the database
-                    context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    foreach (var entry in ex.Entries)
-                    {
-                        if (entry.Entity is Person)
-                        {
-                            // Using a NoTracking query means we get the entity but it is not tracked by the context
-                            // and will not be merged with existing entities in the context.
-                            var databaseEntity = context.People.AsNoTracking().Single(p => p.PersonId == ((Person)entry.Entity).PersonId);
-                            var databaseEntry = context.Entry(databaseEntity);
-
-                            foreach (var property in entry.Metadata.GetProperties())
-                            {
-                                var proposedValue = entry.Property(property.Name).CurrentValue;
-                                var originalValue = entry.Property(property.Name).OriginalValue;
-                                var databaseValue = databaseEntry.Property(property.Name).CurrentValue;
-
-                                // TODO: Logic to decide which value should be written to database
-                                // entry.Property(property.Name).CurrentValue = <value to be saved>;
-
-                                // Update original values to
-                                entry.Property(property.Name).OriginalValue = databaseEntry.Property(property.Name).CurrentValue;
-                            }
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("Don't know how to handle concurrency conflicts for " + entry.Metadata.Name);
-                        }
-                    }
-
-                    // Retry the save operation
-                    context.SaveChanges();
-                }
-            }
-        }
-
-        public class PersonContext : DbContext
-        {
-            public DbSet<Person> People { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFSaving.Concurrency;Trusted_Connection=True;");
-            }
-        }
-
-        public class Person
-        {
-            public int PersonId { get; set; }
-
-            [ConcurrencyCheck]
-            public string FirstName { get; set; }
-
-            [ConcurrencyCheck]
-            public string LastName { get; set; }
-
-            public string PhoneNumber { get; set; }
-        }
-
-    }
-}
-```
+[!code-csharp[Main](../../../samples/core/Saving/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]
