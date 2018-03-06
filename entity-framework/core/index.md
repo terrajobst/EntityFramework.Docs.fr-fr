@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 ms.technology: entity-framework-core
 uid: core/index
-ms.openlocfilehash: 13de9cf98111b8e253e073c591fcec04206b4c4f
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: c76b4cd318151b502c549fa0a82800f9987ed94c
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="entity-framework-core-quick-overview"></a>Vue d’ensemble d’Entity Framework Core
 
@@ -20,16 +20,18 @@ EF Core est un mappeur objet-relationnel (ORM) qui permet aux développeurs .NET
 
 Si vous voulez approfondir vos connaissances en écrivant du code, nous vous recommandons un de nos guides de [démarrage](get-started/index.md) pour commencer avec EF Core.
 
-## <a name="latest-version-ef-core-20"></a>Dernière version : EF Core 2.0
+## <a name="what-is-new-in-ef-core"></a>Nouveautés d’EF Core
 
-Si vous êtes familiarisé avec EF Core et souhaitez vous plonger directement dans les détails de la nouvelle version :
+Si vous connaissez déjà EF Core et souhaitez vous plonger directement dans les détails des dernières versions :
 
-- **[Nouvelles fonctionnalités d’EF Core 2.0](what-is-new/index.md)**
-- **[Mise à niveau d’applications existantes vers EF Core 2.0](miscellaneous/1x-2x-upgrade.md)**
+- **[Nouveautés d’EF Core 2.1 (actuellement en préversion)](xref:core/what-is-new/ef-core-2.1)**
+- **[Nouveautés d’EF Core 2.0 (dernière version publiée)](xref:core/what-is-new/ef-core-2.0)**
+- **[Mise à niveau d’applications existantes vers EF Core 2.0](xref:core/miscellaneous/1x-2x-upgrade)**
+
 
 ## <a name="get-entity-framework-core"></a>Obtenir Entity Framework Core
 
-[Installez le package NuGet](https://docs.nuget.org/ndocs/quickstart/use-a-package) pour le fournisseur de base de données que vous souhaitez utiliser. Par ex. pour installer le fournisseur SQL Server dans un développement multiplateforme à l’aide de l’outil `dotnet` depuis la ligne de commande :
+[Installez le package NuGet](https://docs.nuget.org/ndocs/quickstart/use-a-package) pour le fournisseur de base de données que vous souhaitez utiliser. Par exemple, pour installer le fournisseur SQL Server dans un développement multiplateforme à l’aide de l’outil `dotnet` depuis la ligne de commande :
 
 ``` Console
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer

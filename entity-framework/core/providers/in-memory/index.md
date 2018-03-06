@@ -6,17 +6,17 @@ ms.date: 10/27/2016
 ms.assetid: 9af0cba7-7605-4f8f-9cfa-dd616fcb880c
 ms.technology: entity-framework-core
 uid: core/providers/in-memory/index
-ms.openlocfilehash: a8e05f50837f3da554b338475d24215706dfa2ec
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 356af9390a8aafa5afe35f333cd1e6ac1988390d
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="ef-core-in-memory-database-provider"></a>Fournisseur de base de données InMemory EF Core
 
-Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec une base de données en mémoire. Cela est utile quand vous testez le code qui utilise Entity Framework Core. Le fournisseur est géré dans le cadre du [projet GitHub EntityFramework](https://github.com/aspnet/EntityFramework).
+Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec une base de données en mémoire. Ceci peut s’avérer utile pour les tests, bien que le fournisseur SQLite en mode en mémoire constitue peut-être un remplacement de test plus approprié pour les bases de données relationnelles. Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
 
-## <a name="install"></a>Installer
+## <a name="install"></a>Installez
 
 Installez le [package NuGet Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/).
 
@@ -26,7 +26,7 @@ Install-Package Microsoft.EntityFrameworkCore.InMemory
 
 ## <a name="get-started"></a>Bien démarrer
 
-Les ressources suivantes vous permettront de démarrer avec ce fournisseur.
+Les ressources suivantes vous permettent de commencer à utiliser ce fournisseur.
 * [Test avec InMemory](../../miscellaneous/testing/in-memory.md)
 
 * [Exemple de tests d’application UnicornStore](https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs)
