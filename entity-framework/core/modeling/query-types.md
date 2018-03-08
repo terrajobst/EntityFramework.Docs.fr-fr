@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: d03c4b1d5635530e63b93e051cb69583718deb4e
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 19a371c65da33e8209cc1ab3423a67c34ddae61e
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="query-types"></a>Types de requêtes
 > [!NOTE]
@@ -55,6 +55,10 @@ Tout d’abord, nous définissons un modèle simple de Blog et Post :
 Ensuite, nous définissons une vue de base de données simple qui permet d’interroger le nombre de messages associée à chaque blog :
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#View)]
+
+Ensuite, nous définissons une classe pour contenir le résultat de la vue de base de données :
+
+[!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#QueryType)]
 
 Ensuite, nous configurons le type de requête dans _OnModelCreating_ à l’aide de la ```modelBuilder.Query<T>``` API.
 API de configuration fluent standard nous permet de configurer le mappage pour le Type de requête :
