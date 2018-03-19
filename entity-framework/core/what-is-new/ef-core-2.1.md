@@ -6,11 +6,11 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 1e5e9839bae1e5da4082d90c02d098bb3b2b43bd
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: bb1e691e0f22bd36467d58c02bde22c63067207e
+ms.sourcegitcommit: fcaeaf085171dfb5c080ec42df1d1df8dfe204fb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 > [!NOTE]  
@@ -124,7 +124,7 @@ var query = context.Customers.Select(
 
 Notez que cette requête est traduite en deux requêtes SQL seulement : une pour Customers et la suivante pour Orders.
 
-### <a name="ownedattribute"></a>OwnedAttribute
+## <a name="ownedattribute"></a>OwnedAttribute
 
 Il est désormais possible de configurer des [types d’entités détenus](xref:core/modeling/owned-entities) en annotant simplement le type avec `[Owned]` et en veillant à ce que l’entité propriétaire soit ajoutée au modèle :
 
