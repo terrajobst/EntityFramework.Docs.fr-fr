@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/8/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 6b278a5ae270b6a84269dffd72eeca609b168cdd
-ms.sourcegitcommit: 3b6159db8a6c0653f13c7b528367b4e69ac3d51e
+ms.openlocfilehash: d950e74ed4cef7d4274aabcf3eda7b0b735574c6
+ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 03/20/2018
 ---
 <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 ==================================
@@ -20,7 +20,7 @@ Dans la première approche, vous générez deux migrations pour chaque modificat
 
 Pour faire cela consiste à placer chaque ensemble de la migration [dans un assembly distinct] [ 2] et basculez manuellement le fournisseur active (et l’assembly de migrations) entre l’ajout de ces deux migrations.
 
-Une autre approche que facilite l’utilisation des outils plus facile pour créer un nouveau type dérive de votre DbContext et remplace le fournisseur actif. Ce type est utilisé lors de la conception du temps lors de l’ajout ou de l’application de migrations.
+Une autre approche qui facilite l’utilisation des outils des plus simple consiste à créer un nouveau type qui dérive de votre DbContext et remplace le fournisseur actif. Ce type est utilisé lors de la conception du temps lors de l’ajout ou de l’application de migrations.
 
 ``` csharp
 class MySqliteDbContext : MyDbContext
