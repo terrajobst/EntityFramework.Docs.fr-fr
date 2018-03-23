@@ -1,16 +1,16 @@
 ---
-title: "La mise à niveau à partir de EF Core 1.0 RC2 vers la version RTM - EF Core"
+title: La mise à niveau à partir de EF Core 1.0 RC2 vers la version RTM - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 ms.technology: entity-framework-core
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 7a1d85949a5f9e1ad7efdbf585a608d815e8ce63
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 4bb4c5736708413f6581cad250b089b7bc22a559
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>La mise à niveau à partir de EF Core 1.0 RC2 vers la version RTM
 
@@ -38,7 +38,7 @@ Cette modification a un impact sur les projets qui utilisent ASP.NET Identity et
 
 *  **AspNetRoles**
 
-    * Nom
+    * Name
 
     * NormalizedName
 
@@ -69,6 +69,9 @@ Si vous ciblait .NET Core avec RC2, vous deviez ajouter `imports` à project.jso
   }
 }
 ```
+
+> [!NOTE]  
+> À partir de la version 1.0 RTM, les [le Kit de développement .NET Core](https://www.microsoft.com/net/download/core) ne prend plus en `project.json` ou développez des applications .NET Core à l’aide de Visual Studio 2015. Nous vous recommandons de [migrer de project.json vers csproj](https://docs.microsoft.com/dotnet/articles/core/migration/). Si vous utilisez Visual Studio, nous vous recommandons de vous mettre à niveau vers [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 
 ## <a name="uwp-add-binding-redirects"></a>UWP : Ajouter des redirections de liaison
 
