@@ -1,28 +1,25 @@
 ---
-title: "Bien démarrer avec ASP.NET Core - Base de données existante - EF Core"
+title: Bien démarrer avec ASP.NET Core - Base de données existante - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: afd99d68d2ba25ce58a21dc48d2c7ce27f208807
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: db2469d0badd428734425c1f568667f00bef2f4f
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une base de données existante
-
-> [!IMPORTANT]  
-> Le [Kit SDK .NET Core](https://www.microsoft.com/net/download/core) ne prend plus en charge `project.json` ni Visual Studio 2015. Tous les utilisateurs réalisant des tâches de développement .NET Core sont invités à [migrer de project.json vers csproj](https://docs.microsoft.com/dotnet/articles/core/migration/) et [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 
 Dans cette procédure pas à pas, vous allez générer une application ASP.NET Core MVC exécutant l’accès aux données de base à l’aide d’Entity Framework. Vous allez utiliser l’ingénierie à rebours pour créer un modèle Entity Framework à partir d’une base de données existante.
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb) sur GitHub.
 
-## <a name="prerequisites"></a>Conditions préalables
+## <a name="prerequisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez satisfaire les prérequis suivants :
 
@@ -93,7 +90,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 Si vous recevez l’erreur `The term 'Scaffold-DbContext' is not recognized as the name of a cmdlet`, fermez et rouvrez Visual Studio.
 
 > [!TIP]  
-> Vous pouvez spécifier les tables pour lesquelles générer des entités en ajoutant l’argument `-Tables` à la commande ci-dessus. Par ex. `-Tables Blog,Post`.
+> Vous pouvez spécifier les tables pour lesquelles générer des entités en ajoutant l’argument `-Tables` à la commande ci-dessus. Par exemple, `-Tables Blog,Post`.
 
 Le processus d’ingénierie à rebours créé des classes d’entité (`Blog.cs` & `Post.cs`) et un contexte dérivé (`BloggingContext.cs`) en fonction du schéma de la base de données existante.
 
@@ -144,7 +141,7 @@ Le concept d’injection de dépendances est essentiel dans ASP.NET Core. Des se
 
 Dans ASP.NET Core, la configuration s’effectue généralement dans **Startup.cs**. Pour respecter ce modèle, nous allons transférer la configuration du fournisseur de base de données dans **Startup.cs**.
 
-* Ouvrir `Models\BloggingContext.cs`
+* Ouvrez `Models\BloggingContext.cs`.
 * Supprimez la méthode `OnConfiguring(...)`.
 
 ``` csharp

@@ -1,26 +1,23 @@
 ---
-title: "Bien démarrer avec .NET Core - Nouvelle base de données - EF Core"
+title: Bien démarrer avec .NET Core - Nouvelle base de données - EF Core
 author: rick-anderson
 ms.author: riande
 ms.author2: tdykstra
-description: "Bien démarrer avec .NET Core à l’aide d’Entity Framework Core"
+description: Bien démarrer avec .NET Core à l’aide d’Entity Framework Core
 keywords: .NET Core, Entity Framework Core, VS Code, Visual Studio Code, Mac, Linux
 ms.date: 04/05/2017
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 ms.technology: entity-framework-core
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 3becf75e7a513a3aa18c3c2daf628b65327365b0
-ms.sourcegitcommit: 0858f157b806f4a881b94ddbeecf1ece1d53e1e0
+ms.openlocfilehash: 2511dfa3f3262bb12c2058dc1c402b7dcc4c670d
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/21/2018
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>Bien démarrer avec EF Core sur une application console .NET Core avec une nouvelle base de données
 
 Dans cette procédure pas à pas, vous allez créer une application console .NET Core qui exécute l’accès aux données de base d’une base de données SQLite à l’aide d’Entity Framework Core. Vous utiliserez des migrations pour créer la base de données à partir de votre modèle. Consultez [ASP.NET Core - Nouvelle base de données](xref:core/get-started/aspnetcore/new-db) pour une version de Visual Studio utilisant ASP.NET Core MVC.
-
-> [!NOTE]  
-> Le [Kit SDK .NET Core](https://www.microsoft.com/net/download/core) ne prend plus en charge `project.json` ni Visual Studio 2015. Nous vous recommandons de [migrer de project.json vers csproj](https://docs.microsoft.com/dotnet/articles/core/migration/). Si vous utilisez Visual Studio, nous vous recommandons de migrer vers [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite) sur GitHub.
