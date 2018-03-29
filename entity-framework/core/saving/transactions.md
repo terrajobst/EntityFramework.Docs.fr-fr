@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 ms.technology: entity-framework-core
 uid: core/saving/transactions
-ms.openlocfilehash: 2dda7b7d58ae058fc2aa89fe16fbf46adc8c6bdc
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: fe4c0d6ad7ccb2e97dc94fbf2eb26a41e7fbcb19
+ms.sourcegitcommit: 7113e8675f26cbb546200824512078bf360225df
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="using-transactions"></a>L’utilisation de Transactions
 
@@ -133,4 +133,4 @@ Il est également possible de s’inscrire dans une transaction explicite.
    > [!IMPORTANT]  
    > Il est recommandé de tester que l’API se comporte correctement avec votre fournisseur avant dépendent de la gestion des transactions. Vous êtes invité à contacter le chargé de maintenance du fournisseur de base de données si elle n’est pas le cas. 
 
-2. À compter de la version 2.1, l’implémentation de System.Transactions dans .NET Core n’inclut pas de prise en charge des transactions distribuées, par conséquent, vous ne pouvez pas utiliser `TransactionScope` ou `CommitableTransaction`pour coordonner des transactions sur plusieurs gestionnaires de ressources. 
+2. À compter de la version 2.1, l’implémentation de System.Transactions dans .NET Core n’inclut pas de prise en charge des transactions distribuées, par conséquent, vous ne pouvez pas utiliser `TransactionScope` ou `CommitableTransaction` pour coordonner des transactions sur plusieurs gestionnaires de ressources. 
