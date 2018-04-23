@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 8a52cb8259bb381729a33a8161aec4b73f69f45d
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 396d31c9d0c0f47d299f49e82e557ed29b8420e7
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 <a name="ef-core-net-command-line-tools"></a>Outils de ligne de commande du .NET Core EF
 ===============================
@@ -65,6 +65,9 @@ Le projet cible contient les fichiers qui sont ajoutés (ou dans certains cas su
 
 Le projet de démarrage est le projet qu’émulent les outils durant l’exécution du code de votre projet. Également par défaut est le projet dans le répertoire actif, il peut être modifié à l’aide de la **--projet de démarrage** option.
 
+> [!NOTE]
+> Par exemple, la mise à jour de la base de données de votre application web qui a un cœur EF installé dans un autre projet se présente comme suit : `dotnet ef database update --project {project-path}` (à partir de votre répertoire d’application web)
+
 Options courantes :
 
 |    |                                  |                             |
@@ -77,9 +80,9 @@ Options courantes :
 |    | --configuration \<CONFIGURATION > | Configuration à utiliser.   |
 |    | --runtime \<identificateur >          | Le runtime à utiliser.         |
 | -h | --aide                           | Afficher les informations d’aide.      |
-| -v | --verbose                        | Afficher la sortie des commentaires.        |
+| -v | --détaillé                        | Afficher la sortie des commentaires.        |
 |    | --Aucune-couleur                       | Ne pas redéfinir la sortie.      |
-|    | --prefix-output                  | Préfixe dont le niveau de sortie.   |
+|    | --sortie de préfixe                  | Préfixe dont le niveau de sortie.   |
 
 
 > [!TIP]
@@ -96,7 +99,7 @@ Options :
 
 |    |           |                                                          |
 |:---|:----------|:---------------------------------------------------------|
-| -f | --force   | Ne pas confirmer.                                           |
+| -f | --forcer   | Ne pas confirmer.                                           |
 |    | --exécution | Afficher la base de données qui seront supprimés, mais ne pas supprimer. |
 
 ### <a name="dotnet-ef-database-update"></a>mise à jour de la base de données DotNet ef
@@ -107,7 +110,7 @@ Arguments :
 
 |              |                                                                                              |
 |:-------------|:---------------------------------------------------------------------------------------------|
-| \<MIGRATION> | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
+| \<MIGRATION &GT; | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
 
 ### <a name="dotnet-ef-dbcontext-info"></a>informations de dbcontext ef dotnet
 
@@ -125,20 +128,21 @@ Arguments :
 
 |               |                                                                     |
 |:--------------|:--------------------------------------------------------------------|
-| \<CONNEXION > | La chaîne de connexion à la base de données.                              |
-| \<PROVIDER>   | Le fournisseur à utiliser. (Par exemple) Microsoft.EntityFrameworkCore.SqlServer) |
+| \<CONNEXION &GT; | La chaîne de connexion à la base de données.                              |
+| \<FOURNISSEUR &GT;   | Le fournisseur à utiliser. (Par ex. Microsoft.EntityFrameworkCore.SqlServer) |
 
 Options :
 
 |                 |                                         |                                                                                                  |
 |:----------------|:----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | --data-annotations                      | Utilisez des attributs pour configurer le modèle (le cas échéant). Si omis, uniquement l’API fluent est utilisé. |
+| <nobr>-d</nobr> | --annotations de données                      | Utilisez des attributs pour configurer le modèle (le cas échéant). Si omis, uniquement l’API fluent est utilisé. |
 | -c              | --contexte \<nom >                       | Le nom de la DbContext.                                                                       |
-| -f              | --force                                 | Remplacer les fichiers existants.                                                                        |
+|                 | --contexte-dir \<chemin d’accès >                   | Répertoire à placer dans DbContext. Chemins d’accès sont relatif au répertoire du projet.             |
+| -f              | --forcer                                 | Remplacer les fichiers existants.                                                                        |
 | -o              | --sortie-dir \<chemin d’accès >                    | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire du projet.                      |
-|                 | <nobr>--schema \<SCHEMA_NAME>...</nobr> | Les schémas des tables pour générer des types d’entités.                                              |
+|                 | <nobr>--schéma \<SCHEMA_NAME >...</nobr> | Les schémas des tables pour générer des types d’entités.                                              |
 | -t              | --table \<TABLE_NAME >...                | Les tables pour générer des types d’entités.                                                         |
-|                 | --use-database-names                    | Utilisez des noms de table et de colonne directement à partir de la base de données.                                           |
+|                 | --noms de base de données d’utilisation                    | Utilisez des noms de table et de colonne directement à partir de la base de données.                                           |
 
 ### <a name="dotnet-ef-migrations-add"></a>ajouter des migrations d’ef dotnet
 
@@ -148,7 +152,7 @@ Arguments :
 
 |         |                            |
 |:--------|:---------------------------|
-| \<NAME> | Le nom de la migration. |
+| \<NOM &GT; | Le nom de la migration. |
 
 Options :
 
@@ -168,7 +172,7 @@ Options :
 
 |    |         |                                                                       |
 |:---|:--------|:----------------------------------------------------------------------|
-| -f | --force | Ne pas vérifier si la migration a été appliquée à la base de données. |
+| -f | --forcer | Rétablir la migration si elle a été appliquée à la base de données. |
 
 ### <a name="dotnet-ef-migrations-script"></a>script de migrations ef dotnet
 
@@ -178,8 +182,8 @@ Arguments :
 
 |         |                                                               |
 |:--------|:--------------------------------------------------------------|
-| \<FROM> | La migration de départ. La valeur par défaut est 0 (base de données initiale). |
-| \<TO>   | La fin de la migration. Valeur par défaut est la dernière migration.         |
+| \<À PARTIR DE &GT; | La migration de départ. La valeur par défaut est 0 (base de données initiale). |
+| \<POUR &GT;   | La fin de la migration. Valeur par défaut est la dernière migration.         |
 
 Options :
 

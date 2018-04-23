@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: aacf8c8564a3966db6202c9ff1c1c02a19a10814
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: a53455a78db4bc504c45abafdacf9a15381f608e
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 <a name="ef-core-package-manager-console-tools"></a>Outils de la Console Gestionnaire de Package EF Core
 =====================================
@@ -74,8 +74,8 @@ Paramètres :
 
 |                                   |                                                                                                                  |
 |:----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| ***-Name*** \<String>             | Le nom de la migration.                                                                                       |
-| <nobr>-OutputDir \<String></nobr> | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatif au répertoire du projet. La valeur par défaut est « Migration ». |
+| ***-Name*** \<chaîne >             | Le nom de la migration.                                                                                       |
+| <nobr>-OutputDir \<chaîne ></nobr> | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatif au répertoire du projet. La valeur par défaut est « Migration ». |
 
 > [!NOTE]
 > Paramètres de **gras** sont requis et celles dans *italique* sont positionnels.
@@ -100,9 +100,9 @@ Supprime la dernière migration.
 
 Paramètres :
 
-|        |                                                                       |
-|:-------|:----------------------------------------------------------------------|
-| -Force | Ne pas vérifier si la migration a été appliquée à la base de données. |
+|        |                                                              |
+|:-------|:-------------------------------------------------------------|
+| -Force | Rétablir la migration si elle a été appliquée à la base de données. |
 
 ### <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
@@ -112,17 +112,18 @@ Paramètres :
 
 |                                          |                                                                                                  |
 |:-----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>***-Connection*** \<String></nobr> | La chaîne de connexion à la base de données.                                                           |
-| ***-Provider*** \<String>                | Le fournisseur à utiliser. (Par exemple) Microsoft.EntityFrameworkCore.SqlServer)                              |
-| -OutputDir \<String>                     | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire du projet.                      |
+| <nobr>***-Connexion*** \<chaîne ></nobr> | La chaîne de connexion à la base de données.                                                           |
+| ***-Fournisseur*** \<chaîne >                | Le fournisseur à utiliser. (Par ex. Microsoft.EntityFrameworkCore.SqlServer)                              |
+| -OutputDir \<chaîne >                     | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire du projet.                      |
+| -ContextDir \<chaîne >                    | Répertoire à placer dans DbContext. Chemins d’accès sont relatif au répertoire du projet.             |
 | -Contexte \<chaîne >                       | Le nom de la DbContext à générer.                                                           |
-| -Schemas \<String[]>                     | Les schémas des tables pour générer des types d’entités.                                              |
+| -Schémas \<String [] >                     | Les schémas des tables pour générer des types d’entités.                                              |
 | -Tables \<String [] >                      | Les tables pour générer des types d’entités.                                                         |
 | -DataAnnotations                         | Utilisez des attributs pour configurer le modèle (le cas échéant). Si omis, uniquement l’API fluent est utilisé. |
 | -UseDatabaseNames                        | Utilisez des noms de table et de colonne directement à partir de la base de données.                                           |
 | -Force                                   | Remplacer les fichiers existants.                                                                        |
 
-### <a name="script-migration"></a>Script-Migration
+### <a name="script-migration"></a>Migration de script
 
 Génère un script SQL à partir de la migration.
 
@@ -130,19 +131,19 @@ Paramètres :
 
 |                   |                                                                    |
 |:------------------|:-------------------------------------------------------------------|
-| *-From* \<String> | La migration de départ. La valeur par défaut est 0 (base de données initiale).      |
-| *-To* \<String>   | La fin de la migration. Valeur par défaut est la dernière migration.              |
+| *-From* \<chaîne > | La migration de départ. La valeur par défaut est 0 (base de données initiale).      |
+| *-* \<Chaîne >   | La fin de la migration. Valeur par défaut est la dernière migration.              |
 | -Idempotent       | Générer un script qui peut être utilisé sur toute migration, une base de données. |
 | -Sortie \<chaîne > | Le fichier dans lequel écrire le résultat à.                                   |
 
 > [!TIP]
 > To, From, et les paramètres de sortie prend en charge le développement par tabulation.
 
-### <a name="update-database"></a>Update-Database
+### <a name="update-database"></a>Base de données de mise à jour
 
 |                                     |                                                                                                |
 |:------------------------------------|:-----------------------------------------------------------------------------------------------|
-| <nobr>*-Migration* \<String></nobr> | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
+| <nobr>*-Migration* \<chaîne ></nobr> | La migration de cible. Si 0, toutes les migrations vont être annulées. Valeur par défaut est la dernière migration. |
 
 > [!TIP]
 > Le paramètre de la Migration prend en charge le développement par tabulation.

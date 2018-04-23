@@ -1,23 +1,23 @@
 ---
-title: "Données - EF Core inhérentes à l’enregistrement"
+title: Données - EF Core inhérentes à l’enregistrement
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 ms.technology: entity-framework-core
 uid: core/saving/related-data
-ms.openlocfilehash: 078879163002cb66e0f0f439415789963181ec15
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="saving-related-data"></a>Enregistrer les données associées
 
 En plus des entités isolées, vous pouvez également faire utiliser des relations définies dans votre modèle.
 
 > [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) sur GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Ajout d’un graphique de nouvelles entités
 
@@ -26,6 +26,9 @@ Si vous créez plusieurs nouvelles entités connexes, les Ajout d’un d’eux a
 Dans l’exemple suivant, le blog et trois publications associées sont tous insérées dans la base de données. Les publications sont trouvées et ajoutées, car ils sont accessibles via le `Blog.Posts` propriété de navigation.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
+
+> [!TIP]  
+> Utilisez la propriété EntityEntry.State pour définir l’état de simplement une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="adding-a-related-entity"></a>Ajout d’une entité connexe
 
