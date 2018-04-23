@@ -1,73 +1,76 @@
 ---
-title: "Types de requêtes - EF Core"
+title: Types de requêtes - EF Core
 author: anpete
 ms.author: anpete
 ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: dfd08cd1c30debddc79740bbf05c39c22e973855
-ms.sourcegitcommit: 01b5cf3b7c983bcced91e7cc4c78391ced2d2caa
+ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="query-types"></a><span data-ttu-id="ea28b-102">Types de requêtes</span><span class="sxs-lookup"><span data-stu-id="ea28b-102">Query Types</span></span>
+# <a name="query-types"></a><span data-ttu-id="a56b1-102">Types de requêtes</span><span class="sxs-lookup"><span data-stu-id="a56b1-102">Query Types</span></span>
 > [!NOTE]
-> <span data-ttu-id="ea28b-103">Cette fonctionnalité est une nouveauté dans EF Core 2.1</span><span class="sxs-lookup"><span data-stu-id="ea28b-103">This feature is new in EF Core 2.1</span></span>
+> <span data-ttu-id="a56b1-103">Cette fonctionnalité est une nouveauté dans EF Core 2.1</span><span class="sxs-lookup"><span data-stu-id="a56b1-103">This feature is new in EF Core 2.1</span></span>
 
-<span data-ttu-id="ea28b-104">Types de requêtes sont des types de résultats de requête en lecture seule qui peuvent être ajoutés au modèle EF principal.</span><span class="sxs-lookup"><span data-stu-id="ea28b-104">Query Types are read-only query result types that can be added to the EF Core model.</span></span> <span data-ttu-id="ea28b-105">Types de requêtes activer l’interrogation d’ad hoc (par exemple, les types anonymes), mais sont plus flexibles, car ils peuvent avoir la configuration de mappage spécifiée.</span><span class="sxs-lookup"><span data-stu-id="ea28b-105">Query Types enable ad-hoc querying (like anonymous types), but are more flexible because they can have mapping configuration specified.</span></span>
+<span data-ttu-id="a56b1-104">En plus des types d’entité peut contenir un modèle EF Core _types de requête_, qui peut être utilisé pour effectuer des requêtes de base de données sur des données qui n’est pas mappées aux types d’entités.</span><span class="sxs-lookup"><span data-stu-id="a56b1-104">In addition to entity types, an EF Core model can contain _query types_, which can be used to carry out database queries against data that isn't mapped to entity types.</span></span>
 
-<span data-ttu-id="ea28b-106">Ils sont conceptuellement semblables aux Types d’entités qui :</span><span class="sxs-lookup"><span data-stu-id="ea28b-106">They are conceptually similar to Entity Types in that:</span></span>
+<span data-ttu-id="a56b1-105">Types de requêtes présentent de nombreuses similitudes avec les types d’entités :</span><span class="sxs-lookup"><span data-stu-id="a56b1-105">Query types have many similarities with entity types:</span></span>
 
-- <span data-ttu-id="ea28b-107">Ils sont des types POCO c# qui sont ajoutés au modèle, soit dans ```OnModelCreating``` à l’aide de la ```ModelBuilder.Query``` (méthode), ou via une propriété DbContext « set » (pour les types de requête une telle propriété est typée en tant que ```DbQuery<T>``` plutôt que ```DbSet<T>```).</span><span class="sxs-lookup"><span data-stu-id="ea28b-107">They are POCO C# types that are added to the model, either in ```OnModelCreating``` using the ```ModelBuilder.Query``` method, or via a DbContext "set" property (for query types such a property is typed as ```DbQuery<T>``` rather than ```DbSet<T>```).</span></span>
-- <span data-ttu-id="ea28b-108">Ils prennent en charge une grande partie des mêmes fonctionnalités de mappage en tant que types d’entité normale.</span><span class="sxs-lookup"><span data-stu-id="ea28b-108">They support much of the same mapping capabilities as regular entity types.</span></span> <span data-ttu-id="ea28b-109">Par exemple, mappage d’héritage navigations (voir limitiations ci-dessous) et, sur des magasins relationnels, la possibilité de configurer les objets de schéma de base de données cible via ```ToTable```, ```HasColumn``` les méthodes api fluent (ou des annotations de données).</span><span class="sxs-lookup"><span data-stu-id="ea28b-109">For example, inheritance mapping, navigations (see limitiations below) and, on relational stores, the ability to configure the target database schema objects via ```ToTable```, ```HasColumn``` fluent-api methods (or data annotations).</span></span>
+- <span data-ttu-id="a56b1-106">Ils peuvent également être ajoutés au modèle soit dans `OnModelCreating`, ou via une propriété « set » sur une dérivée _DbContext_.</span><span class="sxs-lookup"><span data-stu-id="a56b1-106">They can also be added to the model either in `OnModelCreating`, or via a "set" property on a derived _DbContext_.</span></span>
+- <span data-ttu-id="a56b1-107">Ils prennent en charge plusieurs capacités de mappage même, comme l’héritage de mappage, les propriétés de navigation (voir limitations ci-dessous), puis, dans des magasins relationnels, la possibilité de configurer les objets de base de données cible et les colonnes via les méthodes de l’API fluent ou de l’annotation de données.</span><span class="sxs-lookup"><span data-stu-id="a56b1-107">They support many of the same mapping capabilities, like inheritance mapping, navigation properties (see limitations below) and, on relational stores, the ability to configure the target database objects and columns via fluent API methods or data annotations.</span></span>
 
-<span data-ttu-id="ea28b-110">Types de requêtes sont différents d’entité types dans ce qu’ils :</span><span class="sxs-lookup"><span data-stu-id="ea28b-110">Query Types are different from entity types in that they:</span></span>
+<span data-ttu-id="a56b1-108">Toutefois ils sont différents d’entité types dans ce qu’il :</span><span class="sxs-lookup"><span data-stu-id="a56b1-108">However they are different from entity types in that they:</span></span>
 
-- <span data-ttu-id="ea28b-111">Ne nécessitent pas une clé à définir.</span><span class="sxs-lookup"><span data-stu-id="ea28b-111">Do not require a key to be defined.</span></span>
-- <span data-ttu-id="ea28b-112">Ne sont jamais suivies par le dispositif de suivi des modifications.</span><span class="sxs-lookup"><span data-stu-id="ea28b-112">Are never tracked by the Change Tracker.</span></span>
-- <span data-ttu-id="ea28b-113">Ne sont jamais détectés par convention.</span><span class="sxs-lookup"><span data-stu-id="ea28b-113">Are never discovered by convention.</span></span>
-- <span data-ttu-id="ea28b-114">Prennent en charge uniquement un sous-ensemble des fonctionnalités de mappage de navigation - spécifiquement, ils ne peuvent jamais agir en tant que l’extrémité principale d’une relation.</span><span class="sxs-lookup"><span data-stu-id="ea28b-114">Only support a subset of navigation mapping capabilities - Specifically, they may never act as the principal end of a relationship.</span></span>
-- <span data-ttu-id="ea28b-115">Peut être mappé à un _définition de requête_ -une requête est une requête secondaire qui fait Office de source de données pour un Type de requête.</span><span class="sxs-lookup"><span data-stu-id="ea28b-115">May be mapped to a _defining query_ - A Defining Query is a secondary query that acts a data source for a Query Type.</span></span>
+- <span data-ttu-id="a56b1-109">Ne nécessitent pas une clé à définir.</span><span class="sxs-lookup"><span data-stu-id="a56b1-109">Do not require a key to be defined.</span></span>
+- <span data-ttu-id="a56b1-110">Ne sont jamais suivies pour les modifications sur le _DbContext_ et par conséquent sont jamais insérées, mises à jour ou de suppression sur la base de données.</span><span class="sxs-lookup"><span data-stu-id="a56b1-110">Are never tracked for changes on the _DbContext_ and therefore are never inserted, updated or deleted on the database.</span></span>
+- <span data-ttu-id="a56b1-111">Ne sont jamais détectés par convention.</span><span class="sxs-lookup"><span data-stu-id="a56b1-111">Are never discovered by convention.</span></span>
+- <span data-ttu-id="a56b1-112">Prennent en charge uniquement un sous-ensemble des fonctionnalités de mappage de navigation - spécifiquement, ils ne peuvent jamais agir en tant que l’extrémité principale d’une relation.</span><span class="sxs-lookup"><span data-stu-id="a56b1-112">Only support a subset of navigation mapping capabilities - Specifically, they may never act as the principal end of a relationship.</span></span>
+- <span data-ttu-id="a56b1-113">Sont traitées sur le _ModelBuilder_ à l’aide de la `Query` méthode plutôt que la `Entity` (méthode).</span><span class="sxs-lookup"><span data-stu-id="a56b1-113">Are addressed on the _ModelBuilder_ using the `Query` method rather than the `Entity` method.</span></span>
+- <span data-ttu-id="a56b1-114">Sont mappées sur le _DbContext_ via les propriétés de type `DbQuery<T>` au lieu de `DbSet<T>`</span><span class="sxs-lookup"><span data-stu-id="a56b1-114">Are mapped on the _DbContext_ through properties of type `DbQuery<T>` rather than `DbSet<T>`</span></span>
+- <span data-ttu-id="a56b1-115">Sont mappées à des objets de base de données à l’aide de la `ToView` méthode, plutôt que `ToTable`.</span><span class="sxs-lookup"><span data-stu-id="a56b1-115">Are mapped to database objects using the `ToView` method, rather than `ToTable`.</span></span>
+- <span data-ttu-id="a56b1-116">Peut être mappé à un _définition de requête_ - une définition de requête est une requête secondaire déclarée dans le modèle qui fait Office de source de données pour un type de requête.</span><span class="sxs-lookup"><span data-stu-id="a56b1-116">May be mapped to a _defining query_ - A defining query is a secondary query declared in the model that acts a data source for a query type.</span></span>
 
-<span data-ttu-id="ea28b-116">Parmi les principaux scénarios d’utilisation pour les types de requêtes, citons :</span><span class="sxs-lookup"><span data-stu-id="ea28b-116">Some of the main usage scenarios for query types are:</span></span>
+<span data-ttu-id="a56b1-117">Parmi les principaux scénarios d’utilisation pour les types de requêtes, citons :</span><span class="sxs-lookup"><span data-stu-id="a56b1-117">Some of the main usage scenarios for query types are:</span></span>
 
-- <span data-ttu-id="ea28b-117">Mappage de vues de base de données.</span><span class="sxs-lookup"><span data-stu-id="ea28b-117">Mapping to database views.</span></span>
-- <span data-ttu-id="ea28b-118">Mappage des tables qui n’ont pas de clé primaire définie.</span><span class="sxs-lookup"><span data-stu-id="ea28b-118">Mapping to tables that do not have a primary key defined.</span></span>
-- <span data-ttu-id="ea28b-119">Agissant en tant que type de retour pour ad hoc ```FromSql()``` requêtes.</span><span class="sxs-lookup"><span data-stu-id="ea28b-119">Serving as the return type for ad hoc ```FromSql()``` queries.</span></span>
-- <span data-ttu-id="ea28b-120">Mappage pour les requêtes définies dans le modèle.</span><span class="sxs-lookup"><span data-stu-id="ea28b-120">Mapping to queries defined in the model.</span></span>
-
-> [!TIP]
-> <span data-ttu-id="ea28b-121">Mappage d’un type de requête à une vue de base de données est obtenue grâce à la ```ToTable``` API fluent.</span><span class="sxs-lookup"><span data-stu-id="ea28b-121">Mapping a query type to a database view is achieved using the ```ToTable``` fluent API.</span></span>
-
-## <a name="example"></a><span data-ttu-id="ea28b-122">Exemple</span><span class="sxs-lookup"><span data-stu-id="ea28b-122">Example</span></span>
-
-<span data-ttu-id="ea28b-123">L’exemple suivant montre comment utiliser le Type de requête pour interroger une vue de base de données.</span><span class="sxs-lookup"><span data-stu-id="ea28b-123">The following example shows how to use Query Type to query a database view.</span></span>
+- <span data-ttu-id="a56b1-118">Agissant en tant que type de retour pour ad hoc `FromSql()` requêtes.</span><span class="sxs-lookup"><span data-stu-id="a56b1-118">Serving as the return type for ad hoc `FromSql()` queries.</span></span>
+- <span data-ttu-id="a56b1-119">Mappage de vues de base de données.</span><span class="sxs-lookup"><span data-stu-id="a56b1-119">Mapping to database views.</span></span>
+- <span data-ttu-id="a56b1-120">Mappage des tables qui n’ont pas de clé primaire définie.</span><span class="sxs-lookup"><span data-stu-id="a56b1-120">Mapping to tables that do not have a primary key defined.</span></span>
+- <span data-ttu-id="a56b1-121">Mappage pour les requêtes définies dans le modèle.</span><span class="sxs-lookup"><span data-stu-id="a56b1-121">Mapping to queries defined in the model.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="ea28b-124">Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) sur GitHub.</span><span class="sxs-lookup"><span data-stu-id="ea28b-124">You can view this article's [sample](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) on GitHub.</span></span>
+> <span data-ttu-id="a56b1-122">Mappage d’un type de requête à un objet de base de données est obtenue grâce à la `ToView` API fluent.</span><span class="sxs-lookup"><span data-stu-id="a56b1-122">Mapping a query type to a database object is achieved using the `ToView` fluent API.</span></span> <span data-ttu-id="a56b1-123">Du point de vue du noyau de EF, l’objet de base de données spécifiée dans cette méthode est un _vue_, c'est-à-dire qu’il est traité comme une source de la requête en lecture seule et ne peut pas être la cible d’une mise à jour, insérer ou supprimer les opérations.</span><span class="sxs-lookup"><span data-stu-id="a56b1-123">From the perspective of EF Core, the database object specified in this method is a _view_, meaning that it is treated as a read-only query source and cannot be the target of update, insert or delete operations.</span></span> <span data-ttu-id="a56b1-124">Toutefois, cela ne signifie pas que l’objet de base de données est réellement nécessaire pour la vue de base de données, il peut également être une table de base de données qui sera traitée comme étant en lecture seule.</span><span class="sxs-lookup"><span data-stu-id="a56b1-124">However, this does not mean that the database object is actually required to be a database view - It can alternatively be a database table that will be treated as read-only.</span></span> <span data-ttu-id="a56b1-125">À l’inverse, pour les types d’entité, EF Core suppose qu’un objet de base de données spécifié dans le `ToTable` méthode peut être traitée comme un _table_, ce qui signifie qu’il peut être utilisé en tant que requête source, mais également ciblés par la mise à jour, supprimer et insérer opérations.</span><span class="sxs-lookup"><span data-stu-id="a56b1-125">Conversely, for entity types, EF Core assumes that a database object specified in the `ToTable` method can be treated as a _table_, meaning that it can be used as a query source but also targeted by update, delete and insert operations.</span></span> <span data-ttu-id="a56b1-126">En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout devrait fonctionner correctement tant que la vue est configurée pour être mis à jour sur la base de données.</span><span class="sxs-lookup"><span data-stu-id="a56b1-126">In fact, you can specify the name of a database view in `ToTable` and everything should work fine as long as the view is configured to be updatable on the database.</span></span>
 
-<span data-ttu-id="ea28b-125">Tout d’abord, nous définissons un modèle simple de Blog et Post :</span><span class="sxs-lookup"><span data-stu-id="ea28b-125">First, we define a simple Blog and Post model:</span></span>
+## <a name="example"></a><span data-ttu-id="a56b1-127">Exemple</span><span class="sxs-lookup"><span data-stu-id="a56b1-127">Example</span></span>
+
+<span data-ttu-id="a56b1-128">L’exemple suivant montre comment utiliser le Type de requête pour interroger une vue de base de données.</span><span class="sxs-lookup"><span data-stu-id="a56b1-128">The following example shows how to use Query Type to query a database view.</span></span>
+
+> [!TIP]
+> <span data-ttu-id="a56b1-129">Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) sur GitHub.</span><span class="sxs-lookup"><span data-stu-id="a56b1-129">You can view this article's [sample](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) on GitHub.</span></span>
+
+<span data-ttu-id="a56b1-130">Tout d’abord, nous définissons un modèle simple de Blog et Post :</span><span class="sxs-lookup"><span data-stu-id="a56b1-130">First, we define a simple Blog and Post model:</span></span>
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#Entities)]
 
-<span data-ttu-id="ea28b-126">Ensuite, nous définissons une vue de base de données simple qui permet d’interroger le nombre de messages associée à chaque blog :</span><span class="sxs-lookup"><span data-stu-id="ea28b-126">Next, we define a simple database view that will allow us to query the number of posts associated with each blog:</span></span>
+<span data-ttu-id="a56b1-131">Ensuite, nous définissons une vue de base de données simple qui permet d’interroger le nombre de messages associée à chaque blog :</span><span class="sxs-lookup"><span data-stu-id="a56b1-131">Next, we define a simple database view that will allow us to query the number of posts associated with each blog:</span></span>
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#View)]
 
-<span data-ttu-id="ea28b-127">Ensuite, nous définissons une classe pour contenir le résultat de la vue de base de données :</span><span class="sxs-lookup"><span data-stu-id="ea28b-127">Next, we define a class to hold the result from the database view:</span></span>
+<span data-ttu-id="a56b1-132">Ensuite, nous définissons une classe pour contenir le résultat de la vue de base de données :</span><span class="sxs-lookup"><span data-stu-id="a56b1-132">Next, we define a class to hold the result from the database view:</span></span>
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#QueryType)]
 
-<span data-ttu-id="ea28b-128">Ensuite, nous configurons le type de requête dans _OnModelCreating_ à l’aide de la ```modelBuilder.Query<T>``` API.</span><span class="sxs-lookup"><span data-stu-id="ea28b-128">Next, we configure the query type in _OnModelCreating_ using the ```modelBuilder.Query<T>``` API.</span></span>
-<span data-ttu-id="ea28b-129">API de configuration fluent standard nous permet de configurer le mappage pour le Type de requête :</span><span class="sxs-lookup"><span data-stu-id="ea28b-129">We use standard fluent configuration APIs to configure the mapping for the Query Type:</span></span>
+<span data-ttu-id="a56b1-133">Ensuite, nous configurons le type de requête dans _OnModelCreating_ à l’aide de la `modelBuilder.Query<T>` API.</span><span class="sxs-lookup"><span data-stu-id="a56b1-133">Next, we configure the query type in _OnModelCreating_ using the `modelBuilder.Query<T>` API.</span></span>
+<span data-ttu-id="a56b1-134">API de configuration fluent standard nous permet de configurer le mappage pour le Type de requête :</span><span class="sxs-lookup"><span data-stu-id="a56b1-134">We use standard fluent configuration APIs to configure the mapping for the Query Type:</span></span>
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#Configuration)]
 
-<span data-ttu-id="ea28b-130">Enfin, nous pouvons interrogez la vue de base de données de la façon standard :</span><span class="sxs-lookup"><span data-stu-id="ea28b-130">Finally, we can query the database view in the standard way:</span></span>
+<span data-ttu-id="a56b1-135">Enfin, nous pouvons interrogez la vue de base de données de la façon standard :</span><span class="sxs-lookup"><span data-stu-id="a56b1-135">Finally, we can query the database view in the standard way:</span></span>
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#Query)]
 
 > [!TIP]
-> <span data-ttu-id="ea28b-131">Notez que nous avons également de définir une propriété de niveau de requête (DbQuery) d’agir en tant que racine pour les requêtes sur ce type de contexte.</span><span class="sxs-lookup"><span data-stu-id="ea28b-131">Note we have also defined a context level query property (DbQuery) to act as a root for queries against this type.</span></span>
+> <span data-ttu-id="a56b1-136">Notez que nous avons également de définir une propriété de niveau de requête (DbQuery) d’agir en tant que racine pour les requêtes sur ce type de contexte.</span><span class="sxs-lookup"><span data-stu-id="a56b1-136">Note we have also defined a context level query property (DbQuery) to act as a root for queries against this type.</span></span>
