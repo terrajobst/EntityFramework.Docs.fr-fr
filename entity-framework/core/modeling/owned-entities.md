@@ -1,16 +1,16 @@
 ---
-title: "Propriétaire de Types d’entités - EF Core"
+title: Propriétaire de Types d’entités - EF Core
 author: julielerman
 ms.author: divega
 ms.date: 2/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a6823377eb626ca92263c31351e1aef61db5a787
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: f2f05499a3e3494f420d916df2db19667a6f1e29
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="owned-entity-types"></a>Types d’entités appartenant à
 
@@ -21,7 +21,7 @@ EF Core vous permet de types d’entités de modèle qui peuvent apparaître uni
 
 ## <a name="explicit-configuration"></a>Configuration explicite
 
-La propriété entité types sont jamais inclus par cœur de EF dans le modèle par convention. Vous pouvez utiliser la `OwnsOne` méthode dans `OnModelCreating` ou annotez le type avec `OwnedAttrbibute` (nouveau dans EF Core 2.1) pour configurer le type comme un type lui appartenant.
+La propriété entité types sont jamais inclus par cœur de EF dans le modèle par convention. Vous pouvez utiliser la `OwnsOne` méthode dans `OnModelCreating` ou annotez le type avec `OwnedAttribute` (nouveau dans EF Core 2.1) pour configurer le type comme un type lui appartenant.
 
 Dans cet exemple, StreetAddress est un type avec aucune propriété d’identité. Il est utilisé comme propriété du type Order pour spécifier l’adresse d’expédition d’une commande particulière. Dans `OnModelCreating`, nous utilisons le `OwnsOne` méthode pour spécifier que la propriété ShippingAddress est une entité propriétaire du type de commande.
 

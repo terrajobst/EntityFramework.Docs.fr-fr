@@ -1,45 +1,48 @@
 ---
-title: "Types de requêtes - EF Core"
+title: Types de requêtes - EF Core
 author: anpete
 ms.author: anpete
 ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: dfd08cd1c30debddc79740bbf05c39c22e973855
-ms.sourcegitcommit: 01b5cf3b7c983bcced91e7cc4c78391ced2d2caa
+ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="query-types"></a>Types de requêtes
 > [!NOTE]
 > Cette fonctionnalité est une nouveauté dans EF Core 2.1
 
-Types de requêtes sont des types de résultats de requête en lecture seule qui peuvent être ajoutés au modèle EF principal. Types de requêtes activer l’interrogation d’ad hoc (par exemple, les types anonymes), mais sont plus flexibles, car ils peuvent avoir la configuration de mappage spécifiée.
+En plus des types d’entité peut contenir un modèle EF Core _types de requête_, qui peut être utilisé pour effectuer des requêtes de base de données sur des données qui n’est pas mappées aux types d’entités.
 
-Ils sont conceptuellement semblables aux Types d’entités qui :
+Types de requêtes présentent de nombreuses similitudes avec les types d’entités :
 
-- Ils sont des types POCO c# qui sont ajoutés au modèle, soit dans ```OnModelCreating``` à l’aide de la ```ModelBuilder.Query``` (méthode), ou via une propriété DbContext « set » (pour les types de requête une telle propriété est typée en tant que ```DbQuery<T>``` plutôt que ```DbSet<T>```).
-- Ils prennent en charge une grande partie des mêmes fonctionnalités de mappage en tant que types d’entité normale. Par exemple, mappage d’héritage navigations (voir limitiations ci-dessous) et, sur des magasins relationnels, la possibilité de configurer les objets de schéma de base de données cible via ```ToTable```, ```HasColumn``` les méthodes api fluent (ou des annotations de données).
+- Ils peuvent également être ajoutés au modèle soit dans `OnModelCreating`, ou via une propriété « set » sur une dérivée _DbContext_.
+- Ils prennent en charge plusieurs capacités de mappage même, comme l’héritage de mappage, les propriétés de navigation (voir limitations ci-dessous), puis, dans des magasins relationnels, la possibilité de configurer les objets de base de données cible et les colonnes via les méthodes de l’API fluent ou de l’annotation de données.
 
-Types de requêtes sont différents d’entité types dans ce qu’ils :
+Toutefois ils sont différents d’entité types dans ce qu’il :
 
 - Ne nécessitent pas une clé à définir.
-- Ne sont jamais suivies par le dispositif de suivi des modifications.
+- Ne sont jamais suivies pour les modifications sur le _DbContext_ et par conséquent sont jamais insérées, mises à jour ou de suppression sur la base de données.
 - Ne sont jamais détectés par convention.
 - Prennent en charge uniquement un sous-ensemble des fonctionnalités de mappage de navigation - spécifiquement, ils ne peuvent jamais agir en tant que l’extrémité principale d’une relation.
-- Peut être mappé à un _définition de requête_ -une requête est une requête secondaire qui fait Office de source de données pour un Type de requête.
+- Sont traitées sur le _ModelBuilder_ à l’aide de la `Query` méthode plutôt que la `Entity` (méthode).
+- Sont mappées sur le _DbContext_ via les propriétés de type `DbQuery<T>` au lieu de `DbSet<T>`
+- Sont mappées à des objets de base de données à l’aide de la `ToView` méthode, plutôt que `ToTable`.
+- Peut être mappé à un _définition de requête_ - une définition de requête est une requête secondaire déclarée dans le modèle qui fait Office de source de données pour un type de requête.
 
 Parmi les principaux scénarios d’utilisation pour les types de requêtes, citons :
 
+- Agissant en tant que type de retour pour ad hoc `FromSql()` requêtes.
 - Mappage de vues de base de données.
 - Mappage des tables qui n’ont pas de clé primaire définie.
-- Agissant en tant que type de retour pour ad hoc ```FromSql()``` requêtes.
 - Mappage pour les requêtes définies dans le modèle.
 
 > [!TIP]
-> Mappage d’un type de requête à une vue de base de données est obtenue grâce à la ```ToTable``` API fluent.
+> Mappage d’un type de requête à un objet de base de données est obtenue grâce à la `ToView` API fluent. Du point de vue du noyau de EF, l’objet de base de données spécifiée dans cette méthode est un _vue_, c'est-à-dire qu’il est traité comme une source de la requête en lecture seule et ne peut pas être la cible d’une mise à jour, insérer ou supprimer les opérations. Toutefois, cela ne signifie pas que l’objet de base de données est réellement nécessaire pour la vue de base de données, il peut également être une table de base de données qui sera traitée comme étant en lecture seule. À l’inverse, pour les types d’entité, EF Core suppose qu’un objet de base de données spécifié dans le `ToTable` méthode peut être traitée comme un _table_, ce qui signifie qu’il peut être utilisé en tant que requête source, mais également ciblés par la mise à jour, supprimer et insérer opérations. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout devrait fonctionner correctement tant que la vue est configurée pour être mis à jour sur la base de données.
 
 ## <a name="example"></a>Exemple
 
@@ -60,7 +63,7 @@ Ensuite, nous définissons une classe pour contenir le résultat de la vue de ba
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#QueryType)]
 
-Ensuite, nous configurons le type de requête dans _OnModelCreating_ à l’aide de la ```modelBuilder.Query<T>``` API.
+Ensuite, nous configurons le type de requête dans _OnModelCreating_ à l’aide de la `modelBuilder.Query<T>` API.
 API de configuration fluent standard nous permet de configurer le mappage pour le Type de requête :
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#Configuration)]

@@ -1,16 +1,16 @@
 ---
-title: "Types d’entités avec des constructeurs - EF Core"
+title: Types d’entités avec des constructeurs - EF Core
 author: ajcvickers
 ms.author: divega
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 38ab0c1c3cd8c490875abf30b8478c99bc58630f
-ms.sourcegitcommit: 60b831318c4f5ec99061e8af6a7c9e7c03b3469c
+ms.openlocfilehash: 3f861d54c5bff637ae28f38b08da7aff7d0ea5c0
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/02/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entités avec des constructeurs
 
@@ -49,7 +49,7 @@ public class Post
 }
 ```
 
-Lorsque EF Core crée des instances de ces types, tels que pour les résultats d’une requête, il sera tout d’abord appeler le constructeur sans paramètre par défaut, puis définissez chaque propriété à la valeur à partir de la base de données. Toutefois, si EF Core recherche un constructeur paramétrable avec des noms de paramètre et les types qui correspondent à ceux de mappé des propriétés, puis il appelle à la place du constructeur paramétré avec des valeurs pour ces propriétés et ne définit pas explicitement de chaque propriété. Exemple :
+Lorsque EF Core crée des instances de ces types, tels que pour les résultats d’une requête, il sera tout d’abord appeler le constructeur sans paramètre par défaut, puis définissez chaque propriété à la valeur à partir de la base de données. Toutefois, si EF Core recherche un constructeur paramétrable avec des noms de paramètre et les types qui correspondent à ceux de mappé des propriétés, puis il appelle à la place du constructeur paramétré avec des valeurs pour ces propriétés et ne définit pas explicitement de chaque propriété. Par exemple :
 
 ```Csharp
 public class Blog
@@ -99,7 +99,7 @@ Une fois que les propriétés sont définies via le constructeur, il peut être 
 * Propriétés sans méthodes setter ne sont pas mappées par convention. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
 * À l’aide des valeurs de clés générées automatiquement nécessite une propriété de clé qui est en lecture-écriture, étant donné que la valeur de clé doit être définie par le Générateur de clé lors de l’insertion de nouvelles entités.
 
-Un moyen simple pour éviter ces éléments consiste à utiliser les méthodes setter privé. Exemple :
+Un moyen simple pour éviter ces éléments consiste à utiliser les méthodes setter privé. Par exemple :
 ```Csharp
 public class Blog
 {
@@ -254,7 +254,7 @@ public class Post
 }
 ```
 Choses à noter à ce sujet :
-* Le constructeur est privé, car il n’est jamais appeler EF Core, et il existe un autre constructeur public pour une utilisation générale.
+* Le constructeur est privé, car il est toujours appelée par EF Core, et il existe un autre constructeur public pour une utilisation générale.
 * Le code qui utilise le service injecté (autrement dit, le contexte) est défense contre lui étant `null` pour gérer les cas où EF Core n’est pas création de l’instance.
 * Étant donné que le service est stocké dans une propriété en lecture/écriture, elle sera réinitialisée lorsque l’entité est attachée à une nouvelle instance de contexte.
 

@@ -1,16 +1,16 @@
 ---
-title: Value Conversions - EF Core
+title: Conversions de valeurs - EF Core
 author: ajcvickers
 ms.author: divega
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 50acba39cdec16caa9300fcaf47ab6242a4f69fb
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 329d2757059462468ca30772d37789343c03ba7b
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>La classe ValueConverter
 
-Appel de `HasConversion` comme indiqué ci-dessus va créer un `ValueConverter` de l’instance et la définir sur la propriété. Le `ValueConverter` peut être créée à la place explicitement. Exemple :
+Appel de `HasConversion` comme indiqué ci-dessus va créer un `ValueConverter` de l’instance et la définir sur la propriété. Le `ValueConverter` peut être créée à la place explicitement. Par exemple :
 ```Csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
@@ -137,6 +137,6 @@ Ensuite, les valeurs enum seront enregistrés sous forme de chaînes dans la bas
 
 Il existe quelques limitations actuelles connues du système de conversion de valeur :
 * Comme indiqué précédemment, `null` ne peut pas être converti.
-* Il n’existe actuellement aucun moyen pour répartir une conversion d’une propriété pour les colonnes de DECHARGE multiple ou vice versa.
+* Il n’existe actuellement aucun moyen pour répartir une conversion d’une propriété à plusieurs colonnes, ou vice versa.
 * Utilisation des conversions de valeurs peut affecter la capacité de EF Core à traduire des expressions SQL. Un avertissement sera consigné pour ces cas.
 La suppression de ces limitations est envisagée pour une version ultérieure.
