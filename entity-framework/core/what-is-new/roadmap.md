@@ -6,24 +6,24 @@ ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 ms.technology: entity-framework-core
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: 5aef679df2ecdfe7f59458c8994d0d17b4a889ff
-ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
+ms.openlocfilehash: 6c10e64a4fa3bf26dc0da64bb9e102c8b76d3a6e
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="entity-framework-core-roadmap"></a>Feuille de route d’Entity Framework Core
 
 > [!IMPORTANT]
 > Notez que les fonctionnalités et les plannings des versions ultérieures sont susceptibles de changer à tout moment, et même si cette page est régulièrement mise à jour, elle risque de ne pas toujours refléter nos projets les plus récents.
 
-La première préversion d’EF Core 2.1 a été publiée en février 2018. Vous trouverez des informations supplémentaires sur cette version dans [Nouveautés d’EF Core 2.1](xref:core/what-is-new/ef-core-2.1).
+La deuxième préversion d’EF Core 2.1 a été publiée en avril 2018. Vous trouverez des informations supplémentaires sur cette version dans [Nouveautés d’EF Core 2.1](xref:core/what-is-new/ef-core-2.1).
 
 Nous avons l’intention de publier des préversions supplémentaires d’EF Core 2.1 tous les mois et une version finale durant le deuxième trimestre 2018.
 
 Nous n’avons pas terminé le [planning des versions](#release-planning-process) pour la version qui suivra la version 2.1.
 
-## <a name="schedule"></a>Planning
+## <a name="schedule"></a>Planification
 
 Le planning pour EF Core est synchronisé avec le [planning .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md) et le [planning ASP.NET Core](https://github.com/aspnet/Home/wiki/Roadmap).
 

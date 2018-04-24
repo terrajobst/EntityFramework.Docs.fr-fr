@@ -1,22 +1,22 @@
 ---
-title: "Nouveautés d’EF Core 2.1 - EF Core"
+title: Nouveautés d’EF Core 2.1 - EF Core
 author: divega
 ms.author: divega
 ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: bb1e691e0f22bd36467d58c02bde22c63067207e
-ms.sourcegitcommit: fcaeaf085171dfb5c080ec42df1d1df8dfe204fb
+ms.openlocfilehash: db1648095aa4d612af53f4e10a30be36edc40da5
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/15/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 > [!NOTE]  
 > Il s’agit encore d’une préversion.
 
-Outre un nombre important de petites améliorations et plus d’une centaine de correctifs produit, EF Core 2.1 inclut plusieurs nouvelles fonctionnalités :
+En plus de nombreux correctifs de bogues et de petites améliorations des fonctionnalités et des performances, EF Core 2.1 inclut de nouvelles fonctionnalités intéressantes :
 
 ## <a name="lazy-loading"></a>Chargement différé
 EF Core contient désormais les blocs de construction nécessaires pour permettre à quiconque de créer des classes d’entité capables de charger leurs propriétés de navigation à la demande. Nous avons également introduit un nouveau package, Microsoft.EntityFrameworkCore.Proxies, qui tire parti de ces blocs de construction pour produire des classes proxy de chargement différé basées sur des classes d’entité ayant subi des modifications minimales (par exemple, des classes avec des propriétés de navigation virtuelles).
@@ -71,7 +71,7 @@ Avec la nouvelle version, il sera possible de fournir des données initiales pou
 Par exemple, utilisez ceci pour configurer les données d’amorçage d’un Post dans `OnModelCreating`:
 
 ``` csharp
-modelBuilder.Entity<Post>().SeedData(new Post{ Id = 1, Text = "Hello World!" });
+modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 ```
 
 Pour plus d’informations sur cette rubrique, lisez la [section sur l’amorçage des données](xref:core/modeling/data-seeding).  
@@ -143,9 +143,29 @@ public class Order
 }
 ```
 
+## <a name="new-dotnet-ef-global-tool"></a>Nouvel outil global ef-dotnet
+
+Les commandes _ef-dotnet_ ont été converties en un outil global CLI .NET. Ainsi, il n’est plus nécessaire d’utiliser DotNetCliToolReference dans le projet pour pouvoir utiliser les migrations ou structurer un DbContext à partir d’une base de données existante.
+
+## <a name="microsoftentityframeworkcoreabstractions-package"></a>Package Microsoft.EntityFrameworkCore.Abstractions
+Le nouveau package contient des attributs et des interfaces que vous pouvez utiliser dans vos projets pour alléger les fonctionnalités EF Core sans dépendance envers Core EF dans sa globalité. Par exemple, l’attribut [Owned] introduit dans la préversion 1 a été déplacé ici.
+
+## <a name="state-change-events"></a>Événements de changement d’état
+
+Les nouveaux événements `Tracked` et `StateChanged` sur `ChangeTracker` peuvent être utilisés pour écrire une logique qui réagit aux entités qui entrent dans DbContext ou modifiant leur état.
+
+## <a name="raw-sql-parameter-analyzer"></a>Analyseur de paramètre SQL brut
+
+Un nouvel analyseur de code est inclus avec EF Core. Il détecte les utilisations potentiellement dangereuses de nos API SQL brutes, comme `FromSql` ou `ExecuteSqlCommand`. Par exemple, dans la requête suivante, un avertissement s’affiche, car _minAge_ n’est pas paramétrable :
+
+``` csharp
+var sql = $"SELECT * FROM People WHERE Age > {minAge}";
+var query = context.People.FromSql(sql);
+```
+
 ## <a name="database-provider-compatibility"></a>Compatibilité des fournisseurs de base de données
 
-De par sa conception, EF Core 2.1 est compatible avec les fournisseurs de base de données créés pour EF Core 2.0. Certaines des fonctionnalités décrites ci-dessus, comme les conversions de valeurs, nécessitent un fournisseur mis à jour. En revanche, d’autres fonctionnalités comme le chargement différé sont compatibles avec les fournisseurs existants.
+De par sa conception, EF Core 2.1 est compatible avec les fournisseurs de base de données créés pour EF Core 2.0 ou requiert tout du moins des modifications minimes. Certaines des fonctionnalités décrites ci-dessus, comme les conversions de valeurs, nécessitent un fournisseur mis à jour. En revanche, d’autres fonctionnalités comme le chargement différé sont compatibles avec les fournisseurs existants.
 
 > [!TIP]
 > Si vous vous heurtez à des incompatibilités inattendues ou à d’autres problèmes liés aux nouvelles fonctionnalités, ou si vous avez des commentaires à propos de ces nouveautés, utilisez [notre système de suivi des problèmes](https://github.com/aspnet/EntityFrameworkCore/issues/new) pour nous en faire part.
