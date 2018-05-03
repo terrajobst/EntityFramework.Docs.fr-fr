@@ -6,17 +6,17 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
-Suppression en cascade est couramment utilisée dans la terminologie de base de données pour décrire une caractéristique qui permet la suppression d’une ligne pour déclencher automatiquement la suppression de lignes connexes. Un concept étroitement lié également couvert par les comportements de suppression EF cœur est la suppression automatique d’une entité enfant lorsqu’il est la relation à un parent a été interrompue--cette i communément appelée « suppression des orphelins ».
+Suppression en cascade est couramment utilisée dans la terminologie de base de données pour décrire une caractéristique qui permet la suppression d’une ligne pour déclencher automatiquement la suppression de lignes connexes. Un concept étroitement lié également couvert par les comportements de suppression EF cœur est la suppression automatique d’une entité enfant lors de sa relation à un parent a été interrompue, cela est communément appelé « suppression des orphelins ».
 
-EF Core implémente plusieurs comportements de suppression différente et permet la configuration des comportements de suppression de relations individuelles. EF Core implémente également des conventions de configurer automatiquement les comportements de suppression par défaut utiles pour chaque relation basée sur le [requiredness de la relation] (../modeling/relationships.md#required-and-optional-relationships).
+EF Core implémente plusieurs comportements de suppression différente et permet la configuration des comportements de suppression de relations individuelles. EF Core implémente également des conventions de configurer automatiquement les comportements de suppression par défaut utiles pour chaque relation basée sur le [requiredness de la relation](../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Supprimer des comportements
 Supprimer les comportements sont définis dans le *deleteBehavior()* énumérateur de type et peut être passée à la *OnDelete* API fluent au contrôle si la suppression d’une entité principal/le parent ou l’interruption de la relation à des entités dépendantes/enfant doit avoir un effet secondaire sur les entités dépendantes/enfant.
@@ -36,18 +36,18 @@ Il existe quatre supprimer des comportements, répertoriés dans les tableaux ci
 | Nom du comportement               | Effet sur dépendant/enfant dans la mémoire    | Effet sur dépendant/enfant dans la base de données  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Cascade**                 | Les entités sont supprimées.                   | Les entités sont supprimées.                   |
-| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | Aucun.                                   |
-| **SetNull**                 | Propriétés de clé étrangère sont définies avec la valeur null | Propriétés de clé étrangère sont définies avec la valeur null |
-| **Restrict**                | Aucun.                                   | Aucun.                                   |
+| **ClientSetNull** (par défaut) | Propriétés de clé étrangère sont définies avec la valeur null | Aucun                                   |
+| **setNull**                 | Propriétés de clé étrangère sont définies avec la valeur null | Propriétés de clé étrangère sont définies avec la valeur null |
+| **Restreindre**                | Aucun                                   | Aucun                                   |
 
 Pour les relations requises (clé étrangère non nullable) il est _pas_ possible d’enregistrer une valeur null valeur de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement         | Effet sur dépendant/enfant dans la mémoire | Effet sur dépendant/enfant dans la base de données |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (par défaut) | Les entités sont supprimées.                | Les entités sont supprimées.                  |
-| **ClientSetNull**     | Lève une exception SaveChanges                  | Aucun.                                  |
-| **SetNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
-| **Restrict**          | Aucun.                                | Aucun.                                  |
+| **ClientSetNull**     | Lève une exception SaveChanges                  | Aucun                                  |
+| **setNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
+| **Restreindre**          | Aucun                                | Aucun                                  |
 
 Dans les tableaux ci-dessus, *aucun* peut entraîner une violation de contrainte. Par exemple, si une entité principal/enfant est supprimée, mais aucune action n’est effectuée pour modifier la clé étrangère de dépendant/enfant, puis la base de données probablement lève sur SaveChanges en raison d’une violation de contrainte foreign.
 

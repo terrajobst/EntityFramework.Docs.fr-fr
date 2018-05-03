@@ -1,15 +1,15 @@
 ---
-title: "Portage de EF6 vers Core EF - portage d’un modèle basé sur le fichier EDMX"
+title: Portage de EF6 vers Core EF - portage d’un modèle basé sur le fichier EDMX
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 63003709-f1ec-4bdc-8083-65a60c4826d2
 uid: efcore-and-ef6/porting/port-edmx
 ms.openlocfilehash: c999d2114c76ee3a7615ae897b42ee3376cff14e
-ms.sourcegitcommit: 1880d5ce49d4c9cb891d0e8fb230770bb44799e5
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portage d’un modèle EDMX EF6 vers EF Core
 

@@ -1,16 +1,16 @@
 ---
-title: "Chargement associées données - EF Core"
+title: Chargement associées données - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: 0d7705e0e5368435536e98d319c853ea8c732643
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 5f1fb9376300739ab0e306d9d60e7ec71aa2d2e7
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/05/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="loading-related-data"></a>Chargement de données connexes
 
@@ -98,19 +98,19 @@ Vous pouvez inclure des données liées provenant uniquement définies sur un ty
 Contenu de `School` navigation de toutes les personnes qui sont les étudiants peut être chargée dynamiquement à l’aide d’un certain nombre de modèles :
 
 - utilisation de cast
-```Csharp
-context.People.Include(person => ((Student)person).School).ToList()
-```
+  ```Csharp
+  context.People.Include(person => ((Student)person).School).ToList()
+  ```
 
 - à l’aide de `as` (opérateur)
-```Csharp
-context.People.Include(person => (person as Student).School).ToList()
-```
+  ```Csharp
+  context.People.Include(person => (person as Student).School).ToList()
+  ```
 
 - à l’aide de la surcharge de `Include` qui accepte le paramètre de type `string`
-```Csharp
-context.People.Include("Student").ToList()
-```
+  ```Csharp
+  context.People.Include("Student").ToList()
+  ```
 
 ### <a name="ignored-includes"></a>Ignoré inclut
 
@@ -152,7 +152,7 @@ Vous pouvez également filtrer les entités associées sont chargées en mémoir
 > [!NOTE]  
 > Cette fonctionnalité a été introduite dans EF Core 2.1.
 
-La façon la plus simple d’utiliser le chargement différé est en installant le [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) package et l’activer avec un appel à `UseLazyLoadingProxies`. Exemple :
+La façon la plus simple d’utiliser le chargement différé est en installant le [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) package et l’activer avec un appel à `UseLazyLoadingProxies`. Par exemple :
 ```Csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -186,7 +186,7 @@ public class Post
 ```
 ### <a name="lazy-loading-without-proxies"></a>Lazy-chargement sans proxy
 
-Chargement Lazy proxys fonctionnent en injectant le `ILazyLoader` de service dans une entité, comme décrit dans [constructeurs de Type d’entité](../modeling/constructors.md). Exemple :
+Chargement Lazy proxys fonctionnent en injectant le `ILazyLoader` de service dans une entité, comme décrit dans [constructeurs de Type d’entité](../modeling/constructors.md). Par exemple :
 ```Csharp
 public class Blog
 {
@@ -239,7 +239,7 @@ public class Post
     }
 }
 ```
-Cela ne nécessite pas hérité de types d’entité ou de propriétés de navigation à être des ordinateurs virtuels et permet aux instances d’entité créées avec `new` charger en différé-une fois attaché à un contexte. Toutefois, il requiert une référence à le `ILazyLoader` service, qui combine des types d’entités à l’assembly EF Core. Pour éviter ce cœur EF permet la `ILazyLoader.Load` méthode être ajoutés en tant que délégué. Exemple :
+Cela ne nécessite pas hérité de types d’entité ou de propriétés de navigation à être des ordinateurs virtuels et permet aux instances d’entité créées avec `new` charger en différé-une fois attaché à un contexte. Toutefois, il requiert une référence à le `ILazyLoader` service, qui combine des types d’entités à l’assembly EF Core. Pour éviter ce cœur EF permet la `ILazyLoader.Load` méthode être ajoutés en tant que délégué. Par exemple :
 ```Csharp
 public class Blog
 {
