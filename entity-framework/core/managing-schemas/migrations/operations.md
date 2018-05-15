@@ -1,14 +1,14 @@
 ---
-title: "Opérations de Migrations personnalisé - EF Core"
+title: Opérations de Migrations personnalisé - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/7/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: d41409dee034e84d22092a5f9111dd79c87dcec3
-ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
+ms.openlocfilehash: 84d80175e719c950844b13688e1a4992614f25d8
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 05/14/2018
 ---
 <a name="custom-migrations-operations"></a>Opérations de migration personnalisée
 ============================
@@ -33,7 +33,7 @@ static MigrationBuilder CreateUser(
     => migrationBuilder.Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
 ```
 
-Si vos migrations avez besoin prendre en charge plusieurs fournisseurs de base de données, vous pouvez utiliser le `MigrationBuilder.ActiveProvider` propriété. Voici un exemple de prise en charge de Microsoft SQL Server et PostreSQL.
+Si vos migrations avez besoin prendre en charge plusieurs fournisseurs de base de données, vous pouvez utiliser le `MigrationBuilder.ActiveProvider` propriété. Voici un exemple de prise en charge de Microsoft SQL Server et PostgreSQL.
 
 ``` csharp
 static MigrationBuilder CreateUser(

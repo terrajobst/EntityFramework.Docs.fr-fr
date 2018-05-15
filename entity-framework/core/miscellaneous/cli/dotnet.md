@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 396d31c9d0c0f47d299f49e82e557ed29b8420e7
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: d053d53bd50d2e7d16223c5b4e4009c9bb2298bb
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/14/2018
 ---
 <a name="ef-core-net-command-line-tools"></a>Outils de ligne de commande du .NET Core EF
 ===============================
@@ -19,14 +19,18 @@ Les outils de ligne de commande Entity Framework Core .NET sont une extension de
 
 <a name="installing-the-tools"></a>Installation des outils
 --------------------
-Installer les outils de ligne de commande EF Core .NET à l’aide de ces étapes :
+> [!NOTE]
+> Le .NET Core SDK version 2.1.300 et inclut plus récente **dotnet ef** commandes qui sont compatibles avec EF Core 2.0 et versions ultérieures. Par conséquent, si vous utilisez des versions récentes de .NET Core SDK et le runtime EF Core, aucune installation n’est requise et vous pouvez ignorer le reste de cette section.
+>
+> En revanche, le **dotnet ef** outil contenu dans la version du Kit de développement .NET Core 2.1.300 et les versions ultérieures n’est pas compatible avec la version EF Core 1.0 et 1.1. Avant que vous pouvez travailler avec un projet qui utilise ces versions antérieures d’EF principal sur un ordinateur qui a le Kit de développement logiciel .NET Core 2.1.300 ou version plus récente, vous devez également installer la version 2.1.200 ou antérieure du Kit de développement et de configurer l’application pour utiliser cette version antérieure en modifiant son  [global.json](https://docs.microsoft.com/en-us/dotnet/core/tools/global-json) fichier. Ce fichier est normalement inclus dans le répertoire de solution (une au-dessus du projet). Vous pouvez ensuite poursuivre l’instruction 2161DS ci-dessous.
+
+Pour les versions précédentes du Kit de développement .NET Core, vous pouvez installer les outils de ligne de commande EF Core .NET à l’aide de ces étapes :
 
 1. Modifiez le fichier projet et ajoutez Microsoft.EntityFrameworkCore.Tools.DotNet comme un élément DotNetCliToolReference (voir ci-dessous)
 2. Exécutez les commandes suivantes :
 
        dotnet add package Microsoft.EntityFrameworkCore.Design
        dotnet restore
-
 
 Le projet résultant doit ressembler à ceci :
 

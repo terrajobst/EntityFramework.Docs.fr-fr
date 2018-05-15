@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
-ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
+ms.openlocfilehash: f16e3a130f3a4f92b2bf6014f2df0ca4eec56a25
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/19/2018
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="query-types"></a>Types de requêtes
 > [!NOTE]
@@ -28,7 +28,10 @@ Toutefois ils sont différents d’entité types dans ce qu’il :
 - Ne nécessitent pas une clé à définir.
 - Ne sont jamais suivies pour les modifications sur le _DbContext_ et par conséquent sont jamais insérées, mises à jour ou de suppression sur la base de données.
 - Ne sont jamais détectés par convention.
-- Prennent en charge uniquement un sous-ensemble des fonctionnalités de mappage de navigation - spécifiquement, ils ne peuvent jamais agir en tant que l’extrémité principale d’une relation.
+- Prennent uniquement en charge un sous-ensemble des fonctionnalités de mappage de navigation - plus précisément :
+  - Ils ne peuvent jamais agir en tant que l’extrémité principale d’une relation.
+  - Ils ne peuvent contenir que des propriétés de navigation de référence en pointant sur les entités.
+  - Entités ne peut pas contenir de propriétés de navigation pour les types de requêtes.
 - Sont traitées sur le _ModelBuilder_ à l’aide de la `Query` méthode plutôt que la `Entity` (méthode).
 - Sont mappées sur le _DbContext_ via les propriétés de type `DbQuery<T>` au lieu de `DbSet<T>`
 - Sont mappées à des objets de base de données à l’aide de la `ToView` méthode, plutôt que `ToTable`.

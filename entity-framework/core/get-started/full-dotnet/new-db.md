@@ -1,5 +1,5 @@
 ---
-title: "Bien démarrer avec .NET Framework - Nouvelle base de données - EF Core"
+title: Bien démarrer avec .NET Framework - Nouvelle base de données - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -7,10 +7,10 @@ ms.assetid: 52b69727-ded9-4a7b-b8d5-73f3acfbbad3
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/new-db
 ms.openlocfilehash: bd7054c6834ae11bfdc352d63654e4304771e432
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-a-new-database"></a>Bien démarrer avec EF Core sur .NET Framework avec une nouvelle base de données
 
@@ -19,7 +19,7 @@ Dans cette procédure pas à pas, vous allez générer une application console q
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.NewDb) sur GitHub.
 
-## <a name="prerequisites"></a>Conditions préalables
+## <a name="prerequisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez satisfaire les prérequis suivants :
 
