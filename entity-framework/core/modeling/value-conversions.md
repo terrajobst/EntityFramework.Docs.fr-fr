@@ -6,11 +6,11 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 329d2757059462468ca30772d37789343c03ba7b
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 3e97c05a87ad9b4817c03f446031ea6c74704f5b
+ms.sourcegitcommit: 605e42232854ce44bae09624a6eebc35b8e2473b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>La classe ValueConverter
 
-Appel de `HasConversion` comme indiqué ci-dessus va créer un `ValueConverter` de l’instance et la définir sur la propriété. Le `ValueConverter` peut être créée à la place explicitement. Par exemple :
+Appel de `HasConversion` comme indiqué ci-dessus va créer un `ValueConverter` de l’instance et la définir sur la propriété. Le `ValueConverter` peut être créée à la place explicitement. Exemple :
 ```Csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
@@ -78,7 +78,7 @@ Cela peut être utile lorsque plusieurs propriétés d’utilisent la même conv
 
 ## <a name="built-in-converters"></a>Convertisseurs intégrés
 
-Est de base EF fourni avec un ensemble de prédéfinis `ValueConverter` classes, de la `Microsoft.EntityFrameworkCore.Storage.Converters` espace de noms. Ces équivalents sont :
+Est de base EF fourni avec un ensemble de prédéfinis `ValueConverter` classes, de la `Microsoft.EntityFrameworkCore.Storage.ValueConversion` espace de noms. Ces équivalents sont :
 * `BoolToZeroOneConverter` -Bool à zéro et un
 * `BoolToStringConverter` -Bool pour les chaînes telles que « Y » et « N »
 * `BoolToTwoValuesConverter` -Bool toutes les deux valeurs
