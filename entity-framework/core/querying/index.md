@@ -1,5 +1,5 @@
 ---
-title: "Interrogation des données - EF Core"
+title: Interrogation des données - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

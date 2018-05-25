@@ -1,5 +1,5 @@
 ---
-title: "Enregistrement de données - EF Core"
+title: Enregistrement de données - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
