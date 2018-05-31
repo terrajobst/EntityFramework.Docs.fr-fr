@@ -1,5 +1,5 @@
 ---
-title: "Définition des valeurs explicites pour les propriétés générées - EF Core"
+title: 'Définition de valeurs explicites pour les propriétés générées : EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,38 +8,39 @@ ms.technology: entity-framework-core
 uid: core/saving/explicit-values-generated-properties
 ms.openlocfilehash: f34e92d9a3b10b6ff904257ccd047a8acdaad231
 ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053699"
 ---
-# <a name="setting-explicit-values-for-generated-properties"></a>Définition des valeurs explicites pour les propriétés générées
+# <a name="setting-explicit-values-for-generated-properties"></a>Définition de valeurs explicites pour les propriétés générées
 
-Une propriété générée est une propriété dont la valeur est générée (soit par la base de données EF) lorsque l’entité est ajoutée ou mis à jour. Consultez [généré de propriétés](../modeling/generated-properties.md) pour plus d’informations.
+Une propriété générée est une propriété dont la valeur est générée (soit par la base de données soit par EF) lorsque l’entité est ajoutée ou mise à jour. Pour plus d’informations, consultez [Propriétés générées](../modeling/generated-properties.md).
 
-Il peut arriver dans laquelle vous souhaitez définir une valeur explicite pour une propriété générée, au lieu d’utiliser celui généré.
+Il peut arriver que vous souhaitiez définir une valeur explicite pour une propriété générée, au lieu d’en générer une.
 
 > [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/ExplicitValuesGenerateProperties/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/ExplicitValuesGenerateProperties/) sur GitHub.
 
 ## <a name="the-model"></a>Le modèle
 
-Le modèle utilisé dans cet article contienne un seul `Employee` entité.
+Le modèle utilisé dans cet article contient une seule entité `Employee`.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Employee.cs#Sample)]
 
-## <a name="saving-an-explicit-value-during-add"></a>L’enregistrement d’une valeur explicite lors d’ajout
+## <a name="saving-an-explicit-value-during-add"></a>Enregistrement d’une valeur explicite lors de l’ajout
 
-Le `Employee.EmploymentStarted` propriété est configurée pour avoir des valeurs générées par la base de données pour les nouvelles entités (à l’aide de la valeur par défaut).
+La propriété `Employee.EmploymentStarted` est configurée pour avoir des valeurs générées par la base de données pour les nouvelles entités (avec une valeur par défaut).
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
 Le code suivant insère deux employés dans la base de données.
-* Pour la première, aucune valeur n’est attribuée à `Employee.EmploymentStarted` propriété, celui-ci reste définie sur la valeur par défaut CLR `DateTime`.
-* Pour la seconde, nous avons défini une valeur explicite de `1-Jan-2000`.
+* Pour le premier, aucune valeur n’est attribuée à la propriété `Employee.EmploymentStarted`, elle reste donc définie sur la valeur par défaut de CLR pour `DateTime`.
+* Pour le deuxième, nous avons défini une valeur explicite de `1-Jan-2000`.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmploymentStarted)]
 
-Sortie indique que la base de données a généré une valeur pour le premier employé et notre valeur explicite a été utilisé pour la deuxième.
+La sortie indique que la base de données a généré une valeur pour le premier employé et utilisé notre valeur explicite pour le deuxième.
 
 ``` Console
 1: John Doe, 1/26/2017 12:00:00 AM
@@ -48,45 +49,45 @@ Sortie indique que la base de données a généré une valeur pour le premier em
 
 ### <a name="explicit-values-into-sql-server-identity-columns"></a>Valeurs explicites dans les colonnes IDENTITY de SQL Server
 
-Par convention le `Employee.EmployeeId` propriété est un magasin généré `IDENTITY` colonne.
+Par convention la propriété `Employee.EmployeeId` est une colonne `IDENTITY` générée par le magasin.
 
-Pour la plupart des cas, l’approche illustrée ci-dessus fonctionne pour les propriétés de clé. Toutefois, pour insérer des valeurs explicites dans un serveur SQL Server `IDENTITY` colonne, vous devez activer manuellement `IDENTITY_INSERT` avant d’appeler `SaveChanges()`.
+Pour la plupart des cas, l’approche illustrée ci-dessus fonctionne pour les propriétés de clé. Toutefois, pour insérer des valeurs explicites dans une colonne `IDENTITY` SQL Server, vous devez activer manuellement `IDENTITY_INSERT` avant d’appeler `SaveChanges()`.
 
 > [!NOTE]  
-> Nous avons un [demande de fonctionnalité](https://github.com/aspnet/EntityFramework/issues/703) sur notre backlog procéder automatiquement dans le fournisseur SQL Server.
+> Nous avons une [demande de fonctionnalité](https://github.com/aspnet/EntityFramework/issues/703) dans notre backlog pour faire cela automatiquement dans le fournisseur SQL Server.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
 
-Sortie indique que l’ID fournis ont été enregistrés dans la base de données.
+La sortie indique que les ID fournis ont été enregistrés dans la base de données.
 
 ``` Console
 100: John Doe
 101: Jane Doe
 ```
 
-## <a name="setting-an-explicit-value-during-update"></a>Définition d’une valeur explicite pendant la mise à jour
+## <a name="setting-an-explicit-value-during-update"></a>Définition d’une valeur explicite pendant une mise à jour
 
-Le `Employee.LastPayRaise` propriété est configurée pour avoir des valeurs générées par la base de données pendant les mises à jour.
+La propriété `Employee.LastPayRaise` est configurée pour avoir des valeurs générées par la base de données lors des mises à jour.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
 
 > [!NOTE]  
-> Par défaut, EF Core lève une exception si vous essayez d’enregistrer une valeur explicite pour une propriété qui est configurée pour être générés pendant la mise à jour. Pour éviter ce problème, vous avez besoin pour la liste déroulante à l’API de métadonnées au niveau inférieur et définir le `AfterSaveBehavior` (comme indiqué ci-dessus).
+> Par défaut, EF Core lève une exception si vous essayez d’enregistrer une valeur explicite pour une propriété qui est configurée pour être générée pendant la mise à jour. Pour éviter ce problème, vous devez descendre au niveau de l’API de bas niveau et définir `AfterSaveBehavior` (comme indiqué ci-dessus).
 
 > [!NOTE]  
-> **Modifications dans EF Core 2.0 :** dans les versions précédentes, le comportement après enregistrement a été contrôlé par le biais du `IsReadOnlyAfterSave` indicateur. Cet indicateur est obsolète et remplacé par `AfterSaveBehavior`.
+> **Modifications dans EF Core 2.0 :** dans les versions précédentes, le comportement après enregistrement était contrôlé par le biais de l’indicateur `IsReadOnlyAfterSave`. Cet indicateur est obsolète et a été remplacé par `AfterSaveBehavior`.
 
-Il existe également un déclencheur dans la base de données pour générer des valeurs pour le `LastPayRaise` colonne pendant `UPDATE` operations.
+Il existe également un déclencheur dans la base de données pour générer des valeurs pour la colonne `LastPayRaise` pendant les opérations `UPDATE`.
 
 [!code-sql[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
 Le code suivant augmente le salaire des deux employés dans la base de données.
-* Pour la première, aucune valeur n’est attribuée à `Employee.LastPayRaise` propriété, celui-ci reste définie sur null.
-* Pour la seconde, nous avons défini une valeur explicite d’une semaine plus tôt (arrière rencontre le salaire raise).
+* Pour le premier, aucune valeur n’est attribuée à la propriété `Employee.LastPayRaise`, elle reste donc définie sur null.
+* Pour le second, nous avons défini une valeur explicite d’une semaine plus tôt (rétroactivation de l’augmentation de salaire).
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#LastPayRaise)]
 
-Sortie indique que la base de données a généré une valeur pour le premier employé et notre valeur explicite a été utilisé pour la deuxième.
+La sortie indique que la base de données a généré une valeur pour le premier employé et utilisé notre valeur explicite pour le deuxième.
 
 ``` Console
 1: John Doe, 1/26/2017 12:00:00 AM

@@ -1,5 +1,5 @@
 ---
-title: Enregistrement de base - EF Core
+title: 'Enregistrement de base : EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,9 +8,10 @@ ms.technology: entity-framework-core
 uid: core/saving/basic
 ms.openlocfilehash: deead323301dc4a0ee0748b4536ddff4596b99e6
 ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31006661"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
@@ -21,16 +22,16 @@ Découvrez comment ajouter, modifier et supprimer des données à l’aide de vo
 
 ## <a name="adding-data"></a>Ajout de données
 
-Utilisez le *DbSet.Add* méthode pour ajouter de nouvelles instances de vos classes d’entité. Les données seront insérées dans la base de données lorsque vous appelez *SaveChanges*.
+Utilisez la méthode *DbSet.Add* pour ajouter de nouvelles instances de vos classes d’entité. Les données seront insérées dans la base de données lorsque vous appelez *SaveChanges*.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> Les méthodes Add, attacher et mise à jour tout le travail sur le graphique complet d’entités passé, comme décrit dans la [les données associées](related-data.md) section. Ou bien, la propriété EntityEntry.State peut être utilisée pour définir l’état de simplement une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
+> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](related-data.md). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Mise à jour des données
 
-EF détecte automatiquement les modifications apportées à une entité existante qui est suivie par le contexte. Cela inclut les entités qui vous charge/requête à partir de la base de données et des entités qui ont été précédemment ajoutées et enregistrées dans la base de données.
+EF détecte automatiquement les modifications apportées à une entité existante qui est suivie par le contexte. Cela inclut les entités que vous chargez/demandez à partir de la base de données et des entités qui ont été précédemment ajoutées et enregistrées dans la base de données.
 
 Modifiez simplement les valeurs affectées aux propriétés, puis appelez *SaveChanges*.
 
@@ -38,9 +39,9 @@ Modifiez simplement les valeurs affectées aux propriétés, puis appelez *SaveC
 
 ## <a name="deleting-data"></a>Suppression de données
 
-Utilisez le *DbSet.Remove* méthode pour supprimer les instances des classes d’entité.
+Utilisez la méthode *DbSet.Remove* pour supprimer les instances de vos classes d’entité.
 
-Si l’entité existe déjà dans la base de données, il sera supprimé pendant *SaveChanges*. Si l’entité n’a pas encore été enregistrée pour la base de données (autrement dit, il est suivi comme ajouté), elle sera supprimée à partir du contexte et ne pourra plus être inséré lorsque *SaveChanges* est appelée.
+Si l’entité existe déjà dans la base de données, elle sera supprimée pendant *SaveChanges*. Si l’entité n’a pas encore été enregistrée dans la base de données (autrement dit, si elle est suivie comme ajoutée), elle sera supprimée du contexte et ne pourra plus être insérée lorsque *SaveChanges* est appelé.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Remove)]
 
@@ -49,6 +50,6 @@ Si l’entité existe déjà dans la base de données, il sera supprimé pendant
 Vous pouvez combiner plusieurs opérations d’ajout/mise à jour/suppression en un seul appel à *SaveChanges*.
 
 > [!NOTE]  
-> Pour la plupart des fournisseurs de base de données, *SaveChanges* est transactionnelle. Cela signifie que toutes les opérations réussissent ou échouent et les opérations de ne jamais être gauche partiellement appliquées.
+> Pour la plupart des fournisseurs de base de données, *SaveChanges* est transactionnel. Cela signifie que toutes les opérations réussissent ou échouent complètement et que les opérations ne sont jamais partiellement appliquées.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#MultipleOperations)]
