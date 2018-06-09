@@ -6,20 +6,21 @@ ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 ms.technology: entity-framework-core
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 807560e563eddfb72d4286353b1403a0d2e2a441
-ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
+ms.openlocfilehash: 60d76bf3360eb47cdd9836494c1f135d1005a215
+ms.sourcegitcommit: 3adf1267be92effc3c9daa893906a7f36834204f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/08/2017
+ms.lasthandoff: 06/08/2018
+ms.locfileid: "35232134"
 ---
-# <a name="logging"></a>Enregistrement
+# <a name="logging"></a>Journalisation
 
 > [!TIP]  
-> Vous pouvez afficher cet article [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) sur GitHub.
 
 ## <a name="aspnet-core-applications"></a>Applications ASP.NET Core
 
-EF Core intègre automatiquement avec les mécanismes de journalisation sans de ASP.NET Core chaque fois que `AddDbContext` ou `AddDbContextPool` est utilisé. Par conséquent, lorsque vous utilisez ASP.NET Core, la journalisation doit être configurée comme décrit dans la [documentation d’ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
+EF Core intègre automatiquement avec les mécanismes de journalisation d’ASP.NET Core chaque fois que `AddDbContext` ou `AddDbContextPool` est utilisé. Par conséquent, lorsque vous utilisez ASP.NET Core, la journalisation doit être configurée comme décrit dans la [documentation d’ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
 
 ## <a name="other-applications"></a>Autres applications
 
@@ -36,7 +37,7 @@ Après avoir installé l’ou les modules approprié, l’application doit crée
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
-Cette instance de singleton/global doit être inscrits avec EF de base sur la `DbContextOptionsBuilder`. Exemple :
+Cette instance de singleton/global doit être inscrits avec EF de base sur la `DbContextOptionsBuilder`. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -45,7 +46,7 @@ Cette instance de singleton/global doit être inscrits avec EF de base sur la `D
 
 ## <a name="filtering-what-is-logged"></a>Filtrage des éléments enregistrés
 
-Pour filtrer les éléments enregistrés, le plus simple consiste à configurer lors de l’inscription de l’ILoggerProvider. Exemple :
+Pour filtrer les éléments enregistrés, le plus simple consiste à configurer lors de l’inscription de l’ILoggerProvider. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 
