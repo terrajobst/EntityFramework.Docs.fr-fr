@@ -9,6 +9,7 @@ ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 05/14/2018
+ms.locfileid: "34163140"
 ---
 <a name="custom-migrations-operations"></a><span data-ttu-id="7aeeb-102">Opérations de migration personnalisée</span><span class="sxs-lookup"><span data-stu-id="7aeeb-102">Custom Migrations Operations</span></span>
 ============================

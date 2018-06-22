@@ -1,5 +1,5 @@
 ---
-title: "Y compris les & l’exclusion de Types - EF Core"
+title: Y compris les & l’exclusion de Types - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052599"
 ---
 # <a name="including--excluding-types"></a><span data-ttu-id="54394-102">Y compris les & l’exclusion de Types</span><span class="sxs-lookup"><span data-stu-id="54394-102">Including & Excluding Types</span></span>
 

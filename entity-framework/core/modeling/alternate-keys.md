@@ -1,5 +1,5 @@
 ---
-title: "Clés secondaires - EF Core"
+title: Clés secondaires - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052469"
 ---
 # <a name="alternate-keys"></a><span data-ttu-id="277a1-102">Clés secondaires</span><span class="sxs-lookup"><span data-stu-id="277a1-102">Alternate Keys</span></span>
 

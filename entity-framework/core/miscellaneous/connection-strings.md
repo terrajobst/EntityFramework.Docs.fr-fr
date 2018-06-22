@@ -1,5 +1,5 @@
 ---
-title: "Chaînes de connexion - EF Core"
+title: Chaînes de connexion - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052529"
 ---
 # <a name="connection-strings"></a><span data-ttu-id="18289-102">Chaînes de connexion</span><span class="sxs-lookup"><span data-stu-id="18289-102">Connection Strings</span></span>
 

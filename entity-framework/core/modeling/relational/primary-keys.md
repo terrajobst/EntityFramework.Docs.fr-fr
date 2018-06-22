@@ -1,5 +1,5 @@
 ---
-title: "Clés primaires - EF Core"
+title: Clés primaires - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052719"
 ---
 # <a name="primary-keys"></a><span data-ttu-id="0aea6-102">Clés primaires</span><span class="sxs-lookup"><span data-stu-id="0aea6-102">Primary Keys</span></span>
 

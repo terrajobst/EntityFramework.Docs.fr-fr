@@ -1,5 +1,5 @@
 ---
-title: "Créer et supprimer des API - EF Core"
+title: "\U0001F527Créer et supprimer des API - EF Core"
 author: bricelam
 ms.author: bricelam
 ms.date: 11/10/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053819"
 ---
 # <a name="-create-and-drop-apis"></a><span data-ttu-id="09949-102">🔧Créer et supprimer des API</span><span class="sxs-lookup"><span data-stu-id="09949-102">🔧 Create and Drop APIs</span></span>
 

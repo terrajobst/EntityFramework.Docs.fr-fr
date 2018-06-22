@@ -1,5 +1,5 @@
 ---
-title: "La mise à niveau depuis des versions antérieures à EF Core 2 - EF Core"
+title: La mise à niveau depuis des versions antérieures à EF Core 2 - EF Core
 author: divega
 ms.author: divega
 ms.date: 8/13/2017
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678612"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a><span data-ttu-id="fe99f-102">Mise à niveau des applications à partir de versions antérieures à EF Core 2.0</span><span class="sxs-lookup"><span data-stu-id="fe99f-102">Upgrading applications from previous versions to EF Core 2.0</span></span>
 

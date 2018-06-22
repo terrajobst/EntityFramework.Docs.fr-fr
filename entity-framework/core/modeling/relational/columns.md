@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052899"
 ---
 # <a name="column-mapping"></a><span data-ttu-id="e0177-102">Mappage de colonnes</span><span class="sxs-lookup"><span data-stu-id="e0177-102">Column Mapping</span></span>
 

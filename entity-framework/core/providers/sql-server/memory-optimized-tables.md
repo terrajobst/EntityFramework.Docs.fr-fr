@@ -1,5 +1,5 @@
 ---
-title: "Microsoft SQL Server de base de données fournisseur - Tables optimisées en mémoire - EF Core"
+title: Microsoft SQL Server de base de données fournisseur - Tables optimisées en mémoire - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052639"
 ---
 # <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a><span data-ttu-id="652c5-102">Prend en charge les Tables optimisées en mémoire dans le fournisseur de base de données SQL Server EF Core</span><span class="sxs-lookup"><span data-stu-id="652c5-102">Memory-Optimized Tables support in SQL Server EF Core Database Provider</span></span>
 

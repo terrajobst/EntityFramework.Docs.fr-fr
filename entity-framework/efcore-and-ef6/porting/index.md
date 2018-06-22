@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26048851"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a><span data-ttu-id="06d3a-102">Portage depuis EF6 vers EF Core</span><span class="sxs-lookup"><span data-stu-id="06d3a-102">Porting from EF6 to EF Core</span></span>
 

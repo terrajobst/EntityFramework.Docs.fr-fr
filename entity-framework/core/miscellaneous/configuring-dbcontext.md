@@ -1,5 +1,5 @@
 ---
-title: "Configuration d’un DbContext - EF Core"
+title: Configuration d’un DbContext - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/12/2018
+ms.locfileid: "29152388"
 ---
 # <a name="configuring-a-dbcontext"></a><span data-ttu-id="bf315-102">Configuration d’un DbContext</span><span class="sxs-lookup"><span data-stu-id="bf315-102">Configuring a DbContext</span></span>
 

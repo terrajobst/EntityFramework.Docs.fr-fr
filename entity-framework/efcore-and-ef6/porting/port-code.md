@@ -1,5 +1,5 @@
 ---
-title: "Portage de EF6 vers Core EF - portage d’un modèle basé sur le Code"
+title: Portage de EF6 vers Core EF - portage d’un modèle basé sur le Code
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052949"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a><span data-ttu-id="b16a0-102">Portage d’un modèle de Code EF6 vers EF Core</span><span class="sxs-lookup"><span data-stu-id="b16a0-102">Porting an EF6 Code-Based Model to EF Core</span></span>
 

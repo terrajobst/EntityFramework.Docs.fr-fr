@@ -1,5 +1,5 @@
 ---
-title: "Colonnes calculées - EF Core"
+title: Colonnes calculées - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052479"
 ---
 # <a name="computed-columns"></a><span data-ttu-id="ccef1-102">Colonnes calculées</span><span class="sxs-lookup"><span data-stu-id="ccef1-102">Computed Columns</span></span>
 

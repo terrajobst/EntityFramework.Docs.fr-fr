@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678997"
 ---
 # <a name="indexes"></a><span data-ttu-id="354bb-102">Index</span><span class="sxs-lookup"><span data-stu-id="354bb-102">Indexes</span></span>
 

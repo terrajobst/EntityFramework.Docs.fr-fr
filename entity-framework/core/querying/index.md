@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26048881"
 ---
 # <a name="querying-data"></a><span data-ttu-id="f0a6a-102">Interrogation des données</span><span class="sxs-lookup"><span data-stu-id="f0a6a-102">Querying Data</span></span>
 

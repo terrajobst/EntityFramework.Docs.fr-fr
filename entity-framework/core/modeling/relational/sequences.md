@@ -1,5 +1,5 @@
 ---
-title: "Séquences - EF Core"
+title: Séquences - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052709"
 ---
 # <a name="sequences"></a><span data-ttu-id="7c4c3-102">Séquences</span><span class="sxs-lookup"><span data-stu-id="7c4c3-102">Sequences</span></span>
 

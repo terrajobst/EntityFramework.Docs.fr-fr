@@ -1,5 +1,5 @@
 ---
-title: "Valeurs par défaut - EF Core"
+title: Valeurs par défaut - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052759"
 ---
 # <a name="default-values"></a><span data-ttu-id="a09f3-102">Valeurs par défaut</span><span class="sxs-lookup"><span data-stu-id="a09f3-102">Default Values</span></span>
 

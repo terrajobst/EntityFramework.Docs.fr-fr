@@ -9,6 +9,7 @@ ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053689"
 ---
 <a name="design-time-services"></a><span data-ttu-id="48277-102">Services au moment du design</span><span class="sxs-lookup"><span data-stu-id="48277-102">Design-time services</span></span>
 ====================

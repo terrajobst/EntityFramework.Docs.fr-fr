@@ -1,5 +1,5 @@
 ---
-title: "Propriétés obligatoire ou facultatif - EF Core"
+title: Propriétés obligatoire ou facultatif - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052849"
 ---
 # <a name="required-and-optional-properties"></a><span data-ttu-id="22b78-102">Propriétés obligatoires et facultatifs</span><span class="sxs-lookup"><span data-stu-id="22b78-102">Required and Optional Properties</span></span>
 

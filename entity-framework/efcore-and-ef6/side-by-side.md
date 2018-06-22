@@ -1,5 +1,5 @@
 ---
-title: "EF6 et Core EF - Utilisation conjointe dans la même application"
+title: EF6 et Core EF - Utilisation conjointe dans la même application
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26054823"
 ---
 # <a name="using-ef-core-and-ef6-in-the-same-application"></a><span data-ttu-id="e85b9-102">Utilisation conjointe d’EF Core et d’EF6 dans la même application</span><span class="sxs-lookup"><span data-stu-id="e85b9-102">Using EF Core and EF6 in the Same Application</span></span>
 

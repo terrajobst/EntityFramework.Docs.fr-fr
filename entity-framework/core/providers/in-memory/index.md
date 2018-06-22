@@ -1,5 +1,5 @@
 ---
-title: "Fournisseur de base de données InMemory - EF Core"
+title: Fournisseur de base de données InMemory - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678984"
 ---
 # <a name="ef-core-in-memory-database-provider"></a><span data-ttu-id="6744d-102">Fournisseur de base de données InMemory EF Core</span><span class="sxs-lookup"><span data-stu-id="6744d-102">EF Core In-Memory Database Provider</span></span>
 
