@@ -1,5 +1,5 @@
 ---
-title: "Bien démarrer avec UWP - Nouvelle base de données - EF Core"
+title: Bien démarrer avec UWP - Nouvelle base de données - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -12,6 +12,7 @@ ms.sourcegitcommit: 96324e58c02b97277395ed43173bf13ac80d2012
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 12/01/2017
+ms.locfileid: "26049832"
 ---
 # <a name="getting-started-with-ef-core-on-universal-windows-platform-uwp-with-a-new-database"></a>Bien démarrer avec EF Core sur la plateforme Windows universelle (UWP) avec une nouvelle base de données
 

@@ -1,5 +1,5 @@
 ---
-title: "Tester les composants à l’aide d’Entity Framework - EF Core"
+title: Tester les composants à l’aide d’Entity Framework - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26048861"
 ---
 # <a name="testing"></a>Test
 

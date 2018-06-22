@@ -1,5 +1,5 @@
 ---
-title: "Gestion des schémas de base de données - EF Core"
+title: Gestion des schémas de base de données - EF Core
 author: bricelam
 ms.author: divega
 ms.date: 10/30/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26049381"
 ---
 # <a name="managing-database-schemas"></a>Gestion des schémas de base de données
 EF Core propose deux méthodes pour que votre modèle EF Core et le schéma de base de données restent synchronisés. Pour choisir entre les deux, décidez si votre modèle EF Core ou le schéma de base de données est la source de vérité.

@@ -1,5 +1,5 @@
 ---
-title: "Héritage (base de données relationnelle) - EF Core"
+title: Héritage (base de données relationnelle) - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/12/2018
+ms.locfileid: "29152355"
 ---
 # <a name="inheritance-relational-database"></a>Héritage (base de données relationnelle)
 

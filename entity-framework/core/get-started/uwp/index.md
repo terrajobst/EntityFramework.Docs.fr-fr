@@ -1,5 +1,5 @@
 ---
-title: "Bien démarrer sur UWP - EF Core"
+title: Bien démarrer sur UWP - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: c72d85805db0aa95f980514a18381fdc5e17c786
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 12/01/2017
+ms.locfileid: "26049431"
 ---
 # <a name="getting-started-with-ef-core-on-universal-windows-platform-uwp"></a>Bien démarrer avec EF Core sur la plateforme Windows universelle (UWP)
 
