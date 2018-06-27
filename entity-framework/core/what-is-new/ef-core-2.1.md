@@ -6,20 +6,19 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: db1648095aa4d612af53f4e10a30be36edc40da5
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754423"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
-> [!NOTE]  
-> Il s’agit encore d’une préversion.
 
 En plus de nombreux correctifs de bogues et de petites améliorations des fonctionnalités et des performances, EF Core 2.1 inclut de nouvelles fonctionnalités intéressantes :
 
 ## <a name="lazy-loading"></a>Chargement différé
-EF Core contient désormais les blocs de construction nécessaires pour permettre à quiconque de créer des classes d’entité capables de charger leurs propriétés de navigation à la demande. Nous avons également introduit un nouveau package, Microsoft.EntityFrameworkCore.Proxies, qui tire parti de ces blocs de construction pour produire des classes proxy de chargement différé basées sur des classes d’entité ayant subi des modifications minimales (par exemple, des classes avec des propriétés de navigation virtuelles).
+EF Core contient désormais les blocs de construction nécessaires pour permettre à quiconque de créer des classes d’entité capables de charger leurs propriétés de navigation à la demande. Nous avons également introduit un nouveau package, Microsoft.EntityFrameworkCore.Proxies, qui tire parti de ces composants pour produire des classes proxy de chargement différé basées sur des classes d’entité ayant subi des modifications minimales (par exemple des classes avec des propriétés de navigation virtuelles).
 
 Pour plus d’informations sur cette rubrique, lisez la [section sur le chargement différé](xref:core/querying/related-data#lazy-loading).
 
@@ -38,7 +37,7 @@ Jusqu’à présent, EF Core pouvait uniquement mapper les propriétés de types
 Pour plus d’informations sur cette rubrique, lisez la [section sur les conversions de valeurs](xref:core/modeling/value-conversions).  
 
 ## <a name="linq-groupby-translation"></a>Traduction LINQ GroupBy
-Avant la version 2.1, l’opérateur LINQ GroupBy dans EF Core était toujours évalué en mémoire. Il est désormais possible de le traduire en clause SQL GROUP BY dans les scénarios les plus courants.
+Avant la version 2.1, l’opérateur LINQ GroupBy dans EF Core était toujours évalué en mémoire. Il est désormais possible de le traduire en clause SQL GROUP BY dans les scénarios les plus courants.
 
 Cet exemple illustre une requête avec GroupBy utilisée pour calculer différentes fonctions d’agrégation :
 
@@ -124,7 +123,7 @@ var query = context.Customers.Select(
 
 Notez que cette requête est traduite en deux requêtes SQL seulement : une pour Customers et la suivante pour Orders.
 
-## <a name="ownedattribute"></a>OwnedAttribute
+## <a name="owned-attribute"></a>Attribut [Owned]
 
 Il est désormais possible de configurer des [types d’entités détenus](xref:core/modeling/owned-entities) en annotant simplement le type avec `[Owned]` et en veillant à ce que l’entité propriétaire soit ajoutée au modèle :
 
@@ -143,12 +142,14 @@ public class Order
 }
 ```
 
-## <a name="new-dotnet-ef-global-tool"></a>Nouvel outil global ef-dotnet
+## <a name="command-line-tool-dotnet-ef-included-in-net-core-sdk"></a>Outil en ligne de commande dotnet-ef inclus dans le SDK .NET Core
 
-Les commandes _ef-dotnet_ ont été converties en un outil global CLI .NET. Ainsi, il n’est plus nécessaire d’utiliser DotNetCliToolReference dans le projet pour pouvoir utiliser les migrations ou structurer un DbContext à partir d’une base de données existante.
+Les commandes _ef-dotnet_ font désormais partie du SDK .NET Core. Ainsi, il n’est plus nécessaire d’utiliser DotNetCliToolReference dans le projet pour pouvoir utiliser des migrations ou structurer un DbContext à partir d’une base de données existante.
+
+Pour plus d’informations sur la façon d’activer les outils en ligne de commande pour différentes versions du SDK .NET Core et EF Core, consultez la section sur [l’installation des outils](xref:core/miscellaneous/cli/dotnet#installing-the-tools).
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Package Microsoft.EntityFrameworkCore.Abstractions
-Le nouveau package contient des attributs et des interfaces que vous pouvez utiliser dans vos projets pour alléger les fonctionnalités EF Core sans dépendance envers Core EF dans sa globalité. Par exemple, l’attribut [Owned] introduit dans la préversion 1 a été déplacé ici.
+Le nouveau package contient des attributs et des interfaces que vous pouvez utiliser dans vos projets pour alléger les fonctionnalités EF Core sans dépendance envers Core EF dans sa globalité. Par exemple, l’attribut [Owned] et l’interface ILazyLoader se trouvent ici.
 
 ## <a name="state-change-events"></a>Événements de changement d’état
 
@@ -165,7 +166,7 @@ var query = context.People.FromSql(sql);
 
 ## <a name="database-provider-compatibility"></a>Compatibilité des fournisseurs de base de données
 
-De par sa conception, EF Core 2.1 est compatible avec les fournisseurs de base de données créés pour EF Core 2.0 ou requiert tout du moins des modifications minimes. Certaines des fonctionnalités décrites ci-dessus, comme les conversions de valeurs, nécessitent un fournisseur mis à jour. En revanche, d’autres fonctionnalités comme le chargement différé sont compatibles avec les fournisseurs existants.
+Nous vous recommandons d’utiliser EF Core 2.1 avec des fournisseurs qui ont été mis à jour ou au moins testés pour fonctionner avec EF Core 2.1.
 
 > [!TIP]
 > Si vous vous heurtez à des incompatibilités inattendues ou à d’autres problèmes liés aux nouvelles fonctionnalités, ou si vous avez des commentaires à propos de ces nouveautés, utilisez [notre système de suivi des problèmes](https://github.com/aspnet/EntityFrameworkCore/issues/new) pour nous en faire part.
