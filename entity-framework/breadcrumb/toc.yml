@@ -28,9 +28,15 @@
             - name: Enregistrement de données
               tocHref: /ef/core/saving/
               topicHref: /ef/core/saving/index
+            - name: Implémentations de .NET prises en charge
+              tocHref: /ef/core/platforms/
+              topicHref: /ef/core/platofms/index
             - name: Fournisseurs de bases de données
               tocHref: /ef/core/providers/
               topicHref: /ef/core/providers/index
+            - name: Gestion des schémas de base de données
+              tocHref: /ef/core/managing-schemas/
+              topicHref: /ef/core/managing-schemas/index
             - name: Informations de référence sur la ligne de commande
               tocHref: /ef/core/miscellaneous/cli/
               topicHref: /ef/core/miscellaneous/cli/index
@@ -43,3 +49,25 @@
         - name: Entity Framework 6
           tocHref: /ef/ef6/
           topicHref: /ef/ef6/index
+          items:
+            - name: Nouveautés
+              tocHref: /ef/ef6/what-is-new/
+              topicHref: /ef/ef6/what-is-new/index
+            - name: Bien démarrer
+              tocHref: /ef/ef6/get-started
+              topicHref: /ef/ef6/get-started
+            - name: Notions de base
+              tocHref: /ef/ef6/fundamentals/
+              topicHref: /ef/ef6/fundamentals/index
+            - name: Création d’un modèle
+              tocHref: /ef/ef6/modeling/
+              topicHref: /ef/ef6/modeling/index
+            - name: Interrogation des données
+              tocHref: /ef/ef6/querying/
+              topicHref: /ef/ef6/querying/index
+            - name: Enregistrement de données
+              tocHref: /ef/ef6/saving/
+              topicHref: /ef/ef6/saving/index
+            - name: Ressources supplémentaires
+              tocHref: /ef/ef6/resources/
+              topicHref: /ef/ef6/resources/index
