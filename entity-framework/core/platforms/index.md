@@ -5,12 +5,12 @@ ms.author: divega
 ms.date: 08/30/2017
 ms.technology: entity-framework-core
 uid: core/platforms/index
-ms.openlocfilehash: 02e9450cb0ead1701da9f58c51bef3031a3be4ed
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 790628c407cc4374fee4ebde8201783955afdcc3
+ms.sourcegitcommit: fd50ac53b93a03825dcbb42ed2e7ca95ca858d5f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29678674"
+ms.lasthandoff: 07/07/2018
+ms.locfileid: "37900328"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implémentations de .NET prises en charge par EF Core
 
@@ -18,7 +18,7 @@ Nous souhaitons que vous puissiez utiliser EF Core partout où vous pouvez écri
 
 Le tableau suivant fournit des conseils pour chaque implémentation de .NET :
 
-| Implémentation de .NET                                                                                                  | Statut                                                             | Exigences de EF Core 1.x                                                                                | Exigences de EF Core 2.x <sup>(1)</sup>                                                                 |
+| Implémentation de .NET                                                                                                  | Status                                                             | Exigences de EF Core 1.x                                                                                | Exigences de EF Core 2.x <sup>(1)</sup>                                                                 |
 |:---------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|
 | **.NET Core** ([ASP.NET Core](../get-started/aspnetcore/index.md), [Console](../get-started/netcore/index.md), etc.) | Entièrement prise en charge et recommandée                                    | [.NET Core SDK 1.x](https://www.microsoft.com/net/core/)                                                | [.NET Core SDK 2.x](https://www.microsoft.com/net/core/)                                                |
 | **.NET Framework** (WinForms, WPF, ASP.NET, [Console](../get-started/full-dotnet/index.md), etc.)                    | Entièrement prise en charge et recommandée. EF6 également disponible <sup>(2)</sup> | .NET Framework 4.5.1                                                                                    | .NET Framework 4.6.1                                                                                    |
@@ -29,7 +29,7 @@ Le tableau suivant fournit des conseils pour chaque implémentation de .NET :
 
 <sup>(2)</sup> Consultez [Comparer EF Core et EF6](../../efcore-and-ef6/index.md) pour choisir la technologie appropriée.
 
-<sup>(3)</sup> La présence de problèmes et de limitations connues avec Xamarin peut entraîner un dysfonctionnement de certaines applications développées à l’aide d’EF Core 2.0. Pour obtenir des solutions de contournement, vérifiez la liste des [problèmes actifs] ([](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin).
+<sup>(3)</sup> La présence de problèmes et de limitations connues avec Xamarin peut entraîner un dysfonctionnement de certaines applications développées à l’aide d’EF Core 2.0. Consultez la liste des [problèmes actifs](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin) pour connaître les solutions de contournement.
 
 <sup>(4) </sup> Les versions antérieures d’EF Core et de .NET UWP présentaient plusieurs problèmes de compatibilité, notamment avec les applications compilées avec la chaîne d’outils .NET Native. La nouvelle version de .NET UWP prend en charge .NET Standard 2.0 et contient .NET Native 2.0 qui résout la plupart des problèmes de compatibilité signalés précédemment. EF Core 2.0.1 a été testé de manière plus approfondie avec UWP, mais les tests ne sont pas automatisés.
 
