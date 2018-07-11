@@ -6,20 +6,20 @@ ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 ms.technology: entity-framework-core
 uid: core/get-started/install/index
-ms.openlocfilehash: 31b96ebd0ae282b88be98988eff6263084dc5dd5
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 7bb2ee11940a4fd5736c7a23c16533ef53018f7b
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
-ms.locfileid: "26049241"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949190"
 ---
 # <a name="installing-ef-core"></a>Installation d’EF Core
 
-## <a name="prerequisites"></a>Conditions préalables
+## <a name="prerequisites"></a>Prérequis
 
 Pour développer des applications .NET Core 2.0 (y compris des applications ASP.NET Core 2.0 qui ciblent .NET Core), vous devez télécharger et installer une version du [SDK .NET Core 2.0](https://www.microsoft.com/net/download/core) qui convient à votre plateforme. **Cela est vrai même si vous avez installé Visual Studio 2017 version 15.3.**
 
-Pour utiliser EF Core 2.0 ou toute autre bibliothèque .NET Standard 2.0 avec une plateforme .NET en plus de .NET Core 2.0 (par exemple, avec .NET Framework 4.6.1 ou version supérieure), vous avez besoin d’une version de NuGet qui prend en charge .NET Standard 2.0 et ses frameworks compatibles. Voici quelques façons de procéder :
+Pour utiliser EF Core 2.0 ou toute autre bibliothèque .NET Standard 2.0 avec une plateforme .NET en plus de .NET Core 2.0 (par exemple, avec .NET Framework 4.6.1 ou version ultérieure), vous avez besoin d’une version de NuGet qui prend en charge .NET Standard 2.0 et ses frameworks compatibles. Voici quelques façons de procéder :
 
 * Installez Visual Studio 2017 version 15.3.
 * Si vous utilisez Visual Studio 2015, [téléchargez et mettez à niveau le client NuGet vers la version 3.6.0](https://www.nuget.org/downloads).
@@ -42,7 +42,7 @@ La méthode recommandée pour ajouter des bibliothèques runtime EF Core à une 
 Outre les bibliothèques runtime, vous pouvez installer des outils qui facilitent la réalisation de plusieurs tâches EF Core dans votre projet au moment de la conception, telles que la création et l’application de migrations et la création d’un modèle basé sur une base de données existante.
 
 > [!TIP]  
-> Si vous devez mettre à jour une application qui utilise un fournisseur de base de données tiers, recherchez toujours une mise à jour du fournisseur qui est compatible avec la version d’EF Core à utiliser. Par ex. les fournisseurs de base de données pour les versions antérieures ne sont pas compatibles avec la version 2.0 du runtime EF Core.  
+> Si vous devez mettre à jour une application qui utilise un fournisseur de base de données tiers, recherchez toujours une mise à jour du fournisseur qui est compatible avec la version d’EF Core à utiliser. Par exemple, les fournisseurs de base de données pour les versions antérieures ne sont pas compatibles avec la version 2.0 du runtime EF Core.  
 
 > [!TIP]  
 > Les applications ciblant ASP.NET Core 2.0 peuvent utiliser EF Core 2.0 sans dépendances supplémentaires en plus des fournisseurs de base de données tiers. Les applications ciblant des versions antérieures d’ASP.NET Core doivent être mises à niveau vers ASP.NET Core 2.0 pour utiliser EF Core 2.0.
@@ -53,7 +53,7 @@ Outre les bibliothèques runtime, vous pouvez installer des outils qui faciliten
 Pour développer des applications qui ciblent [.NET Core](https://www.microsoft.com/net/download/core), vous pouvez choisir d’utiliser les [commandes CLI `dotnet`](https://docs.microsoft.com/dotnet/core/tools/) en combinaison avec votre éditeur de texte, ou bien un environnement de développement intégré (IDE) tel que Visual Studio, Visual Studio pour Mac ou Visual Studio Code.
 
 > [!IMPORTANT]  
-> Les applications qui ciblent .NET Core requièrent des versions spécifiques de Visual Studio, par exemple, le développement .NET Core 1.x nécessite Visual Studio 2017, tandis que le développement .NET Core 2.0 requiert Visual Studio 2017 version 15.3.
+> Les applications qui ciblent .NET Core nécessitent des versions spécifiques de Visual Studio. Par exemple, le développement .NET Core 1.x nécessite Visual Studio 2017, tandis que le développement .NET Core 2.0 nécessite Visual Studio 2017 version 15.3.
 
 Pour installer ou mettre à niveau le fournisseur SQL Server dans une application .NET Core multiplateforme, basculez vers le répertoire de l’application et exécutez la commande suivante dans une ligne de commande :
 
@@ -61,7 +61,7 @@ Pour installer ou mettre à niveau le fournisseur SQL Server dans une applicatio
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-Vous pouvez indiquer une installation de version spécifique dans la commande `dotnet add package`, à l’aide du modificateur `-v`. Par ex. pour installer les packages EF Core 2.0, ajoutez `-v 2.0.0` à la commande.
+Vous pouvez indiquer une installation de version spécifique dans la commande `dotnet add package`, à l’aide du modificateur `-v`. Par exemple, pour installer des packages EF Core 2.0, ajoutez `-v 2.0.0` à la commande.
 
 EF Core comprend un ensemble de [commandes supplémentaires pour l’interface CLI `dotnet`](../../miscellaneous/cli/dotnet.md), commençant par `dotnet ef`. Pour que vous puissiez utiliser les commandes CLI `dotnet ef`, le fichier `.csproj` de votre application doit contenir l’entrée suivante :
 
@@ -106,7 +106,7 @@ Vous pouvez installer un fournisseur de base de données EF Core dans votre appl
   ```
 * Vous pouvez utiliser la commande `Update-Package` à la place pour mettre à jour un package qui est déjà installé dans une version plus récente.
 
-* Pour spécifier une version spécifique, vous pouvez utiliser le modificateur `-Version` ; par exemple, pour installer des packages EF Core 2.0, ajoutez `-Version 2.0.0` aux commandes.
+* Pour spécifier une version spécifique, vous pouvez utiliser le modificateur `-Version`. Par exemple, pour installer des packages EF Core 2.0, ajoutez `-Version 2.0.0` aux commandes.
 
 #### <a name="tools"></a>Outils
 
