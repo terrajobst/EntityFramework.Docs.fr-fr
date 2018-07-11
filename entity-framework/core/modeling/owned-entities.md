@@ -6,12 +6,12 @@ ms.date: 2/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 768429b857b09c1974f4ade31b5bbb6b1c7e15c3
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 476a1dcaadcd99eba0cd4f5f0ac40c32a97af5c9
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911873"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949425"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -155,7 +155,7 @@ modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, od =>
 
 Il est possible de réaliser la même chose à l’aide `OwnedAttribute` sur OrderDetails et StreetAdress.
 
-En plus des types détenus imbriqués, un type détenu peut référencer une entité ordinaire. Dans l’exemple suivant, le pays est une entité standard (c'est-à-dire non détenus) :
+En plus des types détenus imbriqués, un type détenu peut référencer une entité ordinaire. Dans l’exemple suivant, le pays est une entité non détenus normale :
 
 ``` csharp
 public class StreetAddress
@@ -182,7 +182,7 @@ modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, od =>
 
 ## <a name="querying-owned-types"></a>Interrogation des types détenus
 
-Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut. Il n’est pas nécessaire d’utiliser le `Include` (méthode), même si les types détenus sont stockées dans une table distincte. Selon le modèle décrit précédemment, la requête suivante extrait ordre, OrderDetails et les deux StreeAddresses détenus pour toutes les commandes en attente à partir de la base de données :
+Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut. Il n’est pas nécessaire d’utiliser le `Include` (méthode), même si les types détenus sont stockées dans une table distincte. Selon le modèle décrit précédemment, la requête suivante extrait ordre, OrderDetails et les deux StreetAddresses détenus pour toutes les commandes en attente à partir de la base de données :
 
 ``` csharp
 var orders = context.Orders.Where(o => o.Status == OrderStatus.Pending);
@@ -194,11 +194,11 @@ Certaines de ces restrictions sont fondamentaux pour comment détenu travail de 
 
 ### <a name="shortcomings-in-previous-versions"></a>Lacunes dans les versions précédentes
 - Dans EF Core 2.0, navigations à la propriété types d’entité ne peut pas être déclarés dans les types d’entité dérivés, sauf si les entités sont explicitement mappées à une table distincte de la hiérarchie de propriétaire. Cette limitation a été supprimée dans EF Core 2.1
- 
+
 ### <a name="current-shortcomings"></a>Défauts actuels
 - Hiérarchies d’héritage qui incluent détenus types d’entité ne sont pas pris en charge.
 - Types d’entité détenus ne peut pas être pointés par une propriété de navigation de collection (seule référence navigations sont actuellement gérées)
-- Navigations à détenus types d’entité ne peut pas être null, sauf si elles sont explicitement mappées à une table distincte du propriétaire 
+- Navigations à détenus types d’entité ne peut pas être null, sauf si elles sont explicitement mappées à une table distincte du propriétaire
 - Instances de types d’entité détenus ne peut pas être partagées par plusieurs propriétaires (il s’agit d’un scénario bien connu pour les objets de valeur qui ne peut pas être implémenté à l’aide des types d’entité détenus)
 
 ### <a name="by-design-restrictions"></a>Restrictions par conception

@@ -6,26 +6,26 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 8cea624c295f99ef54cb8b4758642eade03c235e
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 80c7ee04d3bb0dd45b66ec7d6fec5ee7e3343026
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812493"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949203"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entités avec des constructeurs
 
 > [!NOTE]  
-> Cette fonctionnalité est une nouveauté dans EF Core 2.1.
+> Cette fonctionnalité est une nouveauté d’EF Core 2.1.
 
-À compter de EF Core 2.1, il est désormais possible de définir un constructeur avec des paramètres et appeler ce constructeur lorsque vous créez une instance de l’entité de EF Core. Les paramètres du constructeur peuvent être liés aux propriétés mappées, à différents types de services pour faciliter les comportements like ou chargement différé.
+À compter d’EF Core 2.1, il est désormais possible de définir un constructeur avec des paramètres et appeler ce constructeur lorsque vous créez une instance de l’entité de EF Core. Les paramètres du constructeur peuvent être liés à la propriété mappée, ou à différents types de services pour faciliter les comportements, tels que chargement différé.
 
 > [!NOTE]  
-> À compter de EF Core 2.1, toute liaison de constructeur est par convention. Configuration des constructeurs spécifiques à utiliser est prévue pour une version ultérieure.
+> À compter d’EF Core 2.1, tous les liaison constructeur est par convention. Configuration des constructeurs spécifiques à utiliser est prévue pour une version ultérieure.
 
 ## <a name="binding-to-mapped-properties"></a>Liaison aux propriétés mappées
 
-Considérez un modèle/billet de Blog classique :
+Considérez un modèle de billet de Blog/classique :
 
 ```Csharp
 public class Blog
@@ -50,7 +50,7 @@ public class Post
 }
 ```
 
-Lorsque EF Core crée des instances de ces types, tels que pour les résultats d’une requête, il sera tout d’abord appeler le constructeur sans paramètre par défaut, puis définissez chaque propriété à la valeur à partir de la base de données. Toutefois, si EF Core recherche un constructeur paramétrable avec des noms de paramètre et les types qui correspondent à ceux de mappé des propriétés, puis il appelle à la place du constructeur paramétré avec des valeurs pour ces propriétés et ne définit pas explicitement de chaque propriété. Par exemple :
+Quand EF Core crée des instances de ces types, comme pour les résultats d’une requête, il sera tout d’abord appeler le constructeur sans paramètre par défaut et définissez chaque propriété sur la valeur à partir de la base de données. Toutefois, si EF Core recherche un constructeur paramétrable avec des noms de paramètre et les types qui correspondent à ceux de mappé des propriétés, puis il appelle à la place du constructeur paramétré avec des valeurs pour ces propriétés et ne définit pas explicitement de chaque propriété. Exemple :
 
 ```Csharp
 public class Blog
@@ -88,19 +88,19 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-Certains points à noter :
-* Toutes les propriétés ne doivent avoir des paramètres du constructeur. Par exemple, la propriété de Post.Content n’est pas définie par un paramètre de constructeur, donc EF Core définirai ces informations après avoir appelé le constructeur de façon normale.
+Voici quelques éléments à noter :
+* Toutes les propriétés ne doivent avoir des paramètres du constructeur. Par exemple, la propriété de Post.Content n’est pas définie par n’importe quel paramètre de constructeur, donc EF Core est la valeur après l’appel du constructeur de façon normale.
 * Les noms et types de paramètres doivent correspondre à des types de propriété et les noms, à ceci près que les propriétés peuvent être casse Pascal tandis que les paramètres sont de casse mixte.
-* EF principal ne peut pas définir les propriétés de navigation (par exemple, le Blog ou publications ci-dessus) à l’aide d’un constructeur.
+* EF Core ne peut pas définir les propriétés de navigation (par exemple, Blog ou les billets ci-dessus) à l’aide d’un constructeur.
 * Le constructeur peut être public, privé, ou avoir n’importe quelle autre accessibilité.
 
 ### <a name="read-only-properties"></a>Propriétés en lecture seule
 
-Une fois que les propriétés sont définies via le constructeur, il peut être judicieux pour rendre certains d'entre eux en lecture seule. EF Core prend en charge, mais certains éléments à prendre en compte :
-* Propriétés sans méthodes setter ne sont pas mappées par convention. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
-* À l’aide des valeurs de clés générées automatiquement nécessite une propriété de clé qui est en lecture-écriture, étant donné que la valeur de clé doit être définie par le Générateur de clé lors de l’insertion de nouvelles entités.
+Une fois que les propriétés sont définies via le constructeur, il peut être judicieux pour rendre certains d'entre eux en lecture seule. EF Core prend en charge, mais il existe quelques éléments à rechercher :
+* Propriétés sans accesseurs Set ne sont pas mappées par convention. (Cela a tendance à mapper des propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
+* À l’aide de valeurs de clés générées automatiquement nécessite une propriété de clé qui est en lecture-écriture, dans la mesure où la valeur de clé doit être définie par le Générateur de clé lors de l’insertion de nouvelles entités.
 
-Un moyen simple pour éviter ces éléments consiste à utiliser les méthodes setter privé. Par exemple :
+Un moyen simple pour éviter ces choses consiste à utiliser les méthodes Set privées. Exemple :
 ```Csharp
 public class Blog
 {
@@ -137,9 +137,9 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-EF Core voit une propriété avec un setter privé en lecture-écriture, ce qui signifie que toutes les propriétés sont mappées comme avant, et la clé peut toujours être générées par le magasin.
+EF Core voit une propriété avec un setter privée en lecture-écriture, ce qui signifie que toutes les propriétés sont mappées comme auparavant et la clé peut toujours être générées par le magasin.
 
-Une alternative à l’utilisation de méthodes setter privé consiste à définir des propriétés réellement en lecture seule et ajouter un mappage plus explicite dans OnModelCreating. De même, certaines propriétés peuvent être complètement supprimées et remplacées par uniquement des champs. Par exemple, considérez ces types d’entités :
+Une alternative à l’utilisation de méthodes setter privée consiste à rendre les propriétés vraiment en lecture seule et ajouter un mappage plus explicite dans OnModelCreating. De même, certaines propriétés peuvent être complètement supprimées et remplacées par uniquement des champs. Par exemple, considérez ces types d’entités :
 
 ```Csharp
 public class Blog
@@ -197,25 +197,25 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 Points à noter :
-* La clé « property » est désormais un champ. Il n’est pas un `readonly` afin que les clés générées par le magasin peuvent être utilisés. 
+* La clé « property » est désormais un champ. Il n’est pas un `readonly` afin que les clés générées par le magasin peuvent être utilisées.
 * Les autres propriétés sont en lecture seule défini uniquement dans le constructeur.
-* Si la valeur de clé primaire est toujours définie par EF ou lire à partir de la base de données, puis il n’est pas nécessaire d’inclure dans le constructeur. Cela laisse la clé « property » comme un champ de type simple et indique clairement qu’il ne doit pas être défini explicitement lors de la création de nouveaux blogs ou des publications.
+* Si la valeur de clé primaire est toujours définie par Entity Framework ou lire à partir de la base de données, il est inutile d’inclure cela dans le constructeur. Cela laisse la clé « property » comme un champ simple et permet d’identifier clairement qu’il ne doit pas être défini explicitement lors de la création de nouveaux blogs ou les billets.
 
 > [!NOTE]  
-> Ce code génère avertissement '169' indiquant que le champ n’est jamais utilisé. Cela peut être ignoré, car il est en réalité EF Core utilise le champ de manière extralinguistic.
+> Ce code entraîne '169' indiquant que le champ n’est jamais utilisé d’avertissement du compilateur. Cela peut être ignoré, car en réalité EF Core utilise le champ de manière extralinguistic.
 
-## <a name="injecting-services"></a>Injection des services
+## <a name="injecting-services"></a>Injection de services
 
-EF Core pouvez injecter également un « services » dans le constructeur du type d’une entité. Par exemple, les éléments suivants peuvent être ajoutés :
-* `DbContext` -l’instance de contexte actuel, qui peut également être de type votre type dérivé de DbContext
+EF Core peut également injecter des « services » dans le constructeur du type d’une entité. Par exemple, ce qui suit peut être injecté :
+* `DbContext` -l’instance de contexte actuel, ce qui peut également être tapé sous forme votre type DbContext dérivée
 * `ILazyLoader` -le service de chargement différé, consultez le [chargement différé documentation](../querying/related-data.md) pour plus d’informations
-* `Action<object, string>` -un délégué de chargement différé, consultez le [chargement différé documentation](../querying/related-data.md) pour plus d’informations
-* `IEntityType` -les métadonnées de EF principales associées à ce type d’entité
+* `Action<object, string>` -un délégué sur le chargement différé, consultez le [chargement différé documentation](../querying/related-data.md) pour plus d’informations
+* `IEntityType` -les métadonnées de EF Core associées à ce type d’entité
 
 > [!NOTE]  
-> À compter de EF Core 2.1, uniquement les services connus EF Core peuvent être ajoutées. Prise en charge pour l’injection des services d’application est envisagée pour une version ultérieure.
+> À compter d’EF Core 2.1, seuls les services connus par EF Core peuvent être injectées. Prise en charge d’injection de services d’application est envisagée pour une version ultérieure.
 
-Par exemple, un DbContext injecté peut servir à sélectivement accéder à la base de données pour obtenir des informations sur les entités associées sans charger toutes les. Dans l’exemple ci-dessous, cela est utilisé pour obtenir le nombre de publications de blog de sans charger les billets de :
+Par exemple, un DbContext injecté peut être utilisé pour accéder de façon sélective la base de données pour obtenir des informations sur les entités connexes sans charger toutes les. Dans l’exemple ci-dessous, cela est utilisé pour obtenir le nombre de billets dans un blog sans charger les billets de :
 
 ```Csharp
 public class Blog
@@ -253,10 +253,10 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-Choses à noter à ce sujet :
-* Le constructeur est privé, car il est toujours appelée par EF Core, et il existe un autre constructeur public pour une utilisation générale.
-* Le code qui utilise le service injecté (autrement dit, le contexte) est défense contre lui étant `null` pour gérer les cas où EF Core n’est pas création de l’instance.
+Choses à remarquer à ce sujet :
+* Le constructeur est privé, dans la mesure où elle est toujours appelée par EF Core, et il existe un autre constructeur public pour une utilisation générale.
+* Le code qui utilise le service injecté (autrement dit, le contexte) est la défense contre lui en cours `null` pour gérer les cas où EF Core n’est pas création de l’instance.
 * Étant donné que le service est stocké dans une propriété en lecture/écriture, elle sera réinitialisée lorsque l’entité est attachée à une nouvelle instance de contexte.
 
 > [!WARNING]  
-> Injection le DbContext comme cela est souvent considéré un anti-modèle, car il associe vos types d’entité directement à EF Core. Étudiez attentivement toutes les options avant d’utiliser l’injection des services comme suit.
+> Injecter le DbContext, comme cela est souvent considéré comme un anti-modèle dans la mesure où elle associe vos types d’entité directement vers EF Core. Étudiez attentivement toutes les options avant d’utiliser l’injection de service comme suit.
