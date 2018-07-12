@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
 caps.latest.revision: 3
-ms.openlocfilehash: 1941337da55e5bb63efba42360c87c1c0f6ee325
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 5c7431985e2e404060197615bf281fcf3b318403
+ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911713"
+ms.lasthandoff: 07/09/2018
+ms.locfileid: "37914282"
 ---
 # <a name="code-first-migrations"></a>Migrations Code First
 Migrations Code First est la méthode recommandée pour faire évoluer votre schéma de base de données d’application si vous utilisez le flux de travail Code First. Les migrations fournissent un ensemble d’outils pour les opérations suivantes :
@@ -310,7 +310,7 @@ Si un autre développeur veut ces changements sur son ordinateur, il peut effect
 
 Migrations Code First exécute le pipeline de migration, mais il écrit les changements dans un fichier .sql au lieu de les appliquer réellement. Une fois que le script est généré, il est ouvert dans Visual Studio pour que vous puissiez le consulter ou l’enregistrer.
 
-### <a name="generating-idempotent-scripts-ef6-onwards"></a>Génération de scripts idempotents (EF6 et versions ultérieures)
+### <a name="generating-idempotent-scripts"></a>Génération de scripts idempotents
 
 À partir d’EF6, si vous spécifiez **–SourceMigration $InitialDatabase**, le script généré est « idempotent ». Les scripts idempotents peuvent mettre à niveau une base de données de n’importe quelle version vers la dernière version (ou la version spécifiée si vous utilisez **–TargetMigration**). Le script généré inclut une logique pour vérifier la table **\_\_MigrationsHistory** et applique uniquement les changements qui ne l’ont pas déjà été.
 
