@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
 caps.latest.revision: 3
-ms.openlocfilehash: f0319e97d8ca8cfc9c90dac51d2ecbe7a29c1929
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 92467e1a93f576eca627cf7b7d2351054a882c2c
+ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911733"
+ms.lasthandoff: 07/16/2018
+ms.locfileid: "39067545"
 ---
 # <a name="querying-and-finding-entities"></a>Interrogation et recherche d’entités
 Cette rubrique décrit les différentes méthodes de recherche de données à l’aide d’Entity Framework, y compris LINQ et la méthode Find. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -41,7 +41,7 @@ using (var context = new BloggingContext())
 Notez que DbSet et IDbSet créent toujours des requêtes sur la base de données et impliquent toujours un aller-retour vers la base de données même si les entités retournées existent déjà dans le contexte. Une requête est exécutée sur la base de données quand :  
 
 - Elle est énumérée par une instruction **foreach** (C#) ou **For Each** (Visual Basic).  
-- Elle est énumérée par une opération de collection comme [ToArray](https://msdn.microsoft.com/library/bb298736), [ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary) ou ToList[entrer la description du lien ici](https://msdn.microsoft.com/library/bb342261).  
+- Elle est énumérée par une opération de collection comme [ToArray](https://msdn.microsoft.com/library/bb298736), [ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary) ou [ToList](https://msdn.microsoft.com/library/bb342261).  
 - Des opérateurs LINQ, comme [First](https://msdn.microsoft.com/library/bb291976) ou [Any](https://msdn.microsoft.com/library/bb337697) sont spécifiés dans la partie la plus extérieure de la requête.  
 - Les méthodes suivantes sont appelées : la méthode d’extension [Load](https://msdn.microsoft.com/library/system.data.entity.dbextensions.load) sur DbSet, [DbEntityEntry.Reload](https://msdn.microsoft.com/library/system.data.entity.infrastructure.dbentityentry.reload.aspx) et Database.ExecuteSqlCommand.  
 
