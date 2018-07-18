@@ -6,12 +6,12 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: 44cbbc965755a694772dc4336ca2c1efc51fd6cd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754423"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949229"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 
@@ -157,7 +157,7 @@ Les nouveaux événements `Tracked` et `StateChanged` sur `ChangeTracker` peuven
 
 ## <a name="raw-sql-parameter-analyzer"></a>Analyseur de paramètre SQL brut
 
-Un nouvel analyseur de code est inclus avec EF Core. Il détecte les utilisations potentiellement dangereuses de nos API SQL brutes, comme `FromSql` ou `ExecuteSqlCommand`. Par exemple, dans la requête suivante, un avertissement s’affiche, car _minAge_ n’est pas paramétrable :
+Un nouvel analyseur de code est inclus avec EF Core. Il détecte les utilisations potentiellement dangereuses de nos API SQL brutes, comme `FromSql` ou `ExecuteSqlCommand`. Par exemple, dans la requête suivante, un avertissement s’affiche, car _minAge_ n’est pas paramétrable :
 
 ``` csharp
 var sql = $"SELECT * FROM People WHERE Age > {minAge}";

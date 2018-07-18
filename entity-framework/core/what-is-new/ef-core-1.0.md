@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: e5b9e57a01ff302b1d7bd0fc5419aa5b8213865e
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: af7cf490ef2b04afb02461279fbe67c1c7fa3d95
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26049682"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949020"
 ---
 # <a name="features-included-in-ef-core-10"></a>Fonctionnalités incluses dans EF Core 1.0
 
@@ -31,7 +31,7 @@ Ces conventions génèrent un modèle initial basé sur la forme des classes d�
 ### <a name="fluent-api"></a>API Fluent
 Permet de remplacer la méthode `OnModelCreating` sur votre contexte pour configurer davantage le modèle détecté par convention.
 ### <a name="data-annotations"></a>Annotations de données
-Il s’agit d’attributs qui peuvent être ajoutés à vos propriétés/classes d’entité et qui influenceront le modèle EF (en d’autres termes, l’ajout de la mention [Obligatoire] informera EF qu’une propriété est requise).
+Il s’agit d’attributs qui peuvent être ajoutés à vos propriétés/classes d’entité et qui influenceront le modèle EF. Par exemple, l’ajout de la mention `[Required]` informera EF qu’une propriété est obligatoire.
 ### <a name="relational-table-mapping"></a>Mappage de tables relationnelles
 Permet de mapper des entités à des tables ou des colonnes.
 ### <a name="key-value-generation"></a>Génération de valeur de clé
@@ -79,7 +79,7 @@ Offre la possibilité d’utiliser LINQ pour récupérer des données à partir 
 ### <a name="mixed-clientserver-evaluation"></a>Évaluation du client/serveur mixte
 Permet aux requêtes de contenir la logique qui ne peut pas être évaluée dans la base de données et qui doit par conséquent être évaluée une fois les données récupérées dans la mémoire.
 ### <a name="notracking"></a>NoTracking
-Permet d’accélérer l’exécution des requêtes quand le contexte n’a pas besoin d’effectuer le monitoring des modifications apportées aux instances d’entité (par exemple, des résultats en lecture seule).
+Permet d’accélérer l’exécution des requêtes quand le contexte n’a pas besoin de surveiller les changements apportés aux instances d’entité (cela s’avère utile si les résultats en lecture seule).
 ### <a name="eager-loading"></a>Chargement hâtif
 Fournit les méthodes `Include` et `ThenInclude` pour identifier les données associées qui doivent également être extraites durant l’interrogation.
 ### <a name="async-query"></a>Requête asynchrone
@@ -100,7 +100,7 @@ Permet de générer automatiquement un modèle EF basé sur un schéma de base d
 Se connecte à Microsoft SQL Server 2008 et versions ultérieures.
 ### <a name="sqlite"></a>SQLite
 Se connecte à une base de données SQLite 3.
-### <a name="in-memory"></a>In-Memory
+### <a name="in-memory"></a>En mémoire
 Fonctionnalité conçue pour tester facilement sans vous connecter à une base de données réelle.
 ### <a name="3rd-party-providers"></a>Fournisseurs tiers
 Plusieurs fournisseurs sont disponibles pour d’autres moteurs de base de données. Consultez [Fournisseurs de bases de données](../providers/index.md) pour en obtenir la liste complète.

@@ -6,12 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 02d0b6fe2956e819e08e08c9a0658008abd36c34
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 538458cf49ee86b9a5cba2f606adc04e583605e2
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29680020"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949125"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -93,7 +93,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
-Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité ```Post```. Notez l’utilisation d’une propriété de niveau instance DbContext : ```TenantId```. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte, c’est-à-dire, celle qui exécute la requête.
+Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité ```Post```. Notez l’utilisation d’une propriété de niveau instance DbContext : ```TenantId```. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur IgnoreQueryFilters().
 
@@ -134,7 +134,7 @@ Quelques points à noter :
 
 - Par convention, le nom de la méthode est utilisé comme nom de fonction (dans ce cas, une fonction définie par l’utilisateur) au moment de la génération du code SQL, mais vous pouvez remplacer le nom et le schéma durant l’inscription de la méthode.
 - Seules les fonctions scalaires sont prises en charge.
-- Vous devez créer la fonction mappée dans la base de données ; par exemple, EF Core Migrations ne se charge pas de cette création.
+- Vous devez créer la fonction mappée dans la base de données. Les migrations EF Core ne se chargent pas de opération.
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Configuration du type autonome pour Code First
 
@@ -177,7 +177,7 @@ Ce regroupement est conceptuellement semblable au regroupement de connexions dan
 La nouvelle méthode présente quelques limitations quant à ce qui peut être effectué dans la méthode ```OnConfiguring()``` de DbContext.
 
 > [!WARNING]  
-> Évitez d’utiliser le regroupement DbContext si vous gérez votre propre état (par exemple, champs privés) dans votre classe DbContext dérivée qui ne doit pas être partagée entre les demandes. EF Core réinitialise uniquement l’état dont il a connaissance avant d’ajouter une instance de DbContext au pool.
+> Évitez d’utiliser le regroupement DbContext si vous gérez votre propre état (par exemple, champs privés) dans votre classe DbContext dérivée qui ne doit pas être partagée entre les requêtes. EF Core réinitialise uniquement l’état dont il a connaissance avant d’ajouter une instance de DbContext au pool.
 
 ### <a name="explicitly-compiled-queries"></a>Requêtes compilées explicitement
 
@@ -220,7 +220,7 @@ Le SQL généré pour les jonctions de groupes est amélioré. Les jonctions de 
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>Interpolation de chaîne dans FromSql et ExecuteSqlCommand
 
-C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : ```FromSql``` et ```ExecuteSqlCommand```. Avec cette nouvelle prise en charge, l’interpolation de chaîne C# peut être utilisée de manière « sécurisée », c’est-à-dire, d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire durant la construction dynamique du code SQL au moment de l’exécution.
+C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : ```FromSql``` et ```ExecuteSqlCommand```. Avec cette nouvelle prise en charge, l’interpolation de chaîne C# peut être utilisée de manière « sécurisée », c’est-à-dire d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire pendant la construction dynamique du code SQL au moment de l’exécution.
 
 Voici un exemple :
 
@@ -259,7 +259,7 @@ Nous avons ajouté la propriété EF.Functions qui peut être utilisée par EF C
 ``` csharp
 var aCustomers =
     from c in context.Customers
-    where EF.Functions.Like(c.Name, "a%");
+    where EF.Functions.Like(c.Name, "a%")
     select c;
 ```
 
