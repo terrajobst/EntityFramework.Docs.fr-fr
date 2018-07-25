@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 10/27/2017
 ms.technology: entity-framework-core
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: 7c16017d3b97d115841050fe6ac0fdbeb5e71d94
-ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
+ms.openlocfilehash: 648ca990252fb32d8cf181a7ae672d07a81f56bb
+ms.sourcegitcommit: 0935ff275ae739243297f5b97eb21414398125c6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/16/2018
-ms.locfileid: "39067529"
+ms.lasthandoff: 07/23/2018
+ms.locfileid: "39201917"
 ---
 <a name="design-time-dbcontext-creation"></a>Création de DbContext d’au moment du design
 ==============================
