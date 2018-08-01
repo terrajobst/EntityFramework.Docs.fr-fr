@@ -6,12 +6,12 @@ ms.date: 8/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 ms.technology: entity-framework-core
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: dca9a3fb9e514b6eb22281a0f0140539681efb71
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 9be2368159fe7ab7b6951cc14a84ee63762ce90c
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949254"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39388450"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>La mise à niveau des applications à partir de versions précédentes vers EF Core 2.0
 
@@ -154,7 +154,7 @@ Cela crée/utilise une base de données portant le nom « MyDatabase ». Si `U
 
 ### <a name="read-only-api-changes"></a>Modifications de l’API en lecture seule
 
-`IsReadOnlyBeforeSave`, `IsReadOnlyAferSave`, et `IsStoreGeneratedAlways` ont été obsolète et remplacé par [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) et [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Ces comportements s’appliquent à n’importe quelle propriété (générées par le magasin non seulement des propriétés) et déterminer comment la valeur de la propriété doit être utilisée lors de l’insertion dans une ligne de base de données (`BeforeSaveBehavior`) ou lorsque la mise à jour existant de base de données ligne (`AfterSaveBehavior`).
+`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`, et `IsStoreGeneratedAlways` ont été obsolète et remplacé par [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) et [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Ces comportements s’appliquent à n’importe quelle propriété (générées par le magasin non seulement des propriétés) et déterminer comment la valeur de la propriété doit être utilisée lors de l’insertion dans une ligne de base de données (`BeforeSaveBehavior`) ou lorsque la mise à jour existant de base de données ligne (`AfterSaveBehavior`).
 
 Propriétés marquées comme étant [ValueGenerated.OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (par exemple, pour les colonnes calculées) par défaut ignore toute valeur actuellement définie sur la propriété. Cela signifie qu’une valeur générée par le magasin sera toujours obtenue indépendamment de si n’importe quelle valeur a été définie ou modifiée sur l’entité suivie. Cela peut être modifié en définissant un autre `Before\AfterSaveBehavior`.
 
