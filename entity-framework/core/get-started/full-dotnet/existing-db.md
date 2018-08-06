@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: 3cd69109e3cf8dbc103f9eea6e2553df17f29a98
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 39e77ab8c124df67458cc5fa6db2882b65943ebe
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812623"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39388466"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Bien démarrer avec EF Core sur .NET Framework avec une base de données existante
 
@@ -24,7 +24,7 @@ Dans cette procédure pas à pas, vous allez générer une application console q
 
 Pour effectuer cette procédure pas à pas, vous devez satisfaire les prérequis suivants :
 
-* [Visual Studio 2017](https://www.visualstudio.com/downloads/)
+* [Visual Studio 2017](https://www.visualstudio.com/downloads/) - au moins la version 15.3
 
 * [Dernière version du Gestionnaire de package NuGet](https://dist.nuget.org/index.html)
 
@@ -69,7 +69,7 @@ Ce didacticiel utilise une base de données de **création de blogs** sur votre 
 
 * Choisissez le modèle de projet **Application console**.
 
-* Assurez-vous de bien cibler **.NET Framework 4.5.1** ou une version ultérieure.
+* Assurez-vous de bien cibler **.NET Framework 4.6.1** ou une version ultérieure
 
 * Nommez le projet et cliquez sur **OK**.
 
