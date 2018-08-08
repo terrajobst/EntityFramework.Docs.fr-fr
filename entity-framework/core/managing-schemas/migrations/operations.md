@@ -1,21 +1,21 @@
 ---
-title: Opérations de Migrations personnalisé - EF Core
+title: Opérations sur les Migrations personnalisé - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/7/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 84d80175e719c950844b13688e1a4992614f25d8
-ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
+ms.openlocfilehash: 510d585534b4809179c905ee5b77cab4209a2b8f
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/14/2018
-ms.locfileid: "34163140"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614283"
 ---
-<a name="custom-migrations-operations"></a>Opérations de migration personnalisée
+<a name="custom-migrations-operations"></a>Opérations de Migrations personnalisé
 ============================
-Permet à l’API MigrationBuilder vous permet d’effectuer de nombreux types d’opérations lors d’une migration, mais il est loin d’être exhaustive. Toutefois, l’API est également extensible, ce qui vous permet de définir vos propres opérations. Il existe deux façons d’étendre l’API : à l’aide de la `Sql()` (méthode), ou en définissant personnalisé `MigrationOperation` objets.
+L’API MigrationBuilder vous permet d’effectuer différents types d’opérations lors d’une migration, mais il est loin d’être exhaustive. Toutefois, l’API est également extensible, ce qui vous permet de définir vos propres opérations. Il existe deux façons d’étendre l’API : à l’aide de la `Sql()` (méthode), ou en définissant personnalisé `MigrationOperation` objets.
 
-Pour illustrer cela, regardons implémente une opération qui crée un utilisateur de base de données à l’aide de chaque approche. Dans notre migrations, nous voulons pouvoir écrire le code suivant :
+Pour illustrer cela, nous allons étudier implémente une opération qui crée un utilisateur de base de données à l’aide de chaque approche. Dans notre migrations, nous souhaitons pouvoir écrire le code suivant :
 
 ``` csharp
 migrationBuilder.CreateUser("SQLUser1", "Password");
@@ -52,14 +52,16 @@ static MigrationBuilder CreateUser(
             return migrationBuilder
                 .Sql($"CREATE USER {name} WITH PASSWORD = '{password}';");
     }
+
+    return migrationBuilder;
 }
 ```
 
-Cette approche fonctionne uniquement si vous savez que tous les fournisseurs où votre opération personnalisé est appliquée.
+Cette approche fonctionne uniquement si vous savez que chaque fournisseur où votre opération personnalisée est appliquée.
 
 <a name="using-a-migrationoperation"></a>À l’aide d’une MigrationOperation
 ---------------------------
-Pour séparer l’opération personnalisée à partir de l’instruction SQL, vous pouvez définir vos propres `MigrationOperation` pour le représenter. L’opération est ensuite transmise au fournisseur pour permettre de déterminer la requête SQL appropriée pour générer.
+Pour découpler l’opération personnalisée à partir de SQL, vous pouvez définir vos propres `MigrationOperation` pour le représenter. L’opération est ensuite transmise au fournisseur pour déterminer la requête SQL appropriée à générer.
 
 ``` csharp
 class CreateUserOperation : MigrationOperation
@@ -88,7 +90,7 @@ static MigrationBuilder CreateUser(
 }
 ```
 
-Cette approche, chaque fournisseur pour savoir comment générer SQL pour cette opération dans leurs `IMigrationsSqlGenerator` service. Voici un exemple de substitution de générateur de SQL Server pour gérer la nouvelle opération.
+Cette approche, chaque fournisseur doit connaître la procédure de génération SQL pour cette opération dans leurs `IMigrationsSqlGenerator` service. Voici un exemple de substitution de générateur de SQL Server pour gérer la nouvelle opération.
 
 ``` csharp
 class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
@@ -133,7 +135,7 @@ class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
 }
 ```
 
-Remplacer le service de génération par défaut migrations sql par la mise à jour.
+Remplacer le service de générateur par défaut migrations sql par la mise à jour.
 
 ``` csharp
 protected override void OnConfiguring(DbContextOptionsBuilder options)

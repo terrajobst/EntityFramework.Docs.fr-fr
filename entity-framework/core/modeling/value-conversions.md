@@ -6,12 +6,12 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 5bfb6111ac450db91f3f1a7074a924a1c8400ce7
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: d5189cef6d44fdf3fd6116a2952ce07ff3a389d4
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949090"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614397"
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -28,7 +28,7 @@ Conversions sont définies à l’aide de deux `Func` arborescences : un dans `
 
 ## <a name="configuring-a-value-converter"></a>Configuration d’un convertisseur de valeurs
 
-Conversions de valeurs sont définies sur les propriétés de la OnModelCreating de votre DbContext. Par exemple, considérez un type enum et une entité défini en tant que :
+Conversions de valeurs sont définies sur les propriétés dans le `OnModelCreating` de votre `DbContext`. Par exemple, considérez un type enum et une entité défini en tant que :
 ```Csharp
 public class Rider
 {
@@ -44,7 +44,7 @@ public enum EquineBeast
     Unicorn
 }
 ```
-Puis les conversions peuvent être définies dans OnModelCreating pour stocker les valeurs d’énumération sous forme de chaînes (par exemple, « Donkey », « Chevaux »,...) dans la base de données :
+Conversions peuvent être défini dans `OnModelCreating` pour stocker les valeurs d’énumération sous forme de chaînes (par exemple, « Donkey », « Chevaux »,...) dans la base de données :
 ```Csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -115,7 +115,7 @@ Notez que tous les convertisseurs intégrés sont sans état, et donc une seule 
 
 ## <a name="pre-defined-conversions"></a>Conversions prédéfinies
 
-Pour les conversions courantes pour lesquelles il existe un convertisseur intégré, il est inutile de spécifier le convertisseur explicitement. Au lieu de cela, il suffit de configurer le type de fournisseur doit être utilisé et Entity Framework l’utilisera automatiquement le convertisseur de build approprié. Énumération pour les conversions de chaîne sont utilisés comme un exemple ci-dessus, mais EF permettra de faire cela automatiquement si le type de fournisseur est configuré :
+Pour les conversions courantes pour lesquelles il existe un convertisseur intégré, il est inutile de spécifier le convertisseur explicitement. Au lieu de cela, il suffit de configurer le type de fournisseur doit être utilisé et Entity Framework l’utilisera automatiquement le convertisseur intégré approprié. Énumération pour les conversions de chaîne sont utilisés comme un exemple ci-dessus, mais EF permettra de faire cela automatiquement si le type de fournisseur est configuré :
 ```Csharp
 modelBuilder
     .Entity<Rider>()
@@ -132,7 +132,7 @@ public class Rider
     public EquineBeast Mount { get; set; }
 }
 ```
-Ensuite, les valeurs enum seront enregistrés sous forme de chaînes dans la base de données sans aucune configuration supplémentaire dans OnModelCreating.
+Puis les valeurs enum seront enregistrés sous forme de chaînes dans la base de données sans aucune configuration supplémentaire dans `OnModelCreating`.
 
 ## <a name="limitations"></a>Limitations
 
