@@ -2,40 +2,35 @@
 title: Bien démarrer avec ASP.NET Core - Base de données existante - EF Core
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
+ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: e28149346ccd7531449ea696505588317471e6dd
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: c231a456abd4c110aba0326821799d6e9d567b3c
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949151"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614319"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une base de données existante
 
-Dans cette procédure pas à pas, vous allez générer une application ASP.NET Core MVC exécutant l’accès aux données de base à l’aide d’Entity Framework. Vous allez utiliser l’ingénierie à rebours pour créer un modèle Entity Framework à partir d’une base de données existante.
+Dans ce tutoriel, vous générez une application ASP.NET Core MVC exécutant l’accès aux données de base à l’aide d’Entity Framework Core. Vous rétroconcevez une base de données existante pour créer un modèle Entity Framework.
 
-> [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb) sur GitHub.
+[Affichez l’exemple proposé dans cet article sur GitHub](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb).
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour effectuer cette procédure pas à pas, vous devez satisfaire les prérequis suivants :
+Installez les logiciels suivants :
 
-* [Visual Studio 2017 15.3](https://www.visualstudio.com/downloads/) avec les charges de travail suivantes :
+* [Visual Studio 2017 15.7](https://www.visualstudio.com/downloads/) avec les charges de travail suivantes :
   * **ASP.NET et développement web** (sous **Web et cloud**)
   * **Développement multiplateforme .NET Core** (sous **Autres ensembles d’outils**)
-* [Kit SDK .NET Core 2.0](https://www.microsoft.com/net/download/core)
-* [Base de données de création de blogs](#blogging-database)
+* [SDK .NET Core 2.1](https://www.microsoft.com/net/download/core)
 
-### <a name="blogging-database"></a>Base de données de création de blogs
+## <a name="create-blogging-database"></a>Créer une base de données de création de blogs
 
-Ce didacticiel utilise une base de données de **création de blogs** sur votre instance LocalDb en tant que base de données existante.
-
-> [!TIP]  
-> Si vous avez déjà créé la base de données de **création de blogs** dans le cadre d’un autre didacticiel, vous pouvez ignorer ces étapes.
+Ce didacticiel utilise une base de données de **création de blogs** sur votre instance LocalDb en tant que base de données existante. Si vous avez déjà créé la base de données de **création de blogs** dans le cadre d’un autre tutoriel, ignorez ces étapes.
 
 * Ouvrir Visual Studio
 * **Outils -> Connexion à une base de données...**
@@ -53,29 +48,20 @@ Ce didacticiel utilise une base de données de **création de blogs** sur votre 
 
 * Ouvrez Visual Studio 2017.
 * **Fichier > Nouveau > Projet...**
-* Dans le menu de gauche, sélectionnez **Installé > Modèles > Visual C# > Web**.
-* Sélectionnez le modèle de projet **Application web ASP.NET Core (.NET Core)**.
+* Dans le menu de gauche, sélectionnez **Installé > Visual C# > Web**
+* Sélectionnez le modèle de projet **Application web ASP.NET Core**.
 * Entrez le nom **EFGetStarted.AspNetCore.ExistingDb** et cliquez sur **OK**.
 * Patientez jusqu’à l’affichage de la boîte de dialogue **Nouvelle application web ASP.NET Core**.
-* Dans la liste de **modèles ASP.NET Core 2.0**, sélectionnez le modèle de projet **Application web (Model-View-Controller)**.
+* Vérifiez que la liste déroulante du framework cible a la valeur **.NET Core**, et que la liste déroulante de version a la valeur **ASP.NET Core 2.1**.
+* Sélectionnez le modèle **Application web (Model-View-Controller)**.
 * Vérifiez que le paramètre **Authentification** est défini sur **Aucune authentification**.
 * Cliquez sur **OK**.
 
-## <a name="install-entity-framework"></a>Installer Entity Framework
+## <a name="install-entity-framework-core"></a>Installer Entity Framework Core
 
-Pour utiliser EF Core, installez le package pour le ou les fournisseurs de bases de données à cibler. Cette procédure pas à pas utilise SQL Server. Pour obtenir la liste des fournisseurs disponibles, consultez [Fournisseurs de bases de données](../../providers/index.md).
+Pour installer EF Core, installez le package pour le ou les fournisseurs de bases de données EF Core à cibler. Pour obtenir la liste des fournisseurs disponibles, consultez [Fournisseurs de bases de données](../../providers/index.md). 
 
-* **Outils > Gestionnaire de package NuGet > Console du Gestionnaire de package**
-
-* Exécutez `Install-Package Microsoft.EntityFrameworkCore.SqlServer`.
-
-Nous utiliserons des outils Entity Framework pour créer un modèle à partir de la base de données. Nous installerons donc également le package d’outils :
-
-* Exécutez `Install-Package Microsoft.EntityFrameworkCore.Tools`.
-
-Nous utiliserons des outils de génération de modèles automatique ASP.NET Core pour créer par la suite des contrôleurs et des vues. Nous installerons donc également ce package de conception :
-
-* Exécutez `Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design`.
+Pour ce tutoriel, vous n’êtes pas obligé d’installer un package de fournisseur, car le tutoriel utilise SQL Server. Le package du fournisseur SQL Server est inclus dans le [métapackage Microsoft.AspnetCore.App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1).
 
 ## <a name="reverse-engineer-your-model"></a>Rétroconcevoir le modèle
 
@@ -95,16 +81,30 @@ Si vous recevez l’erreur `The term 'Scaffold-DbContext' is not recognized as t
 
 Le processus d’ingénierie à rebours créé des classes d’entité (`Blog.cs` & `Post.cs`) et un contexte dérivé (`BloggingContext.cs`) en fonction du schéma de la base de données existante.
 
- Les classes d’entité sont des objets C# simples qui représentent les données que vous allez interroger et enregistrer.
+ Les classes d’entité sont des objets C# simples qui représentent les données que vous allez interroger et enregistrer. Voici les classes d’entité `Blog` et `Post` :
 
  [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Models/Blog.cs)]
 
+[!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Models/Post.cs)]
+
+> [!TIP]  
+> Pour activer le chargement différé, vous pouvez créer des propriétés de navigation `virtual` (Blog.Post et Post.Blog).
+
  Le contexte représente une session avec la base de données et vous permet d’interroger et d’enregistrer les instances des classes d’entité.
 
-<!-- Static code listing, rather than a linked file, because the walkthrough modifies the context file heavily -->
+<!-- Static code listing, rather than a linked file, because the tutorial modifies the context file heavily -->
  ``` csharp
 public partial class BloggingContext : DbContext
 {
+    public BloggingContext()
+    {
+    }
+
+    public BloggingContext(DbContextOptions<BloggingContext> options)
+        : base(options)
+    {
+    }
+
     public virtual DbSet<Blog> Blog { get; set; }
     public virtual DbSet<Post> Post { get; set; }
 
@@ -138,52 +138,25 @@ public partial class BloggingContext : DbContext
 
 Le concept d’injection de dépendances est essentiel dans ASP.NET Core. Des services (tels que `BloggingContext`) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont affectés aux composants qui les nécessitent (par exemple, vos contrôleurs MVC) par le biais des propriétés ou paramètres du constructeur. Pour plus d’informations sur l’injection de dépendances, consultez l’article [Injection de dépendances](http://docs.asp.net/en/latest/fundamentals/dependency-injection.html) sur le site ASP.NET.
 
-### <a name="remove-inline-context-configuration"></a>Supprimer la configuration contextuelle inline
-
-Dans ASP.NET Core, la configuration s’effectue généralement dans **Startup.cs**. Pour respecter ce modèle, nous allons transférer la configuration du fournisseur de base de données dans **Startup.cs**.
-
-* Ouvrez `Models\BloggingContext.cs`.
-* Supprimez la méthode `OnConfiguring(...)`.
-
-``` csharp
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
-    #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;");
-}
-```
-
-* Ajoutez le constructeur suivant pour pouvoir transférer la configuration dans le contexte par injection de dépendances.
-
-[!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Models/BloggingContext.cs#Constructor)]
-
 ### <a name="register-and-configure-your-context-in-startupcs"></a>Inscrire et configurer le contexte dans Startup.cs
 
-Afin de permettre à nos contrôleurs MVC d’utiliser `BloggingContext`, nous allons inscrire ce dernier en tant que service.
+Pour rendre `BloggingContext` accessible aux contrôleurs MVC, inscrivez-le en tant que service.
 
 * Ouvrez **Startup.cs**.
 * Ajoutez les instructions `using` suivantes au début du fichier.
 
 [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Startup.cs#AddedUsings)]
 
-Nous pouvons à présent utiliser la méthode `AddDbContext(...)` pour l’inscrire en tant que service.
+Vous pouvez à présent utiliser la méthode `AddDbContext(...)` pour l’inscrire en tant que service.
 * Localisez la méthode `ConfigureServices(...)`.
-* Ajoutez le code suivant pour inscrire le contexte en tant que service.
+* Ajoutez le code en surbrillance suivant pour inscrire le contexte en tant que service.
 
-[!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Startup.cs?name=ConfigureServices&highlight=7-8)]
+[!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Startup.cs?name=ConfigureServices&highlight=14-15)]
 
 > [!TIP]  
-> Dans une application réelle, vous placeriez généralement la chaîne de connexion dans un fichier de configuration. Par souci de simplicité, nous allons la définir dans le code. Pour plus d’informations, consultez [Chaînes de connexion](../../miscellaneous/connection-strings.md).
+> Dans une application réelle, vous placez généralement la chaîne de connexion dans un fichier de configuration ou une variable d’environnement. Par souci de simplicité, ce tutoriel la définit dans le code. Pour plus d’informations, consultez [Chaînes de connexion](../../miscellaneous/connection-strings.md).
 
-## <a name="create-a-controller"></a>Créer un contrôleur
-
-Nous allons à présent activer la génération de modèles automatique dans notre projet.
-
-* Dans l’**Explorateur de solutions**, cliquez avec le bouton de droite sur le dossier **Contrôleurs** et sélectionnez **Ajouter -> Contrôleur...**
-* Sélectionnez **Dépendances complètes** et cliquez sur **Ajouter**.
-* Vous pouvez ignorer les instructions du fichier `ScaffoldingReadMe.txt` qui s’ouvre.
-
-Une fois activée la génération de modèles automatique, nous pouvons générer automatiquement un modèle de contrôleur pour l’entité `Blog`.
+## <a name="create-a-controller-and-views"></a>Créer un contrôleur et des vues
 
 * Dans l’**Explorateur de solutions**, cliquez avec le bouton de droite sur le dossier **Contrôleurs** et sélectionnez **Ajouter -> Contrôleur...**
 * Sélectionnez **Contrôleur MVC avec vues, utilisant Entity Framework** et cliquez sur **OK**.
