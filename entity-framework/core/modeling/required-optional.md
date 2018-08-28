@@ -1,28 +1,26 @@
 ---
-title: Propriétés obligatoire ou facultatif - EF Core
+title: Propriétés obligatoires ou facultatives - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: ddaa0a54-9f43-4c34-aae3-f95c96c69842
-ms.technology: entity-framework-core
 uid: core/modeling/required-optional
-ms.openlocfilehash: 2af1d49e12ef980f81cb9c00556dee471673ccae
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b6716a5b03e1afc2933e317d606ef50f986c22c7
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052849"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995495"
 ---
 # <a name="required-and-optional-properties"></a>Propriétés obligatoires et facultatifs
 
-Une propriété est considéré comme facultative s’il est valide pour pouvoir contenir `null`. Si `null` n’est pas une valeur valide pour être affectée à une propriété, il est considéré comme une propriété obligatoire.
+Une propriété est considéré comme facultative s’il est valide pour pouvoir contenir `null`. Si `null` n’est pas une valeur valide pour être affectée à une propriété, puis il est considéré comme une propriété obligatoire.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, une propriété dont le type CLR peut contenir la valeur null est configurée comme facultatifs (`string`, `int?`, `byte[]`, etc..). Les propriétés dont le type CLR ne peut pas contenir la valeur null seront configurées en fonction des besoins (`int`, `decimal`, `bool`, etc..).
+Par convention, une propriété dont le type CLR peut contenir la valeur null sera configurée comme étant facultatif (`string`, `int?`, `byte[]`, etc..). Les propriétés dont le type CLR ne peut pas contenir de valeur null seront configurées en fonction des besoins (`int`, `decimal`, `bool`, etc..).
 
 > [!NOTE]  
-> Une propriété dont le type CLR ne peut pas contenir de valeur null ne peut pas être configurée comme facultatifs. La propriété est toujours considérée comme requis par Entity Framework.
+> Une propriété dont le type CLR ne peut pas contenir de valeur null ne peut pas être configurée comme facultatifs. La propriété sera toujours considéré comme exigé par Entity Framework.
 
 ## <a name="data-annotations"></a>Annotations de données
 

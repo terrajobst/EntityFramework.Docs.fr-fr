@@ -2,19 +2,13 @@
 title: Fractionnement d’entité concepteur - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-caps.latest.revision: 3
-ms.openlocfilehash: 386b739363fb78641d5ebd8130fd19008bc8c9f6
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 214561f0a0381bced3ceae0b6acfcd45f5dd65c5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39121109"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995617"
 ---
 # <a name="designer-entity-splitting"></a>Fractionnement d’entité Concepteur
 Cette procédure pas à pas montre comment mapper un type d’entité à deux tables en modifiant un modèle avec Entity Framework Designer (Concepteur d’EF). Vous pouvez mapper une entité à plusieurs tables quand les tables partagent une clé commune. Les concepts qui s'appliquent au mappage d'un type d'entité à deux tables sont facilement étendus au mappage d'un type d'entité à plusieurs tables.

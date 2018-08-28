@@ -1,28 +1,26 @@
 ---
 title: Valeurs par défaut - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: e541366a-130f-47dd-9997-1b110a11febe
-ms.technology: entity-framework-core
 uid: core/modeling/relational/default-values
-ms.openlocfilehash: 73b916b6d9f9c984c8ea010f2319eafa7d031a58
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 341f243ddddc345bb4236e5c34f814694b71e32a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052759"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996250"
 ---
 # <a name="default-values"></a>Valeurs par défaut
 
 > [!NOTE]  
-> La configuration de cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiqués ici devient disponibles lorsque vous installez un fournisseur de base de données relationnelle (en raison de l’élément partagé *Microsoft.EntityFrameworkCore.Relational* package).
+> La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
 La valeur par défaut d’une colonne est la valeur qui sera insérée si une nouvelle ligne est insérée, mais aucune valeur n’est spécifiée pour la colonne.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, la valeur par défaut n’est pas configurée.
+Par convention, une valeur par défaut n’est pas configurée.
 
 ## <a name="data-annotations"></a>Annotations de données
 

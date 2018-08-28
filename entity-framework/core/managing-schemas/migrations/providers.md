@@ -3,25 +3,24 @@ title: Migrations avec plusieurs fournisseurs - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/8/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: d950e74ed4cef7d4274aabcf3eda7b0b735574c6
-ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
+ms.openlocfilehash: 7ae695037992323337a780cda29d8c8ed8a13458
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2018
-ms.locfileid: "30002803"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997971"
 ---
 <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 ==================================
-Le [EF principaux outils] [ 1] structurez uniquement des migrations pour le fournisseur active. Toutefois, vous pouvez être amené à utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Il existe deux façons de gérer cette situation avec des Migrations. Vous pouvez conserver deux jeux de migrations--un pour chaque fournisseur--ou la fusion en une seule valeur qui peut travailler sur les deux.
+Le [outils EF Core] [ 1] structurer uniquement les migrations pour le fournisseur active. Toutefois, vous pouvez être amené à utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Il existe deux façons de gérer cela avec des Migrations. Vous pouvez conserver les deux ensembles de migrations--un pour chaque fournisseur--ou la fusion dans une seule valeur qui peut travailler sur les deux.
 
 <a name="two-migration-sets"></a>Deux ensembles de migration
 ------------------
 Dans la première approche, vous générez deux migrations pour chaque modification de modèle.
 
-Pour faire cela consiste à placer chaque ensemble de la migration [dans un assembly distinct] [ 2] et basculez manuellement le fournisseur active (et l’assembly de migrations) entre l’ajout de ces deux migrations.
+Pour effectuer cela consiste à placer chaque ensemble de la migration [dans un assembly distinct] [ 2] et basculer manuellement le fournisseur actif (et l’assembly de migrations) entre l’ajout les deux migrations.
 
-Une autre approche qui facilite l’utilisation des outils des plus simple consiste à créer un nouveau type qui dérive de votre DbContext et remplace le fournisseur actif. Ce type est utilisé lors de la conception du temps lors de l’ajout ou de l’application de migrations.
+Une autre approche qui facilite l’utilisation avec les outils consiste à créer un nouveau type qui dérive de votre DbContext et remplace le fournisseur actif. Ce type est utilisé lors de la conception du temps lors de l’ajout ou appliquer des migrations.
 
 ``` csharp
 class MySqliteDbContext : MyDbContext
@@ -32,7 +31,7 @@ class MySqliteDbContext : MyDbContext
 ```
 
 > [!NOTE]
-> Étant donné que chaque ensemble de migration utilise ses propres types DbContext, cette approche ne requiert pas à l’aide d’un assembly distinct des migrations.
+> Étant donné que chaque ensemble de migration utilise ses propres types DbContext, cette approche ne nécessite pas à l’aide d’un assembly de migrations distinctes.
 
 Lorsque vous ajoutez la nouvelle migration, spécifier les types de contexte.
 
@@ -50,9 +49,9 @@ dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir 
 
 <a name="one-migration-set"></a>Migration d’un jeu
 -----------------
-Si vous n’aimez pas avoir deux jeux de migration, vous pouvez manuellement les combiner en un seul ensemble peut être appliqué pour les deux fournisseurs.
+Si vous n’aimez pas avoir deux ensembles de migrations, vous pouvez manuellement les combiner en un seul ensemble peut être appliqué pour les deux fournisseurs.
 
-Les annotations peuvent coexister dans la mesure où un fournisseur ignore toutes les annotations ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut ressembler à ceci.
+Annotations peuvent coexister dans la mesure où un fournisseur ignore toutes les annotations qui ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut ressembler à ceci.
 
 ``` csharp
 Id = table.Column<int>(nullable: false)
@@ -61,7 +60,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-Si les opérations peuvent être appliquées uniquement sur un fournisseur (ou elles sont différemment entre les fournisseurs), utilisez le `ActiveProvider` propriété pour indiquer à quel fournisseur est actif.
+Si des opérations peuvent être appliquées uniquement sur un seul fournisseur (ou elles différemment entre les fournisseurs), utilisez le `ActiveProvider` propriété pour indiquer à quel fournisseur est actif.
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

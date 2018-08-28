@@ -2,19 +2,13 @@
 title: Spécification MSL - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
-caps.latest.revision: 4
-ms.openlocfilehash: 7448efc99f9fd9c6cdf930256a26347376fb354c
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 77dc7072c70b104188cd23974f32308960daebb6
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39121163"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996029"
 ---
 # <a name="msl-specification"></a>Spécification MSL
 Langage de spécification de mappage (MSL) est un langage basé sur XML qui décrit le mappage entre le modèle conceptuel et le modèle de stockage d’une application Entity Framework.

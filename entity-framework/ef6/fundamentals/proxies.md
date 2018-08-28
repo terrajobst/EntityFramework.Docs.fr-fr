@@ -2,19 +2,13 @@
 title: Utilisation de proxys - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 869ee4dc-06f1-471d-8e0e-0a1a2bc59c30
-caps.latest.revision: 3
-ms.openlocfilehash: 4632e246d28a3cd53dabe5ac76e44f4538739abc
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 7b82dd370e67d1622fc00ff5e5275721d0fc4fe1
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120816"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997201"
 ---
 # <a name="working-with-proxies"></a>Utilisation de proxys
 Lorsque vous créez des instances de types d’entités POCO, Entity Framework crée souvent des instances d’un type dérivé généré dynamiquement qui agit comme un proxy pour l’entité. Ce proxy substitue certaines propriétés virtuelles de l’entité à insérer des raccordements pour effectuer des actions automatiquement lorsque la propriété est accessible. Par exemple, ce mécanisme est utilisé pour prendre en charge le chargement différé des relations. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  

@@ -2,19 +2,13 @@
 title: Procédures stockées avec plusieurs jeux de résultats - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
-caps.latest.revision: 3
-ms.openlocfilehash: 68d544b0c553868ad1ff36cd24db19cff08db073
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: bb104ac5f584d26d279259a173de9afe3f018968
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39121200"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996173"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procédures stockées avec plusieurs jeux de résultats
 Parfois, lorsque vous utilisez stockées procédures, vous devez retourner plusieurs résultats définissent. Ce scénario est couramment utilisé pour réduire le nombre de base de données allers-retours requis pour composer un seul écran. Avant d’EF5, Entity Framework permettrait la procédure stockée à appeler, mais ne renvoie que le premier jeu de résultats au code appelant.

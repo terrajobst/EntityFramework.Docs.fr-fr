@@ -2,19 +2,13 @@
 title: Spécification SSDL - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-caps.latest.revision: 3
-ms.openlocfilehash: a9977c80d9a9401afdcad2284a705bcb28790fb8
-ms.sourcegitcommit: 9ae4473425c5e76337c9d032b0e5dbfedf1fcf57
+ms.openlocfilehash: 35c560d88e5078a7fc4c07b76020f3ad7d0735e1
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39121451"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995277"
 ---
 # <a name="ssdl-specification"></a>Spécification SSDL
 SSDL (Store Schema Definition Language) est un langage basé sur XML qui décrit le modèle de stockage d'une application Entity Framework.
@@ -419,7 +413,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à la **En
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Name**       | Oui         | Nom du jeu d'entités.                                                              |
 | **EntityType** | Oui         | Nom qualifié complet du type d'entité pour lequel le jeu d'entités contient des instances. |
-| **Schéma**     | Non          | Schéma de base de données.                                                                     |
+| **schéma**     | Non          | Schéma de base de données.                                                                     |
 | **Table**      | Non          | Table de base de données.                                                                      |
 
 > [!NOTE]
@@ -517,7 +511,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à la **fo
 | **NiladicFunction**        | Non          | **True** si la fonction est un niladiques<sup>2</sup> fonction ; **False** dans le cas contraire.                                                                                                                                   |
 | **IsComposable**           | Non          | **True** si la fonction est un élément composable<sup>3</sup> fonction ; **False** dans le cas contraire.                                                                                                                                |
 | **ParameterTypeSemantics** | Non          | Énumération qui définit la sémantique de type utilisée pour résoudre les surcharges de fonction. L'énumération est définie dans le manifeste du fournisseur par définition de fonction. La valeur par défaut est **AllowImplicitConversion**. |
-| **Schéma**                 | Non          | Nom du schéma dans lequel une procédure stockée est définie.                                                                                                                                                   |
+| **schéma**                 | Non          | Nom du schéma dans lequel une procédure stockée est définie.                                                                                                                                                   |
 
 <sup>1</sup> une fonction intégrée est une fonction qui est définie dans la base de données. Pour plus d’informations sur les fonctions qui sont définis dans le modèle de stockage, consultez l’élément CommandText (SSDL).
 

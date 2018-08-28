@@ -2,19 +2,13 @@
 title: Mode de mappage prégénéré - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-caps.latest.revision: 3
-ms.openlocfilehash: 9e74176d02afc424118219eec8e016843333cbb8
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 397569ef374cb44d4938f9e201b588a26c408f6e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39121350"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996470"
 ---
 # <a name="pre-generated-mapping-views"></a>Vues prégénérées mappage
 Avant de l’Entity Framework peut exécuter une requête ou enregistrer les modifications apportées à la source de données, il doit générer un ensemble de vues de mappage pour accéder à la base de données. Ces vues de mappage sont un ensemble de l’instruction Entity SQL qui représentent la base de données de manière abstraite et font partie des métadonnées qui sont mis en cache par domaine d’application. Si vous créez plusieurs instances du même contexte dans le même domaine d’application, elles réutiliseront les vues de mappage depuis les métadonnées mises en cache au lieu de les régénérer. Étant donné que la génération de vues de mappage constitue une partie significative du coût total de l’exécution de la première requête, Entity Framework vous permet de prégénérer des vues de mappage et de les inclure dans le projet compilé. Pour plus d’informations, consultez [considérations sur les performances (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).

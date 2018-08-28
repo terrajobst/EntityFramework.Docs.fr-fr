@@ -1,17 +1,15 @@
 ---
 title: Héritage - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 754be334-dd21-450e-9d22-2591e80012a2
-ms.technology: entity-framework-core
 uid: core/modeling/inheritance
-ms.openlocfilehash: f0394bc55dfbfea8277b1ddf898361165dd1fe51
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: c5fa9d13dec8cfc3e1cac69e471f509cbbb9e4c5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052779"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995894"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -19,9 +17,9 @@ L’héritage dans le modèle EF est utilisé pour contrôler la façon dont l�
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, il incombe au fournisseur de base de données de déterminer comment l’héritage est représentée dans la base de données. Consultez [l’héritage (base de données relationnelle)](relational/inheritance.md) pour la gestion avec un fournisseur de base de données relationnelle.
+Par convention, il incombe au fournisseur de base de données de déterminer comment l’héritage est représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour comment ceci est géré avec un fournisseur de base de données relationnelle.
 
-EF sera uniquement le programme d’installation d’héritage si deux ou plusieurs types hérités sont explicitement inclus dans le modèle. EF n’analyse pas pour les types de base ou dérivées qui ne figuraient pas dans le cas contraire dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet<TEntity>*  pour chaque type dans la hiérarchie d’héritage.
+EF n'est que le programme d’installation l’héritage si deux ou plusieurs des types hérités sont explicitement inclus dans le modèle. EF n’analyse pas pour les types de base ou dérivés qui ne figuraient pas dans le cas contraire dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet<TEntity>*  pour chaque type dans la hiérarchie d’héritage.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/InheritanceDbSets.cs?highlight=3-4&name=Model)]
 
@@ -39,4 +37,4 @@ Vous ne pouvez pas utiliser des Annotations de données pour configurer l’hér
 
 ## <a name="fluent-api"></a>API Fluent
 
-Le fournisseur de base de données que vous utilisez dépend de l’API Fluent d’héritage. Consultez [l’héritage (base de données relationnelle)](relational/inheritance.md) pour la configuration que vous pouvez effectuer pour un fournisseur de base de données relationnelle.
+Le fournisseur de base de données que vous utilisez dépend de l’API Fluent pour l’héritage. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour la configuration que vous pouvez effectuer pour un fournisseur de base de données relationnelle.
