@@ -1,0 +1,48 @@
+---
+title: Journal des modifications ayant un impact sur le fournisseur - EF Core
+author: ajcvickers
+ms.author: avickers
+ms.date: 08/08/2018
+ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
+ms.technology: entity-framework-core
+uid: core/providers/provider-log
+ms.openlocfilehash: ee73940e3c0030b76e73438b1852cc29ebeadb45
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998358"
+---
+# <a name="provider-impacting-changes"></a><span data-ttu-id="8c87f-102">Modifications ayant un impact sur le fournisseur</span><span class="sxs-lookup"><span data-stu-id="8c87f-102">Provider-impacting changes</span></span>
+
+<span data-ttu-id="8c87f-103">Cette page contient des liens pour extraire les requêtes effectuées sur le dépôt EF Core qui peut-être nécessiter des auteurs d’autres fournisseurs de base de données de réagir.</span><span class="sxs-lookup"><span data-stu-id="8c87f-103">This page contains links to pull requests made on the EF Core repo that may require authors of other database providers to react.</span></span> <span data-ttu-id="8c87f-104">L’objectif est de fournir un point de départ pour les auteurs des fournisseurs de base de données de tiers existants lors de la mise à jour de leur fournisseur vers une nouvelle version.</span><span class="sxs-lookup"><span data-stu-id="8c87f-104">The intention is to provide a starting point for authors of existing third-party database providers when updating their provider to a new version.</span></span>
+
+<span data-ttu-id="8c87f-105">Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2.</span><span class="sxs-lookup"><span data-stu-id="8c87f-105">We are starting this log with changes from 2.1 to 2.2.</span></span> <span data-ttu-id="8c87f-106">Avant 2.1, nous avons utilisé le [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) et [ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) étiquettes sur nos problèmes et les demandes de tirage.</span><span class="sxs-lookup"><span data-stu-id="8c87f-106">Prior to 2.1 we used the [`providers-beware`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) and [`providers-fyi`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) labels on our issues and pull requests.</span></span>
+
+### <a name="21-----22"></a><span data-ttu-id="8c87f-107">2.1---> 2.2</span><span class="sxs-lookup"><span data-stu-id="8c87f-107">2.1 ---> 2.2</span></span>
+
+#### <a name="test-only-changes"></a><span data-ttu-id="8c87f-108">Modifications de test uniquement</span><span class="sxs-lookup"><span data-stu-id="8c87f-108">Test-only changes</span></span>
+
+* <span data-ttu-id="8c87f-109">https://github.com/aspnet/EntityFrameworkCore/pull/12057 -Autoriser les séparateurs SQL personnalisables dans les tests</span><span class="sxs-lookup"><span data-stu-id="8c87f-109">https://github.com/aspnet/EntityFrameworkCore/pull/12057 - Allow customizable SQL delimeters in tests</span></span>
+  * <span data-ttu-id="8c87f-110">Tester les changements qui permettent des comparaisons de virgule flottante non strict dans BuiltInDataTypesTestBase</span><span class="sxs-lookup"><span data-stu-id="8c87f-110">Test changes that allow non-strict floating point comparisons in BuiltInDataTypesTestBase</span></span>
+  * <span data-ttu-id="8c87f-111">Modifications de test qui permettent des tests de requête à être réutilisée avec différents séparateurs SQL</span><span class="sxs-lookup"><span data-stu-id="8c87f-111">Test changes that allow query tests to be re-used with different SQL delimeters</span></span>
+* <span data-ttu-id="8c87f-112">https://github.com/aspnet/EntityFrameworkCore/pull/12072 -Ajouter des tests de DbFunction pour les tests de spécification relationnelle</span><span class="sxs-lookup"><span data-stu-id="8c87f-112">https://github.com/aspnet/EntityFrameworkCore/pull/12072 - Add DbFunction tests to the relational specification tests</span></span>
+  * <span data-ttu-id="8c87f-113">Telles que ces tests peuvent être exécutés sur tous les fournisseurs de base de données</span><span class="sxs-lookup"><span data-stu-id="8c87f-113">Such that these tests can be run against all database providers</span></span>
+* <span data-ttu-id="8c87f-114">https://github.com/aspnet/EntityFrameworkCore/pull/12362 -Nettoyage du test asynchrone</span><span class="sxs-lookup"><span data-stu-id="8c87f-114">https://github.com/aspnet/EntityFrameworkCore/pull/12362 - Async test cleanup</span></span>
+  * <span data-ttu-id="8c87f-115">Supprimer `Wait` , les appels inutiles async et renommé certaines méthodes de test</span><span class="sxs-lookup"><span data-stu-id="8c87f-115">Remove `Wait` calls, unneeded async, and renamed some test methods</span></span>
+* <span data-ttu-id="8c87f-116">https://github.com/aspnet/EntityFrameworkCore/pull/12666 -Unifier l’infrastructure de test de journalisation</span><span class="sxs-lookup"><span data-stu-id="8c87f-116">https://github.com/aspnet/EntityFrameworkCore/pull/12666 - Unify logging test infrastructure</span></span>
+  * <span data-ttu-id="8c87f-117">Ajouté `CreateListLoggerFactory` et supprimé une infrastructure de journalisation précédente, nécessitant des fournisseurs à l’aide de ces tests pour réagir</span><span class="sxs-lookup"><span data-stu-id="8c87f-117">Added `CreateListLoggerFactory` and removed some previous logging infrastructure, which will require providers using these tests to react</span></span>
+* <span data-ttu-id="8c87f-118">https://github.com/aspnet/EntityFrameworkCore/pull/12500 -Exécuter des tests de requête plus à la fois de façon synchrone et asynchrone</span><span class="sxs-lookup"><span data-stu-id="8c87f-118">https://github.com/aspnet/EntityFrameworkCore/pull/12500 - Run more query tests both synchronously and asynchronously</span></span>
+  * <span data-ttu-id="8c87f-119">Noms de test et la factorisation a changé, ce qui nécessitera des fournisseurs à l’aide de ces tests pour réagir</span><span class="sxs-lookup"><span data-stu-id="8c87f-119">Test names and factoring has changed, which will require providers using these tests to react</span></span>
+* <span data-ttu-id="8c87f-120">https://github.com/aspnet/EntityFrameworkCore/pull/12766 -Renommer les navigations dans le modèle ComplexNavigations</span><span class="sxs-lookup"><span data-stu-id="8c87f-120">https://github.com/aspnet/EntityFrameworkCore/pull/12766 - Renaming navigations in the ComplexNavigations model</span></span>
+  * <span data-ttu-id="8c87f-121">Fournisseurs à l’aide de ces tests peuvent devoir réagir</span><span class="sxs-lookup"><span data-stu-id="8c87f-121">Providers using these tests may need to react</span></span>
+* <span data-ttu-id="8c87f-122">https://github.com/aspnet/EntityFrameworkCore/pull/12141 -Retourner le contexte pour le pool au lieu d’en cours de suppression dans les tests fonctionnels</span><span class="sxs-lookup"><span data-stu-id="8c87f-122">https://github.com/aspnet/EntityFrameworkCore/pull/12141 - Return the context to the pool instead of disposing in functional tests</span></span>
+  * <span data-ttu-id="8c87f-123">Cette modification inclut une refactorisation de test qui peut nécessiter des fournisseurs de réagir</span><span class="sxs-lookup"><span data-stu-id="8c87f-123">This change includes some test refactoring which may require providers to react</span></span>
+
+
+#### <a name="test-and-product-code-changes"></a><span data-ttu-id="8c87f-124">Modifications de code de test et de produit</span><span class="sxs-lookup"><span data-stu-id="8c87f-124">Test and product code changes</span></span>
+
+* <span data-ttu-id="8c87f-125">https://github.com/aspnet/EntityFrameworkCore/pull/12109 -Consolider RelationalTypeMapping.Clone méthodes</span><span class="sxs-lookup"><span data-stu-id="8c87f-125">https://github.com/aspnet/EntityFrameworkCore/pull/12109 - Consolidate RelationalTypeMapping.Clone methods</span></span>
+  * <span data-ttu-id="8c87f-126">Les modifications dans 2.1 à la RelationalTypeMapping autorisées pour une simplification dans les classes dérivées.</span><span class="sxs-lookup"><span data-stu-id="8c87f-126">Changes in 2.1 to the RelationalTypeMapping allowed for a simplification in derived classes.</span></span> <span data-ttu-id="8c87f-127">Nous pensons que cela endommageait aux fournisseurs, mais les fournisseurs peuvent tirer parti de cette modification dans leur type dérivé de la mapper des classes.</span><span class="sxs-lookup"><span data-stu-id="8c87f-127">We don't believe this was breaking to providers, but providers can take advantage of this change in their derived type mapping classes.</span></span>
+* <span data-ttu-id="8c87f-128">https://github.com/aspnet/EntityFrameworkCore/pull/12069 -Les requêtes avec balises ou nommés</span><span class="sxs-lookup"><span data-stu-id="8c87f-128">https://github.com/aspnet/EntityFrameworkCore/pull/12069 - Tagged or named queries</span></span>
+  * <span data-ttu-id="8c87f-129">Ajoute l’infrastructure de marquage des requêtes LINQ et apparaissent sous forme de commentaires dans le code SQL de ces balises.</span><span class="sxs-lookup"><span data-stu-id="8c87f-129">Adds infrastructure for tagging LINQ queries and having those tags show up as comments in the SQL.</span></span> <span data-ttu-id="8c87f-130">Cela peut nécessiter des fournisseurs de réagir dans la génération SQL.</span><span class="sxs-lookup"><span data-stu-id="8c87f-130">This may require providers to react in SQL generation.</span></span>
