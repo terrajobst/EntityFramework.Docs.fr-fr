@@ -2,19 +2,13 @@
 title: Utilisation d’entités déconnectées - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 12138003-a373-4817-b1b7-724130202f5f
-caps.latest.revision: 3
-ms.openlocfilehash: 5419215a77b57ab3c92fb88a512510070ea23bd6
-ms.sourcegitcommit: 45494121254ad4fdcec613d1dd22d850068d6f39
+ms.openlocfilehash: b496a9cba48946974844725c5df5e7df7351cf23
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37913441"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998224"
 ---
 # <a name="working-with-disconnected-entities"></a>Utilisation d’entités déconnectées
 Dans une application Entity Framework, une classe de contexte détecte les changements des entités suivies. La méthode SaveChanges conserve les changements détectés par le contexte dans la base de données. Quand vous utilisez des applications multicouches, les objets d’entité sont généralement modifiés quand ils sont déconnectés du contexte, et vous devez choisir à la fois comment suivre les changements et comment les signaler au contexte. Cette rubrique décrit les différentes options disponibles quand vous utilisez Entity Framework avec des entités déconnectées.   
