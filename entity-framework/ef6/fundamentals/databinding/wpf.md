@@ -2,19 +2,13 @@
 title: Liaison de données avec WPF - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-caps.latest.revision: 3
-ms.openlocfilehash: 1756ec14fe83d80199b6040bd345dc2fe6294281
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 0b1f4d5ea204cd80acf42caa499732610daa0e31
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39121139"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994821"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 Cette procédure pas à pas montre comment lier les types POCO à des contrôles WPF dans un formulaire « maître / détail ». L’application utilise les API Entity Framework pour remplir des objets avec des données à partir de la base de données, le suivi des modifications et conserver les données dans la base de données.

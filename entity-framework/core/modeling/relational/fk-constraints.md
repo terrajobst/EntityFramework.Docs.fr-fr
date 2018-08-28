@@ -1,22 +1,20 @@
 ---
-title: Contraintes de clé étrangères - EF Core
+title: Contraintes de clé étrangère - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: dbaf4bac-1fd5-46c0-ac57-64d7153bc574
-ms.technology: entity-framework-core
 uid: core/modeling/relational/fk-constraints
-ms.openlocfilehash: 726f03e2ee4cd3ec851c9a861b75dd12f9203e9c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: a83f72b5d832e349fb4a5fb3b2de0b82bd79ef2a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052739"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993986"
 ---
 # <a name="foreign-key-constraints"></a>Contraintes de clé étrangère
 
 > [!NOTE]  
-> La configuration de cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiqués ici devient disponibles lorsque vous installez un fournisseur de base de données relationnelle (en raison de l’élément partagé *Microsoft.EntityFrameworkCore.Relational* package).
+> La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
 Une contrainte de clé étrangère est introduite pour chaque relation dans le modèle.
 
