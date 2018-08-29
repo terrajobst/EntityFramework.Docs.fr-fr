@@ -2,19 +2,13 @@
 title: À l’aide de migrate.exe - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 989ea862-e936-4c85-926a-8cfbef5df5b8
-caps.latest.revision: 3
-ms.openlocfilehash: 3a9bc47d2c18abe6ca70b92a8758b4d95010a464
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 39740578e4a8c2d5400bcabbcb107baf0648fba5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120810"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993497"
 ---
 # <a name="using-migrateexe"></a>À l’aide de migrate.exe
 Migrations Code First peut être utilisées pour mettre à jour une base de données à l’intérieur de visual studio, mais peuvent également être exécutées via la migrate.exe outil ligne de commande. Cette page pour obtenir une vue d’ensemble rapide sur comment utiliser migrate.exe pour exécuter des migrations par rapport à une base de données.
@@ -30,7 +24,7 @@ Une fois que vous avez migrate.exe vous devez copier dans l’emplacement de l�
 
 Si votre application cible le .NET 4 et 4.5 pas, puis vous devrez copier le **Redirect.config** dans l’emplacement ainsi et renommez-le **migrate.exe.config**. Il s’agit donc que migrate.exe obtient les redirections de liaison correct pour être en mesure de localiser l’assembly d’Entity Framework.
 
-| .NET 4.5                                   | .NET 4.0                                   |
+| .NET 4.5                                   | .NET 4.0                                   |
 |:-------------------------------------------|:-------------------------------------------|
 | ![Net45Files](~/ef6/media/net45files.png)  | ![Net40Files](~/ef6/media/net40files.png)  |
 

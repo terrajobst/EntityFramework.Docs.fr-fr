@@ -3,12 +3,12 @@ title: Obtenir Entity Framework - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
-ms.openlocfilehash: 78ef1e7b20bd879c972870552c8f692e153b7abb
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 91b78e56f60edf7ebc8769b1c385f8547f63cd3d
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996563"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152386"
 ---
 # <a name="get-entity-framework"></a>Obtenir Entity Framework
 Entity Framework est constitué par les outils Entity Framework pour Visual Studio et le Runtime Entity Framework.
@@ -39,7 +39,7 @@ Install-Package EntityFramework
 
 ## <a name="installing-a-specific-version-of-ef"></a>Installation d’une version spécifique d’EF
 
-À partir d’Entity Framework 4.1 et versions ultérieures, les nouvelles versions du runtime EF ont été publiées en tant que le [EntityFramework NuGet package](https://www.nuget.org/packages/EntityFramework/). Une de ces versions peuvent être ajoutée à un projet basé sur le .NET Framework en exécutant la commande suivante dans Visual Studio [Console du Gestionnaire de Package](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
+À partir d’Entity Framework 4.1 et versions ultérieures, les nouvelles versions du runtime EF ont été publiées en tant que le [EntityFramework NuGet Package](https://www.nuget.org/packages/EntityFramework/). Une de ces versions peuvent être ajoutée à un projet basé sur le .NET Framework en exécutant la commande suivante dans Visual Studio [Console du Gestionnaire de Package](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
 
 ``` powershell
 Install-Package EntityFramework -Version <number>

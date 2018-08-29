@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 0536393d074d82583f47faae13cc22498193cb7e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994891"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152463"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entités avec des constructeurs
 
@@ -25,7 +25,7 @@ ms.locfileid: "42994891"
 
 Considérez un modèle de billet de Blog/classique :
 
-```Csharp
+``` csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -50,7 +50,7 @@ public class Post
 
 Quand EF Core crée des instances de ces types, comme pour les résultats d’une requête, il sera tout d’abord appeler le constructeur sans paramètre par défaut et définissez chaque propriété sur la valeur à partir de la base de données. Toutefois, si EF Core recherche un constructeur paramétrable avec des noms de paramètre et les types qui correspondent à ceux de mappé des propriétés, puis il appelle à la place du constructeur paramétré avec des valeurs pour ces propriétés et ne définit pas explicitement de chaque propriété. Exemple :
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -99,7 +99,7 @@ Une fois que les propriétés sont définies via le constructeur, il peut être 
 * À l’aide de valeurs de clés générées automatiquement nécessite une propriété de clé qui est en lecture-écriture, dans la mesure où la valeur de clé doit être définie par le Générateur de clé lors de l’insertion de nouvelles entités.
 
 Un moyen simple pour éviter ces choses consiste à utiliser les méthodes Set privées. Exemple :
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -139,7 +139,7 @@ EF Core voit une propriété avec un setter privée en lecture-écriture, ce qui
 
 Une alternative à l’utilisation de méthodes setter privée consiste à rendre les propriétés vraiment en lecture seule et ajouter un mappage plus explicite dans OnModelCreating. De même, certaines propriétés peuvent être complètement supprimées et remplacées par uniquement des champs. Par exemple, considérez ces types d’entités :
 
-```Csharp
+``` csharp
 public class Blog
 {
     private int _id;
@@ -174,7 +174,7 @@ public class Post
 }
 ```
 Et cette configuration dans OnModelCreating :
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(
@@ -215,7 +215,7 @@ EF Core peut également injecter des « services » dans le constructeur du ty
 
 Par exemple, un DbContext injecté peut être utilisé pour accéder de façon sélective la base de données pour obtenir des informations sur les entités connexes sans charger toutes les. Dans l’exemple ci-dessous, cela est utilisé pour obtenir le nombre de billets dans un blog sans charger les billets de :
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog()

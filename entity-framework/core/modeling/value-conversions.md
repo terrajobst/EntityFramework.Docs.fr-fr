@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d6b51a0a70ee527844b6fe995f39bec534dbaba8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a1956221ecc920feba796e4d95cc97259e89c53
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996286"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152508"
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -27,7 +27,7 @@ Conversions sont définies à l’aide de deux `Func` arborescences : un dans `
 ## <a name="configuring-a-value-converter"></a>Configuration d’un convertisseur de valeurs
 
 Conversions de valeurs sont définies sur les propriétés dans le `OnModelCreating` de votre `DbContext`. Par exemple, considérez un type enum et une entité défini en tant que :
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -43,7 +43,7 @@ public enum EquineBeast
 }
 ```
 Conversions peuvent être défini dans `OnModelCreating` pour stocker les valeurs d’énumération sous forme de chaînes (par exemple, « Donkey », « Chevaux »,...) dans la base de données :
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 ## <a name="the-valueconverter-class"></a>La classe ValueConverter
 
 Appel `HasConversion` comme indiqué ci-dessus créera un `ValueConverter` de l’instance et le définir sur la propriété. Le `ValueConverter` à la place peuvent être créés explicitement. Exemple :
-```Csharp
+``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -82,7 +82,7 @@ EF Core est fourni avec un ensemble de prédéfinis `ValueConverter` classes, fi
 * `BoolToStringConverter` -Bool pour les chaînes telles que « Y » et « N »
 * `BoolToTwoValuesConverter` -Bool aux deux valeurs
 * `BytesToStringConverter` -Tableau d’octets en chaîne codée en Base64
-* `CastingConverter` -Les conversions qui requièrent uniquement un cast de Csharp
+* `CastingConverter` -Les conversions qui requièrent uniquement un cast de type
 * `CharToStringConverter` -Char en chaîne de caractères unique
 * `DateTimeOffsetToBinaryConverter` -DateTimeOffset par rapport à la valeur de 64 bits codée en binaire
 * `DateTimeOffsetToBytesConverter` -DateTimeOffset en tableau d’octets
@@ -101,7 +101,7 @@ EF Core est fourni avec un ensemble de prédéfinis `ValueConverter` classes, fi
 * `TimeSpanToTicksConverter` -Intervalle de temps en graduations
 
 Notez que `EnumToStringConverter` est inclus dans cette liste. Cela signifie qu’il est inutile de spécifier la conversion explicitement, comme indiqué ci-dessus. Au lieu de cela, utilisez simplement le convertisseur intégré :
-```Csharp
+``` csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -114,14 +114,14 @@ Notez que tous les convertisseurs intégrés sont sans état, et donc une seule 
 ## <a name="pre-defined-conversions"></a>Conversions prédéfinies
 
 Pour les conversions courantes pour lesquelles il existe un convertisseur intégré, il est inutile de spécifier le convertisseur explicitement. Au lieu de cela, il suffit de configurer le type de fournisseur doit être utilisé et Entity Framework l’utilisera automatiquement le convertisseur intégré approprié. Énumération pour les conversions de chaîne sont utilisés comme un exemple ci-dessus, mais EF permettra de faire cela automatiquement si le type de fournisseur est configuré :
-```Csharp
+``` csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
     .HasConversion<string>();
 ```
 La même chose peut être obtenue en spécifiant explicitement le type de colonne. Par exemple, si le type d’entité est défini comme donc :
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }
