@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: 29b7e20e875bf791a88a92636c1df4bc4e31656b
-ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
+ms.openlocfilehash: a1d554795dcd8a3e5b44e89ac014f538598461cc
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/14/2018
-ms.locfileid: "34163211"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447643"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
-Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Cela peut être utile si la requête que vous voulez effectuer ne peut pas être exprimée à l’aide de LINQ ou que l’utilisation d’une requête LINQ se traduit du SQL inefficace envoyé à la base de données.
+Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Cela peut être utile si la requête que vous voulez effectuer ne peut pas être exprimée à l’aide de LINQ ou que l’utilisation d’une requête LINQ se traduit du SQL inefficace envoyé à la base de données. Les requêtes SQL brutes peuvent retourner des types d’entités ou, à partir d’EF Core 2.1, des [types de requête](xref:core/modeling/query-types) qui font partie de votre modèle.
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
@@ -23,7 +23,6 @@ Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque 
 ## <a name="limitations"></a>Limitations
 
 Il existe quelques limitations à connaître lors de l’utilisation des requêtes SQL brutes :
-* Les requêtes SQL peuvent uniquement servir à retourner des types d’entité qui font partie de votre modèle. Nous avons une amélioration dans notre backlog pour [Autoriser le retour de types ad hoc à partir de requêtes SQL brutes](https://github.com/aspnet/EntityFramework/issues/1862).
 
 * La requête SQL doit retourner des données pour toutes les propriétés du type d’entité ou de requête.
 
@@ -33,10 +32,10 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 
 * Les instructions `SELECT` passées à cette méthode doivent généralement être composables : si EF Core a besoin évaluer des opérateurs de requête supplémentaires sur le serveur (par exemple, pour traduire les opérateurs LINQ appliqués après `FromSql`), le SQL fourni sera considéré comme une sous-requête. Cela signifie que l’instruction SQL passée ne doit pas contenir de caractères ou d’options qui ne sont pas valides sur une sous-requête, comme :
   * un point-virgule de fin
-  * Sur le serveur SQL Server, une indication de niveau de requête en fin, par exemple `OPTION (HASH JOIN)`
+  * Sur le serveur SQL Server, une indication de niveau de requête en fin (par exemple, `OPTION (HASH JOIN)`)
   * Sur le serveur SQL Server, une clause `ORDER BY` n’est pas accompagnée de `TOP 100 PERCENT` dans la clause `SELECT`
 
-* Les instructions SQL autres que `SELECT` sont reconnues automatiquement en tant que non composables. Par conséquent, les résultats complets des procédures stockées sont toujours retournés au client et tous les opérateurs LINQ appliqués après `FromSql` sont évalués en mémoire. 
+* Les instructions SQL autres que `SELECT` sont reconnues automatiquement en tant que non composables. Par conséquent, les résultats complets des procédures stockées sont toujours retournés au client et tous les opérateurs LINQ appliqués après `FromSql` sont évalués en mémoire.
 
 ## <a name="basic-raw-sql-queries"></a>Requêtes SQL brutes de base
 

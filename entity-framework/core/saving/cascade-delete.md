@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 7e1c87ae3a955c22b267a108ea7c2bb504e9acc3
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812675"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447809"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -32,7 +32,10 @@ Il existe trois mesures qu'EF peut prendre lorsqu’une entité principale/paren
 
 Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère n’acceptant pas la valeur null est équivalente à une relation requise.) Dans ces cas, EF Core note que la propriété de clé étrangère a été marquée comme null jusqu'à l’appel à SaveChanges, auquel cas une exception est levée, car la modification ne peut pas être conservée dans la base de données. Cela est similaire à une violation de contrainte de la base de données.
 
-Il existe quatre comportements de suppression, répertoriés dans les tableaux ci-dessous. Pour les relations facultatives (clé étrangère acceptant la valeur null) il _est_ possible d’enregistrer une valeur null de clé étrangère, ce qui entraîne les conséquences suivantes :
+Il existe quatre comportements de suppression, répertoriés dans les tableaux ci-dessous.
+
+### <a name="optional-relationships"></a>Relations facultatives
+Pour les relations facultatives (clé étrangère acceptant la valeur null) il _est_ possible d’enregistrer une valeur null de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement               | Effet sur les entités dépendantes/enfant en mémoire    | Effet sur les entités dépendantes/enfant dans la base de données  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
@@ -41,6 +44,7 @@ Il existe quatre comportements de suppression, répertoriés dans les tableaux c
 | **SetNull**                 | Les propriétés de clé étrangère sont définies avec la valeur null | Les propriétés de clé étrangère sont définies avec la valeur null |
 | **Restrict**                | Aucun.                                   | Aucun.                                   |
 
+### <a name="required-relationships"></a>Relations requises
 Pour les relations requises (clé étrangère n’acceptant pas la valeur null) il _n’est pas_ possible d’enregistrer une valeur null de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement         | Effet sur les entités dépendantes/enfant en mémoire | Effet sur les entités dépendantes/enfant dans la base de données |

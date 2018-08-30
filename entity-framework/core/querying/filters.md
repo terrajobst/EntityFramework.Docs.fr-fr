@@ -5,12 +5,12 @@ ms.author: anpete
 ms.date: 11/03/2017
 ms.technology: entity-framework-core
 uid: core/querying/filters
-ms.openlocfilehash: 4e3c3c99d155f69e00fed99c415f519808ea1a68
-ms.sourcegitcommit: 6e379265e4f087fb7cf180c824722c81750554dc
+ms.openlocfilehash: 6b7a4069917c93015a218c131ff0d0a3920fb69d
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2017
-ms.locfileid: "26053899"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "42447765"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -24,28 +24,28 @@ Les filtres de requête globale permet aux prédicats de requête LINQ (expressi
 L’exemple suivant montre comment utiliser les filtres de requête globale pour implémenter des comportements de suppression réversible et d’architecture multilocataire dans un modèle de création de blogs simple.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryFilters) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryFilters) sur GitHub.
 
 Tout d’abord définissez les entités :
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Entities)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Entities)]
 
-Notez la déclaration d’un champ __tenantId_ sur l’entité _Blog_. Celui-ci doit servir à associer chaque instance de blog à un client spécifique. Une propriété _IsDeleted_ est également définie sur le type d’entité _Post_. Elle est utilisée pour déterminer si une instance _Post_ a été « supprimée de façon réversible ». Voici un exemple. L’instance est marquée comme supprimée sans que les données sous-jacentes soient réellement supprimées.
+Notez la déclaration d’un champ __tenantId_ sur l’entité _Blog_. Celui-ci doit servir à associer chaque instance de blog à un client spécifique. Une propriété _IsDeleted_ est également définie sur le type d’entité _Post_. Elle est utilisée pour déterminer si une instance _Post_ a été « supprimée de façon réversible ». Autrement dit, l’instance est marquée comme supprimée sans que les données sous-jacentes soient réellement supprimées.
 
 Ensuite, configurez les filtres de requête dans _OnModelCreating_ à l’aide de l’API ```HasQueryFilter```.
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Configuration)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Configuration)]
 
 Les expressions de prédicat passées aux appels _HasQueryFilter_ seront désormais automatiquement appliquées à toutes les requêtes LINQ pour ces types.
 
 > [!TIP]
-> Notez l’utilisation d’un champ de niveau d’instance DbContext : ```_tenantId``` permet de définir le client en cours. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte, Voici un exemple. L’instance qui exécute la requête.
+> Notez l’utilisation d’un champ de niveau d’instance DbContext : ```_tenantId``` permet de définir le client en cours. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
 
 ## <a name="disabling-filters"></a>Désactivation des filtres
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur ```IgnoreQueryFilters()```.
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#IgnoreFilters)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#IgnoreFilters)]
 
 ## <a name="limitations"></a>Limitations
 

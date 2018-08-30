@@ -5,12 +5,12 @@ ms.author: divega
 ms.date: 03/03/2018
 ms.technology: entity-framework-core
 uid: core/saving/concurrency
-ms.openlocfilehash: 288d9c6fced5ebbaa2c366248c68547502c3698e
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 2d8909585201a45eb020537847800f125b3b0120
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/05/2018
-ms.locfileid: "29745477"
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "42447734"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
 
@@ -48,7 +48,7 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 ## <a name="resolving-concurrency-conflicts"></a>Résolution des conflits d’accès concurrentiel
 
-Dans la suite de l’exemple précédent, si un utilisateur tente d’enregistrer certaines modifications apportées à une `Person`, mais qu’un autre utilisateur a déjà modifié le `LastName`, une exception sera levée.
+Dans la suite de l’exemple précédent, si un utilisateur tente d’enregistrer certaines modifications apportées à une `Person`, mais qu’un autre utilisateur a déjà modifié le `LastName`, alors une exception sera levée.
 
 À ce stade, l’application peut simplement indiquer à l’utilisateur que la mise à jour a échoué en raison de modifications en conflit et passer à la suite. Mais il peut être souhaitable d’inviter l’utilisateur à s’assurer que cet enregistrement représente toujours la même personne réelle et à recommencer l’opération.
 
