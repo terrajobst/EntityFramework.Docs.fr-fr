@@ -3,12 +3,12 @@ title: Relations, les propriétés de navigation et les clés étrangères - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: c1d48f18a7dd25a6a48537f0de5379f861bf447a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a1653afd609280ab572ef88a9fcf8a6275b79fd6
+ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997999"
+ms.lasthandoff: 09/06/2018
+ms.locfileid: "43821398"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, les propriétés de navigation et les clés étrangères
 Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre entités. Il fournit également des conseils sur la façon de mapper et de manipuler des relations.
@@ -71,59 +71,60 @@ Le reste de cette page décrit comment accéder à et manipuler des données à 
 
 ## <a name="creating-and-modifying-relationships"></a>Création et modification de relations
 
-Dans un *association de clé étrangère*, lorsque vous modifiez la relation, l’état d’un objet dépendant avec une EntityState.Unchanged l’état passe à EntityState.Modified. Dans une relation indépendante, modification de la relation ne pas mettre à jour l’état de l’objet dépendant.
+Dans un *association de clé étrangère*, lorsque vous modifiez la relation, l’état d’un objet dépendant avec une `EntityState.Unchanged` les modifications d’état `EntityState.Modified`. Dans une relation indépendante, modification de la relation ne pas mettre à jour l’état de l’objet dépendant.
 
 Les exemples suivants montrent comment utiliser les propriétés de clé étrangère et les propriétés de navigation pour associer les objets connexes. Avec les associations de clé étrangère, vous pouvez utiliser soit la méthode à modifier, créer ou modifier des relations. Avec les associations indépendantes, vous ne pouvez pas utiliser la propriété de clé étrangère.
 
--   En assignant une nouvelle valeur à une propriété de clé étrangère, comme dans l’exemple suivant.  
-    ``` csharp
-    course.DepartmentID = newCourse.DepartmentID;
-    ```
+- En assignant une nouvelle valeur à une propriété de clé étrangère, comme dans l’exemple suivant.  
+  ``` csharp
+  course.DepartmentID = newCourse.DepartmentID;
+  ```
 
--   Le code suivant supprime une relation en définissant la clé étrangère sur **null**. Notez que la propriété de clé étrangère doit être nullable.  
-    ``` csharp
-    course.DepartmentID = null;
-    ```  
-    >[!NOTE]
-    > Si la référence est dans l’état ajouté (dans cet exemple, l’objet de cours), la propriété de navigation de référence ne sera pas synchronisée avec les valeurs de clé d’un nouvel objet jusqu'à ce que SaveChanges est appelée. La synchronisation n'a pas lieu, car le contexte de l'objet ne contient pas de clés permanentes pour les objets ajoutés tant qu'ils ne sont pas enregistrés. Si vous devez disposer des nouveaux objets entièrement synchronisés dès que vous définissez la relation, utilisez une du methods.* suivant
+- Le code suivant supprime une relation en définissant la clé étrangère sur **null**. Notez que la propriété de clé étrangère doit être nullable.  
+  ``` csharp
+  course.DepartmentID = null;
+  ```
 
--   En affectant un nouvel objet à une propriété de navigation. Le code suivant crée une relation entre un cours et un `department`. Si les objets sont attachés au contexte, le `course` est également ajouté à la `department.Courses` collection et la clé étrangère propriété sur le `course` objet est défini sur la valeur de propriété de clé du service.  
-    ``` csharp
-    course.Department = department;
-    ```
+  >[!NOTE]
+  > Si la référence est dans l’état ajouté (dans cet exemple, l’objet de cours), la propriété de navigation de référence ne sera pas synchronisée avec les valeurs de clé d’un nouvel objet jusqu'à ce que SaveChanges est appelée. La synchronisation n'a pas lieu, car le contexte de l'objet ne contient pas de clés permanentes pour les objets ajoutés tant qu'ils ne sont pas enregistrés. Si vous devez disposer des nouveaux objets entièrement synchronisés dès que vous définissez la relation, utilisez une du methods.* suivant
 
- -   Pour supprimer la relation, définissez la propriété de navigation sur `null`. Si vous travaillez avec Entity Framework qui repose sur .NET 4.0, la terminaison connexe doit être chargé avant que vous le définissez sur null. Exemple :  
-    ``` chsarp
-    context.Entry(course).Reference(c => c.Department).Load();  
-    course.Department = null;
-    ```  
-    En commençant par Entity Framework 5.0, qui est basé sur .NET 4.5, vous pouvez définir la relation NULL sans charger de la terminaison connexe. Vous pouvez également définir la valeur actuelle sur null à l’aide de la méthode suivante.  
-    ``` csharp
-    context.Entry(course).Reference(c => c.Department).CurrentValue = null;
-    ```
+- En affectant un nouvel objet à une propriété de navigation. Le code suivant crée une relation entre un cours et un `department`. Si les objets sont attachés au contexte, le `course` est également ajouté à la `department.Courses` collection et la clé étrangère propriété sur le `course` objet est défini sur la valeur de propriété de clé du service.  
+  ``` csharp
+  course.Department = department;
+  ```
 
--   En supprimant ou en ajoutant un objet dans une collection d'entités. Par exemple, vous pouvez ajouter un objet de type `Course` à la `department.Courses` collection. Cette opération crée une relation entre un particulier **cours** et un particulier `department`. Si les objets sont attachés pour le contexte, la référence de service et la propriété de clé étrangère sur la **cours** objet définira appropriés `department`.  
-    ``` csharp
-    department.Courses.Add(newCourse);
-    ```
+- Pour supprimer la relation, définissez la propriété de navigation sur `null`. Si vous travaillez avec Entity Framework qui repose sur .NET 4.0, la terminaison connexe doit être chargé avant que vous le définissez sur null. Exemple :   
+  ``` csharp
+  context.Entry(course).Reference(c => c.Department).Load();
+  course.Department = null;
+  ```
+
+  En commençant par Entity Framework 5.0, qui est basé sur .NET 4.5, vous pouvez définir la relation NULL sans charger de la terminaison connexe. Vous pouvez également définir la valeur actuelle sur null à l’aide de la méthode suivante.   
+  ``` csharp
+  context.Entry(course).Reference(c => c.Department).CurrentValue = null;
+  ```
+
+- En supprimant ou en ajoutant un objet dans une collection d'entités. Par exemple, vous pouvez ajouter un objet de type `Course` à la `department.Courses` collection. Cette opération crée une relation entre un particulier **cours** et un particulier `department`. Si les objets sont attachés pour le contexte, la référence de service et la propriété de clé étrangère sur la **cours** objet définira appropriés `department`.  
+  ``` csharp
+  department.Courses.Add(newCourse);
+  ```
 
 - À l’aide de la `ChangeRelationshipState` méthode pour modifier l’état de la relation entre deux objets d’entité spécifiée. Cette méthode est couramment utilisée lorsque vous travaillez avec des applications multicouches et un *association indépendante* (il ne peut pas être utilisé avec une association de clé étrangère). En outre, pour utiliser cette méthode, vous devez supprimer jusqu'à `ObjectContext`, comme illustré dans l’exemple ci-dessous.  
 Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre formateurs et cours. Appelant le `ChangeRelationshipState` (méthode) et en passant le `EntityState.Added` vous permet de paramètre, le `SchoolContext` savoir qu’une relation a été ajoutée entre les deux objets :
+  ``` csharp
 
-``` csharp
+  ((IObjectContextAdapter)context).ObjectContext.
+    ObjectStateManager.
+    ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
+  ```
 
-       ((IObjectContextAdapter)context).ObjectContext.
-                 ObjectStateManager.
-                  ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
-```
+  Notez que si vous mettez à jour (pas seulement l’ajout de) une relation, vous devez supprimer l’ancienne relation après l’ajout d’une nouvelle :
 
-    Note that if you are updating (not just adding) a relationship, you must delete the old relationship after adding the new one:
-
-``` csharp
-       ((IObjectContextAdapter)context).ObjectContext.
-                  ObjectStateManager.
-                  ChangeRelationshipState(course, oldInstructor, c => c.Instructor, EntityState.Deleted);
-```
+  ``` csharp
+  ((IObjectContextAdapter)context).ObjectContext.
+    ObjectStateManager.
+    ChangeRelationshipState(course, oldInstructor, c => c.Instructor, EntityState.Deleted);
+  ```
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisation des modifications entre les clés étrangères et les propriétés de navigation
 
