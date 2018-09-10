@@ -3,12 +3,12 @@ title: Validation - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: eec834888e2e3efaadc8acf9d4f64307f394ea4a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 65639b0f91f54ee2cd1336f6b6cd4caf45ede680
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994443"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251022"
 ---
 # <a name="data-validation"></a>Validation de données
 > [!NOTE]
@@ -54,7 +54,7 @@ Code utilise d’abord les annotations à partir de l’assembly System.Componen
 
 Sans code supplémentaire ni modifications de balisage dans l’application, une application MVC effectue la validation côté client, création même dynamique d’un message en utilisant les noms de propriété et d’annotation.
 
-![figure01](~/ef6/media/figure01.png)
+![Figure 1](~/ef6/media/figure01.png)
 
 Dans le billet back (méthode) de cette vue de créer, Entity Framework est utilisé pour enregistrer le nouveau blog sur la base de données, mais la validation côté client de MVC est déclenchée avant que l’application n’atteigne ce code.
 
@@ -153,7 +153,7 @@ Le constructeur ValidationResult prend une chaîne qui représente le message d�
 
 Contrairement à la validation fournie par l’API Fluent, ce résultat de validation est reconnu par la vue et le Gestionnaire d’exceptions que j’ai utilisée précédemment pour ajouter l’erreur dans ModelState n’est pas nécessaire. Étant donné que j’ai configuré les deux noms de propriété dans le ValidationResult, le HtmlHelpers MVC affiche le message d’erreur pour ces deux propriétés.
 
-![figure02](~/ef6/media/figure02.png)
+![Figure 2](~/ef6/media/figure02.png)
 
 ## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
 
@@ -231,7 +231,7 @@ Voici quelques autres points à prendre en compte lors de l’utilisation de la 
     -   Validation des propriétés sur les propriétés de type complexe
     -   Type de validation au niveau du type complexe, y compris la validation IValidatableObject sur le type complexe
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 L’API de validation dans Entity Framework joue très bien avec la validation côté client dans MVC, mais vous n’êtes pas obligé de s’appuient sur la validation côté client. Entity Framework se chargera de la validation côté serveur pour DataAnnotations ou des configurations que vous avez appliqué avec l’API Fluent de code first.
 

@@ -3,12 +3,12 @@ title: Liaison de données avec WinForms - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: 7ceb8e85fe3d8f5ab9a5e58ef9c84599585d8f77
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 071172810f7dac45f42aca0efa7f329bac31e9cd
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994527"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251191"
 ---
 # <a name="databinding-with-winforms"></a>Liaison de données avec WinForms
 Cette procédure pas à pas montre comment lier les types POCO aux contrôles Windows Forms (WinForms) dans un formulaire « maître / détail ». L’application utilise Entity Framework pour remplir des objets avec des données à partir de la base de données, le suivi des modifications et conserver les données dans la base de données.
@@ -179,17 +179,17 @@ Procédons à générer la base de données.
 -   Cliquez avec le bouton droit sur **des connexions de données -&gt; ajouter une connexion...**
 -   Si vous n’avez pas connecté à une base de données à partir de l’Explorateur de serveurs avant que vous devez sélectionner Microsoft SQL Server comme source de données
 
-    ![ChangeDataSource](~/ef6/media/changedatasource.png)
+    ![Modifier la source de données](~/ef6/media/changedatasource.png)
 
 -   Se connecter à la base de données locale ou de SQL Express, en fonction de celles que vous avez installé, puis entrez **produits** en tant que le nom de la base de données
 
-    ![AddConnectionLocalDB](~/ef6/media/addconnectionlocaldb.png)
+    ![Ajouter la connexion base de données locale](~/ef6/media/addconnectionlocaldb.png)
 
-    ![AddConnectionExpress](~/ef6/media/addconnectionexpress.png)
+    ![Ajouter des connexions Express](~/ef6/media/addconnectionexpress.png)
 
 -   Sélectionnez **OK** et vous demandera si vous souhaitez créer une base de données, sélectionnez **Oui**
 
-    ![CreateDatabase](~/ef6/media/createdatabase.png)
+    ![Créer une base de données](~/ef6/media/createdatabase.png)
 
 -   La nouvelle base de données s’affiche maintenant dans l’Explorateur de serveurs, avec le bouton droit dessus et sélectionnez **nouvelle requête**
 -   Copiez le code SQL suivant dans la nouvelle requête, puis avec le bouton droit sur la requête, puis sélectionnez **Execute**
@@ -227,11 +227,11 @@ Nous allons utiliser Entity Framework Designer, qui est inclus dans le cadre de 
 
 -   Sélectionnez la connexion à la base de données que vous avez créé dans la première section, entrez **ProductContext** comme nom de la chaîne de connexion et cliquez sur **suivant**
 
-    ![ChooseYourConnection](~/ef6/media/chooseyourconnection.png)
+    ![Choisir votre connexion](~/ef6/media/chooseyourconnection.png)
 
 -   Cliquez sur la case à cocher en regard de « Tables » pour importer toutes les tables, cliquez sur « Terminer »
 
-    ![ChooseYourObjects](~/ef6/media/chooseyourobjects.png)
+    ![Choisir vos objets de](~/ef6/media/chooseyourobjects.png)
 
 Une fois que le processus d’ingénierie à rebours est terminé le nouveau modèle est ajouté à votre projet et ouvert pour l’afficher dans le Concepteur d’Entity Framework. Un fichier App.config a également été ajouté à votre projet avec les détails de connexion pour la base de données.
 
@@ -250,7 +250,7 @@ Entity Framework génère du code à partir de votre modèle à l’aide de mod�
 -   Ouvrez le **l’Explorateur de solutions** et recherchez **ProductModel.edmx** fichier
 -   Rechercher la **ProductModel.tt** fichier qui doit être imbriqué sous le fichier ProductModel.edmx
 
-    ![ProductModelTemplate](~/ef6/media/productmodeltemplate.png)
+    ![Modèle de produit](~/ef6/media/productmodeltemplate.png)
 
 -   Double-cliquez sur le fichier ProductModel.tt pour l’ouvrir dans l’éditeur Visual Studio
 -   Rechercher et remplacer les deux occurrences de «**ICollection**« avec »**ObservableListSource**». Ceux-ci sont situés dans des lignes environ 296 et 484.
@@ -278,13 +278,13 @@ Ajoutez les classes qui sont définies dans le modèle en tant que sources de do
 -   Dans la fenêtre Choisir un Type de Source de données, sélectionnez **objet** et cliquez sur **suivant**
 -   Dans le, sélectionnez la boîte de dialogue des objets de données, dérouler les **WinFormswithEFSample** deux fois, puis sélectionnez **catégorie** il est inutile de sélectionner la source de données de produit, car nous allons lui par le biais du produit propriété sur la source de données de catégorie.
 
-    ![DataSource](~/ef6/media/datasource.png)
+    ![Source de données](~/ef6/media/datasource.png)
 
 -   Cliquez sur **terminer.** 
      *Si la fenêtre Sources de données ne s’affichent pas, sélectionnez *** vue -&gt; autres Windows -&gt; des Sources de données**
 -   Appuyez sur l’icône d’épingle, afin de la fenêtre Sources de données ne sont pas automatique masquer. Vous devrez peut-être appuyer sur le bouton de rafraîchissement si la fenêtre a été déjà visible.
 
-    ![DataSource2](~/ef6/media/datasource2.png)
+    ![Source de données 2](~/ef6/media/datasource2.png)
 
 -   Dans l’Explorateur de solutions, double-cliquez sur le **Form1.cs** fichier à ouvrir le formulaire principal dans le concepteur.
 -   Sélectionnez le **catégorie** source de données et faites-la glisser sur le formulaire. Par défaut, un nouveau DataGridView (**categoryDataGridView**) et contrôles de barre d’outils de Navigation sont ajoutées au concepteur. Ces contrôles sont liés à la BindingSource (**categoryBindingSource**) et le navigateur de liaison (**categoryBindingNavigator**) les composants qui sont également créés.
@@ -302,7 +302,7 @@ Ajoutez les classes qui sont définies dans le modèle en tant que sources de do
     Jusqu’ici, nous associées nos contrôles DataGridView aux composants BindingSource dans le concepteur. Dans la section suivante, nous allons ajouter code pour le code-behind pour définir categoryBindingSource.DataSource à la collection d’entités qui sont actuellement suivies par DbContext. Lorsque nous glisser-déplacer de produits sous la catégorie, le WinForms a pris en charge de configuration de la propriété productsBindingSource.DataSource à la propriété categoryBindingSource et productsBindingSource.DataMember aux produits. En raison de cette liaison, seuls les produits qui appartiennent à la catégorie actuellement sélectionnée seront affichera dans le productDataGridView.
 -   Activer la **enregistrer** dans la barre d’outils de Navigation en cliquant sur le bouton droit de la souris et en sélectionnant **activé**.
 
-    ![Concepteur de Form1](~/ef6/media/form1-designer.png)
+    ![Concepteur de formulaires 1](~/ef6/media/form1-designer.png)
 
 -   Ajouter le Gestionnaire d’événements pour l’enregistrement bouton en double-cliquant sur le bouton. Cela ajoute le Gestionnaire d’événements et vous permettent du code-behind pour le formulaire. Le code pour le **categoryBindingNavigatorSaveItem\_cliquez sur** Gestionnaire d’événements sera ajouté dans la section suivante.
 
@@ -401,12 +401,12 @@ Le code déclare une instance d’exécution longue de ProductContext. L’objet
 
 -   Compiler et exécuter l’application et vous pouvez tester la fonctionnalité.
 
-    ![Form1BeforeSave](~/ef6/media/form1beforesave.png)
+    ![Écran 1 avant l’enregistrement](~/ef6/media/form1beforesave.png)
 
 -   Après avoir enregistré les clés de magasin généré sont affichées sur l’écran.
 
-    ![Form1AfterSave](~/ef6/media/form1aftersave.png)
+    ![Écran 1 après enregistrement](~/ef6/media/form1aftersave.png)
 
 -   Si vous avez utilisé un Code First, vous verrez également qu’un **WinFormswithEFSample.ProductContext** base de données est créée pour vous.
 
-    ![ServerObjExplorer](~/ef6/media/serverobjexplorer.png)
+    ![Explorateur d’objets Server](~/ef6/media/serverobjexplorer.png)

@@ -3,12 +3,12 @@ title: Obtenir Entity Framework - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
-ms.openlocfilehash: 91b78e56f60edf7ebc8769b1c385f8547f63cd3d
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 601f8d123d5494be6a658da1c4ad3743ed50385c
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152386"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250879"
 ---
 # <a name="get-entity-framework"></a>Obtenir Entity Framework
 Entity Framework est constitué par les outils Entity Framework pour Visual Studio et le Runtime Entity Framework.
@@ -27,7 +27,7 @@ La dernière version d’Entity Framework est disponible en tant que le [package
 
 Vous pouvez installer le package EntityFramework en cliquant sur le **références** dossier de votre projet et en sélectionnant **gérer les Packages NuGet...**
 
-![ManageNuGetPackages](~/ef6/media/managenugetpackages.png)
+![Gérer les Packages NuGet](~/ef6/media/managenugetpackages.png)
 
 ### <a name="installing-from-package-manager-console"></a>Installation à partir de la Console du Gestionnaire de Package
 
@@ -55,7 +55,7 @@ Les méthodes ci-dessus vous donnera la dernière version entièrement prise en 
 
 Pour installer la dernière version préliminaire d’Entity Framework vous pouvez sélectionner **inclure la version préliminaire** dans la fenêtre Gérer les Packages NuGet. Si aucune version préliminaire n’est disponibles vous obtenez automatiquement la dernière version entièrement prise en charge d’Entity Framework.
 
-![IncludePreRelease](~/ef6/media/includeprerelease.png)
+![Inclure la version préliminaire](~/ef6/media/includeprerelease.png)
 
 Ou bien, vous pouvez exécuter la commande suivante le [Console du Gestionnaire de Package](http://docs.nuget.org/docs/start-here/using-the-package-manager-console).
 

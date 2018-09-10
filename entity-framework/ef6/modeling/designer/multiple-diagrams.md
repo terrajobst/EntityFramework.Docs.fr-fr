@@ -3,12 +3,12 @@ title: Plusieurs diagrammes par modèle - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
-ms.openlocfilehash: f27afbd3b44ff3eb8044ab960f10b2856a603ee3
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e23bf92ce3199b2162ca9a42bd0f797375179d77
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993776"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250957"
 ---
 # <a name="multiple-diagrams-per-model"></a>Plusieurs diagrammes par modèle
 > [!NOTE]
@@ -39,7 +39,7 @@ La fenêtre de surface de conception visuelle s’ouvre automatiquement à l’i
 
 La capture d’écran suivante montre un fichier .edmx ouvert dans le Concepteur EF. La capture d’écran montre l’aire de conception visuelle (à gauche) et le **Explorateur de modèles** fenêtre (à droite).
 
-![EFDesigner2](~/ef6/media/efdesigner2.png)
+![Entity Framework Designer 2](~/ef6/media/efdesigner2.png)
 
 Pour annuler une opération effectuée dans le Concepteur EF, cliquez sur Ctrl-Z.
 
@@ -77,6 +77,6 @@ Pour modifier la couleur, sélectionnez une entité (ou plusieurs entités) sur 
 
 ![Color](~/ef6/media/color.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette rubrique, nous avons vu comment fractionner un modèle en plusieurs diagrammes et également comment spécifier une couleur différente pour une entité à l’aide d’Entity Framework Designer. 

@@ -3,12 +3,12 @@ title: Prise en charge enum - Concepteur EF - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
-ms.openlocfilehash: d4c5528c4dc13ab7189421feebf84c2cb2f4b2bb
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a94a497e8c5b3213dd7eb4215de90164d437507d
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995635"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250633"
 ---
 # <a name="enum-support---ef-designer"></a>Prise en charge de l’enum - Entity Framework Designer
 > [!NOTE]
@@ -70,11 +70,11 @@ L'assistant exécute les actions suivantes :
 
 1.  Dans Entity Framework Designer, cliquez sur la propriété Name, sélectionnez **convertir enum**
 
-    ![ConvertToEnum](~/ef6/media/converttoenum.png)
+    ![Convertir en Enum](~/ef6/media/converttoenum.png)
 
 2.  Dans le **Enum ajouter** boîte de dialogue Entrez **DepartmentNames** pour le nom de Type Enum, modifiez le Type sous-jacent **Int32**, puis ajoutez les membres suivants pour le type : anglais, Mathématiques et des prix
 
-    ![AddEnumType](~/ef6/media/addenumtype.png)
+    ![Ajouter le Type Enum](~/ef6/media/addenumtype.png)
 
 3.  Appuyez sur **OK**
 4.  Enregistrer le modèle et générer le projet
@@ -85,7 +85,7 @@ Si vous examinez la fenêtre Propriétés, vous pouvez remarquer que le type de 
 
 Si vous basculez vers la fenêtre Explorateur de modèles, vous verrez que le type a été également ajouté au nœud Types Enum.
 
-![ModelBrowser](~/ef6/media/modelbrowser.png)
+![Explorateur de modèles](~/ef6/media/modelbrowser.png)
 
 >[!NOTE]
 > Vous pouvez également ajouter des nouveaux types enum à partir de cette fenêtre en cliquant sur le bouton droit de la souris et en sélectionnant **ajouter un Enum Type**. Une fois que le type est créé il apparaîtra dans la liste des types et vous pourrez associer à une propriété
@@ -133,6 +133,6 @@ DepartmentID: 1 Name: English
 
 Pour afficher les données dans la base de données, avec le bouton droit sur le nom de base de données dans l’Explorateur d’objets SQL Server et sélectionnez **Actualiser**. Ensuite, cliquez sur le bouton droit de la souris sur la table et sélectionnez **afficher les données**.
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons vu comment mapper des types d’énumération à l’aide d’Entity Framework Designer et comment utiliser des énumérations dans le code. 

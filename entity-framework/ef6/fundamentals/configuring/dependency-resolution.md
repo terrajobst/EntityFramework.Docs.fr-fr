@@ -3,12 +3,12 @@ title: Résolution des dépendances - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 32d19ac6-9186-4ae1-8655-64ee49da55d0
-ms.openlocfilehash: 45681bb0cedecd502b1968b90b7f682d3257dd23
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c6c56c3048e17a5c888ffe564e7606abf8b0c4ed
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998160"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251243"
 ---
 # <a name="dependency-resolution"></a>Résolution des dépendances
 > [!NOTE]
@@ -25,13 +25,11 @@ public interface IDbDependencyResolver
 
 La méthode GetService est généralement appelée par Entity Framework et est gérée par une implémentation de IDbDependencyResolver fourni par Entity Framework ou par l’application. Lorsqu’elle est appelée, l’argument de type est le type de classe interface ou de base du service demandé, et l’objet de clé est null ou un objet qui fournit des informations contextuelles sur le service demandé.  
 
-Cet article ne contient-elle pas tous les détails d’implémentation IDbDependencyResolver, mais au lieu de cela agit comme une référence pour les types de service (autrement dit, l’interface et la base de types de classe) pour lequel EF appelle GetService et la sémantique de l’objet clé pour chacun d’eux appels. Ce document sera mis à jour comme des services supplémentaires sont ajoutés.  
+Sauf mention contraire, n’importe quel objet retourné doit être thread-safe, car il peut être utilisé comme un singleton. Dans de nombreux cas, que l’objet retourné est une fabrique dans ce cas, l’usine elle-même doit être thread-safe, mais l’objet retourné par la fabrique est inutile être thread-safe, car une nouvelle instance est demandée à partir de la fabrique pour chaque utilisation.
 
-## <a name="services-resolved"></a>Services résolus  
+Cet article ne contient-elle pas tous les détails d’implémentation IDbDependencyResolver, mais au lieu de cela agit comme une référence pour les types de service (autrement dit, l’interface et la base de types de classe) pour lequel EF appelle GetService et la sémantique de l’objet clé pour chacun d’eux appels.
 
-Sauf mention contraire, n’importe quel objet retourné doit être thread-safe, car il peut être utilisé comme un singleton. Dans de nombreux cas, que l’objet retourné est une fabrique dans ce cas, l’usine elle-même doit être thread-safe, mais l’objet retourné par la fabrique est inutile être thread-safe, car une nouvelle instance est demandée à partir de la fabrique pour chaque utilisation.  
-
-### <a name="systemdataentityidatabaseinitializertcontext"></a>System.Data.Entity.IDatabaseInitializer < TContext\>  
+## <a name="systemdataentityidatabaseinitializertcontext"></a>System.Data.Entity.IDatabaseInitializer < TContext\>  
 
 **Version introduite**: EF6.0.0  
 
@@ -39,7 +37,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>Func < System.Data.Entity.Migrations.Sql.MigrationSqlGenerator\>  
+## <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>Func < System.Data.Entity.Migrations.Sql.MigrationSqlGenerator\>  
 
 **Version introduite**: EF6.0.0
 
@@ -50,7 +48,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdataentitycorecommondbproviderservices"></a>System.Data.Entity.Core.Common.DbProviderServices  
+## <a name="systemdataentitycorecommondbproviderservices"></a>System.Data.Entity.Core.Common.DbProviderServices  
 
 **Version introduite**: EF6.0.0  
 
@@ -61,7 +59,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdataentityinfrastructureidbconnectionfactory"></a>System.Data.Entity.Infrastructure.IDbConnectionFactory  
+## <a name="systemdataentityinfrastructureidbconnectionfactory"></a>System.Data.Entity.Infrastructure.IDbConnectionFactory  
 
 **Version introduite**: EF6.0.0  
 
@@ -72,7 +70,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdataentityinfrastructureimanifesttokenservice"></a>System.Data.Entity.Infrastructure.IManifestTokenService  
+## <a name="systemdataentityinfrastructureimanifesttokenservice"></a>System.Data.Entity.Infrastructure.IManifestTokenService  
 
 **Version introduite**: EF6.0.0  
 
@@ -82,7 +80,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="systemdataentityinfrastructureidbproviderfactoryservice"></a>System.Data.Entity.Infrastructure.IDbProviderFactoryService  
+## <a name="systemdataentityinfrastructureidbproviderfactoryservice"></a>System.Data.Entity.Infrastructure.IDbProviderFactoryService  
 
 **Version introduite**: EF6.0.0  
 
@@ -90,7 +88,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>Func < DbContext, System.Data.Entity.Infrastructure.IDbModelCacheKey\>  
+## <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>Func < DbContext, System.Data.Entity.Infrastructure.IDbModelCacheKey\>  
 
 **Version introduite**: EF6.0.0  
 
@@ -98,7 +96,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="systemdataentityspatialdbspatialservices"></a>System.Data.Entity.Spatial.DbSpatialServices  
+## <a name="systemdataentityspatialdbspatialservices"></a>System.Data.Entity.Spatial.DbSpatialServices  
 
 **Version introduite**: EF6.0.0  
 
@@ -109,7 +107,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>Func < System.Data.Entity.Infrastructure.IDbExecutionStrategy\>  
+## <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>Func < System.Data.Entity.Infrastructure.IDbExecutionStrategy\>  
 
 **Version introduite**: EF6.0.0  
 
@@ -120,7 +118,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>Func < DbConnection, chaîne, System.Data.Entity.Migrations.History.HistoryContext\>  
+## <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>Func < DbConnection, chaîne, System.Data.Entity.Migrations.History.HistoryContext\>  
 
 **Version introduite**: EF6.0.0  
 
@@ -131,7 +129,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdatacommondbproviderfactory"></a>System.Data.Common.DbProviderFactory  
+## <a name="systemdatacommondbproviderfactory"></a>System.Data.Common.DbProviderFactory  
 
 **Version introduite**: EF6.0.0  
 
@@ -142,7 +140,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Ce service n’est généralement pas modifié directement dans la mesure où l’implémentation par défaut utilise l’inscription du fournisseur ADO.NET normale. Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdataentityinfrastructureiproviderinvariantname"></a>System.Data.Entity.Infrastructure.IProviderInvariantName  
+## <a name="systemdataentityinfrastructureiproviderinvariantname"></a>System.Data.Entity.Infrastructure.IProviderInvariantName  
 
 **Version introduite**: EF6.0.0  
 
@@ -153,7 +151,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 >[!NOTE]
 > Pour plus d’informations sur des services de fournisseur dans EF6, consultez le [modèle de fournisseur EF6](~/ef6/fundamentals/providers/provider-model.md) section.  
 
-### <a name="systemdataentitycoremappingviewgenerationiviewassemblycache"></a>System.Data.Entity.Core.Mapping.ViewGeneration.IViewAssemblyCache  
+## <a name="systemdataentitycoremappingviewgenerationiviewassemblycache"></a>System.Data.Entity.Core.Mapping.ViewGeneration.IViewAssemblyCache  
 
 **Version introduite**: EF6.0.0  
 
@@ -161,7 +159,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="systemdataentityinfrastructurepluralizationipluralizationservice"></a>System.Data.Entity.Infrastructure.Pluralization.IPluralizationService
+## <a name="systemdataentityinfrastructurepluralizationipluralizationservice"></a>System.Data.Entity.Infrastructure.Pluralization.IPluralizationService
 
 **Version introduite**: EF6.0.0  
 
@@ -169,7 +167,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null  
 
-### <a name="systemdataentityinfrastructureinterceptionidbinterceptor"></a>System.Data.Entity.Infrastructure.Interception.IDbInterceptor  
+## <a name="systemdataentityinfrastructureinterceptionidbinterceptor"></a>System.Data.Entity.Infrastructure.Interception.IDbInterceptor  
 
 **Version introduite**: EF6.0.0
 
@@ -177,7 +175,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null.  
 
-### <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>Func < System.Data.Entity.DbContext, Action < chaîne\>, System.Data.Entity.Infrastructure.Interception.DatabaseLogFormatter\>  
+## <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>Func < System.Data.Entity.DbContext, Action < chaîne\>, System.Data.Entity.Infrastructure.Interception.DatabaseLogFormatter\>  
 
 **Version introduite**: EF6.0.0  
 
@@ -185,7 +183,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: non utilisé ; sera null.  
 
-### <a name="funcsystemdataentitydbcontext"></a>Func < System.Data.Entity.DbContext\>  
+## <a name="funcsystemdataentitydbcontext"></a>Func < System.Data.Entity.DbContext\>  
 
 **Version introduite**: EF6.1.0  
 
@@ -193,7 +191,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: objet de Type pour le type de DbContext dérivé pour laquelle une fabrique est nécessaire.  
 
-### <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>Func < System.Data.Entity.Core.Metadata.Edm.IMetadataAnnotationSerializer\>  
+## <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>Func < System.Data.Entity.Core.Metadata.Edm.IMetadataAnnotationSerializer\>  
 
 **Version introduite**: EF6.1.0  
 
@@ -201,7 +199,7 @@ Sauf mention contraire, n’importe quel objet retourné doit être thread-safe,
 
 **Clé**: le nom de l’annotation est sérialisée ou désérialisée.  
 
-### <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>Func < System.Data.Entity.Infrastructure.TransactionHandler\>  
+## <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>Func < System.Data.Entity.Infrastructure.TransactionHandler\>  
 
 **Version introduite**: EF6.1.0  
 

@@ -3,12 +3,12 @@ title: Code First pour une base de données existante - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 29f959265e0fd0d5e14c156519e6931fd8da0677
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: fedfb921919582e2cdb5f3bc497f11889b972ad6
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995088"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251074"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First pour une base de données existante
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Code First ciblant une base de données existante. Code tout d’abord vous permet de définir votre modèle à l’aide de C\# ou les classes VB.Net. Une configuration supplémentaire si vous le souhaitez peut être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent.
@@ -33,15 +33,15 @@ Procédons à générer la base de données.
 -   Cliquez avec le bouton droit sur **des connexions de données -&gt; ajouter une connexion...**
 -   Si vous n’avez pas connecté à une base de données à partir de **Explorateur de serveurs** avant que vous devrez sélectionner **Microsoft SQL Server** comme source de données
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Sélectionnez la Source de données](~/ef6/media/selectdatasource.png)
 
 -   Connectez-vous à votre instance de base de données locale, puis entrez **blogs** en tant que le nom de la base de données
 
-    ![LocalDBConnection](~/ef6/media/localdbconnection.png)
+    ![Connexion de base de données locale](~/ef6/media/localdbconnection.png)
 
 -   Sélectionnez **OK** et vous demandera si vous souhaitez créer une base de données, sélectionnez **Oui**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![Base de données de boîte de dialogue Créer](~/ef6/media/createdatabasedialog.png)
 
 -   La nouvelle base de données s’affiche maintenant dans l’Explorateur de serveurs, avec le bouton droit dessus et sélectionnez **nouvelle requête**
 -   Copiez le code SQL suivant dans la nouvelle requête, puis avec le bouton droit sur la requête, puis sélectionnez **Execute**
@@ -92,15 +92,15 @@ Nous allons utiliser Entity Framework Tools pour Visual Studio pour nous aider �
 -   Cette opération lance le **Assistant Entity Data Model**
 -   Sélectionnez **Code First à partir de la base de données** et cliquez sur **suivant**
 
-    ![WizardOneCFE](~/ef6/media/wizardonecfe.png)
+    ![Un CFE Assistant](~/ef6/media/wizardonecfe.png)
 
 -   Sélectionnez la connexion à la base de données que vous avez créé dans la première section et cliquez sur **suivant**
 
-    ![WizardTwoCFE](~/ef6/media/wizardtwocfe.png)
+    ![CFE deux Assistant](~/ef6/media/wizardtwocfe.png)
 
 -   Cliquez sur la case à cocher en regard **Tables** pour importer toutes les tables, cliquez sur **terminer**
 
-    ![WizardThreeCFE](~/ef6/media/wizardthreecfe.png)
+    ![CFE trois Assistant](~/ef6/media/wizardthreecfe.png)
 
 Une fois le processus d’ingénierie à rebours terminé un nombre d’éléments seront ajoutés au projet, nous allons examiner ce qui a été ajouté.
 
@@ -223,6 +223,6 @@ Code First à l’Assistant de base de données est conçu pour générer un ens
 
 Si vous souhaitez utiliser les Migrations Code First avec une base de données existante, consultez [Migrations Code First pour une base de données existante](~/ef6/modeling/code-first/migrations/existing-database.md).
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons vu développement Code First à l’aide de la base de données existante. Nous avons utilisé les outils Entity Framework pour Visual Studio pour rétroconcevoir un ensemble de classes qui mappé à la base de données et peut être utilisé pour stocker et récupérer des données.

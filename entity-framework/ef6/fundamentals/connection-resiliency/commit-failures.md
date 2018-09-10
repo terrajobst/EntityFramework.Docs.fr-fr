@@ -3,12 +3,12 @@ title: Gestion des échecs de validation de transaction - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-ms.openlocfilehash: a22a651851bc46e2bf1fe652b3b9a921ec22b70b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f912777104c2e925122c05046d4d65660de8b8a8
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996835"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250854"
 ---
 # <a name="handling-transaction-commit-failures"></a>Gestion des échecs de validation de transaction
 > [!NOTE]
@@ -50,23 +50,23 @@ Bien que EF fera de son mieux pour nettoyer les lignes de la table lorsqu’ils 
 
 Avant d’EF 6.1 s’est pas mécanisme permettant de gérer les échecs de validation dans le produit d’EF. Il existe plusieurs façons de gérer cette situation peut être appliquée aux versions précédentes d’EF6 :  
 
-### <a name="option-1---do-nothing"></a>Option 1 : ne rien faire  
+* Option 1 : ne rien faire  
 
-La probabilité d’un échec de connexion lors de la validation de transaction est faible, elle peut être acceptable pour votre application de simplement échouer si cette condition se produit réellement.  
+  La probabilité d’un échec de connexion lors de la validation de transaction est faible, elle peut être acceptable pour votre application de simplement échouer si cette condition se produit réellement.  
 
-## <a name="option-2---use-the-database-to-reset-state"></a>Option 2 : utiliser la base de données pour réinitialiser l’état  
+* Option 2 : utiliser la base de données pour réinitialiser l’état  
 
-1. Ignorer le DbContext actuel  
-2. Créer un nouveau DbContext et restaurer l’état de votre application à partir de la base de données  
-3. Informer l’utilisateur que la dernière opération ne peut-être pas terminée avec succès  
+  1. Ignorer le DbContext actuel  
+  2. Créer un nouveau DbContext et restaurer l’état de votre application à partir de la base de données  
+  3. Informer l’utilisateur que la dernière opération ne peut-être pas terminée avec succès  
 
-## <a name="option-3---manually-track-the-transaction"></a>Option 3 - suivre manuellement la transaction  
+* Option 3 - suivre manuellement la transaction  
 
-1. Ajouter une table non suivies à la base de données utilisé pour suivre l’état des transactions.  
-2. Insérer une ligne dans la table au début de chaque transaction.  
-3. Si la connexion échoue lors de la validation, vérifier la présence de la ligne correspondante dans la base de données.  
-    - Si la ligne est présente, se poursuivent normalement, car la transaction a été validée avec succès  
-    - Si la ligne est absente, utilisez une stratégie d’exécution pour retenter l’opération actuelle.  
-4. Si la validation est réussie, supprimez la ligne correspondante pour éviter la croissance de la table.  
+  1. Ajouter une table non suivies à la base de données utilisé pour suivre l’état des transactions.  
+  2. Insérer une ligne dans la table au début de chaque transaction.  
+  3. Si la connexion échoue lors de la validation, vérifier la présence de la ligne correspondante dans la base de données.  
+     - Si la ligne est présente, se poursuivent normalement, car la transaction a été validée avec succès  
+     - Si la ligne est absente, utilisez une stratégie d’exécution pour retenter l’opération actuelle.  
+  4. Si la validation est réussie, supprimez la ligne correspondante pour éviter la croissance de la table.  
 
 [Ce billet de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contient des exemples de code pour accomplir cela sur SQL Azure.  

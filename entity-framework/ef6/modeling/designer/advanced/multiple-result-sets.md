@@ -3,12 +3,12 @@ title: Procédures stockées avec plusieurs jeux de résultats - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
-ms.openlocfilehash: bb104ac5f584d26d279259a173de9afe3f018968
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 56c28f05bd7efe1b54d6cadd32afe0e9c6cf38b5
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996173"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251009"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procédures stockées avec plusieurs jeux de résultats
 Parfois, lorsque vous utilisez stockées procédures, vous devez retourner plusieurs résultats définissent. Ce scénario est couramment utilisé pour réduire le nombre de base de données allers-retours requis pour composer un seul écran. Avant d’EF5, Entity Framework permettrait la procédure stockée à appeler, mais ne renvoie que le premier jeu de résultats au code appelant.
@@ -104,7 +104,7 @@ Si vous utilisez le Concepteur EF, vous pouvez également modifier votre modèle
 -   Pour ce faire, vous devez ajouter la procédure stockée à votre modèle comme vous le feriez pour une requête de jeu de résultats unique.
 -   Une fois que vous avez obtenu cela, vous devez cliquez avec le bouton droit sur votre modèle et sélectionnez **ouvrir avec...** puis **Xml**
 
-    ![OpenAs](~/ef6/media/openas.png)
+    ![Ouvrez en tant que](~/ef6/media/openas.png)
 
 Une fois que le modèle ouvert en tant que XML, vous devez procédez comme suit :
 
@@ -216,6 +216,6 @@ Une fois que ces mappages ont été modifiées, vous pouvez enregistrer le modè
 >[!NOTE]
 > Si vous modifiez manuellement le fichier edmx pour votre modèle, il sera remplacé si vous régénérez jamais le modèle à partir de la base de données.
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Ici, nous avons décrit deux méthodes d’accès aux résultats multiples définit à l’aide d’Entity Framework. Les deux d'entre eux sont valides en fonction de votre situation et préférences et vous devez choisir celui qui semble mieux à votre situation. Il est prévu que la prise en charge pour résultat plusieurs jeux sera améliorée dans les futures versions d’Entity Framework et que les étapes dans ce document ne sera plus nécessaire.

@@ -3,12 +3,12 @@ title: Définition de requête - Concepteur EF - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
-ms.openlocfilehash: 60d5310589bb9bc3fdb971673422e80537357e55
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8415a265cdbe078422e0467ee97da955a81b873d
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996305"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250970"
 ---
 # <a name="defining-query---ef-designer"></a>Définition de requête - Entity Framework Designer
 Cette procédure pas à pas montre comment ajouter une définition de type de requête et une entité correspondante à un modèle à l’aide du Concepteur EF. Une requête de définition est couramment utilisée pour fournir des fonctionnalités semblables à celles fournies par une vue de base de données, mais la vue est définie dans le modèle, pas la base de données. Une requête de définition vous permet d’exécuter une instruction SQL qui est spécifiée dans le **DefiningQuery** élément d’un fichier .edmx. Pour plus d’informations, consultez **DefiningQuery** dans le [spécification SSDL](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
@@ -54,11 +54,11 @@ Cette procédure pas à pas utilise Visual Studio 2012 ou version ultérieure.
 -   Dans l’Explorateur de solutions, cliquez sur le **DefiningQueryModel.edmx** fichier et sélectionnez **ouvrir avec...** .
 -   Sélectionnez **éditeur XML (texte)**.
 
-    ![XMLEditor](~/ef6/media/xmleditor.png)
+    ![Éditeur XML](~/ef6/media/xmleditor.png)
 
 -   Cliquez sur **Oui** si vous y êtes invité avec le message suivant :
 
-    ![Avertissement2](~/ef6/media/warning2.png)
+    ![Avertissement 2](~/ef6/media/warning2.png)
 
  
 
@@ -88,7 +88,7 @@ Dans cette étape, nous allons utiliser l’éditeur XML pour ajouter une défin
           <EntitySet Name="Course" EntityType="SchoolModel.Store.Course" store:Type="Tables" Schema="dbo" />
 ```
 
--   Ajouter le **EntityType** élément à la section SSDL du fichier. fichier comme indiqué ci-dessous. Notez les points suivants :
+-   Ajouter le **EntityType** élément à la section SSDL du fichier. fichier comme indiqué ci-dessous. Notez ce qui suit :
     -   La valeur de la **nom** attribut correspond à la valeur de la **EntityType** d’attribut dans le **EntitySet** élément ci-dessus, bien que le nom qualifié complet de la type d’entité est utilisé dans le **EntityType** attribut.
     -   Les noms des propriétés correspondent aux noms de colonnes retournés par l’instruction SQL dans le **DefiningQuery** élément (ci-dessus).
     -   Dans cet exemple, la clé d'entité est composée de trois propriétés pour garantir le caractère unique de la valeur de la clé.
@@ -125,7 +125,7 @@ Dans cette étape, nous allons utiliser l’éditeur XML pour ajouter une défin
 
 ## <a name="add-an-entity-type-to-the-model"></a>Ajouter un Type d’entité au modèle
 
-Dans cette étape, nous allons ajouter le type d’entité au modèle conceptuel à l’aide du Concepteur EF.  Notez les points suivants :
+Dans cette étape, nous allons ajouter le type d’entité au modèle conceptuel à l’aide du Concepteur EF.  Notez ce qui suit :
 
 -   Le **nom** de l’entité correspond à la valeur de la **EntityType** d’attribut dans le **EntitySet** élément ci-dessus.
 -   Les noms des propriétés correspondent aux noms de colonnes retournés par l’instruction SQL dans le **DefiningQuery** élément ci-dessus.
@@ -136,7 +136,7 @@ Ouvrez le modèle dans le Concepteur EF.
 -   Double-cliquez sur le DefiningQueryModel.edmx.
 -   Par exemple **Oui** au message suivant :
 
-    ![Avertissement2](~/ef6/media/warning2.png)
+    ![Avertissement 2](~/ef6/media/warning2.png)
 
  
 
@@ -172,7 +172,7 @@ Dans cette étape, nous allons utiliser la fenêtre Détails de mappage pour map
     Le **détails de Mapping** fenêtre s’affiche.
 -   Sélectionnez **GradeReport** à partir de la **&lt;ajouter une Table ou vue&gt;** liste déroulante (situé sous **Table**s).  
     Par défaut des mappages entre les concepts et de stockage **GradeReport** type d’entité s’affichent.  
-    ![MappingDetails3](~/ef6/media/mappingdetails.png)
+    ![Mappage 3](~/ef6/media/mappingdetails.png)
 
 Par conséquent, le **EntitySetMapping** élément est ajouté à la section mapping du fichier .edmx. 
 

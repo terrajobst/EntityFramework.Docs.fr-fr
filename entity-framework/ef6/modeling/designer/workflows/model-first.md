@@ -3,12 +3,12 @@ title: Model First - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: c21592b27fa752532f5ede5923d0bd751f0bf372
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3dd0eba29619f09995d7009dd29462c14bde98c4
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998113"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251139"
 ---
 # <a name="model-first"></a>Tout d’abord de modèle
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Model First à l’aide d’Entity Framework. Modèle tout d’abord vous permet de créer un nouveau modèle à l’aide d’Entity Framework Designer, puis générez un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension .edmx) et peut être affiché et modifié dans l’Entity Framework Designer. Les classes que vous interagissez avec dans votre application sont automatiquement générées à partir du fichier EDMX.
@@ -45,7 +45,7 @@ Nous allons utiliser Entity Framework Designer, qui est inclus dans le cadre de 
 -   Entrez **BloggingModel** comme nom et cliquez sur **OK**, cette action lance l’Assistant Entity Data Model
 -   Sélectionnez **modèle vide** et cliquez sur **terminer**
 
-    ![CreateEmptyModel](~/ef6/media/createemptymodel.png)
+    ![Créer le modèle vide](~/ef6/media/createemptymodel.png)
 
 Entity Framework Designer s’ouvre avec un modèle vide. Maintenant, nous pouvons commencer l’ajout d’entités, les propriétés et les associations au modèle.
 
@@ -55,7 +55,7 @@ Entity Framework Designer s’ouvre avec un modèle vide. Maintenant, nous pouvo
 -   Avec le bouton droit sur l’aire de conception et sélectionnez **Ajouter nouveau -&gt; entité...**
 -   Entrez **Blog** en tant que le nom de l’entité et **BlogId** comme le nom de la clé et cliquez sur **OK**
 
-    ![AddBlogEntity](~/ef6/media/addblogentity.png)
+    ![Ajouter une entité de Blog](~/ef6/media/addblogentity.png)
 
 -   Avec le bouton droit sur la nouvelle entité sur l’aire de conception et sélectionnez **Ajouter nouveau -&gt; propriété scalaire**, entrez **nom** comme nom de la propriété.
 -   Répétez ce processus pour ajouter un **Url** propriété.
@@ -71,11 +71,11 @@ Maintenant que nous avons deux entités, il est temps d’ajouter une associatio
      *Cela signifie qu’un Blog a de nombreuses publications et une publication appartient à un Blog*
 -   Vérifiez le **ajouter des propriétés de clé étrangère à l’entité 'Post'** case est activée et cliquez sur **OK**
 
-    ![AddAssociationMF](~/ef6/media/addassociationmf.png)
+    ![Ajouter une Association MF](~/ef6/media/addassociationmf.png)
 
 Nous disposons désormais d’un modèle simple que nous pouvons générer une base de données et l’utiliser pour lire et écrire des données.
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![Modèle Initial](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Étapes supplémentaires dans Visual Studio 2010
 
@@ -95,7 +95,7 @@ Ensuite, nous devons échanger notre modèle pour générer du code qui utilise 
 -   Sélectionnez **modèles en ligne** dans le menu de gauche et recherchez **DbContext**
 -   Sélectionnez le EF **5.x générateur DbContext pour C\#**, entrez **BloggingModel** comme nom et cliquez sur **ajouter**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![Modèle de DbContext](~/ef6/media/dbcontexttemplate.png)
 
 ## <a name="3-generating-the-database"></a>3. Génération de la base de données
 
@@ -111,9 +111,9 @@ Procédons à générer la base de données.
 -   Avec le bouton droit sur l’aire de conception et sélectionnez **générer la base de données à partir du modèle...**
 -   Cliquez sur **nouvelle connexion...** et spécifiez la base de données locale ou de SQL Express, selon la version de Visual Studio que vous utilisez, entrez **ModelFirst.Blogging** en tant que le nom de la base de données.
 
-    ![LocalDBConnectionMF](~/ef6/media/localdbconnectionmf.png)
+    ![Connexion de base de données locale MF](~/ef6/media/localdbconnectionmf.png)
 
-    ![SqlExpressConnectionMF](~/ef6/media/sqlexpressconnectionmf.png)
+    ![Connexion SQL Express MF](~/ef6/media/sqlexpressconnectionmf.png)
 
 -   Sélectionnez **OK** et vous demandera si vous souhaitez créer une base de données, sélectionnez **Oui**
 -   Sélectionnez **suivant** et Entity Framework Designer calculera un script pour créer le schéma de base de données
@@ -126,7 +126,7 @@ Maintenant que nous avons un modèle, il est temps de les utiliser pour accéder
 
 *Cette capture d’écran provient de Visual Studio 2012, si vous utilisez Visual Studio 2010 le BloggingModel.tt et les fichiers BloggingModel.Context.tt seront directement sous votre projet plutôt qu’imbriqué sous le fichier EDMX.*
 
-![GeneratedClasses](~/ef6/media/generatedclasses.png)
+![Classes générées](~/ef6/media/generatedclasses.png)
 
 Implémentez la méthode Main dans Program.cs, comme indiqué ci-dessous. Ce code crée une nouvelle instance de notre contexte et il utilise ensuite pour insérer un nouveau Blog. Il utilise ensuite une requête LINQ pour récupérer tous les Blogs à partir de la base de données classé par ordre alphabétique par titre.
 
@@ -180,7 +180,7 @@ Nous allons commencer en ajoutant une nouvelle entité d’utilisateur à notre 
 
 -   Ajouter un nouveau **utilisateur** nom de l’entité avec **nom d’utilisateur** comme nom de clé et **chaîne** comme type de propriété pour la clé
 
-    ![AddUserEntity](~/ef6/media/adduserentity.png)
+    ![Ajouter une entité d’utilisateur](~/ef6/media/adduserentity.png)
 
 -   Avec le bouton droit sur le **nom d’utilisateur** propriété sur l’aire de conception et sélectionnez **propriétés**, changement de fenêtre dans les propriétés le **MaxLength** à **50 ** 
      *Cela limite les données qui peuvent être stockées dans le nom d’utilisateur à 50 caractères*
@@ -195,6 +195,6 @@ Nous disposons désormais d’un modèle mis à jour et nous sommes prêts à me
     *Le script généré supprime toutes les tables existantes et puis recréer le schéma à partir de zéro. Cela peut fonctionner pour un développement local, mais n’est pas viable pour l’envoi des modifications à une base de données qui a déjà été déployé. Si vous avez besoin publier les modifications dans une base de données qui a déjà été déployé, vous devez modifier le script ou utiliser un outil de comparaison de schéma pour calculer un script de migration.*
 -   Avec le bouton droit sur le script et sélectionnez **Execute**, vous devrez spécifier la base de données pour se connecter à, spécifiez LocalDB ou Express de SQL Server, selon la version de Visual Studio que vous utilisez
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons étudié développement Model First, qui nous a permis de créer un modèle dans le Concepteur EF et puis générer une base de données à partir de ce modèle. Ensuite, nous avons utilisé le modèle pour lire et écrire des données à partir de la base de données. Enfin, nous mis à jour le modèle et puis recréer le schéma de base de données pour faire correspondre le modèle.

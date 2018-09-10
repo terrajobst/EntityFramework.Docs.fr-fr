@@ -3,12 +3,12 @@ title: Conventions personnalisées Code First - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: 79450790c6d3c8ce7fad209e3946e81d3fad4b75
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a0e8080037cf86640275f498ed159c847ff5c057
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995826"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251061"
 ---
 # <a name="custom-code-first-conventions"></a>Conventions personnalisées Code First
 > [!NOTE]
@@ -115,7 +115,7 @@ Une fonctionnalité intéressante de la méthode IsKey est qu’il est additif. 
 
 Ce code configurera les types dans notre modèle pour avoir une clé composite constituée de la colonne de clé de type int et la colonne de nom de chaîne. Si nous permet d’afficher le modèle dans le concepteur, elle ressemblerait à ceci :
 
-![compositeKey](~/ef6/media/compositekey.png)
+![Clé composite](~/ef6/media/compositekey.png)
 
 Un autre exemple de conventions de propriété consiste à configurer toutes les propriétés de date/heure dans mon modèle pour mapper au type datetime2 dans SQL Server au lieu de date/heure. Vous pouvez y parvenir avec les éléments suivants :
 
@@ -292,7 +292,7 @@ Par défaut employé et manager sont mappés à la même table (employés) dans 
 
 Le code ci-dessus mappera vers une structure de table qui ressemble à ceci :
 
-![tptExample](~/ef6/media/tptexample.jpg)
+![TPT, exemple](~/ef6/media/tptexample.jpg)
 
 Vous pouvez éviter ce problème et mettre à jour le mappage TPH par défaut, de différentes manières :
 

@@ -3,12 +3,12 @@ title: EF6 First - de base de données
 author: divega
 ms.date: 2016-10-23
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: c60108c09fcbaaa1f86e77fa52cb13fe018975e1
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 93ae5729e487ed9be3972ac78d599dbea19ed458
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995908"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251087"
 ---
 # <a name="database-first"></a>Tout d’abord la base de données
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement première base de données à l’aide d’Entity Framework. Base de données tout d’abord vous permet rétroconcevoir un modèle à partir d’une base de données existante. Le modèle est stocké dans un fichier EDMX (extension .edmx) et peut être affiché et modifié dans l’Entity Framework Designer. Les classes que vous interagissez avec dans votre application sont automatiquement générées à partir du fichier EDMX.
@@ -46,17 +46,17 @@ Procédons à générer la base de données.
 -   Cliquez avec le bouton droit sur **des connexions de données -&gt; ajouter une connexion...**
 -   Si vous n’avez pas connecté à une base de données à partir de l’Explorateur de serveurs avant que vous devez sélectionner Microsoft SQL Server comme source de données
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Sélectionnez la Source de données](~/ef6/media/selectdatasource.png)
 
 -   Se connecter à la base de données locale ou de SQL Express, en fonction de celles que vous avez installé, puis entrez **DatabaseFirst.Blogging** en tant que le nom de la base de données
 
-    ![SqlExpressConnectionDF](~/ef6/media/sqlexpressconnectiondf.png)
+    ![Connexion SQL Express DF](~/ef6/media/sqlexpressconnectiondf.png)
 
-    ![LocalDBConnectionDF](~/ef6/media/localdbconnectiondf.png)
+    ![Connexion de base de données locale DF](~/ef6/media/localdbconnectiondf.png)
 
 -   Sélectionnez **OK** et vous demandera si vous souhaitez créer une base de données, sélectionnez **Oui**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![Base de données de boîte de dialogue Créer](~/ef6/media/createdatabasedialog.png)
 
 -   La nouvelle base de données s’affiche maintenant dans l’Explorateur de serveurs, avec le bouton droit dessus et sélectionnez **nouvelle requête**
 -   Copiez le code SQL suivant dans la nouvelle requête, puis avec le bouton droit sur la requête, puis sélectionnez **Execute**
@@ -101,21 +101,21 @@ Nous allons utiliser Entity Framework Designer, qui est inclus dans le cadre de 
 -   Cette opération lance le **Assistant Entity Data Model**
 -   Sélectionnez **générer à partir de la base de données** et cliquez sur **suivant**
 
-    ![WizardStep1](~/ef6/media/wizardstep1.png)
+    ![Étape 1 de l’Assistant](~/ef6/media/wizardstep1.png)
 
 -   Sélectionnez la connexion à la base de données que vous avez créé dans la première section, entrez **BloggingContext** comme nom de la chaîne de connexion et cliquez sur **suivant**
 
-    ![WizardStep2](~/ef6/media/wizardstep2.png)
+    ![Étape 2 de l’Assistant](~/ef6/media/wizardstep2.png)
 
 -   Cliquez sur la case à cocher en regard de « Tables » pour importer toutes les tables, cliquez sur « Terminer »
 
-    ![WizardStep3](~/ef6/media/wizardstep3.png)
+    ![Étape 3 de l’Assistant](~/ef6/media/wizardstep3.png)
 
  
 
 Une fois que le processus d’ingénierie à rebours est terminé le nouveau modèle est ajouté à votre projet et ouvert pour l’afficher dans le Concepteur d’Entity Framework. Un fichier App.config a également été ajouté à votre projet avec les détails de connexion pour la base de données.
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![Modèle Initial](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Étapes supplémentaires dans Visual Studio 2010
 
@@ -135,7 +135,7 @@ Ensuite, nous devons échanger notre modèle pour générer du code qui utilise 
 -   Sélectionnez **modèles en ligne** dans le menu de gauche et recherchez **DbContext**
 -   Sélectionnez le EF **5.x générateur DbContext pour C\#**, entrez **BloggingModel** comme nom et cliquez sur **ajouter**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![Modèle de DbContext](~/ef6/media/dbcontexttemplate.png)
 
  
 
@@ -145,7 +145,7 @@ Maintenant que nous avons un modèle, il est temps de les utiliser pour accéder
 
 *Cette capture d’écran provient de Visual Studio 2012, si vous utilisez Visual Studio 2010 le BloggingModel.tt et les fichiers BloggingModel.Context.tt seront directement sous votre projet plutôt qu’imbriqué sous le fichier EDMX.*
 
-![GeneratedClassesDF](~/ef6/media/generatedclassesdf.png)
+![Classes générées DF](~/ef6/media/generatedclassesdf.png)
 
  
 
@@ -217,7 +217,7 @@ Maintenant que le schéma est mis à jour, il est temps pour mettre à jour le m
 -   Sous l’onglet Ajouter de la vérification de l’Assistant Mise à jour la zone en regard des Tables, cela indique que nous souhaitons ajouter les nouvelles tables à partir du schéma.
     *L’onglet de l’actualisation affiche les tables existantes dans le modèle qui sera vérifié les modifications pendant la mise à jour. Les onglets de suppression affichent toutes les tables qui ont été supprimés à partir du schéma et seront également supprimées à partir du modèle dans le cadre de la mise à jour. Les informations sur ces deux onglets sont détectées automatiquement et sont fournies à titre d’information uniquement, vous ne pouvez pas modifier les paramètres.*
 
-    ![RefreshWizard](~/ef6/media/refreshwizard.png)
+    ![Actualiser l’Assistant](~/ef6/media/refreshwizard.png)
 
 -   Cliquez sur Terminer dans l’Assistant de mise à jour
 
@@ -225,8 +225,8 @@ Maintenant que le schéma est mis à jour, il est temps pour mettre à jour le m
 
 Le modèle est désormais mis à jour pour inclure une nouvelle entité d’utilisateur qui est mappé à la table d’utilisateurs que nous avons ajouté à la base de données.
 
-![ModelUpdated](~/ef6/media/modelupdated.png)
+![Modèle mis à jour](~/ef6/media/modelupdated.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons étudié développement Database First, qui nous a permis de créer un modèle dans le Concepteur EF basé sur une base de données existante. Ensuite, nous avons utilisé ce modèle pour lire et écrire des données à partir de la base de données. Enfin, nous avons mis à jour le modèle pour refléter les modifications que nous avons apportées au schéma de base de données.

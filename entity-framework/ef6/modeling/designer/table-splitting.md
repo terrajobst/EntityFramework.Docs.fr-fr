@@ -3,12 +3,12 @@ title: Fractionnement de la Table concepteur - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: 87b6e1bd0374f77dfffab342c659cf4e16c8a337
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f07aeb0aa679f6fa8131c667ac808f17c3f03f20
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994501"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250983"
 ---
 # <a name="designer-table-splitting"></a>Table du Concepteur de fractionnement
 Cette procédure pas à pas montre comment mapper plusieurs types d’entités à une table unique en modifiant un modèle avec Entity Framework Designer (Concepteur d’EF).
@@ -17,7 +17,7 @@ L’une des raisons que vous souhaiterez utiliser le fractionnement de table son
 
 L’illustration suivante montre les principales fenêtres qui sont utilisées lorsque vous travaillez avec le Concepteur EF.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -126,12 +126,12 @@ Les instructions T-SQL suivantes ont été exécutées sur le **School** base de
 
 -   Ce qui suit **insérer** a été exécutée suite à l’exécution de contexte. SaveChanges() et combine les données à partir de la **personne** et **HireInfo** entités
 
-    ![Insert](~/ef6/media/insert.png)
+    ![Insérer](~/ef6/media/insert.png)
 
 -   Ce qui suit **sélectionnez** a été exécutée suite à l’exécution de contexte. People.FirstOrDefault() et sélectionne uniquement les colonnes mappées aux **personne**
 
-    ![Select1](~/ef6/media/select1.png)
+    ![Sélectionnez 1](~/ef6/media/select1.png)
 
 -   Ce qui suit **sélectionnez** a été exécutée à la suite de l’accès à la existingPerson.Instructor de propriété de navigation et sélectionne uniquement les colonnes mappées aux **HireInfo**
 
-    ![Select2](~/ef6/media/select2.png)
+    ![Sélectionnez 2](~/ef6/media/select2.png)

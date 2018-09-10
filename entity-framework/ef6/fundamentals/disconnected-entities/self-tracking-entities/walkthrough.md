@@ -3,12 +3,12 @@ title: Entités procédure pas à pas - EF6 de suivi automatique
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-ms.openlocfilehash: 64ca9ae42df1a1c740131e254b8f80f67b2f9f97
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1c450bbb20c246d9b9d58707ac03eb48eadfa970
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995419"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251282"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>Procédure pas à pas de suivi automatique entités
 > [!IMPORTANT]
@@ -142,7 +142,7 @@ Ensuite, nous allons ajouter un nouveau projet et générer les classes d’enti
 -   Sélectionnez le **STETemplate.tt** fichier
 -   Cliquez sur la flèche déroulante à côté du **ajouter** bouton et sélectionnez **ajouter en tant que lien**
 
-    ![AddLinkedTemplate](~/ef6/media/addlinkedtemplate.png)
+    ![Ajouter le modèle lié](~/ef6/media/addlinkedtemplate.png)
 
 Nous allons également s’assurer que les classes d’entité sont générés dans le même espace de noms comme contexte. Simplement, cela réduit le nombre d’à l’aide des instructions, que nous devons ajouter tout au long de notre application.
 
@@ -552,4 +552,4 @@ Vous pouvez à présent exécuter l’application pour la voir en action.
 -   Avec le bouton droit le **STESample.WPFTest** projet **l’Explorateur de solutions** et sélectionnez **déboguer -&gt; démarrer une nouvelle instance**
 -   Vous pouvez manipuler les données à l’aide de l’écran et l’enregistrer via le service en utilisant le **enregistrer** bouton
 
-![WPF](~/ef6/media/wpf.png)
+![Fenêtre principale de WPF](~/ef6/media/wpf.png)

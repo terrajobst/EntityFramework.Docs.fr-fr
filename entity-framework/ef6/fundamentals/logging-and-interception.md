@@ -3,12 +3,12 @@ title: Journalisation et l’interception des opérations de base de données - 
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 2e16502abf54be3f3b2f63fe69d2605ef13dea27
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9a8be81af45d9f27caa8c26f66d219dc568b6604
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994633"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251269"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Journalisation et l’interception des opérations de base de données
 > [!NOTE]
@@ -36,8 +36,6 @@ using (var context = new BlogContext())
 ```  
 
 Notez que ce contexte. Database.Log est défini sur Console.Write. Il s’agit tout ce qui est nécessaire pour ouvrir une session SQL dans la console.  
-
-### <a name="example-output"></a>Résultat de l'exemple  
 
 Nous allons ajouter un code de requête/insertion/mise à jour simple afin que nous pouvons voir une sortie :  
 
@@ -98,7 +96,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 (Notez qu’il s’agit de la sortie en supposant que toute initialisation de la base de données a déjà eu lieu. Si l’initialisation de base de données n’était pas déjà passé, il serait beaucoup plus sortie montrant tout le travail Migrations n’en arrière-plan pour vérifier ou créer une base de données.)  
 
-### <a name="what-gets-logged"></a>Ce qui obtient enregistré ?  
+## <a name="what-gets-logged"></a>Ce qui obtient enregistré ?  
 
 Lorsque la propriété du journal a la valeur toutes les conditions suivantes est journalisé :  
 
@@ -124,7 +122,7 @@ En examinant la sortie de l’exemple ci-dessus, chacune des quatre commandes en
     - Notez les détails de paramètre pour les propriétés de clé étrangère et de titre  
     - Notez que ces commandes sont en cours d’exécution en mode asynchrone  
 
-### <a name="logging-to-different-places"></a>Journalisation dans différents emplacements  
+## <a name="logging-to-different-places"></a>Journalisation dans différents emplacements  
 
 Comme indiqué ci-dessus journalisation dans la console est très facile. Il est également facile de se connecter à la mémoire, le fichier, etc. à l’aide de différents types de [TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx).  
 
@@ -147,7 +145,7 @@ var logger = new MyLogger();
 context.Database.Log = s => logger.Log("EFApp", s);
 ```  
 
-### <a name="result-logging"></a>Journalisation des résultats  
+## <a name="result-logging"></a>Journalisation des résultats  
 
 L’enregistreur d’événements par défaut consigne le texte de commande (SQL), des paramètres et la ligne « Exécution » avec un horodatage avant la commande est envoyée à la base de données. Une ligne « terminée » qui contient le temps écoulé est connectée exécution suivante de la commande.  
 
@@ -155,11 +153,11 @@ Notez que pour les commandes asynchrones la ligne « terminée » n’est pas 
 
 La ligne « terminée » contient des informations différentes selon le type de commande et si l’exécution a réussi.  
 
-#### <a name="successful-execution"></a>Exécution réussie  
+### <a name="successful-execution"></a>Exécution réussie  
 
 Pour les commandes qui aboutissent à la sortie est « terminé dans x ms avec résultat : » suivie des indications sur le résultat. Indication commandes qui retournent un lecteur de données du résultat est le type de [DbDataReader](https://msdn.microsoft.com/library/system.data.common.dbdatareader.aspx) retourné. Pour les commandes qui retournent une valeur entière, tels que la mise à jour la commande présentée ci-dessus le résultat illustré est cet entier.  
 
-#### <a name="failed-execution"></a>Exécution a échoué  
+### <a name="failed-execution"></a>Exécution a échoué  
 
 Pour les commandes qui échouent en levant une exception, la sortie contient le message de l’exception. Par exemple, à l’aide de SqlQuery à la requête sur une table qui existe sera le résultat dans le journal de sortie quelque chose comme ceci :  
 
@@ -169,7 +167,7 @@ SELECT * from ThisTableIsMissing
 -- Failed in 1 ms with error: Invalid object name 'ThisTableIsMissing'.
 ```  
 
-#### <a name="canceled-execution"></a>Exécution a été annulée  
+### <a name="canceled-execution"></a>Exécution a été annulée  
 
 Pour les commandes asynchrones où la tâche est annulée. le résultat peut être échec avec une exception, étant donné que c’est ce que le fournisseur ADO.NET sous-jacent souvent lorsqu’une tentative est effectuée pour annuler. Si cela ne se produit pas et que la tâche est annulée correctement la sortie se présente quelque chose comme ceci :  
 
@@ -180,8 +178,6 @@ update Blogs set Title = 'No' where Id = -1
 ```  
 
 ## <a name="changing-log-content-and-formatting"></a>Modification du contenu du journal et mise en forme  
-
-### <a name="databaselogformatter"></a>DatabaseLogFormatter  
 
 En coulisse le Database.Log propriété permet d’utiliser d’un objet DatabaseLogFormatter. Cet objet lie une implémentation IDbCommandInterceptor (voir ci-dessous) à un délégué qui accepte les chaînes et un DbContext. Cela signifie que les méthodes sur DatabaseLogFormatter sont appelées avant et après l’exécution de commandes par Entity Framework. Ces méthodes DatabaseLogFormatter rassemblent et formater la sortie de journal, puis envoyez-la au délégué.  
 

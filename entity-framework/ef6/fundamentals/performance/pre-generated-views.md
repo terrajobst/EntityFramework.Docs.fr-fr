@@ -3,12 +3,12 @@ title: Mode de mappage prégénéré - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: 397569ef374cb44d4938f9e201b588a26c408f6e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c2ad7125122c04af238e8fdd07da2c6c308a2756
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996470"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250762"
 ---
 # <a name="pre-generated-mapping-views"></a>Vues prégénérées mappage
 Avant de l’Entity Framework peut exécuter une requête ou enregistrer les modifications apportées à la source de données, il doit générer un ensemble de vues de mappage pour accéder à la base de données. Ces vues de mappage sont un ensemble de l’instruction Entity SQL qui représentent la base de données de manière abstraite et font partie des métadonnées qui sont mis en cache par domaine d’application. Si vous créez plusieurs instances du même contexte dans le même domaine d’application, elles réutiliseront les vues de mappage depuis les métadonnées mises en cache au lieu de les régénérer. Étant donné que la génération de vues de mappage constitue une partie significative du coût total de l’exécution de la première requête, Entity Framework vous permet de prégénérer des vues de mappage et de les inclure dans le projet compilé. Pour plus d’informations, consultez [considérations sur les performances (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
@@ -20,11 +20,11 @@ Pour prégénérer des vues le plus simple consiste à utiliser le [EF Power Too
 -   Pour **Code First** modèles avec le bouton droit sur le fichier de code qui contient votre classe DbContext.
 -   Pour **Entity Framework Designer** modèles avec le bouton droit sur votre fichier EDMX.
 
-![generateViews](~/ef6/media/generateviews.png)
+![générer des vues](~/ef6/media/generateviews.png)
 
 Une fois le processus est terminé vous offrira une classe similaire à ce qui suit généré
 
-![generatedViews](~/ef6/media/generatedviews.png)
+![Vues générées](~/ef6/media/generatedviews.png)
 
 Désormais, lorsque vous exécutez votre application EF utilise cette classe pour charger des vues en fonction des besoins. Si votre modèle change et vous ne ré-générez pas de cette classe EF lève une exception.
 

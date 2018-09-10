@@ -3,12 +3,12 @@ title: La résilience et nouvelle tentative logique de connexion - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 47181292873009c7bce2047787503258ffa35d9d
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d7e58abfa17c5537cdc9b0068e7c2a3c2e390038
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997483"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250515"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Logique de résilience et de nouvelle tentative de connexion
 > [!NOTE]
@@ -68,11 +68,9 @@ Le SqlAzureExecutionStrategy réessaiera instantanément la première fois, une 
 
 Les stratégies d’exécution va réessayer uniquement un nombre limité d’exceptions qui sont généralement tansient, vous devez toujours gérer les autres erreurs ainsi intercepter l’exception RetryLimitExceeded pour le cas où une erreur n’est pas temporaire ou prend trop de temps à résoudre lui-même.  
 
-## <a name="limitations"></a>Limitations  
-
 Il existe certaines connus des limitations lorsque vous utilisez une stratégie d’exécution de nouvelle tentative :  
 
-### <a name="streaming-queries-are-not-supported"></a>Requêtes de diffusion en continu ne sont pas pris en charge.  
+## <a name="streaming-queries-are-not-supported"></a>Requêtes de diffusion en continu ne sont pas pris en charge.  
 
 Par défaut, EF6 et version ultérieure met en mémoire tampon les résultats de requête, plutôt que de diffusion en continu les. Si vous souhaitez avoir des résultats transmis en continu vous pouvez utiliser la méthode AsStreaming pour modifier un LINQ pour interroger des entités à la diffusion en continu.  
 
@@ -88,11 +86,9 @@ using (var db = new BloggingContext())
 
 Diffusion en continu n’est pas pris en charge lorsqu’une stratégie d’exécution de nouvelle tentative est inscrit. Cette limitation existe parce que la connexion peut supprimer la partie dans les résultats retournés. Lorsque cela se produit, EF doit exécuter à nouveau la requête entière, mais n’a aucun moyen fiable de savoir ce qui se traduit ont déjà été retournés (données peuvent avoir changé depuis la requête initiale a été envoyée, résultats peuvent revenir dans un ordre différent, résultats ne peuvent pas avoir un identificateur unique etc..).  
 
-### <a name="user-initiated-transactions-not-supported"></a>Transactions non prises en charge initiée par l’utilisateur  
+## <a name="user-initiated-transactions-are-not-supported"></a>Les transactions initiées par l’utilisateur ne sont pas pris en charge.  
 
 Lorsque vous avez configuré une stratégie d’exécution qui résulte de nouvelles tentatives, il existe certaines limitations concernant l’utilisation de transactions.  
-
-#### <a name="whats-supported-efs-default-transaction-behavior"></a>Ce qui est pris en charge : comportement de transaction par défaut le d’Entity Framework  
 
 Par défaut, Entity Framework effectue des mises à jour de la base de données dans une transaction. Vous n’avez pas besoin de faire quelque chose pour ce faire, EF toujours fait automatiquement.  
 
@@ -106,8 +102,6 @@ using (var db = new BloggingContext())
     db.SaveChanges();
 }
 ```  
-
-#### <a name="whats-not-supported-user-initiated-transactions"></a>Ce qui n’est pas pris en charge : transactions initiée par l’utilisateur  
 
 Lorsque vous N'utilisez pas une stratégie d’exécution de nouvelle tentative, vous pouvez encapsuler plusieurs opérations dans une transaction unique. Par exemple, le code suivant encapsule les deux appels à SaveChanges dans une transaction unique. Si n’importe quelle partie de l’opération échoue, aucune des modifications sont appliquées.  
 
@@ -130,9 +124,7 @@ using (var db = new BloggingContext())
 
 Cela n’est pas pris en charge lors de l’utilisation d’une stratégie d’exécution de nouvelle tentative, car EF ne tient pas compte de toutes les opérations précédentes et comment les retenter. Par exemple, si le deuxième SaveChanges a échoué puis EF n’est plus contient les informations requises pour le premier appel de SaveChanges de nouvelle tentative.  
 
-#### <a name="possible-workarounds"></a>Solutions possibles  
-
-##### <a name="suspend-execution-strategy"></a>Suspendre la stratégie d’exécution  
+### <a name="workaround-suspend-execution-strategy"></a>Solution de contournement : Interrompre la stratégie d’exécution  
 
 Une solution de contournement possible est de suspendre la stratégie d’exécution de nouvelle tentative pour la partie du code qui a besoin d’utiliser un utilisateur a lancé la transaction. Pour ce faire, le plus simple consiste à ajouter un indicateur SuspendExecutionStrategy à votre code basé sur la classe de configuration et modifier l’expression lambda à la stratégie d’exécution pour retourner la stratégie d’exécution par défaut (non retying) lorsque l’indicateur est défini.  
 
@@ -193,7 +185,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-##### <a name="manually-call-execution-strategy"></a>Appeler manuellement la stratégie d’exécution  
+### <a name="workaround-manually-call-execution-strategy"></a>Solution de contournement : Appeler manuellement la stratégie d’exécution  
 
 Une autre option consiste à utiliser la stratégie d’exécution manuellement et de lui donner l’ensemble de la logique à exécuter, afin qu’elle peut réessayer tout ce que si une des opérations échoue. Nous avons besoin de suspendre la stratégie d’exécution - à l’aide de la technique ci-dessus - afin que les contextes utilisées à l’intérieur du bloc de code renouvelable n’essayez pas de nouvelle tentative.  
 

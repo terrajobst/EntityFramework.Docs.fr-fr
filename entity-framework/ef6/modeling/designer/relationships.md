@@ -3,12 +3,12 @@ title: Relations - Concepteur EF - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 402fe960-754b-470f-976b-e5de3e9986b5
-ms.openlocfilehash: 72efe76956c930a787449e6cce453ab0317adc7c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e1912a5e00e51b4f07b1ac83848fdbe0aa4755aa
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994646"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250710"
 ---
 # <a name="relationships---ef-designer"></a>Relations - Entity Framework Designer
 > [!NOTE]
@@ -16,7 +16,7 @@ ms.locfileid: "42994646"
 
 Les associations définissent les relations entre les types d’entité dans un modèle. Cette rubrique montre comment mapper des associations avec Entity Framework Designer (Concepteur d’EF). L’illustration suivante montre les principales fenêtres qui sont utilisées lorsque vous travaillez avec le Concepteur EF.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 > [!NOTE]
 > Lorsque vous générez le modèle conceptuel, les avertissements sur les entités non mappées et les associations peuvent apparaître dans la liste d’erreurs. Vous pouvez ignorer ces avertissements, car une fois que vous choisissez de générer la base de données à partir du modèle, les erreurs disparaîtront.
@@ -44,7 +44,7 @@ Création d’une association avec les mises à jour du Concepteur EF le contenu
 1.  Cliquez sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis sélectionnez **Association...** .
 2.  Définissez les paramètres pour l’association dans le **ajouter une Association** boîte de dialogue.
 
-    ![AddAssociation](~/ef6/media/addassociation.png)
+    ![Ajouter une Association](~/ef6/media/addassociation.png)
 
     > [!NOTE]
     > Vous pouvez choisir de ne pas ajouter les propriétés de navigation ou les propriétés de clé étrangère aux entités situées aux terminaisons de l’association en désactivant le ** propriété de Navigation ** et ** ajouter des propriétés de clé étrangères pour la &lt;nom de type d’entité&gt; entité ** cases à cocher. Si vous ajoutez une seule propriété de navigation, l'association n'est parcourable que dans une seule direction. Si vous n'ajoutez pas de propriétés de navigation, vous devez ajouter des propriétés de clé étrangère pour accéder aux entités au niveau des terminaisons de l'association.
@@ -76,7 +76,7 @@ Lorsque vous utilisez le Concepteur EF pour ajouter ou modifier une contrainte r
 -   À partir de la **dépendants** liste déroulante, sélectionnez l’entité dépendante dans la contrainte référentielle.
 -   Pour chaque clé principale qui a une clé dépendante, sélectionnez une clé dépendante correspondante dans les listes déroulantes dans le **clé dépendante** colonne.
 
-    ![RefConstraint](~/ef6/media/refconstraint.png)
+    ![Contrainte ref](~/ef6/media/refconstraint.png)
 
 -   Cliquez sur **OK**.
 
@@ -97,7 +97,7 @@ Vous pouvez spécifier comment une association est mappé à la base de données
     Le **détails de Mapping** fenêtre affiche les deux terminaisons de l’association et les propriétés de clé pour le type d’entité à chaque **fin**.
 -   Pour chaque propriété de clé, cliquez sur le **colonne** champ, puis sélectionnez la colonne à laquelle la propriété doit être mappée.
 
-    ![MappingDetails4](~/ef6/media/mappingdetails4.png)
+    ![Détails de mappage de 4](~/ef6/media/mappingdetails4.png)
 
 ### <a name="edit-an-association-mapping"></a>Modifier un mappage d’association
 

@@ -3,12 +3,12 @@ title: Héritage TPH concepteur - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 72d26a8e-20ab-4500-bd13-394a08e73394
-ms.openlocfilehash: 9a546f6450b5aa3b03c062d1ab2c6f9257ba8292
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1eb935414b20d6e93e9d470ccc845bc13626ed3a
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995002"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250840"
 ---
 # <a name="designer-tph-inheritance"></a>Héritage TPH Concepteur
 Cette procédure pas à pas montre comment implémenter l’héritage de table par hiérarchie (TPH) dans votre modèle conceptuel avec Entity Framework Designer (Concepteur d’EF). L’héritage TPH utilise une table de base de données pour gérer les données de tous les types d’entités dans une hiérarchie d’héritage.
@@ -54,7 +54,7 @@ Le Concepteur d’entités, qui fournit une aire de conception pour la modificat
 
 Autrement dit la **personne** table se présente dans la base de données.
 
-![PersonTable](~/ef6/media/persontable.png) 
+![Table Person](~/ef6/media/persontable.png) 
 
 ## <a name="implement-table-per-hierarchy-inheritance"></a>Implémenter l’héritage Table par hiérarchie
 
@@ -94,14 +94,14 @@ Deux nouveaux types d’entités ont été ajoutés à l’aire de conception. U
 -   Dans le **opérateur** colonne de la **détails de Mapping** fenêtre, sélectionnez = dans la liste déroulante.
 -   Dans le **valeur/propriété** colonne, tapez **Instructor**. Le résultat final doit ressembler à ceci :
 
-    ![MappingDetails2](~/ef6/media/mappingdetails2.png)
+    ![Détails de mappage](~/ef6/media/mappingdetails2.png)
 
 -   Répétez ces étapes pour le **étudiant** type d’entité, mais vérifiez la condition égale à **étudiant** valeur.  
     *La raison pour laquelle nous souhaitons supprimer le **discriminateur** propriété, est, car vous ne pouvez pas mapper une colonne de table plusieurs fois. Cette colonne sera utilisée pour le mappage conditionnel, afin qu’il ne peut pas être utilisé pour le mappage de propriété ainsi. La seule façon, il peut être utilisé pour les deux, si une condition utilise une **Is Null** ou **Is Not Null** comparaison.*
 
 L'héritage TPH (table par hiérarchie) est maintenant implémenté.
 
-![FinalTPH](~/ef6/media/finaltph.png)
+![TPH finale](~/ef6/media/finaltph.png)
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 

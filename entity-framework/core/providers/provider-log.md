@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 44b200223153fca44cb2cfa3e78b3bedc7b4a552
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821333"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250814"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -19,9 +19,9 @@ Cette page contient des liens pour extraire les requêtes effectuées sur le dé
 
 Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2.1, nous avons utilisé le [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) et [ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) étiquettes sur nos problèmes et les demandes de tirage.
 
-### <a name="21-----22"></a>2.1---> 2.2
+## <a name="21-----22"></a>2.1---> 2.2
 
-#### <a name="test-only-changes"></a>Modifications de test uniquement
+### <a name="test-only-changes"></a>Modifications de test uniquement
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12057 -Autoriser les séparateurs SQL personnalisables dans les tests
   * Tester les changements qui permettent des comparaisons de virgule flottante non strict dans BuiltInDataTypesTestBase
@@ -40,7 +40,7 @@ Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2
   * Cette modification inclut une refactorisation de test qui peut nécessiter des fournisseurs de réagir
 
 
-#### <a name="test-and-product-code-changes"></a>Modifications de code de test et de produit
+### <a name="test-and-product-code-changes"></a>Modifications de code de test et de produit
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12109 -Consolider RelationalTypeMapping.Clone méthodes
   * Les modifications dans 2.1 à la RelationalTypeMapping autorisées pour une simplification dans les classes dérivées. Nous pensons que cela endommageait aux fournisseurs, mais les fournisseurs peuvent tirer parti de cette modification dans leur type dérivé de la mapper des classes.
@@ -50,4 +50,5 @@ Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2
   * Permet les mappages de types et membres traducteurs d’être inscrit en dehors du fournisseur
     * Les fournisseurs doivent appeler la base. FindMapping() dans leur implémentation ITypeMappingSource pour qu’il fonctionne
   * Suivez ce modèle pour ajouter la prise en charge spatiale pour votre fournisseur qui est cohérente entre les fournisseurs.
-
+* https://github.com/aspnet/EntityFrameworkCore/pull/13199 -Ajouter un débogage amélioré pour la création de fournisseur de service
+  * Permet de DbContextOptionsExtensions implémenter une nouvelle interface qui permet aux utilisateurs de comprendre pourquoi le fournisseur de services interne est en cours de nouveau généré

@@ -3,12 +3,12 @@ title: Concepteur CUD procédures stockées - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: 7a3176e1057816dd11ced5fc545aa3baa672bd03
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 36c9b97b77fec30136cba1d850a0259c689e69ae
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993887"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250918"
 ---
 # <a name="designer-cud-stored-procedures"></a>CUD Concepteur de procédures stockées
 Cette procédure pas à pas montrent comment mapper la créer\\insérer, mettre à jour et supprimer des opérations (CUD) d’un type d’entité aux procédures stockées à l’aide d’Entity Framework Designer (Concepteur d’EF).  Par défaut, Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  
@@ -54,7 +54,7 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 -   En outre, sélectionnez les procédures stockées suivantes sous la **de procédures stockées et fonctions** nœud : **DeletePerson**, **InsertPerson**, et **UpdatePerson** . 
 -   À partir de Visual Studio 2012, le Concepteur EF prend en charge l’importation en bloc des procédures stockées. Le **importation sélectionné des procédures stockées et fonctions dans le modèle d’entité** est activée par défaut. Étant donné que dans cet exemple nous avons des procédures stockées qui insérant, mettre à jour et supprimer des types d’entité, nous ne souhaitez pas les importer et sera décochez cette case à cocher. 
 
-    ![ImportSProcs](~/ef6/media/importsprocs.jpg)
+    ![Importer S Procs](~/ef6/media/importsprocs.jpg)
 
 -   Cliquez sur **Terminer**.
     Le Concepteur EF, qui fournit une aire de conception pour la modification de votre modèle, s’affiche.
@@ -72,7 +72,7 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 -   Appuyez sur **Entrée**.
 -   Par défaut, **NewPersonID** est mappé à la clé d’entité **PersonID**. Notez qu'une flèche indique le sens du mappage : la valeur de la colonne de résultats est fournie à la propriété.
 
-    ![MappingDetails](~/ef6/media/mappingdetails.png)
+    ![Détails de mappage](~/ef6/media/mappingdetails.png)
 
 -   Cliquez sur **&lt;sélectionner un Update Function&gt;** et sélectionnez **UpdatePerson** dans la liste déroulante résultante.
 -   Les mappages par défaut entre les paramètres des procédures stockées et les propriétés d'entité apparaissent.

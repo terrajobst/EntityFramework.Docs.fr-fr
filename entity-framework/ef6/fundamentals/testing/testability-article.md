@@ -3,12 +3,12 @@ title: Testabilité et Entity Framework 4.0
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 17a9f09022531a81042979464de05fbbd2570759
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a2384c7868ae3cf6af4f915c06ae9fdb622634c
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995227"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251321"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testabilité et Entity Framework 4.0
 Scott Allen
@@ -194,13 +194,13 @@ Ces définitions de classe change légèrement nous explorons les différentes a
 
 Avec les objets oct en place, nous pouvons créer un modèle EDM (Entity Data Model) dans Visual Studio (voir figure 1). Nous n’utiliserons pas le modèle EDM pour générer le code pour nos entités. Au lieu de cela, nous souhaitons utiliser les entités que nous affectueusement abrégé créer manuellement. Nous utiliserons uniquement le modèle EDM pour générer notre schéma de base de données et fournir les métadonnées qu'ef4 a besoin de mapper des objets dans la base de données.
 
-![eftest_01](~/ef6/media/eftest-01.jpg)
+![EF test_01](~/ef6/media/eftest-01.jpg)
 
 **Figure 1**
 
 Remarque : Si vous souhaitez développer le modèle EDM tout d’abord, il est possible de générer, nettoyer, code POCO à partir du modèle EDM. Pour cela, avec une extension de Visual Studio 2010 fournie par l’équipe programmabilité des données. Pour télécharger l’extension, lancez le Gestionnaire d’extensions dans le menu Outils dans Visual Studio et rechercher dans la galerie en ligne des modèles pour « POCO » (voir figure 2). Il existe plusieurs modèles POCO pour EF. Pour plus d’informations sur l’utilisation du modèle, consultez « [procédure pas à pas : modèle de POCO pour Entity Framework](http://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)».
 
-![eftest_02](~/ef6/media/eftest-02.png)
+![EF test_02](~/ef6/media/eftest-02.png)
 
 **Figure 2**
 
@@ -415,13 +415,13 @@ La « mère d’objet « nous utilisons dans la classe de base est un modèle 
 
 Nous pouvons utiliser le EmployeeControllerTestBase comme classe de base pour un nombre de contextes de test (voir figure 3). Chaque contexte de test teste une action de contrôleur spécifique. Par exemple, un contexte de test se concentrera sur test de l’action de création utilisée lors d’une demande HTTP GET (pour afficher la vue pour la création d’un employé) et une fixture différentes se concentrera sur l’action de création utilisée dans une requête HTTP POST (pour tirer des informations fournies par le utilisateur de créer un employé). Chaque classe dérivée est uniquement responsable de la configuration requise dans son contexte spécifique et de fournir les assertions que nécessaires pour vérifier les résultats pour son contexte de test spécifique.
 
-![eftest_03](~/ef6/media/eftest-03.png)
+![EF test_03](~/ef6/media/eftest-03.png)
 
 **Figure 3**
 
 Le style de test et de la convention d’affectation de noms présenté ici n’est pas requis pour le code testable : il s’agit simplement d’une approche. Figure 4 montre les tests en cours d’exécution dans le Resharper cerveaux Jet testent le plug-in de test runner pour Visual Studio 2010.
 
-![eftest_04](~/ef6/media/eftest-04.png)
+![EF test_04](~/ef6/media/eftest-04.png)
 
 **Figure 4**
 

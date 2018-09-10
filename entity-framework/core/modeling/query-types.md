@@ -4,12 +4,12 @@ author: anpete
 ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/query-types
-ms.openlocfilehash: bacb121ca00a9b0aa00bfe201de4f95113472d70
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 54d960e2e2236e2d4185dedc48f51035f5c10e93
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996697"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250723"
 ---
 # <a name="query-types"></a>Types de requêtes
 > [!NOTE]
@@ -17,12 +17,14 @@ ms.locfileid: "42996697"
 
 En plus des types d’entité, un modèle EF Core peut contenir _types de requête_, qui peut être utilisé pour effectuer des requêtes de base de données sur des données qui n’est pas mappées aux types d’entité.
 
-Types de requêtes ont beaucoup de similitudes avec les types d’entités :
+## <a name="compare-query-types-to-entity-types"></a>Comparer des types de requête aux types d’entité
 
-- Ils peuvent également être ajoutées au modèle, soit dans `OnModelCreating`, ou via une propriété « set » sur une dérivée _DbContext_.
-- Ils prennent en charge la plupart des mêmes fonctionnalités mappage, telles que l’héritage de mappage, les propriétés de navigation (voir les limitations ci-dessous) et, sur des magasins relationnels, la possibilité de configurer les objets de base de données cible et les colonnes par le biais de méthodes de l’API fluent ou des annotations de données.
+Types de requêtes sont comme les types d’entités qui elles :
 
-Cependant ils sont différents de l’entité types dans ce qu’il :
+- Peuvent être ajoutées au modèle, soit dans `OnModelCreating` ou via une propriété « set » sur une dérivée _DbContext_.
+- Prend en charge la plupart des mêmes fonctionnalités de mappage, comme les propriétés de navigation et de mappage de l’héritage. Sur des magasins relationnels, ils peuvent configurer les objets de base de données cible et les colonnes par le biais de méthodes de l’API fluent ou des annotations de données.
+
+Toutefois, ils sont différents à partir de l’entité types dans ce qu’il :
 
 - Ne nécessitent pas une clé à définir.
 - Ne sont jamais suivis pour les modifications sur le _DbContext_ et par conséquent sont jamais insérées, mises à jour ou supprimées sur la base de données.
@@ -36,6 +38,8 @@ Cependant ils sont différents de l’entité types dans ce qu’il :
 - Sont mappées aux objets de base de données en utilisant le `ToView` (méthode), plutôt que `ToTable`.
 - Peut être mappé à un _définition de requête_ : une définition de requête est une requête secondaire déclarée dans le modèle qui fait Office de source de données pour un type de requête.
 
+## <a name="usage-scenarios"></a>Scénarios d'utilisation
+
 Les principaux scénarios d’utilisation pour les types de requêtes sont notamment :
 
 - Agissant comme le type de retour pour ad hoc `FromSql()` requêtes.
@@ -43,8 +47,9 @@ Les principaux scénarios d’utilisation pour les types de requêtes sont notam
 - Mappage de tables qui n’ont pas d’une clé primaire définie.
 - Mappage à des requêtes définies dans le modèle.
 
-> [!TIP]
-> Mappage d’un type de requête à un objet de base de données est obtenue à l’aide de la `ToView` API fluent. Du point de vue d’EF Core, l’objet de base de données spécifié dans cette méthode est un _vue_, ce qui signifie qu’il est traité comme une source de la requête en lecture seule et ne peut pas être la cible de mise à jour, insérer ou supprimer des opérations. Toutefois, cela ne signifie pas que l’objet de base de données soit réellement nécessaire pour être une vue de base de données, il peut également être une table de base de données qui est traitée comme étant en lecture seule. À l’inverse, pour les types d’entité, EF Core suppose qu’un objet de base de données spécifiée dans le `ToTable` méthode peut être traitée comme un _table_, ce qui signifie qu’il peut être utilisé en tant que requête source, mais également ciblé par la mise à jour, supprimer et insérer opérations. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout devrait fonctionner correctement tant que la vue est configurée pour être mis à jour sur la base de données.
+## <a name="mapping-to-database-objects"></a>Mappage aux objets de base de données
+
+Mappage d’un type de requête à un objet de base de données est obtenue à l’aide de la `ToView` API fluent. Du point de vue d’EF Core, l’objet de base de données spécifié dans cette méthode est un _vue_, ce qui signifie qu’il est traité comme une source de la requête en lecture seule et ne peut pas être la cible de mise à jour, insérer ou supprimer des opérations. Toutefois, cela ne signifie pas que l’objet de base de données soit réellement nécessaire pour être une vue de base de données, il peut également être une table de base de données qui est traitée comme étant en lecture seule. À l’inverse, pour les types d’entité, EF Core suppose qu’un objet de base de données spécifiée dans le `ToTable` méthode peut être traitée comme un _table_, ce qui signifie qu’il peut être utilisé en tant que requête source, mais également ciblé par la mise à jour, supprimer et insérer opérations. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout devrait fonctionner correctement tant que la vue est configurée pour être mis à jour sur la base de données.
 
 ## <a name="example"></a>Exemple
 

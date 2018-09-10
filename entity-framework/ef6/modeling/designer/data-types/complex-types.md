@@ -3,19 +3,19 @@ title: Les Types complexes - Concepteur EF - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 9a8228ef-acfd-4575-860d-769d2c0e18a1
-ms.openlocfilehash: d35504cbe60823249d54385962568802b3e41308
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a516bd14131fd035a4d005e0fdf140f7ff4d65f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994851"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250827"
 ---
 # <a name="complex-types---ef-designer"></a>Types complexes - Entity Framework Designer
 Cette rubrique montre comment mapper des types complexes avec Entity Framework Designer (Concepteur d’EF) et comment interroger des entités qui contiennent des propriétés de type complexe.
 
 L’illustration suivante montre les principales fenêtres qui sont utilisées lorsque vous travaillez avec le Concepteur EF.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 > [!NOTE]
 > Lorsque vous générez le modèle conceptuel, les avertissements sur les entités non mappées et les associations peuvent apparaître dans la liste d’erreurs. Vous pouvez ignorer ces avertissements, car une fois que vous choisissez de générer la base de données à partir du modèle, les erreurs disparaîtront.
@@ -45,7 +45,7 @@ Un nouveau type complexe avec les propriétés sélectionnées est ajouté à la
 
 Une propriété complexe du type récemment créé remplace les propriétés sélectionnées. Tous les mappages de propriété sont conservés.
 
-![Refactor2](~/ef6/media/refactor2.png)
+![Refactoriser 2](~/ef6/media/refactor2.png)
 
 ## <a name="create-a-new-complex-type"></a>Créer un nouveau Type complexe
 
@@ -53,7 +53,7 @@ Vous pouvez également créer un nouveau type complexe qui ne contient-elle pas 
 
 Avec le bouton droit le **des Types complexes** dossier dans l’Explorateur de modèles, pointez sur **Type complexe AddNew...** . Vous pouvez également sélectionner le **des Types complexes** dossier et appuyez sur la **insérer** clé de votre clavier.
 
-![AddNewComplextype](~/ef6/media/addnewcomplextype.png)
+![Ajouter un type complexe de nouveau](~/ef6/media/addnewcomplextype.png)
 
 Un nouveau type complexe est ajouté au dossier avec un nom par défaut. Vous pouvez maintenant ajouter des propriétés pour le type.
 
@@ -65,7 +65,7 @@ Vous pouvez ajouter une propriété à un type complexe en appliquant l'une des 
 
 -   Avec le bouton droit à un type complexe dans l’Explorateur de modèles, pointez sur **ajouter**, puis pointez sur **propriété scalaire** ou **propriété complexe**, puis sélectionnez le type de propriété souhaitée. Ou bien, vous pouvez sélectionner un type complexe et appuyez sur la **insérer** clé de votre clavier.  
 
-    ![AddPropertiestoComplexType](~/ef6/media/addpropertiestocomplextype.png)
+    ![Ajouter des propriétés à un Type complexe](~/ef6/media/addpropertiestocomplextype.png)
 
     Une nouvelle propriété est ajoutée au type complexe avec un nom par défaut.
 
@@ -108,7 +108,7 @@ Lorsque vous renommez un type complexe, toutes les références au type sont mis
     Une liste déroulante de toutes les propriétés scalaires s'affiche.
 7.  Sélectionnez la propriété appropriée.
 
-    ![MapComplexType](~/ef6/media/mapcomplextype.png)
+    ![Mapper le Type complexe](~/ef6/media/mapcomplextype.png)
 
 8.  Répétez les étapes 6 et 7 pour chaque colonne de la table.
 
@@ -121,14 +121,14 @@ Les importations de fonction sont basées sur les procédures stockées. Pour ma
 
 -   Double-cliquez sur une fonction importée que vous souhaitez mapper à un type complexe.
 
-    ![FunctionImports](~/ef6/media/functionimports.png)
+    ![Importations de fonction](~/ef6/media/functionimports.png)
 
 -   Définissez les paramètres de la nouvelle importation de fonction comme suit :
     -   Spécifiez la procédure stockée pour laquelle vous créez une importation de fonction dans le **nom de la procédure stockée** champ. Ce champ est une liste déroulante qui affiche toutes les procédures stockées dans le modèle de stockage.
     -   Spécifiez le nom de l’importation de fonction dans le **nom du Function Import** champ.
     -   Sélectionnez **complexes** en tant que la valeur de retour tapez, puis spécifiez le type de retour complex spécifique en choisissant le type approprié dans la liste déroulante.
 
-        ![EditFunctionImport](~/ef6/media/editfunctionimport.png)
+        ![Modifier l’importation de fonction](~/ef6/media/editfunctionimport.png)
 
 -   Cliquez sur **OK**.
     L'entrée function import est créée dans le modèle conceptuel.

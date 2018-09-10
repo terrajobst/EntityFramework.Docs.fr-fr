@@ -3,12 +3,12 @@ title: Relations, les propriétés de navigation et les clés étrangères - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: a1653afd609280ab572ef88a9fcf8a6275b79fd6
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 53f428360be4ea2e11a42676d22e584633ceedbc
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821398"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251217"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, les propriétés de navigation et les clés étrangères
 Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre entités. Il fournit également des conseils sur la façon de mapper et de manipuler des relations.
@@ -19,7 +19,7 @@ Dans les bases de données relationnelles, les relations (également appelées a
 
 L’illustration suivante montre les deux tables impliquées dans une relation un-à-plusieurs. Le **cours** table est la table dépendante, car elle contient le **DepartmentID** colonne qui lie à la **département** table.
 
-![Database2](~/ef6/media/database2.png)
+![Tables Department et cours](~/ef6/media/database2.png)
 
 Dans Entity Framework, une entité peut être associée à d’autres entités via une association ou de la relation. Chaque relation comporte deux terminaisons qui décrivent le type d’entité et la multiplicité du type (un, zéro-ou-un ou plusieurs) pour les deux entités dans cette relation. La relation peut-être être régie par une contrainte référentielle, qui décrit quelle fin dans la relation est un rôle principal et qui est un rôle dépendant.
 
@@ -33,7 +33,7 @@ Vous pouvez choisir d'utiliser un type d'association dans votre modèle ou les d
 
 L’illustration suivante montre un modèle conceptuel qui a été créé avec l’Entity Framework Designer. Le modèle contient deux entités qui participent de relation un-à-plusieurs. Les deux entités ont des propriétés de navigation. **Cours** est l’entité depend et a la **DepartmentID** propriété de clé étrangère définie.
 
-![RelationshipEFDesigner](~/ef6/media/relationshipefdesigner.png)
+![Tables de département et de cours avec les propriétés de navigation](~/ef6/media/relationshipefdesigner.png)
 
 L’extrait de code suivant montre le même modèle que celui qui a été créé avec Code First.
 

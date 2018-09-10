@@ -3,12 +3,12 @@ title: Async interroge et enregistre - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 64051dea740b2183cb904d7fb4293d7048c218ca
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 35604fc16ea37415d39801831aa162d0d42c2a2f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152435"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250749"
 ---
 # <a name="async-query-and-save"></a>Async interroger et enregistrer
 > [!NOTE]
@@ -145,7 +145,7 @@ Ce code appelle la **PerformDatabaseOperations** méthode qui enregistre une nou
 4.  Retourne de la requête et les résultats sont écrits dans **Console**
 5.  Citation du jour est écrite dans **Console**
 
-![SyncOutput](~/ef6/media/syncoutput.png) 
+![Sortie de la synchronisation](~/ef6/media/syncoutput.png) 
 
  
 
@@ -227,7 +227,7 @@ Maintenant que le code est asynchrone, nous pouvons observer un flux d’exécut
 4.  Requête pour tous les **Blogs** est envoyé à la base de données *là encore, le thread managé est libre d’effectuer d’autres tâches pendant que la requête est traitée dans la base de données. Étant donné que tous les autres l’exécution terminée, le thread simplement arrêtera sur l’appel d’attente cependant.*
 5.  Retourne de la requête et les résultats sont écrits dans **Console**
 
-![AsyncOutput](~/ef6/media/asyncoutput.png) 
+![Sortie d’async](~/ef6/media/asyncoutput.png) 
 
  
 
