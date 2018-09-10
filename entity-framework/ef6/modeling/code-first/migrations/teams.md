@@ -3,12 +3,12 @@ title: Code First Migrations dans les environnements d’équipe - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 42f52e63fd6cfc1f02d6a721594f4a161eea9a7b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 31f8476c64d36d4d1cf3d18deb59ebc482dcc975
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997297"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251230"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations dans les environnements d’équipe
 > [!NOTE]
@@ -54,7 +54,7 @@ La clé pour utiliser correctement les migrations dans un environnement d’équ
 
 Lorsque vous ajoutez la première migration à votre projet, vous exécutez quelque chose comme **Add-Migration première** dans la Console du Gestionnaire de Package. Les étapes de haut niveau qui exécute cette commande sont décrits ci-dessous.
 
-![FirstMigration](~/ef6/media/firstmigration.png)
+![Première Migration](~/ef6/media/firstmigration.png)
 
 Le modèle actuel est calculé à partir de votre code (1). Les objets de base de données requis sont alors calculées par la différence de modèle (2) : dans la mesure où cela est la première migration du modèle diffèrent utilise simplement un modèle vide pour la comparaison. Les modifications requises sont passées au Générateur de code pour générer le code de migration requises (3) qui est ensuite ajouté à votre solution Visual Studio (4).
 
@@ -66,7 +66,7 @@ Outre le code de migration réelle qui est stocké dans le fichier de code princ
 
 Plus tard, vous revenez et apportez des modifications à votre modèle : dans notre exemple, nous allons ajouter un **Url** propriété **Blog**. Puis émettez une commande comme **Add-Migration AddUrl** pour générer automatiquement une migration pour appliquer la base de données change. Les étapes de haut niveau qui exécute cette commande sont décrits ci-dessous.
 
-![SecondMigration](~/ef6/media/secondmigration.png)
+![Nouvelle Migration](~/ef6/media/secondmigration.png)
 
 Tout comme la dernière fois, le modèle actuel est calculé à partir du code (1). Toutefois, cette fois, il existe des migrations existantes pour le modèle précédent est récupéré à partir de la dernière migration (2). Ces deux modèles sont comparés pour rechercher les modifications de base de données requis (3) et le processus effectue ensuite comme avant.
 
@@ -96,14 +96,14 @@ Première Examinons un exemple concret de conflit de fusion. Nous allons continu
 
 Nous allons suivre le modèle EF et les migrations à un nombre de modifications. Pour un point de départ, les développeurs ont synchronisé dans le référentiel de contrôle source, comme illustré dans le graphique suivant.
 
-![StartingPoint](~/ef6/media/startingpoint.png)
+![Point de départ](~/ef6/media/startingpoint.png)
 
 Développeur \#1 et développeur \#2 désormais apporte des modifications au modèle EF dans leur code local base. Développeur \#1 ajoute un **évaluation** propriété **Blog** – et génère une **AddRating** migration pour appliquer les modifications à la base de données. Développeur \#2 ajoute un **lecteurs** propriété **Blog** – et génère le correspondantes **AddReaders** migration. Les développeurs exécutaient **Update-Database**, pour appliquer les modifications à leurs bases de données locales, puis continuer le développement de l’application.
 
 > [!NOTE]
 > Migrations sont précédées avec un horodatage, de sorte que notre graphique représente que la migration AddReaders développeur \#2 vient après la migration AddRating développeur \#1. Si développeur \#1 ou \#2 ne généré aucune différence pour les problèmes de l’utilisation dans une équipe, ou le processus de fusion que nous allons examiner dans la section suivante d’effectuer de la première migration.
 
-![LocalChanges](~/ef6/media/localchanges.png)
+![Modifications locales](~/ef6/media/localchanges.png)
 
 C’est un jour chance pour développeur \#1 qu’elles se produisent à soumettre leurs modifications tout d’abord. Car aucune autre personne a archivé dans la mesure où ils synchronisés son référentiel, ils peuvent simplement les soumettre leurs modifications sans effectuer toute fusion.
 
@@ -147,7 +147,7 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 
 Voici l’état de développeur \#local de 2 code base après l’utilisation de cette approche.
 
-![MergeMigration](~/ef6/media/mergemigration.png)
+![Migration de fusion](~/ef6/media/mergemigration.png)
 
 ### <a name="option-2-update-the-model-snapshot-in-the-last-migration"></a>Option 2 : Mettre à jour la capture instantanée du modèle dans la dernière migration
 
@@ -176,9 +176,9 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 
 Voici l’état de développeur \#local de 2 code base après l’utilisation de cette approche.
 
-![UpdatedMetadata](~/ef6/media/updatedmetadata.png)
+![Métadonnées mises à jour](~/ef6/media/updatedmetadata.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Il existe quelques problèmes lors de l’utilisation de Code First Migrations dans un environnement d’équipe. Toutefois, une compréhension élémentaire du fonctionnement de la migration et de certaines approches simples pour la résolution des conflits de fusion facilitent surmonter ces défis.
 

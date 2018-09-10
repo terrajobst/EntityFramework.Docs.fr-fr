@@ -3,12 +3,12 @@ title: Code First pour une base de données - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: 50c6a4710bc50879304f64e781a46c4836f86882
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 8ed1bfbc3536acc0d83b9c8ecdd180aeb44eff83
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152476"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251048"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First pour une base de données
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données qui n’existe pas de ciblage et Code First crée, ou une base de données vide ce Code First l’ajoutera des tables à. Code tout d’abord vous permet de définir votre modèle à l’aide de C\# ou les classes VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent.
@@ -199,13 +199,13 @@ Vous pouvez vous connecter à cette base de données à l’aide de l’Explorat
 -   Cliquez avec le bouton droit sur **des connexions de données** et sélectionnez **ajouter une connexion...**
 -   Si vous n’avez pas connecté à une base de données à partir de l’Explorateur de serveurs avant que vous devez sélectionner Microsoft SQL Server comme source de données
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Sélectionnez la Source de données](~/ef6/media/selectdatasource.png)
 
 -   Se connecter à la base de données locale ou de SQL Express, en fonction de celles que vous avez installé
 
 Nous pouvons maintenant inspecter le schéma que Code First créé.
 
-![SchemaInitial](~/ef6/media/schemainitial.png)
+![Schéma Initial](~/ef6/media/schemainitial.png)
 
 DbContext élaboré quelles classes à inclure dans le modèle en examinant les propriétés DbSet que nous avons défini. Il utilise ensuite l’ensemble de conventions Code First par défaut pour déterminer les noms de table et de colonne, de déterminer les types de données, de trouver les clés primaires, etc. Plus loin dans cette procédure pas à pas, nous allons examiner comment vous pouvez remplacer ces conventions.
 
@@ -266,7 +266,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 
 La nouvelle colonne de l’Url est maintenant ajoutée à la table de Blogs dans la base de données :
 
-![SchemaWithUrl](~/ef6/media/schemawithurl.png)
+![Schéma avec l’Url](~/ef6/media/schemawithurl.png)
 
 ## <a name="6-data-annotations"></a>6. Annotations de données
 
@@ -316,7 +316,7 @@ public class User
 
 La nouvelle table est maintenant ajoutée à la base de données :
 
-![SchemaWithUsers](~/ef6/media/schemawithusers.png)
+![Schéma avec des utilisateurs](~/ef6/media/schemawithusers.png)
 
 La liste complète des annotations prises en charge par Entity Framework est :
 
@@ -365,8 +365,8 @@ public class BloggingContext : DbContext
 
 La colonne DisplayName a été renommée pour afficher\_nom :
 
-![SchemaWithDisplayNameRenamed](~/ef6/media/schemawithdisplaynamerenamed.png)
+![Schéma avec le nom d’affichage renommé](~/ef6/media/schemawithdisplaynamerenamed.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons vu développement Code First à l’aide d’une base de données. Nous défini un modèle à l’aide de classes, puis ce modèle permet de créer une base de données et de stocker et récupérer des données. Une fois que la base de données a été créé, nous avons utilisé les Migrations Code First pour modifier le schéma en tant que notre modèle a évolué. Nous avons également vu comment configurer un modèle à l’aide des Annotations de données et l’API Fluent.
