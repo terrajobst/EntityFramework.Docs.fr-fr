@@ -4,14 +4,14 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 9f702d5833b88e6eb77c0afefdae0ed3bc162ec8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e4eed480178ce43cbc5ece8db8e584032da7b2b9
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993931"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250346"
 ---
-# <a name="creating-a-model"></a>Création d’un modèle
+# <a name="creating-and-configuring-a-model"></a>Création et configuration d’un modèle
 
 Entity Framework utilise un ensemble de conventions pour créer un modèle basé sur la forme de vos classes d’entité. Vous pouvez spécifier une configuration supplémentaire pour compléter et/ou remplacer ce qui a été découvert par convention.
 
@@ -20,9 +20,7 @@ Cet article traite de la configuration qui peut être appliquée à un modèle c
 > [!TIP]  
 > Vous pouvez afficher [l’exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples) proposé dans cet article sur GitHub.
 
-## <a name="methods-of-configuration"></a>Méthodes de configuration
-
-### <a name="fluent-api"></a>API Fluent
+## <a name="use-fluent-api-to-configure-a-model"></a>Utiliser l’API Fluent pour configurer un modèle
 
 Vous pouvez substituer la méthode `OnModelCreating` dans le contexte dérivé et utiliser `ModelBuilder API` pour configurer votre modèle. Il s’agit de la méthode de configuration la plus puissante, qui permet de spécifier une configuration sans modifier les classes d’entité. Dotée du niveau de priorité le plus élevé, la configuration de l’API Fluent remplace les conventions et les annotations de données.
 
@@ -42,7 +40,7 @@ Vous pouvez substituer la méthode `OnModelCreating` dans le contexte dérivé e
     }
 ```
 
-### <a name="data-annotations"></a>Annotations de données
+## <a name="use-data-annotations-to-configure-a-model"></a>Utiliser des annotations de données pour configurer un modèle
 
 Vous pouvez également appliquer des attributs (également appelés annotations de données) à vos classes et propriétés. Les annotations de données remplacent les conventions, mais elles sont remplacées par la configuration de l’API Fluent.
 

@@ -3,12 +3,12 @@ title: Entités de suivi automatique - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 8b555d211facd737aedf120a1ecfdc88d3903107
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: bd22df9e14fe71ae065baf1d747b1642dd7bafce
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998014"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250859"
 ---
 # <a name="self-tracking-entities"></a>Entités de suivi automatique
 
@@ -28,7 +28,7 @@ Cet élément de modèle génère deux fichiers .tt (modèle de texte) :
 
 Pour commencer, visitez la page [Procédure pas à pas des entités de suivi automatique](walkthrough.md).  
 
-## <a name="considerations-when-working-with-self-tracking-entities"></a>Points à prendre en considération lors de l'utilisation d'entités de suivi automatique  
+## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Points fonctionnels à prendre en considération lors de l’utilisation d’entités de suivi automatique  
 > [!IMPORTANT]
 > Nous ne recommandons plus d’utiliser le modèle des entités de suivi automatique. Il reste disponible uniquement pour prendre en charge les applications existantes. Si votre application doit utiliser des graphiques d’entités déconnectés, envisagez d’autres alternatives comme les [Entités traçables](http://trackableentities.github.io/), qui présentent une technologie similaire aux entités de suivi automatique, mais développée de manière plus active par la communauté, ou bien l’écriture de code personnalisé à l’aide des API de suivi de changements de bas niveau.
 
@@ -46,7 +46,7 @@ Tenez compte des éléments suivants lors de l'utilisation d'entités de suivi a
 - Les entités de suivi automatique ne sont pas activées pour effectuer un chargement différé.  
 - La sérialisation binaire et la sérialisation en objets de gestion d’état ASP.NET ne sont pas prises en charge par les entités de suivi automatique. Toutefois, vous pouvez personnaliser le modèle pour ajouter la prise en charge de la sérialisation binaire. Pour plus d’informations, consultez [Utilisation de la sérialisation binaire et de ViewState avec les entités de suivi automatique](http://go.microsoft.com/fwlink/?LinkId=199208).  
 
-### <a name="security-considerations"></a>Considérations relatives à la sécurité  
+## <a name="security-considerations"></a>Considérations relatives à la sécurité  
 
 Les considérations de sécurité suivantes doivent être prises en compte quand vous utilisez les entités de suivi automatique :  
 

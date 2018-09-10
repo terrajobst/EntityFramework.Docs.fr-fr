@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 144cc8c8c9979e4ce24260c2975e6b10d4fdbb84
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c8d53b47d215c0db673c9058e9d78a7e2e7b895f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994921"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250736"
 ---
 # <a name="getting-started-with-entity-framework-core"></a>Bien démarrer avec Entity Framework Core
 
@@ -23,5 +23,17 @@ Ces didacticiels d’introduction ne demandent aucune connaissance d’Entity Fr
 
 Entity Framework Core peut créer un modèle basé sur une base de données existante ou créer une base de données basée sur votre modèle. Il existe des didacticiels qui illustrent ces deux approches.
 
+* .NET Framework (applications console, WinForms, WPF)
+  * [Nouvelle base de données](full-dotnet/new-db.md)
+  * [Base de données existante](full-dotnet/existing-db.md)
+* .NET core (Windows, macOS, Linux)
+  * [Nouvelle base de données](netcore/new-db-sqlite.md)
+* ASP.NET Core
+  * [Nouvelle base de données](aspnetcore/new-db.md)
+  * [Base de données existante](aspnetcore/existing-db.md)
+  * [EF Core et Razor Pages](/aspnet/core/data/ef-rp/intro)
+* Plateforme Windows universelle (UWP)
+  * [Nouvelle base de données](uwp/getting-started.md)
+
 > [!NOTE]  
-> Ces didacticiels et les exemples qui les accompagnent ont été mis à jour pour utiliser EF Core 2.0 (à l’exception du didacticiel UWP, qui utilise toujours EF Core 1.1). Toutefois, dans la majorité des cas, vous devriez pouvoir créer des applications qui utilisent les versions précédentes, avec des instructions qui diffèrent très peu. 
+> Ces didacticiels et les exemples qui les accompagnent ont été mis à jour pour utiliser EF Core 2.1. Toutefois, dans la majorité des cas, vous devriez pouvoir créer des applications qui utilisent les versions précédentes, avec des instructions qui diffèrent très peu. 

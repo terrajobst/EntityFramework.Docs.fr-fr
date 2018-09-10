@@ -3,12 +3,12 @@ title: Modèles de génération de code de concepteur - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
-ms.openlocfilehash: 29e28dd4ebe0e5e6e3cddacb1d34202c2010f389
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e4d4aaa647baca9f85b85db1aadaade37abd6ff2
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994869"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251165"
 ---
 # <a name="designer-code-generation-templates"></a>Modèles de génération de code de concepteur
 Quand vous créez un modèle à l’aide d’Entity Framework Designer, vos classes et le contexte dérivé sont générés automatiquement pour vous. En plus de la génération de code par défaut, nous fournissons également un nombre de modèles pouvant servir à personnaliser le code généré. Ces modèles sont fournis sous forme de modèles de texte T4, ce qui vous permet de les personnaliser si nécessaire.
@@ -151,7 +151,7 @@ Les modèles « Web Sites » (par ex., **EF 5.x DbContext Generator for C\# Web 
 
 Pour commencer à utiliser un modèle de génération de code, cliquez avec le bouton droit sur un emplacement vide dans l’aire de conception dans EF Designer et sélectionnez **Ajouter un élément de génération de code...**.
 
-![Add_Code_Gen_Item](~/ef6/media/add-code-gen-item.png)
+![Ajouter un élément de génération de code](~/ef6/media/add-code-gen-item.png)
 
 Si vous avez déjà installé le modèle à utiliser (ou qu’il a été inclus dans Visual Studio), il est disponible sous la section **Code** ou **Données** dans le menu à gauche.
 
@@ -166,8 +166,8 @@ Si vous utilisez Visual Studio 2012, les nouveaux fichiers .tt sont imbriqués s
 > [!NOTE]
 > Pour les modèles créés dans Visual Studio 2012, vous devez supprimer les modèles utilisés pour la génération de code par défaut, sinon vous obtenez des classes et un contexte en double. Les fichiers par défaut sont **&lt;nom du modèle&gt;.tt** et **&lt;nom du modèle&gt;.context.tt**. 
 
-![VS2012_Templates](~/ef6/media/vs2012-templates.png)
+![Modèles Visual Studio 2012](~/ef6/media/vs2012-templates.png)
 
 Si vous utilisez Visual Studio 2010, les fichiers tt sont ajoutés directement à votre projet.  
 
-![VS2010_Templates](~/ef6/media/vs2010-templates.png)
+![Modèles Visual Studio 2010](~/ef6/media/vs2010-templates.png)
