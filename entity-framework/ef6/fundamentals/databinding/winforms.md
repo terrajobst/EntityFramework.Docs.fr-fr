@@ -3,12 +3,12 @@ title: Liaison de données avec WinForms - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: 071172810f7dac45f42aca0efa7f329bac31e9cd
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 48e6d997875a25a5954484f854953df69a267d05
+ms.sourcegitcommit: 8d04a2ad98036f32ca70c77ce3040c5edb1cdf82
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251191"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44384850"
 ---
 # <a name="databinding-with-winforms"></a>Liaison de données avec WinForms
 Cette procédure pas à pas montre comment lier les types POCO aux contrôles Windows Forms (WinForms) dans un formulaire « maître / détail ». L’application utilise Entity Framework pour remplir des objets avec des données à partir de la base de données, le suivi des modifications et conserver les données dans la base de données.
@@ -71,7 +71,7 @@ Propriétés de la collection doivent implémenter l’interface IListSource pou
 
             IList IListSource.GetList()
             {
-                return _bindingList  (_bindingList = this.ToBindingList());
+                return _bindingList ?? (_bindingList = this.ToBindingList());
             }
         }
     }
@@ -278,7 +278,7 @@ Ajoutez les classes qui sont définies dans le modèle en tant que sources de do
 -   Dans la fenêtre Choisir un Type de Source de données, sélectionnez **objet** et cliquez sur **suivant**
 -   Dans le, sélectionnez la boîte de dialogue des objets de données, dérouler les **WinFormswithEFSample** deux fois, puis sélectionnez **catégorie** il est inutile de sélectionner la source de données de produit, car nous allons lui par le biais du produit propriété sur la source de données de catégorie.
 
-    ![Source de données](~/ef6/media/datasource.png)
+    ![source de données](~/ef6/media/datasource.png)
 
 -   Cliquez sur **terminer.** 
      *Si la fenêtre Sources de données ne s’affichent pas, sélectionnez *** vue -&gt; autres Windows -&gt; des Sources de données**
