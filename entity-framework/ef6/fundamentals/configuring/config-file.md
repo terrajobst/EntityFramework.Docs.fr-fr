@@ -1,14 +1,14 @@
 ---
 title: Paramètres de fichier de configuration - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-ms.openlocfilehash: 88c2439f3a89c9fb9ee22f828789df4decf39cc5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 949ad4f030205753c5fbf9b95f4d183d8c0d1fe7
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996501"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490870"
 ---
 # <a name="configuration-file-settings"></a>Fichier de configuration
 Entity Framework permet un certain nombre de paramètres de la définir à partir du fichier de configuration. En général EF suit un principe de « convention sur configuration » : tous les paramètres décrits dans ce billet un comportement par défaut, vous devez uniquement à vous soucier de la modification du paramètre lorsque la valeur par défaut ne répond plus aux besoins de votre.  

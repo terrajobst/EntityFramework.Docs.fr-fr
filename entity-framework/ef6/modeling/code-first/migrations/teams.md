@@ -1,14 +1,14 @@
 ---
 title: Code First Migrations dans les environnements d’équipe - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 31f8476c64d36d4d1cf3d18deb59ebc482dcc975
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: f5216a80928625040d6719f0e97ae786e5e33e05
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251230"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490504"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations dans les environnements d’équipe
 > [!NOTE]
@@ -178,7 +178,7 @@ Voici l’état de développeur \#local de 2 code base après l’utilisation de
 
 ![Métadonnées mises à jour](~/ef6/media/updatedmetadata.png)
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 Il existe quelques problèmes lors de l’utilisation de Code First Migrations dans un environnement d’équipe. Toutefois, une compréhension élémentaire du fonctionnement de la migration et de certaines approches simples pour la résolution des conflits de fusion facilitent surmonter ces défis.
 

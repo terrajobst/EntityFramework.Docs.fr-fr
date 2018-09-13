@@ -1,14 +1,14 @@
 ---
 title: Model First - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 3dd0eba29619f09995d7009dd29462c14bde98c4
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 8e010f95db40261073b4af80a3c0e3225a2cd1cf
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251139"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490478"
 ---
 # <a name="model-first"></a>Tout d’abord de modèle
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Model First à l’aide d’Entity Framework. Modèle tout d’abord vous permet de créer un nouveau modèle à l’aide d’Entity Framework Designer, puis générez un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension .edmx) et peut être affiché et modifié dans l’Entity Framework Designer. Les classes que vous interagissez avec dans votre application sont automatiquement générées à partir du fichier EDMX.
@@ -195,6 +195,6 @@ Nous disposons désormais d’un modèle mis à jour et nous sommes prêts à me
     *Le script généré supprime toutes les tables existantes et puis recréer le schéma à partir de zéro. Cela peut fonctionner pour un développement local, mais n’est pas viable pour l’envoi des modifications à une base de données qui a déjà été déployé. Si vous avez besoin publier les modifications dans une base de données qui a déjà été déployé, vous devez modifier le script ou utiliser un outil de comparaison de schéma pour calculer un script de migration.*
 -   Avec le bouton droit sur le script et sélectionnez **Execute**, vous devrez spécifier la base de données pour se connecter à, spécifiez LocalDB ou Express de SQL Server, selon la version de Visual Studio que vous utilisez
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 Dans cette procédure pas à pas, nous avons étudié développement Model First, qui nous a permis de créer un modèle dans le Concepteur EF et puis générer une base de données à partir de ce modèle. Ensuite, nous avons utilisé le modèle pour lire et écrire des données à partir de la base de données. Enfin, nous mis à jour le modèle et puis recréer le schéma de base de données pour faire correspondre le modèle.
