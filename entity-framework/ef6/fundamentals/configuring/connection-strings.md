@@ -1,14 +1,14 @@
 ---
 title: Chaînes de connexion et de modèles - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 294bb138-978f-4fe2-8491-fdf3cd3c60c4
-ms.openlocfilehash: dce414ea84f13235691abf0dcadef5c743d90f9d
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2c9f084107e4de7f5439bf0082b46a3b538496e0
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994957"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490742"
 ---
 # <a name="connection-strings-and-models"></a>Modèles et les chaînes de connexion
 Cette rubrique décrit comment Entity Framework détecte la connexion de base de données à utiliser, et comment vous pouvez le modifier. Les modèles créés avec Code First et le Concepteur EF sont traités dans cette rubrique.  

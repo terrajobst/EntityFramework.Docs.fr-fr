@@ -1,14 +1,14 @@
 ---
 title: Code First pour une base de données existante - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: fedfb921919582e2cdb5f3bc497f11889b972ad6
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: f05420beb3dff2d632151fcbf48986b0d9cd18ff
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251074"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490608"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First pour une base de données existante
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Code First ciblant une base de données existante. Code tout d’abord vous permet de définir votre modèle à l’aide de C\# ou les classes VB.Net. Une configuration supplémentaire si vous le souhaitez peut être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent.
@@ -223,6 +223,6 @@ Code First à l’Assistant de base de données est conçu pour générer un ens
 
 Si vous souhaitez utiliser les Migrations Code First avec une base de données existante, consultez [Migrations Code First pour une base de données existante](~/ef6/modeling/code-first/migrations/existing-database.md).
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 Dans cette procédure pas à pas, nous avons vu développement Code First à l’aide de la base de données existante. Nous avons utilisé les outils Entity Framework pour Visual Studio pour rétroconcevoir un ensemble de classes qui mappé à la base de données et peut être utilisé pour stocker et récupérer des données.

@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: a637e5e2f75e16bc7b11b1a51abcbe16274a1c75
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250814"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490766"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -52,3 +52,7 @@ Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2
   * Suivez ce modèle pour ajouter la prise en charge spatiale pour votre fournisseur qui est cohérente entre les fournisseurs.
 * https://github.com/aspnet/EntityFrameworkCore/pull/13199 -Ajouter un débogage amélioré pour la création de fournisseur de service
   * Permet de DbContextOptionsExtensions implémenter une nouvelle interface qui permet aux utilisateurs de comprendre pourquoi le fournisseur de services interne est en cours de nouveau généré
+* https://github.com/aspnet/EntityFrameworkCore/pull/13289 -Ajoute CanConnect API pour une utilisation par les contrôles d’intégrité
+  * Cette demande de tirage ajoute le concept de `CanConnect` qui sera utilisé par le contrôle d’intégrité d’ASP.NET Core vérifie pour déterminer si la base de données est disponible. Par défaut, l’implémentation relationnelle appelle simplement `Exist`, mais les fournisseurs peuvent implémenter quelque chose de différent si nécessaire. Les fournisseurs non relationnelles devez implémenter la nouvelle API pour le contrôle d’intégrité être utilisable.
+* https://github.com/aspnet/EntityFrameworkCore/pull/13306 -Mettez à jour de base RelationalTypeMapping pour ne définir pas DbParameter taille
+  * Arrêter de taille par défaut dans la mesure où il peut provoquer la troncation. Fournisseurs devrez peut-être ajouter leur propre logique si la taille doit être définie.

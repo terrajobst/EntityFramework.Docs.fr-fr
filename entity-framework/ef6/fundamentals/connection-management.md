@@ -1,14 +1,14 @@
 ---
 title: Gestion des connexions - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-ms.openlocfilehash: dc405e1876edc850ae6e4ce4649da52635d316ae
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997903"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489334"
 ---
 # <a name="connection-management"></a>Gestion des connexions
 Cette page décrit le comportement d’Entity Framework en ce qui concerne le passage de connexions pour le contexte et les fonctionnalités de la **Database.Connection.Open()** API.  

@@ -1,14 +1,14 @@
 ---
 title: Automatique les Migrations Code First - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 256d1c774a2165dc12daf3d04550566c1a44b751
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 21f77ef49db2485047292b3928b4f63d49dbb180
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250450"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489984"
 ---
 # <a name="automatic-code-first-migrations"></a>Automatique de Code First Migrations
 Les Migrations automatiques vous permet d’utiliser Code First Migrations sans qu’un fichier de code dans votre projet pour chaque modification apportée. Toutes les modifications peuvent être appliquées automatiquement, par exemple renomme de colonne requiert l’utilisation d’une migration de type de code.
@@ -209,6 +209,6 @@ Maintenant, nous pouvons utiliser **Update-Database** pour obtenir les Migration
 
 -   Exécutez le **Update-Database** commande dans la Console du Gestionnaire de Package.
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 Dans cette procédure pas à pas, que vous avez vu comment utiliser les migrations automatiques pour transmettre le modèle change à la base de données. Vous avez également vu comment structurer et exécutez les migrations de base de code entre les migrations automatiques lorsque vous avez besoin de davantage de contrôle.

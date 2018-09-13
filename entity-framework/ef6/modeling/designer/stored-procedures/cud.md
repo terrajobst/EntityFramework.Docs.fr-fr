@@ -1,14 +1,14 @@
 ---
 title: Concepteur CUD procédures stockées - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: 36c9b97b77fec30136cba1d850a0259c689e69ae
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 35a00aa817c8643352c517c233977efd49e3baac
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250918"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489555"
 ---
 # <a name="designer-cud-stored-procedures"></a>CUD Concepteur de procédures stockées
 Cette procédure pas à pas montrent comment mapper la créer\\insérer, mettre à jour et supprimer des opérations (CUD) d’un type d’entité aux procédures stockées à l’aide d’Entity Framework Designer (Concepteur d’EF).  Par défaut, Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  

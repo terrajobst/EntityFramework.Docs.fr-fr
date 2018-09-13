@@ -1,14 +1,14 @@
 ---
 title: Automatique détecter les modifications - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: a8d1488d-9a54-4623-a76b-e81329ff2756
-ms.openlocfilehash: bca33e12674c47cc7e047e85b11746c8e39246b4
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9af85fd7ca48a14432a1f33c59079fc438ef8810
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998097"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490985"
 ---
 # <a name="automatic-detect-changes"></a>Détecter des modifications automatique
 Lors de l’utilisation de la plupart des entités POCO la détermination de la manière dont une entité a changé (et par conséquent les mises à jour doivent être envoyées à la base de données) est gérée par l’algorithme de détecter les modifications. Détecter works de modifications en détectant les différences entre les valeurs de propriété actuelles de l’entité et les valeurs de propriété d’origine qui sont stockés dans un instantané lorsque l’entité a été interrogée ou attachée. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  

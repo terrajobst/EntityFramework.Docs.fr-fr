@@ -1,14 +1,14 @@
 ---
 title: Annotations de données First - EF6 de code
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 57e2b988f81d9c82e10a07a5cd4f3a1decfd838a
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 38ae52543ed99e5a1c1da7d19a2e15d168e3a1bd
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251204"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490105"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -461,7 +461,7 @@ Pour résoudre ces problèmes, vous pouvez utiliser l’annotation InverseProper
 
  
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 DataAnnotations vous permettent non seulement de décrire la validation côté client et serveur dans vos classes de premier code, mais ils vous permettent également d’améliorer et même corriger les hypothèses code va d’abord faire sur vos classes selon ses conventions. Avec DataAnnotations, vous pouvez optimiser pas uniquement les génération de schéma de base de données, mais vous pouvez également mapper vos classes de premier code pour une base de données existant.
 

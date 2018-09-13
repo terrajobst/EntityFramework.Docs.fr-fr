@@ -1,14 +1,14 @@
 ---
 title: API Fluent avec VB.NET - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: b21ee872034ca3c82ec793835476d79585a1018b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: cbdd32696fb88d3de6cf1966040e5dda49fe19cd
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993479"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489465"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent avec VB.NET
 Code tout d’abord vous permet de définir votre modèle à l’aide de C\# ou les classes VB.NET. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent. Cette procédure pas à pas montre comment effectuer la configuration de l’API fluent à l’aide de VB.NET.

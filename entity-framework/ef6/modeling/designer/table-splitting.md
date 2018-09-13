@@ -1,14 +1,14 @@
 ---
 title: Fractionnement de la Table concepteur - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: f07aeb0aa679f6fa8131c667ac808f17c3f03f20
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 8b0ca6778a06ed43b1365d2e5969ff15948f8004
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250983"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490692"
 ---
 # <a name="designer-table-splitting"></a>Table du Concepteur de fractionnement
 Cette procédure pas à pas montre comment mapper plusieurs types d’entités à une table unique en modifiant un modèle avec Entity Framework Designer (Concepteur d’EF).
@@ -126,7 +126,7 @@ Les instructions T-SQL suivantes ont été exécutées sur le **School** base de
 
 -   Ce qui suit **insérer** a été exécutée suite à l’exécution de contexte. SaveChanges() et combine les données à partir de la **personne** et **HireInfo** entités
 
-    ![Insérer](~/ef6/media/insert.png)
+    ![Insert](~/ef6/media/insert.png)
 
 -   Ce qui suit **sélectionnez** a été exécutée suite à l’exécution de contexte. People.FirstOrDefault() et sélectionne uniquement les colonnes mappées aux **personne**
 

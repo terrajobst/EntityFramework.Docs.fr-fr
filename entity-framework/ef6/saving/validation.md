@@ -1,14 +1,14 @@
 ---
 title: Validation - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: 65639b0f91f54ee2cd1336f6b6cd4caf45ede680
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3aeb33763819544618c4a3068bb278c9b23409b6
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251022"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490627"
 ---
 # <a name="data-validation"></a>Validation de données
 > [!NOTE]
@@ -231,7 +231,7 @@ Voici quelques autres points à prendre en compte lors de l’utilisation de la 
     -   Validation des propriétés sur les propriétés de type complexe
     -   Type de validation au niveau du type complexe, y compris la validation IValidatableObject sur le type complexe
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 L’API de validation dans Entity Framework joue très bien avec la validation côté client dans MVC, mais vous n’êtes pas obligé de s’appuient sur la validation côté client. Entity Framework se chargera de la validation côté serveur pour DataAnnotations ou des configurations que vous avez appliqué avec l’API Fluent de code first.
 

@@ -1,14 +1,14 @@
 ---
 title: Requêtes SQL brutes - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-ms.openlocfilehash: 99893ca1c634ce6f2e4cf9dcb70b1a1e43532c60
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6b00648939ccedffeed09b4e1d6e8d70fa262a36
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995732"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490582"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 Entity Framework vous permet d’interroger à l’aide de LINQ avec vos classes d’entité. Toutefois, il peut arriver que vous souhaitez exécuter des requêtes à l’aide de requêtes SQL brutes directement par rapport à la base de données. Cela inclut l’appel de procédures stockées, qui peuvent être utiles pour les modèles de Code First qui ne prennent actuellement pas en charge le mappage à des procédures stockées. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  

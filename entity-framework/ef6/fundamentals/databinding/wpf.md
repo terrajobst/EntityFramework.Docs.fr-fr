@@ -1,14 +1,14 @@
 ---
 title: Liaison de données avec WPF - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: e6df90db17d39d3aa91275800a6414fed40fb5db
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 5bd4a9b98a12de41e4ec37c2cc7dbdc537210893
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251152"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490226"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 Cette procédure pas à pas montre comment lier les types POCO à des contrôles WPF dans un formulaire « maître / détail ». L’application utilise les API Entity Framework pour remplir des objets avec des données à partir de la base de données, le suivi des modifications et conserver les données dans la base de données.
@@ -250,7 +250,7 @@ Ajoutez les classes qui sont définies dans le modèle en tant que sources de do
 -   La fenêtre Sources de données est ouverte en regard de la fenêtre de MainWindow.xaml *si la fenêtre Sources de données ne s’affichent pas, sélectionnez **vue -&gt; autres Windows -&gt; des Sources de données***
 -   Appuyez sur l’icône d’épingle, afin de la fenêtre Sources de données ne sont pas automatique masquer. Vous devrez peut-être appuyer sur le bouton de rafraîchissement si la fenêtre a été déjà visible.
 
-    ![Sources de données](~/ef6/media/datasources.png)
+    ![Data Sources](~/ef6/media/datasources.png)
 
 -   Sélectionnez le ** catégorie ** source de données et faites-la glisser sur le formulaire.
 
@@ -290,7 +290,7 @@ Maintenant que nous avons une grille pour afficher les catégories de nous allon
 
 Le formulaire doit ressembler à ceci :
 
-![Concepteur](~/ef6/media/designer.png) 
+![Designer](~/ef6/media/designer.png) 
 
 ## <a name="add-code-that-handles-data-interaction"></a>Ajoutez le Code qui gère l’Interaction de données
 

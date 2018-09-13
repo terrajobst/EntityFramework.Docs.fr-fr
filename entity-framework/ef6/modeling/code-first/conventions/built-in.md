@@ -1,14 +1,14 @@
 ---
 title: Conventions Code First - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: bc644573-c2b2-4ed7-8745-3c37c41058ad
-ms.openlocfilehash: c5fa580879a4b53fed34d94b737988875f38c62c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 4d03a32db5d84eb37c22617a95005b272172a65d
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995524"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490998"
 ---
 # <a name="code-first-conventions"></a>Conventions Code First
 Code First vous permet de décrire un modèle à l’aide de classes c# ou Visual Basic .NET. La forme de base du modèle est détectée à l’aide des conventions. Conventions des ensembles de règles qui sont utilisés pour configurer automatiquement un modèle conceptuel basé sur les définitions de classe lorsque vous travaillez avec Code First. Les conventions sont définies dans l’espace de noms System.Data.Entity.ModelConfiguration.Conventions.  

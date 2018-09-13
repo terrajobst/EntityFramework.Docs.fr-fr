@@ -1,14 +1,14 @@
 ---
 title: Raccourcis clavier du Concepteur de Entity Framework - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: e3a9d968c26841c143b1b7b0ba9a168ecd13f469
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: c75eafcca0863faa1ad64202e98b61832827377c
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251126"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490244"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Raccourcis de clavier du concepteur Entity Framework
 Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les différents écrans de l’Entity Framework Tools pour Visual Studio.
@@ -19,7 +19,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Un Assistant](~/ef6/media/wizardone.png)
 
-| Raccourci  | Action                                                     | Remarques                                               |
+| Raccourci  | Action                                                     | Notes                                               |
 |:----------|:-----------------------------------------------------------|:----------------------------------------------------|
 | **ALT + n** | Déplacer vers l’écran suivant                                        | Non disponible pour toutes les sélections de contenu du modèle. |
 | **Alt + f** | Terminer l’Assistant                                              | Non disponible pour toutes les sélections de contenu du modèle. |
@@ -29,7 +29,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Assistant deux](~/ef6/media/wizardtwo.png)
 
-| Raccourci  | Action                                                     | Remarques                                                   |
+| Raccourci  | Action                                                     | Notes                                                   |
 |:----------|:-----------------------------------------------------------|:--------------------------------------------------------|
 | **ALT + n** | Déplacer vers l’écran suivant                                        |                                                         |
 | **ALT + p** | Déplacer vers l’écran précédent                                    |                                                         |
@@ -43,7 +43,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Assistant trois](~/ef6/media/wizardthree.png)
 
-| Raccourci  | Action                                             | Remarques                                                                                 |
+| Raccourci  | Action                                             | Notes                                                                                 |
 |:----------|:---------------------------------------------------|:--------------------------------------------------------------------------------------|
 | **ALT + n** | Déplacer vers l’écran suivant                                |                                                                                       |
 | **ALT + p** | Déplacer vers l’écran précédent                            |                                                                                       |
@@ -53,7 +53,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Assistant quatre](~/ef6/media/wizardfour.png)
 
-| Raccourci  | Action                                                                                    | Remarques                                                               |
+| Raccourci  | Action                                                                                    | Notes                                                               |
 |:----------|:------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|
 | **Alt + f** | Terminer l’Assistant                                                                             |                                                                     |
 | **ALT + p** | Déplacer vers l’écran précédent                                                                   |                                                                     |
@@ -72,7 +72,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Aire du Concepteur](~/ef6/media/designersurface.png)
 
-| Raccourci                                                                                | Action                      | Remarques                                                                                                                                                                                                                               |
+| Raccourci                                                                                | Action                      | Notes                                                                                                                                                                                                                               |
 |:----------------------------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Entrez/espace**                                                                         | Basculer la sélection            | Active ou désactive la sélection sur l’objet qui a le focus.                                                                                                                                                                                         |
 | **Échap**                                                                                 | Annuler la sélection            | Annule la sélection actuelle.                                                                                                                                                                                                      |
@@ -96,8 +96,8 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 | **CTRL + &lt;**                                                                         | Remonter (focus)              | Identique à remonter la commande, mais déplace le focus sans la sélection.                                                                                                                                                                          |
 | **CTRL + &gt;**                                                                         | Descendent (focus)             | Identique à descendent commande, mais déplace le focus sans la sélection.                                                                                                                                                                         |
 | **MAJ + fin**                                                                         | Suivez à connecté         | À partir d’une entité, se déplace à une entité qui n’est connectée à cette entité.                                                                                                                                                               |
-| **Suppr**                                                                                 | Delete                      | Supprimer un objet ou un connecteur à partir du diagramme.                                                                                                                                                                                     |
-| **Ins**                                                                                 | Insérer                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment de « Propriétés scalaires » ou une propriété proprement dite est sélectionnée.                                                                                                           |
+| **Suppr**                                                                                 | Supprimer                      | Supprimer un objet ou un connecteur à partir du diagramme.                                                                                                                                                                                     |
+| **Ins**                                                                                 | Insert                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment de « Propriétés scalaires » ou une propriété proprement dite est sélectionnée.                                                                                                           |
 | **Page préc.**                                                                               | Diagramme de défilement des           | Fait défiler vers l’aire de conception, incréments égaux à 75 % de la hauteur de l’aire de conception actuellement visible.                                                                                                                    |
 | **Page suiv.**                                                                             | Diagramme de défilement vers le bas         | Fait défiler l’aire de conception.                                                                                                                                                                                                    |
 | **Maj + Pg vers le bas**                                                                     | Diagramme de défilement droite        | Fait défiler vers l’aire de conception vers la droite.                                                                                                                                                                                            |
@@ -115,7 +115,7 @@ Cette page fournit une liste de raccourcis clavier qui sont disponibles dans les
 
 ![Raccourcis des détails de mappage](~/ef6/media/mappingdetailsshortcuts.png)
 
-| Raccourci                  | Action         | Remarques                                                                                                                                 |
+| Raccourci                  | Action         | Notes                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | **Tab**                   | Basculez le contexte | Bascule entre la zone de fenêtre principale et de la barre d’outils sur la gauche                                                                     |
 | **Touches de direction**            | Navigation     | Vous déplacer dans les lignes, ou à droite et gauche sur les colonnes de la zone de fenêtre principale. Déplacer entre les boutons dans la barre d’outils sur la gauche. |
