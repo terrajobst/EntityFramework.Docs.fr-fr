@@ -3,12 +3,12 @@ title: Entités de suivi automatique - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3575977ceabe7d93ac48d5fac253eac1341e2353
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: b098736ef47e79c916f4bf054716022d5032eee5
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489698"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283808"
 ---
 # <a name="self-tracking-entities"></a>Entités de suivi automatique
 
@@ -39,12 +39,12 @@ Tenez compte des éléments suivants lors de l'utilisation d'entités de suivi a
 - Quand vous envoyez le graphique modifié sur le client au service et que vous voulez continuer à utiliser le même graphique sur le client, vous devez effectuer une itération manuelle au sein du graphique et appeler la méthode **AcceptChanges** sur chaque objet pour réinitialiser le suivi des changements.  
 
     > Si des objets dans votre graphique contiennent des propriétés avec des valeurs générées par la base de données (par exemple, des valeurs d’identité ou de concurrence), l’Entity Framework remplace les valeurs de ces propriétés par les valeurs générées par la base de données après l’appel de la méthode **SaveChanges**. Vous pouvez implémenter votre opération de service pour retourner des objets enregistrés ou une liste de valeurs de propriété générées pour les objets au client. Le client devra ensuite remplacer les instances d'objet ou valeurs de propriété d'objet par les objets ou valeurs de propriété retournés à partir de l'opération de service.  
-- La fusion de graphiques à partir de plusieurs demandes de service peut introduire des objets avec des valeurs de clés dupliquées dans le graphique résultant. L’Entity Framework ne supprime pas les objets avec des clés en double quand vous appelez la méthode **ApplyChanges**, mais lève une exception. Pour éviter les graphiques avec des valeurs de clé en double, suivez l’un des modèles décrits dans le blog suivant : [Entités de suivi automatique : ApplyChanges et entités en double](http://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409).  
+- La fusion de graphiques à partir de plusieurs demandes de service peut introduire des objets avec des valeurs de clés dupliquées dans le graphique résultant. L’Entity Framework ne supprime pas les objets avec des clés en double quand vous appelez la méthode **ApplyChanges**, mais lève une exception. Pour éviter les graphiques avec des valeurs de clé en double, suivez l’un des modèles décrits dans le blog suivant : [Entités de suivi automatique : ApplyChanges et entités en double](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409).  
 - Lorsque vous modifiez la relation entre les objets en définissant la propriété de clé étrangère, la propriété de navigation de référence a la valeur Null et n'est pas synchronisée sur l'entité principale appropriée sur le client. Dès que le graphique est attaché au contexte d’objet (par exemple, une fois que vous avez appelé la méthode **ApplyChanges**), les propriétés de clé étrangère et les propriétés de navigation sont synchronisées.  
 
     > Le fait que la propriété de navigation de référence ne soit pas synchronisée avec l'objet principal approprié peut poser un problème si vous avez spécifié la suppression en cascade dans la relation de clé étrangère. Si vous supprimez l'objet principal, la suppression ne sera pas propagée aux objets dépendants. Si vous avez spécifié des suppressions en cascade, utilisez les propriétés de navigation pour modifier les relations au lieu de définir la propriété de clé étrangère.  
 - Les entités de suivi automatique ne sont pas activées pour effectuer un chargement différé.  
-- La sérialisation binaire et la sérialisation en objets de gestion d’état ASP.NET ne sont pas prises en charge par les entités de suivi automatique. Toutefois, vous pouvez personnaliser le modèle pour ajouter la prise en charge de la sérialisation binaire. Pour plus d’informations, consultez [Utilisation de la sérialisation binaire et de ViewState avec les entités de suivi automatique](http://go.microsoft.com/fwlink/?LinkId=199208).  
+- La sérialisation binaire et la sérialisation en objets de gestion d’état ASP.NET ne sont pas prises en charge par les entités de suivi automatique. Toutefois, vous pouvez personnaliser le modèle pour ajouter la prise en charge de la sérialisation binaire. Pour plus d’informations, consultez [Utilisation de la sérialisation binaire et de ViewState avec les entités de suivi automatique](https://go.microsoft.com/fwlink/?LinkId=199208).  
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité  
 
