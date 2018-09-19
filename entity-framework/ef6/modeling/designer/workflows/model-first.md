@@ -3,12 +3,12 @@ title: Model First - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 8e010f95db40261073b4af80a3c0e3225a2cd1cf
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: d429d5ea590b22c77f3f7f0bcfbd5dfc0a3e0049
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490478"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283873"
 ---
 # <a name="model-first"></a>Tout d’abord de modèle
 Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Model First à l’aide d’Entity Framework. Modèle tout d’abord vous permet de créer un nouveau modèle à l’aide d’Entity Framework Designer, puis générez un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension .edmx) et peut être affiché et modifié dans l’Entity Framework Designer. Les classes que vous interagissez avec dans votre application sont automatiquement générées à partir du fichier EDMX.
@@ -18,13 +18,13 @@ Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au
 
 **Présentée par** : [Rowan Miller](http://romiller.com/)
 
-**Vidéo**: [WMV](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**Vidéo**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
 Vous devez disposer de Visual Studio 2010 ou Visual Studio 2012 est installé pour terminer cette procédure pas à pas.
 
-Si vous utilisez Visual Studio 2010, vous devez également avoir [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installé.
+Si vous utilisez Visual Studio 2010, vous devez également avoir [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installé.
 
 ## <a name="1-create-the-application"></a>1. Création de l’application
 
@@ -84,7 +84,7 @@ Si vous travaillez dans Visual Studio 2010, il existe quelques étapes suppléme
 Tout d’abord, nous devons obtenir la dernière version d’Entity Framework à partir de NuGet.
 
 -   **Projet –&gt; gérer les Packages NuGet... ** 
-     *Si vous n’avez pas le **gérer les Packages NuGet... ** option, vous devez installer le [version la plus récente de NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
+     *Si vous n’avez pas le **gérer les Packages NuGet... ** option, vous devez installer le [version la plus récente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
 -   Sélectionnez le **Online** onglet
 -   Sélectionnez le **EntityFramework** package
 -   Cliquez sur **installer**

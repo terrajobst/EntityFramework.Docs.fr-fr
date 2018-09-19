@@ -3,12 +3,12 @@ title: Testabilité et Entity Framework 4.0
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 0ddf72ab46e2d67dc8a9cf75cbd40430352c5210
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: aec177438004fd255bef85a5e5047cf6b5a6f782
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490530"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284042"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testabilité et Entity Framework 4.0
 Scott Allen
@@ -198,7 +198,7 @@ Avec les objets oct en place, nous pouvons créer un modèle EDM (Entity Data Mo
 
 **Figure 1**
 
-Remarque : Si vous souhaitez développer le modèle EDM tout d’abord, il est possible de générer, nettoyer, code POCO à partir du modèle EDM. Pour cela, avec une extension de Visual Studio 2010 fournie par l’équipe programmabilité des données. Pour télécharger l’extension, lancez le Gestionnaire d’extensions dans le menu Outils dans Visual Studio et rechercher dans la galerie en ligne des modèles pour « POCO » (voir figure 2). Il existe plusieurs modèles POCO pour EF. Pour plus d’informations sur l’utilisation du modèle, consultez « [procédure pas à pas : modèle de POCO pour Entity Framework](http://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)».
+Remarque : Si vous souhaitez développer le modèle EDM tout d’abord, il est possible de générer, nettoyer, code POCO à partir du modèle EDM. Pour cela, avec une extension de Visual Studio 2010 fournie par l’équipe programmabilité des données. Pour télécharger l’extension, lancez le Gestionnaire d’extensions dans le menu Outils dans Visual Studio et rechercher dans la galerie en ligne des modèles pour « POCO » (voir figure 2). Il existe plusieurs modèles POCO pour EF. Pour plus d’informations sur l’utilisation du modèle, consultez « [procédure pas à pas : modèle de POCO pour Entity Framework](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)».
 
 ![EF test_02](~/ef6/media/eftest-02.png)
 
@@ -964,11 +964,11 @@ Dans ce document, nous avons présenté plusieurs approches de création de code
 -   Martin, « [le principe de responsabilité unique](http://www.objectmentor.com/resources/articles/srp.pdf)»
 -   Martin Fowler, [catalogue de modèles](http://www.martinfowler.com/eaaCatalog/index.html) de *modèles d’Architecture d’Application Enterprise*
 -   Caprio Griffin, « [l’Injection de dépendances](https://msdn.microsoft.com/magazine/cc163739.aspx)»
--   Blog de programmabilité de données, « [procédure pas à pas : développement avec Entity Framework 4.0 piloté par Test](http://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)».
--   Blog de programmabilité de données, « [des modèles à l’aide de référentiel et unité de travail avec Entity Framework 4.0](http://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)»
+-   Blog de programmabilité de données, « [procédure pas à pas : développement avec Entity Framework 4.0 piloté par Test](https://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)».
+-   Blog de programmabilité de données, « [des modèles à l’aide de référentiel et unité de travail avec Entity Framework 4.0](https://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)»
 -   Dave Astels, « [BDD Intro](http://blog.daveastels.com/files/BDD_Intro.pdf)»
 -   Aaron Jensen, « [introduisant des spécifications Machine](http://codebetter.com/blogs/aaron.jensen/archive/2008/05/08/introducing-machine-specifications-or-mspec-for-short.aspx)»
--   Eric Lee, « [BDD avec MSTest](http://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)»
+-   Eric Lee, « [BDD avec MSTest](https://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)»
 -   Eric Evans, « [Domain Driven Design](http://books.google.com/books?id=7dlaMs0SECsC&printsec=frontcover&dq=evans%20domain%20driven%20design&hl=en&ei=cHztS6C8KIaglAfA_dS1CA&sa=X&oi=book_result&ct=result&resnum=1&ved=0CCoQ6AEwAA)»
 -   Martin Fowler, « [Mocks aren ' t Stubs](http://martinfowler.com/articles/mocksArentStubs.html)»
 -   Martin Fowler, « [Double de Test](http://martinfowler.com/bliki/TestDouble.html)»

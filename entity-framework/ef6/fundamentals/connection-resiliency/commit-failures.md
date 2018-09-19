@@ -3,18 +3,18 @@ title: Gestion des échecs de validation de transaction - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-ms.openlocfilehash: 71d5649dd993bb95e24165a55d812c71a37f03f3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 27e75e6a1919ee2300fe76cfcdf67cceaad887b3
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489386"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283652"
 ---
 # <a name="handling-transaction-commit-failures"></a>Gestion des échecs de validation de transaction
 > [!NOTE]
 > **EF6.1 et versions ultérieures uniquement** -les fonctionnalités, API, etc. abordés dans cette page ont été introduits dans Entity Framework 6.1. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Dans le cadre de 6.1, nous vous présentons une nouvelle fonctionnalité de résilience de connexion pour Entity Framework : la possibilité de détecter et de récupérer automatiquement lorsque des échecs de connexion temporaires affectent l’accusé de réception de la transaction est validée. Des informations complètes sur le scénario sont mieux décrits dans le billet de blog [connectivité de base de données SQL et le problème de l’idempotence](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En résumé, le scénario est que lorsqu’une exception est levée pendant une validation de transaction il existe deux causes possibles :  
+Dans le cadre de 6.1, nous vous présentons une nouvelle fonctionnalité de résilience de connexion pour Entity Framework : la possibilité de détecter et de récupérer automatiquement lorsque des échecs de connexion temporaires affectent l’accusé de réception de la transaction est validée. Des informations complètes sur le scénario sont mieux décrits dans le billet de blog [connectivité de base de données SQL et le problème de l’idempotence](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En résumé, le scénario est que lorsqu’une exception est levée pendant une validation de transaction il existe deux causes possibles :  
 
 1. Échec de la validation de transaction sur le serveur
 2. La validation de transaction a réussi sur le serveur, mais un problème de connectivité a empêché la notification de réussite d’atteindre le client  
@@ -69,4 +69,4 @@ Avant d’EF 6.1 s’est pas mécanisme permettant de gérer les échecs de vali
      - Si la ligne est absente, utilisez une stratégie d’exécution pour retenter l’opération actuelle.  
   4. Si la validation est réussie, supprimez la ligne correspondante pour éviter la croissance de la table.  
 
-[Ce billet de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contient des exemples de code pour accomplir cela sur SQL Azure.  
+[Ce billet de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contient des exemples de code pour accomplir cela sur SQL Azure.  

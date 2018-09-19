@@ -3,12 +3,12 @@ title: Automatique les Migrations Code First - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 21f77ef49db2485047292b3928b4f63d49dbb180
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 2713afaf09707b7696e90464aac9945c2d82d274
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489984"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283912"
 ---
 # <a name="automatic-code-first-migrations"></a>Automatique de Code First Migrations
 Les Migrations automatiques vous permet d’utiliser Code First Migrations sans qu’un fichier de code dans votre projet pour chaque modification apportée. Toutes les modifications peuvent être appliquées automatiquement, par exemple renomme de colonne requiert l’utilisation d’une migration de type de code.
@@ -97,7 +97,7 @@ Modifions un peu plus notre modèle.
     public string Url { get; set; }
 ```
 
-Si vous réexécutez l’application, vous obtenez une exception InvalidOperationException indiquant *Le modèle permettant la sauvegarde du contexte 'BlogContext' a changé depuis la création de la base de données. Utilisez Migrations Code First pour mettre à jour la base de données (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](http://go.microsoft.com/fwlink/?LinkId=238269)*).*
+Si vous réexécutez l’application, vous obtenez une exception InvalidOperationException indiquant *Le modèle permettant la sauvegarde du contexte 'BlogContext' a changé depuis la création de la base de données. Utilisez Migrations Code First pour mettre à jour la base de données (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269)*).*
 
 Comme le suggère l’exception, utilisons donc Migrations Code First. Étant donné que nous souhaitons utiliser les migrations automatiques, nous allons spécifier le **– EnableAutomaticMigrations** basculer.
 

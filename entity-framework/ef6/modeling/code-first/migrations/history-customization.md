@@ -3,12 +3,12 @@ title: Personnalisation de la table d’historique de migrations - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ed5518f0-a9a6-454e-9e98-a4fa7748c8d0
-ms.openlocfilehash: 6644bf2b0ac703a9f3a779b17b31d79d40cc5b69
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: e3faefc4b812ec4bc440ed2bb48747053d8cb1b3
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489206"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283691"
 ---
 # <a name="customizing-the-migrations-history-table"></a>Personnalisation de la table d’historique de migrations
 > [!NOTE]
@@ -69,7 +69,7 @@ Supposons que vous souhaitez renommer la table d’historique de migrations et p
     }
 ```
 
-Une fois que votre HistoryContext personnalisée est prête vous devez faire EF prenant en charge de celui-ci en vous inscrivant via [configuration basée sur le code](http://msdn.com/data/jj680699):
+Une fois que votre HistoryContext personnalisée est prête vous devez faire EF prenant en charge de celui-ci en vous inscrivant via [configuration basée sur le code](https://msdn.com/data/jj680699):
 
 ``` csharp
     using System.Data.Entity;

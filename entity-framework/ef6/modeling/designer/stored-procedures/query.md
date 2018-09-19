@@ -3,12 +3,12 @@ title: Requête concepteur procédures stockées - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 6284b10261e6f3b9bf69d1c15e121988e4976d48
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 04478ea1c8cd43a7ba4ee788e464992af3de7f64
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489945"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283899"
 ---
 # <a name="designer-query-stored-procedures"></a>Requêtes du Générateur de procédures stockées
 Cette procédure pas à pas montrent comment utiliser Entity Framework Designer (Concepteur d’EF) pour importer des procédures stockées dans un modèle, puis appelez les procédures stockées importés pour récupérer les résultats. 
@@ -100,4 +100,4 @@ The department name is Engineering
 <a name="output-parameters"></a>Paramètres de sortie
 -----------------
 
-Si les paramètres de sortie sont utilisés, leurs valeurs ne sera pas disponibles jusqu'à ce que les résultats ont été lues entièrement. Il s’agit en raison du comportement sous-jacent de DbDataReader, consultez [extraction de données à l’aide d’un DataReader](http://go.microsoft.com/fwlink/?LinkID=398589) pour plus d’informations.
+Si les paramètres de sortie sont utilisés, leurs valeurs ne sera pas disponibles jusqu'à ce que les résultats ont été lues entièrement. Il s’agit en raison du comportement sous-jacent de DbDataReader, consultez [extraction de données à l’aide d’un DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) pour plus d’informations.

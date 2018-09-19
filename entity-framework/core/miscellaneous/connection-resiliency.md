@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: d6e31cf2b9b783ea503703536d159b34bf2e18c0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d5101d0622ddc2c90ddded16b9ec6cc4eb814c36
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997188"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283834"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -49,7 +49,7 @@ La solution consiste à appeler manuellement la stratégie d’exécution avec u
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Échec de validation de transaction et le problème de l’idempotence
 
-En règle générale, en cas d’échec de la connexion la transaction en cours est annulée. Toutefois, si la connexion est perdue pendant la transaction étant validées résultant état de la transaction est inconnu. Consultez ce [billet de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) pour plus d’informations.
+En règle générale, en cas d’échec de la connexion la transaction en cours est annulée. Toutefois, si la connexion est perdue pendant la transaction étant validées résultant état de la transaction est inconnu. Consultez ce [billet de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) pour plus d’informations.
 
 Par défaut, la stratégie d’exécution va retenter l’opération comme si la transaction a été annulée, mais si elle n’est pas le cas cela entraîne une exception si le nouvel état de la base de données n’est pas compatible ou pourrait entraîner **une altération des données** si le opération ne repose pas sur un état particulier, par exemple lors de l’insertion d’une nouvelle ligne avec les valeurs de clé généré automatiquement.
 

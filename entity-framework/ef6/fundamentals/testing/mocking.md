@@ -3,12 +3,12 @@ title: Test avec une infrastructure de simulation - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: b50d0afb52ae1c496f2734ecc015cdaaa060aff7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 20799b55b2dffe27637c4fb84df06cee174e6dd9
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489971"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284094"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Test avec une infrastructure de simulation
 > [!NOTE]
@@ -235,7 +235,7 @@ Entity Framework 6 a introduit un ensemble de méthodes d’extension qui peut �
 
 Étant donné que les requêtes Entity Framework utiliser LINQ, les méthodes d’extension sont définies sur IQueryable et IEnumerable. Toutefois, car ils sont uniquement conçus pour être utilisé avec Entity Framework, vous pouvez recevoir l’erreur suivante si vous tentez de les utiliser sur une requête LINQ qui n’est pas une requête Entity Framework :
 
-> La source IQueryable n’implémente pas IDbAsyncEnumerable{0}. Uniquement les sources qui implémentent IDbAsyncEnumerable peuvent être utilisées pour les opérations asynchrones d’Entity Framework. Pour plus d’informations, consultez [ http://go.microsoft.com/fwlink/?LinkId=287068 ](http://go.microsoft.com/fwlink/?LinkId=287068).  
+> La source IQueryable n’implémente pas IDbAsyncEnumerable{0}. Uniquement les sources qui implémentent IDbAsyncEnumerable peuvent être utilisées pour les opérations asynchrones d’Entity Framework. Pour plus d’informations, consultez [ http://go.microsoft.com/fwlink/?LinkId=287068 ](https://go.microsoft.com/fwlink/?LinkId=287068).  
 
 Tandis que les méthodes asynchrones sont uniquement pris en charge en cours d’exécution par rapport à une requête Entity Framework, vous souhaiterez utilisez-les dans votre test unitaire en cours d’exécution par rapport à une mémoire tester double d’un DbSet.  
 

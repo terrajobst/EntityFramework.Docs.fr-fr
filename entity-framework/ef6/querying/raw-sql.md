@@ -3,12 +3,12 @@ title: Requêtes SQL brutes - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-ms.openlocfilehash: 6b00648939ccedffeed09b4e1d6e8d70fa262a36
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 168aee67186535bf2a50705e86bfc5a88147e369
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490582"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283782"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 Entity Framework vous permet d’interroger à l’aide de LINQ avec vos classes d’entité. Toutefois, il peut arriver que vous souhaitez exécuter des requêtes à l’aide de requêtes SQL brutes directement par rapport à la base de données. Cela inclut l’appel de procédures stockées, qui peuvent être utiles pour les modèles de Code First qui ne prennent actuellement pas en charge le mappage à des procédures stockées. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -82,4 +82,4 @@ Notez que toutes les modifications apportées aux données dans la base de donn�
 
 ### <a name="output-parameters"></a>Paramètres de sortie  
 
-Si les paramètres de sortie sont utilisés, leurs valeurs ne sera pas disponibles jusqu'à ce que les résultats ont été lues entièrement. Il s’agit en raison du comportement sous-jacent de DbDataReader, consultez [extraction de données à l’aide d’un DataReader](http://go.microsoft.com/fwlink/?LinkID=398589) pour plus d’informations.  
+Si les paramètres de sortie sont utilisés, leurs valeurs ne sera pas disponibles jusqu'à ce que les résultats ont été lues entièrement. Il s’agit en raison du comportement sous-jacent de DbDataReader, consultez [extraction de données à l’aide d’un DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) pour plus d’informations.  

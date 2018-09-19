@@ -3,12 +3,12 @@ title: Conventions de Model-Based - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: fb79164f71cb3afff705a83f5078a13d043abca8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 80b722730b4ca6c9d00a8611b6c9027e8bc9fe61
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490933"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283705"
 ---
 # <a name="model-based-conventions"></a>Conventions reposant sur un modèle
 > [!NOTE]
@@ -146,7 +146,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>Extension des Conventions existantes   
 
-Si vous avez besoin écrire une convention qui est similaire à un des conventions qui applique déjà les Entity Framework à votre modèle, que vous pouvez toujours étendre cette convention pour éviter d’avoir à réécrire de zéro.  Un exemple consiste à remplacer l’Id existant correspondant à la convention avec un personnalisé.   Un avantage supplémentaire à la substitution de la convention de clés est que la méthode substituée est appelée uniquement si aucune clé déjà détecté ou configurée de manière explicite. Une liste des conventions utilisées par Entity Framework est disponible ici : [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
+Si vous avez besoin écrire une convention qui est similaire à un des conventions qui applique déjà les Entity Framework à votre modèle, que vous pouvez toujours étendre cette convention pour éviter d’avoir à réécrire de zéro.  Un exemple consiste à remplacer l’Id existant correspondant à la convention avec un personnalisé.   Un avantage supplémentaire à la substitution de la convention de clés est que la méthode substituée est appelée uniquement si aucune clé déjà détecté ou configurée de manière explicite. Une liste des conventions utilisées par Entity Framework est disponible ici : [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
 
 ``` csharp
 using System.Data.Entity;
@@ -209,4 +209,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>Notes  
 
-Une liste de conventions qui sont actuellement appliquées par Entity Framework est disponible dans la documentation MSDN ici : [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Cette liste est extraite directement à partir de notre code source.  Le code source pour Entity Framework 6 est disponible sur [GitHub](https://github.com/aspnet/entityframework6/) et la plupart des conventions utilisées par Entity Framework sont bon point de départ pour les modèles personnalisés en fonction des conventions.  
+Une liste de conventions qui sont actuellement appliquées par Entity Framework est disponible dans la documentation MSDN ici : [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Cette liste est extraite directement à partir de notre code source.  Le code source pour Entity Framework 6 est disponible sur [GitHub](https://github.com/aspnet/entityframework6/) et la plupart des conventions utilisées par Entity Framework sont bon point de départ pour les modèles personnalisés en fonction des conventions.  
