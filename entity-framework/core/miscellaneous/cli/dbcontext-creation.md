@@ -13,7 +13,7 @@ ms.locfileid: "42993716"
 ---
 <a name="design-time-dbcontext-creation"></a>Création de DbContext d’au moment du design
 ==============================
-Certaines commandes outils EF Core (par exemple, le [Migrations] [ 1] commandes) nécessitent une dérivée `DbContext` instance doit être créé au moment du design afin de collecter des informations détaillées sur l’application types d’entité et comment elles correspondent à un schéma de base de données. Dans la plupart des cas, il est souhaitable que le `DbContext` ainsi créée est configuré de manière similaire à la façon dont il serait [configuré au moment de l’exécution][2].
+Certaines commandes outils EF Core (par exemple, le [Migrations][1] commandes) nécessitent une dérivée `DbContext` instance doit être créé au moment du design afin de collecter des informations détaillées sur l’application types d’entité et comment elles correspondent à un schéma de base de données. Dans la plupart des cas, il est souhaitable que le `DbContext` ainsi créée est configuré de manière similaire à la façon dont il serait [configuré au moment de l’exécution][2].
 
 Il existe différentes façons les outils essaie de créer le `DbContext`:
 
@@ -26,11 +26,11 @@ Les outils essayer tout d’abord d’obtenir le fournisseur de services en appe
 > [!NOTE]
 > Lorsque vous créez une nouvelle application ASP.NET Core 2.0, ce hook est inclus par défaut. Dans les versions précédentes d’EF Core et ASP.NET Core, les outils tentez d’appeler `Startup.ConfigureServices` directement afin d’obtenir de fournisseur de services de l’application, mais ce modèle n’est plus fonctionne correctement dans les applications ASP.NET Core 2.0. Si vous mettez à niveau une application 1.x de ASP.NET Core 2.0, vous pouvez [modifier votre `Program` classe à suivre le nouveau modèle][3].
 
-Le `DbContext` lui-même et les dépendances dans son constructeur doivent être inscrits en tant que services dans le fournisseur de services de l’application. Vous pouvez facilement faire en ayant [un constructeur sur la `DbContext` qui prend une instance de `DbContextOptions<TContext>` en tant qu’argument] [ 4] et à l’aide de la [ `AddDbContext<TContext>` (méthode)] [5].
+Le `DbContext` lui-même et les dépendances dans son constructeur doivent être inscrits en tant que services dans le fournisseur de services de l’application. Vous pouvez facilement faire en ayant [un constructeur sur la `DbContext` qui prend une instance de `DbContextOptions<TContext>` en tant qu’argument][ 4] et à l’aide de la [`AddDbContext<TContext>` (méthode)][5].
 
 <a name="using-a-constructor-with-no-parameters"></a>À l’aide d’un constructeur sans paramètres
 --------------------------------------
-Si le DbContext ne peut pas être obtenu à partir du fournisseur de service d’application, les outils Recherchez dérivé `DbContext` type dans le projet. Puis, ils tentent de créer une instance à l’aide d’un constructeur sans paramètre. Il peut s’agir du constructeur par défaut si le `DbContext` est configuré à l’aide de la [ `OnConfiguring` ] [ 6] (méthode).
+Si le DbContext ne peut pas être obtenu à partir du fournisseur de service d’application, les outils Recherchez dérivé `DbContext` type dans le projet. Puis, ils tentent de créer une instance à l’aide d’un constructeur sans paramètre. Il peut s’agir du constructeur par défaut si le `DbContext` est configuré à l’aide de la [`OnConfiguring`][6] (méthode).
 
 <a name="from-a-design-time-factory"></a>À partir d’une fabrique au moment du design
 --------------------------
@@ -57,7 +57,7 @@ namespace MyProject
 ```
 
 > [!NOTE]
-> Le `args` paramètre est actuellement pas utilisé. Il est [un problème] [ 7] la possibilité de spécifier des arguments au moment du design à partir des outils de suivi.
+> Le `args` paramètre est actuellement pas utilisé. Il est [un problème][7] la possibilité de spécifier des arguments au moment du design à partir des outils de suivi.
 
 Une fabrique au moment du design peut être particulièrement utile si vous avez besoin configurer le DbContext différemment pour le moment du design qu’au moment de l’exécution, si le `DbContext` prend constructeur paramètres supplémentaires ne sont pas inscrits dans l’injection de dépendances, si vous n’utilisez pas du tout l’injection de dépendances, ou si pour certains vous préférez ne pas avoir de raison un `BuildWebHost` méthode dans votre application ASP.NET Core `Main` classe.
 
