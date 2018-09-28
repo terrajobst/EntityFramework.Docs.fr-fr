@@ -3,12 +3,12 @@ title: Paramètres de fichier de configuration - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-ms.openlocfilehash: 949ad4f030205753c5fbf9b95f4d183d8c0d1fe7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: faba4e406b9f26f5bed6149f75c59da362d84692
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490870"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415781"
 ---
 # <a name="configuration-file-settings"></a>Fichier de configuration
 Entity Framework permet un certain nombre de paramètres de la définir à partir du fichier de configuration. En général EF suit un principe de « convention sur configuration » : tous les paramètres décrits dans ce billet un comportement par défaut, vous devez uniquement à vous soucier de la modification du paramètre lorsque la valeur par défaut ne répond plus aux besoins de votre.  
@@ -153,7 +153,7 @@ La section de configuration vous permet de spécifier une fabrique de connexion 
 
 Lorsque vous avez installé le package NuGet d’EF qui pointe vers SQL Express ou LocalDB, selon celle qui vous avez installé a été inscrit par une fabrique de connexion par défaut.  
 
-Pour définir une fabrique de connexion, vous spécifiez le nom de type qualifié d’assembly dans le **deafultConnectionFactory** élément.  
+Pour définir une fabrique de connexion, vous spécifiez le nom de type qualifié d’assembly dans le **defaultconnectionfactory que** élément.  
 
 > [!NOTE]
 > Un nom qualifié d’assembly est le nom qualifié d’espace de noms, suivi par une virgule, puis l’assembly du type dans lequel réside. Vous pouvez éventuellement spécifier également la version de l’assembly, la culture et le jeton de clé publique.  

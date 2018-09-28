@@ -3,12 +3,12 @@ title: Annotations de données First - EF6 de code
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 38ae52543ed99e5a1c1da7d19a2e15d168e3a1bd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 54e27f1b866da14d68db66ca5eca5a6dde819e26
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490105"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415807"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -319,13 +319,13 @@ Voici la table une fois qu’il est régénéré. Le nom de la table a changé �
 Une fonctionnalités de base de données important est la possibilité d’avoir les propriétés calculées. Si vous mappez vos classes de Code First pour les tables qui contiennent des colonnes calculées, vous ne voulez Entity Framework pour tenter de mettre à jour ces colonnes. Mais vous ne souhaitez pas que EF pour renvoyer ces valeurs à partir de la base de données une fois que vous avez inséré ou mis à jour des données. Vous pouvez utiliser l’annotation DatabaseGenerated pour signaler les propriétés dans votre classe, ainsi que l’énumération calculé. Autres énumérations sont None et d’identité.
 
 ``` csharp
-    [DatabaseGenerated(DatabaseGenerationOption.Computed)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateCreated { get; set; }
 ```
 
 Vous pouvez utiliser la base de données générée sur les colonnes byte ou timestamp lorsque code génère tout d’abord la base de données, sinon vous devez uniquement l’utiliser en pointant sur les bases de données existantes, car le code ne sont pas tout d’abord être en mesure de déterminer la formule pour la colonne calculée.
 
-Vous lisez supérieur à celui par défaut, une propriété de clé est un entier deviendra une clé d’identité dans la base de données. Qui serait le même que l’affectation DatabaseGenerated DatabaseGenerationOption.Identity. Si vous ne souhaitez pas qu’il soit une clé d’identité, vous pouvez définir la valeur à DatabaseGenerationOption.None.
+Vous lisez supérieur à celui par défaut, une propriété de clé est un entier deviendra une clé d’identité dans la base de données. Qui serait le même que l’affectation DatabaseGenerated DatabaseGeneratedOption.Identity. Si vous ne souhaitez pas qu’il soit une clé d’identité, vous pouvez définir la valeur à DatabaseGeneratedOption.None.
 
  
 
