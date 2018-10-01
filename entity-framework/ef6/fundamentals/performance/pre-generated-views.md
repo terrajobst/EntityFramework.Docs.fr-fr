@@ -3,19 +3,19 @@ title: Mode de mappage prégénéré - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: da5d59ba5a899a0ee3a1eec3db0da1b4ece871d8
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 1fda9fe9638adce9b24a6b81aa081effeb0def81
+ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46284107"
+ms.lasthandoff: 09/30/2018
+ms.locfileid: "47459524"
 ---
 # <a name="pre-generated-mapping-views"></a>Vues prégénérées mappage
 Avant de l’Entity Framework peut exécuter une requête ou enregistrer les modifications apportées à la source de données, il doit générer un ensemble de vues de mappage pour accéder à la base de données. Ces vues de mappage sont un ensemble de l’instruction Entity SQL qui représentent la base de données de manière abstraite et font partie des métadonnées qui sont mis en cache par domaine d’application. Si vous créez plusieurs instances du même contexte dans le même domaine d’application, elles réutiliseront les vues de mappage depuis les métadonnées mises en cache au lieu de les régénérer. Étant donné que la génération de vues de mappage constitue une partie significative du coût total de l’exécution de la première requête, Entity Framework vous permet de prégénérer des vues de mappage et de les inclure dans le projet compilé. Pour plus d’informations, consultez [considérations sur les performances (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
 
-## <a name="generating-mapping-views-with-the-ef-power-tools"></a>Génération de mappage des vues avec les outils EF Power Tools
+## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Génération de mappage des vues avec l’édition Community EF Power Tools
 
-Pour prégénérer des vues le plus simple consiste à utiliser le [EF Power Tools](https://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d). Une fois que vous avez installé les outils Power avoir une option de menu pour générer des vues, comme indiqué ci-dessous.
+Pour prégénérer des vues le plus simple consiste à utiliser le [EF Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition). Une fois que vous avez installé les outils Power avoir une option de menu pour générer des vues, comme indiqué ci-dessous.
 
 -   Pour **Code First** modèles avec le bouton droit sur le fichier de code qui contient votre classe DbContext.
 -   Pour **Entity Framework Designer** modèles avec le bouton droit sur votre fichier EDMX.
