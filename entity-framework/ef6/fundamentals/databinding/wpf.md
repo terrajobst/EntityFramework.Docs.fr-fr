@@ -3,12 +3,12 @@ title: Liaison de données avec WPF - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: 5bd4a9b98a12de41e4ec37c2cc7dbdc537210893
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 1933988277d3be8fecc02fced3293f2b7f80c901
+ms.sourcegitcommit: ae399f9f3d1bae2c446b552247bd3af3ca5a2cf9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490226"
+ms.lasthandoff: 10/04/2018
+ms.locfileid: "48575663"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 Cette procédure pas à pas montre comment lier les types POCO à des contrôles WPF dans un formulaire « maître / détail ». L’application utilise les API Entity Framework pour remplir des objets avec des données à partir de la base de données, le suivi des modifications et conserver les données dans la base de données.
@@ -31,7 +31,7 @@ Si nécessaire, vous pouvez [revenir à la génération de code en fonction de O
 
 Vous devez disposer de Visual Studio 2013, Visual Studio 2012 ou Visual Studio 2010 est installé pour terminer cette procédure pas à pas.
 
-Si vous utilisez Visual Studio 2010, vous devez également installer le package NuGet. Pour plus d’informations, consultez [installation NuGet](http://docs.nuget.org/docs/start-here/installing-nuget).  
+Si vous utilisez Visual Studio 2010, vous devez également installer le package NuGet. Pour plus d’informations, consultez [installation NuGet](https://docs.microsoft.com/nuget/install-nuget-client-tools).  
 
 ## <a name="create-the-application"></a>Création de l’application
 
@@ -252,12 +252,12 @@ Ajoutez les classes qui sont définies dans le modèle en tant que sources de do
 
     ![Data Sources](~/ef6/media/datasources.png)
 
--   Sélectionnez le ** catégorie ** source de données et faites-la glisser sur le formulaire.
+-   Sélectionnez le **catégorie** source de données et faites-la glisser sur le formulaire.
 
 Les éléments suivants s’est produite lorsque nous avons fait glisser cette source :
 
--   Le **categoryViewSource** ressource et le ** categoryDataGrid ** contrôle ont été ajoutés à XAML. Pour plus d’informations sur DataViewSources, consultez http://bea.stollnitz.com/blog/?p=387.
--   La propriété DataContext sur l’élément de grille parent a été définie sur « {StaticResource **categoryViewSource** } ».  Le **categoryViewSource** ressources servant de source de liaison externe\\élément de grille parent. Les éléments internes de la grille puis héritent de la valeur DataContext parent grille (propriété ItemsSource de la categoryDataGrid est définie sur « {Binding} »). 
+-   Le **categoryViewSource** ressource et le **categoryDataGrid** contrôle ont été ajoutées pour XAML 
+-   La propriété DataContext sur l’élément de grille parent a été définie sur « {StaticResource **categoryViewSource** } ». Le **categoryViewSource** ressources servant de source de liaison externe\\élément de grille parent. Les éléments internes de la grille puis héritent la valeur DataContext grille (propriété ItemsSource de la categoryDataGrid est définie sur « {Binding} »)
 
 ``` xml
     <Window.Resources>
@@ -282,7 +282,7 @@ Les éléments suivants s’est produite lorsque nous avons fait glisser cette s
 
 Maintenant que nous avons une grille pour afficher les catégories de nous allons ajouter une grille de détails pour afficher les produits associés.
 
--   Sélectionnez le ** produits ** propriété sous la ** catégorie ** source de données et faites-la glisser sur le formulaire.
+-   Sélectionnez le **produits** propriété sous la **catégorie** source de données et faites-la glisser sur le formulaire.
     -   Le **categoryProductsViewSource** ressource et **productDataGrid** grille sont ajoutés à XAML
     -   Le chemin de liaison pour cette ressource est défini pour les produits
     -   Infrastructure de liaison de données WPF permet de s’assurer que seuls les produits liés à la catégorie sélectionnée apparaissent dans **productDataGrid**
@@ -305,7 +305,7 @@ Il est temps d’ajouter des gestionnaires d’événements à la fenêtre princ
 
 Cela vous amène à du code-behind pour le formulaire, nous allons maintenant modifier le code pour utiliser le ProductContext pour accéder aux données. Mettre à jour le code pour le MainWindow comme indiqué ci-dessous.
 
-Le code déclare une instance d’exécution longue de **ProductContext**. Le **ProductContext** objet est utilisé pour interroger et enregistrer les données dans la base de données. Le **Dispose**() sur le **ProductContext** instance est ensuite appelée à partir de l’élément substitué **OnClosing** (méthode). Les commentaires du code fournissent des informations sur ce que fait le code.
+Le code déclare une instance d’exécution longue de **ProductContext**. Le **ProductContext** objet est utilisé pour interroger et enregistrer les données dans la base de données. Le **Dispose()** sur le **ProductContext** instance est ensuite appelée à partir de l’élément substitué **OnClosing** (méthode). Les commentaires du code fournissent des informations sur ce que fait le code.
 
 ``` csharp
     using System.Data.Entity;
@@ -389,6 +389,10 @@ Le code déclare une instance d’exécution longue de **ProductContext**. Le **
 
 -   Appuyez sur la **enregistrer** bouton pour enregistrer les données dans la base de données
 
-Après l’appel à du DbContext **SaveChanges**(), les ID sont remplies avec les valeurs de la base de données générée. Étant donné que nous avons appelé **Actualiser**() après **SaveChanges**() le **DataGrid** contrôles sont mis à jour avec les nouvelles valeurs également.
+Après l’appel à du DbContext **SaveChanges()**, les ID sont remplies avec les valeurs de la base de données générée. Étant donné que nous avons appelé **Refresh()** après **SaveChanges()** le **DataGrid** contrôles sont mis à jour avec les nouvelles valeurs également.
 
 ![Fenêtre principale avec ID remplis](~/ef6/media/screen2.png)
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+Pour en savoir plus sur la liaison de données pour les collections à l’aide de WPF, consultez [cette rubrique](https://docs.microsoft.com/dotnet/framework/wpf/data/data-binding-overview#binding-to-collections) dans la documentation WPF.  
