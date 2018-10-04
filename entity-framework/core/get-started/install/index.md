@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 7831e6a54e885cf0b89ef3eef2cd81a9292df606
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 455eccbb149f0980cefa250ef5db443c73e66603
+ms.sourcegitcommit: ae399f9f3d1bae2c446b552247bd3af3ca5a2cf9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250320"
+ms.lasthandoff: 10/04/2018
+ms.locfileid: "48575637"
 ---
 # <a name="installing-entity-framework-core"></a>Installation d’Entity Framework Core
 
@@ -114,7 +114,7 @@ Si vous mettez à niveau une application existante avec EF Core 2.1, vous pouve
 
 * Les packages design-time des fournisseurs de base de données tels que `Microsoft.EntityFrameworkCore.SqlServer.Design` ne sont plus obligatoires ou pris en charge dans EF Core 2.1, mais ne sont pas automatiquement supprimés durant la mise à niveau des autres packages.
 
-* Les outils CLI .NET étant désormais inclus dans le kit SDK .NET, la référence à ce package peut être supprimée du fichier *.csproj* :
+* Les outils CLI .NET étant désormais inclus dans le Kit de développement logiciel (SDK) .NET, la référence à ce package peut être supprimée du fichier *.csproj* :
 
   ```
   <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
