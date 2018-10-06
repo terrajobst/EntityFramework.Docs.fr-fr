@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: db4d89b6a0babe01bccbeadc51381a309ad8ca0f
-ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
+ms.openlocfilehash: 9a57b58f8569ee1241e40c3809b03487d1d88e02
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/30/2018
-ms.locfileid: "47459555"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834758"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Référence - Console du Gestionnaire de Package dans Visual Studio des outils Entity Framework Core
 
@@ -177,7 +177,7 @@ Paramètres :
 
 ## <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
-Génère du code pour un `DbContext` et types d’entité pour une base de données.
+Génère du code pour un `DbContext` et types d’entité pour une base de données. Dans l’ordre pour `Scaffold-DbContext` pour générer un type d’entité, la table de base de données doit avoir une clé primaire.
 
 Paramètres :
 
