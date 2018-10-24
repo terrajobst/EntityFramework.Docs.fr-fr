@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 78f8d9576748a725634665f915def80b5a13820c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 47e22be274d02b5221c638d07151d9607aa7e24f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997875"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250801"
 ---
 # <a name="client-vs-server-evaluation"></a>Évaluation sur le client ou le serveur
 
@@ -49,7 +49,7 @@ public static string StandardizeUrl(string url)
 }
 ```
 
-## <a name="disabling-client-evaluation"></a>Désactivation de l’évaluation du client
+## <a name="client-evaluation-performance-issues"></a>Problèmes de performances d’évaluation sur le client
 
 Si l’évaluation sur le client peut être très utile, dans certains cas, cela peut entraîner une dégradation des performances. Considérez la requête suivante, où la méthode d’assistance est maintenant utilisée dans un filtre. Étant donné que cela ne peut pas être effectué dans la base de données, toutes les données sont extraites en mémoire, puis le filtre est appliqué sur le client. Selon la quantité de données et la mesure dans laquelle ces données sont filtrées, cela peut entraîner une dégradation des performances.
 
@@ -60,7 +60,13 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-Par défaut, EF Core consigne un avertissement lorsque l’évaluation sur le client est effectuée. Consultez [Journalisation](../miscellaneous/logging.md) pour plus d’informations sur l’affichage de la sortie de la journalisation. Vous pouvez modifier le comportement lorsque l’évaluation sur le client survient, entre journaliser ou ne rien faire. Cette opération est effectuée lors de la définition des options pour votre contexte, généralement dans `DbContext.OnConfiguring`, ou `Startup.cs` si vous utilisez ASP.NET Core.
+## <a name="client-evaluation-logging"></a>Journalisation de l’évaluation sur le client
+
+Par défaut, EF Core consigne un avertissement lorsque l’évaluation sur le client est effectuée. Consultez [Journalisation](../miscellaneous/logging.md) pour plus d’informations sur l’affichage de la sortie de la journalisation. 
+
+## <a name="optional-behavior-throw-an-exception-for-client-evaluation"></a>Comportement facultatif : lever une exception pour l’évaluation sur le client
+
+Vous pouvez modifier le comportement lorsque l’évaluation sur le client survient, entre journaliser ou ne rien faire. Cette opération est effectuée lors de la définition des options pour votre contexte, généralement dans `DbContext.OnConfiguring`, ou `Startup.cs` si vous utilisez ASP.NET Core.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/ThrowOnClientEval/BloggingContext.cs?highlight=5)] -->
 ``` csharp

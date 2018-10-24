@@ -4,12 +4,12 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
-ms.openlocfilehash: 35292d2a724d02ecdc96b53550858eb0b6dd79d1
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 1efadf4484a13d5df2a2f11aad3d0e8f9ceff543
+ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489230"
+ms.lasthandoff: 10/14/2018
+ms.locfileid: "49315631"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) est un mappeur Objet Relationnel (O/RM) éprouvé pour .NET qui bénéficie de nombreuses années de développement de fonctionnalités et de stabilisation.
@@ -37,7 +37,7 @@ EF6 implémente de nombreuses fonctionnalités O/RM populaires :
 
 EF Core est une version plus moderne, légère et extensible d’Entity Framework, qui a des avantages et des fonctionnalités très similaires à EF6.
 EF Core est le résultat d’une réécriture complète et contient de nombreuses nouvelles fonctionnalités non disponibles dans EF6, même s’il lui manque encore certaines des fonctionnalités de mappage les plus avancées d’EF6.
-Nous vous recommandons d’utiliser EF Core dans les nouvelles applications si l’ensemble des fonctionnalités correspond à vos besoins.
+Si l’ensemble des fonctionnalités correspond à vos besoins, vous pouvez utiliser EF Core dans les nouvelles applications.
 La section [Comparer EF Core et EF6](xref:efcore-and-ef6/index) examine ce choix plus en détail.
 
 ## <a name="get-startedef6get-startedmd"></a>[Bien démarrer](~/ef6/get-started.md)

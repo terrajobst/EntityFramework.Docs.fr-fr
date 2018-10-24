@@ -2,23 +2,41 @@
 title: Migrations - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 10/30/2017
+ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 4a5d6f3798c7af7597f95cebea1aeb9e5e58d277
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 5ae06a4342a556936dc44c5bf6622814eaad4733
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996520"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834745"
 ---
 <a name="migrations"></a>Migrations
 ==========
-Les migrations permettent d’appliquer de façon incrémentielle des modifications de schéma à la base de données pour qu’elle demeure synchronisée avec votre modèle EF Core tout en conservant les données existantes dans la base de données.
 
-<a name="creating-the-database"></a>Création de la base de données
----------------------
-Une fois que vous avez [défini votre modèle initial][1], il est temps de créer la base de données. Pour ce faire, ajoutez une migration initiale.
-Installez les [outils EF Core][2] et exécutez la commande appropriée.
+Un modèle de données change au cours du développement et perd sa synchronisation avec la base de données. Vous pouvez supprimer la base de données et laisser EF en créer une qui correspond au modèle, mais cette procédure entraîne la perte de données. La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.
+
+Les migrations incluent des outils en ligne de commande et des API qui aident à effectuer les tâches suivantes :
+
+* [Créer une migration](#create-a-migration). Générez du code qui peut mettre à jour la base de données pour la synchroniser avec un ensemble de modifications du modèle.
+* [Mettre à jour la base de données](#update-the-database). Appliquez des migrations en attente pour mettre à jour le schéma de base de données.
+* [Personnaliser le code de migration](#customize-migration-code). Le code généré doit parfois être modifié ou complété.
+* [Supprimer une migration](#remove-a-migration). Supprimez le code généré.
+* [Rétablir une migration](#revert-a-migration). Annulez les modifications apportées à la base de données.
+* [Générer des scripts SQL](#generate-sql-scripts). Vous aurez peut-être besoin d’un script pour mettre à jour une base de données de production ou pour résoudre des problèmes liés au code de migration.
+* [Appliquer des migrations au moment de l’exécution](#apply-migrations-at-runtime). Quand les mises à jour au moment du design et l’exécution de scripts ne sont pas les meilleures options, appelez la méthode `Migrate()`.
+
+<a name="install-the-tools"></a>Installer les outils
+-----------------
+
+Installez les [outils en ligne de commande](xref:core/miscellaneous/cli/index) :
+* Pour Visual Studio, nous vous recommandons les [outils de la Console du Gestionnaire de package](xref:core/miscellaneous/cli/powershell).
+* Pour d’autres environnements de développement, choisissez les [outils CLI .NET Core](xref:core/miscellaneous/cli/dotnet).
+
+<a name="create-a-migration"></a>Créer une migration
+------------------
+
+Une fois que vous avez [défini votre modèle initial](xref:core/modeling/index), il est temps de créer la base de données. Pour ajouter une migration initiale, exécutez la commande suivante.
 
 ``` powershell
 Add-Migration InitialCreate
@@ -38,6 +56,9 @@ L’horodatage dans le nom des fichiers permet de conserver ces derniers dans l�
 > [!TIP]
 > Vous êtes libre de déplacer les fichiers Migrations et de changer leur espace de noms. Les migrations sont créées en tant que sœurs de la dernière migration.
 
+<a name="update-the-database"></a>Mettre à jour la base de données
+-------------------
+
 Ensuite, appliquez la migration à la base de données pour créer le schéma.
 
 ``` powershell
@@ -47,9 +68,10 @@ Update-Database
 dotnet ef database update
 ```
 
-<a name="adding-another-migration"></a>Ajout d’une autre migration
+<a name="customize-migration-code"></a>Personnaliser le code de migration
 ------------------------
-Une fois votre modèle EF Core modifié, le schéma de base de données n’est plus synchronisé. Pour le mettre à jour, ajoutez une autre migration. Le nom de la migration peut être utilisé comme un message de validation dans un système de gestion de versions. Par exemple, si j’ai apporté des modifications pour enregistrer des avis de clients sur des produits, je peux choisir quelque chose comme *AddProductReviews*.
+
+Une fois votre modèle EF Core modifié, le schéma de base de données risque de ne plus être synchronisé. Pour le mettre à jour, ajoutez une autre migration. Le nom de la migration peut être utilisé comme un message de validation dans un système de gestion de versions. Par exemple, vous pouvez choisir un nom tel que *AjouterÉvaluationsProduit* si la modification est une nouvelle classe d’entité pour les évaluations.
 
 ``` powershell
 Add-Migration AddProductReviews
@@ -58,7 +80,9 @@ Add-Migration AddProductReviews
 dotnet ef migrations add AddProductReviews
 ```
 
-Une fois la migration structurée, vous devez vérifier sa précision et ajouter toutes les opérations supplémentaires nécessaires à son application. Par exemple, la migration peut contenir les opérations suivantes :
+Une fois que la migration a été structurée (que du code a été généré pour elle), vérifiez si le code est exact et ajoutez, supprimez ou modifiez toutes les opérations nécessaires pour pouvoir l’appliquer correctement.
+
+Par exemple, une migration peut contenir les opérations suivantes :
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -99,7 +123,7 @@ migrationBuilder.DropColumn(
 ```
 
 > [!TIP]
-> L’ajout d’une nouvelle migration émet un avertissement si la structuration d’une opération risque d’entraîner une perte de données (telle que la suppression d’une colonne). Veillez à vérifier tout particulièrement la précision de ces migrations.
+> Le processus de structuration de migration vous avertit quand une opération peut entraîner une perte de données (par exemple la suppression d’une colonne). Si cet avertissement s’affiche, veillez particulièrement à examiner si le code de migration est exact.
 
 Appliquez la migration à la base de données à l’aide de la commande appropriée.
 
@@ -110,10 +134,19 @@ Update-Database
 dotnet ef database update
 ```
 
-<a name="removing-a-migration"></a>Suppression d’une migration
---------------------
-Parfois, vous ajoutez une migration et réalisez que vous devez apporter des modifications supplémentaires à votre modèle EF Core avant de l’appliquer.
-Pour supprimer la dernière migration, utilisez cette commande.
+### <a name="empty-migrations"></a>Migrations vides
+
+Il est parfois utile d’ajouter une migration sans apporter de modification au modèle. Dans ce cas, l’ajout d’une nouvelle migration crée des fichiers de code avec des classes vides. Vous pouvez personnaliser cette migration pour effectuer des opérations qui ne sont pas directement liées au modèle EF Core. Voici quelques exemples de ce que vous pouvez gérer de cette façon :
+
+* Recherche en texte intégral
+* Fonctions
+* Procédures stockées
+* Déclencheurs
+* Affichages
+
+<a name="remove-a-migration"></a>Supprimer une migration
+------------------
+Parfois, vous ajoutez une migration et réalisez que vous devez apporter des modifications supplémentaires à votre modèle EF Core avant de l’appliquer. Pour supprimer la dernière migration, utilisez cette commande.
 
 ``` powershell
 Remove-Migration
@@ -122,10 +155,10 @@ Remove-Migration
 dotnet ef migrations remove
 ```
 
-Après l’avoir supprimée, vous pouvez apporter les modifications supplémentaires au modèle et la rajouter.
+Après avoir supprimé la migration, vous pouvez apporter les modifications supplémentaires au modèle et la rajouter.
 
-<a name="reverting-a-migration"></a>Restauration d’une migration
----------------------
+<a name="revert-a-migration"></a>Rétablir une migration
+------------------
 Si vous avez déjà appliqué une migration (ou plusieurs migrations) à la base de données, mais que vous devez la restaurer, vous pouvez utiliser la même commande que celle servant à appliquer des migrations, mais en spécifiant le nom de la migration à restaurer.
 
 ``` powershell
@@ -135,20 +168,8 @@ Update-Database LastGoodMigration
 dotnet ef database update LastGoodMigration
 ```
 
-<a name="empty-migrations"></a>Migrations vides
-----------------
-Il est parfois utile d’ajouter une migration sans apporter de modification au modèle. Dans ce cas, l’ajout d’une nouvelle migration crée une migration vide. Vous pouvez personnaliser cette migration pour effectuer des opérations qui ne sont pas directement liées au modèle EF Core.
-Voici quelques exemples de ce que vous pouvez gérer de cette façon :
-
-* Recherche en texte intégral
-* Fonctions
-* Procédures stockées
-* Déclencheurs
-* Affichages
-* Etc.
-
-<a name="generating-a-sql-script"></a>Génération d’un script SQL
------------------------
+<a name="generate-sql-scripts"></a>Générer des scripts SQL
+--------------------
 Quand vous déboguez vos migrations ou que vous les déployez sur une base de données de production, il est utile de générer un script SQL. Vous pouvez ensuite revoir le script et l’affiner en fonction des besoins d’une base de données de production. Vous pouvez également utiliser le script conjointement avec une technologie de déploiement. La commande de base est la suivante.
 
 ``` powershell
@@ -166,22 +187,21 @@ La migration **to** est la dernière migration à appliquer à la base de donné
 
 Un script **idempotent** peut également être généré. Ce script n’applique les migrations que si elles n’ont pas déjà été appliquées à la base de données. Cela est utile si vous ne savez pas exactement ce que la dernière migration a appliqué à la base de données ou si vous effectuez un déploiement sur plusieurs bases de données pouvant chacune être liée à une migration différente.
 
-<a name="applying-migrations-at-runtime"></a>Application de migrations au moment de l’exécution
-------------------------------
+<a name="apply-migrations-at-runtime"></a>Appliquer des migrations au moment de l’exécution
+---------------------------
 Certaines applications sont susceptibles d’appliquer des migrations au moment de l’exécution (au démarrage ou à la première exécution). Ces opérations nécessitent l’utilisation de la méthode `Migrate()`.
 
-Attention, cette approche ne s’adresse pas à tout un chacun. Bien qu’elle soit idéale pour les applications avec une base de données locale, la plupart des applications nécessitent une stratégie de déploiement plus robuste, telle que la génération de scripts SQL.
+Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés. Utilisez `DbContext.GetService<IMigrator>()` pour y accéder.
 
 ``` csharp
 myDbContext.Database.Migrate();
 ```
 
 > [!WARNING]
-> N’appelez pas `EnsureCreated()` avant `Migrate()`. `EnsureCreated()` ignore Migrations pour créer le schéma, ce qui entraîne l’échec de `Migrate()`.
+> * Cette approche ne s’adresse pas à tout un chacun. Bien qu’elle soit idéale pour les applications avec une base de données locale, la plupart des applications nécessitent une stratégie de déploiement plus robuste, telle que la génération de scripts SQL.
+> * N’appelez pas `EnsureCreated()` avant `Migrate()`. `EnsureCreated()` ignore Migrations pour créer le schéma, ce qui entraîne l’échec de `Migrate()`.
 
-> [!NOTE]
-> Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés. Utilisez `DbContext.GetService<IMigrator>()` pour y accéder.
+<a name="next-steps"></a>Étapes suivantes
+----------
 
-
-  [1]: ../../modeling/index.md
-  [2]: ../../miscellaneous/cli/index.md
+Pour plus d'informations, consultez <xref:core/miscellaneous/cli/index>.

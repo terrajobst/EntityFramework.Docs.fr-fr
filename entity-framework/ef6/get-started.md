@@ -1,40 +1,46 @@
 ---
 title: Bien démarrer avec Entity Framework 6 - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
-ms.openlocfilehash: 0087899d2fc65bc91ad36e35d5157e50b5c4bd2d
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c25bf16bd2c39530d54b286b7743ceb83c941e4d
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998082"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489284"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Bien démarrer avec Entity Framework 6
 
-Ce guide contient un ensemble de liens vers des articles de documentation sélectionnés, des procédures pas à pas et des vidéos qui peuvent vous aider à démarrer rapidement :
+Ce guide contient un ensemble de liens vers des articles de documentation sélectionnés, des procédures pas à pas et des vidéos qui peuvent vous aider à démarrer rapidement.
 
-## <a name="get-entity-frameworkef6fundamentalsinstallmd"></a>[Obtenir Entity Framework](~/ef6/fundamentals/install.md)
-Vous apprendrez ici à ajouter Entity Framework à vos applications. Par ailleurs, si vous voulez utiliser EF Designer, vérifiez qu’il est installé dans Visual Studio.
+## <a name="fundamentals"></a>Notions de base
 
-## <a name="creating-a-model-code-first-the-ef-designer-and-the-ef-workflowsef6modelingindexmd"></a>[Création d’un modèle : Code First, EF Designer et les flux de travail EF](~/ef6/modeling/index.md)
-Préférez-vous spécifier votre modèle EF en écrivant du code ou en traçant des zones et des lignes ?
+* [Obtenir Entity Framework](~/ef6/fundamentals/install.md)
+
+  Vous apprendrez ici à ajouter Entity Framework à vos applications. Par ailleurs, si vous voulez utiliser EF Designer, vérifiez qu’il est installé dans Visual Studio.
+
+* [Création d’un modèle : Code First, EF Designer et les flux de travail EF](~/ef6/modeling/index.md)
+
+  Préférez-vous spécifier votre modèle EF en écrivant du code ou en traçant des zones et des lignes ?
 Allez-vous utiliser EF pour mapper vos objets à une base de données existante ou voulez-vous qu’EF crée une base de données adaptée à vos objets ?
 Vous découvrez ici deux approches différentes pour utiliser EF6 : EF Designer et Code First.
 Veillez à suivre la discussion et à regarder la vidéo présentant la différence.
 
-## <a name="working-with-dbcontextef6fundamentalsworking-with-dbcontextmd"></a>[Utilisation de DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
-DbContext est le premier et le plus important type EF dont vous avez besoin pour apprendre à utiliser Entity Framework. Il sert de tremplin pour les requêtes de base de données et effectue le suivi des changements que vous apportez aux objets afin qu’ils puissent être conservés dans la base de données.
+* [Utilisation de DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
 
-## <a name="ask-a-questionef6resourcesget-helpmd"></a>[Poser une question](~/ef6/resources/get-help.md)
-Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
+  DbContext est le premier et le plus important type EF dont vous avez besoin pour apprendre à utiliser Entity Framework. Il sert de tremplin pour les requêtes de base de données et effectue le suivi des changements que vous apportez aux objets afin qu’ils puissent être conservés dans la base de données.
 
-## <a name="contributehttpgithubcomaspnetentityframework6"></a>[Contribuer](http://github.com/aspnet/EntityFramework6/)
-Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
+* [Poser une question](~/ef6/resources/get-help.md)
 
-## <a name="index-of-walkthroughs"></a>Index des procédures pas à pas
+  Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
 
-- Code First
+* [Contribuer](http://github.com/aspnet/EntityFramework6/)
+
+  Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
+
+## <a name="code-first-resources"></a>Ressources Code First
+
   - [Code First ciblant un flux de travail de base de données existant](~/ef6/modeling/code-first/workflows/existing-database.md)
   - [Code First ciblant un nouveau flux de travail de base de données](~/ef6/modeling/code-first/workflows/new-database.md)
   - [Mappage d’enums avec Code First](~/ef6/modeling/code-first/data-types/enums.md)
@@ -45,7 +51,7 @@ Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comme
   - [Migrations Code First dans les environnements d’équipe](~/ef6/modeling/code-first/migrations/teams.md)
   - [Migrations Code First automatiques](~/ef6/modeling/code-first/migrations/automatic.md) (désormais déconseillées)
 
-- EF Designer
+## <a name="ef-designer-resources"></a>Ressources EF Designer
   - [Flux de travail Database First](~/ef6/modeling/designer/workflows/database-first.md)
   - [Flux de travail Model First](~/ef6/modeling/designer/workflows/model-first.md)
   - [Mappage d’enums](~/ef6/modeling/designer/data-types/enums.md)
@@ -59,7 +65,7 @@ Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comme
   - [Requête de définition](~/ef6/modeling/designer/advanced/defining-query.md) (Avancé)
   - [Fonctions table](~/ef6/modeling/designer/advanced/tvfs.md) (Avancé)
 
-- Notions de base
+## <a name="other-resources"></a>Autres ressources
   - [Requête et enregistrement asynchrones](~/ef6/fundamentals/async.md)
   - [Liaison de données avec WinForms](~/ef6/fundamentals/databinding/winforms.md)
   - [Liaison de données avec WPF](~/ef6/fundamentals/databinding/wpf.md)

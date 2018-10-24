@@ -1,45 +1,27 @@
 ---
-title: Référence de la ligne de commande - EF Core
+title: Informations de référence sur les outils Entity Framework Core - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/06/2017
-ms.openlocfilehash: d43b01fc61bb1c9b678e12e41c27d7efe9a59fa5
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.date: 09/19/2018
+uid: core/miscellaneous/cli/index
+ms.openlocfilehash: 9fcb452c2798a3d07e39cbcc3c34629dca4394ff
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490361"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447116"
 ---
-<a name="entity-framework-core-tools"></a>Outils Entity Framework Core
-===========================
-Les outils Entity Framework Core vous permettent de développer des applications EF Core. Ils servent principalement à structurer un DbContext et des types d’entité en reconstituant la logique du schéma d’une base de données et à gérer les migrations.
+# <a name="entity-framework-core-tools-reference"></a>Informations de référence sur les outils Entity Framework Core
 
-Les [outils de la console du Gestionnaire de package EF Core][1] procurent une expérience de qualité supérieure dans Visual Studio. Exécutez-les dans la [console du Gestionnaire de package][2] de NuGet. Ces outils fonctionnent avec les projets .NET Framework et .NET Core.
+Les outils Entity Framework Core aident à effectuer les tâches de développement au moment du design. Ils servent principalement à gérer les migrations et à structurer un `DbContext` et des types d’entité en reconstituant la logique du schéma d’une base de données.
 
-Les [outils en ligne de commande .NET EF Core][3] sont une extension des [outils de l’interface de ligne de commande .NET Core][4] qui sont multiplateformes et peuvent s’exécuter en dehors de Visual Studio. Ces outils nécessitent un projet de SDK .NET Core (dont le fichier projet contient `Sdk="Microsoft.NET.Sdk"` ou une ligne similaire).
+* Les [outils de la Console du Gestionnaire de package EF Core](powershell.md)) s’exécutent dans la [Console du Gestionnaire de package](https://docs.microsoft.com/nuget/tools/package-manager-console) dans Visual Studio. Ces outils fonctionnent avec les projets .NET Framework et .NET Core.
 
-Les deux outils exposent les mêmes fonctionnalités. Si vous développez dans Visual Studio, nous vous recommandons d’utiliser les outils de la console du Gestionnaire de package, car ils procurent une expérience plus intégrée.
+* Les [outils de l’interface de ligne de commande (CLI) EF Core .NET](dotnet.md) sont une extension multiplateforme des [outils CLI .NET Core](https://docs.microsoft.com/dotnet/core/tools/). Ces outils nécessitent un projet de SDK .NET Core (dont le fichier projet contient `Sdk="Microsoft.NET.Sdk"` ou une ligne similaire).
 
-<a name="frameworks"></a>Frameworks
-----------
-Les outils prennent en charge les projets qui ciblent .NET Framework ou .NET Core.
+Les deux outils exposent les mêmes fonctionnalités. Si vous développez dans Visual Studio, nous vous recommandons d’utiliser les outils de la **Console du Gestionnaire de package**, car ils procurent une expérience plus intégrée.
 
-Si vous voulez utiliser une bibliothèque de classes, envisagez d’utiliser si possible une bibliothèque de classes .NET Core ou .NET Framework. Ceci permet de rencontrer moins de problèmes avec les outils .NET. Si vous voulez utiliser à la place une bibliothèque de classes .NET Standard, vous devez utiliser un projet de démarrage qui cible .NET Framework ou .NET Core, pour que les outils aient une plateforme cible concrète dans laquelle ils peuvent charger votre bibliothèque de classes. Ce projet de démarrage peut être un projet factice sans code réel ; il est nécessaire seulement pour fournir une cible aux outils.
+## <a name="next-steps"></a>Étapes suivantes
 
-Si votre projet cible un autre framework (par exemple Windows universel ou Xamarin), vous devez créer une bibliothèque de classes .NET Standard distincte. Dans ce cas, suivez les instructions ci-dessus pour créer également un projet de démarrage qui peut être utilisé par les outils.
-
-<a name="startup-and-target-projects"></a>Projets de démarrage et cible
----------------------------
-Chaque fois que vous appelez une commande, deux projets sont impliqués : le projet cible et le projet de démarrage.
-
-Le projet cible contient les fichiers qui sont ajoutés (ou dans certains cas supprimés).
-
-Le projet de démarrage est le projet qu’émulent les outils durant l’exécution du code de votre projet.
-
-Le projet cible et le projet de démarrage peuvent être le même.
-
-
-  [1]: powershell.md
-  [2]: https://docs.microsoft.com/nuget/tools/package-manager-console
-  [3]: dotnet.md
-  [4]: https://docs.microsoft.com/dotnet/core/tools/
+* [Informations de référence sur les outils de la Console du Gestionnaire de package EF Core](powershell.md)
+* [Informations de référence sur les outils CLI .NET EF Core](dotnet.md)

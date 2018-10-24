@@ -1,15 +1,15 @@
 ---
 title: 'Fonctionnement des requêtes : EF Core'
 author: rowanmiller
-ms.date: 10/27/2016
+ms.date: 09/26/2018
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/overview
-ms.openlocfilehash: f1c23471bfbc998b2d4f9dc579d1404d6202e109
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 23d26f9c0ac17fc0df744f5339946947ea366911
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993201"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415729"
 ---
 # <a name="how-queries-work"></a>Fonctionnement des requêtes
 
@@ -45,4 +45,4 @@ Les opérations qui génèrent les requêtes envoyées à la base de données le
 * Liaison des données des résultats d’une requête sur une interface utilisateur
 
 > [!WARNING]  
-> **Validez toujours l’entrée d’utilisateur :** EF assure une protection contre les attaques par injection SQL, mais n’effectue aucune validation générale sur les entrées. Par conséquent, si les valeurs transmises aux API, utilisées dans les requêtes LINQ, affectées aux propriétés d’entité, etc., proviennent d’une source non fiable, vous devez effectuer une validation adéquate, selon vos besoins de l’application. Cela inclut toute entrée utilisateur utilisée pour construire des requêtes de façon dynamique. Même si vous utilisez LINQ, si vous acceptez les entrées utilisateur pour générer des expressions, vous devez vous assurer que seules les expressions prévues peuvent être construites.
+> **Toujours valider l’entrée d’utilisateur :** bien qu’EF Core protège contre les attaques par injection SQL au moyen de paramètres et de l’échappement des littéraux dans les requêtes, il ne valide pas les entrées. Vous devez effectuer une validation adéquate, conformément aux exigences de l’application, avant que les valeurs provenant d’une source non fiable soient utilisées dans des requêtes LINQ, affectées à des propriétés d’entité ou transmises à d’autres API EF Core. Cela inclut toute entrée utilisateur utilisée pour construire des requêtes de façon dynamique. Même si vous utilisez LINQ, si vous acceptez les entrées d’utilisateur pour générer des expressions, vous devez vous assurer que seules les expressions prévues peuvent être construites.
