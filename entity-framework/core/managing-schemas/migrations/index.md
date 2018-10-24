@@ -2,23 +2,41 @@
 title: Migrations - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 10/30/2017
+ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 4a5d6f3798c7af7597f95cebea1aeb9e5e58d277
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 5ae06a4342a556936dc44c5bf6622814eaad4733
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996520"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834745"
 ---
-<a name="migrations"></a><span data-ttu-id="5e149-102">Migrations</span><span class="sxs-lookup"><span data-stu-id="5e149-102">Migrations</span></span>
+<a name="migrations"></a><span data-ttu-id="c0979-102">Migrations</span><span class="sxs-lookup"><span data-stu-id="c0979-102">Migrations</span></span>
 ==========
-<span data-ttu-id="5e149-103">Les migrations permettent d’appliquer de façon incrémentielle des modifications de schéma à la base de données pour qu’elle demeure synchronisée avec votre modèle EF Core tout en conservant les données existantes dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="5e149-103">Migrations provide a way to incrementally apply schema changes to the database to keep it in sync with your EF Core model while preserving existing data in the database.</span></span>
 
-<a name="creating-the-database"></a><span data-ttu-id="5e149-104">Création de la base de données</span><span class="sxs-lookup"><span data-stu-id="5e149-104">Creating the database</span></span>
----------------------
-<span data-ttu-id="5e149-105">Une fois que vous avez [défini votre modèle initial][1], il est temps de créer la base de données.</span><span class="sxs-lookup"><span data-stu-id="5e149-105">After you've [defined your initial model][1], it's time to create the database.</span></span> <span data-ttu-id="5e149-106">Pour ce faire, ajoutez une migration initiale.</span><span class="sxs-lookup"><span data-stu-id="5e149-106">To do this, add an initial migration.</span></span>
-<span data-ttu-id="5e149-107">Installez les [outils EF Core][2] et exécutez la commande appropriée.</span><span class="sxs-lookup"><span data-stu-id="5e149-107">Install the [EF Core Tools][2] and run the appropriate command.</span></span>
+<span data-ttu-id="c0979-103">Un modèle de données change au cours du développement et perd sa synchronisation avec la base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-103">A data model changes during development and gets out of sync with the database.</span></span> <span data-ttu-id="c0979-104">Vous pouvez supprimer la base de données et laisser EF en créer une qui correspond au modèle, mais cette procédure entraîne la perte de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-104">You can drop the database and let EF create a new one that matches the model, but this procedure results in the loss of data.</span></span> <span data-ttu-id="c0979-105">La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-105">The migrations feature in EF Core provides a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database.</span></span>
+
+<span data-ttu-id="c0979-106">Les migrations incluent des outils en ligne de commande et des API qui aident à effectuer les tâches suivantes :</span><span class="sxs-lookup"><span data-stu-id="c0979-106">Migrations includes command-line tools and APIs that help with the following tasks:</span></span>
+
+* <span data-ttu-id="c0979-107">[Créer une migration](#create-a-migration).</span><span class="sxs-lookup"><span data-stu-id="c0979-107">[Create a migration](#create-a-migration).</span></span> <span data-ttu-id="c0979-108">Générez du code qui peut mettre à jour la base de données pour la synchroniser avec un ensemble de modifications du modèle.</span><span class="sxs-lookup"><span data-stu-id="c0979-108">Generate code that can update the database to sync it with a set of model changes.</span></span>
+* <span data-ttu-id="c0979-109">[Mettre à jour la base de données](#update-the-database).</span><span class="sxs-lookup"><span data-stu-id="c0979-109">[Update the database](#update-the-database).</span></span> <span data-ttu-id="c0979-110">Appliquez des migrations en attente pour mettre à jour le schéma de base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-110">Apply pending migrations to update the database schema.</span></span>
+* <span data-ttu-id="c0979-111">[Personnaliser le code de migration](#customize-migration-code).</span><span class="sxs-lookup"><span data-stu-id="c0979-111">[Customize migration code](#customize-migration-code).</span></span> <span data-ttu-id="c0979-112">Le code généré doit parfois être modifié ou complété.</span><span class="sxs-lookup"><span data-stu-id="c0979-112">Sometimes the generated code needs to be modified or supplemented.</span></span>
+* <span data-ttu-id="c0979-113">[Supprimer une migration](#remove-a-migration).</span><span class="sxs-lookup"><span data-stu-id="c0979-113">[Remove a migration](#remove-a-migration).</span></span> <span data-ttu-id="c0979-114">Supprimez le code généré.</span><span class="sxs-lookup"><span data-stu-id="c0979-114">Delete the generated code.</span></span>
+* <span data-ttu-id="c0979-115">[Rétablir une migration](#revert-a-migration).</span><span class="sxs-lookup"><span data-stu-id="c0979-115">[Revert a migration](#revert-a-migration).</span></span> <span data-ttu-id="c0979-116">Annulez les modifications apportées à la base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-116">Undo the database changes.</span></span>
+* <span data-ttu-id="c0979-117">[Générer des scripts SQL](#generate-sql-scripts).</span><span class="sxs-lookup"><span data-stu-id="c0979-117">[Generate SQL scripts](#generate-sql-scripts).</span></span> <span data-ttu-id="c0979-118">Vous aurez peut-être besoin d’un script pour mettre à jour une base de données de production ou pour résoudre des problèmes liés au code de migration.</span><span class="sxs-lookup"><span data-stu-id="c0979-118">You might need a script to update a production database or to troubleshoot migration code.</span></span>
+* <span data-ttu-id="c0979-119">[Appliquer des migrations au moment de l’exécution](#apply-migrations-at-runtime).</span><span class="sxs-lookup"><span data-stu-id="c0979-119">[Apply migrations at runtime](#apply-migrations-at-runtime).</span></span> <span data-ttu-id="c0979-120">Quand les mises à jour au moment du design et l’exécution de scripts ne sont pas les meilleures options, appelez la méthode `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="c0979-120">When design-time updates and running scripts aren't the best options, call the `Migrate()` method.</span></span>
+
+<a name="install-the-tools"></a><span data-ttu-id="c0979-121">Installer les outils</span><span class="sxs-lookup"><span data-stu-id="c0979-121">Install the tools</span></span>
+-----------------
+
+<span data-ttu-id="c0979-122">Installez les [outils en ligne de commande](xref:core/miscellaneous/cli/index) :</span><span class="sxs-lookup"><span data-stu-id="c0979-122">Install the [command-line tools](xref:core/miscellaneous/cli/index):</span></span>
+* <span data-ttu-id="c0979-123">Pour Visual Studio, nous vous recommandons les [outils de la Console du Gestionnaire de package](xref:core/miscellaneous/cli/powershell).</span><span class="sxs-lookup"><span data-stu-id="c0979-123">For Visual Studio, we recommend the [Package Manager Console tools](xref:core/miscellaneous/cli/powershell).</span></span>
+* <span data-ttu-id="c0979-124">Pour d’autres environnements de développement, choisissez les [outils CLI .NET Core](xref:core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="c0979-124">For other development environments, choose the [.NET Core CLI tools](xref:core/miscellaneous/cli/dotnet).</span></span>
+
+<a name="create-a-migration"></a><span data-ttu-id="c0979-125">Créer une migration</span><span class="sxs-lookup"><span data-stu-id="c0979-125">Create a migration</span></span>
+------------------
+
+<span data-ttu-id="c0979-126">Une fois que vous avez [défini votre modèle initial](xref:core/modeling/index), il est temps de créer la base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-126">After you've [defined your initial model](xref:core/modeling/index), it's time to create the database.</span></span> <span data-ttu-id="c0979-127">Pour ajouter une migration initiale, exécutez la commande suivante.</span><span class="sxs-lookup"><span data-stu-id="c0979-127">To add an initial migration, run the following command.</span></span>
 
 ``` powershell
 Add-Migration InitialCreate
@@ -27,18 +45,21 @@ Add-Migration InitialCreate
 dotnet ef migrations add InitialCreate
 ```
 
-<span data-ttu-id="5e149-108">Trois fichiers sont ajoutés à votre projet sous le répertoire **Migrations** :</span><span class="sxs-lookup"><span data-stu-id="5e149-108">Three files are added to your project under the **Migrations** directory:</span></span>
+<span data-ttu-id="c0979-128">Trois fichiers sont ajoutés à votre projet sous le répertoire **Migrations** :</span><span class="sxs-lookup"><span data-stu-id="c0979-128">Three files are added to your project under the **Migrations** directory:</span></span>
 
-* <span data-ttu-id="5e149-109">**00000000000000_InitialCreate.cs** : fichier principal des migrations.</span><span class="sxs-lookup"><span data-stu-id="5e149-109">**00000000000000_InitialCreate.cs**--The main migrations file.</span></span> <span data-ttu-id="5e149-110">Contient les opérations nécessaires à l’application de la migration (dans `Up()`) et à sa restauration (dans `Down()`).</span><span class="sxs-lookup"><span data-stu-id="5e149-110">Contains the operations necessary to apply the migration (in `Up()`) and to revert it (in `Down()`).</span></span>
-* <span data-ttu-id="5e149-111">**00000000000000_InitialCreate.Designer.cs** : fichier de métadonnées des migrations.</span><span class="sxs-lookup"><span data-stu-id="5e149-111">**00000000000000_InitialCreate.Designer.cs**--The migrations metadata file.</span></span> <span data-ttu-id="5e149-112">Contient des informations utilisées par EF.</span><span class="sxs-lookup"><span data-stu-id="5e149-112">Contains information used by EF.</span></span>
-* <span data-ttu-id="5e149-113">**MyContextModelSnapshot.cs** : instantané de votre modèle actuel.</span><span class="sxs-lookup"><span data-stu-id="5e149-113">**MyContextModelSnapshot.cs**--A snapshot of your current model.</span></span> <span data-ttu-id="5e149-114">Permet de déterminer ce qui a changé pendant l’ajout de la migration suivante.</span><span class="sxs-lookup"><span data-stu-id="5e149-114">Used to determine what changed when adding the next migration.</span></span>
+* <span data-ttu-id="c0979-129">**00000000000000_InitialCreate.cs** : fichier principal des migrations.</span><span class="sxs-lookup"><span data-stu-id="c0979-129">**00000000000000_InitialCreate.cs**--The main migrations file.</span></span> <span data-ttu-id="c0979-130">Contient les opérations nécessaires à l’application de la migration (dans `Up()`) et à sa restauration (dans `Down()`).</span><span class="sxs-lookup"><span data-stu-id="c0979-130">Contains the operations necessary to apply the migration (in `Up()`) and to revert it (in `Down()`).</span></span>
+* <span data-ttu-id="c0979-131">**00000000000000_InitialCreate.Designer.cs** : fichier de métadonnées des migrations.</span><span class="sxs-lookup"><span data-stu-id="c0979-131">**00000000000000_InitialCreate.Designer.cs**--The migrations metadata file.</span></span> <span data-ttu-id="c0979-132">Contient des informations utilisées par EF.</span><span class="sxs-lookup"><span data-stu-id="c0979-132">Contains information used by EF.</span></span>
+* <span data-ttu-id="c0979-133">**MyContextModelSnapshot.cs** : instantané de votre modèle actuel.</span><span class="sxs-lookup"><span data-stu-id="c0979-133">**MyContextModelSnapshot.cs**--A snapshot of your current model.</span></span> <span data-ttu-id="c0979-134">Permet de déterminer ce qui a changé pendant l’ajout de la migration suivante.</span><span class="sxs-lookup"><span data-stu-id="c0979-134">Used to determine what changed when adding the next migration.</span></span>
 
-<span data-ttu-id="5e149-115">L’horodatage dans le nom des fichiers permet de conserver ces derniers dans l’ordre chronologique et de voir ainsi la progression des modifications.</span><span class="sxs-lookup"><span data-stu-id="5e149-115">The timestamp in the filename helps keep them ordered chronologically so you can see the progression of changes.</span></span>
+<span data-ttu-id="c0979-135">L’horodatage dans le nom des fichiers permet de conserver ces derniers dans l’ordre chronologique et de voir ainsi la progression des modifications.</span><span class="sxs-lookup"><span data-stu-id="c0979-135">The timestamp in the filename helps keep them ordered chronologically so you can see the progression of changes.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="5e149-116">Vous êtes libre de déplacer les fichiers Migrations et de changer leur espace de noms.</span><span class="sxs-lookup"><span data-stu-id="5e149-116">You are free to move Migrations files and change their namespace.</span></span> <span data-ttu-id="5e149-117">Les migrations sont créées en tant que sœurs de la dernière migration.</span><span class="sxs-lookup"><span data-stu-id="5e149-117">New migrations are created as siblings of the last migration.</span></span>
+> <span data-ttu-id="c0979-136">Vous êtes libre de déplacer les fichiers Migrations et de changer leur espace de noms.</span><span class="sxs-lookup"><span data-stu-id="c0979-136">You are free to move Migrations files and change their namespace.</span></span> <span data-ttu-id="c0979-137">Les migrations sont créées en tant que sœurs de la dernière migration.</span><span class="sxs-lookup"><span data-stu-id="c0979-137">New migrations are created as siblings of the last migration.</span></span>
 
-<span data-ttu-id="5e149-118">Ensuite, appliquez la migration à la base de données pour créer le schéma.</span><span class="sxs-lookup"><span data-stu-id="5e149-118">Next, apply the migration to the database to create the schema.</span></span>
+<a name="update-the-database"></a><span data-ttu-id="c0979-138">Mettre à jour la base de données</span><span class="sxs-lookup"><span data-stu-id="c0979-138">Update the database</span></span>
+-------------------
+
+<span data-ttu-id="c0979-139">Ensuite, appliquez la migration à la base de données pour créer le schéma.</span><span class="sxs-lookup"><span data-stu-id="c0979-139">Next, apply the migration to the database to create the schema.</span></span>
 
 ``` powershell
 Update-Database
@@ -47,9 +68,10 @@ Update-Database
 dotnet ef database update
 ```
 
-<a name="adding-another-migration"></a><span data-ttu-id="5e149-119">Ajout d’une autre migration</span><span class="sxs-lookup"><span data-stu-id="5e149-119">Adding another migration</span></span>
+<a name="customize-migration-code"></a><span data-ttu-id="c0979-140">Personnaliser le code de migration</span><span class="sxs-lookup"><span data-stu-id="c0979-140">Customize migration code</span></span>
 ------------------------
-<span data-ttu-id="5e149-120">Une fois votre modèle EF Core modifié, le schéma de base de données n’est plus synchronisé. Pour le mettre à jour, ajoutez une autre migration.</span><span class="sxs-lookup"><span data-stu-id="5e149-120">After making changes to your EF Core model, the database schema will be out of sync. To bring it up to date, add another migration.</span></span> <span data-ttu-id="5e149-121">Le nom de la migration peut être utilisé comme un message de validation dans un système de gestion de versions.</span><span class="sxs-lookup"><span data-stu-id="5e149-121">The migration name can be used like a commit message in a version control system.</span></span> <span data-ttu-id="5e149-122">Par exemple, si j’ai apporté des modifications pour enregistrer des avis de clients sur des produits, je peux choisir quelque chose comme *AddProductReviews*.</span><span class="sxs-lookup"><span data-stu-id="5e149-122">For example, if I made changes to save customer reviews of products, I might choose something like *AddProductReviews*.</span></span>
+
+<span data-ttu-id="c0979-141">Une fois votre modèle EF Core modifié, le schéma de base de données risque de ne plus être synchronisé. Pour le mettre à jour, ajoutez une autre migration.</span><span class="sxs-lookup"><span data-stu-id="c0979-141">After making changes to your EF Core model, the database schema might be out of sync. To bring it up to date, add another migration.</span></span> <span data-ttu-id="c0979-142">Le nom de la migration peut être utilisé comme un message de validation dans un système de gestion de versions.</span><span class="sxs-lookup"><span data-stu-id="c0979-142">The migration name can be used like a commit message in a version control system.</span></span> <span data-ttu-id="c0979-143">Par exemple, vous pouvez choisir un nom tel que *AjouterÉvaluationsProduit* si la modification est une nouvelle classe d’entité pour les évaluations.</span><span class="sxs-lookup"><span data-stu-id="c0979-143">For example, you might choose a name like *AddProductReviews* if the change is a new entity class for reviews.</span></span>
 
 ``` powershell
 Add-Migration AddProductReviews
@@ -58,7 +80,9 @@ Add-Migration AddProductReviews
 dotnet ef migrations add AddProductReviews
 ```
 
-<span data-ttu-id="5e149-123">Une fois la migration structurée, vous devez vérifier sa précision et ajouter toutes les opérations supplémentaires nécessaires à son application.</span><span class="sxs-lookup"><span data-stu-id="5e149-123">Once the migration is scaffolded, you should review it for accuracy and add any additional operations required to apply it correctly.</span></span> <span data-ttu-id="5e149-124">Par exemple, la migration peut contenir les opérations suivantes :</span><span class="sxs-lookup"><span data-stu-id="5e149-124">For example, your migration might contain the following operations:</span></span>
+<span data-ttu-id="c0979-144">Une fois que la migration a été structurée (que du code a été généré pour elle), vérifiez si le code est exact et ajoutez, supprimez ou modifiez toutes les opérations nécessaires pour pouvoir l’appliquer correctement.</span><span class="sxs-lookup"><span data-stu-id="c0979-144">Once the migration is scaffolded (code generated for it), review the code for accuracy and add, remove or modify any operations required to apply it correctly.</span></span>
+
+<span data-ttu-id="c0979-145">Par exemple, une migration peut contenir les opérations suivantes :</span><span class="sxs-lookup"><span data-stu-id="c0979-145">For example, a migration might contain the following operations:</span></span>
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -75,7 +99,7 @@ migrationBuilder.AddColumn<string>(
     nullable: true);
 ```
 
-<span data-ttu-id="5e149-125">Bien que ces opérations rendent le schéma de base de données compatible, elles ne conservent pas les noms de client existants.</span><span class="sxs-lookup"><span data-stu-id="5e149-125">While these operations make the database schema compatible, they don't preserve the existing customer names.</span></span> <span data-ttu-id="5e149-126">Pour l’améliorer, réécrivez la migration comme suit.</span><span class="sxs-lookup"><span data-stu-id="5e149-126">To make it better, rewrite it as follows.</span></span>
+<span data-ttu-id="c0979-146">Bien que ces opérations rendent le schéma de base de données compatible, elles ne conservent pas les noms de client existants.</span><span class="sxs-lookup"><span data-stu-id="c0979-146">While these operations make the database schema compatible, they don't preserve the existing customer names.</span></span> <span data-ttu-id="c0979-147">Pour l’améliorer, réécrivez la migration comme suit.</span><span class="sxs-lookup"><span data-stu-id="c0979-147">To make it better, rewrite it as follows.</span></span>
 
 ``` csharp
 migrationBuilder.AddColumn<string>(
@@ -99,9 +123,9 @@ migrationBuilder.DropColumn(
 ```
 
 > [!TIP]
-> <span data-ttu-id="5e149-127">L’ajout d’une nouvelle migration émet un avertissement si la structuration d’une opération risque d’entraîner une perte de données (telle que la suppression d’une colonne).</span><span class="sxs-lookup"><span data-stu-id="5e149-127">Adding a new migration warns when an operation is scaffolded that may result in data loss (like dropping a column).</span></span> <span data-ttu-id="5e149-128">Veillez à vérifier tout particulièrement la précision de ces migrations.</span><span class="sxs-lookup"><span data-stu-id="5e149-128">Be sure to especially review these migrations for accuracy.</span></span>
+> <span data-ttu-id="c0979-148">Le processus de structuration de migration vous avertit quand une opération peut entraîner une perte de données (par exemple la suppression d’une colonne).</span><span class="sxs-lookup"><span data-stu-id="c0979-148">The migration scaffolding process warns when an operation might result in data loss (like dropping a column).</span></span> <span data-ttu-id="c0979-149">Si cet avertissement s’affiche, veillez particulièrement à examiner si le code de migration est exact.</span><span class="sxs-lookup"><span data-stu-id="c0979-149">If you see that warning, be especially sure to review the migrations code for accuracy.</span></span>
 
-<span data-ttu-id="5e149-129">Appliquez la migration à la base de données à l’aide de la commande appropriée.</span><span class="sxs-lookup"><span data-stu-id="5e149-129">Apply the migration to the database using the appropriate command.</span></span>
+<span data-ttu-id="c0979-150">Appliquez la migration à la base de données à l’aide de la commande appropriée.</span><span class="sxs-lookup"><span data-stu-id="c0979-150">Apply the migration to the database using the appropriate command.</span></span>
 
 ``` powershell
 Update-Database
@@ -110,10 +134,19 @@ Update-Database
 dotnet ef database update
 ```
 
-<a name="removing-a-migration"></a><span data-ttu-id="5e149-130">Suppression d’une migration</span><span class="sxs-lookup"><span data-stu-id="5e149-130">Removing a migration</span></span>
---------------------
-<span data-ttu-id="5e149-131">Parfois, vous ajoutez une migration et réalisez que vous devez apporter des modifications supplémentaires à votre modèle EF Core avant de l’appliquer.</span><span class="sxs-lookup"><span data-stu-id="5e149-131">Sometimes you add a migration and realize you need to make additional changes to your EF Core model before applying it.</span></span>
-<span data-ttu-id="5e149-132">Pour supprimer la dernière migration, utilisez cette commande.</span><span class="sxs-lookup"><span data-stu-id="5e149-132">To remove the last migration, use this command.</span></span>
+### <a name="empty-migrations"></a><span data-ttu-id="c0979-151">Migrations vides</span><span class="sxs-lookup"><span data-stu-id="c0979-151">Empty migrations</span></span>
+
+<span data-ttu-id="c0979-152">Il est parfois utile d’ajouter une migration sans apporter de modification au modèle.</span><span class="sxs-lookup"><span data-stu-id="c0979-152">Sometimes it's useful to add a migration without making any model changes.</span></span> <span data-ttu-id="c0979-153">Dans ce cas, l’ajout d’une nouvelle migration crée des fichiers de code avec des classes vides.</span><span class="sxs-lookup"><span data-stu-id="c0979-153">In this case, adding a new migration creates code files with empty classes.</span></span> <span data-ttu-id="c0979-154">Vous pouvez personnaliser cette migration pour effectuer des opérations qui ne sont pas directement liées au modèle EF Core.</span><span class="sxs-lookup"><span data-stu-id="c0979-154">You can customize this migration to perform operations that don't directly relate to the EF Core model.</span></span> <span data-ttu-id="c0979-155">Voici quelques exemples de ce que vous pouvez gérer de cette façon :</span><span class="sxs-lookup"><span data-stu-id="c0979-155">Some things you might want to manage this way are:</span></span>
+
+* <span data-ttu-id="c0979-156">Recherche en texte intégral</span><span class="sxs-lookup"><span data-stu-id="c0979-156">Full-Text Search</span></span>
+* <span data-ttu-id="c0979-157">Fonctions</span><span class="sxs-lookup"><span data-stu-id="c0979-157">Functions</span></span>
+* <span data-ttu-id="c0979-158">Procédures stockées</span><span class="sxs-lookup"><span data-stu-id="c0979-158">Stored procedures</span></span>
+* <span data-ttu-id="c0979-159">Déclencheurs</span><span class="sxs-lookup"><span data-stu-id="c0979-159">Triggers</span></span>
+* <span data-ttu-id="c0979-160">Affichages</span><span class="sxs-lookup"><span data-stu-id="c0979-160">Views</span></span>
+
+<a name="remove-a-migration"></a><span data-ttu-id="c0979-161">Supprimer une migration</span><span class="sxs-lookup"><span data-stu-id="c0979-161">Remove a migration</span></span>
+------------------
+<span data-ttu-id="c0979-162">Parfois, vous ajoutez une migration et réalisez que vous devez apporter des modifications supplémentaires à votre modèle EF Core avant de l’appliquer.</span><span class="sxs-lookup"><span data-stu-id="c0979-162">Sometimes you add a migration and realize you need to make additional changes to your EF Core model before applying it.</span></span> <span data-ttu-id="c0979-163">Pour supprimer la dernière migration, utilisez cette commande.</span><span class="sxs-lookup"><span data-stu-id="c0979-163">To remove the last migration, use this command.</span></span>
 
 ``` powershell
 Remove-Migration
@@ -122,11 +155,11 @@ Remove-Migration
 dotnet ef migrations remove
 ```
 
-<span data-ttu-id="5e149-133">Après l’avoir supprimée, vous pouvez apporter les modifications supplémentaires au modèle et la rajouter.</span><span class="sxs-lookup"><span data-stu-id="5e149-133">After removing it, you can make the additional model changes and add it again.</span></span>
+<span data-ttu-id="c0979-164">Après avoir supprimé la migration, vous pouvez apporter les modifications supplémentaires au modèle et la rajouter.</span><span class="sxs-lookup"><span data-stu-id="c0979-164">After removing the migration, you can make the additional model changes and add it again.</span></span>
 
-<a name="reverting-a-migration"></a><span data-ttu-id="5e149-134">Restauration d’une migration</span><span class="sxs-lookup"><span data-stu-id="5e149-134">Reverting a migration</span></span>
----------------------
-<span data-ttu-id="5e149-135">Si vous avez déjà appliqué une migration (ou plusieurs migrations) à la base de données, mais que vous devez la restaurer, vous pouvez utiliser la même commande que celle servant à appliquer des migrations, mais en spécifiant le nom de la migration à restaurer.</span><span class="sxs-lookup"><span data-stu-id="5e149-135">If you already applied a migration (or several migrations) to the database but need to revert it, you can use the same command to apply migrations, but specify the name of the migration you want to roll back to.</span></span>
+<a name="revert-a-migration"></a><span data-ttu-id="c0979-165">Rétablir une migration</span><span class="sxs-lookup"><span data-stu-id="c0979-165">Revert a migration</span></span>
+------------------
+<span data-ttu-id="c0979-166">Si vous avez déjà appliqué une migration (ou plusieurs migrations) à la base de données, mais que vous devez la restaurer, vous pouvez utiliser la même commande que celle servant à appliquer des migrations, mais en spécifiant le nom de la migration à restaurer.</span><span class="sxs-lookup"><span data-stu-id="c0979-166">If you already applied a migration (or several migrations) to the database but need to revert it, you can use the same command to apply migrations, but specify the name of the migration you want to roll back to.</span></span>
 
 ``` powershell
 Update-Database LastGoodMigration
@@ -135,21 +168,9 @@ Update-Database LastGoodMigration
 dotnet ef database update LastGoodMigration
 ```
 
-<a name="empty-migrations"></a><span data-ttu-id="5e149-136">Migrations vides</span><span class="sxs-lookup"><span data-stu-id="5e149-136">Empty migrations</span></span>
-----------------
-<span data-ttu-id="5e149-137">Il est parfois utile d’ajouter une migration sans apporter de modification au modèle.</span><span class="sxs-lookup"><span data-stu-id="5e149-137">Sometimes it's useful to add a migration without making any model changes.</span></span> <span data-ttu-id="5e149-138">Dans ce cas, l’ajout d’une nouvelle migration crée une migration vide.</span><span class="sxs-lookup"><span data-stu-id="5e149-138">In this case, adding a new migration creates an empty one.</span></span> <span data-ttu-id="5e149-139">Vous pouvez personnaliser cette migration pour effectuer des opérations qui ne sont pas directement liées au modèle EF Core.</span><span class="sxs-lookup"><span data-stu-id="5e149-139">You can customize this migration to perform operations that don't directly relate to the EF Core model.</span></span>
-<span data-ttu-id="5e149-140">Voici quelques exemples de ce que vous pouvez gérer de cette façon :</span><span class="sxs-lookup"><span data-stu-id="5e149-140">Some things you might want to manage this way are:</span></span>
-
-* <span data-ttu-id="5e149-141">Recherche en texte intégral</span><span class="sxs-lookup"><span data-stu-id="5e149-141">Full-Text Search</span></span>
-* <span data-ttu-id="5e149-142">Fonctions</span><span class="sxs-lookup"><span data-stu-id="5e149-142">Functions</span></span>
-* <span data-ttu-id="5e149-143">Procédures stockées</span><span class="sxs-lookup"><span data-stu-id="5e149-143">Stored procedures</span></span>
-* <span data-ttu-id="5e149-144">Déclencheurs</span><span class="sxs-lookup"><span data-stu-id="5e149-144">Triggers</span></span>
-* <span data-ttu-id="5e149-145">Affichages</span><span class="sxs-lookup"><span data-stu-id="5e149-145">Views</span></span>
-* <span data-ttu-id="5e149-146">Etc.</span><span class="sxs-lookup"><span data-stu-id="5e149-146">etc.</span></span>
-
-<a name="generating-a-sql-script"></a><span data-ttu-id="5e149-147">Génération d’un script SQL</span><span class="sxs-lookup"><span data-stu-id="5e149-147">Generating a SQL script</span></span>
------------------------
-<span data-ttu-id="5e149-148">Quand vous déboguez vos migrations ou que vous les déployez sur une base de données de production, il est utile de générer un script SQL.</span><span class="sxs-lookup"><span data-stu-id="5e149-148">When debugging your migrations or deploying them to a production database, it's useful to generate a SQL script.</span></span> <span data-ttu-id="5e149-149">Vous pouvez ensuite revoir le script et l’affiner en fonction des besoins d’une base de données de production.</span><span class="sxs-lookup"><span data-stu-id="5e149-149">The script can then be further reviewed for accuracy and tuned to fit the needs of a production database.</span></span> <span data-ttu-id="5e149-150">Vous pouvez également utiliser le script conjointement avec une technologie de déploiement.</span><span class="sxs-lookup"><span data-stu-id="5e149-150">The script can also be used in conjunction with a deployment technology.</span></span> <span data-ttu-id="5e149-151">La commande de base est la suivante.</span><span class="sxs-lookup"><span data-stu-id="5e149-151">The basic command is as follows.</span></span>
+<a name="generate-sql-scripts"></a><span data-ttu-id="c0979-167">Générer des scripts SQL</span><span class="sxs-lookup"><span data-stu-id="c0979-167">Generate SQL scripts</span></span>
+--------------------
+<span data-ttu-id="c0979-168">Quand vous déboguez vos migrations ou que vous les déployez sur une base de données de production, il est utile de générer un script SQL.</span><span class="sxs-lookup"><span data-stu-id="c0979-168">When debugging your migrations or deploying them to a production database, it's useful to generate a SQL script.</span></span> <span data-ttu-id="c0979-169">Vous pouvez ensuite revoir le script et l’affiner en fonction des besoins d’une base de données de production.</span><span class="sxs-lookup"><span data-stu-id="c0979-169">The script can then be further reviewed for accuracy and tuned to fit the needs of a production database.</span></span> <span data-ttu-id="c0979-170">Vous pouvez également utiliser le script conjointement avec une technologie de déploiement.</span><span class="sxs-lookup"><span data-stu-id="c0979-170">The script can also be used in conjunction with a deployment technology.</span></span> <span data-ttu-id="c0979-171">La commande de base est la suivante.</span><span class="sxs-lookup"><span data-stu-id="c0979-171">The basic command is as follows.</span></span>
 
 ``` powershell
 Script-Migration
@@ -158,30 +179,29 @@ Script-Migration
 dotnet ef migrations script
 ```
 
-<span data-ttu-id="5e149-152">Il existe plusieurs options pour cette commande.</span><span class="sxs-lookup"><span data-stu-id="5e149-152">There are several options to this command.</span></span>
+<span data-ttu-id="c0979-172">Il existe plusieurs options pour cette commande.</span><span class="sxs-lookup"><span data-stu-id="c0979-172">There are several options to this command.</span></span>
 
-<span data-ttu-id="5e149-153">La migration **from** doit être la dernière migration appliquée à la base de données avant l’exécution du script.</span><span class="sxs-lookup"><span data-stu-id="5e149-153">The **from** migration should be the last migration applied to the database before running the script.</span></span> <span data-ttu-id="5e149-154">Si aucune migration n’a été appliquée, spécifiez `0` (il s’agit de la valeur par défaut).</span><span class="sxs-lookup"><span data-stu-id="5e149-154">If no migrations have been applied, specify `0` (this is the default).</span></span>
+<span data-ttu-id="c0979-173">La migration **from** doit être la dernière migration appliquée à la base de données avant l’exécution du script.</span><span class="sxs-lookup"><span data-stu-id="c0979-173">The **from** migration should be the last migration applied to the database before running the script.</span></span> <span data-ttu-id="c0979-174">Si aucune migration n’a été appliquée, spécifiez `0` (il s’agit de la valeur par défaut).</span><span class="sxs-lookup"><span data-stu-id="c0979-174">If no migrations have been applied, specify `0` (this is the default).</span></span>
 
-<span data-ttu-id="5e149-155">La migration **to** est la dernière migration à appliquer à la base de données après l’exécution du script.</span><span class="sxs-lookup"><span data-stu-id="5e149-155">The **to** migration is the last migration that will be applied to the database after running the script.</span></span> <span data-ttu-id="5e149-156">Par défaut, il s’agit de la dernière migration dans votre projet.</span><span class="sxs-lookup"><span data-stu-id="5e149-156">This defaults to the last migration in your project.</span></span>
+<span data-ttu-id="c0979-175">La migration **to** est la dernière migration à appliquer à la base de données après l’exécution du script.</span><span class="sxs-lookup"><span data-stu-id="c0979-175">The **to** migration is the last migration that will be applied to the database after running the script.</span></span> <span data-ttu-id="c0979-176">Par défaut, il s’agit de la dernière migration dans votre projet.</span><span class="sxs-lookup"><span data-stu-id="c0979-176">This defaults to the last migration in your project.</span></span>
 
-<span data-ttu-id="5e149-157">Un script **idempotent** peut également être généré.</span><span class="sxs-lookup"><span data-stu-id="5e149-157">An **idempotent** script can optionally be generated.</span></span> <span data-ttu-id="5e149-158">Ce script n’applique les migrations que si elles n’ont pas déjà été appliquées à la base de données.</span><span class="sxs-lookup"><span data-stu-id="5e149-158">This script only applies migrations if they haven't already been applied to the database.</span></span> <span data-ttu-id="5e149-159">Cela est utile si vous ne savez pas exactement ce que la dernière migration a appliqué à la base de données ou si vous effectuez un déploiement sur plusieurs bases de données pouvant chacune être liée à une migration différente.</span><span class="sxs-lookup"><span data-stu-id="5e149-159">This is useful if you don't exactly know what the last migration applied to the database was or if you are deploying to multiple databases that may each be at a different migration.</span></span>
+<span data-ttu-id="c0979-177">Un script **idempotent** peut également être généré.</span><span class="sxs-lookup"><span data-stu-id="c0979-177">An **idempotent** script can optionally be generated.</span></span> <span data-ttu-id="c0979-178">Ce script n’applique les migrations que si elles n’ont pas déjà été appliquées à la base de données.</span><span class="sxs-lookup"><span data-stu-id="c0979-178">This script only applies migrations if they haven't already been applied to the database.</span></span> <span data-ttu-id="c0979-179">Cela est utile si vous ne savez pas exactement ce que la dernière migration a appliqué à la base de données ou si vous effectuez un déploiement sur plusieurs bases de données pouvant chacune être liée à une migration différente.</span><span class="sxs-lookup"><span data-stu-id="c0979-179">This is useful if you don't exactly know what the last migration applied to the database was or if you are deploying to multiple databases that may each be at a different migration.</span></span>
 
-<a name="applying-migrations-at-runtime"></a><span data-ttu-id="5e149-160">Application de migrations au moment de l’exécution</span><span class="sxs-lookup"><span data-stu-id="5e149-160">Applying migrations at runtime</span></span>
-------------------------------
-<span data-ttu-id="5e149-161">Certaines applications sont susceptibles d’appliquer des migrations au moment de l’exécution (au démarrage ou à la première exécution).</span><span class="sxs-lookup"><span data-stu-id="5e149-161">Some apps may want to apply migrations at runtime during startup or first run.</span></span> <span data-ttu-id="5e149-162">Ces opérations nécessitent l’utilisation de la méthode `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="5e149-162">Do this using the `Migrate()` method.</span></span>
+<a name="apply-migrations-at-runtime"></a><span data-ttu-id="c0979-180">Appliquer des migrations au moment de l’exécution</span><span class="sxs-lookup"><span data-stu-id="c0979-180">Apply migrations at runtime</span></span>
+---------------------------
+<span data-ttu-id="c0979-181">Certaines applications sont susceptibles d’appliquer des migrations au moment de l’exécution (au démarrage ou à la première exécution).</span><span class="sxs-lookup"><span data-stu-id="c0979-181">Some apps may want to apply migrations at runtime during startup or first run.</span></span> <span data-ttu-id="c0979-182">Ces opérations nécessitent l’utilisation de la méthode `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="c0979-182">Do this using the `Migrate()` method.</span></span>
 
-<span data-ttu-id="5e149-163">Attention, cette approche ne s’adresse pas à tout un chacun.</span><span class="sxs-lookup"><span data-stu-id="5e149-163">Caution, this approach isn't for everyone.</span></span> <span data-ttu-id="5e149-164">Bien qu’elle soit idéale pour les applications avec une base de données locale, la plupart des applications nécessitent une stratégie de déploiement plus robuste, telle que la génération de scripts SQL.</span><span class="sxs-lookup"><span data-stu-id="5e149-164">While it's great for apps with a local database, most applications will require more robust deployment strategy like generating SQL scripts.</span></span>
+<span data-ttu-id="c0979-183">Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés.</span><span class="sxs-lookup"><span data-stu-id="c0979-183">This method builds on top of the `IMigrator` service, which can be used for more advanced scenarios.</span></span> <span data-ttu-id="c0979-184">Utilisez `DbContext.GetService<IMigrator>()` pour y accéder.</span><span class="sxs-lookup"><span data-stu-id="c0979-184">Use `DbContext.GetService<IMigrator>()` to access it.</span></span>
 
 ``` csharp
 myDbContext.Database.Migrate();
 ```
 
 > [!WARNING]
-> <span data-ttu-id="5e149-165">N’appelez pas `EnsureCreated()` avant `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="5e149-165">Don't call `EnsureCreated()` before `Migrate()`.</span></span> <span data-ttu-id="5e149-166">`EnsureCreated()` ignore Migrations pour créer le schéma, ce qui entraîne l’échec de `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="5e149-166">`EnsureCreated()` bypasses Migrations to create the schema, which causes `Migrate()` to fail.</span></span>
+> * <span data-ttu-id="c0979-185">Cette approche ne s’adresse pas à tout un chacun.</span><span class="sxs-lookup"><span data-stu-id="c0979-185">This approach isn't for everyone.</span></span> <span data-ttu-id="c0979-186">Bien qu’elle soit idéale pour les applications avec une base de données locale, la plupart des applications nécessitent une stratégie de déploiement plus robuste, telle que la génération de scripts SQL.</span><span class="sxs-lookup"><span data-stu-id="c0979-186">While it's great for apps with a local database, most applications will require more robust deployment strategy like generating SQL scripts.</span></span>
+> * <span data-ttu-id="c0979-187">N’appelez pas `EnsureCreated()` avant `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="c0979-187">Don't call `EnsureCreated()` before `Migrate()`.</span></span> <span data-ttu-id="c0979-188">`EnsureCreated()` ignore Migrations pour créer le schéma, ce qui entraîne l’échec de `Migrate()`.</span><span class="sxs-lookup"><span data-stu-id="c0979-188">`EnsureCreated()` bypasses Migrations to create the schema, which causes `Migrate()` to fail.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="5e149-167">Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés.</span><span class="sxs-lookup"><span data-stu-id="5e149-167">This method builds on top of the `IMigrator` service, which can be used for more advanced scenarios.</span></span> <span data-ttu-id="5e149-168">Utilisez `DbContext.GetService<IMigrator>()` pour y accéder.</span><span class="sxs-lookup"><span data-stu-id="5e149-168">Use `DbContext.GetService<IMigrator>()` to access it.</span></span>
+<a name="next-steps"></a><span data-ttu-id="c0979-189">Étapes suivantes</span><span class="sxs-lookup"><span data-stu-id="c0979-189">Next steps</span></span>
+----------
 
-
-  [1]: ../../modeling/index.md
-  [2]: ../../miscellaneous/cli/index.md
+<span data-ttu-id="c0979-190">Pour plus d'informations, consultez <xref:core/miscellaneous/cli/index>.</span><span class="sxs-lookup"><span data-stu-id="c0979-190">For more information, see <xref:core/miscellaneous/cli/index>.</span></span>

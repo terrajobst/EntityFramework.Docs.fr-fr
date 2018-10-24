@@ -2,8 +2,6 @@
 
 ## [Comparer EF Core et EF6](efcore-and-ef6/index.md)
 
-### [Lequel des deux est adapté à vos besoins ?](efcore-and-ef6/choosing.md)
-### [Comparaison des fonctionnalités](efcore-and-ef6/features.md)
 ### [EF6 et Core EF dans la même application](efcore-and-ef6/side-by-side.md)
 ### [Portage depuis EF6 vers EF Core](efcore-and-ef6/porting/index.md)
 #### [Valider les exigences](efcore-and-ef6/porting/ensure-requirements.md)
@@ -29,7 +27,7 @@
 #### [ASP.NET Core](core/get-started/aspnetcore/index.md)
 ##### [ASP.NET Core - Nouvelle base de données](core/get-started/aspnetcore/new-db.md)
 ##### [ASP.NET Core - Base de données existante](core/get-started/aspnetcore/existing-db.md)
-##### [EF Core et Razor Pages](/aspnet/core/data/ef-rp/intro)
+##### [⤤ EF Core et Razor Pages](/aspnet/core/data/ef-rp/intro)
 #### [Plateforme Windows universelle (UWP)](core/get-started/uwp/index.md)
 ##### [UWP - Nouvelle base de données](core/get-started/uwp/getting-started.md)
 
