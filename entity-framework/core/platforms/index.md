@@ -3,12 +3,12 @@ title: Implémentations de .NET prises en charge - EF Core
 author: rowanmiller
 ms.date: 08/30/2017
 uid: core/platforms/index
-ms.openlocfilehash: 347965818f0eab9a86411f66eaaf10cb3aa8d652
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8fc25f4a35794162c92fd292990c24e977d1bf1b
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996436"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022260"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implémentations de .NET prises en charge par EF Core
 
@@ -41,7 +41,7 @@ Avec EF Core sur UWP :
 
 * Pour optimiser les performances des requêtes, évitez les types anonymes dans les requêtes LINQ. Une application UWP doit être générée avec .NET Native pour pouvoir être déployée dans le magasin d’applications. Les requêtes avec des types anonymes ont des performances inférieures sur .NET Native.
 
-* Pour optimiser les performances `SaveChanges()`, utilisez [ChangeTrackingStrategy.ChangingAndChangedNotifications](/dotnet/api/microsoft.entityframeworkcore.changetrackingstrategy) et implémentez [INotifyPropertyChanged](https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.aspx), [INotifyPropertyChanging ](https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanging.aspx) et [INotifyCollectionChanged](https://msdn.microsoft.com/en-us/library/system.collections.specialized.inotifycollectionchanged.aspx) dans vos types d’entité.
+* Pour optimiser les performances `SaveChanges()`, utilisez [ChangeTrackingStrategy.ChangingAndChangedNotifications](/dotnet/api/microsoft.entityframeworkcore.changetrackingstrategy) et implémentez [INotifyPropertyChanged](https://msdn.microsoft.com/library/system.componentmodel.inotifypropertychanged.aspx), [INotifyPropertyChanging ](https://msdn.microsoft.com/library/system.componentmodel.inotifypropertychanging.aspx) et [INotifyCollectionChanged](https://msdn.microsoft.com/library/system.collections.specialized.inotifycollectionchanged.aspx) dans vos types d’entité.
 
 ## <a name="report-issues"></a>Signaler des problèmes
 

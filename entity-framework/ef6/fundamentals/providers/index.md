@@ -3,12 +3,12 @@ title: Fournisseurs Entity Framework - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: c9afb32caeeef5111b32251c62019460b62f48b3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 0cfe6c30d6533b0207f78a031d342847a7f68632
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489438"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022221"
 ---
 # <a name="entity-framework-6-providers"></a>Fournisseurs Entity Framework 6
 > [!NOTE]
@@ -68,7 +68,7 @@ Le « type » dans cette inscription est le nom qualifié d’assembly du type d
 
 ### <a name="code-based-registration"></a>Inscription basée sur le code
 
-À partir d’Entity Framework 6, la configuration d’EF au niveau de l’application peut être spécifiée dans le code. Pour des détails complets, consultez _[Configuration d’Entity Framework basée sur le code](https://msdn.microsoft.com/en-us/data/jj680699)_. La méthode normale pour inscrire un fournisseur EF à l’aide d’une configuration basée sur le code est de créer une classe dérivant de System.Data.Entity.DbConfiguration et de la placer dans le même assembly que votre classe DbContext. Votre classe DbConfiguration doit ensuite inscrire le fournisseur dans son constructeur. Par exemple, pour inscrire le fournisseur SQL Compact, la classe DbConfiguration ressemble à ceci :
+À partir d’Entity Framework 6, la configuration d’EF au niveau de l’application peut être spécifiée dans le code. Pour des détails complets, consultez _[Configuration d’Entity Framework basée sur le code](https://msdn.microsoft.com/data/jj680699)_. La méthode normale pour inscrire un fournisseur EF à l’aide d’une configuration basée sur le code est de créer une classe dérivant de System.Data.Entity.DbConfiguration et de la placer dans le même assembly que votre classe DbContext. Votre classe DbConfiguration doit ensuite inscrire le fournisseur dans son constructeur. Par exemple, pour inscrire le fournisseur SQL Compact, la classe DbConfiguration ressemble à ceci :
 
 ``` csharp
     public class MyConfiguration : DbConfiguration
