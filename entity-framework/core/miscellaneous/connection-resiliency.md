@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: d5101d0622ddc2c90ddded16b9ec6cc4eb814c36
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 729cf9b8c038ea2adba8c79c68d9f6fb1676fefa
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283834"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022182"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -46,6 +46,10 @@ Toutefois, si votre code lance une transaction à l’aide de `BeginTransaction(
 La solution consiste à appeler manuellement la stratégie d’exécution avec un délégué représentant tout ce qui doit être exécutée. Si une défaillance passagère se produit, la stratégie d’exécution appelle à nouveau le délégué.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#ManualTransaction)]
+
+Cette approche peut également être utilisée avec les transactions ambiantes.
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#AmbientTransaction)]
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Échec de validation de transaction et le problème de l’idempotence
 
