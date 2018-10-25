@@ -3,12 +3,12 @@ title: Prise en charge de fournisseur pour les Types spatiaux - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-ms.openlocfilehash: ffd22222f59a541d8135d3738d37a7e8f5dc5d7c
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9c00e82c663daec219fe649a8d889afcc81564f7
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489750"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022273"
 ---
 # <a name="provider-support-for-spatial-types"></a>Prise en charge de fournisseur pour les Types spatiaux
 Entity Framework prend en charge l’utilisation des données spatiales via les classes de DbGeography ou DbGeometry. Ces classes s’appuient sur les fonctionnalités spécifiques à la base de données offertes par le fournisseur Entity Framework. Pas tous les fournisseurs prennent en charge les données spatiales et les autres peuvent avoir des conditions préalables supplémentaires telles que l’installation des assemblys de type spatial. Vous trouverez ci-dessous plus d’informations sur la prise en charge de fournisseur pour les types spatiaux.  
@@ -56,4 +56,4 @@ Prise en charge spatiale SQL Server dépend des types spécifiques de SQL Server
 
 Lorsque Visual Studio est installé il installe souvent également une version de SQL Server, et cela inclut l’installation du fichier Microsoft.SqlServer.Types.dll.  
 
-Si SQL Server n’est pas installé sur l’ordinateur où vous souhaitez utiliser des types de données spatiales, ou si les types spatiaux ont été exclus de l’installation de SQL Server, vous devrez les installer manuellement. Les types peuvent être installés à l’aide de `SQLSysClrTypes.msi`, qui fait partie du Feature Pack Microsoft SQL Server. Types de données spatiales sont SQL Server spécifique à la version, nous vous recommandons de [recherche pour « Feature Pack SQL Server »](https://www.microsoft.com/en-us/search/result.aspx?q=sql+server+feature+pack) dans le Microsoft Download Center, puis sélectionnez et téléchargez l’option qui correspond à la version de SQL Server, vous allez utiliser.
+Si SQL Server n’est pas installé sur l’ordinateur où vous souhaitez utiliser des types de données spatiales, ou si les types spatiaux ont été exclus de l’installation de SQL Server, vous devrez les installer manuellement. Les types peuvent être installés à l’aide de `SQLSysClrTypes.msi`, qui fait partie du Feature Pack Microsoft SQL Server. Types de données spatiales sont SQL Server spécifique à la version, nous vous recommandons de [recherche pour « Feature Pack SQL Server »](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) dans le Microsoft Download Center, puis sélectionnez et téléchargez l’option qui correspond à la version de SQL Server, vous allez utiliser.

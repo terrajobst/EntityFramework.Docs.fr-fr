@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: efc78fbada3c59bf9cf2c4cb694835bb5ad60e76
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 65501b5ac03ae544c51b7fc1a07fa9eea849f1e3
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997003"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022143"
 ---
 # <a name="logging"></a>Journalisation
 
@@ -18,7 +18,7 @@ ms.locfileid: "42997003"
 
 ## <a name="aspnet-core-applications"></a>Applications ASP.NET Core
 
-EF Core s’intègre automatiquement avec les mécanismes de journalisation d’ASP.NET Core chaque fois que `AddDbContext` ou `AddDbContextPool` est utilisé. Par conséquent, lorsque vous utilisez ASP.NET Core, journalisation doit être configurée comme décrit dans la [documentation ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
+EF Core s’intègre automatiquement avec les mécanismes de journalisation d’ASP.NET Core chaque fois que `AddDbContext` ou `AddDbContextPool` est utilisé. Par conséquent, lorsque vous utilisez ASP.NET Core, journalisation doit être configurée comme décrit dans la [documentation ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
 
 ## <a name="other-applications"></a>Autres applications
 
@@ -54,4 +54,4 @@ Dans cet exemple, le journal est filtré pour retourner uniquement les messages�
 
 Pour EF Core, les catégories de l’enregistreur d’événements sont définies dans le `DbLoggerCategory` résoudre les classe pour le rendre plus faciles à trouver les catégories, mais ces chaînes simples.
 
-Vous trouverez plus d’informations sur l’infrastructure sous-jacente de la journalisation dans le [documentation sur la journalisation ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
+Vous trouverez plus d’informations sur l’infrastructure sous-jacente de la journalisation dans le [documentation sur la journalisation ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).

@@ -3,12 +3,12 @@ title: Versions de Visual Studio, EF6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-ms.openlocfilehash: d104236ac5c8877da421ba10de9827f17937a9ec
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 16bcdc6d0e7c5632d4f4c06ba285a7a666f24204
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489919"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022247"
 ---
 # <a name="visual-studio-releases"></a>Versions de Visual Studio
 
@@ -41,7 +41,7 @@ N’oubliez pas d’utiliser un préfixe de chaîne textuelle `@` ou doubles bar
 
 ## <a name="visual-studio-2013"></a>Visual Studio 2013
 - Cette version de Visual Studio inclut et version antérieure du runtime et les outils Entity Framework.
-Il est recommandé de mettre à niveau vers Entity Framework Tools 6.1.3, à l’aide de [le programme d’installation](https://www.microsoft.com/en-us/download/details.aspx?id=40762) disponibles dans du Microsoft Download Center.
+Il est recommandé de mettre à niveau vers Entity Framework Tools 6.1.3, à l’aide de [le programme d’installation](https://www.microsoft.com/download/details.aspx?id=40762) disponibles dans du Microsoft Download Center.
 Consultez [libère dernières](~/ef6/what-is-new/past-releases.md#ef-613) pour plus d’informations sur ces versions.
 - Ajout d’Entity Framework pour les nouveaux projets à l’aide des outils Entity Framework mis à niveau ajoute automatiquement le EF 6.1.3 package NuGet.
 Vous pouvez manuellement installer ou mettre à niveau vers n’importe quel package NuGet d’EF disponible en ligne.
@@ -52,7 +52,7 @@ N’oubliez pas d’utiliser un préfixe de chaîne textuelle `@` ou doubles bar
 ## <a name="visual-studio-2012"></a>Visual Studio 2012
 
 - Cette version de Visual Studio inclut et version antérieure du runtime et les outils Entity Framework.
-Il est recommandé de mettre à niveau vers Entity Framework Tools 6.1.3, à l’aide de [le programme d’installation](https://www.microsoft.com/en-us/download/details.aspx?id=40762) disponibles dans du Microsoft Download Center.
+Il est recommandé de mettre à niveau vers Entity Framework Tools 6.1.3, à l’aide de [le programme d’installation](https://www.microsoft.com/download/details.aspx?id=40762) disponibles dans du Microsoft Download Center.
 Consultez [libère dernières](~/ef6/what-is-new/past-releases.md#ef-613) pour plus d’informations sur ces versions.
 - Ajout d’Entity Framework pour les nouveaux projets à l’aide des outils Entity Framework mis à niveau ajoute automatiquement le EF 6.1.3 package NuGet.
 Vous pouvez manuellement installer ou mettre à niveau vers n’importe quel package NuGet d’EF disponible en ligne.
