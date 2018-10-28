@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: 84e2e4bc1bdc774fa059fa893e0f8ac128931feb
-ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
+ms.openlocfilehash: bba2742c3f3b6da93dd4b4f170a3878fc0473bc8
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47447181"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022195"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une base de données existante
 
@@ -59,7 +59,7 @@ Ce didacticiel utilise une base de données de **création de blogs** sur votre 
 
 Pour installer EF Core, installez le package pour le ou les fournisseurs de bases de données EF Core à cibler. Pour obtenir la liste des fournisseurs disponibles, consultez [Fournisseurs de bases de données](../../providers/index.md). 
 
-Pour ce tutoriel, vous n’êtes pas obligé d’installer un package de fournisseur, car le tutoriel utilise SQL Server. Le package du fournisseur SQL Server est inclus dans le [métapackage Microsoft.AspnetCore.App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1).
+Pour ce tutoriel, vous n’êtes pas obligé d’installer un package de fournisseur, car le tutoriel utilise SQL Server. Le package du fournisseur SQL Server est inclus dans le [métapackage Microsoft.AspnetCore.App](https://docs.microsoft.com/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1).
 
 ## <a name="reverse-engineer-your-model"></a>Rétroconcevoir le modèle
 
@@ -177,6 +177,6 @@ Vous pouvez à présent exécuter l’application pour la voir en action.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur la façon de structurer un contexte et des classes d’entités, consultez les articles suivants :
+Pour plus d’informations sur la façon de structurer un contexte et des classes d’entité, consultez les articles suivants :
 * [Référence des outils Entity Framework Core - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
 * [Référence des outils Entity Framework Core - Console du Gestionnaire de Package](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)
