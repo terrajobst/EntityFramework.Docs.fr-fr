@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 393349c05ffaf42c6d2520e73abce23def6becc0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f5a9ae17471391442170d8c40264e4db6922cb08
+ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995936"
+ms.lasthandoff: 11/03/2018
+ms.locfileid: "50980000"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuration d’un DbContext
 
@@ -25,7 +25,7 @@ Bien que n’importe quel modèle qui fournit les informations de configuration 
 
 `DbContext` doit avoir une instance de `DbContextOptions` afin d’effectuer des tâches. Le `DbContextOptions` instance comporte des informations de configuration telles que :
 
-- Le fournisseur de base de données à utiliser, généralement sélectionné en appelant une méthode comme `UseSqlServer` ou `UseSqlite`
+- Le fournisseur de base de données à utiliser, généralement sélectionné en appelant une méthode comme `UseSqlServer` ou `UseSqlite`. Ces méthodes d’extension requièrent le package de fournisseur correspondant, tel que `Microsoft.EntityFrameworkCore.SqlServer` ou `Microsoft.EntityFrameworkCore.Sqlite`. Les méthodes sont définies dans le `Microsoft.EntityFrameworkCore` espace de noms.
 - Toute chaîne de connexion nécessaires ou d’un identificateur de l’instance de la base de données, généralement passé en tant qu’argument à la méthode de sélection de fournisseur mentionnée ci-dessus
 - Tous les sélecteurs comportement facultatif au niveau du fournisseur, généralement également chaînés à l’intérieur de l’appel à la méthode de sélection du fournisseur
 - N’importe quel sélecteurs de comportement générales EF Core, généralement chaînées après ou avant la méthode de sélection du fournisseur
