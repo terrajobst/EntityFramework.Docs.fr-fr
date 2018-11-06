@@ -1,31 +1,91 @@
 ---
 title: L’amorçage des données - EF Core
 author: AndriySvyryd
-ms.date: 02/23/2018
+ms.author: ansvyryd
+ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 48ba2389de4b57dbe4c2b2124911c71440d45556
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 791f7afff36aac52fe2ffdc16ab580db22011b99
+ms.sourcegitcommit: 082946dcaa1ee5174e692dbfe53adeed40609c6a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994477"
+ms.lasthandoff: 11/06/2018
+ms.locfileid: "51028094"
 ---
-# <a name="data-seeding"></a><span data-ttu-id="8a999-102">Amorçage des données</span><span class="sxs-lookup"><span data-stu-id="8a999-102">Data Seeding</span></span>
+# <a name="data-seeding"></a><span data-ttu-id="b0b8e-102">Amorçage des données</span><span class="sxs-lookup"><span data-stu-id="b0b8e-102">Data Seeding</span></span>
 
-> [!NOTE]  
-> <span data-ttu-id="8a999-103">Cette fonctionnalité est une nouveauté d’EF Core 2.1.</span><span class="sxs-lookup"><span data-stu-id="8a999-103">This feature is new in EF Core 2.1.</span></span>
+<span data-ttu-id="b0b8e-103">L’amorçage des données est le processus de remplissage d’une base de données avec un ensemble initial de données.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-103">Data seeding is the process of populating a database with an initial set of data.</span></span>
 
-<span data-ttu-id="8a999-104">L’amorçage des données permet de fournir des données initiales pour remplir une base de données.</span><span class="sxs-lookup"><span data-stu-id="8a999-104">Data seeding allows to provide initial data to populate a database.</span></span> <span data-ttu-id="8a999-105">Contrairement à dans EF6, dans EF Core, données d’amorçage sont associée à un type d’entité dans le cadre de la configuration du modèle.</span><span class="sxs-lookup"><span data-stu-id="8a999-105">Unlike in EF6, in EF Core, seeding data is associated with an entity type as part of the model configuration.</span></span> <span data-ttu-id="8a999-106">Puis EF Core [migrations](xref:core/managing-schemas/migrations/index) peut calculer automatiquement les éléments insérant, mettre à jour ou supprimer la nécessité d’opérations à appliquer lors de la mise à niveau de la base de données vers une nouvelle version du modèle.</span><span class="sxs-lookup"><span data-stu-id="8a999-106">Then EF Core [migrations](xref:core/managing-schemas/migrations/index) can automatically compute what insert, update or delete operations need to be applied when upgrading the database to a new version of the model.</span></span>
+<span data-ttu-id="b0b8e-104">Il existe plusieurs façons qu'y parvenir dans EF Core :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-104">There are several ways this can be accomplished in EF Core:</span></span>
+* <span data-ttu-id="b0b8e-105">Données d’amorçage de modèle</span><span class="sxs-lookup"><span data-stu-id="b0b8e-105">Model seed data</span></span>
+* <span data-ttu-id="b0b8e-106">Personnalisation d’une migration manuelle</span><span class="sxs-lookup"><span data-stu-id="b0b8e-106">Manual migration customization</span></span>
+* <span data-ttu-id="b0b8e-107">Logique d’initialisation personnalisé</span><span class="sxs-lookup"><span data-stu-id="b0b8e-107">Custom initialization logic</span></span>
 
-<span data-ttu-id="8a999-107">Par exemple, vous pouvez utiliser ceci pour configurer les données de valeur initiale pour un `Blog` dans `OnModelCreating`:</span><span class="sxs-lookup"><span data-stu-id="8a999-107">As an example, you can use this to configure seed data for a `Blog` in `OnModelCreating`:</span></span>
+## <a name="model-seed-data"></a><span data-ttu-id="b0b8e-108">Données d’amorçage de modèle</span><span class="sxs-lookup"><span data-stu-id="b0b8e-108">Model seed data</span></span>
 
-[!code-csharp[Main](../../../samples/core/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
+> [!NOTE]
+> <span data-ttu-id="b0b8e-109">Cette fonctionnalité est une nouveauté d’EF Core 2.1.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-109">This feature is new in EF Core 2.1.</span></span>
 
-<span data-ttu-id="8a999-108">Pour ajouter des entités ayant une relation de valeurs de clés étrangères doivent être spécifiés.</span><span class="sxs-lookup"><span data-stu-id="8a999-108">To add entities that have a relationship the foreign key values need to be specified.</span></span> <span data-ttu-id="8a999-109">Les propriétés de clé étrangères sont fréquemment dans l’état de clichés instantanés, pour être en mesure de définir les valeurs à une classe anonyme doit être utilisé :</span><span class="sxs-lookup"><span data-stu-id="8a999-109">Frequently the foreign key properties are in shadow state, so to be able to set the values an anonymous class should be used:</span></span>
+<span data-ttu-id="b0b8e-110">Contrairement à dans EF6, dans EF Core, l’amorçage des données peut être associé à un type d’entité dans le cadre de la configuration du modèle.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-110">Unlike in EF6, in EF Core, seeding data can be associated with an entity type as part of the model configuration.</span></span> <span data-ttu-id="b0b8e-111">Puis EF Core [migrations](xref:core/managing-schemas/migrations/index) peut calculer automatiquement les éléments insérant, mettre à jour ou supprimer la nécessité d’opérations à appliquer lors de la mise à niveau de la base de données vers une nouvelle version du modèle.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-111">Then EF Core [migrations](xref:core/managing-schemas/migrations/index) can automatically compute what insert, update or delete operations need to be applied when upgrading the database to a new version of the model.</span></span>
 
-[!code-csharp[Main](../../../samples/core/DataSeeding/DataSeedingContext.cs?name=PostSeed)]
+> [!NOTE]
+> <span data-ttu-id="b0b8e-112">Migrations considère uniquement les modifications apportées au modèle pour déterminer quelle opération doit être effectuée pour obtenir les données d’amorçage dans l’état souhaité.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-112">Migrations only considers model changes when determining what operation should be performed to get the seed data into the desired state.</span></span> <span data-ttu-id="b0b8e-113">Par conséquent, les modifications apportées aux données effectuées en dehors de migrations peuvent être perdues ou provoquer une erreur.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-113">Thus any changes to the data performed outside of migrations might be lost or cause an error.</span></span>
 
-<span data-ttu-id="8a999-110">Une fois que les entités ont été ajoutées, il est recommandé d’utiliser [migrations](xref:core/managing-schemas/migrations/index) pour appliquer les modifications.</span><span class="sxs-lookup"><span data-stu-id="8a999-110">Once entities have been added, it is recommended to use [migrations](xref:core/managing-schemas/migrations/index) to apply changes.</span></span> 
+<span data-ttu-id="b0b8e-114">Par exemple, cette opération configure les données d’amorçage pour un `Blog` dans `OnModelCreating`:</span><span class="sxs-lookup"><span data-stu-id="b0b8e-114">As an example, this will configure seed data for a `Blog` in `OnModelCreating`:</span></span>
 
-<span data-ttu-id="8a999-111">Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire.</span><span class="sxs-lookup"><span data-stu-id="8a999-111">Alternatively, you can use `context.Database.EnsureCreated()` to create a new database containing the seed data, for example for a test database or when using the in-memory provider.</span></span> <span data-ttu-id="8a999-112">Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour le schéma ni les données d’amorçage dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="8a999-112">Note that if the database already exists, `EnsureCreated()` will neither update the schema nor the seed data in the database.</span></span>
+[!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
+
+<span data-ttu-id="b0b8e-115">Pour ajouter des entités ayant une relation de valeurs de clés étrangères doivent être spécifiés :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-115">To add entities that have a relationship the foreign key values need to be specified:</span></span>
+
+[!code-csharp[PostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=PostSeed)]
+
+<span data-ttu-id="b0b8e-116">Si le type d’entité a des propriétés dans l’état de clichés instantanés qu'une classe anonyme peut être utilisée pour fournir les valeurs :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-116">If the entity type has any properties in shadow state an anonymous class can be used to provide the values:</span></span>
+
+[!code-csharp[AnonymousPostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=AnonymousPostSeed)]
+
+<span data-ttu-id="b0b8e-117">Détenues entité types peuvent être exécutées de manière similaire :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-117">Owned entity types can be seeded in a similar fashion:</span></span>
+
+[!code-csharp[OwnedTypeSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=OwnedTypeSeed)]
+
+<span data-ttu-id="b0b8e-118">Consultez le [exemple complet de projet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) pour plus de contexte.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-118">See the [full sample project](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) for more context.</span></span>
+
+<span data-ttu-id="b0b8e-119">Une fois que les données ont été ajoutées au modèle, [migrations](xref:core/managing-schemas/migrations/index) doit être utilisé pour appliquer les modifications.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-119">Once the data has been added to the model, [migrations](xref:core/managing-schemas/migrations/index) should be used to apply the changes.</span></span>
+
+> [!TIP]
+> <span data-ttu-id="b0b8e-120">Si vous avez besoin appliquer des migrations en tant que partie d’un déploiement automatisé, vous pouvez [créer un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) qui peuvent être visualisés avant l’exécution.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-120">If you need to apply migrations as part of an automated deployment you can [create a SQL script](xref:core/managing-schemas/migrations/index#generate-sql-scripts) that can be previewed before execution.</span></span>
+
+<span data-ttu-id="b0b8e-121">Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non-relation.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-121">Alternatively, you can use `context.Database.EnsureCreated()` to create a new database containing the seed data, for example for a test database or when using the in-memory provider or any non-relation database.</span></span> <span data-ttu-id="b0b8e-122">Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour le schéma ni les données d’amorçage dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-122">Note that if the database already exists, `EnsureCreated()` will neither update the schema nor the seed data in the database.</span></span> <span data-ttu-id="b0b8e-123">Pour les bases de données relationnelles vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des Migrations.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-123">For relational databases you shouldn't call `EnsureCreated()` if you plan to use Migrations.</span></span>
+
+<span data-ttu-id="b0b8e-124">Ce type de données d’amorçage est géré par des migrations et le script pour mettre à jour les données qui se trouve déjà dans la base de données doit être généré sans vous connecter à la base de données.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-124">This type of seed data is managed by migrations and the script to update the data that's already in the database needs to be generated without connecting to the database.</span></span> <span data-ttu-id="b0b8e-125">Cela impose certaines restrictions :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-125">This imposes some restrictions:</span></span>
+* <span data-ttu-id="b0b8e-126">La valeur de clé primaire doit être spécifié même s’il est généralement généré par la base de données.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-126">The primary key value needs to be specified even if it's usually generated by the database.</span></span> <span data-ttu-id="b0b8e-127">Il sera utilisé pour détecter des modifications de données entre des migrations.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-127">It will be used to detect data changes between migrations.</span></span>
+* <span data-ttu-id="b0b8e-128">Les données de départ seront supprimées si la clé primaire est modifiée en aucune façon.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-128">Previously seeded data will be removed if the primary key is changed in any way.</span></span>
+
+<span data-ttu-id="b0b8e-129">Par conséquent, cette fonctionnalité est particulièrement utile pour les données statiques qui n’a pas censé modifier en dehors des migrations et ne repose pas sur rien d’autre dans la base de données, par exemple les codes postaux.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-129">Therefore this feature is most useful for static data that's not expected to change outside of migrations and does not depend on anything else in the database, for example ZIP codes.</span></span>
+
+<span data-ttu-id="b0b8e-130">Si votre scénario comprend les éléments suivants, il est recommandé d’utiliser la logique d’initialisation personnalisé décrite dans la dernière section :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-130">If your scenario includes any of the following it is recommended to use custom initialization logic described in the last section:</span></span>
+* <span data-ttu-id="b0b8e-131">Données temporaires pour le test</span><span class="sxs-lookup"><span data-stu-id="b0b8e-131">Temporary data for testing</span></span>
+* <span data-ttu-id="b0b8e-132">Données qui varie selon l’état de la base de données</span><span class="sxs-lookup"><span data-stu-id="b0b8e-132">Data that depends on database state</span></span>
+* <span data-ttu-id="b0b8e-133">Données dont a besoin des valeurs de clé devant être généré par la base de données, y compris les entités qui utilisent des clés secondaires en tant que l’identité</span><span class="sxs-lookup"><span data-stu-id="b0b8e-133">Data that needs key values to be generated by the database, including entities that use alternate keys as the identity</span></span>
+* <span data-ttu-id="b0b8e-134">Les données qui nécessite une transformation personnalisée (qui n’est pas gérée par [valeur conversions](xref:core/modeling/value-conversions)), par exemple un hachage de mot de passe</span><span class="sxs-lookup"><span data-stu-id="b0b8e-134">Data that requires custom transformation (that is not handled by [value conversions](xref:core/modeling/value-conversions)), such as some password hashing</span></span>
+* <span data-ttu-id="b0b8e-135">Données qui nécessite des appels d’API externe, telle que la création des rôles et les utilisateurs de ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="b0b8e-135">Data that requires calls to external API, such as ASP.NET Core Identity roles and users creation</span></span>
+
+## <a name="manual-migration-customization"></a><span data-ttu-id="b0b8e-136">Personnalisation d’une migration manuelle</span><span class="sxs-lookup"><span data-stu-id="b0b8e-136">Manual migration customization</span></span>
+
+<span data-ttu-id="b0b8e-137">Lorsqu’une migration est ajoutée les modifications apportées aux données spécifiées avec `HasData` sont transformées en appels à `InsertData()`, `UpdateData()`, et `DeleteData()`.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-137">When a migration is added the changes to the data specified with `HasData` are transformed to calls to `InsertData()`, `UpdateData()`, and `DeleteData()`.</span></span> <span data-ttu-id="b0b8e-138">Une façon de contourner certaines des limitations de `HasData` consiste à ajouter manuellement ces appels ou [opérations personnalisées](xref:core/managing-schemas/migrations/operations) pour la migration à la place.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-138">One way of working around some of the limitations of `HasData` is to manually add these calls or [custom operations](xref:core/managing-schemas/migrations/operations) to the migration instead.</span></span>
+
+[!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
+
+## <a name="custom-initialization-logic"></a><span data-ttu-id="b0b8e-139">Logique d’initialisation personnalisé</span><span class="sxs-lookup"><span data-stu-id="b0b8e-139">Custom initialization logic</span></span>
+
+<span data-ttu-id="b0b8e-140">Un moyen simple et puissant pour effectuer l’amorçage des données consiste à utiliser [ `DbContext.SaveChanges()` ](xref:core/saving/index) avant le principal de l’application logique commence à s’exécuter.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-140">A straightforward and powerful way to perform data seeding is to use [`DbContext.SaveChanges()`](xref:core/saving/index) before the main application logic begins execution.</span></span>
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataSeeding/Program.cs?name=CustomSeeding)]
+
+> [!WARNING]
+> <span data-ttu-id="b0b8e-141">Le code d’amorçage ne doit pas être de partie de l’exécution d’application normal car cela peut provoquer des problèmes d’accès concurrentiel lorsque plusieurs instances sont en cours d’exécution et qu’il nécessitent également l’application ayant l’autorisation de modifier le schéma de base de données.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-141">The seeding code should not be part of the normal app execution as this can cause concurrency issues when multiple instances are running and would also require the app having permission to modify the database schema.</span></span>
+
+<span data-ttu-id="b0b8e-142">Selon les contraintes de votre déploiement, le code d’initialisation peut être exécuté de différentes façons :</span><span class="sxs-lookup"><span data-stu-id="b0b8e-142">Depending on the constraints of your deployment the initialization code can be executed in different ways:</span></span>
+* <span data-ttu-id="b0b8e-143">Exécution de l’application de l’initialisation localement</span><span class="sxs-lookup"><span data-stu-id="b0b8e-143">Running the initialization app locally</span></span>
+* <span data-ttu-id="b0b8e-144">Déploiement de l’application de l’initialisation avec l’application principale, l’appel de la routine d’initialisation et la désactivation ou la suppression de l’application de l’initialisation.</span><span class="sxs-lookup"><span data-stu-id="b0b8e-144">Deploying the initialization app with the main app, invoking the initialization routine and disabling or removing the initialization app.</span></span>
+
+<span data-ttu-id="b0b8e-145">Cette tâche peut généralement être automatisée à l’aide de [profils de publication](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/visual-studio-publish-profiles).</span><span class="sxs-lookup"><span data-stu-id="b0b8e-145">This can usually be automated by using [publish profiles](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/visual-studio-publish-profiles).</span></span>
