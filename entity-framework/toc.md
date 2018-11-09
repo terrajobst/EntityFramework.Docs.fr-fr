@@ -72,7 +72,7 @@
 ##### [Utilisation d’un projet distinct](core/managing-schemas/migrations/projects.md)
 ##### [Plusieurs fournisseurs](core/managing-schemas/migrations/providers.md)
 ##### [Table d’historique personnalisée](core/managing-schemas/migrations/history-table.md)
-#### [🔧 Créer et supprimer des API](core/managing-schemas/ensure-created.md)
+#### [ Créer et supprimer des API](core/managing-schemas/ensure-created.md)
 #### [🔧 Reconstitution de la logique des produits](core/managing-schemas/scaffolding.md)
 
 ### [Interrogation des données](core/querying/index.md)
