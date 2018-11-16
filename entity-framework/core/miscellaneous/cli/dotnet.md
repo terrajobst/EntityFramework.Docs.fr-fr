@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/20/2018
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 87b9c73e32eddbf48cd3408de93245d9974efdce
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: 959785c7b10ca668f3691106f62076d538978c03
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834784"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688665"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Référence des outils Entity Framework Core - interface CLI .NET
 
@@ -282,3 +282,8 @@ L’exemple suivant crée un script pour toutes les migrations après la migrati
 ```console
 dotnet ef migrations script 20180904195021_InitialCreate
 ```
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [Migrations](xref:core/managing-schemas/migrations/index)
+* [Ingénierie à rebours](xref:core/managing-schemas/scaffolding)

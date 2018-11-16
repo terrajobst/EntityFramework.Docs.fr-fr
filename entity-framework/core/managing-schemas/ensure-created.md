@@ -2,24 +2,24 @@
 title: Créer et supprimer des API - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/10/2017
-ms.openlocfilehash: 336f6fd655603a2474a58dfef377e121d9b04c3a
-ms.sourcegitcommit: a088421ecac4f5dc5213208170490181ae2f5f0f
+ms.date: 11/7/2018
+ms.openlocfilehash: 40d9e3aa0aba1bf2bc341f01dd815ed7cb7b48fa
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/08/2018
-ms.locfileid: "51285637"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688627"
 ---
 # <a name="create-and-drop-apis"></a>Créer et supprimer des API
 
-Les méthodes EnsureCreated et EnsureDeleted fournissent une alternative légère à [Migrations](migrations/index.md) pour gérer le schéma de base de données. Cela est utile dans les scénarios lorsque les données sont temporaires et peuvent être supprimées lorsque le schéma est modifié. Par exemple lors d’une création de prototypes, dans les tests, ou pour les caches locaux.
+Les méthodes EnsureCreated et EnsureDeleted fournissent une alternative légère à [Migrations](migrations/index.md) pour gérer le schéma de base de données. Ces méthodes sont utiles dans les scénarios lorsque les données sont temporaires et peuvent être supprimées lorsque le schéma est modifié. Par exemple lors d’une création de prototypes, dans les tests, ou pour les caches locaux.
 
-Certains fournisseurs (en particulier ceux non relationnelles) ne prennent pas en charge les Migrations. Dans ce cas, EnsureCreated est souvent le moyen le plus simple pour initialiser le schéma de base de données.
+Certains fournisseurs (en particulier ceux non relationnelles) ne prennent pas en charge les Migrations. Pour ces fournisseurs, EnsureCreated est souvent le moyen le plus simple pour initialiser le schéma de base de données.
 
 > [!WARNING]
 > EnsureCreated et Migrations ne fonctionnent pas bien ensemble. Si vous utilisez des Migrations, n’utilisez pas EnsureCreated pour initialiser le schéma.
 
-Transition à partir de EnsureCreated aux Migrations n’est pas une expérience transparente. Le simpelest pour y parvenir consiste à supprimer de la base de données et créer de nouveau à l’aide des Migrations. Si vous prévoyez d’utiliser des Migrations à l’avenir, il est préférable de simplement commencer avec des Migrations au lieu d’utiliser EnsureCreated.
+Transition à partir de EnsureCreated aux Migrations n’est pas une expérience transparente. Pour cela, le plus simple consiste à supprimer la base de données et de créer de nouveau à l’aide des Migrations. Si vous prévoyez d’utiliser des migrations à l’avenir, il est préférable de simplement commencer avec des Migrations au lieu d’utiliser EnsureCreated.
 
 ## <a name="ensuredeleted"></a>EnsureDeleted
 
