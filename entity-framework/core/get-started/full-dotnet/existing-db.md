@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: b9e079f88dd35016407b19bb627f8bd46edb3d4c
-ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
+ms.openlocfilehash: 1b90c491a3b2025da750a3266ff45d9d92bb1d0d
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47447155"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688613"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Bien démarrer avec EF Core sur .NET Framework avec une base de données existante
 
@@ -120,5 +120,6 @@ Vous pouvez à présent utiliser le modèle pour accéder aux données.
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur la façon de structurer un contexte et des classes d’entité, consultez les articles suivants :
+* [Reconstitution de la logique des produits](xref:core/managing-schemas/scaffolding)
 * [Référence des outils Entity Framework Core - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
 * [Référence des outils Entity Framework Core - Console du Gestionnaire de Package](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)

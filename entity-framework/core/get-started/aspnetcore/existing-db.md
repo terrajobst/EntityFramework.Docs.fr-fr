@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: bba2742c3f3b6da93dd4b4f170a3878fc0473bc8
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 23cd53b0e162afc5db0243b7032bb9c5f18bfb35
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022195"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688691"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une base de données existante
 
@@ -178,5 +178,6 @@ Vous pouvez à présent exécuter l’application pour la voir en action.
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur la façon de structurer un contexte et des classes d’entité, consultez les articles suivants :
+* [Reconstitution de la logique des produits](xref:core/managing-schemas/scaffolding)
 * [Référence des outils Entity Framework Core - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
 * [Référence des outils Entity Framework Core - Console du Gestionnaire de Package](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)
