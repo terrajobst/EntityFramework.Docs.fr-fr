@@ -1,4 +1,4 @@
----
+﻿---
 title: EF Core références relatives aux outils (Console du Gestionnaire de Package) - EF Core
 author: bricelam
 ms.author: bricelam
@@ -130,8 +130,8 @@ Le tableau suivant présente les paramètres qui sont communes à toutes les com
 
 | Paramètre                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Contexte \<chaîne >        | Le `DbContext` classe à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
-| -Projet \<chaîne >        | Le projet cible. Si ce paramètre est omis, le **projet par défaut** pour **Console du Gestionnaire de Package** est utilisé en tant que le projet cible.                                                                             |
+| -Context \<chaîne >        | Le `DbContext` classe à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
+| -Project \<chaîne >        | Le projet cible. Si ce paramètre est omis, le **projet par défaut** pour **Console du Gestionnaire de Package** est utilisé en tant que le projet cible.                                                                             |
 | -StartupProject \<chaîne > | Le projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans **propriétés de la Solution** est utilisé en tant que le projet cible.                                                                                 |
 | -Verbose                  | Afficher la sortie détaillée.                                                                                                                                                                                                 |
 
@@ -183,11 +183,11 @@ Paramètres :
 
 | Paramètre                          | Description                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Connexion \<chaîne ></nobr> | La chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2.x, la valeur peut être *nom =\<nom de chaîne de connexion >*. Dans ce cas, le nom est fourni à partir des sources de configuration qui sont configurées pour le projet. Ceci est un paramètre positionnel et est nécessaire. |
-| <nobr>-Fournisseur \<chaîne ></nobr>   | Le fournisseur à utiliser. En général, c’est le nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Ceci est un paramètre positionnel et est nécessaire.                                                                                           |
+| <nobr>-Connection \<chaîne ></nobr> | La chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2.x, la valeur peut être *nom =\<nom de chaîne de connexion >*. Dans ce cas, le nom est fourni à partir des sources de configuration qui sont configurées pour le projet. Ceci est un paramètre positionnel et est nécessaire. |
+| <nobr>-Provider \<chaîne ></nobr>   | Le fournisseur à utiliser. En général, c’est le nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Ceci est un paramètre positionnel et est nécessaire.                                                                                           |
 | -OutputDir \<chaîne >               | Répertoire à placer les fichiers dans. Chemins d’accès sont relatif au répertoire de projet.                                                                                                                                                                                             |
 | -ContextDir \<chaîne >              | Le répertoire de placer le `DbContext` de fichiers dans. Chemins d’accès sont relatif au répertoire de projet.                                                                                                                                                                              |
-| -Contexte \<chaîne >                 | Le nom de la `DbContext` classe à générer.                                                                                                                                                                                                                          |
+| -Context \<chaîne >                 | Le nom de la `DbContext` classe à générer.                                                                                                                                                                                                                          |
 | -Schemas \<String [] >               | Les schémas des tables pour générer des types d’entité. Si ce paramètre est omis, tous les schémas sont inclus.                                                                                                                                                             |
 | -Tables \<String [] >                | Les tables pour générer des types d’entité. Si ce paramètre est omis, toutes les tables sont inclus.                                                                                                                                                                         |
 | -DataAnnotations                   | Utilisez des attributs pour configurer le modèle (le cas échéant). Si ce paramètre est omis, uniquement l’API fluent est utilisé.                                                                                                                                                      |
@@ -217,7 +217,7 @@ Paramètres :
 | *-From* \<chaîne >        | La migration de départ. Migrations peuvent être identifiées par nom ou par ID. La valeur 0 est un cas spécial signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
 | *-* \<Chaîne >          | La migration de fin. Valeur par défaut est la dernière migration.                                                                                                                                                                      |
 | <nobr>-Idempotent</nobr> | Générer un script qui peut être utilisé sur toute migration d’une base de données.                                                                                                                                                         |
-| -Sortie \<chaîne >        | Fichier dans lequel écrire le résultat. Si ce paramètre est omis, le fichier est créé avec un nom généré dans le même dossier que les fichiers exécutables de l’application sont créés, par exemple : */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*. |
+| -Output \<chaîne >        | Fichier dans lequel écrire le résultat. Si ce paramètre est omis, le fichier est créé avec un nom généré dans le même dossier que les fichiers exécutables de l’application sont créés, par exemple : */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*. |
 
 > [!TIP]
 > To, From, et les paramètres de sortie prend en charge d’extension de l’onglet.
