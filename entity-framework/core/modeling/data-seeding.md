@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 791f7afff36aac52fe2ffdc16ab580db22011b99
-ms.sourcegitcommit: 082946dcaa1ee5174e692dbfe53adeed40609c6a
+ms.openlocfilehash: 8f28dfea12461572ade8fbf3910ebd216dafb389
+ms.sourcegitcommit: fa863883f1193d2118c2f9cee90808baa5e3e73e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2018
-ms.locfileid: "51028094"
+ms.lasthandoff: 12/04/2018
+ms.locfileid: "52857427"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
@@ -54,7 +54,7 @@ Une fois que les données ont été ajoutées au modèle, [migrations](xref:core
 > [!TIP]
 > Si vous avez besoin appliquer des migrations en tant que partie d’un déploiement automatisé, vous pouvez [créer un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) qui peuvent être visualisés avant l’exécution.
 
-Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non-relation. Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour le schéma ni les données d’amorçage dans la base de données. Pour les bases de données relationnelles vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des Migrations.
+Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non-relation. Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour les données de schéma ni de valeur initiale dans la base de données. Pour les bases de données relationnelles vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des Migrations.
 
 Ce type de données d’amorçage est géré par des migrations et le script pour mettre à jour les données qui se trouve déjà dans la base de données doit être généré sans vous connecter à la base de données. Cela impose certaines restrictions :
 * La valeur de clé primaire doit être spécifié même s’il est généralement généré par la base de données. Il sera utilisé pour détecter des modifications de données entre des migrations.
