@@ -12,8 +12,8 @@
 
 ### [Nouveautés](core/what-is-new/index.md)
 #### [Feuille de route EF Core](core/what-is-new/roadmap.md)
-#### [EF Core 2.2 (préversion)](core/what-is-new/ef-core-2.2.md)
-#### [EF Core 2.1 (dernière version stable)](core/what-is-new/ef-core-2.1.md)
+#### [EF Core 2.2 (dernière version stable)](core/what-is-new/ef-core-2.2.md)
+#### [EF Core 2.1](core/what-is-new/ef-core-2.1.md)
 #### [EF Core 2.0](core/what-is-new/ef-core-2.0.md)
 #### [EF Core 1.1](core/what-is-new/ef-core-1.1.md)
 #### [EF Core 1.0](core/what-is-new/ef-core-1.0.md)
