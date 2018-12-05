@@ -3,12 +3,12 @@ title: Code First Migrations dans les environnements d’équipe - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: f5216a80928625040d6719f0e97ae786e5e33e05
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 53460b6cdd454099ccf93b4e2133e4ea21278a64
+ms.sourcegitcommit: fa863883f1193d2118c2f9cee90808baa5e3e73e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490504"
+ms.lasthandoff: 12/04/2018
+ms.locfileid: "52857466"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations dans les environnements d’équipe
 > [!NOTE]
@@ -82,7 +82,7 @@ Il existe de nombreuses raisons QU'EF conserve la capture instantanée autour du
     -   Vous souhaitez ajouter une Inserted et la mise à jour pour la colonne à un ou plusieurs de vos tables, mais vous ne souhaitez pas inclure ces colonnes dans le modèle EF. Si les migrations examiné la base de données que s’il s’agissait en permanence essayez de supprimer ces colonnes chaque fois que vous généré automatiquement une migration. À l’aide de la capture instantanée du modèle, EF uniquement jamais détecte des modifications légitimes portées au modèle.
     -   Vous souhaitez modifier le corps d’une procédure stockée utilisée pour les mises à jour pour inclure une journalisation. Si les migrations étudié cette procédure stockée à partir de la base de données en permanence tentait de rétablir la définition qui attend d’EF. À l’aide de la capture instantanée du modèle, EF sera structurer uniquement jamais de code pour modifier la procédure stockée lorsque vous modifiez la forme de la procédure décrite dans le modèle EF.
     -   Ces mêmes principes s’appliquent à l’ajout d’index supplémentaires, y compris les tables supplémentaires dans votre base de données, mappage EF à une vue de base de données qui se trouve sur une table, etc.
--   Le modèle EF contient plus que la forme de la base de données. L’ensemble du modèle permet de migrations d’examiner des informations sur les propriétés et les classes dans votre modèle et comment elles correspondent aux colonnes et des tables. Ces informations permettent à être plus intelligentes dans le code il structure les migrations. Par exemple, si vous modifiez le nom de la colonne qui a une propriété est mappée aux migrations peut détecter le changement de nom en fait de constater qu’il est la même propriété – quelque chose qui ne peut pas être effectuée si vous avez uniquement le schéma de base de données. 
+-   Le modèle EF contient plus que la forme de la base de données. L’ensemble du modèle permet de migrations d’examiner des informations sur les propriétés et les classes dans votre modèle et comment elles correspondent aux colonnes et des tables. Ces informations permettent à être plus intelligentes dans le code il structure les migrations. Par exemple, si vous modifiez le nom de la colonne qui a une propriété est mappée aux migrations peut détecter le changement de nom en fait de constater qu’il est la même propriété – quelque chose qui ne peut pas être effectuée si vous avez uniquement le schéma de base de données. 
 
 ## <a name="what-causes-issues-in-team-environments"></a>Ce qui provoque des problèmes dans les environnements d’équipe
 
@@ -109,7 +109,7 @@ C’est un jour chance pour développeur \#1 qu’elles se produisent à soumett
 
 ![Envoyer](~/ef6/media/submit.png)
 
-Maintenant il est temps pour développeur \#2 à envoyer. Ils ne sont pas donc chance. Étant donné que quelqu'un d’autre a soumis des modifications dans la mesure où ils synchronisés, ils doivent extraire les modifications et la fusion. Le système de contrôle de code source sera probablement être en mesure de fusionner automatiquement les modifications au niveau du code dans la mesure où ils sont très simples. L’état de développeur \#local de 2 référentiel après la synchronisation est représentée dans le graphique suivant. 
+Maintenant il est temps pour développeur \#2 à envoyer. Ils ne sont pas donc chance. Étant donné que quelqu'un d’autre a soumis des modifications dans la mesure où ils synchronisés, ils doivent extraire les modifications et la fusion. Le système de contrôle de code source sera probablement être en mesure de fusionner automatiquement les modifications au niveau du code dans la mesure où ils sont très simples. L’état de développeur \#local de 2 référentiel après la synchronisation est représentée dans le graphique suivant. 
 
 ![Extraction](~/ef6/media/pull.png)
 
@@ -140,8 +140,7 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 1.  Vérifiez que toutes les modifications en attente de modèle dans votre base de code local ont été écrits dans une migration. Cette étape garantit que vous ne manquez pas les modifications légitimes lorsqu’il s’agit de la génération de la migration vide.
 2.  Synchroniser avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer les migrations de nouveau les autres développeurs ont archivé.
-    **
-    *Remarque : *** Si vous n’obtenez pas les avertissements à partir de la commande Update-Database ne comportait aucune nouvelle migration à partir d’autres développeurs et il est inutile d’effectuer toute fusion.*
+    **_Remarque :_**  *si vous n’obtenez pas les avertissements à partir de la commande Update-Database ne comportait aucune nouvelle migration à partir d’autres développeurs et il est inutile d’effectuer toute fusion.*
 4.  Exécutez **Add-Migration &lt;choisir\_un\_nom&gt; – IgnoreChanges** (par exemple, **Add-Migration de fusion – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actif), mais ignore les modifications qu’il détecte lors de la comparaison du modèle actif pour la capture instantanée dans les migrations dernière (ce qui signifie que vous obtenez une valeur vide **des** et **Vers le bas** méthode).
 5.  Continuer à développer ou les envoyer au contrôle de code source (après que exécution votre de tests unitaires bien entendu).
 
@@ -162,14 +161,11 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 1.  Vérifiez que toutes les modifications en attente de modèle dans votre base de code local ont été écrits dans une migration. Cette étape garantit que vous ne manquez pas les modifications légitimes lorsqu’il s’agit de la génération de la migration vide.
 2.  Synchroniser avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer les migrations de nouveau les autres développeurs ont archivé.
-    **
-    *Remarque : *** Si vous n’obtenez pas les avertissements à partir de la commande Update-Database ne comportait aucune nouvelle migration à partir d’autres développeurs et il est inutile d’effectuer toute fusion.*
+    **_Remarque :_**  *si vous n’obtenez pas les avertissements à partir de la commande Update-Database ne comportait aucune nouvelle migration à partir d’autres développeurs et il est inutile d’effectuer toute fusion.*
 4.  Exécutez **mise à jour la base de données – TargetMigration &lt;deuxième\_dernière\_migration&gt;**  (dans l’exemple que nous avons été suivant ce serait **Update-Database : TargetMigration AddRating**). Cette sauvegarde de la base de données à l’état de la deuxième des rôles dernière migration – efficacement « non application » la dernière migration à partir de la base de données.
-    **
-    *Remarque : *** cette étape est nécessaire pour sécuriser de modifier les métadonnées de la migration dans la mesure où les métadonnées sont également stockées dans le \_ \_MigrationsHistoryTable de la base de données. C’est pourquoi vous devez uniquement utiliser cette option si la dernière migration est uniquement dans votre base de code local. Si d’autres bases de données était la dernière migration appliquée vous devrez également les annuler et ré-appliquer la dernière migration pour mettre à jour les métadonnées.* 
+    **_Remarque :_**  *cette étape est nécessaire pour sécuriser de modifier les métadonnées de la migration dans la mesure où les métadonnées sont également stockées dans le \_ \_MigrationsHistoryTable de la base de données. C’est pourquoi vous devez uniquement utiliser cette option si la dernière migration est uniquement dans votre base de code local. Si d’autres bases de données était la dernière migration appliquée vous devrez également les annuler et ré-appliquer la dernière migration pour mettre à jour les métadonnées.* 
 5.  Exécutez **Add-Migration &lt;complète\_nom\_notamment\_timestamp\_de\_dernière\_migration** &gt; (dans l’exemple Nous avons été suivant ce serait quelque chose comme **Add-Migration 201311062215252\_AddReaders**).
-    **
-    *Remarque : *** vous devez inclure l’horodatage afin que les migrations sait que vous souhaitez modifier la migration existante au lieu d’une génération de modèles automatique.*
+    **_Remarque :_**  *vous devez inclure l’horodatage afin que les migrations sait que vous souhaitez modifier la migration existante au lieu d’une génération de modèles automatique.*
     Cela met à jour les métadonnées pour la dernière migration correspondre au modèle actuel. Vous obtiendrez l’avertissement suivant lors de la commande terminée, mais c’est exactement ce que vous voulez. «*Uniquement le Code de concepteur pour la migration « 201311062215252\_AddReaders' a été ré-généré automatiquement. Pour ré-structurer la migration entière, utilisez le paramètre - Force. »*
 6.  Exécutez **Update-Database** demander à nouveau la dernière migration avec les métadonnées de mises à jour.
 7.  Continuer à développer ou les envoyer au contrôle de code source (après que exécution votre de tests unitaires bien entendu).
