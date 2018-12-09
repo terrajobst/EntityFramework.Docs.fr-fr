@@ -3,12 +3,12 @@ title: 'Filtres de requête globale : EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 73efe62262cf45cc1841d7a86cf59249cf07c5ea
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 201292a440d37d240f31452eaebb23dcd4aee1a6
+ms.sourcegitcommit: 8dd71a57a01c439431164c163a0722877d0e5cd8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996663"
+ms.lasthandoff: 12/07/2018
+ms.locfileid: "53028165"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -22,17 +22,17 @@ Les filtres de requête globale permet aux prédicats de requête LINQ (expressi
 L’exemple suivant montre comment utiliser les filtres de requête globale pour implémenter des comportements de suppression réversible et d’architecture multilocataire dans un modèle de création de blogs simple.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryFilters) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) sur GitHub.
 
 Tout d’abord définissez les entités :
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Entities)]
 
 Notez la déclaration d’un champ __tenantId_ sur l’entité _Blog_. Celui-ci doit servir à associer chaque instance de blog à un client spécifique. Une propriété _IsDeleted_ est également définie sur le type d’entité _Post_. Elle est utilisée pour déterminer si une instance _Post_ a été « supprimée de façon réversible ». Autrement dit, l’instance est marquée comme supprimée sans que les données sous-jacentes soient réellement supprimées.
 
 Ensuite, configurez les filtres de requête dans _OnModelCreating_ à l’aide de l’API ```HasQueryFilter```.
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Configuration)]
+[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Configuration)]
 
 Les expressions de prédicat passées aux appels _HasQueryFilter_ seront désormais automatiquement appliquées à toutes les requêtes LINQ pour ces types.
 
@@ -43,7 +43,7 @@ Les expressions de prédicat passées aux appels _HasQueryFilter_ seront désorm
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur ```IgnoreQueryFilters()```.
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#IgnoreFilters)]
+[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#IgnoreFilters)]
 
 ## <a name="limitations"></a>Limitations
 
