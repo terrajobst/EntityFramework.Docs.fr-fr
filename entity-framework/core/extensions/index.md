@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 07/03/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 1edc7a20f54b2d26f899c93e98dfaf6d62c29f86
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 67eae6cb943b974cc9cd581b8054836d2e37b1e9
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490725"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53181992"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -43,6 +43,19 @@ Extensions Visual Studio 2017+. Vous pouvez rétroconcevoir des classes DbContex
 Extension de Visual Studio 2017 qui ajoute un concepteur ORM permettant de concevoir visuellement des classes Entity Framework 6, Core 2.0 et Core 2.1. Le code est généré à l’aide de modèles T4, donc il peut être totalement personnalisé pour répondre à tous les besoins. Les associations d’héritage, unidirectionnelles et bidirectionnelles sont toutes prises en charge, tout comme les énumérations, la possibilité de colorer le code de vos classes et l’ajout de blocs de texte pour expliquer les parties potentiellement obscures de votre conception.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)
+
+### <a name="catfactory"></a>CatFactory
+
+CatFactory est un moteur de génération de modèles automatique pour .NET Core et Entity Framework Core. Le concept sous-jacent à CatFactory est d’exporter une base de données existante à partir d’une instance de SQL Server, puis, avec la représentation sous forme de modèles de la base de données, de générer automatiquement des modèles d’entités, de configurations, de dépôts et bien plus encore.
+
+[Dépôt GitHub](https://github.com/hherzl/CatFactory.EntityFrameworkCore)
+
+### <a name="loresofts-entity-framework-core-generator"></a>Générateur Entity Framework Core de LoreSoft
+
+Le générateur Entity Framework Core est un outil CLI .NET Core qui peut générer des modèles EF Core à partir d’une base de données existante, comme `dotnet ef dbcontext scaffold`. Toutefois, il est différent dans la mesure où il prend aussi en charge la [regénération](https://efg.loresoft.com/en/latest/regeneration/) de code safe. La regénération s’effectue à travers le remplacement de région ou en analysant les fichiers de mappage. L’outil prend également en charge la génération de modèles de vue, de validation et de code de mappeur d’objet. Pour plus d’informations, consultez le tutoriel et les liens de la documentation de produit.
+
+[Tutoriel](http://www.loresoft.com/Generate-ASP-NET-Web-API)
+[Documentation](https://efg.loresoft.com/en/latest/)
 
 ## <a name="extensions"></a>Extensions
 
