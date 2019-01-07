@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 58da3b6b951b3fa4aa04ec75f5759555c1f0cde5
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: fe7e07b8bd483fb3f9b672ee78ef7541f06a21a4
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980026"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058771"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -50,7 +50,7 @@ Pour comprendre comment EF Core effectue le suivi de ces objets, il est utile de
 ## <a name="collections-of-owned-types"></a>Collections de types détenus
 
 >[!NOTE]
-> Cette fonctionnalité est une nouveauté dans EF Core 2.2.
+> Cette fonctionnalité est une nouveauté d’EF Core 2.2.
 
 Pour configurer une collection de types détenus `OwnsMany` doit être utilisé dans `OnModelCreating`. Toutefois la clé primaire ne sera pas configurée par convention, donc il doit être spécifié explicitement. Il est courant d’utiliser une clé complexe pour ces types d’entités incorporant la clé étrangère pour le propriétaire et une propriété unique supplémentaire qui peut également être dans l’état de clichés instantanés :
 
@@ -126,4 +126,4 @@ Certaines de ces restrictions sont fondamentaux pour comment détenu travail de 
 
 ### <a name="shortcomings-in-previous-versions"></a>Lacunes dans les versions précédentes
 - Dans EF Core 2.0, navigations à la propriété types d’entité ne peut pas être déclarés dans les types d’entité dérivés, sauf si les entités sont explicitement mappées à une table distincte de la hiérarchie de propriétaire. Cette limitation a été supprimée dans EF Core 2.1
-- En EF Core 2.0 et 2.1 uniquement référence aux navigations vers les types détenus ont été pris en charge. Cette limitation a été supprimée dans EF Core 2.2
+- Dans EF Core 2.0 et 2.1 seule référence navigations vers les types détenus ont été pris en charge. Cette limitation a été supprimée dans EF Core 2.2

@@ -3,12 +3,12 @@ title: Async interroge et enregistre - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 4ed4f5c13341f33ccff8325a5ddacd8f7b195a76
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: de702365251fd05c423c8590ccaefa7d8542ad02
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283821"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058758"
 ---
 # <a name="async-query-and-save"></a>Async interroger et enregistrer
 > [!NOTE]
@@ -76,7 +76,7 @@ Nous allons utiliser le [workflow Code First](~/ef6/modeling/code-first/workflow
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>Créer un programme synchrone
 
@@ -96,7 +96,6 @@ Maintenant que nous avons un modèle EF, nous allons écrire du code qui l’uti
             {
                 PerformDatabaseOperations();
 
-                Console.WriteLine();
                 Console.WriteLine("Quote of the day");
                 Console.WriteLine(" Don't worry about the world coming to an end today... ");
                 Console.WriteLine(" It's already tomorrow in Australia.");
@@ -115,16 +114,18 @@ Maintenant que nous avons un modèle EF, nous allons écrire du code qui l’uti
                     {
                         Name = "Test Blog #" + (db.Blogs.Count() + 1)
                     });
+                    Console.WriteLine("Calling SaveChanges.");
                     db.SaveChanges();
+                    Console.WriteLine("SaveChanges completed.");
 
                     // Query for all blogs ordered by name
+                    Console.WriteLine("Executing query.");
                     var blogs = (from b in db.Blogs
                                 orderby b.Name
                                 select b).ToList();
 
                     // Write all blogs out to Console
-                    Console.WriteLine();
-                    Console.WriteLine("All blogs:");
+                    Console.WriteLine("Query completed with following results:");
                     foreach (var blog in blogs)
                     {
                         Console.WriteLine(" " + blog.Name);
@@ -145,20 +146,20 @@ Ce code appelle la **PerformDatabaseOperations** méthode qui enregistre une nou
 4.  Retourne de la requête et les résultats sont écrits dans **Console**
 5.  Citation du jour est écrite dans **Console**
 
-![Sortie de la synchronisation](~/ef6/media/syncoutput.png) 
+![Sortie de la synchronisation](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>Rendre asynchrone
 
 Maintenant que nous avons notre programme soit opérationnel, nous pouvons commencer faisant usage de la nouvelle async et await de mots clés. Nous avons apporté les modifications suivantes au fichier Program.cs
 
-1.  Ligne 2 : L’à l’aide de l’instruction pour le **System.Data.Entity** espace de noms nous donne un accès pour les méthodes d’extension async EF.
+1.  Ligne 2 : L’à l’aide de l’instruction pour la **System.Data.Entity** espace de noms nous donne un accès pour les méthodes d’extension EF async.
 2.  Ligne 4 : L’à l’aide de l’instruction pour la **System.Threading.Tasks** espace de noms permet d’utiliser le **tâche** type.
-3.  Ligne 12 & 18 : nous vous proposons en tant que tâche qui surveille la progression de **PerformSomeDatabaseOperations** (ligne 12) et bloque l’exécution du programme pour cette tâche une fois terminée tout le travail pour le programme est réalisé (ligne 18).
+3.  Ligne 12 & 18 : Nous vous proposons en tant que tâche qui surveille la progression de **PerformSomeDatabaseOperations** (ligne 12) et bloque l’exécution du programme pour cette tâche une fois terminée tout le travail pour le programme est réalisé (ligne 18).
 4.  Ligne 25 : Nous avons mise à jour **PerformSomeDatabaseOperations** à marquer comme **async** et retourner un **tâche**.
 5.  Ligne 35 : Nous allons maintenant appeler la version asynchrone de SaveChanges et en attente de son achèvement.
-6.  Ligne 42 : Nous allons maintenant appeler la version asynchrone de ToList et en attente sur le résultat.
+6.  Ligne 42 : Nous appelons désormais la version asynchrone de ToList et en attente sur le résultat.
 
 Pour obtenir la liste complète des méthodes d’extension disponible dans l’espace de noms System.Data.Entity, reportez-vous à la classe QueryableExtensions. *Vous devrez également ajouter « using System.Data.Entity » à l’aide de vos instructions.*
 
@@ -227,9 +228,9 @@ Maintenant que le code est asynchrone, nous pouvons observer un flux d’exécut
 4.  Requête pour tous les **Blogs** est envoyé à la base de données *là encore, le thread managé est libre d’effectuer d’autres tâches pendant que la requête est traitée dans la base de données. Étant donné que tous les autres l’exécution terminée, le thread simplement arrêtera sur l’appel d’attente cependant.*
 5.  Retourne de la requête et les résultats sont écrits dans **Console**
 
-![Sortie d’async](~/ef6/media/asyncoutput.png) 
+![Sortie d’async](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>Le principal avantage
 
