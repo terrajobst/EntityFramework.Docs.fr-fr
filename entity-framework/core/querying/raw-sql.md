@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 0ad9731840c5f72064f2f66932b9867a0144f437
-ms.sourcegitcommit: 2da6f9b05e1ce3a46491e5cc68f17758bdeb6b02
+ms.openlocfilehash: 5bddddfbc2fe8d0ba99914f03b28bde4076fae42
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53006867"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058708"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -81,7 +81,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-Vous pouvez également construire un objet DbParameter et le fournir en tant que valeur de paramètre. Cela vous permet d’utiliser des paramètres nommés dans la chaîne de requête SQL
+Vous pouvez également construire un objet DbParameter et le fournir en tant que valeur de paramètre. Cela vous permet d’utiliser des paramètres nommés dans la chaîne de requête SQL.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -124,4 +124,4 @@ var blogs = context.Blogs
 ```
 
 > [!WARNING]  
-> **Utilisez toujours le paramétrage pour les requêtes SQL brutes : les API**  acceptant une chaîne SQL brute comme `FromSql` et `ExecuteSqlCommand` autorisent les valeurs à passer facilement en tant que paramètres. En plus de valider l’entrée utilisateur, vous devez toujours utiliser le paramétrage pour toutes les valeurs utilisées dans une commande/requête en SQL brut. Si vous utilisez la concaténation de chaînes pour générer dynamiquement une partie de la chaîne de requête, vous êtes responsable de la validation de l’entrée pour vous protéger contre les attaques par injection SQL.
+> **Utilisez toujours le paramétrage pour les requêtes SQL brutes :** les API acceptant une chaîne SQL brute comme `FromSql` et `ExecuteSqlCommand` autorisent les valeurs à passer facilement en tant que paramètres. En plus de valider l’entrée utilisateur, vous devez toujours utiliser le paramétrage pour toutes les valeurs utilisées dans une commande/requête en SQL brut. Si vous utilisez la concaténation de chaînes pour générer dynamiquement une partie de la chaîne de requête, vous êtes responsable de la validation de l’entrée pour vous protéger contre les attaques par injection SQL.
