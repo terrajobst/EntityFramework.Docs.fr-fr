@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 8f28dfea12461572ade8fbf3910ebd216dafb389
-ms.sourcegitcommit: fa863883f1193d2118c2f9cee90808baa5e3e73e
+ms.openlocfilehash: 1c450b142573368d043430f55a3144b6696a8691
+ms.sourcegitcommit: b4a5ed177b86bf7f81602106dab6b4acc18dfc18
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52857427"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "54316632"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
@@ -55,6 +55,8 @@ Une fois que les données ont été ajoutées au modèle, [migrations](xref:core
 > Si vous avez besoin appliquer des migrations en tant que partie d’un déploiement automatisé, vous pouvez [créer un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) qui peuvent être visualisés avant l’exécution.
 
 Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non-relation. Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour les données de schéma ni de valeur initiale dans la base de données. Pour les bases de données relationnelles vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des Migrations.
+
+### <a name="limitations-of-model-seed-data"></a>Limitations des données de valeur initiale de modèle
 
 Ce type de données d’amorçage est géré par des migrations et le script pour mettre à jour les données qui se trouve déjà dans la base de données doit être généré sans vous connecter à la base de données. Cela impose certaines restrictions :
 * La valeur de clé primaire doit être spécifié même s’il est généralement généré par la base de données. Il sera utilisé pour détecter des modifications de données entre des migrations.
