@@ -3,12 +3,12 @@ title: Le modèle de fournisseur Entity Framework 6 - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: d07a8689fe968bb1512095a59a61abc7ac346a31
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 8cbf6f87e0936f374c3d8a0c15a0e1d9c828f764
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022322"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668750"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Le modèle de fournisseur Entity Framework 6
 
@@ -28,7 +28,7 @@ Un fournisseur EF est vraiment une collection de services spécifiques au fourni
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF dépend d’un type dérivé [System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour l’exécution de tous les accès de bas niveau de la base de données. DbProviderFactory ne faisant pas partie d’EF mais est plutôt une classe dans le .NET Framework qui fait Office de point d’entrée pour les fournisseurs ADO.NET qui peut être utilisée par Entity Framework, autres O/RMs, ou directement par une application pour obtenir des instances de connexions, les commandes, les paramètres et autres abstractions ADO.NET dans un fournisseur de façon indépendante. Plus d’informations sur DbProviderFactory un se trouve dans le [documentation MSDN pour ADO.NET](https://msdn.microsoft.com/library/a6cd7c08.aspx).
+EF dépend d’un type dérivé [System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour l’exécution de tous les accès de bas niveau de la base de données. DbProviderFactory ne faisant pas partie d’EF mais est plutôt une classe dans le .NET Framework qui fait Office de point d’entrée pour les fournisseurs ADO.NET qui peut être utilisée par Entity Framework, autres O/RMs, ou directement par une application pour obtenir des instances de connexions, les commandes, les paramètres et autres abstractions ADO.NET dans un fournisseur de façon indépendante. Vous trouverez plus d’informations sur DbProviderFactory dans le [documentation MSDN pour ADO.NET](https://msdn.microsoft.com/library/a6cd7c08.aspx).
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
@@ -60,7 +60,7 @@ Il s’agit d’un services facultatif qui permet à un fournisseur à ajouter l
 
 Il s’agit d’un service facultatif qui permet des Migrations Entity Framework à utiliser pour la génération de la session SQL utilisée dans la création et modification des schémas de base de données par Code First. Une implémentation est requise pour prendre en charge les Migrations. Si une implémentation est fournie, il sera également utiliser lors de la création de bases de données à l’aide d’initialiseurs de base de données ou la méthode Database.Create.
 
-### <a name="funcdbconnection-string-historycontextfactory"></a>Func < DbConnection, chaîne, HistoryContextFactory >
+### <a name="funcdbconnection-string-historycontextfactory"></a>Func<DbConnection, string, HistoryContextFactory>
 
 Il s’agit d’un service facultatif qui permet à un fournisseur configurer le mappage de la HistoryContext à la `__MigrationHistory` table utilisée par des Migrations Entity Framework. Le HistoryContext est un Code premier DbContext et peut être configuré à l’aide de l’API fluent normale pour modifier des éléments tels que le nom de la table et les spécifications de mappage de colonne. L’implémentation par défaut de ce service retourné par EF pour tous les fournisseurs peut-être fonctionner pour un serveur de base de données donné si tous les mappages table et de colonne par défaut sont pris en charge par le fournisseur. Dans ce cas le fournisseur est inutile de fournir une implémentation de ce service.
 

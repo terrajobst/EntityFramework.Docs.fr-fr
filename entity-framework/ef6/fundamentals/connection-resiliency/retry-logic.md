@@ -3,12 +3,12 @@ title: La résilience et nouvelle tentative logique de connexion - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 09ebed18b43f864af36b6931f45638f3a3056229
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 7d6aa870cc32a2b344457fbb04525a7c2c8d1c61
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490803"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668763"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Logique de résilience et de nouvelle tentative de connexion
 > [!NOTE]
@@ -124,7 +124,7 @@ using (var db = new BloggingContext())
 
 Cela n’est pas pris en charge lors de l’utilisation d’une stratégie d’exécution de nouvelle tentative, car EF ne tient pas compte de toutes les opérations précédentes et comment les retenter. Par exemple, si le deuxième SaveChanges a échoué puis EF n’est plus contient les informations requises pour le premier appel de SaveChanges de nouvelle tentative.  
 
-### <a name="workaround-suspend-execution-strategy"></a>Solution de contournement : Interrompre la stratégie d’exécution  
+### <a name="workaround-suspend-execution-strategy"></a>Solution de contournement : Suspendre la stratégie d’exécution  
 
 Une solution de contournement possible est de suspendre la stratégie d’exécution de nouvelle tentative pour la partie du code qui a besoin d’utiliser un utilisateur a lancé la transaction. Pour ce faire, le plus simple consiste à ajouter un indicateur SuspendExecutionStrategy à votre code basé sur la classe de configuration et modifier l’expression lambda à la stratégie d’exécution pour retourner la stratégie d’exécution par défaut (non retying) lorsque l’indicateur est défini.  
 
@@ -149,7 +149,7 @@ namespace Demo
         {
             get
             {
-                return (bool?)CallContext.LogicalGetData("SuspendExecutionStrategy")  false;
+                return (bool?)CallContext.LogicalGetData("SuspendExecutionStrategy") ?? false;
             }
             set
             {
@@ -185,7 +185,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-### <a name="workaround-manually-call-execution-strategy"></a>Solution de contournement : Appeler manuellement la stratégie d’exécution  
+### <a name="workaround-manually-call-execution-strategy"></a>Solution de contournement : Appeler manuellement la stratégie d’exécution  
 
 Une autre option consiste à utiliser la stratégie d’exécution manuellement et de lui donner l’ensemble de la logique à exécuter, afin qu’elle peut réessayer tout ce que si une des opérations échoue. Nous avons besoin de suspendre la stratégie d’exécution - à l’aide de la technique ci-dessus - afin que les contextes utilisées à l’intérieur du bloc de code renouvelable n’essayez pas de nouvelle tentative.  
 

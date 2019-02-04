@@ -3,12 +3,12 @@ title: Async interroge et enregistre - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: de702365251fd05c423c8590ccaefa7d8542ad02
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.openlocfilehash: 89c7b9d533d37b4c9e123f37d8ab27c67ba26cc8
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058758"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668711"
 ---
 # <a name="async-query-and-save"></a>Async interroger et enregistrer
 > [!NOTE]
@@ -223,7 +223,7 @@ Maintenant que le code est asynchrone, nous pouvons observer un flux d’exécut
 
 1.  **SaveChanges** commence à transmettre le nouveau **Blog** à la base de données *une fois que la commande est envoyée à la base de données, pas plus de calcul de temps est nécessaire sur le thread managé actuel. Le **PerformDatabaseOperations** méthode est retournée (même s’il n’a pas terminé l’exécution) et flux de programme dans la méthode Main se poursuit.*
 2.  **Citation du jour est écrite dans la Console**
-    *puisqu’il n’existe plus aucune tâche à effectuer dans la méthode Main, le thread géré est bloqué sur l’attente appeler jusqu'à ce que l’opération de base de données se termine. Une fois terminée, le reste de notre **PerformDatabaseOperations** * sera exécuté.
+    *puisqu’il n’existe plus aucune tâche à effectuer dans la méthode Main, le thread géré est bloqué sur l’attente appeler jusqu'à ce que l’opération de base de données se termine. Une fois terminée, le reste de notre **PerformDatabaseOperations** sera exécuté.*
 3.  **SaveChanges** terminée
 4.  Requête pour tous les **Blogs** est envoyé à la base de données *là encore, le thread managé est libre d’effectuer d’autres tâches pendant que la requête est traitée dans la base de données. Étant donné que tous les autres l’exécution terminée, le thread simplement arrêtera sur l’appel d’attente cependant.*
 5.  Retourne de la requête et les résultats sont écrits dans **Console**
