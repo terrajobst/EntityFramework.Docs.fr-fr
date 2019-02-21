@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 729cf9b8c038ea2adba8c79c68d9f6fb1676fefa
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 6d8cf117dfd94524a53e10bb4a23c2a44c4c8e7b
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022182"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459170"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -17,9 +17,21 @@ Résilience des connexions retente automatiquement les commandes de base de donn
 
 Par exemple, le fournisseur SQL Server inclut une stratégie d’exécution qui est conçu spécialement pour SQL Server (y compris SQL Azure). Il connaît les types d’exception qui peuvent être retentées et a des valeurs par défaut sensibles pour le nombre maximal de tentatives, délai entre les nouvelles tentatives, etc.
 
-Une stratégie d’exécution est spécifiée lorsque vous configurez les options pour votre contexte. Il s’agit généralement dans le `OnConfiguring` méthode de votre contexte dérivé, ou dans `Startup.cs` pour une application ASP.NET Core.
+Une stratégie d’exécution est spécifiée lorsque vous configurez les options pour votre contexte. Il s’agit généralement dans le `OnConfiguring` méthode de votre contexte dérivé :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#OnConfiguring)]
+
+ou dans `Startup.cs` pour une application ASP.NET Core :
+
+``` csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<PicnicContext>(
+        options => options.UseSqlServer(
+            "<connection string>",
+            providerOptions => providerOptions.EnableRetryOnFailure()));
+}
+```
 
 ## <a name="custom-execution-strategy"></a>Stratégie d’exécution personnalisée
 
@@ -41,7 +53,7 @@ Une stratégie d’exécution qui réessaie automatiquement en cas d’échec do
 
 Toutefois, si votre code lance une transaction à l’aide de `BeginTransaction()` vous définissez votre propre groupe d’opérations qui doivent être traités en tant qu’unité, et tous les éléments à l’intérieur de la transaction doit être lu une défaillance intervient. Vous recevrez une exception semblable à ce qui suit si vous essayez d’effectuer lors de l’utilisation d’une stratégie d’exécution :
 
-> InvalidOperationException : La stratégie d’exécution configurée « SqlServerRetryingExecutionStrategy » ne prend pas en charge des transactions lancée par l’utilisateur. Utilisez la stratégie d’exécution retournée par « DbContext.Database.CreateExecutionStrategy() » pour exécuter toutes les opérations de la transaction en tant qu’ensemble pouvant être retenté.
+> InvalidOperationException: La stratégie d’exécution configurée « SqlServerRetryingExecutionStrategy » ne prend pas en charge les transactions lancées par l’utilisateur. Utilisez la stratégie d’exécution retournée par « DbContext.Database.CreateExecutionStrategy() » pour exécuter toutes les opérations de la transaction en tant qu’ensemble pouvant être retenté.
 
 La solution consiste à appeler manuellement la stratégie d’exécution avec un délégué représentant tout ce qui doit être exécutée. Si une défaillance passagère se produit, la stratégie d’exécution appelle à nouveau le délégué.
 

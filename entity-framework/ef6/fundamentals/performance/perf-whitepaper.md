@@ -3,19 +3,19 @@ title: Considérations relatives aux performances pour EF4, EF5 et EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: c87c1412cb23abf232663d7e4f44eef5f7818ea2
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 4c1f03533cf6df49555c3ef8d09d5949b9a3335c
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022387"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459209"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Considérations relatives aux performances pour Entity Framework 4, 5 et 6
 Par David Obando, Eric Dettinger et autres
 
 Date de publication : Avril 2012
 
-Dernière mise à jour : mai 2014
+Dernière mise à jour : Mai 2014
 
 ------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ Prenons une vue d’ensemble de la répartition du temps lors de l’exécution 
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | Création du contexte          | Moyenne                                                                                                                                                                                                                                                                                                                                                                                                                        | Moyenne                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | Création d’expression de requête | Faible                                                                                                                                                                                                                                                                                                                                                                                                                           | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `  var c1 = q1.First();`                                                                             | Exécution des requêtes LINQ      | -Chargement des métadonnées : haute, mais il est mis en cache <br/> -Afficher la génération : potentiellement très élevé, mais mis en cache <br/> -Évaluation du paramètre : moyenne <br/> -Traduction de requête : moyenne <br/> -Génération de matérialiseur : taille moyenne, mais il est mis en cache <br/> -Exécution de la requête de base de données : potentiellement élevé <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne <br/> -Recherche de identity : moyenne | -Chargement des métadonnées : haute, mais il est mis en cache <br/> -Afficher la génération : potentiellement très élevé, mais mis en cache <br/> -Évaluation du paramètre : faible <br/> -Traduction de requête : taille moyenne, mais il est mis en cache <br/> -Génération de matérialiseur : taille moyenne, mais il est mis en cache <br/> -Exécution de la requête de base de données : potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne <br/> -Recherche de identity : moyenne | -Chargement des métadonnées : haute, mais il est mis en cache <br/> -Afficher la génération : taille moyenne, mais il est mis en cache <br/> -Évaluation du paramètre : faible <br/> -Traduction de requête : taille moyenne, mais il est mis en cache <br/> -Génération de matérialiseur : taille moyenne, mais il est mis en cache <br/> -Exécution de la requête de base de données : potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne (Faster à EF5) <br/> -Recherche de identity : moyenne |
+| `  var c1 = q1.First();`                                                                             | Exécution des requêtes LINQ      | -Chargement des métadonnées : Élevé, mais il est mis en cache <br/> -Afficher la génération : Potentiellement très élevé, mais il est mis en cache <br/> -Version d’évaluation paramètre : Moyenne <br/> -Traduction de la requête : Moyenne <br/> -Génération de matérialiseur : Moyenne, mais il est mis en cache <br/> -Exécution de la requête base de données : Potentiellement élevé <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne <br/> -Recherche de identity : Moyenne | -Chargement des métadonnées : Élevé, mais il est mis en cache <br/> -Afficher la génération : Potentiellement très élevé, mais il est mis en cache <br/> -Version d’évaluation paramètre : Faible <br/> -Traduction de la requête : Moyenne, mais il est mis en cache <br/> -Génération de matérialiseur : Moyenne, mais il est mis en cache <br/> -Exécution de la requête base de données : Potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne <br/> -Recherche de identity : Moyenne | -Chargement des métadonnées : Élevé, mais il est mis en cache <br/> -Afficher la génération : Moyenne, mais il est mis en cache <br/> -Version d’évaluation paramètre : Faible <br/> -Traduction de la requête : Moyenne, mais il est mis en cache <br/> -Génération de matérialiseur : Moyenne, mais il est mis en cache <br/> -Exécution de la requête base de données : Potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne (moins d’EF5) <br/> -Recherche de identity : Moyenne |
 | `}`                                                                                                  | Connection.Close, mais          | Faible                                                                                                                                                                                                                                                                                                                                                                                                                           | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 
@@ -53,7 +53,7 @@ Prenons une vue d’ensemble de la répartition du temps lors de l’exécution 
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | Création du contexte          | Moyenne                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Moyenne                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | Création d’expression de requête | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `  var c1 = q1.First();`                                                                             | Exécution des requêtes LINQ      | -Métadonnées ~~chargement~~ recherche : ~~élevée mais la mise en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~potentiellement très élevé, mais mis en cache~~ faible <br/> -Évaluation du paramètre : moyenne <br/> -Requête ~~traduction~~ recherche : moyenne <br/> -Matérialiseur ~~génération~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Exécution de la requête de base de données : potentiellement élevé <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne <br/> -Recherche de identity : moyenne | -Métadonnées ~~chargement~~ recherche : ~~élevée mais la mise en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~potentiellement très élevé, mais mis en cache~~ faible <br/> -Évaluation du paramètre : faible <br/> -Requête ~~traduction~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Matérialiseur ~~génération~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Exécution de la requête de base de données : potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne <br/> -Recherche de identity : moyenne | -Métadonnées ~~chargement~~ recherche : ~~élevée mais la mise en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Évaluation du paramètre : faible <br/> -Requête ~~traduction~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Matérialiseur ~~génération~~ recherche : ~~moyenne, mais il est mis en cache~~ faible <br/> -Exécution de la requête de base de données : potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objet : moyenne (Faster à EF5) <br/> -Recherche de identity : moyenne |
+| `  var c1 = q1.First();`                                                                             | Exécution des requêtes LINQ      | -Métadonnées ~~chargement~~ recherche : ~~Haute mais mis en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~Potentiellement très élevé, mais mis en cache~~ faible <br/> -Version d’évaluation paramètre : Moyenne <br/> -Requête ~~traduction~~ recherche : Moyenne <br/> -Matérialiseur ~~génération~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Exécution de la requête base de données : Potentiellement élevé <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne <br/> -Recherche de identity : Moyenne | -Métadonnées ~~chargement~~ recherche : ~~Haute mais mis en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~Potentiellement très élevé, mais mis en cache~~ faible <br/> -Version d’évaluation paramètre : Faible <br/> -Requête ~~traduction~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Matérialiseur ~~génération~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Exécution de la requête base de données : Potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne <br/> -Recherche de identity : Moyenne | -Métadonnées ~~chargement~~ recherche : ~~Haute mais mis en cache~~ faible <br/> -Afficher ~~génération~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Version d’évaluation paramètre : Faible <br/> -Requête ~~traduction~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Matérialiseur ~~génération~~ recherche : ~~Taille moyenne, mais mis en cache~~ faible <br/> -Exécution de la requête base de données : Potentiellement élevé (requêtes dans certaines situations de meilleures) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Matérialisation d’objets : Moyenne (moins d’EF5) <br/> -Recherche de identity : Moyenne |
 | `}`                                                                                                  | Connection.Close, mais          | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Faible                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 
@@ -207,7 +207,7 @@ Le cache du plan de requête est partagé entre instances ObjectContext dans le 
 
 #### <a name="321-some-notes-about-query-plan-caching"></a>3.2.1 quelques remarques concernant la mise en cache de requête planifier
 
--   Le cache du plan de requête est partagé pour tous les types de requête : Entity SQL, LINQ to Entities et les objets de CompiledQuery.
+-   Le cache du plan de requête est partagé pour tous les types de requêtes : Entity SQL, LINQ to Entities et les objets de CompiledQuery.
 -   Par défaut, la mise en cache du plan de requête est activée pour les requêtes Entity SQL, si les exécuter via un EntityCommand ou via un ObjectQuery. Il est également activée par défaut pour LINQ aux requêtes d’entités dans Entity Framework dans .NET 4.5 et dans Entity Framework 6
     -   La mise en cache du plan de requête peut être désactivée en définissant la propriété EnablePlanCaching (sur EntityCommand ou ObjectQuery) sur false. Exemple :
 ``` csharp
@@ -246,9 +246,9 @@ Pour illustrer l’effet du plan de requête mise en cache sur les performances 
 
 | Tester                                                                   | EF5 aucun cache | EF5 mis en cache | EF6 aucun cache | EF6 mis en cache |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
-| L’énumération de toutes les 18723 requêtes                                          | 124          | 125.4      | 124,3        | 125.3      |
-| En évitant de balayage (seulement 800 tout d’abord certaines requêtes, quelle que soit la complexité)  | 41.7         | 5.5        | 40,5         | 5,4        |
-| Uniquement les requêtes AggregatingSubtotals (178 total - ce qui évite de balayage) | 39,5         | 4.5        | 38.1         | 4.6        |
+| L’énumération de toutes les 18723 requêtes                                          | 124          | 125.4      | 124.3        | 125.3      |
+| En évitant de balayage (seulement 800 tout d’abord certaines requêtes, quelle que soit la complexité)  | 41.7         | 5.5        | 40.5         | 5,4        |
+| Uniquement les requêtes AggregatingSubtotals (178 total - ce qui évite de balayage) | 39.5         | 4.5        | 38.1         | 4.6        |
 
 *Toutes les heures en secondes.*
 
@@ -319,8 +319,6 @@ Cette méthode d’assistance peut être appelée comme suit :
 La capacité à composer sur n’importe quelle requête LINQ est très utile ; Pour ce faire, il suffit d’appeler une méthode après le IQueryable comme *Skip()* ou *Count()*. Toutefois, il s’agit essentiellement de faire retourne un nouvel objet IQueryable. Il n’existe rien ne vous techniquement à partir de la composition d’un CompiledQuery, cela entraîne la génération d’un nouvel objet IQueryable qui nécessite en passant par le compilateur de plan à nouveau.
 
 Certains composants utilisera IQueryable composé objets pour activer des fonctionnalités avancées. Par exemple, ASP. GridView du NET peut être lié aux données à un objet IQueryable via la propriété SelectMethod. Le contrôle GridView sera ensuite composer sur cet objet IQueryable pour permettre le tri et de pagination sur le modèle de données. Comme vous pouvez le voir, à l’aide d’un CompiledQuery pour le contrôle GridView ne serait pas atteint la requête compilée, mais génère une nouvelle requête autocompiled.
-
-L’équipe de conseil clientèle détaille cela dans son billet de blog « Potentiels performances problèmes avec compilé LINQ requête recompilations » : <http://blogs.msdn.com/b/appfabriccat/archive/2010/08/06/potential-performance-issues-with-compiled-linq-query-re-compiles.aspx>.
 
 Un seul endroit où vous risquez de rencontrer ce est lorsque vous ajoutez des filtres progressifs à une requête. Par exemple, supposons que vous disposiez d’une page de clients avec plusieurs listes déroulantes de filtres facultatifs (par exemple, pays et OrdersCount). Vous pouvez composer ces filtres sur les résultats IQueryable d’un CompiledQuery, mais cela provoquera dans la nouvelle requête passer par le compilateur plan chaque fois que vous l’exécutez.
 
@@ -649,14 +647,14 @@ Entity Framework propose différentes façons de requête. Nous allons examiner 
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   Approprié pour les opérations CUD.
 -   Objets entièrement matérialisés.
 -   La plus simple à écrire avec la syntaxe intégrées dans le langage de programmation.
 -   Bonnes performances.
 
-**Inconvénients**
+**Cons**
 
 -   Certaines restrictions techniques, telles que :
     -   Modèles d’utilisation de DefaultIfEmpty pour les requêtes de jointure externe entraînent des requêtes plus complexes que de simples instructions OUTER JOIN dans Entity SQL.
@@ -678,13 +676,13 @@ var q = context.Products.AsNoTracking()
                         .Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   Amélioration des performances sur les requêtes LINQ régulières.
 -   Objets entièrement matérialisés.
 -   La plus simple à écrire avec la syntaxe intégrées dans le langage de programmation.
 
-**Inconvénients**
+**Cons**
 
 -   Ne convient pas d’opérations CUD.
 -   Certaines restrictions techniques, telles que :
@@ -705,13 +703,13 @@ Cette requête spécifique ne spécifie pas explicitement en cours NoTracking, m
 ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName = 'Beverages'");
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   Approprié pour les opérations CUD.
 -   Objets entièrement matérialisés.
 -   Prend en charge la mise en cache du plan de requête.
 
-**Inconvénients**
+**Cons**
 
 -   Implique des chaînes de requête textuelle qui sont plus susceptibles d’engendrer des erreurs des utilisateurs à des constructions de requêtes intégrées au langage.
 
@@ -730,11 +728,11 @@ using (EntityDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAcc
 }
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   Prend en charge de requête mise en cache de plan dans .NET 4.0 (mise en cache du plan est pris en charge par tous les autres types de requêtes dans .NET 4.5).
 
-**Inconvénients**
+**Cons**
 
 -   Implique des chaînes de requête textuelle qui sont plus susceptibles d’engendrer des erreurs des utilisateurs à des constructions de requêtes intégrées au langage.
 -   Ne convient pas d’opérations CUD.
@@ -756,7 +754,7 @@ SqlQuery sur DbSet :
 var q2 = context.Products.SqlQuery("select * from products");
 ```
 
-ExecyteStoreQuery :
+ExecyteStoreQuery:
 
 ``` csharp
 var beverages = context.ExecuteStoreQuery<Product>(
@@ -766,13 +764,13 @@ var beverages = context.ExecuteStoreQuery<Product>(
 );
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   En règle générale le plus rapide des performances étant donné que le compilateur de plan est ignorée.
 -   Objets entièrement matérialisés.
 -   Approprié pour les opérations CUD lorsqu’il est utilisé dans le DbSet.
 
-**Inconvénients**
+**Cons**
 
 -   Requête est textuelle et sujet aux erreurs.
 -   Requête est liée à un serveur principal spécifique à l’aide de la sémantique du magasin au lieu de la sémantique conceptuelle.
@@ -789,13 +787,13 @@ private static readonly Func<NorthwindEntities, string, IQueryable<Product>> pro
 var q = context.InvokeProductsForCategoryCQ("Beverages");
 ```
 
-**Professionnels de l'**
+**Pros**
 
 -   Un maximum d’offre une amélioration des performances de 7 % sur les requêtes LINQ régulières.
 -   Objets entièrement matérialisés.
 -   Approprié pour les opérations CUD.
 
-**Inconvénients**
+**Cons**
 
 -   Augmenter la complexité et surcharge de programmation.
 -   L’amélioration des performances est perdue lors de la composition sur une requête compilée.
@@ -891,8 +889,8 @@ Le modèle contient les jeux d’entités de 1005 et 4227 ensembles d’associat
 
 | Configuration                              | Répartition du temps consommé                                                                                                                                               |
 |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Visual Studio 2010, Entity Framework 4     | Génération du langage SSDL : 2 h 27 min. <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 2 h 14 min |
-| Visual Studio 2010 SP1, Entity Framework 4 | Génération du langage SSDL : 1 seconde <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 1 h 53 min.   |
+| Visual Studio 2010, Entity Framework 4     | Génération du langage SSDL : 2 h 27 min <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 2 h 14 min |
+| Visual Studio 2010 SP1, Entity Framework 4 | Génération du langage SSDL : 1 seconde <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 1 h 53 min   |
 | Visual Studio 2013, Entity Framework 5     | Génération du langage SSDL : 1 seconde <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 65 minutes    |
 | Visual Studio 2013, Entity Framework 6     | Génération du langage SSDL : 1 seconde <br/> Génération de mappage : 1 seconde <br/> Génération de CSDL : 1 seconde <br/> Génération de ObjectLayer : 1 seconde <br/> Génération de vues : 28 secondes.   |
 
@@ -1307,12 +1305,12 @@ Cet environnement utilise un programme d’installation 2-machine avec la base d
     -   Visual Studio 2010 Ultimate.
     -   Visual Studio 2010 SP1 (uniquement pour certaines comparaisons).
 -   Environnement de logiciel Entity Framework 5 et 6
-    -   Nom du système d’exploitation : Windows 8.1 entreprise
+    -   Nom du système d’exploitation : Windows 8.1 Entreprise
     -   Visual Studio 2013 – Édition intégrale.
 
 ##### <a name="11112-hardware-environment"></a>11.1.1.2 environnement matériel
 
--   Biprocesseur : Intel (r) Xeon (r) du processeur L5520 W3530 à 2,27 GHz, 2261 Mhz8 GHz, 4 cœurs, 84 ou des processeurs logiques.
+-   Double processeur :     Intel (r) Xeon (r) du processeur L5520 W3530 à 2,27 GHz, 2261 Mhz8 GHz, 4 cœurs, 84 ou des processeurs logiques.
 -   Go 2412 RamRAM.
 -   136 lecteur Go SCSI250GB SATA 7200 de tr/min / 3GB/s divisé en 4 partitions.
 
@@ -1325,7 +1323,7 @@ Cet environnement utilise un programme d’installation 2-machine avec la base d
 
 ##### <a name="11122-hardware-environment"></a>11.1.2.2 environnement matériel
 
--   Unique processeur : Intel (r) Xeon (r) du processeur L5520 2,27 GHz, 2261 MhzES-1620 0 @ 3.60 GHz, 4 cœurs, 8 processeurs logiques.
+-   Monoprocesseur : Intel (r) Xeon (r) du processeur L5520 2,27 GHz, 2261 MhzES-1620 0 @ 3.60 GHz, 4 cœurs, 8 processeurs logiques.
 -   Go 824 RamRAM.
 -   465 lecteur Go ATA500GB SATA 7200 de rpm 6 Go/s en 4 parties.
 
@@ -1510,7 +1508,7 @@ La liste de requêtes utilisée avec le modèle Navision contient 3 catégories 
 
 Une requête de recherche simple sans agrégations
 
--   Nombre : 16232
+-   Compteur : 16232
 -   Exemple :
 
 ``` xml
@@ -1523,7 +1521,7 @@ Une requête de recherche simple sans agrégations
 
 Une requête de BI normale avec plusieurs agrégations, mais aucun sous-total (requête unique)
 
--   Nombre : 2313
+-   Compteur : 2313
 -   Exemple :
 
 ``` xml
@@ -1544,7 +1542,7 @@ Où MDF\_SessionLogin\_temps\_Max() est défini dans le modèle en tant que :
 
 Une requête de BI avec des agrégations et les sous-totaux (via l’union de toutes les)
 
--   Nombre : 178
+-   Compteur : 178
 -   Exemple :
 
 ``` xml
