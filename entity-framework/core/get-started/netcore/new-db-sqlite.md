@@ -6,12 +6,12 @@ description: Bien démarrer avec .NET Core à l’aide d’Entity Framework Core
 ms.date: 08/03/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 6cebe14e179cb6998592f5d3823c114b3bda0138
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: a0df80a8fe96be4f8cc3177919e2b087e14cb49c
+ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022309"
+ms.lasthandoff: 02/16/2019
+ms.locfileid: "56325325"
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>Bien démarrer avec EF Core sur une application console .NET Core avec une nouvelle base de données
 
@@ -69,7 +69,7 @@ Une fois que vous avez un modèle, vous utilisez des [migrations](xref:core/mana
 * Exécutez `dotnet ef migrations add InitialCreate` pour générer automatiquement un modèle de migration et créer l’ensemble initial de tables du modèle.
 * Exécutez `dotnet ef database update` pour appliquer la nouvelle migration à la base de données. Cette commande crée la base de données avant d’appliquer des migrations.
 
-La base de données SQLite *blogging.db** se trouve dans le répertoire du projet.
+La base de données SQLite *blogging.db* se trouve dans le répertoire du projet.
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 
