@@ -3,12 +3,12 @@ title: Annotations de données First - EF6 de code
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 8d85ef85f56a23d9b3b526554417dc9dd360e139
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980039"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463280"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -176,7 +176,7 @@ L’annotation MaxLength aura un impact sur la base de données en définissant 
 
 ![Table de blogs montrant la longueur maximale sur la colonne de BloggerName](~/ef6/media/jj591583-figure04.png)
 
-Annotation de côté client MVC et annotation de côté serveur EF 4.1 les deux respecteront cette validation, création à nouveau dynamique d’un message d’erreur : « le champ BloggerName doit être un type de chaîne ou tableau avec une longueur maximale de « 10 ». » Ce message est un peu long. Nombre illimité d’annotations vous permettre de spécifier un message d’erreur avec l’attribut de message d’erreur.
+Annotation de côté client MVC et annotation de côté serveur EF 4.1 seront honorer cette validation, création à nouveau dynamique d’un message d’erreur : « Le champ BloggerName doit être un type de chaîne ou tableau avec une longueur maximale de « 10 ». » Ce message est un peu long. Nombre illimité d’annotations vous permettre de spécifier un message d’erreur avec l’attribut de message d’erreur.
 
 ``` csharp
     [MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
@@ -245,9 +245,6 @@ Dans la base de données, la table de Blog contiendra toutes les propriétés du
 
 ![Table de blog avec un type complexe](~/ef6/media/jj591583-figure06.png)
 
-Autre Remarque intéressant est que bien que la propriété DateCreated a été définie comme une valeur non nullable DateTime dans la classe, le champ de base de données correspondante est nullable. Vous devez utiliser l’annotation requise si vous souhaitez affecter le schéma de base de données.
-
- 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
@@ -271,7 +268,7 @@ Si quelqu'un a modifié le nom de blogueur pour ce blog en attendant, cette mise
 
  
 
-## <a name="timestamp"></a>Horodatage
+## <a name="timestamp"></a>TimeStamp
 
 Il est plus courant d’utiliser des champs rowversion ou timestamp pour le contrôle d’accès concurrentiel. Mais au lieu d’utiliser l’annotation ConcurrencyCheck, vous pouvez utiliser l’annotation d’horodateur plus spécifique, que le type de la propriété est le tableau d’octets. Code tout d’abord traite les propriétés horodatage exactement en tant que propriétés de ConcurrencyCheck, mais il garantit également que le champ de base de données qui génère d’abord code est non nullable. Vous ne pouvez avoir qu’une seule propriété d’horodatage dans une classe donnée.
 
@@ -374,7 +371,7 @@ Par défaut, les index sont non uniques, mais vous pouvez utiliser la **IsUnique
 
 ### <a name="multiple-column-indexes"></a>Index de plusieurs colonnes
 
-Les index qui s’étendent sur plusieurs colonnes sont spécifiés à l’aide du même nom dans plusieurs annotations d’Index pour une table donnée. Lorsque vous créez des index multi-colonnes, vous devez spécifier un ordre pour les colonnes dans l’index. Par exemple, le code suivant crée un index multicolonnes sur **évaluation** et **BlogId** appelé **IX\_BlogAndRating**. **BlogId** est la première colonne dans l’index et **évaluation** est le deuxième.
+Les index qui s’étendent sur plusieurs colonnes sont spécifiés à l’aide du même nom dans plusieurs annotations d’Index pour une table donnée. Lorsque vous créez des index multi-colonnes, vous devez spécifier un ordre pour les colonnes dans l’index. Par exemple, le code suivant crée un index multicolonnes sur **évaluation** et **BlogId** appelé **IX\_BlogIdAndRating**. **BlogId** est la première colonne dans l’index et **évaluation** est le deuxième.
 
 ``` csharp
     public class Post
@@ -391,7 +388,7 @@ Les index qui s’étendent sur plusieurs colonnes sont spécifiés à l’aide 
 
  
 
-## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Relations d’attributs : InverseProperty et ForeignKey
+## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Attributs de relation : InverseProperty et ForeignKey
 
 > [!NOTE]
 > Cette page fournit des informations sur la configuration des relations dans votre modèle Code First à l’aide des Annotations de données. Pour obtenir des informations générales sur les relations dans Entity Framework et comment accéder à et manipuler des données à l’aide de relations, consultez [relations & Propriétés de Navigation](~/ef6/fundamentals/relationships.md). *
@@ -441,7 +438,7 @@ Vous devrez également ajouter dans la classe Person référencée par ces propr
     }
 ```
 
-Tout d’abord code n’est pas capable de faire correspondre les propriétés dans les deux classes sur son propre. La table de base de données pour des publications doit avoir une clé étrangère de la personne CreatedBy et une pour la personne de UpdatedBy, le code, mais tout d’abord créera quatre propriétés de clé étrangère est : personne\_Id, personne\_Id1, CreatedBy\_Id et UpdatedBy\_ID.
+Tout d’abord code n’est pas capable de faire correspondre les propriétés dans les deux classes sur son propre. La table de base de données pour des publications doit avoir une clé étrangère pour la personne CreatedBy et un pour la personne UpdatedBy mais le code sera tout d’abord créer quatre propriétés de clé étrangère : Personne\_Id, personne\_Id1, CreatedBy\_Id et UpdatedBy\_ID.
 
 ![Publie la table comportant des clés étrangères supplémentaires](~/ef6/media/jj591583-figure10.png)
 

@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: a87eca72aa58487415eea11e4f83de1a19e73506
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: cda5cc170646abc3e9d9a70d729237c01f028259
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022335"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463202"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -19,7 +19,15 @@ Cette page contient des liens pour extraire les requêtes effectuées sur le dé
 
 Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2.1, nous avons utilisé le [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) et [ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) étiquettes sur nos problèmes et les demandes de tirage.
 
-## <a name="21-----22"></a>2.1---> 2.2
+## <a name="22-----30"></a>2.2 ---> 3.0
+
+* https://github.com/aspnet/EntityFrameworkCore/pull/14022
+  * API obsolètes supprimés et les surcharges de paramètre facultatif réduite
+  * Removed DatabaseColumn.GetUnderlyingStoreType()
+* https://github.com/aspnet/EntityFrameworkCore/pull/14589
+  * API obsolètes supprimés
+
+## <a name="21-----22"></a>2.1 ---> 2.2
 
 ### <a name="test-only-changes"></a>Modifications de test uniquement
 
@@ -56,7 +64,7 @@ Nous avons commencé ce journal avec des modifications entre 2.1 et 2.2. Avant 2
   * Cette demande de tirage ajoute le concept de `CanConnect` qui sera utilisé par le contrôle d’intégrité d’ASP.NET Core vérifie pour déterminer si la base de données est disponible. Par défaut, l’implémentation relationnelle appelle simplement `Exist`, mais les fournisseurs peuvent implémenter quelque chose de différent si nécessaire. Les fournisseurs non relationnelles devez implémenter la nouvelle API pour le contrôle d’intégrité être utilisable.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13306](https://github.com/aspnet/EntityFrameworkCore/pull/13306) -Mettez à jour de base RelationalTypeMapping pour ne définir pas DbParameter taille
   * Arrêter de taille par défaut dans la mesure où il peut provoquer la troncation. Fournisseurs devrez peut-être ajouter leur propre logique si la taille doit être définie.
-* [https://github.com/aspnet/EntityFrameworkCore/pull/13372](https://github.com/aspnet/EntityFrameworkCore/pull/13372) -RevEng : Spécifiez toujours le type de colonne pour les colonnes décimales
+* https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng : Spécifiez toujours le type de colonne pour les colonnes décimales
   * Configurez toujours le type de colonne pour les colonnes décimales dans le code généré automatiquement, plutôt que de configurer par convention.
   * Les fournisseurs ne doivent pas nécessiter des modifications de leur côté.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13469](https://github.com/aspnet/EntityFrameworkCore/pull/13469) -Ajoute CaseExpression pour générer des expressions de cas de SQL
