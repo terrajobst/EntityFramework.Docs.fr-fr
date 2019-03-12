@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: b52b1fe6b2d5a585f4d55b0299891f61cbc968a3
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b5ac31722f49589f1494a3d8d1c8a7011a4cf9ce
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997568"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463267"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -179,7 +179,7 @@ La nouvelle méthode présente quelques limitations quant à ce qui peut être e
 
 ### <a name="explicitly-compiled-queries"></a>Requêtes compilées explicitement
 
-Deux fonctionnalités de gain de performance à utiliser au choix (opt-in) ont été conçues pour offrir des avantages dans les scénarios à grande échelle.
+Il s’agit de la deuxième fonctionnalité de gain de performance à utiliser au choix conçue pour offrir des avantages dans les scénarios à grande échelle.
 
 Les API de requête manuelles ou compilées explicitement étaient disponibles dans les versions précédentes d’EF, ainsi que dans LINQ to SQL, pour permettre aux applications de mettre en cache la conversion des requêtes afin qu’elles puissent être calculées une seule fois et exécutées plusieurs fois.
 

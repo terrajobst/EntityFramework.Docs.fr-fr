@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 343162596780e6146b57f73a38221701009cd855
-ms.sourcegitcommit: 85d17524d8e022f933cde7fc848313f57dfd3eb8
+ms.openlocfilehash: ad7ac3099cfd4c49b88acfbbff61f2af9294b6ec
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55760507"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463241"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -140,4 +140,6 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 * Les instructions SQL autres que `SELECT` sont reconnues automatiquement en tant que non composables. Par conséquent, les résultats complets des procédures stockées sont toujours retournés au client et tous les opérateurs LINQ appliqués après `FromSql` sont évalués en mémoire.
 
 > [!WARNING]  
-> **Utilisez toujours le paramétrage pour les requêtes SQL brutes :** les API acceptant une chaîne SQL brute comme `FromSql` et `ExecuteSqlCommand` autorisent les valeurs à passer facilement en tant que paramètres. En plus de valider l’entrée utilisateur, vous devez toujours utiliser le paramétrage pour toutes les valeurs utilisées dans une commande/requête en SQL brut. Si vous utilisez la concaténation de chaînes pour générer dynamiquement une partie de la chaîne de requête, vous êtes responsable de la validation de l’entrée pour vous protéger contre les attaques par injection SQL.
+> **Utilisez toujours le paramétrage pour les requêtes SQL brutes :** En plus de valider l’entrée utilisateur, vous devez toujours utiliser le paramétrage pour toutes les valeurs utilisées dans une commande/requête en SQL brut. les API acceptant une chaîne SQL brute comme `FromSql` et `ExecuteSqlCommand` autorisent les valeurs à passer facilement en tant que paramètres. Les surcharges de `FromSql` et `ExecuteSqlCommand` qui acceptent FormattableString autorisent également l’utilisation de la syntaxe d’interpolation de chaîne d’une manière qui vous aide à vous protéger contre les attaques par injection SQL. 
+> 
+> Si vous utilisez la concaténation ou l’interpolation de chaîne pour générer dynamiquement une partie de la chaîne de requête, ou si vous passez l’entrée d’utilisateur à des instructions ou des procédures stockées qui peuvent exécuter ces entrées en tant que code SQL dynamique, vous êtes responsable de la validation de toute entrée afin d’assurer la protection contre les attaques par injection SQL.

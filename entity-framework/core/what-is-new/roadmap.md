@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: 9064b323c11282418f2bedf70f874d45c18bb78a
-ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
+ms.openlocfilehash: f466d112e5ed8661ad1e2d91079c1c01d34b9002
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2019
-ms.locfileid: "56325338"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463228"
 ---
 # <a name="entity-framework-core-roadmap"></a>Feuille de route d’Entity Framework Core
 
@@ -18,43 +18,12 @@ ms.locfileid: "56325338"
 
 ### <a name="ef-core-30"></a>EF Core 3.0
 
-Maintenant que EF Core 2.2 est sorti, notre priorité est EF Core 3.0, qui s’alignera sur la publication de .NET Core 3.0 et d’ASP.NET 3.0.
-
-Nous n’avons pas encore implémenté de nouvelles fonctionnalités. Les  [packages EF Core 3.0 Preview 1 publiés sur la galerie NuGet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.0-preview.18572.1)  en décembre 2018 ne comportent que [des correctifs de bogues, des améliorations mineures et des modifications apportées en prévision du travail sur la version 3.0](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aissue+milestone%3A3.0.0+is%3Aclosed+label%3Aclosed-fixed).
-
-Il nous reste en effet à affiner notre [planning de lancement](#release-planning-process) pour la version 3.0, afin de définir la liste des fonctionnalités à développer dans le temps imparti.
-Nous communiquerons des informations complémentaires dès que nous en saurons plus. Voici déjà les grands thèmes et fonctionnalités sur lesquels nous prévoyons de travailler :
-
-- **Améliorations LINQ ([#12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795))** : LINQ permet d’écrire des requêtes de base de données sans abandonner son langage de prédilection, en tirant parti de riches informations de type pour bénéficier d’IntelliSense et du contrôle de type au moment de la compilation.
-  Cependant, LINQ offre également la possibilité d’écrire un nombre illimité de requêtes complexes, ce qui a toujours représenté un défi de taille pour les fournisseurs LINQ.
-  Dans les premières versions d’EF Core, nous avons résolu ce problème d’une part en identifiant les parties traduisibles en SQL d’une requête, et d’autre part en exécutant le reste de la requête en mémoire sur le client.
-  Si l’exécution côté client est souhaitable dans certaines situations, elle peut aboutir dans la majorité des cas à des requêtes inefficaces, non identifiées comme telles avant le déploiement en production de l’application.
-  Dans EF Core 3.0, nous avons l’intention de modifier en profondeur le fonctionnement de notre implémentation LINQ et nos modes de test.
-  L’objectif est multiple : la rendre plus robuste (par exemple, pour éviter d’interrompre les requêtes dans les versions de correctif), traduire correctement plus d’expressions en SQL, générer des requêtes efficaces dans davantage de cas et empêcher celles qui ne le sont pas de passer inaperçues.
-
-- **Prise en charge de Cosmos DB ([#8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443))** : Nous travaillons sur un fournisseur Cosmos DB pour EF Core, pour permettre aux développeurs habitués au modèle de programmation EF de cibler facilement Azure Cosmos DB comme base de données d’application.
-  L’objectif est de rendre certains des avantages de Cosmos DB (p. ex., distribution mondiale, disponibilité « Always On », scalabilité élastique et faible latence) encore plus accessibles aux développeurs .NET.
-  Le fournisseur proposera la plupart des fonctionnalités d’EF Core, comme le suivi automatique des modifications, les conversions de valeurs et LINQ, sur l’API SQL dans Cosmos DB. Nous avons commencé ce travail avant EF Core 2.2, et [nous avons publié quelques préversions du fournisseur](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/).
-  Nous prévoyons de continuer à développer le fournisseur en parallèle d’EF Core 3.0.   
-
-- **Prise en charge de C# 8.0 ([#12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047))** : nous voulons que nos clients bénéficient avec EF Core d’une partie des [nouvelles fonctionnalités de C# 8.0](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/) comme les flux de données asynchrones (y compris await for each) et les types référence Nullable.
-
-- **Ingénierie à rebours des vues de base de données en types de requêtes ([#1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679))** : dans EF Core 2.1, nous avons ajouté la prise en charge des types de requêtes, qui peuvent représenter des données lisibles dans la base de données, mais non modifiables.
-  Les types de requêtes sont parfaitement adaptés au mappage de vues de base de données. C’est pourquoi, dans EF Core 3.0, nous aimerions automatiser la création de types de requêtes pour les vues de base de données.
-
-- **Entités conteneurs des propriétés ([#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) et [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914))** : cette fonctionnalité permet de créer des entités qui stockent les données dans des propriétés indexées au lieu de propriétés standard, et d’utiliser des instances de la même classe .NET (potentiellement aussi simple que `Dictionary<string, object>`) pour représenter différents types d’entités dans le même modèle EF Core.
-  Cette fonctionnalité est un tremplin pour prendre en charge les relations plusieurs-à-plusieurs sans entité de jointure – l’une des améliorations les plus demandées pour EF Core.
-
-- **EF 6.3 sur .NET Core ([EF6 #271](https://github.com/aspnet/EntityFramework6/issues/271))** : nous sommes conscients du fait que de nombreuses applications utilisent d’anciennes versions d’EF et qu’une migration vers EF Core dans l’unique objectif de tirer parti de .NET Core représente parfois un effort considérable.
-  C’est pourquoi nous adapterons la prochaine version d’EF 6 de façon à ce qu’elle s’exécute sur .NET Core 3.0.
-  L’objectif est de faciliter le portage d’applications avec aussi peu de modifications que possible.
-  Certaines limitations s’appliqueront (par exemple, de nouveaux fournisseurs seront nécessaires, la prise en charge spatiale avec SQL Server ne sera pas activée) et il n’y a pas de nouvelles fonctionnalités planifiées pour EF 6.
-
-En attendant, vous pouvez utiliser [cette requête dans notre outil de suivi des problèmes](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc) pour connaître les éléments de travail provisoirement assignés à la version 3.0.
+EF Core 2.2 n’étant plus d’actualité, nous pouvons maintenant nous concentrer sur EF Core 3.0.
+Consultez [Nouveautés d’EF Core 3.0](xref:core/what-is-new/ef-core-3.0/index) pour découvrir quelles sont les [nouvelles fonctionnalités](xref:core/what-is-new/ef-core-3.0/features) prévues et les [changements cassants](xref:core/what-is-new/ef-core-3.0/breaking-changes) intentionnelles incluses dans cette version.
 
 ## <a name="schedule"></a>Planification
 
-Le planning pour EF Core est synchronisé avec le [planning .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md) et le [planning ASP.NET Core](https://github.com/aspnet/Home/wiki/Roadmap).
+La planification de la version d’EF Core est synchronisée avec la [planification de la version de .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
 
 ## <a name="backlog"></a>Backlog
 
@@ -84,9 +53,9 @@ Mais il est relativement facile de récapituler les questions courantes auxquell
 
 2. **Quelles sont les solutions de contournement possibles si nous n’implémentons pas encore cette fonctionnalité ?** Par exemple, de nombreux développeurs peuvent mapper une table de jointure afin de pallier l’absence de prise en charge native du mappage plusieurs-à-plusieurs. Évidemment, tous les développeurs ne peuvent pas le faire, mais beaucoup en sont capables, ce qui constitue un facteur important dans notre décision.
 
-3. **L’implémentation de cette fonctionnalité fait-elle évoluer l’architecture d’EF Core de telle manière que l’implémentation d’autres fonctionnalités s’en voit facilitée ou plus probable ?** Nous avons tendance à privilégier les fonctionnalités qui agissent comme blocs de construction pour d’autres fonctionnalités. Par exemple, les entités contenant des jeux de propriétés peuvent nous aider à développer la prise en charge plusieurs-à-plusieurs, et les constructeurs d’entité favorisent la prise en charge du chargement différé. 
+3. **L’implémentation de cette fonctionnalité fait-elle évoluer l’architecture d’EF Core de telle manière que l’implémentation d’autres fonctionnalités s’en voit facilitée ou plus probable ?** Nous avons tendance à privilégier les fonctionnalités qui agissent comme blocs de construction pour d’autres fonctionnalités. Par exemple, les entités contenant des jeux de propriétés peuvent nous aider à développer la prise en charge plusieurs-à-plusieurs, et les constructeurs d’entité favorisent la prise en charge du chargement différé.
 
-4. **La fonctionnalité est-elle un point d’extensibilité ?** Nous avons tendance aussi à favoriser les points d’extensibilité au détriment des fonctionnalités standard, car ils permettent aux développeurs de raccorder leurs propres comportements et d’obtenir ainsi une compensation pour certaines fonctionnalités manquantes. 
+4. **La fonctionnalité est-elle un point d’extensibilité ?** Nous avons tendance aussi à favoriser les points d’extensibilité au détriment des fonctionnalités standard, car ils permettent aux développeurs de raccorder leurs propres comportements et d’obtenir ainsi une compensation pour certaines fonctionnalités manquantes.
 
 5. **Quelle est la synergie de la fonctionnalité quand elle est utilisée conjointement avec d’autres produits ?** Nous favorisons les fonctionnalités qui facilitent ou améliorent sensiblement l’expérience d’utilisation d’EF Core avec d’autres produits, tels que .NET Core, la dernière version de Visual Studio, Microsoft Azure et ainsi de suite.
 
