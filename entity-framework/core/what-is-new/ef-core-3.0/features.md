@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: cf0d2cf032b9aa319fe706aece5b1ea66a5d6251
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: b6774f615b04bf9579aac5dea217e7321631da0c
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463355"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829185"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nouvelles fonctionnalités incluses dans EF Core 3.0 (actuellement en préversion)
 
@@ -75,7 +75,7 @@ Cette caractéristique fait d’eux un excellent choix pour les vues de base de 
 Le travail sur cette fonctionnalité a commencé, mais elle n’est pas dans la préversion actuelle. 
 
 cette fonctionnalité permet de créer des entités qui stockent les données dans des propriétés indexées au lieu de propriétés standard, et d’utiliser des instances de la même classe .NET (potentiellement aussi simple que `Dictionary<string, object>`) pour représenter différents types d’entités dans le même modèle EF Core.
-Cette fonctionnalité est un tremplin pour prendre en charge les relations plusieurs-à-plusieurs sans entité de jointure – l’une des améliorations les plus demandées pour EF Core.
+Cette fonctionnalité est un tremplin pour prendre en charge les relations plusieurs-à-plusieurs sans entité de jointure ([problème no 1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)) – l’une des améliorations les plus demandées pour EF Core.
 
 ## <a name="ef-63-on-net-core"></a>EF 6.3 sur .NET Core 
 

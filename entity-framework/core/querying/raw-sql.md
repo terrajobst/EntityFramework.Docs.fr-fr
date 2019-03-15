@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: ad7ac3099cfd4c49b88acfbbff61f2af9294b6ec
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: 0ad43db794902cf1f46bfe8f117fbd36e06f3c44
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463241"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829172"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -96,7 +96,7 @@ var blogs = context.Blogs
 
 Les requêtes qui utilisent `FromSql()` suivent les mêmes règles de suivi des modifications que toute requête LINQ dans EF Core. Par exemple, si la requête projette des types d’entités, les résultats sont suivis par défaut.  
 
-L’exemple suivant utilise une requête SQL brute qui opère une sélection dans une fonction table (TVF), puis désactive le suivi des modifications avec l’appel à .AsNoTracking() :
+L’exemple suivant utilise une requête SQL brute qui opère une sélection dans une Fonction table (TVF), puis désactive le suivi des modifications avec l’appel à .AsNoTracking() :
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
