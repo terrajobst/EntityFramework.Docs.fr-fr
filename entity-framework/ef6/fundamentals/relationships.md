@@ -3,12 +3,12 @@ title: Relations, les propriétés de navigation et les clés étrangères - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 46c2d11b5704ec7ae82a423ae042b87f5efe436f
-ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
+ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2018
-ms.locfileid: "49315657"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829198"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, les propriétés de navigation et les clés étrangères
 Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre entités. Il fournit également des conseils sur la façon de mapper et de manipuler des relations.
@@ -29,7 +29,7 @@ Il est recommandé d’inclure des propriétés dans le modèle correspondant au
 
 Lorsque les colonnes clés étrangères ne sont pas inclus dans le modèle, les informations d’association sont gérées comme un objet indépendant. Les relations sont suivies par le biais des références d’objet au lieu de propriétés de clé étrangère. Ce type d’association est appelé un *association indépendante*. La méthode la plus courante pour modifier un *association indépendante* consiste à modifier les propriétés de navigation sont générées pour chaque entité qui participe à l’association.
 
-Vous pouvez choisir d'utiliser un type d'association dans votre modèle ou les deux à la fois. Toutefois, si vous avez une relation plusieurs-à-plusieurs pure qui est connectée par une table de jointure qui contient uniquement des clés étrangères, EF utilisera une association indépendante pour gérer cette relation plusieurs-à-plusieurs.   
+Vous pouvez choisir d'utiliser un type d'association dans votre modèle ou les deux à la fois. Toutefois, si vous avez une relation plusieurs-à-plusieurs pure qui est connectée par une table de jointure qui contient uniquement des clés étrangères, EF utilisera une association indépendante pour gérer cette relation plusieurs-à-plusieurs.   
 
 L’illustration suivante montre un modèle conceptuel qui a été créé avec l’Entity Framework Designer. Le modèle contient deux entités qui participent de relation un-à-plusieurs. Les deux entités ont des propriétés de navigation. **Cours** est l’entité depend et a la **DepartmentID** propriété de clé étrangère définie.
 
@@ -51,7 +51,7 @@ public class Department
 {
    public Department()
    {
-     this.Course = new HashSet<Course>();
+     this.Courses = new HashSet<Course>();
    }  
    public int DepartmentID { get; set; }
    public string Name { get; set; }
