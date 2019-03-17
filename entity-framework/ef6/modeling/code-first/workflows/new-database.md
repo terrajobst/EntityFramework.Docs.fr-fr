@@ -11,10 +11,10 @@ ms.lasthandoff: 09/18/2018
 ms.locfileid: "46284120"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First pour une base de données
-Cette procédure pas à pas vidéo et pas à pas fournissent une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données qui n’existe pas de ciblage et Code First crée, ou une base de données vide ce Code First l’ajoutera des tables à. Code tout d’abord vous permet de définir votre modèle à l’aide de C\# ou les classes VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent.
+Cette vidéo et la procédure pas à pas suivante fournissent une introduction au développement Code First générant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API fluent.
 
 ## <a name="watch-the-video"></a>Regardez la vidéo
-Cette vidéo fournit une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données qui n’existe pas de ciblage et Code First crée, ou une base de données vide ce Code First l’ajoutera des tables à. Code tout d’abord vous permet de définir votre modèle à l’aide de classes c# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et les propriétés ou à l’aide d’une API fluent.
+Cette vidéo fournit une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API fluent.
 
 **Présentée par** : [Rowan Miller](http://romiller.com/)
 
@@ -22,7 +22,7 @@ Cette vidéo fournit une introduction au développement Code First ciblant une b
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
-Vous devez avoir au moins Visual Studio 2010 ou Visual Studio 2012 est installé pour terminer cette procédure pas à pas.
+Vous devez avoir au moins Visual Studio 2010 ou Visual Studio 2012 installé pour effectuer cette procédure pas à pas.
 
 Si vous utilisez Visual Studio 2010, vous devez également avoir [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installé.
 
