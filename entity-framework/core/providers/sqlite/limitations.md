@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 69c40fcd8b7ddb925728b1bad9992ad2a81e7540
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 53262bc926d79f42c4418a62717a462564dc80bf
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994662"
+ms.lasthandoff: 03/18/2019
+ms.locfileid: "58131416"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limites du fournisseur de base de données SQLite EF Core
 
@@ -34,14 +34,14 @@ Le moteur de base de données SQLite ne prend pas en charge un nombre d’opéra
 | AddUniqueConstraint  | ✗          |                  |
 | AlterColumn          | ✗          |                  |
 | CreateIndex          | ✔          | 1.0              |
-| Create table          | ✔          | 1.0              |
+| CreateTable          | ✔          | 1.0              |
 | DropColumn           | ✗          |                  |
 | DropForeignKey       | ✗          |                  |
-| DROP index            | ✔          | 1.0              |
+| DropIndex            | ✔          | 1.0              |
 | DropPrimaryKey       | ✗          |                  |
 | DropTable            | ✔          | 1.0              |
 | DropUniqueConstraint | ✗          |                  |
-| RenameColumn         | ✗          |                  |
+| RenameColumn         | ✔          | 2.2.2            |
 | RenameIndex          | ✔          | 2.1              |
 | RenameTable          | ✔          | 1.0              |
 | EnsureSchema         | ✔ (nulle)  | 2.0              |
@@ -52,7 +52,7 @@ Le moteur de base de données SQLite ne prend pas en charge un nombre d’opéra
 
 ## <a name="migrations-limitations-workaround"></a>Solution de contournement migrations limitations
 
-Vous pouvez contourner certaines de ces limitations en écrivant du code dans vos migrations pour effectuer une table manuellement régénérer. Une reconstruction de la table implique la modification du nom de la table existante, créer une nouvelle table, copie de données vers la nouvelle table et supprimer l’ancienne table. Vous devez utiliser le `Sql(string)` méthode pour effectuer certaines de ces étapes.
+Vous pouvez contourner certaines de ces limitations en écrivant du code dans vos migrations pour effectuer une table manuellement régénérer. Une reconstruction de la table implique la modification du nom de la table existante, la création d’une nouvelle table, la copie des données vers la nouvelle table et la suppression de l’ancienne table. Vous devez utiliser le `Sql(string)` méthode pour effectuer certaines de ces étapes.
 
 Consultez [rendre autres types de Table de modifications de schéma](http://sqlite.org/lang_altertable.html#otheralter) dans la documentation de SQLite pour plus d’informations.
 
