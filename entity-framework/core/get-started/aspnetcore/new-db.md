@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 4734586adc89e9c1d866a1b4accd8b5e51fe2bb0
-ms.sourcegitcommit: ebf661025d2ad2b62466fa7bf0e0772a7811cbe7
+ms.openlocfilehash: 25e5a683acf4bbed0b978cc6a80f1b50a0b64ca1
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/11/2019
-ms.locfileid: "54211164"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319177"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une nouvelle base de données
 
@@ -114,9 +114,9 @@ Une application de production placerait généralement chaque classe dans un fic
 
 ## <a name="register-the-context-with-dependency-injection"></a>Inscrire le contexte avec l’injection de dépendance
 
-Des services (tels que `BloggingContext`) sont inscrits avec l’[injection de dépendances](http://docs.asp.net/en/latest/fundamentals/dependency-injection.html) au démarrage de l’application. Ces services sont affectés aux composants qui en ont besoin (tels que les contrôleurs MVC) par le biais de propriétés ou de paramètres de constructeur.
+Pour rendre `BloggingContext` accessible aux contrôleurs MVC, inscrivez-le en tant que service dans `Startup.cs`.
 
-Pour rendre `BloggingContext` accessible aux contrôleurs MVC, inscrivez-le en tant que service.
+Les services (tels que `BloggingContext`) sont inscrits à une [injection de dépendances](http://docs.asp.net/en/latest/fundamentals/dependency-injection.html) lors du démarrage de l’application afin qu’ils puissent être fournis automatiquement aux composants qui consomment des services (tels que les contrôleurs MVC) via les paramètres et propriétés du constructeur.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 748db8a71a04a2d696ef21a03319906b9fc776be
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 534ac95cccc03e9797ba766e601e2fe86eaf8061
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829224"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319216"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Changements cassants inclus dans EF Core 3.0 (actuellement en préversion)
 
@@ -653,7 +653,7 @@ Par exemple :
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
 
-Le code semble relier `Samuri` à un autre type d’entité avec la propriété de navigation `Entrance`, qui peut être privée.
+Le code semble relier `Samurai` à un autre type d’entité avec la propriété de navigation `Entrance`, qui peut être privée.
 
 En réalité, ce code tente de créer une relation avec un certain type d’entité nommé `Entrance` sans propriété de navigation.
 
@@ -785,3 +785,83 @@ Ce changement a été apporté afin que la version de SQLite utilisée sur iOS s
 **Atténuations**
 
 Pour utiliser la version de SQLite native sur iOS, configurez `Microsoft.Data.Sqlite` de façon à utiliser un autre bundle `SQLitePCLRaw`.
+
+## <a name="char-values-are-now-stored-as-text-on-sqlite"></a>Les valeurs char sont maintenant stockées au format TEXT sur SQLite
+
+[Suivi de problème no 15020](https://github.com/aspnet/EntityFrameworkCore/issues/15020)
+
+Ce changement a été introduit dans EF Core 3.0-preview 4.
+
+**Ancien comportement**
+
+Avant, les valeurs char étaient stockées comme valeurs INTEGER sur SQLite. Par exemple, une valeur char de *A* était stockée comme valeur entière 65.
+
+**Nouveau comportement**
+
+Maintenant, les valeurs char sont stockées au format TEXT.
+
+**Pourquoi ?**
+
+Le stockage des valeurs au format TEXT est plus naturel et rend la base de données plus compatible avec d’autres technologies.
+
+**Atténuations**
+
+Vous pouvez migrer des bases de données existantes vers le nouveau format en exécutant SQL comme suit.
+
+``` sql
+UPDATE MyTable
+SET CharColumn = char(CharColumn)
+WHERE typeof(CharColumn) = 'integer';
+```
+
+Dans EF Core, vous pouvez également continuer à utiliser le comportement précédent en configurant un convertisseur de valeur sur ces propriétés.
+
+``` csharp
+modelBuilder
+    .Entity<MyEntity>()
+    .Property(e => e.CharProperty)
+    .HasConversion(
+        c => (long)c,
+        i => (char)i);
+```
+
+Microsoft.Data.Sqlite est aussi toujours capable de lire les valeurs de caractère à partir de colonnes INTEGER et TEXT, donc certains scénarios peuvent ne nécessiter aucune action.
+
+## <a name="migration-ids-are-now-generated-using-the-invariant-cultures-calendar"></a>Les ID de migration sont maintenant générés à l’aide du calendrier de la culture invariante
+
+[Suivi de problème no 12978](https://github.com/aspnet/EntityFrameworkCore/issues/12978)
+
+Ce changement a été introduit dans EF Core 3.0-preview 4.
+
+**Ancien comportement**
+
+Les ID de migration ont été générés par inadvertance à l’aide du calendrier de la culture actuelle.
+
+**Nouveau comportement**
+
+Maintenant, les ID de migration sont toujours générés à l’aide du calendrier de la culture invariante (grégorien).
+
+**Pourquoi ?**
+
+L’ordre des migrations est important lors de la mise à jour de la base de données ou de la résolution des conflits de fusion. L’utilisation du calendrier invariant permet d’éviter les problèmes de classement qui peuvent se produire si les membres de l’équipe ont des calendriers système différents.
+
+**Atténuations**
+
+Ce changement affecte tous ceux qui utilisent un calendrier non grégorien où l’année est en avance sur le calendrier grégorien (comme le calendrier bouddhiste thaïlandais). Les ID de migration existants devront être mis à jour afin que les nouvelles migrations soient classées après les migrations existantes.
+
+Vous trouverez les ID de migration dans l’attribut Migration des fichiers de concepteur des migrations.
+
+``` diff
+ [DbContext(typeof(MyDbContext))]
+-[Migration("25620318122820_MyMigration")]
++[Migration("20190318122820_MyMigration")]
+ partial class MyMigration
+ {
+```
+
+Le tableau de l’historique Migrations doit également être mis à jour.
+
+``` sql
+UPDATE __EFMigrationsHistory
+SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 150))
+```

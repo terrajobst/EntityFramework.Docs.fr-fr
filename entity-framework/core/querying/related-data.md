@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4e042acb805c743ee794f4e61105b8d2136973b1
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: 6beaebf2c6859fcf91e963bfae02f029f8f51147
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668724"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58131442"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
 
@@ -52,7 +52,7 @@ Vous pouvez combiner tout cela pour inclure les données associées de plusieurs
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, lors de l’interrogation des `Blog`s, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour ce faire, vous devez spécifier chaque chemin d’accès à inclure à partir de la racine. Par exemple : `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. Dans la plupart des cas, EF consolide les jointures lors de la génération du SQL.
+Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, quand vous interrogez des `Blogs`, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour ce faire, vous devez spécifier chaque chemin d’accès à inclure à partir de la racine. Par exemple : `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. Dans la plupart des cas, EF consolide les jointures lors de la génération du SQL.
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
