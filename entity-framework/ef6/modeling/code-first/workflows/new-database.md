@@ -11,10 +11,10 @@ ms.lasthandoff: 09/18/2018
 ms.locfileid: "46284120"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First pour une base de données
-Cette vidéo et la procédure pas à pas suivante fournissent une introduction au développement Code First générant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API fluent.
+Cette vidéo et la procédure pas à pas suivante fournissent une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent.
 
 ## <a name="watch-the-video"></a>Regardez la vidéo
-Cette vidéo fournit une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API fluent.
+Cette vidéo fournit une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent.
 
 **Présentée par** : [Rowan Miller](http://romiller.com/)
 
