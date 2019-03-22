@@ -3,12 +3,12 @@ title: Relations, les propriétés de navigation et les clés étrangères - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 8292ae7af8d760240715854611d92ab340bf1ca7
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829198"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319190"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, les propriétés de navigation et les clés étrangères
 Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre entités. Il fournit également des conseils sur la façon de mapper et de manipuler des relations.
@@ -147,7 +147,7 @@ Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que le *
 
 ## <a name="loading-related-objects"></a>Charger des objets connexes
 
-Dans Entity Framework, que vous utilisez le plus souvent utiliser les propriétés de navigation pour charger des entités qui sont liées à l’entité retournée par l’association définie. Pour plus d’informations, consultez [le chargement des objets connexes](~/ef6/querying/related-data.md).
+Dans Entity Framework vous utilisez couramment des propriétés de navigation pour charger des entités qui sont liées à l’entité retournée par l’association définie. Pour plus d’informations, consultez [le chargement des objets connexes](~/ef6/querying/related-data.md).
 
 > [!NOTE]
 > Dans une association de clé étrangère, lorsque vous chargez une terminaison connexe d'un objet dépendant, l'objet connexe est chargé en fonction de la valeur de clé étrangère du dépendant actuellement en mémoire :

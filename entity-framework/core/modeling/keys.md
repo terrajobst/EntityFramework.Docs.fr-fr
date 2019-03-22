@@ -4,16 +4,18 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 9e6946100ebabc6ba57cb792b3672219098b1e21
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6272e323b83ccab2ed060a2ebbde1d1e8e353d66
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994019"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319164"
 ---
 # <a name="keys-primary"></a>Clés (primaire)
 
-Une clé sert d’identificateur principal unique pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle correspond à la notion d’un *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (consultez [clés secondaires](alternate-keys.md) pour plus d’informations).
+Une clé sert d’identificateur principal unique pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle correspond à la notion d’un *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (consultez [clés secondaires](alternate-keys.md) pour plus d’informations). 
+
+Une des méthodes suivantes peut être utilisée pour le programme d’installation/créer une clé primaire.
 
 ## <a name="conventions"></a>Conventions
 

@@ -3,12 +3,12 @@ title: Test avec une infrastructure de simulation - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 80fd97073744be40d66c09706d3513dba18e724d
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: 3d39b41018beb70b72105dfb2fe4d61afc0b0525
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834719"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319203"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Test avec une infrastructure de simulation
 > [!NOTE]
@@ -21,7 +21,7 @@ Lors de l’écriture de tests pour votre application, il est souvent souhaitabl
 Il existe deux approches différentes qui peuvent être utilisés pour créer une version en mémoire de votre contexte.  
 
 - **Créer votre propre doubles de test** – cette approche implique d’écrire votre propre implémentation en mémoire de votre contexte et de DbSets. Cela vous donne un grand nombre de contrôle sur la façon dont les classes se comportent mais peuvent impliquer écriture et qui possède une quantité raisonnable de code.  
-- **Utiliser une infrastructure de simulation pour créer des doubles de test** – à l’aide d’une infrastructure de simulation (par exemple, Moq) vous pouvez avoir les implémentations en mémoire de votre contexte et des jeux créés dynamiquement lors de l’exécution pour vous.  
+- **Utiliser une infrastructure de simulation pour créer des doubles de test** – à l’aide d’une infrastructure de simulation (par exemple, Moq), vous pouvez avoir les implémentations en mémoire de votre contexte et de jeux créés dynamiquement lors de l’exécution pour vous.  
 
 Cet article traitera d’à l’aide d’une infrastructure de simulation. Pour créer votre propre doubles de test, consultez [test avec votre propre Doubles de Test](writing-test-doubles.md).  
 
