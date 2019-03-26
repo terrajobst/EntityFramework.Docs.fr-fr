@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 468698d1bbd17d4ad10b1b1601bfbc315a01c1ff
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: cb05e3fb66adf96f8a6778711a76520d0be24c71
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688704"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419768"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Référence - Console du Gestionnaire de Package dans Visual Studio des outils Entity Framework Core
 
@@ -130,9 +130,9 @@ Le tableau suivant présente les paramètres qui sont communes à toutes les com
 
 | Paramètre                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Context \<chaîne >        | Le `DbContext` classe à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
+| -Context \<chaîne >        | Classe `DbContext` à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
 | -Project \<chaîne >        | Le projet cible. Si ce paramètre est omis, le **projet par défaut** pour **Console du Gestionnaire de Package** est utilisé en tant que le projet cible.                                                                             |
-| -StartupProject \<chaîne > | Le projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans **propriétés de la Solution** est utilisé en tant que le projet cible.                                                                                 |
+| -StartupProject \<String> | Le projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans **propriétés de la Solution** est utilisé en tant que le projet cible.                                                                                 |
 | -Verbose                  | Afficher la sortie détaillée.                                                                                                                                                                                                 |
 
 Pour afficher les informations d’aide sur une commande, utilisez PowerShell `Get-Help` commande.
@@ -149,7 +149,7 @@ Paramètres :
 | Paramètre                         | Description                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-Name \<chaîne ><nobr>       | Le nom de la migration. Ceci est un paramètre positionnel et est nécessaire.                                              |
-| <nobr>-OutputDir \<chaîne ></nobr> | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatifs au répertoire de projet cible. La valeur par défaut est « Migrations ». |
+| <nobr>-OutputDir \<String></nobr> | Le répertoire (et espace de noms secondaire) à utiliser. Chemins d’accès sont relatifs au répertoire de projet cible. La valeur par défaut est « Migrations ». |
 
 ## <a name="drop-database"></a>DROP Database
 
@@ -163,7 +163,7 @@ Paramètres :
 
 ## <a name="get-dbcontext"></a>Get-DbContext
 
-Listes disponibles `DbContext` types.
+Obtient des informations sur un `DbContext` type.
 
 ## <a name="remove-migration"></a>Remove-Migration
 
@@ -214,7 +214,7 @@ Paramètres :
 
 | Paramètre                | Description                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-From* \<chaîne >        | La migration de départ. Migrations peuvent être identifiées par nom ou par ID. La valeur 0 est un cas spécial signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
+| *-From* \<String>        | La migration de départ. Migrations peuvent être identifiées par nom ou par ID. La valeur 0 est un cas spécial signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
 | *-* \<Chaîne >          | La migration de fin. Valeur par défaut est la dernière migration.                                                                                                                                                                      |
 | <nobr>-Idempotent</nobr> | Générer un script qui peut être utilisé sur toute migration d’une base de données.                                                                                                                                                         |
 | -Output \<chaîne >        | Fichier dans lequel écrire le résultat. Si ce paramètre est omis, le fichier est créé avec un nom généré dans le même dossier que les fichiers exécutables de l’application sont créés, par exemple : */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*. |
@@ -240,7 +240,7 @@ Met à jour la base de données pour la dernière migration ou pour une migratio
 
 | Paramètre                           | Description                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>*-Migration* \<chaîne ></nobr> | La migration de la cible. Migrations peuvent être identifiées par nom ou par ID. La valeur 0 est un cas spécial signifie *avant la première migration* et oblige toutes les migrations à rétablir. Si aucune migration n’est spécifiée, la commande par défaut est la dernière migration. |
+| <nobr>*-Migration* \<String></nobr> | La migration de la cible. Migrations peuvent être identifiées par nom ou par ID. La valeur 0 est un cas spécial signifie *avant la première migration* et oblige toutes les migrations à rétablir. Si aucune migration n’est spécifiée, la commande par défaut est la dernière migration. |
 
 > [!TIP]
 > Le paramètre de Migration prend en charge d’extension de l’onglet.
@@ -261,4 +261,4 @@ Update-Database -Migration 20180904195021_InitialCreate
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Migrations](xref:core/managing-schemas/migrations/index)
-* [Ingénierie à rebours](xref:core/managing-schemas/scaffolding)
+* [Reconstitution de la logique des produits](xref:core/managing-schemas/scaffolding)

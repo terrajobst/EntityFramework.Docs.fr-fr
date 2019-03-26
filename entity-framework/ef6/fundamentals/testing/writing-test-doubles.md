@@ -3,12 +3,12 @@ title: Test avec votre propre doubles de test - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 2158dc73585c2720e7293096b0478c73edf522d9
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9db56e28cd89084fece36c3e5a2c1b4495991d01
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490907"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419729"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>Test avec votre propre doubles de test
 > [!NOTE]
@@ -43,7 +43,7 @@ Cet article donne des listes de code complet, vous pouvez copier dans Visual Stu
 
 ## <a name="creating-a-context-interface"></a>Création d’une interface de contexte  
 
-Nous allons examiner le test d’un service qui utilise un EF modèle. Pour pouvoir remplacer notre contexte EF avec une version en mémoire pour le test, nous allons définir une interface que notre contexte EF (et son double de mémoire) seront imeplement.  
+Nous allons examiner le test d’un service qui utilise un EF modèle. Pour pouvoir remplacer notre contexte EF avec une version en mémoire pour le test, nous allons définir une interface que notre contexte EF (et son double de mémoire) doit implémenter.
 
 Le service que nous allons tester interroger et modifier des données en utilisant les propriétés DbSet de notre contexte et également appeler SaveChanges pour transmettre des modifications à la base de données. Par conséquent, nous incluons ces membres sur l’interface.  
 
