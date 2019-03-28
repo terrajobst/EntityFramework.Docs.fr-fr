@@ -99,7 +99,7 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * Cette demande de tirage ajoute le concept de `CanConnect` qui sera utilisé par le contrôle d’intégrité d’ASP.NET Core vérifie pour déterminer si la base de données est disponible. Par défaut, l’implémentation relationnelle appelle simplement `Exist`, mais les fournisseurs peuvent implémenter quelque chose de différent si nécessaire. Les fournisseurs non relationnelles devez implémenter la nouvelle API pour le contrôle d’intégrité être utilisable.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13306](https://github.com/aspnet/EntityFrameworkCore/pull/13306) -Mettez à jour de base RelationalTypeMapping pour ne définir pas DbParameter taille
   * Arrêter de taille par défaut dans la mesure où il peut provoquer la troncation. Fournisseurs devrez peut-être ajouter leur propre logique si la taille doit être définie.
-* https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng : Spécifiez toujours le type de colonne pour les colonnes décimales
+* (https://github.com/aspnet/EntityFrameworkCore/pull/13372) -RevEng : Spécifiez toujours le type de colonne pour les colonnes décimales
   * Configurez toujours le type de colonne pour les colonnes décimales dans le code généré automatiquement, plutôt que de configurer par convention.
   * Les fournisseurs ne doivent pas nécessiter des modifications de leur côté.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13469](https://github.com/aspnet/EntityFrameworkCore/pull/13469) -Ajoute CaseExpression pour générer des expressions de cas de SQL
