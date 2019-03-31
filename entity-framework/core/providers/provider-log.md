@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 1133976d8d25e4099b64a1a30a8d2066ff3f6cd7
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: 229c15ec0402e1706318593a099236f723d80595
+ms.sourcegitcommit: ab847dd881d51122e695b7cd8c025fcf3a5a9033
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419664"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58678391"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -61,6 +61,10 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * `EntityMaterializerSource` a été simplifiée
 * https://github.com/aspnet/EntityFrameworkCore/pull/14895
   * StartsWith traduction a changé de manière fournisseurs se peuvent que vous souhaitez/devoir réagir
+* https://github.com/aspnet/EntityFrameworkCore/pull/15168
+  * Configurer les services de convention ont changé. Fournisseurs doivent désormais hériter de « ProviderConventionSet » ou « RelationalConventionSet ».
+  * Personnalisations peuvent être ajoutées via `IConventionSetCustomizer` services, mais cela est destiné à être utilisé par d’autres extensions, pas les fournisseurs.
+  * Conventions utilisées lors de l’exécution doivent être résolues à partir de `IConventionSetBuilder`.
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
