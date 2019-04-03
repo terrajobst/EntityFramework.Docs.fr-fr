@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 229c15ec0402e1706318593a099236f723d80595
-ms.sourcegitcommit: ab847dd881d51122e695b7cd8c025fcf3a5a9033
+ms.openlocfilehash: 9ef87a737111053df0359f3b2d7a4f82d25c578a
+ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58678391"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58867942"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -43,9 +43,6 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * `IMigrationsSqlGenerator` changements apportés à partir d’un service singleton pour un service délimité
 * https://github.com/aspnet/EntityFrameworkCore/pull/14706
   * L’infrastructure pour la création de commandes relationnelles a été rendue publique afin qu’il peut être utilisé par les fournisseurs en toute sécurité et refactorisé légèrement.
-  * `IRelationalCommandBuilderFactory`est passé de service singleton à un service délimité
-  * `IShaperCommandContextFactory` est passé de service singleton à un service délimité
-  * `ISelectExpressionFactory` est passé de service singleton à un service délimité
 * https://github.com/aspnet/EntityFrameworkCore/pull/14733
   * `ILazyLoader` changements apportés à partir d’un service délimité à un service temporaire
 * https://github.com/aspnet/EntityFrameworkCore/pull/14610

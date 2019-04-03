@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: f5a9ae17471391442170d8c40264e4db6922cb08
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: 9400fe8ea817b6aca0fb63c1de05ffe1dc997b2f
+ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980000"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58868007"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuration d’un DbContext
 
@@ -161,6 +161,27 @@ using (var context = serviceProvider.GetService<BloggingContext>())
 
 var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
+## <a name="avoiding-dbcontext-threading-issues"></a>Éviter les problèmes liés aux threads de DbContext
+
+Entity Framework Core ne prend pas en charge plusieurs opérations parallèles en cours d’exécution sur le même `DbContext` instance. Accès simultané peut entraîner un comportement non défini, les blocages d’application et une altération des données. C’est pourquoi il est important de toujours utiliser séparer `DbContext` instances pour les opérations qui s’exécutent en parallèle. 
+
+Il existe des erreurs courantes qui peuvent inadvernetly cause des accès simultané sur le même `DbContext` instance :
+
+### <a name="forgetting-to-await-the-completion-of-an-asynchronous-operation-before-starting-any-other-operation-on-the-same-dbcontext"></a>Oubli à attendre la fin d’une opération asynchrone avant de commencer toute autre opération sur le même DbContext
+
+Les méthodes asynchrones permettent EF Core lancer des opérations qui accèdent à la base de données de façon non bloquante. Mais si un appelant n’attend pas la fin d’une des méthodes suivantes, puis passe à effectuer d’autres opérations sur le `DbContext`, l’état de la `DbContext` peut être (et sera très probablement) endommagé. 
+
+Toujours attendre les méthodes asynchrones EF Core immédiatement.  
+
+### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>Partage implicitement des instances de DbContext entre plusieurs threads par le biais de l’injection de dépendances
+
+Le [ `AddDbContext` ](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) enregistre la méthode d’extension `DbContext` types avec un [durée de vie délimitée](https://docs .microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes) par défaut. 
+
+Cela est protégée contre les problèmes d’accès simultané dans les applications ASP.NET Core, car il y n'a qu’un seul thread à un moment donné, l’exécution de chaque demande du client, et étant donné que chaque requête obtient une étendue de l’injection de dépendance distinct (et par conséquent une `DbContext` instance).
+
+Toutefois, tout code qui exécute explicitement plusieurs threads en parallèle devez vous assurer de que `DbContext` instances ne sont pas jamais accesed simultanément.
+
+À l’aide de l’injection de dépendances, cela est possible en inscrire soit le contexte comme étendues et de création des étendues (à l’aide de `IServiceScopeFactory`) pour chaque thread ou en inscrivant le `DbContext` comme provisoire (à l’aide de la surcharge de `AddDbContext` qui accepte un `ServiceLifetime` paramètre).
 
 ## <a name="more-reading"></a>Lire plus
 
