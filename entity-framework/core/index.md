@@ -4,8 +4,13 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 uid: core/index
+ms.openlocfilehash: fa0695be29668789a179f9a0d6330f3361dbac29
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/17/2019
+ms.locfileid: "58131427"
 ---
-
 # <a name="entity-framework-core"></a><span data-ttu-id="6d2db-102">Entity Framework Core</span><span class="sxs-lookup"><span data-stu-id="6d2db-102">Entity Framework Core</span></span>
 
 <span data-ttu-id="6d2db-103">Entity Framework (EF) Core est une version légère, extensible, [open source](https://github.com/aspnet/EntityFrameworkCore) et multiplateforme de la très connue technologie d’accès aux données Entity Framework.</span><span class="sxs-lookup"><span data-stu-id="6d2db-103">Entity Framework (EF) Core is a lightweight, extensible, [open source](https://github.com/aspnet/EntityFrameworkCore) and cross-platform version of the popular Entity Framework data access technology.</span></span>
