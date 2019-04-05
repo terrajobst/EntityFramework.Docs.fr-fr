@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 0ad43db794902cf1f46bfe8f117fbd36e06f3c44
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 3024c0101c9d886ef844d1b7dc85aaf1be27e86b
+ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829172"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "58914076"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -64,7 +64,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-Vous pouvez également construire un objet DbParameter et le fournir en tant que valeur de paramètre. Cela vous permet d’utiliser des paramètres nommés dans la chaîne de requête SQL.
+Vous pouvez également construire un DbParameter et le fournir comme valeur de paramètre :
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -72,6 +72,17 @@ var user = new SqlParameter("user", "johndoe");
 
 var blogs = context.Blogs
     .FromSql("EXECUTE dbo.GetMostPopularBlogsForUser @user", user)
+    .ToList();
+```
+
+De cette façon, vous pouvez utiliser des paramètres nommés dans la chaîne de requête SQL, ce qui est utile quand une procédure stockée a des paramètres facultatifs :
+
+<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+``` csharp
+var user = new SqlParameter("user", "johndoe");
+
+var blogs = context.Blogs
+    .FromSql("EXECUTE dbo.GetMostPopularBlogs @filterByUser=@user", user)
     .ToList();
 ```
 
@@ -132,7 +143,7 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 
 * La requête SQL ne peut pas contenir de données associées. Toutefois, dans de nombreux cas, vous pouvez composer au-dessus de la requête à l’aide de l’opérateur `Include` pour retourner des données associées (consultez [Inclusion de données associées](#including-related-data)).
 
-* Les instructions `SELECT` passées à cette méthode doivent généralement être composables : si EF Core a besoin évaluer des opérateurs de requête supplémentaires sur le serveur (par exemple, pour traduire les opérateurs LINQ appliqués après `FromSql`), le SQL fourni sera considéré comme une sous-requête. Cela signifie que l’instruction SQL passée ne doit pas contenir de caractères ou d’options qui ne sont pas valides sur une sous-requête, comme :
+* `SELECT` Les instructions passées à cette méthode doivent généralement être composables : si EF Core a besoin évaluer des opérateurs de requête supplémentaires sur le serveur (par exemple, pour traduire les opérateurs LINQ appliqués après `FromSql`), le SQL fourni sera considéré comme une sous-requête. Cela signifie que l’instruction SQL passée ne doit pas contenir de caractères ou d’options qui ne sont pas valides sur une sous-requête, comme :
   * un point-virgule de fin
   * Sur le serveur SQL Server, une indication de niveau de requête en fin (par exemple, `OPTION (HASH JOIN)`)
   * Sur le serveur SQL Server, une clause `ORDER BY` n’est pas accompagnée de `TOP 100 PERCENT` dans la clause `SELECT`

@@ -1,10 +1,18 @@
+---
+ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
+ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "58914101"
+---
 # <a name="contributing-to-the-entity-framework-documentation"></a>Contribution à la documentation Entity Framework
 
-Ce document traite du processus de contribution aux articles et exemples de code hébergés sur le [site de la documentation Entity Framework](https://docs.microsoft.com/ef). Les contributions peuvent aller de la simple correction de fautes de frappe à la rédaction complexe de nouveaux articles.
+Le processus d’ajout d’articles et d’exemples de code à la documentation d’Entity Framework est expliqué ci-dessous. Les contributions peuvent aller de la simple correction de fautes de frappe à la rédaction plus complexe de nouveaux articles.
 
 ## <a name="how-to-make-a-simple-correction-or-suggestion"></a>Comment apporter une correction ou suggestion simple
 
-Les articles sont stockés dans le dépôt en tant que fichiers Markdown. Vous pouvez apporter des modifications simples au contenu d’un fichier Markdown dans le navigateur en appuyant sur le lien **Modifier** en haut à droite de la fenêtre du navigateur. (Dans les fenêtres de navigateur étroites, vous devrez peut-être développer la barre **Options** pour voir le lien **Modifier**.) Suivez les instructions pour créer une demande de tirage (pull request). Après avoir examiné la demande de tirage, l’équipe EF l’accepte ou suggère des modifications.
+Les articles sont stockés dans le dépôt sous forme de fichiers Markdown. Pour changer simplement le contenu d’un fichier Markdown, cliquez sur le lien **Modifier** en haut à droite de la fenêtre du navigateur. Vous devez peut-être développer la barre **Options** pour voir le lien **Modifier**. Suivez les instructions pour créer une demande de tirage (pull request). Après avoir examiné la demande de tirage, l’équipe EF l’accepte ou suggère des modifications.
 
 ## <a name="how-to-make-a-more-complex-submission"></a>Comment effectuer une soumission plus complexe
 
@@ -17,7 +25,7 @@ Vous devez avoir une connaissance de base de [Git et GitHub.com](https://guides.
 
 ## <a name="markdown-syntax"></a>Syntaxe Markdown
 
-Les articles sont écrits en [DFM (DocFX Flavored Markdown)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), qui est un sur-ensemble de [GFM (GitHub Flavored Markdown)](https://guides.github.com/features/mastering-markdown/). Pour obtenir des exemples de syntaxe DFM illustrant les fonctionnalités de l’interface utilisateur couramment utilisées dans la documentation EF, consultez [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) dans le guide de style du dépôt .NET Core. 
+Les articles sont écrits en [DocFX Flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), un sur-ensemble de [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Pour obtenir des exemples de syntaxe et métadonnées DFM illustrant les fonctionnalités d’interface utilisateur couramment utilisées dans la documentation EF, consultez [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) dans le guide de style du dépôt .NET Core.
 
 ## <a name="folder-structure-conventions"></a>Conventions relatives à la structure des dossiers
 
@@ -27,7 +35,7 @@ Les exemples de code sont stockés dans le dossier racine `samples`. Ils sont or
 
 ## <a name="code-snippets"></a>Extraits de code
 
-Les articles contiennent souvent des extraits de code pour illustrer les points abordés. DFM vous permet de copier du code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Dans la mesure du possible, nous préférons utiliser des fichiers de code distincts pour limiter les risques d’erreurs dans le code. Les fichiers de code doivent être stockés dans le dépôt, conformément à la structure de dossiers décrite ci-dessus pour les exemples de projets.
+Les articles contiennent souvent des extraits de code pour illustrer les points abordés. DFM vous permet de copier du code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Dans la mesure du possible, utilisez des fichiers de code distincts pour limiter les risques d’erreurs dans le code. Les fichiers de code doivent être stockés dans le dépôt, conformément à la structure de dossiers décrite ci-dessus pour les exemples de projets.
 
 Voici quelques exemples de [syntaxe d’extrait de code DFM](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html#code-snippet).
 
@@ -43,7 +51,7 @@ Pour afficher une partie d’un fichier en tant qu’extrait de code en utilisan
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?range=1-10]
 ```
 
-Pour les extraits de code C#, vous pouvez référencer une [région C#](https://msdn.microsoft.com/library/9a1ybwek.aspx). Si possible, utilisez des régions plutôt que des numéros de ligne, car les numéros de ligne dans un fichier de code ont tendance à changer au point de ne plus être synchronisés avec les références de numéro de ligne dans un fichier Markdown. Les régions C# peuvent être imbriquées, et si vous référencez la région externe, les directives interne `#region` et `#endregion` ne sont pas affichées dans un extrait de code.
+Pour les extraits de code C#, vous pouvez référencer une [région C#](https://msdn.microsoft.com/library/9a1ybwek.aspx). Utiliser des régions plutôt que des numéros de ligne. Les numéros de ligne dans un fichier de code ont tendance à changer au point de ne plus être synchronisés avec les références de numéro de ligne dans un fichier Markdown. Les régions C# peuvent être imbriquées. Si vous référencez la région externe, les directives internes `#region` et `#endregion` ne sont pas affichées dans un extrait de code.
 
 Pour afficher une région C# nommée « snippet_Example » :
 
