@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 7a2b75e2-1875-4487-9877-feff0651b5a6
 uid: core/miscellaneous/testing/sqlite
-ms.openlocfilehash: bc9d6768a90ce17160c4126d2a68fddaa30d63de
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e8ff204a09d50064b4f0d4376f02b05c8681ac25
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996866"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562531"
 ---
 # <a name="testing-with-sqlite"></a>Test avec SQLite
 
@@ -47,5 +47,8 @@ Pour activer le test par rapport à une autre base de données le plus simple co
 ## <a name="writing-tests"></a>Écriture de tests
 
 La clé à tester avec ce fournisseur est la possibilité d’indiquer le contexte à utiliser SQLite et contrôler la portée de la base de données en mémoire. L’étendue de la base de données est contrôlé par l’ouverture et fermeture de la connexion. La base de données est limitée à la durée pendant laquelle la connexion est ouverte. En général, vous souhaitez une nouvelle base de données pour chaque méthode de test.
+
+>[!TIP]
+> Pour utiliser `SqliteConnection()` et `.UseSqlite()` référence le package NuGet, méthode d’extension [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/SQLite/BlogServiceTests.cs)]

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0d0590f1-1ea3-4d5c-8f44-db17395cd3f3
 uid: core/miscellaneous/testing/in-memory
-ms.openlocfilehash: 2754d1deba98fcee0eb88669293b2197545c8874
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8aaea52f22954ef6a2b7d9b9c5627597c61ac644
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997890"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562544"
 ---
 # <a name="testing-with-inmemory"></a>Test avec InMemory
 
@@ -64,6 +64,6 @@ La clé à tester avec ce fournisseur est la possibilité d’indiquer le contex
 Voici un exemple d’une classe de test qui utilise la base de données en mémoire. Chaque méthode de test spécifie un nom de base de données unique, ce qui signifie que chaque méthode possède sa propre base de données en mémoire.
 
 >[!TIP]
-> Pour utiliser le `.UseInMemoryDatabase()` référence le package NuGet, méthode d’extension `Microsoft.EntityFrameworkCore.InMemory`.
+> Pour utiliser le `.UseInMemoryDatabase()` référence le package NuGet, méthode d’extension [Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/).
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/InMemory/BlogServiceTests.cs)]
