@@ -65,6 +65,7 @@
 #### [Value Conversions](core/modeling/value-conversions.md)
 #### [Amorçage des données](core/modeling/data-seeding.md)
 #### [Constructeurs de type d’entité](core/modeling/constructors.md)
+#### [Fractionnement de table](core/modeling/table-splitting.md)
 #### [Types d’entité détenus](core/modeling/owned-entities.md)
 #### [Types de requêtes](core/modeling/query-types.md)
 #### [Alternance de modèles avec un même DbContext](core/modeling/dynamic-model.md)
