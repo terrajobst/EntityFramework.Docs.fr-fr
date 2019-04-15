@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 414773284df7c208b9a2acf0536fda459bdf775b
-ms.sourcegitcommit: 7bde8e6ad3c4565a4638646ce04bcf5e66f7b5fd
+ms.openlocfilehash: d432ca36c166f7baf71253709bf58b1f5428a11a
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/07/2019
-ms.locfileid: "54069228"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562505"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -40,7 +40,7 @@ EF Core Power Tools est une extension Visual Studio 2017 qui expose différente
 
 ### <a name="entity-framework-visual-editor"></a>Entity Framework Visual Editor
 
-Entity Framework Visual Editor est une extension de Visual Studio 2017 qui ajoute un concepteur ORM permettant de concevoir visuellement des classes EF 6 et EF Core. Le code étant généré à l’aide de modèles T4, il peut être personnalisé pour répondre à tous les besoins. Il prend en charge les associations d’héritage, unidirectionnelles et bidirectionnelles, les énumérations ainsi que la possibilité de colorer le code de vos classes et d’ajouter des blocs de texte pour expliquer les parties potentiellement obscures de votre conception.
+Entity Framework Visual Editor est une extension de Visual Studio qui ajoute un concepteur ORM permettant de concevoir visuellement des classes EF 6 et EF Core. Le code étant généré à l’aide de modèles T4, il peut être personnalisé pour répondre à tous les besoins. Il prend en charge les associations d’héritage, unidirectionnelles et bidirectionnelles, les énumérations ainsi que la possibilité de colorer le code de vos classes et d’ajouter des blocs de texte pour expliquer les parties potentiellement obscures de votre conception.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)
 
