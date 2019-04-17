@@ -3,12 +3,12 @@ title: Configuration par le code - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
-ms.openlocfilehash: c317f112f713612f7b9aef3764a0bd004fef5424
-ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
+ms.openlocfilehash: 079a4ab30af74eac8b1f51ece5801ff40a867a29
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2019
-ms.locfileid: "56325351"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59619283"
 ---
 # <a name="code-based-configuration"></a>Configuration basée sur le code
 > [!NOTE]
@@ -106,7 +106,7 @@ Pour ce faire, Entity Framework permet à inscrire un gestionnaire d’événeme
 - Au démarrage de l’application (avant EF est utilisé) le plug-in ou le fournisseur doit s’inscrire à la méthode de gestionnaire d’événements pour cet événement. (Notez que cela doit se produire avant que l’application utilise Entity Framework).  
 - Le Gestionnaire d’événements effectue un appel à ReplaceService pour chaque service qui doit être remplacé.  
 
-Par exemple, repalce IDbConnectionFactory et DbProviderService s’inscrire un gestionnaire de quelque chose comme suit :  
+Par exemple, pour remplacer IDbConnectionFactory et DbProviderService s’inscrire un gestionnaire de quelque chose comme suit :  
 
 ``` csharp
 DbConfiguration.Loaded += (_, a) =>
