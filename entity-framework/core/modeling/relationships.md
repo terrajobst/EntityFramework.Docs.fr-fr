@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: a53a862cc2443a1c4461aa287def100284635f26
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9ef1a9269fc99f5b27a81c11a161ed5f9d74180d
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994940"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929935"
 ---
 # <a name="relationships"></a>Relations
 
@@ -22,21 +22,21 @@ Une relation définit comment deux entités sont liés entre eux. Dans une base 
 
 Il existe un certain nombre des termes utilisés pour décrire les relations
 
-* **Entité dépendante :** c’est l’entité qui contient les propriétés de clé étrangère. Parfois appelé l’enfant de la relation.
+* **Entité dépendante :** Il s’agit de l’entité qui contient les propriétés de clé étrangère. Parfois appelé l’enfant de la relation.
 
-* **Entité principale :** c’est l’entité qui contient les propriétés de clé primaire / l’autre. Parfois appelé le « parent » de la relation.
+* **Entité principale :** Il s’agit de l’entité qui contient les propriétés de clé primaire / l’autre. Parfois appelé le « parent » de la relation.
 
-* **Clé étrangère :** les propriétés dans l’entité dépendante qui est utilisée pour stocker les valeurs de la propriété de clé principale liée à l’entité.
+* **Clé étrangère :** Les propriétés dans l’entité dépendante qui est utilisée pour stocker les valeurs de la propriété de clé principale liée à l’entité.
 
-* **Clé principale :** les propriétés qui identifiant de façon unique l’entité principale. Cela peut être la clé primaire ou une autre clé.
+* **Clé du principal :** Les propriétés qui identifiant de façon unique l’entité principale. Cela peut être la clé primaire ou une autre clé.
 
-* **Propriété de navigation :** une propriété définie sur l’entité principale et/ou dépendante qui contient une ou plusieurs références aux ou les entités connexes.
+* **Propriété de navigation :** Une propriété définie sur l’entité principale et/ou dépendante qui contient une ou plusieurs références aux ou les entités connexes.
 
-  * **Propriété de navigation de collection :** une propriété de navigation qui contient des références à nombreuses entités connexes.
+  * **Propriété de navigation de collection :** Une propriété de navigation qui contient des références à nombreuses entités connexes.
 
-  * **Propriété de navigation de référence :** une propriété de navigation qui conserve une référence à une entité connexe unique.
+  * **Propriété de navigation de référence :** Une propriété de navigation qui conserve une référence à une entité connexe unique.
 
-  * **Propriété de navigation inverse :** lorsque vous présentez une propriété de navigation particulier, ce terme fait référence à la propriété de navigation à l’autre extrémité de la relation.
+  * **Propriété de navigation inverse :** Lorsque vous présentez une propriété de navigation particulier, ce terme fait référence à la propriété de navigation à l’autre extrémité de la relation.
 
 Le code suivant montre une relation un-à-plusieurs entre `Blog` et `Post`
 
@@ -98,13 +98,13 @@ Consultez [de suppression en Cascade](../saving/cascade-delete.md) pour plus d�
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Il existe deux annotations de données qui peuvent être utilisées pour configurer des relations, `[ForeignKey]` et `[InverseProperty]`.
+Il existe deux annotations de données qui peuvent être utilisées pour configurer des relations, `[ForeignKey]` et `[InverseProperty]`. Elles sont disponibles dans le `System.ComponentModel.DataAnnotations.Schema` espace de noms.
 
 ### <a name="foreignkey"></a>[ForeignKey]
 
 Vous pouvez utiliser les Annotations de données pour configurer la propriété doit être utilisée comme propriété de clé étrangère d’une relation donnée. Cela est généralement le cas lors de la propriété de clé étrangère n’est pas découvert par convention.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?name=Entities&highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?highlight=30)]
 
 > [!TIP]  
 > Le `[ForeignKey]` annotation peut être placée sur une propriété de navigation dans la relation. Il n’a pas besoin d’aller sur la propriété de navigation dans la classe d’entité dépendant.
@@ -113,29 +113,29 @@ Vous pouvez utiliser les Annotations de données pour configurer la propriété 
 
 Vous pouvez utiliser les Annotations de données pour configurer la façon dont les propriétés de navigation sur les entités principales et dépendantes par deux. En général, cela lorsqu’il existe plus d’une paire de propriétés de navigation entre les deux types d’entités.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?name=Entities&highlight=20,23)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?highlight=33,36)]
 
 ## <a name="fluent-api"></a>API Fluent
 
 Pour configurer une relation dans l’API Fluent, vous commencez par identifier les propriétés de navigation qui composent la relation. `HasOne` ou `HasMany` identifie la propriété de navigation sur le type d’entité à partir de la configuration sur. Vous chaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier le volet de navigation inverse. `HasOne`/`WithOne` sont utilisés pour les propriétés de navigation de référence et `HasMany` / `WithMany` sont utilisés pour les propriétés de navigation de collection.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?name=Model&highlight=8,9,10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?highlight=14-16)]
 
 ### <a name="single-navigation-property"></a>Propriété de Navigation unique
 
 Si vous disposez uniquement d’une propriété de navigation, il existe des surcharges sans paramètre de `WithOne` et `WithMany`. Cela indique qu’il existe sur le plan conceptuel une référence ou une collection à l’autre extrémité de la relation, mais il n’existe aucune propriété de navigation incluse dans la classe d’entité.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?name=Model&highlight=10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?highlight=14-16)]
 
 ### <a name="foreign-key"></a>Clé étrangère
 
 Vous pouvez utiliser l’API Fluent pour configurer la propriété doit être utilisée comme propriété de clé étrangère d’une relation donnée.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?name=Model&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?highlight=17)]
 
 Le code suivant montre comment configurer une clé étrangère composite.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?name=Model&highlight=13)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?highlight=20)]
 
 Vous pouvez utiliser la surcharge de chaîne de `HasForeignKey(...)` pour configurer une propriété de clichés instantanés comme une clé étrangère (consultez [occulter les propriétés](shadow-properties.md) pour plus d’informations). Nous vous recommandons d’ajouter explicitement la propriété de clichés instantanés pour le modèle avant de l’utiliser comme une clé étrangère (comme indiqué ci-dessous).
 

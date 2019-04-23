@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 9ef87a737111053df0359f3b2d7a4f82d25c578a
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 61a58bd6119763d90731fac62343b983af510cb6
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867942"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929873"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -62,6 +62,7 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * Configurer les services de convention ont changé. Fournisseurs doivent désormais hériter de « ProviderConventionSet » ou « RelationalConventionSet ».
   * Personnalisations peuvent être ajoutées via `IConventionSetCustomizer` services, mais cela est destiné à être utilisé par d’autres extensions, pas les fournisseurs.
   * Conventions utilisées lors de l’exécution doivent être résolues à partir de `IConventionSetBuilder`.
+* https://github.com/aspnet/EntityFrameworkCore/pull/15288 -Données d’amorçage a été refactorisé dans une API publique afin d’éviter la nécessité d’utiliser des types internes. Cela doit uniquement avoir un impact sur les fournisseurs non relationnelles, étant donné que l’amorçage est géré par la classe de base relationnelle pour tous les fournisseurs relationnelles.
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
@@ -82,7 +83,6 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * Fournisseurs à l’aide de ces tests peuvent devoir réagir
 * [https://github.com/aspnet/EntityFrameworkCore/pull/12141](https://github.com/aspnet/EntityFrameworkCore/pull/12141) -Retourner le contexte pour le pool au lieu d’en cours de suppression dans les tests fonctionnels
   * Cette modification inclut une refactorisation de test qui peut nécessiter des fournisseurs de réagir
-
 
 ### <a name="test-and-product-code-changes"></a>Modifications de code de test et de produit
 
