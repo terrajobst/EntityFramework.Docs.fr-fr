@@ -3,14 +3,17 @@ title: 'Filtres de requête globale : EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 201292a440d37d240f31452eaebb23dcd4aee1a6
-ms.sourcegitcommit: 8dd71a57a01c439431164c163a0722877d0e5cd8
+ms.openlocfilehash: 4afc9fb0338d34845639d57013ac710445321940
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/07/2018
-ms.locfileid: "53028165"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562440"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
+
+> [!NOTE]
+> Cette fonctionnalité date de la publication d’EF Core 2.0.
 
 Les filtres de requête globale permet aux prédicats de requête LINQ (expression booléenne généralement passée à l’opérateur de requête LINQ *Where*) d’être appliqués sur des types d’entité dans le modèle de métadonnées (généralement dans *OnModelCreating*). Ces filtres sont automatiquement appliqués à toutes les requêtes LINQ impliquant ces types d’entités, y compris ceux référencés indirectement, par exemple à l’aide d’Include ou de références de propriété de navigation directe. Voici deux applications courantes de cette fonctionnalité :
 
