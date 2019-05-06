@@ -11,7 +11,7 @@ ms.lasthandoff: 09/13/2018
 ms.locfileid: "45490998"
 ---
 # <a name="code-first-conventions"></a>Conventions Code First
-Code First vous permet de décrire un modèle à l’aide de classes c# ou Visual Basic .NET. La forme de base du modèle est détectée à l’aide des conventions. Conventions des ensembles de règles qui sont utilisés pour configurer automatiquement un modèle conceptuel basé sur les définitions de classe lorsque vous travaillez avec Code First. Les conventions sont définies dans l’espace de noms System.Data.Entity.ModelConfiguration.Conventions.  
+Code First vous permet de décrire un modèle à l’aide de classes C# ou Visual Basic .NET. La forme de base du modèle est détectée à l’aide des conventions. Conventions des ensembles de règles qui sont utilisés pour configurer automatiquement un modèle conceptuel basé sur les définitions de classe lorsque vous travaillez avec Code First. Les conventions sont définies dans l’espace de noms System.Data.Entity.ModelConfiguration.Conventions.  
 
 Vous pouvez configurer davantage de votre modèle à l’aide des annotations de données ou l’API fluent. La priorité est donnée à la configuration via l’API fluent, suivi de conventions et des annotations de données. Pour plus d’informations, consultez [Annotations de données](~/ef6/modeling/code-first/data-annotations.md), [API Fluent - relations](~/ef6/modeling/code-first/fluent/relationships.md), [API Fluent - Types de & propriétés](~/ef6/modeling/code-first/fluent/types-and-properties.md) et [API Fluent avec VB.NET](~/ef6/modeling/code-first/fluent/vb.md).  
 
