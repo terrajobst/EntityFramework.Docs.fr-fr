@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 5bf49718f02c1860871b1f4c255ec4d98fce2fc7
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152463"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405243"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entités avec des constructeurs
 
@@ -90,7 +90,7 @@ Voici quelques éléments à noter :
 * Toutes les propriétés ne doivent avoir des paramètres du constructeur. Par exemple, la propriété de Post.Content n’est pas définie par n’importe quel paramètre de constructeur, donc EF Core est la valeur après l’appel du constructeur de façon normale.
 * Les noms et types de paramètres doivent correspondre à des types de propriété et les noms, à ceci près que les propriétés peuvent être casse Pascal tandis que les paramètres sont de casse mixte.
 * EF Core ne peut pas définir les propriétés de navigation (par exemple, Blog ou les billets ci-dessus) à l’aide d’un constructeur.
-* Le constructeur peut être public, privé, ou avoir n’importe quelle autre accessibilité.
+* Le constructeur peut être public, privé, ou avoir n’importe quelle autre accessibilité. Toutefois, les proxys de chargement différé requièrent que le constructeur est accessible à partir de la classe qui hérite de proxy. Cela signifie généralement rendant public ou protégé.
 
 ### <a name="read-only-properties"></a>Propriétés en lecture seule
 

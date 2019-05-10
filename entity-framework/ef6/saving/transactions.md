@@ -3,12 +3,12 @@ title: Utilisation de Transactions - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7197733ab25c8475746e7863963384730919e3ff
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 96cfff4cca59ab27dd68f50d0260e90902e33a92
+ms.sourcegitcommit: eefcab31142f61a7aaeac03ea90dcd39f158b8b8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489776"
+ms.lasthandoff: 04/29/2019
+ms.locfileid: "64873237"
 ---
 # <a name="working-with-transactions"></a>Utilisation des Transactions
 > [!NOTE]
@@ -39,7 +39,7 @@ Avant d’EF6 Entity Framework insisté sur l’ouverture de la connexion de bas
 
 À partir de EF6 le framework maintenant fournit :  
 
-1. **Database.BeginTransaction()** : une méthode plus facile pour un utilisateur effectuer les transactions proprement dites au sein d’un DbContext existant – autorisant plusieurs opérations à être combinés au sein de la même transaction et par conséquent, soit toutes validées, soit toutes les restaurée en tant qu’un. Il permet également de l’utilisateur de spécifier plus facilement le niveau d’isolation de la transaction.  
+1. **Database.BeginTransaction()** : Une méthode plus facile pour un utilisateur effectuer les transactions proprement dites au sein d’un DbContext existant – autorisant plusieurs opérations à être combinés au sein de la même transaction et par conséquent, tous situés validée ou restaurée en tant qu’un. Il permet également de l’utilisateur de spécifier plus facilement le niveau d’isolation de la transaction.  
 2. **Database.UseTransaction()** : ce qui permet d’utiliser une transaction qui a été démarrée en dehors d’Entity Framework DbContext.  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>Combinaison de plusieurs opérations en une seule transaction dans le même contexte  
@@ -126,7 +126,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-sing System.Transactions;
+using System.Transactions;
 
 namespace TransactionsExamples
 {
