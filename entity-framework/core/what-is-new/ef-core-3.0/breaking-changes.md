@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 4b251638de43af6525f3e6faa0bd4113ab1714b9
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: b1b5e286e08a8b6b4efe225a176e76023f9fdd20
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59619257"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405239"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Changements cassants inclus dans EF Core 3.0 (actuellement en préversion)
 
@@ -76,6 +76,35 @@ Les développeurs peuvent désormais contrôler exactement quand EF Core et les 
 
 Pour utiliser EF Core dans une application ASP.NET Core 3.0 ou toute autre application prise en charge, ajoutez explicitement une référence de package au fournisseur de base de données EF Core que votre application utilisera.
 
+## <a name="the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk"></a>L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core
+
+[Suivi du problème n° 14016](https://github.com/aspnet/EntityFrameworkCore/issues/14016)
+
+Ce changement a été introduit dans EF Core 3.0-preview 4 et la version correspondante du SDK .NET Core.
+
+**Ancien comportement**
+
+Avant la version 3.0, l’outil `dotnet ef` était inclus dans le SDK .NET Core et prêt à l’emploi depuis la ligne de commande d’un projet sans nécessiter d’étapes supplémentaires. 
+
+**Nouveau comportement**
+
+À compter de la version 3.0, le SDK .NET n’inclut pas l’outil `dotnet ef`, donc vous pouvez explicitement l’installer pour pouvoir l’utiliser comme outil local ou global. 
+
+**Pourquoi ?**
+
+Ce changement nous permet de distribuer et mettre à jour `dotnet ef` sous forme d’outil CLI .NET normal sur NuGet, ce qui est cohérent avec le fait qu’EF Core 3.0 est également toujours distribué sous forme de package NuGet.
+
+**Atténuations**
+
+Pour pouvoir gérer des migrations ou générer un `DbContext`, installez `dotnet-ef` à l’aide de la commande `dotnet tool install`.
+Par exemple, pour l’installer en tant qu’outil global, vous pouvez taper cette commande :
+
+  ``` console
+  $ dotnet tool install --global dotnet-ef --version <exact-version>
+  ```
+
+Vous pouvez également obtenir un outil local quand vous restaurez les dépendances d’un projet qui le déclare en tant que dépendance d’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
+
 ## <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés
 
 [Suivi du problème no 10996](https://github.com/aspnet/EntityFrameworkCore/issues/10996)
@@ -109,7 +138,7 @@ Notez que les deux requêtes ci-dessus produisent le même SQL paramétrable ave
 
 **Pourquoi ?**
 
-Les surcharges de méthode comme celle-ci favorisent grandement l’appel accidentel de la méthode de chaîne brute au lieu de la méthode de chaîne interpolée, et inversement.
+Les surcharges de méthode comme celle-ci rendent très facile un appel accidentel à la méthode de chaîne brute quand l’intention est d’appeler la méthode de chaîne interpolée, et inversement.
 De ce fait, les requêtes ne sont plus paramétrables alors qu’elles devraient l’être.
 
 **Atténuations**
@@ -602,7 +631,7 @@ using (new TransactionScope())
 
 **Pourquoi ?**
 
-Ce changement permet d’utiliser plusieurs contextes dans le même `TransactionScope`. Le nouveau comportement correspond aussi à EF6.
+Ce changement permet d’utiliser plusieurs contextes dans le même `TransactionScope`. Le nouveau comportement correspond également à EF6.
 
 **Atténuations**
 
@@ -660,7 +689,7 @@ L’exception à cette règle concernait l’exécution des requêtes, où le ch
 
 **Nouveau comportement**
 
-À compter d’EF Core 3.0, si le champ de stockage d’une propriété est connu, cette propriété sera toujours lu et écrite à l’aide du champ de stockage.
+Depuis EF Core 3.0, si le champ de stockage d’une propriété est connu, alors EF Core lit et écrit toujours cette propriété à l’aide du champ de stockage.
 Cela peut casser une application si celle-ci repose sur un comportement supplémentaire codé dans les méthodes get ou set.
 
 **Pourquoi ?**
