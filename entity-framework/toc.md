@@ -30,6 +30,7 @@
 #### [.NET Core](core/get-started/netcore/index.md)
 ##### [Nouvelle base de données](core/get-started/netcore/new-db-sqlite.md)
 #### [ASP.NET Core](core/get-started/aspnetcore/index.md)
+##### [⤤ Tutoriel interactif](/learn/modules/persist-data-ef-core/)
 ##### [Nouvelle base de données](core/get-started/aspnetcore/new-db.md)
 ##### [Base de données existante](core/get-started/aspnetcore/existing-db.md)
 ##### [⤤ EF Core et Razor Pages](/aspnet/core/data/ef-rp/intro)
