@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 25e5a683acf4bbed0b978cc6a80f1b50a0b64ca1
-ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
+ms.openlocfilehash: fbc1a00d6d6d0624bcbbfa1e51f4e21a915baaaa
+ms.sourcegitcommit: f277883a5ed28eba57d14aaaf17405bc1ae9cf94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58319177"
+ms.lasthandoff: 05/18/2019
+ms.locfileid: "65874577"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>Bien démarrer avec EF Core sur ASP.NET Core avec une nouvelle base de données
 
@@ -50,7 +50,7 @@ Installez les logiciels suivants :
 * Entrez le nom **EFGetStarted.AspNetCore.NewDb** et cliquez sur **OK**.
 * Dans la boîte de dialogue **Nouvelle application web ASP.NET Core** :
   * Vérifiez que les options **.NET Core** et **ASP.NET Core 2.1** sont sélectionnées dans les listes déroulantes.
-  * Sélectionnez le modèle de projet **Application web (Model-View-Controller)**.
+  * Sélectionnez le modèle de projet **Application web (Model-View-Controller)** .
   * Vérifiez que le paramètre **Authentification** est défini sur **Aucune authentification**.
   * Cliquez sur **OK**.
 
@@ -229,5 +229,5 @@ dotnet run
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Tutoriel : Bien démarrer avec EF Core sur .NET Core avec une nouvelle base de données à l’aide de SQLite](xref:core/get-started/netcore/new-db-sqlite)
-* [Tutoriel : Bien démarrer avec des pages Razor dans ASP.NET Core](https://docs.microsoft.com/aspnet/core/tutorials/razor-pages/razor-pages-start)
-* [Tutoriel : Pages Razor avec Entity Framework Core dans ASP.NET Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)
+* [Bien démarrer avec Razor Pages dans ASP.NET Core](/aspnet/core/tutorials/razor-pages/razor-pages-start) ou [Bien démarrer avec ASP.NET Core MVC](/aspnet/core/tutorials/first-mvc-app/start-mvc)
+* [Tutoriel : Razor Pages avec Entity Framework Core dans ASP.NET Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro) ou [Bien démarrer avec EF Core dans une application web ASP.NET MVC](/aspnet/core/data/ef-mvc/intro)
