@@ -62,7 +62,7 @@ Notez que de nombreux de la [modifications avec rupture au niveau application](.
   * Configurer les services de convention ont changé. Fournisseurs doivent désormais hériter de « ProviderConventionSet » ou « RelationalConventionSet ».
   * Personnalisations peuvent être ajoutées via `IConventionSetCustomizer` services, mais cela est destiné à être utilisé par d’autres extensions, pas les fournisseurs.
   * Conventions utilisées lors de l’exécution doivent être résolues à partir de `IConventionSetBuilder`.
-* https://github.com/aspnet/EntityFrameworkCore/pull/15288 -Données d’amorçage a été refactorisé dans une API publique afin d’éviter la nécessité d’utiliser des types internes. Cela doit uniquement avoir un impact sur les fournisseurs non relationnelles, étant donné que l’amorçage est géré par la classe de base relationnelle pour tous les fournisseurs relationnelles.
+* [https://github.com/aspnet/EntityFrameworkCore/pull/15288](https://github.com/aspnet/EntityFrameworkCore/pull/15288) -Données d’amorçage a été refactorisé dans une API publique afin d’éviter la nécessité d’utiliser des types internes. Cela doit uniquement avoir un impact sur les fournisseurs non relationnelles, étant donné que l’amorçage est géré par la classe de base relationnelle pour tous les fournisseurs relationnelles.
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
