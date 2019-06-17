@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: faae0153e0f2bdd42d3b316582dfcab88d9ceb5b
-ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
+ms.openlocfilehash: 9112d8d235237e68232aac54453d584af0edb524
+ms.sourcegitcommit: b188194a1901f4d086d05765cbc5c9b8c9dc5eed
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/31/2019
-ms.locfileid: "66452302"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66829485"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Changements cassants inclus dans EF Core 3.0 (actuellement en préversion)
 
@@ -25,7 +25,7 @@ Les cassures dues aux nouvelles fonctionnalités introduites d’une préversion
 [Suivi de problème no 14935](https://github.com/aspnet/EntityFrameworkCore/issues/14935)
 [Voir également problème no 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -55,7 +55,7 @@ Si une requête ne peut pas être entièrement traduite, réécrivez-la sous une
 
 [Annonces de suivi de problème n°325](https://github.com/aspnet/Announcements/issues/325)
 
-Ce changement a été introduit dans ASP.NET Core 3.0-preview 1. 
+Ce changement a été introduit dans ASP.NET Core 3.0-preview 1. 
 
 **Ancien comportement**
 
@@ -145,6 +145,28 @@ De ce fait, les requêtes ne sont plus paramétrables alors qu’elles devraient
 
 Utilisez plutôt les nouveaux noms de méthode.
 
+## <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>Les méthodes FromSql peuvent uniquement être spécifiées sur les racines de requête
+
+[Suivi de problème no 15704](https://github.com/aspnet/EntityFrameworkCore/issues/15704)
+
+Ce changement a été introduit dans EF Core 3.0-preview 6.
+
+**Ancien comportement**
+
+Avant EF Core 3.0, la méthode `FromSql` pouvant être spécifiée n’importe où dans la requête.
+
+**Nouveau comportement**
+
+À partir d’EF Core 3.0, les nouvelles méthodes `FromSqlRaw` et `FromSqlInterpolated` (qui remplacent `FromSql`) peuvent être spécifiées uniquement sur les racines de requête, par exemple, directement sur le `DbSet<>`. Une erreur de compilation survient si vous tentez de les spécifier à un autre emplacement.
+
+**Pourquoi ?**
+
+La spécification de `FromSql` n’importe où autre que sur un `DbSet` n’avait aucune signification ni valeur ajoutée et pouvait entraîner une ambiguïté dans certains scénarios.
+
+**Atténuations**
+
+Les appels `FromSql` doivent être déplacés pour être directement sur le `DbSet` auquel ils s’appliquent.
+
 ## <a name="query-execution-is-logged-at-debug-level"></a>L’exécution de requête est enregistrée dans le journal au niveau du débogage
 
 [Suivi de problème n°14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
@@ -179,7 +201,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [Suivi de problème n°12378](https://github.com/aspnet/EntityFrameworkCore/issues/12378)
 
-Ce changement a été introduit dans EF Core 3.0-preview 2.
+Ce changement a été introduit dans EF Core 3.0-preview 2.
 
 **Ancien comportement**
 
@@ -276,7 +298,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 [Suivi de problème no 12661](https://github.com/aspnet/EntityFrameworkCore/issues/12661)
 
-Ce changement sera introduit dans EF Core 3.0-preview 5.
+Ce changement a été introduit dans EF Core 3.0-preview 5.
 
 **Ancien comportement**
 
@@ -386,7 +408,7 @@ Changez la configuration des relations de type détenu de façon à utiliser la 
 
 [Suivi du problème no 9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -421,7 +443,7 @@ Si votre modèle a une table qui partage des dépendances avec toutes les colonn
 
 [Suivi du problème no 14154](https://github.com/aspnet/EntityFrameworkCore/issues/14154)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -473,7 +495,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 [Suivi du problème no 13998](https://github.com/aspnet/EntityFrameworkCore/issues/13998)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -604,7 +626,7 @@ Si la propriété était censée être la clé étrangère, et par conséquent u
 
 [Suivi du problème no 14218](https://github.com/aspnet/EntityFrameworkCore/issues/14218)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -656,7 +678,7 @@ using (new TransactionScope())
 
 [Suivi de problème n°6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -680,7 +702,7 @@ Au lieu de cela, ne vous appuyez pas sur des valeurs de clés spécifiques, ou p
 
 [Suivi de problème n°12430](https://github.com/aspnet/EntityFrameworkCore/issues/12430)
 
-Ce changement a été introduit dans EF Core 3.0-preview 2.
+Ce changement a été introduit dans EF Core 3.0-preview 2.
 
 **Ancien comportement**
 
@@ -698,7 +720,7 @@ Ce changement a été apporté afin d’empêcher EF Core de déclencher par err
 
 **Atténuations**
 
-Vous pouvez restaurer le comportement antérieur à la version 3.0 en configurant le mode d’accès à la propriété dans l’API Fluent modelBuilder.
+Vous pouvez restaurer le comportement antérieur à la version 3.0 en configurant le mode d’accès à la propriété sur `ModelBuilder`.
 Par exemple :
 
 ```C#
@@ -709,7 +731,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 [Suivi de problème n°12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -738,7 +760,7 @@ modelBuilder
 
 ## <a name="field-only-property-names-should-match-the-field-name"></a>Les noms de propriété de type « champ uniquement » doivent correspondre au nom du champ
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -786,7 +808,7 @@ modelBuilder
 
 [Suivi de problème no 14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -836,7 +858,7 @@ Appelez `ChgangeTracker.DetectChanges()` explicitement avant d’appeler `Entry`
 
 [Suivi de problème n°14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -922,7 +944,7 @@ Toute implémentation de `IDbContextOptionsExtension` devra être mise à jour p
 
 [Suivi de problème n°12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -981,7 +1003,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [Suivi de problème no 9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -1018,7 +1040,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [Suivi du problème no 15184](https://github.com/aspnet/EntityFrameworkCore/issues/15184)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Ancien comportement**
 
@@ -1048,7 +1070,7 @@ Notez que cette opération annule la réduction d’allocation apportée par ce 
 
 [Suivi de problème n°9913](https://github.com/aspnet/EntityFrameworkCore/issues/9913)
 
-Ce changement a été introduit dans EF Core 3.0-preview 2.
+Ce changement a été introduit dans EF Core 3.0-preview 2.
 
 **Ancien comportement**
 
@@ -1117,7 +1139,7 @@ Utilisez la nouvelle API, comme indiqué ci-dessus.
 
 [Suivi du problème no 214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
 
-Ce changement sera introduit dans EF Core 3.0-preview 4.
+Ce changement a été introduit dans EF Core 3.0-preview 4.
 
 **Nouveau comportement**
 
@@ -1132,6 +1154,28 @@ Les propriétés suivantes ont été converties en méthodes d’extension :
 **Pourquoi ?**
 
 Ce changement simplifie l’implémentation des interfaces mentionnées précédemment.
+
+**Atténuations**
+
+Utilisez les nouvelles méthodes d’extension.
+
+## <a name="provider-specific-metadata-api-changes"></a>Modifications de l’API de métadonnées spécifiques au fournisseur
+
+[Suivi du problème no 214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
+
+Ce changement a été introduit dans EF Core 3.0-preview 6.
+
+**Nouveau comportement**
+
+Les méthodes d’extension spécifiques au fournisseur seront aplaties :
+
+* `IProperty.Relational().ColumnName` -> `IProperty.GetColumnName()`
+* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.GetSqlServerIsMemoryOptimized()`
+* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.ForSqlServerUseIdentityColumn()`
+
+**Pourquoi ?**
+
+Ce changement simplifie l’implémentation des méthodes d’extension mentionnées précédemment.
 
 **Atténuations**
 
@@ -1190,7 +1234,7 @@ Avant, les valeurs GUID étaient stockées comme valeurs BLOB sur SQLite.
 
 **Nouveau comportement**
 
-Maintenant, les valeurs GUID sont stockées au format TEXT.
+Maintenant, les valeurs Guid sont stockées au format TEXT.
 
 **Pourquoi ?**
 
