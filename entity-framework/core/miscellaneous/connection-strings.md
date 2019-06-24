@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 7bb39d260f700e5087673e92a50377dc68151710
-ms.sourcegitcommit: 85ccc9ed42d4aaf7525c6312058c5c9ebdaed3ae
+ms.openlocfilehash: 52a8527170845d3e73ebcec518713ade3f3844f0
+ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/27/2018
-ms.locfileid: "50191340"
+ms.lasthandoff: 06/24/2019
+ms.locfileid: "67333841"
 ---
 # <a name="connection-strings"></a>Chaînes de connexion
 
@@ -77,7 +77,7 @@ Dans ASP.NET Core, le système de configuration est très souple, et la chaîne 
 }
 ```
 
-Le contexte est généralement configuré dans `Startup.cs` avec la chaîne de connexion en cours de lecture à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>`. Vous devez importer le [Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration) espace de noms pour utiliser cette méthode d’extension.
+Le contexte est généralement configuré dans `Startup.cs` avec la chaîne de connexion en cours de lecture à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>`. Vous devez importer le [Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration) espace de noms à utiliser cette méthode d’extension.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
