@@ -3,12 +3,12 @@ title: Utilisation de valeurs de propriété - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: 97902021a671dea9854a365dc2f10eaecb9e5ab8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
+ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488829"
+ms.lasthandoff: 06/27/2019
+ms.locfileid: "67416672"
 ---
 # <a name="working-with-property-values"></a>Utilisation de valeurs de propriété
 La plupart du temps Entity Framework se chargera de suivi de l’état, les valeurs d’origine et les valeurs actuelles des propriétés de vos instances d’entité. Toutefois, il peut être certains cas, par exemple les scénarios déconnectés - où vous souhaitez afficher ou manipuler les informations QU'EF a les propriétés. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -35,7 +35,7 @@ using (var context = new BloggingContext())
     string currentName1 = context.Entry(blog).Property(u => u.Name).CurrentValue;
 
     // Set the Name property to a new value
-    context.Entry(name).Property(u => u.Name).CurrentValue = "My Fancy Blog";
+    context.Entry(blog).Property(u => u.Name).CurrentValue = "My Fancy Blog";
 
     // Read the current value of the Name property using a string for the property name
     object currentName2 = context.Entry(blog).Property("Name").CurrentValue;
@@ -55,7 +55,7 @@ Lorsqu’une valeur de propriété est définie de cette façon la modification 
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Obtention et définition de la valeur actuelle d’une propriété non mappée  
 
-La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lu. Un exemple d’une propriété non mappée peut être une propriété RssLink sur le Blog. Cette valeur peut être calculée en fonction de la BlogId et par conséquent n’a pas besoin être stockées dans la base de données. Exemple :  
+La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lu. Un exemple d’une propriété non mappée peut être une propriété RssLink sur le Blog. Cette valeur peut être calculée en fonction de la BlogId et par conséquent n’a pas besoin être stockées dans la base de données. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -270,7 +270,7 @@ Dans l’exemple ci-dessus des propriétés complexes sont accessibles à l’ai
 
 ## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Création d’un objet cloné contenant actuel, d’origine ou les valeurs de base de données  
 
-L’objet DbPropertyValues retournée à partir de CurrentValues, OriginalValues, ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone doit contenir les valeurs de propriété à partir de l’objet DbPropertyValues utilisé pour le créer. Exemple :  
+L’objet DbPropertyValues retournée à partir de CurrentValues, OriginalValues, ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone doit contenir les valeurs de propriété à partir de l’objet DbPropertyValues utilisé pour le créer. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
