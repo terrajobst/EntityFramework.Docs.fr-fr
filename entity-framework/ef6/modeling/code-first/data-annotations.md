@@ -3,12 +3,12 @@ title: Annotations de données First - EF6 de code
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: fcd01aef7303573001460b352f8099b2cc6e224a
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463280"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286478"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -51,7 +51,7 @@ Lorsqu’ils sont, les classes de Blog et Post facilement suivent la convention 
 
  
 
-## <a name="key"></a>Touche
+## <a name="key"></a>Clé
 
 Entity Framework s’appuie sur chaque entité ayant une valeur de clé qui est utilisée pour l’entité de suivi. Une convention de Code First est les propriétés de clé implicites ; Code tout d’abord recherchera une propriété nommée « Id » ou une combinaison de nom de classe et « Id », tels que « BlogId ». Cette propriété doit être mappée à une colonne de clé primaire dans la base de données.
 
@@ -146,7 +146,7 @@ Ajout nécessaire pour la propriété Title forcera EF (et MVC) pour vous assure
     public string Title { get; set; }
 ```
 
-Sans aucun supplémentaire aucune modification de code ou de balisage dans l’application, une application MVC effectue la validation côté client, création même dynamique d’un message en utilisant les noms de propriété et d’annotation.
+Sans code supplémentaire ni modifications de balisage dans l’application, une application MVC effectue la validation côté client, création même dynamique d’un message en utilisant les noms de propriété et d’annotation.
 
 ![Créer page avec le titre est requis, erreur](~/ef6/media/jj591583-figure02.png)
 

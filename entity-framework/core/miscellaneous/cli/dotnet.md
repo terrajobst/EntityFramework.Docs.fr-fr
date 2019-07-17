@@ -2,14 +2,14 @@
 title: EF Core références relatives aux outils (CLI) .NET - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 09/20/2018
+ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 959785c7b10ca668f3691106f62076d538978c03
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: 05c5f89fc79556e72a7e629c147aa817fe7d1a6b
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688665"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286469"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Référence des outils Entity Framework Core - interface CLI .NET
 
@@ -23,9 +23,28 @@ Si vous utilisez Visual Studio, nous vous recommandons du [outils de la Console 
 
 La procédure d’installation dépend de la version et le type de projet :
 
+* EF Core 3.x
 * ASP.NET Core 2.1 et versions ultérieures
 * EF Core 2.x
 * EF Core 1.x
+
+### <a name="ef-core-3x"></a>EF Core 3.x
+
+* `dotnet ef` doit être installé comme un outil global ou local. La plupart des développeurs installera `dotnet ef` comme un outil global avec la commande suivante :
+
+  ``` console
+    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
+  ```
+
+  Vous pouvez également utiliser `dotnet ef` comme outil local. Pour l’utiliser comme un outil local, restaurer les dépendances d’un projet qui le déclare comme une dépendance d’outils à l’aide un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
+
+* Installer le [.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)). Le Kit de développement logiciel doit être installé même si vous disposez de la dernière version de Visual Studio.
+
+* Installez la dernière version `Microsoft.EntityFrameworkCore.Design` package.
+
+  ``` Console
+  dotnet add package Microsoft.EntityFrameworkCore.Design
+  ```
 
 ### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
 
@@ -37,7 +56,7 @@ La procédure d’installation dépend de la version et le type de projet :
 
 Le `dotnet ef` commandes sont inclus dans le SDK .NET Core, mais pour activer les commandes, vous devez installer le `Microsoft.EntityFrameworkCore.Design` package.
 
-* Installer actuel [du SDK .NET Core](https://www.microsoft.com/net/download/core). Le kit SDK doit être installé même si vous disposez de la dernière version de Visual Studio 2017.
+* Installer actuel [du SDK .NET Core](https://www.microsoft.com/net/download/core). Le Kit de développement logiciel doit être installé même si vous disposez de la dernière version de Visual Studio.
 
 * Installer la dernière stable `Microsoft.EntityFrameworkCore.Design` package.
 
@@ -140,7 +159,7 @@ Pour spécifier l’environnement pour les projets ASP.NET Core, définissez le 
 |                   | Option                            | Description                                                                                                                                                                                                                                                   |
 |:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |                   | `--json`                          | Afficher la sortie JSON.                                                                                                                                                                                                                                             |
-| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | Le `DbContext` classe à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si cette option est omise, EF Core trouve la classe de contexte. S’il existe plusieurs classes de contexte, cette option est requise.                                            |
+| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | Classe `DbContext` à utiliser. Nom de classe complet avec des espaces de noms ou uniquement.  Si cette option est omise, EF Core trouve la classe de contexte. S’il existe plusieurs classes de contexte, cette option est requise.                                            |
 | `-p`              | `--project <PROJECT>`             | Chemin d’accès relatif au dossier du projet du projet cible.  Valeur par défaut est le dossier actif.                                                                                                                                                              |
 | `-s`              | `--startup-project <PROJECT>`     | Chemin d’accès relatif au dossier du projet du projet de démarrage. Valeur par défaut est le dossier actif.                                                                                                                                                              |
 |                   | `--framework <FRAMEWORK>`         | Le [Moniker du Framework cible](/dotnet/standard/frameworks#supported-target-framework-versions) pour le [framework cible](/dotnet/standard/frameworks).  À utiliser lorsque le fichier projet spécifie plusieurs frameworks cibles, et que vous souhaitez sélectionner un d’eux. |
@@ -195,7 +214,7 @@ Arguments :
 
 | Argument       | Description                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | La chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2.x, la valeur peut être *nom =\<nom de chaîne de connexion >*. Dans ce cas, le nom est fourni à partir des sources de configuration qui sont configurées pour le projet. |
+| `<CONNECTION>` | La chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2.x, la valeur peut être *nom =\<nom de chaîne de connexion >* . Dans ce cas, le nom est fourni à partir des sources de configuration qui sont configurées pour le projet. |
 | `<PROVIDER>`   | Le fournisseur à utiliser. En général, c’est le nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`.                                                                                           |
 
 Options :
@@ -286,4 +305,4 @@ dotnet ef migrations script 20180904195021_InitialCreate
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Migrations](xref:core/managing-schemas/migrations/index)
-* [Ingénierie à rebours](xref:core/managing-schemas/scaffolding)
+* [Reconstitution de la logique des produits](xref:core/managing-schemas/scaffolding)

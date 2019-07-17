@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 52a8527170845d3e73ebcec518713ade3f3844f0
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: c306f9ca7a51fc9e3db18e883fd44f56dd1a3cb4
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333841"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286450"
 ---
 # <a name="connection-strings"></a>Chaînes de connexion
 
@@ -17,7 +17,7 @@ La plupart des fournisseurs de base de données requièrent une certaine forme d
 
 ## <a name="net-framework-applications"></a>Applications .NET framework
 
-Les applications .NET framework, tels que WinForms, WPF, Console et ASP.NET 4, ont un modèle de chaîne de connexion éprouvée. La chaîne de connexion doit être ajoutée à votre fichier App.config d’applications (Web.config si vous utilisez ASP.NET). Si votre chaîne de connexion contient des informations sensibles, telles que le nom d’utilisateur et mot de passe, vous pouvez protéger le contenu du fichier configuration en utilisant [de la Configuration protégée](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration).
+Les applications .NET framework, tels que WinForms, WPF, Console et ASP.NET 4, ont un modèle de chaîne de connexion éprouvée. La chaîne de connexion doit être ajoutée au fichier App.config de votre application (Web.config si vous utilisez ASP.NET). Si votre chaîne de connexion contient des informations sensibles, telles que le nom d’utilisateur et mot de passe, vous pouvez protéger le contenu du fichier configuration en utilisant [de la Configuration protégée](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration).
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
