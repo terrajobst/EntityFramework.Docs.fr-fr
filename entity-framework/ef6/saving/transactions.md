@@ -1,52 +1,52 @@
 ---
-title: Utilisation de Transactions - EF6
+title: Utilisation des transactions-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 96cfff4cca59ab27dd68f50d0260e90902e33a92
-ms.sourcegitcommit: eefcab31142f61a7aaeac03ea90dcd39f158b8b8
+ms.openlocfilehash: 7030dc675993339f72c935f6b430cead85fecb7f
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2019
-ms.locfileid: "64873237"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306528"
 ---
-# <a name="working-with-transactions"></a>Utilisation des Transactions
+# <a name="working-with-transactions"></a>Utilisation des transactions
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Ce document décrit l’utilisation de transactions dans EF6, y compris les améliorations que nous avons ajouté depuis EF5 afin de faciliter l’utilisation de transactions.  
+Ce document décrit l’utilisation des transactions dans EF6, y compris les améliorations que nous avons ajoutées depuis EF5 pour faciliter l’utilisation des transactions.  
 
-## <a name="what-ef-does-by-default"></a>Ce que fait EF par défaut  
+## <a name="what-ef-does-by-default"></a>Par défaut, EF  
 
-Dans toutes les versions d’Entity Framework, chaque fois que vous exécutez **SaveChanges()** à insérer, mettre à jour ou supprimer la base de données, le framework encapsule cette opération dans une transaction. Cette opération dure uniquement suffisamment longtemps pour exécuter l’opération, puis termine. Lorsque vous exécutez une autre opération de ce type, une nouvelle transaction est démarrée.  
+Dans toutes les versions de Entity Framework, chaque fois que vous exécutez **SaveChanges ()** pour insérer, mettre à jour ou supprimer sur la base de données, l’infrastructure encapsule cette opération dans une transaction. Cette transaction ne dure que suffisamment longtemps pour exécuter l’opération, puis se termine. Lorsque vous exécutez une autre opération, une nouvelle transaction est démarrée.  
 
-En commençant par EF6 **Database.ExecuteSqlCommand()** par défaut encapsule la commande dans une transaction si une n’était pas présente. Il existe des surcharges de cette méthode qui vous permettent de remplacer ce comportement si vous le souhaitez. Également dans l’exécution d’EF6 de procédures stockées incluses dans le modèle via des API telles que **ObjectContext.ExecuteFunction()** fait de même (sauf le comportement par défaut ne peut pas actuellement être substitué).  
+À compter **de EF6 Database. ExecuteSqlCommand ()** par défaut, la commande est encapsulée dans une transaction, si celle-ci n’est pas déjà présente. Il existe des surcharges de cette méthode qui vous permettent de substituer ce comportement si vous le souhaitez. En outre, dans EF6, l’exécution de procédures stockées incluses dans le modèle via des API telles que **ObjectContext. ExecuteFunction ()** fait de même (sauf que le comportement par défaut ne peut pas être remplacé).  
 
-Dans les deux cas, le niveau d’isolation de la transaction est le niveau d’isolation le fournisseur de base de données considère que sa valeur par défaut. Par défaut, par exemple, sur SQL Server CE est READ COMMITTED.  
+Dans les deux cas, le niveau d’isolation de la transaction est le niveau d’isolation que le fournisseur de base de données considère comme son paramètre par défaut. Par défaut, par exemple, sur SQL Server il s’agit de READ COMMITTED.  
 
 Entity Framework n’encapsule pas les requêtes dans une transaction.  
 
-Cette fonctionnalité par défaut convient pour un grand nombre d’utilisateurs et s’il est donc pas nécessaire d’agir différemment dans EF6 ; écrivez simplement le code comme vous l’avez toujours fait.  
+Cette fonctionnalité par défaut convient à un grand nombre d’utilisateurs et, si tel est le cas, il n’est pas nécessaire de faire quelque chose de différent dans EF6. il vous suffit d’écrire le code comme vous l’avez toujours fait.  
 
-Toutefois, certains utilisateurs ont besoin de mieux contrôler leurs transactions – ce sujet est traité dans les sections suivantes.  
+Toutefois, certains utilisateurs ont besoin d’un meilleur contrôle sur leurs transactions. cela est abordé dans les sections suivantes.  
 
-## <a name="how-the-apis-work"></a>Fonctionnement de l’API  
+## <a name="how-the-apis-work"></a>Fonctionnement des API  
 
-Avant d’EF6 Entity Framework insisté sur l’ouverture de la connexion de base de données elle-même (il a levé une exception si elle a été passée à une connexion qui est déjà ouverte). Dans la mesure où une transaction peut être démarrée uniquement sur une connexion ouverte, cela signifiait que la seule façon d’un utilisateur peut encapsuler plusieurs opérations en une seule transaction était d’utiliser un [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) ou utiliser le  **ObjectContext.Connection** propriété et l’appel de start **Open()** et **BeginTransaction()** directement sur retourné **EntityConnection** objet. En outre, les appels d’API qui contacter la base de données échoue si vous aviez commencé une transaction sur la connexion de base de données sous-jacente à votre rythme.  
+Avant EF6 Entity Framework insistait sur l’ouverture de la connexion de base de données elle-même (une exception a été levée si une connexion déjà ouverte était passée). Étant donné qu’une transaction ne peut être démarrée que sur une connexion ouverte, cela signifiait que le seul moyen pour un utilisateur d’encapsuler plusieurs opérations dans une seule transaction consistait à utiliser une [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) ou à utiliser la propriété **ObjectContext. Connection** et à démarrer appel de **Open ()** et **BeginTransaction ()** directement sur l’objet **EntityConnection** retourné. En outre, les appels d’API qui ont contacté la base de données échouent si vous avez démarré une transaction sur la connexion de base de données sous-jacente.  
 
 > [!NOTE]
-> La limitation d’accepter uniquement les connexions fermées a été supprimée dans Entity Framework 6. Pour plus d’informations, consultez [gestion des connexions](~/ef6/fundamentals/connection-management.md).  
+> La limitation de l’acceptation des connexions fermées a été supprimée dans Entity Framework 6. Pour plus d’informations, consultez [gestion des connexions](~/ef6/fundamentals/connection-management.md).  
 
-À partir de EF6 le framework maintenant fournit :  
+À compter de EF6, le Framework fournit désormais:  
 
-1. **Database.BeginTransaction()** : Une méthode plus facile pour un utilisateur effectuer les transactions proprement dites au sein d’un DbContext existant – autorisant plusieurs opérations à être combinés au sein de la même transaction et par conséquent, tous situés validée ou restaurée en tant qu’un. Il permet également de l’utilisateur de spécifier plus facilement le niveau d’isolation de la transaction.  
-2. **Database.UseTransaction()** : ce qui permet d’utiliser une transaction qui a été démarrée en dehors d’Entity Framework DbContext.  
+1. **Database. BeginTransaction ()** : Méthode plus simple pour un utilisateur de démarrer et de terminer des transactions dans un DbContext existant, ce qui permet de combiner plusieurs opérations au sein de la même transaction et, par conséquent, toutes validées ou toutes restaurées comme une seule. Il permet également à l’utilisateur de spécifier plus facilement le niveau d’isolation de la transaction.  
+2. **Database. UseTransaction ()** : qui permet à DbContext d’utiliser une transaction qui a été démarrée en dehors de la Entity Framework.  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>Combinaison de plusieurs opérations en une seule transaction dans le même contexte  
 
-**Database.BeginTransaction()** a deux remplacements : une qui prend une explicite [IsolationLevel](https://msdn.microsoft.com/library/system.data.isolationlevel.aspx) et l’autre qui n’accepte aucun argument et utilise la valeur par défaut IsolationLevel à partir du fournisseur de base de données sous-jacente. Les deux remplacements retournent un **DbContextTransaction** objet qui fournit des **Commit()** et **Rollback()** méthodes qui effectuent la validation et restauration sur le magasin sous-jacent transaction.  
+**Database. BeginTransaction ()** a deux remplacements: un qui accepte un [IsolationLevel](https://msdn.microsoft.com/library/system.data.isolationlevel.aspx) explicite et un qui n’accepte aucun argument et utilise la valeur IsolationLevel par défaut du fournisseur de base de données sous-jacent. Les deux substitutions retournent un objet **DbContextTransaction** qui fournit des méthodes **Commit ()** et **Rollback ()** qui effectuent des validations et des restaurations sur la transaction de magasin sous-jacente.  
 
-Le **DbContextTransaction** est destiné à être supprimé une fois qu’il a été validée ou restaurée. Un moyen facile de parvenir est la **using(...) {...}** syntaxe qui appelle automatiquement **Dispose()** lorsque du bloc est terminée :  
+Le **DbContextTransaction** est destiné à être supprimé une fois qu’il a été validé ou restauré. Un moyen simple d’y parvenir consiste **à utiliser (...) {...}** syntaxe qui appellera automatiquement **dispose ()** lorsque le bloc using se termine:  
 
 ``` csharp
 using System;
@@ -66,27 +66,20 @@ namespace TransactionsExamples
             {
                 using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
-                    try
+                    context.Database.ExecuteSqlCommand(
+                        @"UPDATE Blogs SET Rating = 5" +
+                            " WHERE Name LIKE '%Entity Framework%'"
+                        );
+
+                    var query = context.Posts.Where(p => p.Blog.Rating >= 5);
+                    foreach (var post in query)
                     {
-                        context.Database.ExecuteSqlCommand(
-                            @"UPDATE Blogs SET Rating = 5" +
-                                " WHERE Name LIKE '%Entity Framework%'"
-                            );
-
-                        var query = context.Posts.Where(p => p.Blog.Rating >= 5);
-                        foreach (var post in query)
-                        {
-                            post.Title += "[Cool Blog]";
-                        }
-
-                        context.SaveChanges();
-
-                        dbContextTransaction.Commit();
+                        post.Title += "[Cool Blog]";
                     }
-                    catch (Exception)
-                    {
-                        dbContextTransaction.Rollback();
-                    }
+
+                    context.SaveChanges();
+
+                    dbContextTransaction.Commit();
                 }
             }
         }
@@ -95,16 +88,16 @@ namespace TransactionsExamples
 ```  
 
 > [!NOTE]
-> Commencer une transaction requiert que la connexion à la banque sous-jacente soit ouverte. Ainsi, l’appel Database.BeginTransaction() ouvrira la connexion si elle n’est pas déjà ouvert. Si DbContextTransaction ouvert la connexion puis il fermera il lorsque Dispose() est appelée.  
+> Le démarrage d’une transaction nécessite que la connexion à la banque sous-jacente soit ouverte. L’appel de Database. BeginTransaction () entraîne l’ouverture de la connexion si elle n’est pas déjà ouverte. Si DbContextTransaction a ouvert la connexion, il la ferme quand la méthode Dispose () est appelée.  
 
-### <a name="passing-an-existing-transaction-to-the-context"></a>En passant d’une transaction existante au contexte  
+### <a name="passing-an-existing-transaction-to-the-context"></a>Passage d’une transaction existante au contexte  
 
-Vous avez parfois besoin une transaction qui est encore plus large dans la portée et qui inclut des opérations sur la même base de données, mais en dehors d’Entity Framework complètement. Pour ce faire, vous devez ouvrir la connexion et démarrer la transaction vous-même et puis demander à EF a) pour utiliser la connexion de base de données déjà ouvert et (b) utiliser la transaction existante sur cette connexion.  
+Parfois, vous souhaitez une transaction qui est encore plus large dans l’étendue et qui comprend des opérations sur la même base de données mais en dehors d’EF. Pour ce faire, vous devez ouvrir la connexion et démarrer la transaction vous-même, puis indiquer à EF a) d’utiliser la connexion de base de données déjà ouverte et b) pour utiliser la transaction existante sur cette connexion.  
 
-Pour ce faire, vous devez définir et utiliser un constructeur sur votre classe de contexte qui hérite d’un des constructeurs DbContext qui prennent i) d’un paramètre de connexion existant et ii) la contextOwnsConnection booléenne.  
+Pour ce faire, vous devez définir et utiliser un constructeur sur votre classe de contexte qui hérite de l’un des constructeurs DbContext qui prend i) un paramètre de connexion existant et II) la valeur booléenne contextOwnsConnection.  
 
 > [!NOTE]
-> L’indicateur contextOwnsConnection doit être définie sur false lorsqu’elle est appelée dans ce scénario. Ceci est important car il informe Entity Framework qu’il ne doit pas fermer la connexion lorsqu’il n’est plus (par exemple, voir la ligne 4 ci-dessous) :  
+> L’indicateur contextOwnsConnection doit avoir la valeur false lorsqu’il est appelé dans ce scénario. Cela est important car il informe Entity Framework qu’il ne doit pas fermer la connexion quand elle l’a fait (par exemple, consultez la ligne 4 ci-dessous):  
 
 ``` csharp
 using (var conn = new SqlConnection("..."))
@@ -116,9 +109,9 @@ using (var conn = new SqlConnection("..."))
 }
 ```  
 
-En outre, vous devez démarrer la transaction vous-même (y compris la propriété IsolationLevel si vous souhaitez éviter le paramètre par défaut) et indiquer à Entity Framework qu’il existe une transaction existante déjà démarrée sur la connexion (voir la ligne 33 ci-dessous).  
+En outre, vous devez démarrer la transaction vous-même (y compris la fonction IsolationLevel si vous souhaitez éviter le paramètre par défaut) et laisser Entity Framework savoir qu’une transaction existante a déjà démarré sur la connexion (voir la ligne 33 ci-dessous).  
 
-Ensuite, vous êtes libre exécuter des opérations de base de données directement sur l’objet SqlConnection lui-même, soit sur le DbContext. Toutes ces opérations sont exécutées au sein d’une seule transaction. Vous prenez la responsabilité pour valider ou restaurer la transaction et pour appeler Dispose() sur celui-ci, ainsi que pour la fermeture et la suppression de la connexion de base de données. Exemple :  
+Vous êtes alors libre d’exécuter des opérations de base de données directement sur le SqlConnection lui-même ou sur DbContext. Toutes ces opérations sont exécutées dans une transaction. Vous êtes responsable de la validation ou de la restauration de la transaction et de l’appel de dispose () sur celle-ci, ainsi que pour la fermeture et la suppression de la connexion de base de données. Par exemple :  
 
 ``` csharp
 using System;
@@ -140,35 +133,28 @@ namespace TransactionsExamples
 
                using (var sqlTxn = conn.BeginTransaction(System.Data.IsolationLevel.Snapshot))
                {
-                   try
-                   {
-                       var sqlCommand = new SqlCommand();
-                       sqlCommand.Connection = conn;
-                       sqlCommand.Transaction = sqlTxn;
-                       sqlCommand.CommandText =
-                           @"UPDATE Blogs SET Rating = 5" +
-                            " WHERE Name LIKE '%Entity Framework%'";
-                       sqlCommand.ExecuteNonQuery();
+                   var sqlCommand = new SqlCommand();
+                   sqlCommand.Connection = conn;
+                   sqlCommand.Transaction = sqlTxn;
+                   sqlCommand.CommandText =
+                       @"UPDATE Blogs SET Rating = 5" +
+                        " WHERE Name LIKE '%Entity Framework%'";
+                   sqlCommand.ExecuteNonQuery();
 
-                       using (var context =  
-                         new BloggingContext(conn, contextOwnsConnection: false))
-                        {
-                            context.Database.UseTransaction(sqlTxn);
-
-                            var query =  context.Posts.Where(p => p.Blog.Rating >= 5);
-                            foreach (var post in query)
-                            {
-                                post.Title += "[Cool Blog]";
-                            }
-                           context.SaveChanges();
-                        }
-
-                        sqlTxn.Commit();
-                    }
-                    catch (Exception)
+                   using (var context =  
+                     new BloggingContext(conn, contextOwnsConnection: false))
                     {
-                        sqlTxn.Rollback();
+                        context.Database.UseTransaction(sqlTxn);
+
+                        var query =  context.Posts.Where(p => p.Blog.Rating >= 5);
+                        foreach (var post in query)
+                        {
+                            post.Title += "[Cool Blog]";
+                        }
+                       context.SaveChanges();
                     }
+
+                    sqlTxn.Commit();
                 }
             }
         }
@@ -178,36 +164,36 @@ namespace TransactionsExamples
 
 ### <a name="clearing-up-the-transaction"></a>Effacement de la transaction
 
-Vous pouvez passer null pour Database.UseTransaction() pour effacer les connaissances d’Entity Framework de la transaction actuelle. Entity Framework sera ni validation ni restaurer la transaction existante lorsque vous effectuez cette opération, par conséquent, vous utilisez avec précaution et uniquement si vous ne savez Voici ce que vous voulez faire.  
+Vous pouvez passer la valeur null à Database. UseTransaction () pour effacer Entity Framework connaissance de la transaction actuelle. Entity Framework ne valide pas ou ne restaure pas la transaction existante lorsque vous procédez ainsi, utilisez avec précaution et uniquement si vous êtes sûr que c’est ce que vous voulez faire.  
 
 ### <a name="errors-in-usetransaction"></a>Erreurs dans UseTransaction
 
-Vous verrez une exception à partir de Database.UseTransaction() si vous passez d’une transaction lorsque :  
+Vous verrez une exception de Database. UseTransaction () si vous transmettez une transaction lorsque:  
 - Entity Framework a déjà une transaction existante  
-- Entity Framework est déjà opérant dans un TransactionScope  
-- L’objet de connexion dans la transaction passée est null. Autrement dit, la transaction n’est pas associée à une connexion : c’est généralement le signe que cette transaction est déjà terminée.  
-- L’objet de connexion dans la transaction passée ne correspond pas à la connexion de d’Entity Framework.  
+- Entity Framework est déjà en cours d’utilisation dans un TransactionScope  
+- L’objet de connexion dans la transaction passée a la valeur null. Autrement dit, la transaction n’est pas associée à une connexion. il s’agit généralement d’un signe que la transaction est déjà terminée.  
+- L’objet de connexion dans la transaction passée ne correspond pas à la connexion de Entity Framework.  
 
-## <a name="using-transactions-with-other-features"></a>À l’aide de transactions avec d’autres fonctionnalités  
+## <a name="using-transactions-with-other-features"></a>Utilisation de transactions avec d’autres fonctionnalités  
 
-Cette section détaille la façon dont les transactions ci-dessus interagissent avec :  
+Cette section explique en détail comment les transactions ci-dessus interagissent avec:  
 
 - Résilience de la connexion  
 - Méthodes asynchrones  
-- Transactions de TransactionScope  
+- Transactions TransactionScope  
 
 ### <a name="connection-resiliency"></a>Résilience des connexions  
 
-La nouvelle fonctionnalité de résilience de connexion ne fonctionne pas avec les transactions lancées par l’utilisateur. Pour plus d’informations, consultez [stratégies une nouvelle tentative d’exécution](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
+La nouvelle fonctionnalité de résilience de connexion ne fonctionne pas avec les transactions initiées par l’utilisateur. Pour plus d’informations, consultez [nouvelle tentative de stratégies d’exécution](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
 
 ### <a name="asynchronous-programming"></a>Programmation asynchrone  
 
-L’approche décrite dans les sections précédentes a besoin d’aucune options ou des paramètres supplémentaires pour travailler avec le [asynchrone interroge et enregistre les méthodes](~/ef6/fundamentals/async.md
-). Sachez toutefois que, selon que vous fassiez dans les méthodes asynchrones, cela peut entraîner la dans des transactions à long terme, ce qui peuvent à son tour entraîner des interblocages ou bloque le c'est-à-dire dégrade les performances de l’application globale.  
+L’approche décrite dans les sections précédentes ne nécessite pas d’options ou de paramètres supplémentaires pour [fonctionner avec la requête asynchrone](~/ef6/fundamentals/async.md
+)et les méthodes d’enregistrement. Toutefois, sachez que, en fonction de ce que vous faites dans les méthodes asynchrones, cela peut entraîner des transactions de longue durée, qui peuvent à leur tour entraîner des blocages ou des blocages, ce qui est incorrect pour les performances de l’application globale.  
 
-### <a name="transactionscope-transactions"></a>Transactions de TransactionScope  
+### <a name="transactionscope-transactions"></a>Transactions TransactionScope  
 
-Avant EF6 la méthode recommandée consistant à fournir les transactions plus grande portée était d’utiliser un objet TransactionScope :  
+Avant EF6, la méthode recommandée pour fournir des transactions plus étendues consistait à utiliser un objet TransactionScope:  
 
 ``` csharp
 using System.Collections.Generic;
@@ -254,9 +240,9 @@ namespace TransactionsExamples
 }
 ```  
 
-Le SqlConnection Entity Framework voulez-vous utiliser la transaction ambiante de TransactionScope et par conséquent, être validées ensemble.  
+SqlConnection et Entity Framework utiliseraient tous deux la transaction TransactionScope ambiante et seront donc validés ensemble.  
 
-En commençant par .NET 4.5.1 TransactionScope a été mis à jour pour fonctionner avec des méthodes asynchrones via l’utilisation de la [TransactionScopeAsyncFlowOption](https://msdn.microsoft.com/library/system.transactions.transactionscopeasyncflowoption.aspx) énumération :  
+À compter de .NET 4.5.1, TransactionScope a été mis à jour pour utiliser également des méthodes asynchrones à l’aide de l’énumération [TransactionScopeAsyncFlowOption](https://msdn.microsoft.com/library/system.transactions.transactionscopeasyncflowoption.aspx) :  
 
 ``` csharp
 using System.Collections.Generic;
@@ -301,16 +287,16 @@ namespace TransactionsExamples
 }
 ```  
 
-Il existe encore quelques limitations à l’approche de TransactionScope :  
+Il existe toujours des limitations à l’approche TransactionScope:  
 
-- Requiert .NET 4.5.1 ou version ultérieure pour travailler avec les méthodes asynchrones.  
-- Il ne peut pas être utilisé dans les scénarios de cloud, sauf si vous êtes sûr que la connexion d’un seul et unique (scénarios de cloud ne prennent pas en charge les transactions distribuées).  
-- Il ne peut pas être combiné avec l’approche Database.UseTransaction() des sections précédentes.  
-- Elle lève des exceptions si vous émettez tout DDL et que vous n’avez pas activé les transactions distribuées via le Service MSDTC.  
+- Nécessite .NET 4.5.1 ou version ultérieure pour utiliser des méthodes asynchrones.  
+- Elle ne peut pas être utilisée dans les scénarios de Cloud, sauf si vous êtes sûr de disposer d’une seule connexion (les scénarios Cloud ne prennent pas en charge les transactions distribuées).  
+- Elle ne peut pas être associée à l’approche Database. UseTransaction () des sections précédentes.  
+- Elle lèvera des exceptions si vous émettez une DDL et que vous n’avez pas activé les transactions distribuées par le biais du service MSDTC.  
 
-Avantages de l’approche de TransactionScope :  
+Avantages de l’approche TransactionScope:  
 
-- Il sera automatiquement mise à niveau une transaction locale en une transaction distribuée si vous rendre plus d’une connexion à une base de données ou combinez une connexion à une base de données avec une connexion à une autre base de données dans la même transaction (Remarque : vous devez avoir le service MSDTC configuré pour autoriser les transactions distribuées pour que cela fonctionne).  
-- Facilité de codage. Si vous préférez la transaction ambiante et traitées implicitement en arrière-plan au lieu de vous contrôlez explicitement sous ensuite l’approche de TransactionScope peut vous conviennent mieux.  
+- Elle met automatiquement à niveau une transaction locale vers une transaction distribuée si vous créez plusieurs connexions à une base de données spécifique ou associez une connexion à une base de données avec une connexion à une base de données différente au sein de la même transaction (Remarque: vous devez avoir le service MSDTC configuré pour autoriser les transactions distribuées pour que cela fonctionne).  
+- Facilité de codage. Si vous préférez que la transaction soit ambiante et traitée implicitement en arrière-plan plutôt que explicitement sous contrôle, l’approche TransactionScope peut vous convenir mieux.  
 
-En résumé, avec le nouveau Database.BeginTransaction() Database.UseTransaction() API ci-dessus, l’approche de TransactionScope n’est plus nécessaire pour la plupart des utilisateurs. Si vous ne passez pas à utiliser TransactionScope être conscient des limitations ci-dessus. Nous vous recommandons d’utiliser l’approche décrite dans les sections précédentes, au lieu de cela lorsque cela est possible.  
+En résumé, avec les API New Database. BeginTransaction () et Database. UseTransaction () ci-dessus, l’approche TransactionScope n’est plus nécessaire pour la plupart des utilisateurs. Si vous continuez à utiliser TransactionScope, tenez compte des limitations ci-dessus. Nous vous recommandons d’utiliser à la place l’approche décrite dans les sections précédentes dans la mesure du possible.  
