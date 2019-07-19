@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: d432ca36c166f7baf71253709bf58b1f5428a11a
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 08231cd93002a6d1b3cebe20f4f7cf57ea085af2
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562505"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306403"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -155,3 +155,16 @@ Implémentation de la prise en charge temporelle pour EF Core.
 Cache des requêtes de second niveau hautes performances pour EF Core.
 
 [Dépôt GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
+
+### <a name="entity-framework-plus"></a>Entity Framework Plus
+
+Étend votre DbContext avec des fonctionnalités telles que : Include Filter (Inclure le filtre), Auditing (Audit), Caching (Mise en cache), Query Future (Requête ultérieure), Batch Delete (Suppression par lot), Batch Update (Mise à jour par lot), et bien plus encore.
+
+[Site web](https://entityframework-plus.net/)
+[Référentiel GitHub](https://github.com/zzzprojects/EntityFramework-Plus)
+
+### <a name="entity-framework-extensions"></a>Extensions d’Entity Framework
+
+Étend votre DbContext avec des opérations en bloc hautes performances : BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge, et bien plus encore.
+
+[Site web](https://entityframework-extensions.net/)

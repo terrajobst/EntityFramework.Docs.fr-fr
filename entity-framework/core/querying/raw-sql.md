@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 3024c0101c9d886ef844d1b7dc85aaf1be27e86b
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 91592ea9f7c73f10446993282c1874c852000871
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58914076"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306542"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -146,7 +146,7 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 * Les instructions `SELECT` passées à cette méthode doivent généralement être composables : si EF Core a besoin évaluer des opérateurs de requête supplémentaires sur le serveur (par exemple, pour traduire les opérateurs LINQ appliqués après `FromSql`), le SQL fourni sera considéré comme une sous-requête. Cela signifie que l’instruction SQL passée ne doit pas contenir de caractères ou d’options qui ne sont pas valides sur une sous-requête, comme :
   * un point-virgule de fin
   * Sur le serveur SQL Server, une indication de niveau de requête en fin (par exemple, `OPTION (HASH JOIN)`)
-  * Sur le serveur SQL Server, une clause `ORDER BY` n’est pas accompagnée de `TOP 100 PERCENT` dans la clause `SELECT`
+  * Sur le serveur SQL Server, une clause `ORDER BY` n’est pas accompagnée de `OFFSET 0` OU `TOP 100 PERCENT` dans la clause `SELECT`
 
 * Les instructions SQL autres que `SELECT` sont reconnues automatiquement en tant que non composables. Par conséquent, les résultats complets des procédures stockées sont toujours retournés au client et tous les opérateurs LINQ appliqués après `FromSql` sont évalués en mémoire.
 
