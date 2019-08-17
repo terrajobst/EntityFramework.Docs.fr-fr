@@ -1,21 +1,21 @@
 ---
-title: Le chargement d’entités - EF6 associées
+title: Chargement des entités associées-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
-ms.openlocfilehash: 2d33d9db8acc61f7d556e3eca46b1ea90198723e
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: f40034475ed6659b60ab4317605fd1d802218d69
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415755"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565320"
 ---
-# <a name="loading-related-entities"></a>Chargement des entités connexes
-Entity Framework prend en charge les trois façons de charger les données associées - chargement hâtif, le chargement différé et le chargement explicite. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
+# <a name="loading-related-entities"></a>Chargement des entités associées
+Entity Framework prend en charge trois méthodes de chargement des données associées: le chargement hâtif, le chargement différé et le chargement explicite. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
 
-## <a name="eagerly-loading"></a>Chargement de manière anticipée  
+## <a name="eagerly-loading"></a>Chargement hâtif  
 
-Le chargement hâtif est le processus par lequel une requête pour un type d’entité charge également les entités associées dans le cadre de la requête. Le chargement hâtif est obtenu à l’aide de la méthode Include. Par exemple, les requêtes ci-dessous chargera les blogs et toutes les publications relatives à chaque blog.  
+Le chargement hâtif est le processus par lequel une requête pour un type d’entité charge également des entités associées dans le cadre de la requête. Le chargement hâtif est obtenu à l’aide de la méthode Include. Par exemple, les requêtes ci-dessous chargent les blogs et toutes les publications associées à chaque blog.  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -25,7 +25,7 @@ using (var context = new BloggingContext())
                         .Include(b => b.Posts)
                         .ToList();
 
-    // Load one blogs and its related posts
+    // Load one blog and its related posts
     var blog1 = context.Blogs
                        .Where(b => b.Name == "ADO.NET Blog")
                        .Include(b => b.Posts)
@@ -46,11 +46,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que Include est une méthode d’extension dans l’espace de noms System.Data.Entity Veillez donc à l’aide de cet espace de noms.  
+Notez que include est une méthode d’extension dans l’espace de noms System. Data. Entity. Assurez-vous que vous utilisez cet espace de noms.  
 
-### <a name="eagerly-loading-multiple-levels"></a>Chargement de manière anticipée plusieurs niveaux  
+### <a name="eagerly-loading-multiple-levels"></a>Chargement à plusieurs niveaux  
 
-Il est également possible de charger plusieurs niveaux d’entités associées de manière anticipée. Les requêtes ci-dessous illustrent comment effectuer cette opération pour la collecte et de propriétés de navigation de référence.  
+Il est également possible de charger de façon dynamique plusieurs niveaux d’entités associées. Les requêtes ci-dessous montrent des exemples de la procédure à suivre pour les propriétés de navigation de collection et de référence.  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -79,11 +79,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez qu’il n’est pas encore possible de filtrer les entités associées sont chargées. Inclure sera toujours apporter dans toutes les entités.  
+Notez qu’il n’est pas possible actuellement de filtrer les entités associées qui sont chargées. Include affichera toujours toutes les entités associées.  
 
 ## <a name="lazy-loading"></a>Chargement différé  
 
-Le chargement différé est le processus par lequel une entité ou une collection d’entités est automatiquement chargée à partir de la base de données la première fois que l’accès à une propriété qui fait référence à l’entité/entités. Lorsque vous utilisez des types d’entités POCO, le chargement différé est obtenu en créant des instances de types de proxy dérivée et puis en substituant les propriétés virtuelles pour ajouter le raccordement de chargement. Par exemple, lorsque vous utilisez la classe d’entité Blog définie ci-dessous, les messages liés seront chargées la première fois que la propriété de navigation de billets est accessible :  
+Le chargement différé est le processus par lequel une entité ou une collection d’entités est chargée automatiquement à partir de la base de données la première fois qu’une propriété faisant référence à l’entité/aux entités est accédée. Lors de l’utilisation des types d’entités POCO, le chargement différé s’effectue en créant des instances de types de proxy dérivés, puis en substituant les propriétés virtuelles pour ajouter le raccordement de chargement. Par exemple, lors de l’utilisation de la classe d’entité blog définie ci-dessous, les publications associées sont chargées la première fois que la propriété de navigation publications est accédée:  
 
 ``` csharp
 public class Blog
@@ -97,13 +97,13 @@ public class Blog
 }
 ```  
 
-### <a name="turn-lazy-loading-off-for-serialization"></a>Activer le chargement différé désactivé pour sérialisation  
+### <a name="turn-lazy-loading-off-for-serialization"></a>Désactivation du chargement différé pour la sérialisation  
 
-Sérialisation et le chargement différé ne mélangez pas correctement, et si vous ne faites pas attention vous pouvez retrouver d’interrogation pour votre base de données entière juste, car le chargement différé est activé. La plupart des sérialiseurs fonctionnent en accédant à chaque propriété sur une instance d’un type. Accès à la propriété déclenche le chargement différé, donc plusieurs entités sont sérialisées. Sur ces entités les propriétés sont accessibles, et d’autres entités sont chargées. Il est conseillé d’activer le chargement désactivé avant de vous sérialisez une entité différé. Les sections suivantes montrent comment effectuer cette opération.  
+Le chargement différé et la sérialisation ne sont pas bien confondus. Si vous n’êtes pas prudent, vous pouvez terminer l’interrogation de votre base de données tout simplement parce que le chargement différé est activé. La plupart des sérialiseurs fonctionnent en accédant à chaque propriété sur une instance d’un type. L’accès aux propriétés déclenche un chargement différé, si bien que davantage d’entités sont sérialisées. Sur ces entités, les propriétés sont accessibles, et d’autres entités sont chargées. Il est recommandé de désactiver le chargement différé avant de sérialiser une entité. Les sections suivantes montrent comment procéder.  
 
-### <a name="turning-off-lazy-loading-for-specific-navigation-properties"></a>Désactivation de chargement différé pour les propriétés de navigation spécifique  
+### <a name="turning-off-lazy-loading-for-specific-navigation-properties"></a>Désactivation du chargement différé pour des propriétés de navigation spécifiques  
 
-Le chargement différé de la collection de billets peut être désactivé en rendant la propriété de billets non virtuelle :  
+Le chargement différé de la collection de publications peut être désactivé en rendant la propriété des publications non virtuelle:  
 
 ``` csharp
 public class Blog
@@ -117,11 +117,11 @@ public class Blog
 }
 ```  
 
-Le chargement des billets de collection encore possible à l’aide d’un chargement hâtif (consultez *chargement de manière anticipée* ci-dessus) ou la méthode Load (consultez *chargement explicite* ci-dessous).  
+Le chargement de la collection de publications peut toujours être effectué à l’aide du chargement hâtif (consultez *chargement hâtif* ci-dessus) ou de la méthode Load (voir *chargement explicite* ci-dessous).  
 
-### <a name="turn-off-lazy-loading-for-all-entities"></a>Désactivez chargement différé pour toutes les entités  
+### <a name="turn-off-lazy-loading-for-all-entities"></a>Désactiver le chargement différé pour toutes les entités  
 
-Le chargement différé peut être désactivé pour toutes les entités dans le contexte en définissant un indicateur sur la propriété de Configuration. Exemple :  
+Le chargement différé peut être désactivé pour toutes les entités du contexte en définissant un indicateur sur la propriété de configuration. Par exemple :  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -133,11 +133,11 @@ public class BloggingContext : DbContext
 }
 ```  
 
-Chargement des entités connexes encore possible à l’aide d’un chargement hâtif (consultez *chargement de manière anticipée* ci-dessus) ou la méthode Load (consultez *chargement explicite* ci-dessous).  
+Le chargement d’entités associées peut toujours être effectué à l’aide du chargement hâtif (consultez *chargement hâtif* ci-dessus) ou de la méthode Load (voir *chargement explicite* ci-dessous).  
 
 ## <a name="explicitly-loading"></a>Chargement explicite  
 
-Même lorsque le chargement différé désactivé, il est toujours possible de charger en différé des entités associées, mais elle doit être effectuée avec un appel explicite. Pour ce faire, vous utilisez la méthode de charge sur l’entrée de l’entité associée. Exemple :  
+Même si le chargement différé est désactivé, il est toujours possible de charger tardivement les entités associées, mais cela doit être effectué avec un appel explicite. Pour ce faire, vous utilisez la méthode Load sur l’entrée de l’entité associée. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -161,11 +161,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que la méthode de référence doit être utilisée lorsqu’une entité a une propriété de navigation à une autre entité unique. En revanche, la méthode de collecte doit être utilisée lorsqu’une entité a une propriété de navigation à une collection d’autres entités.  
+Notez que la méthode de référence doit être utilisée lorsqu’une entité a une propriété de navigation vers une autre entité unique. En revanche, la méthode de collection doit être utilisée lorsqu’une entité a une propriété de navigation vers une collection d’autres entités.  
 
-### <a name="applying-filters-when-explicitly-loading-related-entities"></a>Appliquer des filtres lors du chargement explicite d’entités associées  
+### <a name="applying-filters-when-explicitly-loading-related-entities"></a>Application de filtres lors du chargement explicite d’entités associées  
 
-La méthode de requête fournit l’accès à la requête sous-jacente qui utilise Entity Framework lors du chargement des entités associées. Vous pouvez ensuite utiliser LINQ pour appliquer des filtres à la requête avant de l’exécuter avec un appel à une méthode d’extension LINQ comme ToList, charge, etc. La méthode de requête peut être utilisée avec les propriétés de navigation de référence et de collection, mais est particulièrement utile pour les collections, où il peut être utilisé pour charger uniquement une partie de la collection. Exemple :  
+La méthode de requête fournit l’accès à la requête sous-jacente que Entity Framework utilisera lors du chargement des entités associées. Vous pouvez ensuite utiliser LINQ pour appliquer des filtres à la requête avant de l’exécuter avec un appel à une méthode d’extension LINQ comme ToList, Load, etc. La méthode de requête peut être utilisée avec les propriétés de navigation de référence et de collection, mais elle est particulièrement utile pour les collections où elle peut être utilisée pour charger uniquement une partie de la collection. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -189,13 +189,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Lorsque vous utilisez la méthode de requête, il est généralement préférable désactiver le chargement différé pour la propriété de navigation. Il s’agit, car sinon la collection entière peut sont chargée automatiquement par le mécanisme de chargement différé avant ou après l’exécution de la requête filtrée.  
+Lors de l’utilisation de la méthode de requête, il est généralement préférable de désactiver le chargement différé pour la propriété de navigation. En effet, dans le cas contraire, l’ensemble de la collection peut être chargé automatiquement par le mécanisme de chargement différé avant ou après l’exécution de la requête filtrée.  
 
-Notez que lors de la relation peut être spécifiée sous forme de chaîne au lieu d’une expression lambda, IQueryable retournée n’est pas générique lorsqu’une chaîne est utilisée et la méthode de conversion n’est donc généralement nécessaire avant que quelque chose d’utile peut être fait avec elle.  
+Notez que même si la relation peut être spécifiée en tant que chaîne au lieu d’une expression lambda, le IQueryable retourné n’est pas générique lorsqu’une chaîne est utilisée et la méthode de cast est généralement nécessaire avant toute opération utile.  
 
-## <a name="using-query-to-count-related-entities-without-loading-them"></a>À l’aide de la requête pour compter les entités associées sans leur chargement  
+## <a name="using-query-to-count-related-entities-without-loading-them"></a>Utilisation de Query pour compter les entités associées sans les charger  
 
-Il est parfois utile de connaître le nombre d’entités est lié à une autre entité dans la base de données sans réellement impliquer le coût du chargement de toutes ces entités. La méthode de requête avec la méthode Count de LINQ peut être utilisée pour ce faire. Exemple :  
+Il est parfois utile de savoir combien d’entités sont liées à une autre entité de la base de données sans réellement avoir à charger toutes ces entités. Pour ce faire, vous pouvez utiliser la méthode Query avec la méthode Count LINQ. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
