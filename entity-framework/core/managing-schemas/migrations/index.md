@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: b94ac567644a9d98a05a40857cc072c500203370
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 7d97551044ae4a8fc42d1676199da884f3e2994d
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562557"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565263"
 ---
 <a name="migrations"></a>Migrations
 ==========
@@ -191,7 +191,7 @@ Un script **idempotent** peut également être généré. Ce script n’applique
 ---------------------------
 Certaines applications sont susceptibles d’appliquer des migrations au moment de l’exécution (au démarrage ou à la première exécution). Ces opérations nécessitent l’utilisation de la méthode `Migrate()`.
 
-Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés. Utilisez `DbContext.GetService<IMigrator>()` pour y accéder.
+Cette méthode s’appuie sur le service `IMigrator`, qui peut être utilisé pour des scénarios plus avancés. Utilisez `myDbContext.GetInfrastructure().GetService<IMigrator>()` pour y accéder.
 
 ``` csharp
 myDbContext.Database.Migrate();
@@ -204,4 +204,4 @@ myDbContext.Database.Migrate();
 <a name="next-steps"></a>Étapes suivantes
 ----------
 
-Pour plus d'informations, consultez <xref:core/miscellaneous/cli/index>.
+Pour plus d’informations, consultez <xref:core/miscellaneous/cli/index>.
