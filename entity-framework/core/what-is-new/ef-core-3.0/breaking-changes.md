@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: c73663412efcd93c04892f193d4f5a2485724e22
-ms.sourcegitcommit: 755a15a789631cc4ea581e2262a2dcc49c219eef
+ms.openlocfilehash: 884cc6611b986fb213d99d3d2fc69d7bebe34aa2
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68497531"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565311"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Changements cassants inclus dans EF Core 3.0 (actuellement en préversion)
 
@@ -25,6 +25,7 @@ Les cassures dues aux nouvelles fonctionnalités introduites d’une préversion
 | **Modification critique**                                                                                               | **Impact** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
 | [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Haute       |
+| [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Haute      |
 | [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Haute      |
 | [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Haute      |
 | [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Haute      |
@@ -33,6 +34,7 @@ Les cassures dues aux nouvelles fonctionnalités introduites d’une préversion
 | [La sémantique de DeleteBehavior.Restrict est désormais plus propre](#deletebehavior) | Moyenne      |
 | [L’API de configuration pour les relations de type détenu a changé](#config) | Moyenne      |
 | [Chaque propriété utilise la génération indépendante de clé de type entier en mémoire](#each) | Moyenne      |
+| [Les requêtes sans suivi ne procèdent plus à la résolution de l’identité](#notrackingresolution) | Moyenne      |
 | [Changements apportés à l’API de métadonnées](#metadata-api-changes) | Moyenne      |
 | [Modifications de l’API de métadonnées spécifiques au fournisseur](#provider) | Moyenne      |
 | [UseRowNumberForPaging a été supprimé](#urn) | Moyenne      |
@@ -102,6 +104,29 @@ De plus, l’évaluation automatique sur le client peut entraîner des problème
 **Atténuations**
 
 Si une requête ne peut pas être entièrement traduite, réécrivez-la sous une forme qui peut être traduite ou utilisez `AsEnumerable()`, `ToList()` ou autre méthode similaire pour réimporter explicitement les données sur le client, où elles peuvent ensuite être traitées à l’aide de LINQ-to-Objects.
+
+<a name="netstandard21"></a>
+### <a name="ef-core-30-targets-net-standard-21-rather-than-net-standard-20"></a>EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0
+
+[Suivi de problème no 15498](https://github.com/aspnet/EntityFrameworkCore/issues/15498)
+
+Ce changement a été introduit dans EF Core 3.0-préversion 7.
+
+**Ancien comportement**
+
+Avant la version 3.0, EF Core ciblait .NET Standard 2.0 et s’exécutait sur toutes les plateformes qui prennent en charge cette norme, y compris .NET Framework.
+
+**Nouveau comportement**
+
+À partir de la version 3.0, EF Core cible .NET Standard 2.1 et s’exécute sur toutes les plateformes qui prennent en charge cette norme. Cela n'inclut pas .NET Framework.
+
+**Pourquoi ?**
+
+Cela fait partie d’une décision stratégique dans les technologies .NET de concentrer l’énergie sur .NET Core et d’autres plateformes .NET modernes, telles que Xamarin.
+
+**Atténuations**
+
+Envisagez de passer à une plateforme .NET moderne. Si ce n’est pas possible, continuez à utiliser EF Core 2.1 ou EF Core 2.2, qui prennent tous deux en charge .NET Framework.
 
 <a name="no-longer"></a>
 ### <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core
@@ -222,6 +247,34 @@ La spécification de `FromSql` n’importe où autre que sur un `DbSet` n’avai
 **Atténuations**
 
 Les appels `FromSql` doivent être déplacés pour être directement sur le `DbSet` auquel ils s’appliquent.
+
+<a name="notrackingresolution"></a>
+### <a name="no-tracking-queries-no-longer-perform-identity-resolution"></a>Les requêtes sans suivi ne procèdent plus à la résolution de l’identité
+
+[Suivi de problème no 13518](https://github.com/aspnet/EntityFrameworkCore/issues/13518)
+
+Ce changement a été introduit dans EF Core 3.0-preview 6.
+
+**Ancien comportement**
+
+Avant EF Core 3.0, la même instance d’entité était utilisée pour chaque occurrence d’une entité avec un type et un ID donnés. Cela correspond au comportement des requêtes de suivi. Par exemple, cette requête :
+
+```C#
+var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
+```
+retournait la même instance `Category` pour chaque `Product` associé à la catégorie donnée.
+
+**Nouveau comportement**
+
+À compter de EF Core 3.0, différentes instances d’entité sont créées lorsqu’une entité avec un type et un ID donnés est rencontrée à différents emplacements dans le graphe retourné. Par exemple, la requête ci-dessus retourne à présent une nouvelle instance `Category` pour chaque `Product` même si deux produits sont associés à la même catégorie.
+
+**Pourquoi ?**
+
+La résolution de l’identité (autrement dit, le fait de déterminer qu’une entité a les mêmes type et ID qu’une entité précédemment rencontrée) améliore les performances et la surcharge de la mémoire. Cela agit généralement à l’opposé de la raison pour laquelle aucune requête de suivi n’est utilisée en premier lieu. En outre, même si la résolution de l’identité peut parfois être utile, elle n’est pas nécessaire si les entités doivent être sérialisées et envoyées à un client, ce qui est courant pour les requêtes sans suivi.
+
+**Atténuations**
+
+Utilisez une requête de suivi si la résolution de l’identité est requise.
 
 <a name="qe"></a>
 
@@ -1222,8 +1275,8 @@ Ce changement a été introduit dans EF Core 3.0-preview 6.
 Les méthodes d’extension spécifiques au fournisseur seront aplaties :
 
 * `IProperty.Relational().ColumnName` -> `IProperty.GetColumnName()`
-* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.GetSqlServerIsMemoryOptimized()`
-* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.ForSqlServerUseIdentityColumn()`
+* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.IsMemoryOptimized()`
+* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.UseIdentityColumn()`
 
 **Pourquoi ?**
 
@@ -1260,7 +1313,7 @@ Pour les autres cas, vous pouvez activer les clés étrangères en spécifiant `
 
 <a name="sqlite3"></a>
 
-### <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundleesqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite dépend désormais de SQLitePCLRaw.bundle_e_sqlite3
+### <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundle_e_sqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite dépend désormais de SQLitePCLRaw.bundle_e_sqlite3
 
 **Ancien comportement**
 
