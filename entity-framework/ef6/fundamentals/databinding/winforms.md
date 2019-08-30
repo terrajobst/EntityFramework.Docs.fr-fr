@@ -3,12 +3,12 @@ title: Liaison de liaison avec WinForms-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: ad55ef4d496bbfe30eafcab9811c92989066519f
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 3c7c58f5ded29c136bbdca1d81c64b07c53ce583
+ms.sourcegitcommit: 7391cc31193c1216ec9ed485709042ad0c2106cf
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306561"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69985467"
 ---
 # <a name="databinding-with-winforms"></a>Liaison de liaison avec WinForms
 Cette procédure pas à pas montre comment lier des types POCO à des contrôles Windows Forms (WinForms) dans un formulaire maître/détail. L’application utilise Entity Framework pour remplir les objets avec les données de la base de données, effectuer le suivi des modifications et conserver les données dans la base de données.
@@ -171,7 +171,7 @@ En général, lorsque vous ciblez une base de données existante, elle est déj�
 Le serveur de base de données installé avec Visual Studio diffère selon la version de Visual Studio que vous avez installée:
 
 -   Si vous utilisez Visual Studio 2010, vous allez créer une base de données SQL Express.
--   Si vous utilisez Visual Studio 2012, vous allez [créer une base](https://msdn.microsoft.com/library/hh510202.aspx) de données de base de données locale.
+-   Si vous utilisez Visual Studio 2012, vous allez créer une base de données de [base de données locale](https://msdn.microsoft.com/library/hh510202.aspx).
 
 Commençons par générer la base de données.
 
@@ -280,8 +280,8 @@ Ajoutez les classes définies dans le modèle en tant que sources de données po
 
     ![source de données](~/ef6/media/datasource.png)
 
--   Cliquez sur **Terminer.** Si la *fenêtre sources de données ne s’affiche pas, sélectionnez * * * Afficher&gt; -autres sources&gt; de données Windows* 
-    *
+-   Cliquez sur **Terminer.**
+    Si la fenêtre sources de données ne s’affiche pas, sélectionnez **afficher&gt; -autres sources&gt; de données Windows**
 -   Appuyez sur l’icône d’épingle pour que la fenêtre sources de données ne soit pas masquée automatiquement. Vous devrez peut-être cliquer sur le bouton Actualiser si la fenêtre était déjà visible.
 
     ![Source de données 2](~/ef6/media/datasource2.png)
