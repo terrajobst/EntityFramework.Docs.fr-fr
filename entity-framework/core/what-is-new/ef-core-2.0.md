@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 2712845512d9eb349ef3a7e14f4365327db0fcd6
-ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
-ms.translationtype: HT
+ms.openlocfilehash: 28b2180e898b91d233b590b1639674a464f8c679
+ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69565338"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70271432"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -96,7 +96,7 @@ Nous définissons un filtre au niveau du modèle qui implémente une architectur
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur IgnoreQueryFilters().
 
-#### <a name="limitations"></a>Limitations
+#### <a name="limitations"></a>Limites
 
 - Les références de navigation ne sont pas autorisées. Cette fonctionnalité peut être ajoutée en fonction de vos commentaires.
 - Les filtres ne peuvent être définis que sur le type d’entité racine d’une hiérarchie.
@@ -171,7 +171,7 @@ Si cette méthode est utilisée, au moment où une instance de DbContext est dem
 
 Ce regroupement est conceptuellement semblable au regroupement de connexions dans les fournisseurs ADO.NET et présente l’avantage de réduire les coûts d’initialisation de l’instance de DbContext.
 
-### <a name="limitations"></a>Limitations
+### <a name="limitations"></a>Limites
 
 La nouvelle méthode présente quelques limitations quant à ce qui peut être effectué dans la méthode `OnConfiguring()` de DbContext.
 
@@ -207,7 +207,7 @@ using (var db = new CustomerContext())
 
 EF Core prend en charge la génération automatique des valeurs de clés par le biais d’une variété de mécanismes. Quand vous utilisez cette fonctionnalité, une valeur est générée si la propriété de clé est la valeur par défaut du CLR, généralement zéro ou null. Cela signifie qu’un graphique d’entités peut être transmis à `DbContext.Attach` ou `DbSet.Attach` et qu’EF Core marque les entités qui ont déjà une clé définie comme `Unchanged` tandis que les entités qui n’ont pas de clé définie sont marquées comme `Added`. Il est ainsi plus facile de joindre un graphique regroupant des entités nouvelles et existantes quand des clés générées sont utilisées. `DbContext.Update` et `DbSet.Update` fonctionnent de la même manière, à la différence que les entités ayant une clé définie sont marquées comme `Modified` au lieu de `Unchanged`.
 
-## <a name="query"></a>Query
+## <a name="query"></a>Interroger
 
 ### <a name="improved-linq-translation"></a>Conversion LINQ améliorée
 
@@ -303,7 +303,7 @@ Nous disposons ainsi d’une solution plus fiable dans Microsoft.Data.Sqlite pou
 ### <a name="only-one-provider-per-model"></a>Un seul fournisseur par modèle
 Renforce considérablement les possibilités d’interaction des fournisseurs avec le modèle et simplifie le fonctionnement des conventions, annotations et API Fluent avec les différents fournisseurs.
 
-EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Il en résulte une simplification des API de métadonnées de niveau inférieur, au point que tout accès aux *concepts de métadonnées relationnelles communs* est toujours établi par le biais d’un appel à `.Relational` au lieu de `.SqlServer`, `.Sqlite`, etc.
+EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Il en résulte une simplification des API de métadonnées de niveau inférieur, au point que tout accès aux *concepts de métadonnées relationnelles communs* est toujours établi par le biais d’un appel à `.Relational` au lieu de `.SqlServer`, `.Sqlite`, etc.
 
 ### <a name="consolidated-logging-and-diagnostics"></a>Journalisation consolidée et diagnostics
 
@@ -311,6 +311,6 @@ Les mécanismes de journalisation (basés sur ILogger) et de diagnostics (basés
 
 Les ID d’événement pour les messages envoyés à un ILogger ont été changés dans la version 2.0. Les ID d’événement sont maintenant uniques dans le code EF Core. En outre, ces messages suivent désormais le modèle standard de la journalisation structurée utilisé, par exemple, par le modèle MVC.
 
-Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs).
+Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/DbLoggerCategory.cs).
 
 Les événements DiagnosticSource utilisent désormais les mêmes noms d’ID d’événement que les messages `ILogger` correspondants.
