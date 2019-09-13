@@ -3,12 +3,12 @@ title: Requête Async et Save-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: bf2039110962e8dd114242dcd0b9454963750774
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: ae578976ffc88b407ef0aaa0017935005bedd093
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306581"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921629"
 ---
 # <a name="async-query-and-save"></a>Requête asynchrone et enregistrement
 > [!NOTE]
@@ -221,12 +221,14 @@ Pour obtenir la liste complète des méthodes d’extension disponibles dans l�
 
 Maintenant que le code est asynchrone, nous pouvons observer un autre workflow d’exécution lorsque nous exécutons le programme:
 
-1.  **SaveChanges** commence à envoyer le nouveau **blog** à la base *de données une fois que la commande est envoyée à la base de données, aucune durée de calcul supplémentaire n’est nécessaire sur le thread managé actuel. La méthode **PerformDatabaseOperations** retourne (même si elle n’a pas fini de s’exécuter) et le déroulement du programme dans la méthode main se poursuit.*
-2.  **Le devis du jour est écrit dans la console**
-     *, car il n’y a plus de travail à effectuer dans la méthode main, le thread managé est bloqué sur l’appel d’attente jusqu’à ce que l’opération de base de données se termine. Une fois l’opération terminée, le reste de notre **PerformDatabaseOperations** est exécuté.*
-3.  **SaveChanges** se termine
-4.  La requête portant sur tous les **blogs** est de *nouveau envoyée à la base de données, le thread managé est libre d’effectuer d’autres tâches pendant le traitement de la requête dans la base de données. Étant donné que toutes les autres exécutions sont terminées, le thread s’arrêtera simplement sur l’appel d’attente.*
-5.  La requête retourne et les résultats sont écrits dans la **console**
+1. **SaveChanges** commence à envoyer le nouveau **blog** à la base de données  
+    *Une fois la commande envoyée à la base de données, aucune durée de calcul supplémentaire n’est nécessaire sur le thread managé actuel. La méthode **PerformDatabaseOperations** retourne (même si elle n’a pas fini de s’exécuter) et le déroulement du programme dans la méthode main se poursuit.*
+2. **Le devis du jour est écrit dans la console**  
+    *Étant donné qu’il n’y a plus de travail à effectuer dans la méthode main, le thread managé est bloqué sur l’appel d’attente jusqu’à ce que l’opération de base de données soit terminée. Une fois l’opération terminée, le reste de notre **PerformDatabaseOperations** est exécuté.*
+3.  **SaveChanges** se termine  
+4.  La requête de tous les **blogs** est envoyée à la base de données  
+    *Là encore, le thread managé est libre d’effectuer d’autres tâches pendant le traitement de la requête dans la base de données. Étant donné que toutes les autres exécutions sont terminées, le thread s’arrêtera simplement sur l’appel d’attente.*
+5.  La requête retourne et les résultats sont écrits dans la **console**  
 
 ![Sortie asynchrone](~/ef6/media/asyncoutput.png) 
 

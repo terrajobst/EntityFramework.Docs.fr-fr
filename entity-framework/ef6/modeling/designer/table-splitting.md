@@ -1,21 +1,21 @@
 ---
-title: Fractionnement de la Table concepteur - EF6
+title: Fractionnement de table du concepteur-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: 8b0ca6778a06ed43b1365d2e5969ff15948f8004
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490692"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921781"
 ---
-# <a name="designer-table-splitting"></a>Table du Concepteur de fractionnement
-Cette procédure pas à pas montre comment mapper plusieurs types d’entités à une table unique en modifiant un modèle avec Entity Framework Designer (Concepteur d’EF).
+# <a name="designer-table-splitting"></a>Fractionnement des tables du concepteur
+Cette procédure pas à pas montre comment mapper plusieurs types d’entité à une seule table en modifiant un modèle avec le Entity Framework Designer (concepteur EF).
 
-L’une des raisons que vous souhaiterez utiliser le fractionnement de table sont ce qui peut retarder le chargement de certaines propriétés lorsque vous utilisez le chargement pour charger vos objets différé. Vous pouvez séparer les propriétés qui peuvent contenir de très grande quantité de données dans une entité distincte et chargez uniquement si nécessaire.
+L’une des raisons pour lesquelles vous pouvez souhaiter utiliser le fractionnement de table est de retarder le chargement de certaines propriétés lors de l’utilisation du chargement différé pour charger vos objets. Vous pouvez séparer les propriétés qui peuvent contenir de très grandes quantités de données dans une entité distincte et les charger uniquement lorsque cela est nécessaire.
 
-L’illustration suivante montre les principales fenêtres qui sont utilisées lorsque vous travaillez avec le Concepteur EF.
+L’illustration suivante montre les fenêtres principales qui sont utilisées lors de l’utilisation du concepteur EF.
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
@@ -24,7 +24,7 @@ L’illustration suivante montre les principales fenêtres qui sont utilisées l
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
 - Une version récente de Visual Studio.
-- Le [base de données School exemple](~/ef6/resources/school-database.md).
+- [Exemple de base de données School](~/ef6/resources/school-database.md).
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
@@ -32,60 +32,60 @@ Cette procédure pas à pas utilise Visual Studio 2012.
 
 -   Ouvrez Visual Studio 2012.
 -   Dans le menu **Fichier** , pointez sur **Nouveau**, puis cliquez sur **Projet**.
--   Dans le volet gauche, cliquez sur Visual C\#, puis sélectionnez le modèle Application Console.
--   Entrez **TableSplittingSample** en tant que le nom du projet et cliquez sur **OK**.
+-   Dans le volet gauche, cliquez sur Visual\#C, puis sélectionnez le modèle application console.
+-   Entrez **TableSplittingSample** comme nom du projet, puis cliquez sur **OK**.
 
 ## <a name="create-a-model-based-on-the-school-database"></a>Créer un modèle basé sur la base de données School
 
--   Cliquez sur le nom de projet dans l’Explorateur de solutions, pointez sur **ajouter**, puis cliquez sur **un nouvel élément**.
--   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet Modèles.
--   Entrez **TableSplittingModel.edmx** pour le nom de fichier, puis cliquez sur **ajouter**.
--   Dans la boîte de dialogue Choisir le contenu du modèle, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant.**
--   Cliquez sur Nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **(localdb)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis Cliquez sur **OK**.
-    La boîte de dialogue Choisir votre connexion de données est mis à jour avec le paramètre de votre connexion de base de données.
--   Dans la boîte de dialogue Choisir vos objets de base de données, dérouler les **Tables** nœud et vérifiez la **personne** table. Cette opération ajoute la table spécifiée à la **School** modèle.
--   Cliquez sur **Terminer**.
+-   Cliquez avec le bouton droit sur le nom du projet dans Explorateur de solutions, pointez sur **Ajouter**, puis cliquez sur **nouvel élément**.
+-   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
+-   Entrez **TableSplittingModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
+-   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant.**
+-   Cliquez sur nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **(mssqllocaldb)\\** , sélectionnez la méthode d’authentification, tapez **School** comme nom de la base de données, puis cliquez sur **OK**.
+    La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
+-   Dans la boîte de dialogue choisir vos objets de base de données, dérouler le nœud **tables** et vérifier la table **Person** . Cette opération ajoute la table spécifiée au modèle **School** .
+-   Cliquez sur **Terminer**.
 
-Le Concepteur d’entités, qui fournit une aire de conception pour la modification de votre modèle, s’affiche. Tous les objets que vous avez sélectionné dans le **choisir vos objets de base de données** boîte de dialogue sont ajoutés au modèle.
+Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché. Tous les objets que vous avez sélectionnés dans la boîte de dialogue **choisir vos objets de base de données**sont ajoutés au modèle.
 
-## <a name="map-two-entities-to-a-single-table"></a>Mapper des deux entités à une seule Table
+## <a name="map-two-entities-to-a-single-table"></a>Mapper deux entités à une table unique
 
-Dans cette section, vous allez fractionner la **personne** entité en deux entités puis des mapper à une seule table.
+Dans cette section, vous allez fractionner l’entité **Person** en deux entités, puis les mapper à une table unique.
 
 > [!NOTE]
-> Le **personne** entité ne contient pas toutes les propriétés qui peuvent contenir des données volumineuses ; il est simplement utilisé comme un exemple.
+> L’entité **Person** ne contient pas de propriétés pouvant contenir une grande quantité de données ; elle est utilisée à titre d’exemple.
 
--   Cliquez sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **entité**.
-    Le **nouvelle entité** boîte de dialogue s’affiche.
--   Type **HireInfo** pour le **nom de l’entité** et **PersonID** pour le **propriété Key** nom.
--   Cliquez sur **OK**.
+-   Cliquez avec le bouton droit sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **entité**.
+    La boîte **de dialogue nouvelle entité** s’affiche.
+-   Tapez **HireInfo** pour le nom de l' **entité** et **PersonID** pour le nom de la **propriété de clé** .
+-   Cliquez sur **OK**.
 -   Un nouveau type d'entité est créé et affiché sur l'aire de conception.
--   Sélectionnez le **HireDate** propriété de la **personne** type d’entité, puis appuyez sur **Ctrl + X** clés.
--   Sélectionnez le **HireInfo** entité, puis appuyez sur **Ctrl + V** clés.
--   Créer une association entre **personne** et **HireInfo**. Pour ce faire, cliquez sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **Association**.
--   Le **ajouter une Association** boîte de dialogue s’affiche. Le **PersonHireInfo** nom est attribué par défaut.
--   Spécifier la multiplicité **1(One)** aux deux extrémités de la relation.
+-   Sélectionnez la ****  propriété HireDate du type d’entité **Person** et appuyez sur les touches **CTRL + X** .
+-   Sélectionnez l’entité **HireInfo** et appuyez sur les touches **Ctrl + V** .
+-   Créer une association entre **Person** et **HireInfo**. Pour ce faire, cliquez avec le bouton droit sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **Association**.
+-   La boîte de dialogue **Ajouter une association** s’affiche. Le nom **PersonHireInfo** est donné par défaut.
+-   Spécifiez la multiplicité **1 (un)** aux deux extrémités de la relation.
 -   Appuyez sur **OK**.
 
-L’étape suivante requiert la **détails de Mapping** fenêtre. Si vous ne voyez pas cette fenêtre, cliquez sur l’aire de conception et sélectionnez **détails de Mapping**.
+L’étape suivante nécessite la fenêtre **Détails** de mappage. Si vous ne voyez pas cette fenêtre, cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Détails de mapping**.
 
--   Sélectionnez le **HireInfo** type d’entité et cliquez sur **&lt;ajouter une Table ou vue&gt;** dans le **détails de Mapping** fenêtre.
--   Sélectionnez **personne** à partir de la **&lt;ajouter une Table ou vue&gt;** liste de champs de liste déroulante. La liste contient des tables ou des vues, auquel l’entité sélectionnée peut être mappée.
+-   Sélectionnez le type d’entité **HireInfo** , puis cliquez sur **&lt;ajouter une&gt;table ou une vue** dans la fenêtre **Détails** de mappage.
+-   Sélectionnez **Person** dans la  **&lt;&gt;** liste déroulante Ajouter un champ de table ou de vue. La liste contient les tables ou les vues auxquelles l’entité sélectionnée peut être mappée.
     Les propriétés appropriées doivent être mappées par défaut.
 
     ![Mappage](~/ef6/media/mapping.png)
 
--   Sélectionnez le **PersonHireInfo** association sur l’aire de conception.
--   Avec le bouton droit sur l’aire de conception et sélectionnez l’association de **propriétés**.
--   Dans le **propriétés** fenêtre, sélectionnez le **contraintes référentielles** propriété et cliquez sur le bouton de sélection.
--   Sélectionnez **personne** à partir de la **Principal** liste déroulante.
+-   Sélectionnez l’Association **PersonHireInfo** sur l’aire de conception.
+-   Cliquez avec le bouton droit sur l’Association sur l’aire de conception, puis sélectionnez **Propriétés**.
+-   Dans la fenêtre **Propriétés** , sélectionnez la propriété **contraintes référentielles** , puis cliquez sur le bouton de sélection.
+-   Sélectionnez **Person** dans la liste déroulante **principal** .
 -   Appuyez sur **OK**.
 
- 
+ 
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 
--   Collez le code suivant dans la méthode Main.
+-   Collez le code suivant dans la méthode main.
 
 ``` csharp
     using (var context = new SchoolEntities())
@@ -122,16 +122,16 @@ L’étape suivante requiert la **détails de Mapping** fenêtre. Si vous ne voy
 ```
 -   Compilez et exécutez l'application.
 
-Les instructions T-SQL suivantes ont été exécutées sur le **School** base de données suite à l’exécution de cette application. 
+Les instructions T-SQL suivantes ont été exécutées sur la base de données **School** suite à l’exécution de cette application. 
 
--   Ce qui suit **insérer** a été exécutée suite à l’exécution de contexte. SaveChanges() et combine les données à partir de la **personne** et **HireInfo** entités
+-   L' **instruction INSERT** suivante a été exécutée à la suite de l’exécution du contexte. SaveChanges () et combine les données des entités **Person** et **HireInfo**
 
     ![Insert](~/ef6/media/insert.png)
 
--   Ce qui suit **sélectionnez** a été exécutée suite à l’exécution de contexte. People.FirstOrDefault() et sélectionne uniquement les colonnes mappées aux **personne**
+-   La commande **Select** suivante a été exécutée à la suite de l’exécution du contexte. People. FirstOrDefault () et sélectionne uniquement les colonnes mappées à **Person**
 
-    ![Sélectionnez 1](~/ef6/media/select1.png)
+    ![Sélectionner 1](~/ef6/media/select1.png)
 
--   Ce qui suit **sélectionnez** a été exécutée à la suite de l’accès à la existingPerson.Instructor de propriété de navigation et sélectionne uniquement les colonnes mappées aux **HireInfo**
+-   La commande **Select** suivante a été exécutée suite à l’accès à la propriété de navigation existingPerson. Instructor et sélectionne uniquement les colonnes mappées à **HireInfo**
 
-    ![Sélectionnez 2](~/ef6/media/select2.png)
+    ![Sélectionner 2](~/ef6/media/select2.png)

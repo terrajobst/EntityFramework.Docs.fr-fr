@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 01/24/2017
 ms.assetid: b6429b14-cba0-4af4-878f-b829777c89cb
 uid: core/querying/async
-ms.openlocfilehash: de00e25279e29355a4eb3e55597a8578ceccecb6
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 415c57df599f1cb1a255f01d1072890fedfd6d2b
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993563"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921690"
 ---
 # <a name="asynchronous-queries"></a>Requêtes asynchrones
 
@@ -23,4 +23,4 @@ Entity Framework Core fournit un ensemble de méthodes d’extension asynchrone 
 > [!IMPORTANT]  
 > Les méthodes d’extension EF Core asynchrones sont définies dans l’espace de noms `Microsoft.EntityFrameworkCore`. Cet espace de noms doit être importé pour que les méthodes soient disponibles.
 
-[!code-csharp[Main](../../../samples/core/Querying/Querying/Async/Sample.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Querying/Async/Sample.cs#Sample)]

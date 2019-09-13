@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
-ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
-ms.translationtype: HT
+ms.openlocfilehash: d61fa884f4669daa220ffc96ae59dd63518e6d5a
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/20/2019
-ms.locfileid: "69628429"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921676"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nouvelles fonctionnalités incluses dans EF Core 3.0 (actuellement en préversion)
 
@@ -95,15 +95,6 @@ Cette fonctionnalité n’est pas dans la préversion actuelle.
 Les [types de requêtes](xref:core/modeling/query-types), introduits dans EF Core 2.1 et considérés comme des types d’entités sans clé dans EF Core 3.0, représentent des données qui peuvent être lues à partir de la base de données mais ne peuvent pas être mises à jour.
 Cette caractéristique fait d’eux un excellent choix pour les vues de base de données dans la plupart des scénarios. Nous envisageons donc d’automatiser la création des types d’entités sans clé lors de l’ingénierie à rebours des vues de bases de données.
 
-## <a name="property-bag-entities"></a>Entités conteneurs des propriétés
-
-[Suivi de problème n°13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) et [n°9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
-
-Le travail sur cette fonctionnalité a commencé, mais elle n’est pas dans la préversion actuelle. 
-
-cette fonctionnalité permet de créer des entités qui stockent les données dans des propriétés indexées au lieu de propriétés standard, et d’utiliser des instances de la même classe .NET (potentiellement aussi simple que `Dictionary<string, object>`) pour représenter différents types d’entités dans le même modèle EF Core.
-Cette fonctionnalité est un tremplin pour prendre en charge les relations plusieurs-à-plusieurs sans entité de jointure ([problème no 1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)) – l’une des améliorations les plus demandées pour EF Core.
-
 ## <a name="ef-63-on-net-core"></a>EF 6.3 sur .NET Core
 
 [Suivi de problème EF6 n°271](https://github.com/aspnet/EntityFramework6/issues/271)
@@ -113,7 +104,7 @@ Le travail sur cette fonctionnalité a commencé, mais elle n’est pas dans la 
 nous sommes conscients du fait que de nombreuses applications utilisent d’anciennes versions d’EF et qu’une migration vers EF Core dans l’unique objectif de tirer parti de .NET Core représente parfois un effort considérable.
 C’est pourquoi nous adapterons la prochaine version d’EF 6 de façon à ce qu’elle s’exécute sur .NET Core 3.0.
 L’objectif est de faciliter le portage d’applications avec aussi peu de modifications que possible.
-Il va y avoir certaines limitations. Par exemple :
+Il va y avoir certaines limitations. Par exemple :
 - Les nouveaux fournisseurs devront fonctionner avec les autres bases de données, en plus de la prise en charge de SQL Server incluse sur .NET Core.
 - La prise en charge spatiale avec SQL Server ne sera pas activée.
 
