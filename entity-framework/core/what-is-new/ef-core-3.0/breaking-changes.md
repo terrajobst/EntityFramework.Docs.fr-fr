@@ -4,21 +4,17 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 10a0f0edc5f98baea26b1a5b9c0aa869b1df01af
-ms.sourcegitcommit: df181e201365c20610ba56dcd5c5ed30cfda00c2
+ms.openlocfilehash: 04487291f24bb702dad4b497c34234afdd5e3c9a
+ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/15/2019
-ms.locfileid: "70997857"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71005588"
 ---
-# <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Changements cassants inclus dans EF Core 3.0 (actuellement en préversion)
-
-> [!IMPORTANT]
-> Notez que les fonctionnalités et les plannings des versions ultérieures sont susceptibles de changer à tout moment, et même si cette page est régulièrement mise à jour, elle risque de ne pas toujours refléter nos projets les plus récents.
-
-Les changements de comportement et d’API suivants sont susceptibles de casser les applications développées pour EF Core 2.2.x lors de leur mise à niveau vers la version 3.0.0.
+# <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
+Les modifications d’API et de comportement suivantes peuvent bloquer les applications existantes lors de leur mise à niveau vers 3.0.0.
 Les changements qui, selon nous, auront une incidence uniquement sur les fournisseurs de base de données sont documentés dans [Changements ayant un impact sur les fournisseurs](../../providers/provider-log.md).
-Les cassures dues aux nouvelles fonctionnalités introduites d’une préversion 3.0 à une autre ne sont pas documentées ici.
+Les interruptions d’une version préliminaire 3,0 à une autre version d’évaluation de 3,0 ne sont pas documentées ici.
 
 ## <a name="summary"></a>Récapitulatif
 
