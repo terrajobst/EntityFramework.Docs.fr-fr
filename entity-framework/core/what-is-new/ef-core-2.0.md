@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 28b2180e898b91d233b590b1639674a464f8c679
-ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.openlocfilehash: 781578d9de05895cdbc777aa53c3f6d6f9777869
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/04/2019
-ms.locfileid: "70271432"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149046"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -36,7 +36,7 @@ Pour plus d’informations sur cette fonctionnalité, lisez la [section sur le f
 
 ### <a name="owned-types"></a>Types détenus
 
-Un type d’entité détenu peut partager le même type CLR avec un autre type d’entité détenu, mais dans la mesure où il ne peut pas être identifié par le seul type CLR, un dispositif de navigation est nécessaire pour y accéder à partir d’un autre type d’entité. L’entité qui contient la navigation définie est le propriétaire. Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut.
+Un type d’entité détenu peut partager le même type .NET avec un autre type d’entité détenu, mais étant donné qu’il ne peut pas être identifié uniquement par le type .NET, il doit y avoir une navigation à partir d’un autre type d’entité. L’entité qui contient la navigation définie est le propriétaire. Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut.
 
 Par convention, une clé primaire cachée est créée pour le type détenu et est mappée à la même table que le propriétaire à l’aide du fractionnement de table. Cela permet d’utiliser des types détenus à l’image des types complexes dans EF6 :
 
@@ -96,7 +96,7 @@ Nous définissons un filtre au niveau du modèle qui implémente une architectur
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur IgnoreQueryFilters().
 
-#### <a name="limitations"></a>Limites
+#### <a name="limitations"></a>Limitations
 
 - Les références de navigation ne sont pas autorisées. Cette fonctionnalité peut être ajoutée en fonction de vos commentaires.
 - Les filtres ne peuvent être définis que sur le type d’entité racine d’une hiérarchie.
@@ -171,7 +171,7 @@ Si cette méthode est utilisée, au moment où une instance de DbContext est dem
 
 Ce regroupement est conceptuellement semblable au regroupement de connexions dans les fournisseurs ADO.NET et présente l’avantage de réduire les coûts d’initialisation de l’instance de DbContext.
 
-### <a name="limitations"></a>Limites
+### <a name="limitations"></a>Limitations
 
 La nouvelle méthode présente quelques limitations quant à ce qui peut être effectué dans la méthode `OnConfiguring()` de DbContext.
 
@@ -207,7 +207,7 @@ using (var db = new CustomerContext())
 
 EF Core prend en charge la génération automatique des valeurs de clés par le biais d’une variété de mécanismes. Quand vous utilisez cette fonctionnalité, une valeur est générée si la propriété de clé est la valeur par défaut du CLR, généralement zéro ou null. Cela signifie qu’un graphique d’entités peut être transmis à `DbContext.Attach` ou `DbSet.Attach` et qu’EF Core marque les entités qui ont déjà une clé définie comme `Unchanged` tandis que les entités qui n’ont pas de clé définie sont marquées comme `Added`. Il est ainsi plus facile de joindre un graphique regroupant des entités nouvelles et existantes quand des clés générées sont utilisées. `DbContext.Update` et `DbSet.Update` fonctionnent de la même manière, à la différence que les entités ayant une clé définie sont marquées comme `Modified` au lieu de `Unchanged`.
 
-## <a name="query"></a>Interroger
+## <a name="query"></a>Query
 
 ### <a name="improved-linq-translation"></a>Conversion LINQ améliorée
 

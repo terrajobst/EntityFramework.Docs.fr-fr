@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 16600ccbb1194d584fae15671118d9c046f1f637
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
-ms.translationtype: HT
+ms.openlocfilehash: 5f97015f0228387574e3a19fb20cae1bdb403410
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333859"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149175"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 
@@ -81,7 +81,7 @@ Un modèle EF Core peut désormais inclure des types de requêtes. Contrairement
 - Mappage à des requêtes définies dans le modèle
 - Utilisation comme type de retour pour les requêtes `FromSql()`
 
-Pour plus d’informations sur cette rubrique, lisez la [section sur les types de requêtes](xref:core/modeling/query-types).
+Pour plus d’informations sur cette rubrique, lisez la [section sur les types de requêtes](xref:core/modeling/keyless-entity-types).
 
 ## <a name="include-for-derived-types"></a>Include pour les types dérivés
 Vous pouvez désormais spécifier des propriétés de navigation définies uniquement sur des types dérivés lors de l’écriture d’expressions pour la méthode `Include`. Pour la version fortement typée de `Include`, nous prenons en charge l’utilisation d’un cast explicite ou de l’opérateur `as`. Nous prenons également en charge le référencement des noms de propriété de navigation définis sur des types dérivés dans la version chaîne de `Include` :

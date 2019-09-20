@@ -4,16 +4,16 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 7a0df6fb656be58103971f45b9e12e9f1383311f
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: b0c9ba1bb452e47e8348d000e3f7b88cc2730d8e
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921715"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149304"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
-Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Cela peut être utile si la requête que vous voulez effectuer ne peut pas être exprimée à l’aide de LINQ ou que l’utilisation d’une requête LINQ se traduit par des requêtes SQL inefficaces. Les requêtes SQL brutes peuvent retourner des types d’entités ou, à partir d’EF Core 2.1, des [types de requête](xref:core/modeling/query-types) qui font partie de votre modèle.
+Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Cela peut être utile si la requête que vous voulez effectuer ne peut pas être exprimée à l’aide de LINQ ou que l’utilisation d’une requête LINQ se traduit par des requêtes SQL inefficaces. Les requêtes SQL brutes peuvent retourner des types d’entité ou, à partir de EF Core 2,1, des [types d’entité sans clé](xref:core/modeling/keyless-entity-types) qui font partie de votre modèle.
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
@@ -133,7 +133,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-## <a name="limitations"></a>Limites
+## <a name="limitations"></a>Limitations
 
 Il existe quelques limitations à connaître lors de l’utilisation des requêtes SQL brutes :
 

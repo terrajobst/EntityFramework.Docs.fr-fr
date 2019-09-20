@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: 528733d6eec33de2c9538541a6ed5be704b9d433
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.openlocfilehash: d938f17daecd5031147951d0018602c5635de41d
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005554"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149098"
 ---
 # <a name="new-features-included-in-ef-core-30"></a>Nouvelles fonctionnalités incluses dans EF Core 3,0
 
@@ -57,7 +57,7 @@ var orders =
 
 await foreach(var o in orders)
 {
-  Proccess(o);
+  Process(o);
 } 
 ```
 
@@ -71,7 +71,7 @@ La nouvelle API d’interception de EF Core 3,0 permet d’observer et de modifi
 
 ## <a name="reverse-engineering-of-database-views"></a>Ingénierie à rebours des vues de base de données
 
-Les types d’entité sans clés (précédemment appelés [types de requêtes](xref:core/modeling/query-types)) représentent des données qui peuvent être lues à partir de la base de données, mais qui ne peuvent pas être mises à jour.
+Les types d’entité sans clés (précédemment appelés [types de requêtes](xref:core/modeling/keyless-entity-types)) représentent des données qui peuvent être lues à partir de la base de données, mais qui ne peuvent pas être mises à jour.
 Cette caractéristique permet de mapper les vues de base de données dans la plupart des scénarios, c’est pourquoi nous avons automatisé la création de types d’entité sans clés lors de l’ingénierie inverse des vues de base de données.
 
 ## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>Les entités dépendantes qui partagent la table avec le principal sont maintenant facultatives
@@ -108,5 +108,5 @@ Il existe certaines limitations, par exemple :
 
 Certaines fonctionnalités initialement planifiées pour EF Core 3,0 ont été reportées dans les versions ultérieures : 
 
-- Possibilité de ignorer des parties d’un modèle dans des migrations, suivies par [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725).
-- Entités de conteneurs de propriétés, suivies par deux problèmes distincts : [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) sur les entités de type partagé et les [#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) sur la prise en charge du mappage de propriétés indexées.
+- Possibilité de ignorer des parties d’un modèle dans des migrations, suivies comme [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725).
+- Entités de conteneurs de propriétés, suivies comme deux problèmes distincts : [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) sur les entités de type partagé et les [#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) sur la prise en charge du mappage de propriété indexée.
