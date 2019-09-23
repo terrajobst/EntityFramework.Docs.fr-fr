@@ -4,22 +4,22 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 62194d1db4efcdaed53ca0e14f160315f8e3cf03
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: eb808dd9d9b1b214947524cd83999f67be9cc0ff
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921756"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149068"
 ---
 # <a name="installing-entity-framework-core"></a>Installation d’Entity Framework Core
 
 ## <a name="prerequisites"></a>Prérequis
 
-* EF Core est une bibliothèque [.NET Standard 2.0](/dotnet/standard/net-standard). Par conséquent, l’exécution d’EF Core nécessite une implémentation .NET prenant en charge .NET Standard 2.0. EF Core peut aussi être référencé par d’autres bibliothèques .NET Standard 2.0. 
+* EF Core est une bibliothèque [.NET Standard 2.1](/dotnet/standard/net-standard). Ainsi, l’exécution d’EF Core nécessite une implémentation .NET prenant en charge .NET Standard 2.1. EF Core peut aussi être référencé par d’autres bibliothèques .NET Standard 2.1. 
 
 * Par exemple, vous pouvez utiliser EF Core pour développer des applications qui ciblent .NET Core. La création d’applications .NET Core nécessite le [SDK .NET Core](https://dotnet.microsoft.com/download). Vous pouvez aussi utiliser un environnement de développement comme Visual Studio, Visual Studio pour Mac ou Visual Studio Code. Pour plus d’informations, consultez [Bien démarrer avec .NET Core](/dotnet/core/get-started).
 
-* Vous pouvez utiliser EF Core pour développer des applications qui ciblent .NET Framework 4.6.1 ou version ultérieure sur Windows, à l’aide de Visual Studio. La dernière version de [Visual Studio](https://visualstudio.microsoft.com/vs) est recommandée. Si vous voulez utiliser une ancienne version, comme Visual Studio 2015, vous devez [mettre à niveau le client NuGet vers la version 3.6.0](https://www.nuget.org/downloads) pour utiliser les bibliothèques .NET Standard 2.0.
+* Vous pouvez utiliser EF Core pour développer des applications sur Windows à l’aide de Visual Studio. La dernière version de [Visual Studio](https://visualstudio.microsoft.com/vs) est recommandée.
 
 * EF Core peut s’exécuter sur d’autres implémentations .NET comme [Xamarin](https://dotnet.microsoft.com/apps/xamarin) et .NET Native. Toutefois, dans la pratique, ces implémentations ont des limitations de runtime qui peuvent affecter le fonctionnement d’EF Core sur votre application. Pour plus d’informations, consultez [Implémentations .NET prises en charge par EF Core](xref:core/platforms/index).
 
@@ -133,16 +133,3 @@ Pour les applications ASP.NET Core, ce package est inclus automatiquement.
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     ```
 
-* Vous devez peut-être modifier les applications qui ciblent le .NET Framework pour qu’elle fonctionnent avec les bibliothèques .NET Standard 2.0 :
-
-  * Modifiez le fichier projet et vérifiez que l’entrée suivante apparaît dans le groupe de propriétés initiales :
-
-    ``` xml
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    ```
-
-  * Pour les projets de test, vérifiez également que l’entrée suivante est présente :
-
-    ``` xml
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    ```
