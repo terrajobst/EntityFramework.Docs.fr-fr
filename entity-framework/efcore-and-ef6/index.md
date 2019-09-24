@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: ad0807a3cfd62c6c09a97df1a45134db7a538623
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 3d2f72e64e6846d2d8bb6d4d507e04090287114d
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149063"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71198012"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparer EF Core et EF6
 
@@ -148,7 +148,7 @@ La colonne EF Core indique la version du produit dans laquelle la fonctionnalit�
 
 Utilisez plutôt EF Core pour une nouvelle application si les deux conditions suivantes sont remplies :
 * L’application a besoin des fonctionnalités de .NET Core. Pour plus d’informations, consultez [Choix entre .NET Core et .NET Framework pour les applications serveur](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
-* EF Core prend en charge toutes les fonctionnalités requises par l’application. Si une fonctionnalité souhaitée est manquante, consultez la [feuille de route EF Core](xref:core/what-is-new/roadmap) pour savoir si sa prise en charge est prévue à l’avenir.
+* EF Core prend en charge toutes les fonctionnalités requises par l’application. Si une fonctionnalité souhaitée est manquante, consultez la [feuille de route EF Core](xref:core/what-is-new/index) pour savoir si sa prise en charge est prévue à l’avenir. 
 
 Utilisez plutôt EF6 si les deux conditions suivantes sont remplies :
 * L’application s’exécutera sur Windows et .NET Framework 4.0 ou version ultérieure.
