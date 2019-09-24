@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 15b7e69676ef9aeb70121fcec404c34a17e5e2bb
-ms.sourcegitcommit: 8d04a2ad98036f32ca70c77ce3040c5edb1cdf82
-ms.translationtype: HT
+ms.openlocfilehash: ec04de4eab2a28e3aa81ff27accef4fc11c83995
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44384837"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197795"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -66,13 +66,13 @@ Dans les tableaux ci-dessus, *Aucun* peut entraîner une violation de contrainte
 > Dans EF Core, contrairement à EF6, les effets en cascade ne se produisent pas immédiatement, mais à la place uniquement lorsque SaveChanges est appelé.
 
 > [!NOTE]  
-> **Changements dans EF Core 2.0 :** dans les versions précédentes, *Restrict* provoquerait la définition des propriétés de clé étrangère facultatives dans des entités dépendantes suivies sur null. C’était le comportement de suppression par défaut pour les relations optionnelles. Dans EF Core 2.0, l’option *ClientSetNull* a été introduite pour représenter ce comportement et est devenue la valeur par défaut pour les relations facultatives. Le comportement de *Restrict* a été ajusté pour ne jamais avoir d’effets sur les entités dépendantes.
+> **Modifications apportées à EF Core 2,0 :** Dans les versions précédentes, *Limit* entraînait la définition de propriétés de clé étrangère facultatives dans les entités dépendantes suivies comme ayant la valeur null, et était le comportement de suppression par défaut pour les relations facultatives. Dans EF Core 2.0, l’option *ClientSetNull* a été introduite pour représenter ce comportement et est devenue la valeur par défaut pour les relations facultatives. Le comportement de *Restrict* a été ajusté pour ne jamais avoir d’effets sur les entités dépendantes.
 
 ## <a name="entity-deletion-examples"></a>Exemples de suppression d’entité
 
-Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre ce qui se passe pour chaque comportement de suppression pour les relations facultatives et requises lorsqu’une entité parente est supprimée.
+Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre ce qui se passe pour chaque comportement de suppression pour les relations facultatives et requises lorsqu’une entité parente est supprimée.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
 Nous allons étudier chaque variation de comprendre ce qui se passe.
 
@@ -181,9 +181,9 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ## <a name="delete-orphans-examples"></a>Exemples de suppression d’orphelins
 
-Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre ce qui se passe pour chaque comportement de suppression pour les relations facultatives et requises lorsque la relation entre une entité principale/parent et ses entités dépendantes/enfant est interrompue. Dans cet exemple, la relation est rompue en supprimant les entités dépendantes/enfant (les billets) de la propriété de navigation de collection sur l’entité principale/parent (le blog). Toutefois, le comportement est le même si la référence de l’entité dépendante/enfant vers l’entité principale/parent est annulée à la place.
+Le code suivant fait partie d’un [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre ce qui se passe pour chaque comportement de suppression pour les relations facultatives et requises lorsque la relation entre une entité principale/parent et ses entités dépendantes/enfant est interrompue. Dans cet exemple, la relation est rompue en supprimant les entités dépendantes/enfant (les billets) de la propriété de navigation de collection sur l’entité principale/parent (le blog). Toutefois, le comportement est le même si la référence de l’entité dépendante/enfant vers l’entité principale/parent est annulée à la place.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
 
 Nous allons étudier chaque variation de comprendre ce qui se passe.
 

@@ -1,30 +1,30 @@
 ---
-title: Clés secondaires - EF Core
+title: Autres clés-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 8a5931d4-b480-4298-af36-0e29d74a37c0
 uid: core/modeling/alternate-keys
-ms.openlocfilehash: b26d8bc1630af9e811d9c4e7da850a618bc8042e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 87df5d174a1db12fb3ab763ac76c3b863a83087e
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996969"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197464"
 ---
 # <a name="alternate-keys"></a>Clés secondaires
 
-Une autre clé sert d’un autre identificateur unique pour chaque instance d’entité en plus de la clé primaire. Clés secondaires peuvent être utilisés comme cible d’une relation. Lorsque vous utilisez une base de données relationnelle correspond au concept d’une contrainte/index unique sur les colonnes de clé secondaires et un ou plusieurs contraintes de clé étrangère qui font référence à l’ou les colonnes.
+Une autre clé sert d’identificateur unique alternatif pour chaque instance d’entité en plus de la clé primaire. D’autres clés peuvent être utilisées comme cible d’une relation. Lors de l’utilisation d’une base de données relationnelle, cela correspond au concept d’index/de contrainte unique sur la ou les colonnes clés de remplacement et une ou plusieurs contraintes de clé étrangère qui référencent la ou les colonnes.
 
 > [!TIP]  
-> Si vous souhaitez simplement l’unicité d’une colonne vous ensuite un index unique plutôt qu’une autre clé, consultez [index](indexes.md). Dans EF, les clés secondaires fournissent davantage de fonctionnalités que les index uniques car ils peuvent être utilisés comme cible d’une clé étrangère.
+> Si vous souhaitez simplement garantir l’unicité d’une colonne, vous devez disposer d’un index unique plutôt que d’une clé secondaire, consultez [index](indexes.md). Dans EF, les clés alternatives offrent des fonctionnalités supérieures à celles des index uniques, car elles peuvent être utilisées comme cible d’une clé étrangère.
 
-Clés secondaires sont généralement introduites pour vous si nécessaire et vous n’avez pas besoin de les configurer manuellement. Consultez [Conventions](#conventions) pour plus d’informations.
+Des clés alternatives sont généralement introduites pour vous si nécessaire et vous n’avez pas besoin de les configurer manuellement. Pour plus d’informations, consultez [conventions](#conventions) .
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, une autre clé est introduite pour vous lorsque vous identifiez une propriété qui n’est pas la clé primaire, comme la cible d’une relation.
+Par Convention, une clé secondaire est introduite pour vous lorsque vous identifiez une propriété, qui n’est pas la clé primaire, comme la cible d’une relation.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/AlternateKey.cs?highlight=12)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/AlternateKey.cs?highlight=12)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -62,13 +62,13 @@ public class Post
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Clés secondaires ne peuvent pas être configurés à l’aide des Annotations de données.
+Les clés secondaires ne peuvent pas être configurées à l’aide d’annotations de données.
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour configurer une propriété unique pour être une autre clé.
+Vous pouvez utiliser l’API Fluent pour configurer une seule propriété pour qu’elle soit une clé secondaire.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/AlternateKeySingle.cs?highlight=7,8)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/AlternateKeySingle.cs?highlight=7,8)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -90,9 +90,9 @@ class Car
 }
 ```
 
-Vous pouvez également utiliser l’API Fluent pour configurer plusieurs propriétés d’une autre clé (comme une autre clé composite).
+Vous pouvez également utiliser l’API Fluent pour configurer plusieurs propriétés en tant que clé secondaire (appelée clé de remplacement composite).
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/AlternateKeyComposite.cs?highlight=7,8)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/AlternateKeyComposite.cs?highlight=7,8)] -->
 ``` csharp
 class MyContext : DbContext
 {

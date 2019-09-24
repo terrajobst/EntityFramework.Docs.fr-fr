@@ -4,25 +4,25 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 23e0e4611f642d59048fca5a808d0782b22caa1e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 6f72458504a9dbe99038af7cfd23b6991258f6b8
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994799"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197778"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
 Découvrez comment ajouter, modifier et supprimer des données à l’aide de vos classes de contexte et d’entité.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) sur GitHub.
 
 ## <a name="adding-data"></a>Ajout de données
 
 Utilisez la méthode *DbSet.Add* pour ajouter de nouvelles instances de vos classes d’entité. Les données seront insérées dans la base de données lorsque vous appelez *SaveChanges*.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Add)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
 > Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](related-data.md). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
@@ -33,7 +33,7 @@ EF détecte automatiquement les modifications apportées à une entité existant
 
 Modifiez simplement les valeurs affectées aux propriétés, puis appelez *SaveChanges*.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Update)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Update)]
 
 ## <a name="deleting-data"></a>Suppression de données
 
@@ -41,7 +41,7 @@ Utilisez la méthode *DbSet.Remove* pour supprimer les instances de vos classes 
 
 Si l’entité existe déjà dans la base de données, elle sera supprimée pendant *SaveChanges*. Si l’entité n’a pas encore été enregistrée dans la base de données (autrement dit, si elle est suivie comme ajoutée), elle sera supprimée du contexte et ne pourra plus être insérée lorsque *SaveChanges* est appelé.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Remove)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Remove)]
 
 ## <a name="multiple-operations-in-a-single-savechanges"></a>Plusieurs opérations dans un seul SaveChanges
 
@@ -50,4 +50,4 @@ Vous pouvez combiner plusieurs opérations d’ajout/mise à jour/suppression en
 > [!NOTE]  
 > Pour la plupart des fournisseurs de base de données, *SaveChanges* est transactionnel. Cela signifie que toutes les opérations réussissent ou échouent complètement et que les opérations ne sont jamais partiellement appliquées.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#MultipleOperations)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#MultipleOperations)]

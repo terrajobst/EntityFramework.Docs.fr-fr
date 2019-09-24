@@ -1,15 +1,15 @@
 ---
-title: Contraintes de clé étrangère - EF Core
+title: Contraintes de clé étrangère-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: dbaf4bac-1fd5-46c0-ac57-64d7153bc574
 uid: core/modeling/relational/fk-constraints
-ms.openlocfilehash: a83f72b5d832e349fb4a5fb3b2de0b82bd79ef2a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d7ed4466f4df9ec01267b048ba1bbcc6e8bbdad5
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993986"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197071"
 ---
 # <a name="foreign-key-constraints"></a>Contraintes de clé étrangère
 
@@ -20,17 +20,17 @@ Une contrainte de clé étrangère est introduite pour chaque relation dans le m
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, les contraintes de clé étrangère sont nommés `FK_<dependent type name>_<principal type name>_<foreign key property name>`. Pour les clés étrangères composites `<foreign key property name>` devient une liste séparée par des traits de soulignement des noms de propriété de clé étrangère.
+Par Convention, les contraintes de clé étrangère `FK_<dependent type name>_<principal type name>_<foreign key property name>`sont nommées. Pour les clés `<foreign key property name>` étrangères composites devient une liste de noms de propriétés de clé étrangère séparés par un trait de soulignement.
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Les noms de contrainte de clé étrangère ne peut pas être configurés à l’aide des annotations de données.
+Les noms de contrainte de clé étrangère ne peuvent pas être configurés à l’aide d’annotations de données.
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour configurer le nom de la contrainte de clé étrangère d’une relation.
+Vous pouvez utiliser l’API Fluent pour configurer le nom de la contrainte de clé étrangère pour une relation.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/RelationshipConstraintName.cs?highlight=12)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/RelationshipConstraintName.cs?highlight=12)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -62,6 +62,6 @@ public class Post
     public string Content { get; set; }
 
     public int BlogId { get; set; }
-    public Blog Blog { get; set; }
+    public Blog Blog { get; set; }
 }
 ```

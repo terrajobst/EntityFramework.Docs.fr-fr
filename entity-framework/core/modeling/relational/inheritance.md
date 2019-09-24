@@ -1,35 +1,35 @@
 ---
-title: Héritage (base de données relationnelle) - EF Core
+title: Héritage (base de données relationnelle)-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: 2d0a2abc554f5f115479f886ca3f9f4f01b80b5b
-ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
+ms.openlocfilehash: a7fb19f9c86d1768967d172c006eb5d894254e0c
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/31/2019
-ms.locfileid: "66452284"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71196931"
 ---
 # <a name="inheritance-relational-database"></a>Héritage (base de données relationnelle)
 
 > [!NOTE]  
 > La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
-L’héritage dans le modèle EF est utilisé pour contrôler la façon dont l’héritage dans les classes d’entité est représentée dans la base de données.
+L’héritage dans le modèle EF est utilisé pour contrôler le mode de représentation de l’héritage dans les classes d’entité dans la base de données.
 
 > [!NOTE]  
-> Actuellement, uniquement au modèle de table par hiérarchie (TPH) est implémenté dans EF Core. Autres modèles courants comme table par type (TPT) et table-par-type concret (TPC) ne sont pas encore disponibles.
+> Actuellement, seul le modèle TPH (table par hiérarchie) est implémenté dans EF Core. D’autres modèles courants tels que table par type (TPT) et table par type (TPC) ne sont pas encore disponibles.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, l’héritage sera mappé à l’aide du modèle de table par hiérarchie (TPH). TPH utilise une seule table pour stocker les données pour tous les types dans la hiérarchie. Une colonne de discriminateur est utilisée pour identifier le type de chaque ligne représente.
+Par Convention, l’héritage est mappé à l’aide du modèle TPH (table par hiérarchie). TPH utilise une table unique pour stocker les données de tous les types dans la hiérarchie. Une colonne de discriminateur est utilisée pour identifier le type représenté par chaque ligne.
 
-EF Core sera uniquement installer héritage si deux ou plusieurs des types hérités sont explicitement inclus dans le modèle (voir [héritage](../inheritance.md) pour plus d’informations).
+EF Core configure l’héritage uniquement si au moins deux types hérités sont explicitement inclus dans le modèle (pour plus d’informations, consultez [héritage](../inheritance.md) ).
 
-Voici un exemple montrant un scénario d’héritage simple et les données stockées dans une table de base de données relationnelle en utilisant le modèle TPH. Le *discriminateur* colonne identifie le type de *Blog* sont stockées dans chaque ligne.
+Voici un exemple qui illustre un scénario d’héritage simple et les données stockées dans une table de base de données relationnelle à l’aide du modèle TPH. La colonne de *discriminateur* identifie le type de *blog* qui est stocké dans chaque ligne.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/Conventions/Samples/InheritanceDbSets.cs)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/Conventions/InheritanceDbSets.cs)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -52,17 +52,17 @@ public class RssBlog : Blog
 ![image](_static/inheritance-tph-data.png)
 
 >[!NOTE]
-> Colonnes de la base de données sont automatiquement rendus nullables en fonction des besoins lors de l’utilisation du mappage TPH.
+> Les colonnes de base de données deviennent automatiquement Nullable si nécessaire lors de l’utilisation du mappage TPH.
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Vous ne pouvez pas utiliser des Annotations de données pour configurer l’héritage.
+Vous ne pouvez pas utiliser des annotations de données pour configurer l’héritage.
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour configurer le nom et le type de la colonne de discriminateur et les valeurs qui sont utilisées pour identifier chaque type dans la hiérarchie.
+Vous pouvez utiliser l’API Fluent pour configurer le nom et le type de la colonne de discriminateur et les valeurs utilisées pour identifier chaque type dans la hiérarchie.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/InheritanceTPHDiscriminator.cs?highlight=7,8,9,10)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/InheritanceTPHDiscriminator.cs?highlight=7,8,9,10)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -91,7 +91,7 @@ public class RssBlog : Blog
 
 ## <a name="configuring-the-discriminator-property"></a>Configuration de la propriété de discriminateur
 
-Dans les exemples ci-dessus, le discriminateur est créé comme un [occulter la propriété](xref:core/modeling/shadow-properties) sur l’entité de base de la hiérarchie. Dans la mesure où il s’agit d’une propriété dans le modèle, il peut être configuré comme d’autres propriétés. Par exemple, pour définir la longueur maximale lorsque la valeur par défaut, les discriminateur par convention est utilisée :
+Dans les exemples ci-dessus, le discriminateur est créé en tant que [propriété Shadow](xref:core/modeling/shadow-properties) sur l’entité de base de la hiérarchie. Étant donné qu’il s’agit d’une propriété dans le modèle, elle peut être configurée comme d’autres propriétés. Par exemple, pour définir la longueur maximale lorsque le discriminateur par défaut par convention est utilisé :
 
 ```C#
 modelBuilder.Entity<Blog>()
@@ -99,7 +99,7 @@ modelBuilder.Entity<Blog>()
     .HasMaxLength(200);
 ```
 
-Le discriminateur peut également être mappé à une propriété CLR réelle de votre entité. Exemple :
+Le discriminateur peut également être mappé à une propriété CLR réelle dans votre entité. Par exemple :
 ```C#
 class MyContext : DbContext
 {
@@ -125,7 +125,7 @@ public class RssBlog : Blog
 }
 ```
 
-Combinant ces deux opérations, il est possible de mapper le discriminateur pour une véritable propriété et le configurer :
+Pour combiner ces deux éléments, il est possible de mapper le discriminateur à une véritable propriété et de le configurer :
 ```C#
 modelBuilder.Entity<Blog>(b =>
 {

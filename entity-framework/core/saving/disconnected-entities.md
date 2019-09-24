@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 51367d2619b1943c300f8954123f70b909ad96e7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994397"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197808"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -19,7 +19,7 @@ Une instance de DbContext suit automatiquement les entités retournées à parti
 Toutefois, parfois, les entités sont interrogées par une instance de contexte, puis enregistrées à l’aide d’une autre instance. Cela se produit souvent dans les scénarios « déconnectés », par exemple une application web où les entités sont interrogées, envoyées au client, modifiées, envoyées sur le serveur dans une demande et puis enregistrées. Dans ce cas, la deuxième instance de contexte doit savoir si les entités sont nouvelles (doivent être insérées) ou existantes (doivent être mises à jour).
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) sur GitHub.
 
 > [!TIP]
 > EF Core peut suivre une seule instance d’une entité avec une valeur de clé primaire donnée. La meilleure façon d’éviter ce problème consiste à utiliser un contexte de courte durée de vie pour chaque unité de travail, de sorte que le contexte commence vide, ait des entités associées, enregistre ces entités, puis soit supprimé.
@@ -38,11 +38,11 @@ La valeur d’une clé générée automatiquement peut souvent être utilisée p
 
 Il est facile de rechercher une clé non définie lorsque le type d’entité est connu :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewSimple)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewSimple)]
 
 Toutefois, EF a également un moyen intégré de faire cela pour n’importe quel type d’entité et type de clé :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
 > [!TIP]  
 > Les clés sont définies dès que les entités sont suivies par le contexte, même si l’entité est dans l’état Ajouté. Cela est utile lors du parcours d’un graphique d’entités pour décider quelles actions effectuer avec chacune, par exemple lors de l’utilisation de l’API TrackGraph. La valeur de clé doit uniquement être utilisée de la manière illustrée ici _avant_ qu’un appel soit envoyé pour effectuer le suivi de l’entité.
@@ -55,7 +55,7 @@ Un autre mécanisme est nécessaire pour identifier les nouvelles entités lorsq
 
 Pour rechercher l’entité, utilisez simplement la méthode Find :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewQuery)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewQuery)]
 
 L’affichage du code complet pour le passage d’un indicateur depuis un client n’entre pas dans la portée de ce document. Dans une application web, cela consiste généralement à effectuer des demandes différentes pour différentes actions, ou à passer un état dans la demande, puis l’extraire dans le contrôleur.
 
@@ -63,20 +63,20 @@ L’affichage du code complet pour le passage d’un indicateur depuis un client
 
 Si on sait si une insertion ou une mise à jour est nécessaire, vous pouvez ajouter Add ou Update de manière appropriée :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
 
 Toutefois, si l’entité utilise les valeurs de clé générées automatiquement, la méthode Update peut être utilisée pour les deux cas :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
 
 Normalement, la méthode Update marque l’entité pour la mise à jour, et non l’insertion. Toutefois, si l’entité a une clé générée automatiquement, et qu’aucune valeur de clé n’a été définie, l’entité est automatiquement marquée pour insertion.
 
 > [!TIP]  
 > Ce comportement a été introduit dans EF Core 2.0. Pour les versions antérieures, il est toujours nécessaire de choisir explicitement Add ou Update.
 
-Si l’entité n’utilise pas les clés générées automatiquement, l’application doit décider si l’entité doit être insérée ou mise à jour. Par exemple :
+Si l’entité n’utilise pas de clés générées automatiquement, l’application doit décider si l’entité doit être insérée ou mise à jour : Par exemple :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 Les étapes ici sont :
 * Si Find retourne null, la base de données ne contient pas encore le blog avec cet ID, nous appelons donc Add pour le marquer pour insertion.
@@ -97,17 +97,17 @@ Comme indiqué ci-dessus, EF Core peut suivre une seule instance d’une entité
 
 Un exemple d’utilisation des graphiques est l’insertion ou la mise à jour d’un blog ainsi que de sa collection de billets associés. Si toutes les entités dans le graphique doivent être insérées, ou toutes doivent être mises à jour, le processus est identique à celui décrit ci-dessus pour les entités uniques. Par exemple, un graphique de blogs et publications créé comme suit :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
 
 peut être inséré comme suit :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertGraph)]
 
 L’appel à Add marque le blog et tous les billets à insérer.
 
 De même, si toutes les entités dans un graphique doivent être mises à jour, alors Update peut être utilisé :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#UpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#UpdateGraph)]
 
 Le blog et tous ses billets seront marqués pour être mis à jour.
 
@@ -115,26 +115,26 @@ Le blog et tous ses billets seront marqués pour être mis à jour.
 
 Avec les clés générées automatiquement, Update est de nouveau utilisable à la fois pour les insertions et pour les mises à jour, même si le graphique contient un mélange d’entités qui nécessitent l’insertion et d’autres qui nécessitent la mise à jour :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
 
 Update marque une entité dans le graphique, le blog ou un billet, pour insertion si elle ne dispose pas d’un ensemble clé-valeur, tandis que toutes les autres entités sont marquées pour mise à jour.
 
 Comme précédemment, lorsque vous n’utilisez pas les clés générées automatiquement, vous pouvez utiliser une requête et un traitement :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
 
 ## <a name="handling-deletes"></a>Gestion des suppressions
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
 ## <a name="trackgraph"></a>TrackGraph
 
 En interne, Add, Attach et Update utilisent la traversée de graphique en déterminant pour chaque entité si elle doit être marquée comme Added (à insérer), Modified (à mettre à jour), Unchanged (ne rien faire), ou Deleted (à supprimer). Ce mécanisme est exposé via l’API TrackGraph. Par exemple, supposons que, lorsque le client envoie un graphique d’entités, il définit certains indicateurs sur chaque entité indiquant comment elle doit être gérée. TrackGraph peut ensuite être utilisé pour traiter cet indicateur :
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#TrackGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#TrackGraph)]
 
 Les indicateurs sont uniquement affichés dans le cadre de l’entité pour simplifier l’exemple. En général, les indicateurs feraient partie d’un DTO ou d’un autre état inclus dans la demande.

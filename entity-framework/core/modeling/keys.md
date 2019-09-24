@@ -1,27 +1,27 @@
 ---
-title: Clés (principal) - EF Core
+title: Clés (principale)-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 51d163b867085f42f415dbd7afa9e311ab1781a0
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
+ms.openlocfilehash: 8b32bf6417890a954c933a5973a2c90c609beeca
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929834"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197271"
 ---
-# <a name="keys-primary"></a>Clés (primaire)
+# <a name="keys-primary"></a>Clés (principale)
 
-Une clé sert d’identificateur principal unique pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle correspond à la notion d’un *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (consultez [clés secondaires](alternate-keys.md) pour plus d’informations). 
+Une clé sert d’identificateur unique principal pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle, cela correspond au concept d’une *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (pour plus d’informations, consultez [autres clés](alternate-keys.md) ). 
 
-Une des méthodes suivantes peut être utilisée pour le programme d’installation/créer une clé primaire.
+L’une des méthodes suivantes peut être utilisée pour configurer/créer une clé primaire.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, une propriété nommée `Id` ou `<type name>Id` sera configuré en tant que la clé d’une entité.
+Par Convention, une propriété nommée `Id` ou `<type name>Id` sera configurée comme clé d’une entité.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/KeyId.cs?highlight=3)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyId.cs?highlight=3)] -->
 ``` csharp
 class Car
 {
@@ -32,7 +32,7 @@ class Car
 }
 ```
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/KeyTypeNameId.cs?highlight=3)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyTypeNameId.cs?highlight=3)] -->
 ``` csharp
 class Car
 {
@@ -45,16 +45,16 @@ class Car
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Vous pouvez utiliser des Annotations de données pour configurer une propriété unique pour être la clé d’une entité.
+Vous pouvez utiliser des annotations de données pour configurer une seule propriété en tant que clé d’une entité.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/KeySingle.cs?highlight=13)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?highlight=13)]
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour configurer une propriété unique pour être la clé d’une entité.
+Vous pouvez utiliser l’API Fluent pour configurer une propriété unique en tant que clé d’une entité.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/KeySingle.cs?highlight=11,12)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?highlight=11,12)]
 
-Vous pouvez également utiliser l’API Fluent pour configurer plusieurs propriétés de la clé d’une entité (appelée une clé composite). Clés composites ne peuvent être configurés à l’aide de l’API Fluent : conventions d’installation ajoute jamais une clé composite, et vous ne pouvez pas utiliser des Annotations de données pour configurer une.
+Vous pouvez également utiliser l’API Fluent pour configurer plusieurs propriétés en tant que clé d’une entité (appelée clé composite). Les clés composites ne peuvent être configurées qu’à l’aide des conventions de l’API Fluent qui ne configureront jamais de clé composite, et vous ne pourrez pas utiliser d’annotations de données pour en configurer une.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/KeyComposite.cs?highlight=11,12)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?highlight=11,12)]

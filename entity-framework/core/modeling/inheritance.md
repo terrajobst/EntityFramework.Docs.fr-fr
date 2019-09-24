@@ -1,40 +1,40 @@
 ---
-title: Héritage - EF Core
+title: Héritage-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 754be334-dd21-450e-9d22-2591e80012a2
 uid: core/modeling/inheritance
-ms.openlocfilehash: f6b5c8f5a398ac1e28e29bc17f0674c5b76d7b20
-ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
+ms.openlocfilehash: 1f20c455176b5922364584f8c7688c15a4c3f0f9
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58319125"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197287"
 ---
 # <a name="inheritance"></a>Héritage
 
-L’héritage dans le modèle EF est utilisé pour contrôler la façon dont l’héritage dans les classes d’entité est représentée dans la base de données.
+L’héritage dans le modèle EF est utilisé pour contrôler le mode de représentation de l’héritage dans les classes d’entité dans la base de données.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, il incombe au fournisseur de base de données de déterminer comment l’héritage est représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour comment ceci est géré avec un fournisseur de base de données relationnelle.
+Par Convention, il revient au fournisseur de base de données de déterminer la façon dont l’héritage sera représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour savoir comment cela est géré avec un fournisseur de base de données relationnelle.
 
-EF n'est que le programme d’installation l’héritage si deux ou plusieurs des types hérités sont explicitement inclus dans le modèle. EF n’analyse pas pour les types de base ou dérivés qui ne figuraient pas dans le cas contraire dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet<TEntity>*  pour chaque type dans la hiérarchie d’héritage.
+EF ne configure l’héritage que si deux ou plusieurs types hérités sont explicitement inclus dans le modèle. EF ne recherche pas les types de base ou dérivés qui n’étaient pas inclus dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet<TEntity>*  pour chaque type dans la hiérarchie d’héritage.
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/InheritanceDbSets.cs?highlight=3-4&name=Model)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceDbSets.cs?highlight=3-4&name=Model)]
 
-Si vous ne souhaitez pas exposer un *DbSet<TEntity>*  pour une ou plusieurs entités dans la hiérarchie, vous pouvez utiliser l’API Fluent pour vous assurer qu’ils sont inclus dans le modèle.
-Et si vous ne vous fiez conventions, vous pouvez spécifier le type de base explicitement à l’aide de `HasBaseType`.
+Si vous ne souhaitez pas exposer un *DbSet<TEntity>*  pour une ou plusieurs entités dans la hiérarchie, vous pouvez utiliser l’API Fluent pour vous assurer qu’elles sont incluses dans le modèle.
+Et si vous ne vous fiez pas aux conventions, vous pouvez spécifier explicitement le type `HasBaseType`de base à l’aide de.
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/InheritanceModelBuilder.cs?highlight=7&name=Context)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceModelBuilder.cs?highlight=7&name=Context)]
 
 > [!NOTE]
-> Vous pouvez utiliser `.HasBaseType((Type)null)` pour supprimer un type d’entité à partir de la hiérarchie.
+> Vous pouvez utiliser `.HasBaseType((Type)null)` pour supprimer un type d’entité de la hiérarchie.
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Vous ne pouvez pas utiliser des Annotations de données pour configurer l’héritage.
+Vous ne pouvez pas utiliser des annotations de données pour configurer l’héritage.
 
 ## <a name="fluent-api"></a>API Fluent
 
-Le fournisseur de base de données que vous utilisez dépend de l’API Fluent pour l’héritage. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour la configuration que vous pouvez effectuer pour un fournisseur de base de données relationnelle.
+L’API Fluent pour l’héritage dépend du fournisseur de base de données que vous utilisez. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour la configuration que vous pouvez effectuer pour un fournisseur de base de données relationnelle.

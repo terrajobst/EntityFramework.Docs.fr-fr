@@ -4,16 +4,16 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 1f63593631017a61c39ccab9216adbc4663700e7
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: f7c241159c689d4648b2778b53e50c22f580deb0
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71148901"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197926"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 Les modifications d’API et de comportement suivantes peuvent bloquer les applications existantes lors de leur mise à niveau vers 3.0.0.
-Les changements qui, selon nous, auront une incidence uniquement sur les fournisseurs de base de données sont documentés dans [Changements ayant un impact sur les fournisseurs](../../providers/provider-log.md).
+Les changements qui, selon nous, auront une incidence uniquement sur les fournisseurs de base de données sont documentés dans [Changements ayant un impact sur les fournisseurs](xref:core/providers/provider-log).
 Les interruptions d’une version préliminaire 3,0 à une autre version d’évaluation de 3,0 ne sont pas documentées ici.
 
 ## <a name="summary"></a>Récapitulatif
@@ -23,6 +23,7 @@ Les interruptions d’une version préliminaire 3,0 à une autre version d’év
 | [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Haute       |
 | [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Haute      |
 | [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Haute      |
+| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Haute      |
 | [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Haute      |
 | [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Haute      |
 | [Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core](#no-longer) | Moyenne      |
@@ -37,7 +38,6 @@ Les interruptions d’une version préliminaire 3,0 à une autre version d’év
 | [Les méthodes FromSql peuvent uniquement être spécifiées sur les racines de requête](#fromsql) | Faible      |
 | [~~L’exécution de requêtes est enregistrée au niveau du débogage ~~Rétabli](#qe) | Faible      |
 | [Les valeurs de clés temporaires ne sont plus définies sur les instances d’entités](#tkv) | Faible      |
-| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Faible      |
 | [Les entités dépendantes qui partagent la table avec le principal sont maintenant facultatives](#de) | Faible      |
 | [Toutes les entités qui partagent une table avec une colonne de jeton de concurrence doivent la mapper à une propriété](#aes) | Faible      |
 | [Les propriétés héritées de types non mappés sont maintenant mappées à une seule colonne pour tous les types dérivés](#ip) | Faible      |
@@ -69,6 +69,7 @@ Les interruptions d’une version préliminaire 3,0 à une autre version d’év
 | [SQLitePCL.raw mis à jour vers la version 2.0.0](#SQLitePCL) | Faible      |
 | [NetTopologySuite mis à jour vers la version 2.0.0](#NetTopologySuite) | Faible      |
 | [Plusieurs relations autoréférencées ambiguës doivent être configurées](#mersa) | Faible      |
+| [DbFunction. Schema étant null ou une chaîne vide, il est configuré pour être dans le schéma par défaut du modèle](#udf-empty-string) | Faible      |
 
 ### <a name="linq-queries-are-no-longer-evaluated-on-the-client"></a>Les requêtes LINQ ne sont plus évaluées sur le client
 
@@ -174,7 +175,7 @@ Ce changement nous permet de distribuer et mettre à jour `dotnet ef` sous forme
 Pour pouvoir gérer des migrations ou générer un `DbContext`, installez `dotnet-ef` comme outil général :
 
   ``` console
-    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
+    $ dotnet tool install --global dotnet-ef
   ```
 
 Vous pouvez également obtenir un outil local quand vous restaurez les dépendances d’un projet qui le déclare en tant que dépendance d’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
@@ -1714,4 +1715,39 @@ modelBuilder
      .Entity<User>()
      .HasOne(e => e.UpdatedBy)
      .WithMany();
+```
+
+<a name="udf-empty-string"></a>
+### <a name="dbfunctionschema-being-null-or-empty-string-configures-it-to-be-in-models-default-schema"></a>DbFunction. Schema étant null ou une chaîne vide, il est configuré pour être dans le schéma par défaut du modèle
+
+[#12757 du problème de suivi](https://github.com/aspnet/EntityFrameworkCore/issues/12757)
+
+Ce changement a été introduit dans EF Core 3.0-préversion 7.
+
+**Ancien comportement**
+
+Un DbFunction configuré avec un schéma sous forme de chaîne vide a été traité comme une fonction intégrée sans schéma. Par exemple, le code suivant `DatePart` mappera la `DATEPART` fonction CLR à la fonction intégrée sur SqlServer.
+
+```C#
+[DbFunction("DATEPART", Schema = "")]
+public static int? DatePart(string datePartArg, DateTime? date) => throw new Exception();
+
+```
+
+**Nouveau comportement**
+
+Tous les mappages de DbFunction sont considérés comme mappés à des fonctions définies par l’utilisateur. Par conséquent, la valeur de chaîne vide placerait la fonction dans le schéma par défaut pour le modèle. Ce peut être le schéma configuré explicitement via l’API `modelBuilder.HasDefaultSchema()` Fluent `dbo` ou sinon.
+
+**Pourquoi ?**
+
+Le schéma précédemment vide était un moyen de traiter que la fonction est intégrée, mais cette logique s’applique uniquement à SqlServer, où les fonctions intégrées n’appartiennent à aucun schéma.
+
+**Atténuations**
+
+Configurez la traduction de DbFunction manuellement pour la mapper à une fonction intégrée.
+
+```C#
+modelBuilder
+    .HasDbFunction(typeof(MyContext).GetMethod(nameof(MyContext.DatePart)))
+    .HasTranslation(args => SqlFunctionExpression.Create("DatePart", args, typeof(int?), null));
 ```

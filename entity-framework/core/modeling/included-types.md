@@ -1,33 +1,33 @@
 ---
-title: Inclusion et exclusion de Types - EF Core
+title: Inclusion de & à l’exception des types-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/included-types
-ms.openlocfilehash: f533b24312af37634ce4957e43c39ce776bf0bf0
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
+ms.openlocfilehash: ca83b1c432bdf4853dba81e12ec4a739bc8218dc
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929795"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197375"
 ---
-# <a name="including--excluding-types"></a>Inclusion et exclusion de Types
+# <a name="including--excluding-types"></a>Inclusion de & à l’exception des types
 
-Dans les moyens de modèle EF a des métadonnées sur ce type et tentent de lire et écrire des instances à partir / vers la base de données, y compris un type.
+L’inclusion d’un type dans le modèle signifie qu’EF a des métadonnées sur ce type et tente de lire et d’écrire des instances à partir de/vers la base de données.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, les types qui sont exposés dans `DbSet` propriétés de votre contexte sont incluses dans votre modèle. En outre, les types qui sont mentionnées dans le `OnModelCreating` méthode sont également incluses. Enfin, tous les types qui sont trouvent en explorant les propriétés de navigation de types découverts de manière récursive sont également inclus dans le modèle.
+Par Convention, les types qui sont exposés `DbSet` dans les propriétés de votre contexte sont inclus dans votre modèle. En outre, les types qui sont mentionnés dans `OnModelCreating` la méthode sont également inclus. Enfin, tous les types qui sont trouvés en explorant de manière récursive les propriétés de navigation des types découverts sont également inclus dans le modèle.
 
-**Par exemple, les trois types sont détectés dans le code suivant :**
+**Par exemple, dans le code suivant, les trois types sont découverts :**
 
-* `Blog` car elle est exposée dans un `DbSet` propriété dans le contexte
+* `Blog`parce qu’il est exposé dans `DbSet` une propriété sur le contexte
 
-* `Post` car il est découvert par le biais de la `Blog.Posts` propriété de navigation
+* `Post`parce qu’il est découvert via `Blog.Posts` la propriété de navigation
 
-* `AuditEntry` car il sera mentionné dans `OnModelCreating`
+* `AuditEntry`parce qu’il est mentionné dans`OnModelCreating`
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/IncludedTypes.cs?highlight=3,7,16)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/IncludedTypes.cs?highlight=3,7,16)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -66,12 +66,12 @@ public class AuditEntry
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Vous pouvez utiliser des Annotations de données pour exclure un type à partir du modèle.
+Vous pouvez utiliser des annotations de données pour exclure un type du modèle.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/IgnoreType.cs?highlight=20)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?highlight=20)]
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour exclure un type à partir du modèle.
+Vous pouvez utiliser l’API Fluent pour exclure un type du modèle.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/IgnoreType.cs?highlight=12)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?highlight=12)]

@@ -1,36 +1,36 @@
 ---
-title: Colonnes calculées - EF Core
+title: Colonnes calculées-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e9d81f06-805d-45c9-97c2-3546df654829
 uid: core/modeling/relational/computed-columns
-ms.openlocfilehash: b88efdf69e5100e4eff55f3a41925d2d8e7c3178
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: da106c94698a202744d7cd465aa84d0d72802833
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993951"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197233"
 ---
 # <a name="computed-columns"></a>Colonnes calculées
 
 > [!NOTE]  
 > La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).
 
-Une colonne calculée est une colonne dont la valeur est calculée dans la base de données. Une colonne calculée peut utiliser d’autres colonnes dans la table pour calculer sa valeur.
+Une colonne calculée est une colonne dont la valeur est calculée dans la base de données. Une colonne calculée peut utiliser d’autres colonnes de la table pour calculer sa valeur.
 
 ## <a name="conventions"></a>Conventions
 
-Par convention, les colonnes calculées ne sont pas créés dans le modèle.
+Par Convention, les colonnes calculées ne sont pas créées dans le modèle.
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Les colonnes calculées n’ont pas peuvent être configurés avec des Annotations de données.
+Les colonnes calculées ne peuvent pas être configurées avec des annotations de données.
 
 ## <a name="fluent-api"></a>API Fluent
 
-Vous pouvez utiliser l’API Fluent pour spécifier qu’une propriété doit correspondre à une colonne calculée.
+Vous pouvez utiliser l’API Fluent pour spécifier qu’une propriété doit être mappée à une colonne calculée.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/ComputedColumn.cs?highlight=9)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/ComputedColumn.cs?highlight=9)] -->
 ``` csharp
 class MyContext : DbContext
 {
