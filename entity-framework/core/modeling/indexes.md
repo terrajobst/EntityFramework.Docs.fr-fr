@@ -1,33 +1,33 @@
 ---
-title: Index - EF Core
+title: Index-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: 87fe893243377e3ab83d419ae9bedf813ca50c3f
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b6f11401b69bd8e8795f6b22e5392ba16fc9ba2e
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995478"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197246"
 ---
-# <a name="indexes"></a><span data-ttu-id="4edfd-102">Index</span><span class="sxs-lookup"><span data-stu-id="4edfd-102">Indexes</span></span>
+# <a name="indexes"></a><span data-ttu-id="a1d9f-102">Index</span><span class="sxs-lookup"><span data-stu-id="a1d9f-102">Indexes</span></span>
 
-<span data-ttu-id="4edfd-103">Les index sont un concept commun entre plusieurs banques de données.</span><span class="sxs-lookup"><span data-stu-id="4edfd-103">Indexes are a common concept across many data stores.</span></span> <span data-ttu-id="4edfd-104">Bien que leur implémentation dans le magasin de données peut varier, ils sont utilisés pour faire des recherches basées sur une colonne (ou un ensemble de colonnes) plus efficace.</span><span class="sxs-lookup"><span data-stu-id="4edfd-104">While their implementation in the data store may vary, they are used to make lookups based on a column (or set of columns) more efficient.</span></span>
+<span data-ttu-id="a1d9f-103">Les index sont un concept commun entre de nombreux magasins de données.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-103">Indexes are a common concept across many data stores.</span></span> <span data-ttu-id="a1d9f-104">Bien que leur implémentation dans le magasin de données puisse varier, elles sont utilisées pour rendre les recherches basées sur une colonne (ou un ensemble de colonnes) plus efficaces.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-104">While their implementation in the data store may vary, they are used to make lookups based on a column (or set of columns) more efficient.</span></span>
 
-## <a name="conventions"></a><span data-ttu-id="4edfd-105">Conventions</span><span class="sxs-lookup"><span data-stu-id="4edfd-105">Conventions</span></span>
+## <a name="conventions"></a><span data-ttu-id="a1d9f-105">Conventions</span><span class="sxs-lookup"><span data-stu-id="a1d9f-105">Conventions</span></span>
 
-<span data-ttu-id="4edfd-106">Par convention, un index est créé dans chaque propriété (ou un ensemble de propriétés) qui sont utilisés comme une clé étrangère.</span><span class="sxs-lookup"><span data-stu-id="4edfd-106">By convention, an index is created in each property (or set of properties) that are used as a foreign key.</span></span>
+<span data-ttu-id="a1d9f-106">Par Convention, un index est créé dans chaque propriété (ou ensemble de propriétés) utilisée comme clé étrangère.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-106">By convention, an index is created in each property (or set of properties) that are used as a foreign key.</span></span>
 
-## <a name="data-annotations"></a><span data-ttu-id="4edfd-107">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="4edfd-107">Data Annotations</span></span>
+## <a name="data-annotations"></a><span data-ttu-id="a1d9f-107">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="a1d9f-107">Data Annotations</span></span>
 
-<span data-ttu-id="4edfd-108">Index ne peuvent pas être créés à l’aide des annotations de données.</span><span class="sxs-lookup"><span data-stu-id="4edfd-108">Indexes can not be created using data annotations.</span></span>
+<span data-ttu-id="a1d9f-108">Les index ne peuvent pas être créés à l’aide d’annotations de données.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-108">Indexes can not be created using data annotations.</span></span>
 
-## <a name="fluent-api"></a><span data-ttu-id="4edfd-109">API Fluent</span><span class="sxs-lookup"><span data-stu-id="4edfd-109">Fluent API</span></span>
+## <a name="fluent-api"></a><span data-ttu-id="a1d9f-109">API Fluent</span><span class="sxs-lookup"><span data-stu-id="a1d9f-109">Fluent API</span></span>
 
-<span data-ttu-id="4edfd-110">Vous pouvez utiliser l’API Fluent pour spécifier un index sur une seule propriété.</span><span class="sxs-lookup"><span data-stu-id="4edfd-110">You can use the Fluent API to specify an index on a single property.</span></span> <span data-ttu-id="4edfd-111">Par défaut, les index ne sont pas uniques.</span><span class="sxs-lookup"><span data-stu-id="4edfd-111">By default, indexes are non-unique.</span></span>
+<span data-ttu-id="a1d9f-110">Vous pouvez utiliser l’API Fluent pour spécifier un index sur une seule propriété.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-110">You can use the Fluent API to specify an index on a single property.</span></span> <span data-ttu-id="a1d9f-111">Par défaut, les index sont non uniques.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-111">By default, indexes are non-unique.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Index.cs?highlight=7,8)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Index.cs?highlight=7,8)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -47,18 +47,18 @@ public class Blog
 }
 ```
 
-<span data-ttu-id="4edfd-112">Vous pouvez également spécifier qu’un index doit être unique, ce qui signifie qu’aucun deux entités ne peuvent avoir la même valeur (s) pour les propriétés données.</span><span class="sxs-lookup"><span data-stu-id="4edfd-112">You can also specify that an index should be unique, meaning that no two entities can have the same value(s) for the given property(s).</span></span>
+<span data-ttu-id="a1d9f-112">Vous pouvez également spécifier qu’un index doit être unique, ce qui signifie que deux entités ne peuvent pas avoir la même valeur pour la ou les propriétés spécifiées.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-112">You can also specify that an index should be unique, meaning that no two entities can have the same value(s) for the given property(s).</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/IndexUnique.cs?highlight=3)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/IndexUnique.cs?highlight=3)] -->
 ``` csharp
         modelBuilder.Entity<Blog>()
             .HasIndex(b => b.Url)
             .IsUnique();
 ```
 
-<span data-ttu-id="4edfd-113">Vous pouvez également spécifier un index sur plusieurs colonnes.</span><span class="sxs-lookup"><span data-stu-id="4edfd-113">You can also specify an index over more than one column.</span></span>
+<span data-ttu-id="a1d9f-113">Vous pouvez également spécifier un index sur plusieurs colonnes.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-113">You can also specify an index over more than one column.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/IndexComposite.cs?highlight=7,8)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/IndexComposite.cs?highlight=7,8)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -80,4 +80,4 @@ public class Person
 ```
 
 > [!TIP]  
-> <span data-ttu-id="4edfd-114">Il existe un seul index par un ensemble distinct de propriétés.</span><span class="sxs-lookup"><span data-stu-id="4edfd-114">There is only one index per distinct set of properties.</span></span> <span data-ttu-id="4edfd-115">Si vous utilisez l’API Fluent pour configurer un index sur un ensemble de propriétés qui possède déjà un index défini, soit par convention ou la configuration précédente, puis vous allez modifier la définition de cet index.</span><span class="sxs-lookup"><span data-stu-id="4edfd-115">If you use the Fluent API to configure an index on a set of properties that already has an index defined, either by convention or previous configuration, then you will be changing the definition of that index.</span></span> <span data-ttu-id="4edfd-116">Cela est utile si vous souhaitez continuer à configurer un index qui a été créé par convention.</span><span class="sxs-lookup"><span data-stu-id="4edfd-116">This is useful if you want to further configure an index that was created by convention.</span></span>
+> <span data-ttu-id="a1d9f-114">Il n’existe qu’un seul index par jeu de propriétés distinct.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-114">There is only one index per distinct set of properties.</span></span> <span data-ttu-id="a1d9f-115">Si vous utilisez l’API Fluent pour configurer un index sur un ensemble de propriétés pour lequel un index est déjà défini, soit par Convention, soit par configuration précédente, vous allez modifier la définition de cet index.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-115">If you use the Fluent API to configure an index on a set of properties that already has an index defined, either by convention or previous configuration, then you will be changing the definition of that index.</span></span> <span data-ttu-id="a1d9f-116">Cela est utile si vous souhaitez configurer davantage un index qui a été créé par Convention.</span><span class="sxs-lookup"><span data-stu-id="a1d9f-116">This is useful if you want to further configure an index that was created by convention.</span></span>
