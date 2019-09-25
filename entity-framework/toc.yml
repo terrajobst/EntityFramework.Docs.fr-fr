@@ -1,33 +1,32 @@
 - name: Entity Framework
   href: index.md
   items:
-    - name: Comparer EF Core et EF6
-      href: efcore-and-ef6/index.md
+    - name: EF Core & EF6
       items:
-        - name: EF6 et Core EF dans la même application
-          href: efcore-and-ef6/side-by-side.md
-        - name: Portage depuis EF6 vers EF Core
-          href: efcore-and-ef6/porting/index.md
+        - name: Comparer EF Core et EF6
+          href: efcore-and-ef6/index.md
+        - name: Déplacer d’EF6 vers EF Core
           items:
-            - name: Valider les exigences
-              href: efcore-and-ef6/porting/ensure-requirements.md
+            - name: Vue d'ensemble
+              href: efcore-and-ef6/porting/index.md
             - name: Portage d’un modèle basé sur le format EDMX
               href: efcore-and-ef6/porting/port-edmx.md
             - name: Portage d’un modèle basé sur du code
               href: efcore-and-ef6/porting/port-code.md
+        - name: Utiliser EF6 et EF Core dans la même application
+          href: efcore-and-ef6/side-by-side.md
     - name: Entity Framework Core
-      href: core/index.md
       items:
+        - name: Vue d'ensemble
+          href: core/index.md
         - name: Nouveautés
-          href: core/what-is-new/index.md
           items:
-            - name: Feuille de route
-              href: core/what-is-new/roadmap.md
-            - name: EF Core 3.0 (dernière version)
-              href: core/what-is-new/ef-core-3.0/index.md
+            - name: Vue d'ensemble
+              href: core/what-is-new/index.md
+            - name: EF Core 3.0
               items:
                 - name: Nouvelles fonctionnalités
-                  href: core/what-is-new/ef-core-3.0/features.md
+                  href: core/what-is-new/ef-core-3.0/index.md
                 - name: Modifications avec rupture
                   href: core/what-is-new/ef-core-3.0/breaking-changes.md
             - name: "EF Core\_2.2"
@@ -49,8 +48,9 @@
                 - name: De 1.x vers 2.0
                   href: core/miscellaneous/1x-2x-upgrade.md
         - name: Bien démarrer
-          href: core/get-started/index.md
           items:
+            - name: Tutoriel EF Core
+              href: core/get-started/index.md
             - name: Installation d’EF Core
               href: core/get-started/install/index.md
             - name: ⤤ Tutoriel ASP.NET Core
@@ -64,17 +64,21 @@
             - name: Résilience des connexions
               href: core/miscellaneous/connection-resiliency.md
             - name: Test
-              href: core/miscellaneous/testing/index.md
               items:
+                - name: Vue d'ensemble
+                  href: core/miscellaneous/testing/index.md
                 - name: Test avec SQLite
                   href: core/miscellaneous/testing/sqlite.md
                 - name: Test avec InMemory
                   href: core/miscellaneous/testing/in-memory.md
             - name: Configuration d’un DbContext
               href: core/miscellaneous/configuring-dbcontext.md
+            - name: Types références Nullables
+              href: core/miscellaneous/nullable-reference-types.md
         - name: Création d’un modèle
-          href: core/modeling/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/modeling/index.md
             - name: Inclusion et exclusion de types
               href: core/modeling/included-types.md
             - name: Inclusion et exclusion de propriétés
@@ -83,7 +87,7 @@
               href: core/modeling/keys.md
             - name: Valeurs générées
               href: core/modeling/generated-properties.md
-            - name: Propriétés obligatoires ou facultatives
+            - name: Propriétés obligatoires et facultatives
               href: core/modeling/required-optional.md
             - name: Longueur maximale
               href: core/modeling/max-length.md
@@ -118,8 +122,9 @@
             - name: Données spatiales (GIS)
               href: core/modeling/spatial.md
             - name: Modélisation de base de données relationnelle
-              href: core/modeling/relational/index.md
               items:
+                - name: Vue d'ensemble
+                  href: core/modeling/relational/index.md
                 - name: Mappage de tables
                   href: core/modeling/relational/tables.md
                 - name: Mappage de colonnes
@@ -145,11 +150,13 @@
                 - name: Héritage (base de données relationnelle)
                   href: core/modeling/relational/inheritance.md
         - name: Gestion des schémas de base de données
-          href: core/managing-schemas/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/managing-schemas/index.md
             - name: Migrations
-              href: core/managing-schemas/migrations/index.md
               items:
+                - name: Vue d’ensemble
+                  href: core/managing-schemas/migrations/index.md
                 - name: Environnements d’équipe
                   href: core/managing-schemas/migrations/teams.md
                 - name: Opérations personnalisées
@@ -165,8 +172,9 @@
             - name: Ingénierie à rebours (génération de modèles automatique)
               href: core/managing-schemas/scaffolding.md
         - name: Interrogation des données
-          href: core/querying/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/querying/index.md
             - name: Requête de base
               href: core/querying/basic.md
             - name: Chargement des données associées
@@ -186,8 +194,9 @@
             - name: Balises de requête
               href: core/querying/tags.md
         - name: Enregistrement de données
-          href: core/saving/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/saving/index.md
             - name: Enregistrement de base
               href: core/saving/basic.md
             - name: Données associées
@@ -207,21 +216,25 @@
         - name: Implémentations de .NET prises en charge
           href: core/platforms/index.md
         - name: Fournisseurs de bases de données
-          href: core/providers/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/providers/index.md
             - name: Microsoft SQL Server
-              href: core/providers/sql-server/index.md
               items:
+                - name: Vue d'ensemble
+                  href: core/providers/sql-server/index.md
                 - name: Tables à mémoire optimisée
                   href: core/providers/sql-server/memory-optimized-tables.md
             - name: SQLite
-              href: core/providers/sqlite/index.md
               items:
+                - name: Vue d'ensemble
+                  href: core/providers/sqlite/index.md
                 - name: Limitations de SQLite
                   href: core/providers/sqlite/limitations.md
             - name: Cosmos
-              href: core/providers/cosmos/index.md
               items:
+                - name: Vue d'ensemble
+                  href: core/providers/cosmos/index.md
                 - name: Utilisation de données non structurées
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Limitations de Cosmos
@@ -235,8 +248,9 @@
         - name: Outils et extensions
           href: core/extensions/index.md
         - name: Référence de la ligne de commande
-          href: core/miscellaneous/cli/index.md
           items:
+            - name: Vue d'ensemble
+              href: core/miscellaneous/cli/index.md
             - name: Console du Gestionnaire de package (Visual Studio)
               href: core/miscellaneous/cli/powershell.md
             - name: CLI .NET Core
@@ -248,11 +262,13 @@
         - name: ⤤ Informations de référence de l’API EF Core
           href: 'https://docs.microsoft.com/dotnet/api/?view=efcore-2.1'
     - name: Entity Framework 6
-      href: ef6/index.md
       items:
+        - name: Vue d'ensemble
+          href: ef6/index.md
         - name: Nouveautés
-          href: ef6/what-is-new/index.md
           items:
+            - name: Vue d'ensemble
+              href: ef6/what-is-new/index.md
             - name: Versions précédentes
               href: ef6/what-is-new/past-releases.md
             - name: Mise à niveau vers EF6
@@ -262,7 +278,6 @@
         - name: Bien démarrer
           href: ef6/get-started.md
         - name: Notions de base
-          href: ef6/fundamentals/index.md
           items:
             - name: Obtenir Entity Framework
               href: ef6/fundamentals/install.md
@@ -297,11 +312,13 @@
                 - name: WPF
                   href: ef6/fundamentals/databinding/wpf.md
             - name: Entités déconnectées
-              href: ef6/fundamentals/disconnected-entities/index.md
               items:
+                - name: Vue d'ensemble
+                  href: ef6/fundamentals/disconnected-entities/index.md
                 - name: Entités de suivi automatique
-                  href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                   items:
+                    - name: Vue d'ensemble
+                      href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                     - name: Procédure pas à pas
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md
             - name: Journalisation et interception
@@ -315,8 +332,9 @@
                 - name: Utilisation des vues prégénérées
                   href: ef6/fundamentals/performance/pre-generated-views.md
             - name: Fournisseurs
-              href: ef6/fundamentals/providers/index.md
               items:
+                - name: Vue d'ensemble
+                  href: ef6/fundamentals/providers/index.md
                 - name: Modèle de fournisseur EF6
                   href: ef6/fundamentals/providers/provider-model.md
                 - name: Prise en charge spatiale dans les fournisseurs
@@ -332,8 +350,9 @@
                 - name: Testabilité avec EF4 (Article)
                   href: ef6/fundamentals/testing/testability-article.md
         - name: Création d’un modèle
-          href: ef6/modeling/index.md
           items:
+            - name: Vue d'ensemble
+              href: ef6/modeling/index.md
             - name: Utilisation de Code First
               items:
                 - name: Flux de travail
@@ -371,8 +390,9 @@
                     - name: Mappage de procédures stockées
                       href: ef6/modeling/code-first/fluent/cud-stored-procedures.md
                 - name: Migrations
-                  href: ef6/modeling/code-first/migrations/index.md
                   items:
+                    - name: Vue d'ensemble
+                      href: ef6/modeling/code-first/migrations/index.md
                     - name: Migrations automatiques
                       href: ef6/modeling/code-first/migrations/automatic.md
                     - name: Utilisation de bases de données existantes
@@ -424,8 +444,9 @@
                 - name: Choix de la version de runtime
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: Génération de code
-                  href: ef6/modeling/designer/codegen/index.md
                   items:
+                    - name: Vue d'ensemble
+                      href: ef6/modeling/designer/codegen/index.md
                     - name: ObjectContext hérité
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
                 - name: Avancé
@@ -447,8 +468,9 @@
                 - name: Raccourcis clavier
                   href: ef6/modeling/designer/keyboard-shortcuts.md
         - name: Interrogation des données
-          href: ef6/querying/index.md
           items:
+            - name: Vue d'ensemble
+              href: ef6/querying/index.md
             - name: 'Load, méthode'
               href: ef6/querying/load-method.md
             - name: Données locales
@@ -460,8 +482,9 @@
             - name: Interrogation de données associées
               href: ef6/querying/related-data.md
         - name: Enregistrement de données
-          href: ef6/saving/index.md
           items:
+            - name: Vue d'ensemble
+              href: ef6/saving/index.md
             - name: Suivi des modifications
               items:
                 - name: Détecter automatiquement les changements
@@ -477,7 +500,6 @@
             - name: Validation de données
               href: ef6/saving/validation.md
         - name: Ressources supplémentaires
-          href: ef6/resources/index.md
           items:
             - name: Blogs
               href: ef6/resources/blogs.md
