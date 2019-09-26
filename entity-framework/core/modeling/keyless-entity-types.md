@@ -5,16 +5,16 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: b968ac9602b9aa1f1c1e3181b6b76a64394d70f0
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: e78b9f91fd2505de300ced7b5e73291b5d1ad3b4
+ms.sourcegitcommit: 7bc43f21e7bdd64926314ea949aae689f1911956
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71150842"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266777"
 ---
 # <a name="keyless-entity-types"></a>Types d’entité sans clé
 > [!NOTE]
-> Cette fonctionnalité est une nouveauté d’EF Core 2.1. Avant le 3,0, ils étaient appelés types de requêtes
+> Cette fonctionnalité a été ajoutée à EF Core 2,1 sous le nom des types de requêtes. Dans EF Core 3,0, le concept a été renommé en types d’entité sans clé.
 
 En plus des types d’entités standard, un modèle de EF Core peut contenir des _types d’entité sans_clé, qui peuvent être utilisés pour exécuter des requêtes de base de données sur des données qui ne contiennent pas de valeurs de clés.
 
@@ -56,7 +56,7 @@ Le mappage d’un type d’entité clé-inférieur à un objet de `ToTable` base
 L’exemple suivant montre comment utiliser les types d’entités Keyless pour interroger une vue de base de données.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryTypes) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) sur GitHub.
 
 Tout d’abord, nous définissons un modèle simple de Blog et Post :
 
