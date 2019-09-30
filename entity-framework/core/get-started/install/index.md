@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: eb808dd9d9b1b214947524cd83999f67be9cc0ff
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 7bdedf563b7d919ba334db79af73c3eed3ba4129
+ms.sourcegitcommit: 2caec1e63f2ce1d9439ef6193df5a77da2fedd0f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149068"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317581"
 ---
 # <a name="installing-entity-framework-core"></a>Installation d’Entity Framework Core
 
@@ -17,7 +17,7 @@ ms.locfileid: "71149068"
 
 * EF Core est une bibliothèque [.NET Standard 2.1](/dotnet/standard/net-standard). Ainsi, l’exécution d’EF Core nécessite une implémentation .NET prenant en charge .NET Standard 2.1. EF Core peut aussi être référencé par d’autres bibliothèques .NET Standard 2.1. 
 
-* Par exemple, vous pouvez utiliser EF Core pour développer des applications qui ciblent .NET Core. La création d’applications .NET Core nécessite le [SDK .NET Core](https://dotnet.microsoft.com/download). Vous pouvez aussi utiliser un environnement de développement comme Visual Studio, Visual Studio pour Mac ou Visual Studio Code. Pour plus d’informations, consultez [Bien démarrer avec .NET Core](/dotnet/core/get-started).
+* Par exemple, vous pouvez utiliser EF Core pour développer des applications qui ciblent .NET Core. La création d’applications .NET Core nécessite le [SDK .NET Core](https://dotnet.microsoft.com/download). Vous pouvez aussi utiliser un environnement de développement comme [Visual Studio](https://visualstudio.microsoft.com/vs), [Visual Studio pour Mac](https://visualstudio.microsoft.com/vs/mac) ou [Visual Studio Code](https://code.visualstudio.com). Pour plus d’informations, consultez [Bien démarrer avec .NET Core](/dotnet/core/get-started).
 
 * Vous pouvez utiliser EF Core pour développer des applications sur Windows à l’aide de Visual Studio. La dernière version de [Visual Studio](https://visualstudio.microsoft.com/vs) est recommandée.
 
