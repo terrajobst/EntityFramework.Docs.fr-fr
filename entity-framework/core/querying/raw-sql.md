@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: ebec5775770c0f1e297eaaf35bf644c605a69afc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: d8f52edfdf4bd7776ab8d81185c867cbfd7bcf44
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197774"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813595"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
@@ -62,7 +62,6 @@ En guise d' `FromSqlRaw`alternative à, vous `FromSqlInterpolated` pouvez utilis
 
 > [!NOTE]
 > Avant la version 3,0, `FromSqlRaw` `FromSqlInterpolated` deux surcharges étaient nommées `FromSql`. Pour plus d’informations, consultez la [section versions précédentes](#previous-versions) .
-
 
 <!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -172,6 +171,6 @@ Il existe quelques limitations à connaître lors de l’utilisation des requêt
 
 * Notez que SQL Server n’autorise pas la composition sur les appels de procédure stockée. par conséquent, toute tentative d’appliquer des opérateurs de requête supplémentaires à un tel appel entraîne l’invalidité de SQL. Les opérateurs de requête peuvent être `AsEnumerable()` introduits après pour l’évaluation du client.
 
-# <a name="previous-versions"></a>Versions antérieures
+## <a name="previous-versions"></a>Versions antérieures
 
 EF Core version 2,2 et les versions antérieures comportaient deux `FromSql` surcharges nommées qui se présentaient de la `FromSqlRaw` même `FromSqlInterpolated`façon que les plus récents et. Il est ainsi très facile d’appeler par erreur la méthode de chaîne brute lorsque l’intention était d’appeler la méthode de chaîne interpolée, et d’inverse. De ce fait, les requêtes ne sont plus paramétrables alors qu’elles devraient l’être.

@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 1222f10811914f65822a49e18522c287ece12174
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 42e59b47f569ef6fcf72fc5bd5f94d3e9d807a24
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306498"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813572"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Mise à niveau des applications des versions précédentes vers EF Core 2,0
 
@@ -94,19 +94,19 @@ Les fournisseurs SQL Server et SQLite sont fournis par l’équipe EF et les ver
 
 Remarque: ces modifications ne doivent pas avoir d’impact sur la plupart du code d’application.
 
-Les ID d’événement pour les messages envoyés à un [ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) ont été modifiés dans 2,0. Les ID d’événement sont maintenant uniques dans le code EF Core. En outre, ces messages suivent désormais le modèle standard de la journalisation structurée utilisé, par exemple, par le modèle MVC.
+Les ID d’événement pour les messages envoyés à un [ILogger](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger) ont été modifiés dans 2,0. Les ID d’événement sont maintenant uniques dans le code EF Core. En outre, ces messages suivent désormais le modèle standard de la journalisation structurée utilisé, par exemple, par le modèle MVC.
 
-Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs).
+Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
 
-Les événements [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) utilisent désormais les mêmes noms d’ID d’événements `ILogger` que les messages correspondants. Les charges utiles d’événement sont tous des types nominaux dérivés de [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
+Les événements [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) utilisent désormais les mêmes noms d’ID d’événements `ILogger` que les messages correspondants. Les charges utiles d’événement sont tous des types nominaux dérivés de [EventData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata).
 
-Les ID d’événement, les types de charge utile et les catégories sont documentés dans les classes [CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs) et [RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs) .
+Les ID d’événement, les types de charge utile et les catégories sont documentés dans les classes [CoreEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.coreeventid) et [RelationalEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.relationaleventid) .
 
 Les ID ont également été déplacés de Microsoft. EntityFrameworkCore. infrastructure vers le nouvel espace de noms Microsoft. EntityFrameworkCore. Diagnostics.
 
 ## <a name="ef-core-relational-metadata-api-changes"></a>EF Core les modifications de l’API de métadonnées relationnelles
 
-EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Il en résulte une simplification des API de métadonnées de niveau inférieur, au point que tout accès aux _concepts de métadonnées relationnelles communs_ est toujours établi par le biais d’un appel à `.Relational` au lieu de `.SqlServer`, `.Sqlite`, etc. Par exemple, le code 1.1. x ressemble à ceci:
+EF Core 2.0 génère désormais un [IModel](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.imodel) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Il en résulte une simplification des API de métadonnées de niveau inférieur, au point que tout accès aux _concepts de métadonnées relationnelles communs_ est toujours établi par le biais d’un appel à `.Relational` au lieu de `.SqlServer`, `.Sqlite`, etc. Par exemple, le code 1.1. x ressemble à ceci:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
@@ -118,7 +118,7 @@ Doit maintenant être écrit comme suit:
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-Au lieu d’utiliser des `ForSqlServerToTable`méthodes telles que, les méthodes d’extension sont désormais disponibles pour écrire du code conditionnel basé sur le fournisseur actuel en cours d’utilisation. Par exemple :
+Au lieu d’utiliser des `ForSqlServerToTable`méthodes telles que, les méthodes d’extension sont désormais disponibles pour écrire du code conditionnel basé sur le fournisseur actuel en cours d’utilisation. Exemple :
 
 ```C#
 modelBuilder.Entity<User>().ToTable(
@@ -135,7 +135,7 @@ L' `AddEntityFramework`appel `AddEntityFrameworkSqlServer`de,, etc. n’est pas 
 
 ## <a name="in-memory-databases-must-be-named"></a>Les bases de données en mémoire doivent être nommées
 
-La base de données en mémoire sans nom globale a été supprimée, mais toutes les bases de données en mémoire doivent être nommées. Par exemple :
+La base de données en mémoire sans nom globale a été supprimée, mais toutes les bases de données en mémoire doivent être nommées. Exemple :
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
@@ -145,13 +145,13 @@ Crée/utilise une base de données nommée «MyDatabase». Si `UseInMemoryDataba
 
 ## <a name="read-only-api-changes"></a>Modifications de l’API en lecture seule
 
-`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`et `IsStoreGeneratedAlways` ont été obsolètes et remplacés par [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) et [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Ces comportements s’appliquent à n’importe quelle propriété (non seulement les propriétés générées par le magasin) et déterminent la façon dont la valeur de la propriété doit`BeforeSaveBehavior`être utilisée lors de l’insertion dans une ligne de`AfterSaveBehavior`base de données () ou lors de la mise à jour d’une ligne de base de données existante ().
+`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`et `IsStoreGeneratedAlways` ont été obsolètes et remplacés par [BeforeSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.beforesavebehavior) et [AfterSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.aftersavebehavior). Ces comportements s’appliquent à n’importe quelle propriété (non seulement les propriétés générées par le magasin) et déterminent la façon dont la valeur de la propriété doit`BeforeSaveBehavior`être utilisée lors de l’insertion dans une ligne de`AfterSaveBehavior`base de données () ou lors de la mise à jour d’une ligne de base de données existante ().
 
-Les propriétés marquées comme [ValueGenerated. OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (par exemple, pour les colonnes calculées) ignorent par défaut toute valeur actuellement définie sur la propriété. Cela signifie qu’une valeur générée par le magasin sera toujours obtenue, qu’une valeur ait été définie ou modifiée sur l’entité suivie. Cela peut être modifié en définissant un `Before\AfterSaveBehavior`différent.
+Les propriétés marquées comme [ValueGenerated. OnAddOrUpdate](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.valuegenerated) (par exemple, pour les colonnes calculées) ignorent par défaut toute valeur actuellement définie sur la propriété. Cela signifie qu’une valeur générée par le magasin sera toujours obtenue, qu’une valeur ait été définie ou modifiée sur l’entité suivie. Cela peut être modifié en définissant un `Before\AfterSaveBehavior`différent.
 
 ## <a name="new-clientsetnull-delete-behavior"></a>Nouveau comportement de suppression de ClientSetNull
 
-Dans les versions précédentes, [DeleteBehavior. Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) avait un comportement pour les entités suivies par le contexte qui a `SetNull` plus de sémantiques correspondantes. Dans EF Core 2,0, un nouveau `ClientSetNull` comportement a été introduit comme valeur par défaut pour les relations facultatives. Ce comportement a `SetNull` une sémantique pour les entités suivies `Restrict` et le comportement pour les bases de données créées à l’aide de EF Core. Dans notre expérience, il s’agit des comportements les plus attendus/utiles pour les entités suivies et la base de données. `DeleteBehavior.Restrict`est maintenant respecté pour les entités suivies lorsqu’elles sont définies pour des relations facultatives.
+Dans les versions précédentes, [DeleteBehavior. Restrict](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.deletebehavior) avait un comportement pour les entités suivies par le contexte qui a `SetNull` plus de sémantiques correspondantes. Dans EF Core 2,0, un nouveau `ClientSetNull` comportement a été introduit comme valeur par défaut pour les relations facultatives. Ce comportement a `SetNull` une sémantique pour les entités suivies `Restrict` et le comportement pour les bases de données créées à l’aide de EF Core. Dans notre expérience, il s’agit des comportements les plus attendus/utiles pour les entités suivies et la base de données. `DeleteBehavior.Restrict`est maintenant respecté pour les entités suivies lorsqu’elles sont définies pour des relations facultatives.
 
 ## <a name="provider-design-time-packages-removed"></a>Packages au moment de la conception du fournisseur supprimés
 

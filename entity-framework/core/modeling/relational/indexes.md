@@ -1,17 +1,17 @@
 ---
-title: Index-EF Core
+title: Index (base de données relationnelle)-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 7dcf27dedbde45302a462a4c41a811b9868e40bb
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 7bb74d0bfa6090b597eb988a46f00494e25f233e
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197017"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813629"
 ---
-# <a name="indexes"></a>Index
+# <a name="indexes-relational-database"></a>Index (base de données relationnelle)
 
 > [!NOTE]  
 > La configuration indiquée dans cette section s’applique aux bases de données relationnelles en général. Les méthodes d’extension indiquées ici sont disponibles quand vous installez un fournisseur de base de données relationnelle (en raison du package partagé *Microsoft.EntityFrameworkCore.Relational*).

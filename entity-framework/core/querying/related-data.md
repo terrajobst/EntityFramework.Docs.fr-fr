@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4bf9598f9b7e74c2835d3926215de9a7ef4e6f96
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 4e4ba21cd099daab4db8a8f358800fde26980c14
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921789"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813582"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
 
@@ -30,7 +30,6 @@ Vous pouvez utiliser la méthode `Include` pour spécifier les données associé
 > [!TIP]  
 > Entity Framework Core corrige automatiquement les propriétés de navigation vers d’autres entités qui étaient précédemment chargées dans l’instance de contexte. Ainsi, même vous n’incluez pas explicitement si les données pour une propriété de navigation, la propriété peut toujours être renseignée si toutes ou une partie des entités associées ont été précédemment chargées.
 
-
 Vous pouvez inclure des données associées provenant de plusieurs relations dans une seule requête.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleIncludes)]
@@ -41,9 +40,6 @@ Vous pouvez descendre dans la hiérarchie des relations pour inclure plusieurs n
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#SingleThenInclude)]
 
-> [!NOTE]  
-> Les versions actuelles de Visual Studio offrent des options de saisie semi-automatique de code incorrectes et peuvent provoquer le marquage d’expressions correctes avec des erreurs de syntaxe lorsque vous utilisez la méthode `ThenInclude` après une propriété de navigation de collection. Cela est causé par un bogue d’IntelliSense suivi sur https://github.com/dotnet/roslyn/issues/8237. Il est possible d’ignorer ces fausses erreurs de syntaxe tant que le code est correct et qu’il peut être compilé avec succès. 
-
 Vous pouvez enchaîner plusieurs appels à `ThenInclude` pour continuer à inclure les niveaux de données associées suivants.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleThenIncludes)]
@@ -52,9 +48,12 @@ Vous pouvez combiner tout cela pour inclure les données associées de plusieurs
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, quand vous interrogez des `Blogs`, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour ce faire, vous devez spécifier chaque chemin d’accès à inclure à partir de la racine. Par exemple, `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. Dans la plupart des cas, EF consolide les jointures lors de la génération du SQL.
+Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, quand vous interrogez des `Blogs`, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour ce faire, vous devez spécifier chaque chemin d’accès à inclure à partir de la racine. Par exemple : `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. Dans la plupart des cas, EF consolide les jointures lors de la génération du SQL.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
+
+> [!CAUTION]
+> Depuis la version 3.0.0, chaque `Include` entraîne l’ajout d’une jointure supplémentaire aux requêtes SQL produites par les fournisseurs relationnels, tandis que les versions précédentes généraient des requêtes SQL supplémentaires. Cela peut considérablement modifier les performances de vos requêtes. En particulier, les requêtes LINQ avec un nombre trop élevé d’opérateurs `Include` peuvent devoir être décomposées en plusieurs requêtes LINQ distinctes afin d’éviter le problème d’éclatement cartésien.
 
 ### <a name="include-on-derived-types"></a>Inclure des types dérivés
 
@@ -111,22 +110,7 @@ Le contenu de la navigation `School` de toutes les personnes qui sont des étudi
   context.People.Include("School").ToList()
   ```
 
-### <a name="ignored-includes"></a>Inclusions ignorées
-
-Si vous modifiez la requête afin qu’elle ne renvoie plus les instances du type d’entité par lequel la requête a commencé, les opérateurs include sont ignorés.
-
-Dans l’exemple suivant, les opérateurs include sont basés sur le `Blog`, puis l’opérateur `Select` est utilisé pour modifier la requête pour retourner un type anonyme. Dans ce cas, les opérateurs include n’ont aucun effet.
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IgnoredInclude)]
-
-Par défaut, EF Core consigne un avertissement lorsque les opérateurs include sont ignorés. Consultez [Journalisation](../miscellaneous/logging.md) pour plus d’informations sur l’affichage de la sortie de la journalisation. Vous pouvez modifier le comportement lorsqu’un opérateur include est ignoré, entre journaliser ou ne rien faire. Cette opération est effectuée lors de la définition des options pour votre contexte, généralement dans `DbContext.OnConfiguring`, ou `Startup.cs` si vous utilisez ASP.NET Core.
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/ThrowOnIgnoredInclude/BloggingContext.cs#OnConfiguring)]
-
 ## <a name="explicit-loading"></a>Chargement explicite
-
-> [!NOTE]  
-> Cette fonctionnalité a été introduite dans EF Core 1.1.
 
 Vous pouvez charger explicitement une propriété de navigation via l’API `DbContext.Entry(...)`.
 
@@ -148,10 +132,8 @@ Vous pouvez également filtrer les entités associées qui sont chargées en mé
 
 ## <a name="lazy-loading"></a>Chargement différé
 
-> [!NOTE]  
-> Cette fonctionnalité a été introduite dans EF Core 2.1.
+La façon la plus simple d’utiliser le chargement différé est d’installer le package [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) et de l’activer avec un appel à `UseLazyLoadingProxies`. Exemple :
 
-La façon la plus simple d’utiliser le chargement différé est d’installer le package [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) et de l’activer avec un appel à `UseLazyLoadingProxies`. Par exemple :
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -159,12 +141,15 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseSqlServer(myConnectionString);
 ```
 Ou bien, lors de l’utilisation d’AddDbContext :
+
 ```csharp
 .AddDbContext<BloggingContext>(
     b => b.UseLazyLoadingProxies()
           .UseSqlServer(myConnectionString));
 ```
+
 EF Core active ensuite le chargement différé pour n’importe quelle propriété de navigation qui peut être substituée, c’est-à-dire qui doit être `virtual` et sur une classe qui peut être héritée. Par exemple, dans les entités suivantes, les propriétés de navigation `Post.Blog` et `Blog.Posts` seront chargées en différé.
+
 ```csharp
 public class Blog
 {
@@ -183,9 +168,11 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
 ### <a name="lazy-loading-without-proxies"></a>Chargement différé sans proxy
 
-Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](../modeling/constructors.md). Par exemple :
+Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](../modeling/constructors.md). Exemple :
+
 ```csharp
 public class Blog
 {
@@ -238,7 +225,9 @@ public class Post
     }
 }
 ```
-Il n’est pas nécessaire que l’héritage des types d’entité à partir des propriétés de navigation soit virtuel, et cela permet aux instances d’entité créées avec `new` d’être chargées en différé une fois jointes à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types, de sorte que dépendre de celui-ci n’a qu’un impact très limité. Toutefois, pour éviter complètement de dépendre des packages EF Core dans les types d’entité, il est possible d’injecter la méthode `ILazyLoader.Load` en tant que délégué. Par exemple :
+
+Il n’est pas nécessaire que l’héritage des types d’entité à partir des propriétés de navigation soit virtuel, et cela permet aux instances d’entité créées avec `new` d’être chargées en différé une fois jointes à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types, de sorte que dépendre de celui-ci n’a qu’un impact très limité. Toutefois, pour éviter complètement de dépendre des packages EF Core dans les types d’entité, il est possible d’injecter la méthode `ILazyLoader.Load` en tant que délégué. Exemple :
+
 ```csharp
 public class Blog
 {
@@ -291,7 +280,9 @@ public class Post
     }
 }
 ```
+
 Le code ci-dessus utilise une méthode d'extension `Load` pour rendre l’utilisation du délégué un peu plus propre :
+
 ```csharp
 public static class PocoLoadingExtensions
 {
@@ -308,6 +299,7 @@ public static class PocoLoadingExtensions
     }
 }
 ```
+
 > [!NOTE]  
 > Le paramètre de constructeur pour le délégué à chargement différé doit être appelé « lazyLoader ». La configuration permettant d’utiliser un nom différent est prévue pour une version ultérieure.
 
