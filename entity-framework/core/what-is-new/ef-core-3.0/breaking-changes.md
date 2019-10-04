@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 0dd4c5c4aa1a5d241fb48abf1372a678d0f7a7a3
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: f7f04efa8fb8ebc1eb06f256b8ccbd3110af47ab
+ms.sourcegitcommit: 705e898b4684e639a57c787fb45c932a27650c2d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813622"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71934881"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 Les modifications d’API et de comportement suivantes peuvent bloquer les applications existantes lors de leur mise à niveau vers 3.0.0.
@@ -27,6 +27,7 @@ Les changements qui, selon nous, auront une incidence uniquement sur les fournis
 | [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Élevé      |
 | [Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core](#no-longer) | Moyenne      |
 | [Les suppressions en cascade se produisent désormais immédiatement par défaut](#cascade) | Moyenne      |
+| [Le chargement hâtif des entités associées se produit désormais dans une seule requête](#eager-loading-single-query) | Moyenne      |
 | [La sémantique de DeleteBehavior.Restrict est désormais plus propre](#deletebehavior) | Moyenne      |
 | [L’API de configuration pour les relations de type détenu a changé](#config) | Moyenne      |
 | [Chaque propriété utilise la génération indépendante de clé de type entier en mémoire](#each) | Moyenne      |
@@ -34,6 +35,7 @@ Les changements qui, selon nous, auront une incidence uniquement sur les fournis
 | [Changements apportés à l’API de métadonnées](#metadata-api-changes) | Moyenne      |
 | [Modifications de l’API de métadonnées spécifiques au fournisseur](#provider) | Moyenne      |
 | [UseRowNumberForPaging a été supprimé](#urn) | Moyenne      |
+| [La méthode FromSql quand elle est utilisée avec une procédure stockée ne peut pas être composée](#fromsqlsproc) | Moyenne      |
 | [Les méthodes FromSql peuvent uniquement être spécifiées sur les racines de requête](#fromsql) | Faible      |
 | [~~L’exécution de requêtes est enregistrée au niveau du débogage ~~Rétabli](#qe) | Faible      |
 | [Les valeurs de clés temporaires ne sont plus définies sur les instances d’entités](#tkv) | Faible      |
@@ -210,6 +212,35 @@ De ce fait, les requêtes ne sont plus paramétrables alors qu’elles devraient
 
 Utilisez plutôt les nouveaux noms de méthode.
 
+<a name="fromsqlsproc"></a>
+### <a name="fromsql-method-when-used-with-stored-procedure-cannot-be-composed"></a>La méthode FromSql quand elle est utilisée avec une procédure stockée ne peut pas être composée
+
+[#15392 du problème de suivi](https://github.com/aspnet/EntityFrameworkCore/issues/15392)
+
+**Ancien comportement**
+
+Avant le EF Core 3,0, la méthode FromSql a tenté de détecter si le SQL passé peut être composé. Il a fait l’évaluation du client lorsque le SQL n’était pas composable comme une procédure stockée. La requête suivante a fonctionné en exécutant la procédure stockée sur le serveur et en procédant à l’opération FirstOrDefault côté client.
+
+```C#
+context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").FirstOrDefault();
+```
+
+**Nouveau comportement**
+
+À compter de EF Core 3,0, EF Core n’essaiera pas d’analyser le SQL. Par conséquent, si vous effectuez une composition après FromSqlRaw/FromSqlInterpolated, EF Core compose le SQL en provoquant une sous-requête. Par conséquent, si vous utilisez une procédure stockée avec la composition, vous obtiendrez une exception pour la syntaxe SQL non valide.
+
+**Pourquoi ?**
+
+EF Core 3,0 ne prend pas en charge l’évaluation automatique du client, car il s’agit d’une erreur, comme expliqué [ici](#linq-queries-are-no-longer-evaluated-on-the-client).
+
+**Atténuation**
+
+Si vous utilisez une procédure stockée dans FromSqlRaw/FromSqlInterpolated, vous savez qu’elle ne peut pas être composée. vous pouvez donc ajouter __AsEnumerable/AsAsyncEnumerable__ juste après l’appel de la méthode FromSql pour éviter toute composition côté serveur.
+
+```C#
+context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable().FirstOrDefault();
+```
+
 <a name="fromsql"></a>
 
 ### <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>Les méthodes FromSql peuvent uniquement être spécifiées sur les racines de requête
@@ -366,6 +397,29 @@ Exemple :
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
 context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 ```
+<a name="eager-loading-single-query"></a>
+### <a name="eager-loading-of-related-entities-now-happens-in-a-single-query"></a>Le chargement hâtif des entités associées se produit désormais dans une seule requête
+
+[#18022 du problème de suivi](https://github.com/aspnet/EntityFrameworkCore/issues/18022)
+
+**Ancien comportement**
+
+Avant le 3,0, le chargement des navigations de collections à l’aide des opérateurs `Include` a entraîné la génération de plusieurs requêtes sur une base de données relationnelle, une pour chaque type d’entité associé.
+
+**Nouveau comportement**
+
+À partir de 3,0, EF Core génère une requête unique avec des JOINTUREs sur des bases de données relationnelles.
+
+**Pourquoi ?**
+
+L’émission de plusieurs requêtes pour implémenter une seule requête LINQ a entraîné de nombreux problèmes, notamment des performances négatives lorsque plusieurs allers-retours de base de données étaient nécessaires et des problèmes de cohérence des données à mesure que chaque requête pouvait observer un état différent de la base de données.
+
+**Atténuations**
+
+Bien qu’techniquement, il ne s’agit pas d’une modification avec rupture, cela peut avoir un impact considérable sur les performances de l’application lorsqu’une seule requête contient un grand nombre d’opérateurs `Include` dans les navigations de collection. Pour plus d’informations et pour réécrire des requêtes de manière plus efficace, [consultez ce commentaire](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-537219137) .
+
+**
+
 <a name="deletebehavior"></a>
 ### <a name="deletebehaviorrestrict-has-cleaner-semantics"></a>La sémantique de DeleteBehavior.Restrict est désormais plus propre
 
