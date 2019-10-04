@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9af0cba7-7605-4f8f-9cfa-dd616fcb880c
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 28f5f262b41cbc1f196e41d75c8b88ca60e678fe
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: b668e286993b9687be21aa815df4e8b8dd308c60
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149228"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813532"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>Fournisseur de base de données InMemory EF Core
 
@@ -19,17 +19,27 @@ Ce fournisseur de base de données permet d’utiliser Entity Framework Core ave
 
 Installez le [package NuGet Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/).
 
+# <a name="net-core-clitabdotnet-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
+
+``` console
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+```
+
+# <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.InMemory
 ```
 
+***
+
 ## <a name="get-started"></a>Bien démarrer
 
 Les ressources suivantes vous permettent de commencer à utiliser ce fournisseur.
-* [Test avec InMemory](../../miscellaneous/testing/in-memory.md)
 
+* [Test avec InMemory](../../miscellaneous/testing/in-memory.md)
 * [Exemple de tests d’application UnicornStore](https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs)
 
 ## <a name="supported-database-engines"></a>Moteurs de base de données pris en charge
 
-* Base de données en mémoire intégrée (conçue uniquement à des fins de test)
+Base de données en mémoire in-process (conçue uniquement à des fins de test)
