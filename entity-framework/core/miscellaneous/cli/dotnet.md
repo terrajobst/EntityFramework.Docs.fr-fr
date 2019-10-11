@@ -4,16 +4,16 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 910136871cce5818b8e70a012e5132259b66e4c1
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: e5b42275aa575d711e1dcdf3d2ba3cb29a036727
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197581"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181255"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Informations de référence sur les outils Entity Framework Core-CLI .NET
 
-Les outils de l’interface de ligne de commande (CLI) pour Entity Framework Core effectuer des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0#introduction-to-migrations), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes sont une extension de la commande [dotnet](/dotnet/core/tools) multiplateforme, qui fait partie du [Kit SDK .net Core](https://www.microsoft.com/net/core). Ces outils fonctionnent avec les projets .NET Core.
+Les outils de l’interface de ligne de commande (CLI) pour Entity Framework Core effectuer des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes sont une extension de la commande [dotnet](/dotnet/core/tools) multiplateforme, qui fait partie du [Kit SDK .net Core](https://www.microsoft.com/net/core). Ces outils fonctionnent avec les projets .NET Core.
 
 Si vous utilisez Visual Studio, nous vous recommandons d’utiliser les outils de la [console du gestionnaire de package](powershell.md) à la place :
 * Ils fonctionnent automatiquement avec le projet actif sélectionné dans la **console du gestionnaire de package** sans que vous ayez besoin de basculer manuellement les répertoires.
@@ -30,17 +30,17 @@ La procédure d’installation dépend du type et de la version du projet :
 
 ### <a name="ef-core-3x"></a>EF Core 3. x
 
-* `dotnet ef`doit être installé en tant qu’outil Global ou local. La plupart des développeurs `dotnet ef` s’installent comme un outil global avec la commande suivante :
+* `dotnet ef` doit être installé en tant qu’outil Global ou local. La plupart des développeurs installent `dotnet ef` comme un outil global avec la commande suivante :
 
   ``` console
   dotnet tool install --global dotnet-ef
   ```
 
-  Vous pouvez également utiliser `dotnet ef` en tant qu’outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
+  Vous pouvez également utiliser `dotnet ef` comme outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
 
 * Installez le [kit SDK .NET Core 3,0](https://dotnet.microsoft.com/download/dotnet-core/3.0)). Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
 
-* Installez le package `Microsoft.EntityFrameworkCore.Design` le plus récent.
+* Installez le dernier package `Microsoft.EntityFrameworkCore.Design`.
 
   ``` Console
   dotnet add package Microsoft.EntityFrameworkCore.Design
@@ -50,15 +50,15 @@ La procédure d’installation dépend du type et de la version du projet :
 
 * Installez le [Kit SDK .net Core](https://www.microsoft.com/net/download/core)actuel. Le kit SDK doit être installé même si vous disposez de la dernière version de Visual Studio 2017.
 
-  C’est tout ce qui est nécessaire pour ASP.net Core 2.1 + car `Microsoft.EntityFrameworkCore.Design` le package est inclus dans le [AspNetCore.](/aspnet/core/fundamentals/metapackage-app)
+  C’est tout ce qui est nécessaire pour ASP.NET Core 2.1 +, car le package `Microsoft.EntityFrameworkCore.Design` est inclus dans le [AspNetCore](/aspnet/core/fundamentals/metapackage-app).
 
 ### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2. x (non ASP.NET Core)
 
-Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour activer les commandes dont vous avez besoin pour `Microsoft.EntityFrameworkCore.Design` installer le package.
+Les commandes `dotnet ef` sont incluses dans la kit SDK .NET Core, mais pour activer les commandes, vous devez installer le package `Microsoft.EntityFrameworkCore.Design`.
 
 * Installez le [Kit SDK .net Core](https://www.microsoft.com/net/download/core)actuel. Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
 
-* Installez le dernier package `Microsoft.EntityFrameworkCore.Design` stable.
+* Installez le dernier package stable `Microsoft.EntityFrameworkCore.Design`.
 
   ``` Console
   dotnet add package Microsoft.EntityFrameworkCore.Design
@@ -70,9 +70,9 @@ Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour act
 
 * Configurez l’application pour utiliser la version du kit de développement logiciel (SDK) 2.1.200 en modifiant son fichier [global. JSON](/dotnet/core/tools/global-json) . Ce fichier est normalement inclus dans le répertoire de la solution (l’un au-dessus du projet).
 
-* Modifiez le fichier projet et ajoutez `Microsoft.EntityFrameworkCore.Tools.DotNet` `DotNetCliToolReference` en tant qu’élément. Spécifiez la version 1. x la plus récente, par exemple : 1.1.6. Consultez l’exemple de fichier projet à la fin de cette section.
+* Modifiez le fichier projet et ajoutez `Microsoft.EntityFrameworkCore.Tools.DotNet` en tant qu’élément `DotNetCliToolReference`. Spécifiez la version 1. x la plus récente, par exemple : 1.1.6. Consultez l’exemple de fichier projet à la fin de cette section.
 
-* Installez la dernière version 1. x du `Microsoft.EntityFrameworkCore.Design` package, par exemple :
+* Installez la dernière version 1. x du package `Microsoft.EntityFrameworkCore.Design`, par exemple :
 
   ```console
   dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
@@ -98,7 +98,7 @@ Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour act
   </Project>
   ```
 
-  Une référence de package `PrivateAssets="All"` avec n’est pas exposée aux projets qui font référence à ce projet. Cette restriction est particulièrement utile pour les packages qui sont généralement utilisés uniquement pendant le développement.
+  Une référence de package avec `PrivateAssets="All"` n’est pas exposée aux projets qui font référence à ce projet. Cette restriction est particulièrement utile pour les packages qui sont généralement utilisés uniquement pendant le développement.
 
 ### <a name="verify-installation"></a>Vérifier l’installation
 
@@ -133,9 +133,9 @@ Avant d’utiliser les outils, vous devrez peut-être créer un projet de démar
 
 Les commandes font référence à un *projet* et à un *projet de démarrage*.
 
-* Le *projet* est également appelé *projet cible* , car il s’agit de l’emplacement où les commandes ajoutent ou suppriment des fichiers. Par défaut, le projet dans le répertoire actif est le projet cible. Vous pouvez spécifier un projet différent comme projet cible à l’aide <nobr>`--project`</nobr> de l’option.
+* Le *projet* est également appelé *projet cible* , car il s’agit de l’emplacement où les commandes ajoutent ou suppriment des fichiers. Par défaut, le projet dans le répertoire actif est le projet cible. Vous pouvez spécifier un projet différent comme projet cible à l’aide de l’option <nobr>`--project`</nobr> .
 
-* Le *projet de démarrage* est celui que les outils génèrent et exécutent. Les outils doivent exécuter le code de l’application au moment de la conception pour obtenir des informations sur le projet, telles que la chaîne de connexion à la base de données et la configuration du modèle. Par défaut, le projet dans le répertoire actif est le projet de démarrage. Vous pouvez spécifier un projet différent comme projet de démarrage à l' <nobr>`--startup-project`</nobr> aide de l’option.
+* Le *projet de démarrage* est celui que les outils génèrent et exécutent. Les outils doivent exécuter le code de l’application au moment de la conception pour obtenir des informations sur le projet, telles que la chaîne de connexion à la base de données et la configuration du modèle. Par défaut, le projet dans le répertoire actif est le projet de démarrage. Vous pouvez spécifier un projet différent comme projet de démarrage à l’aide de l’option <nobr>`--startup-project`</nobr> .
 
 Le projet de démarrage et le projet cible sont souvent le même projet. Un scénario classique dans lequel il s’agit de projets distincts est le suivant :
 
@@ -146,7 +146,7 @@ Il est également possible de [Placer le code de migrations dans une bibliothèq
 
 ### <a name="other-target-frameworks"></a>Autres frameworks cibles
 
-Les outils CLI fonctionnent avec les projets .NET Core et les projets de .NET Framework. Les applications qui ont le modèle EF Core dans une bibliothèque de classes .NET Standard peuvent ne pas avoir de projet .NET Core ou .NET Framework. C’est le cas, par exemple, des applications Xamarin et plateforme Windows universelle. Dans ce cas, vous pouvez créer un projet d’application console .NET Core dont le seul but est d’agir comme projet de démarrage pour les outils. Le projet peut être un projet factice sans code &mdash; réel, il n’est nécessaire que pour fournir une cible pour les outils.
+Les outils CLI fonctionnent avec les projets .NET Core et les projets de .NET Framework. Les applications qui ont le modèle EF Core dans une bibliothèque de classes .NET Standard peuvent ne pas avoir de projet .NET Core ou .NET Framework. C’est le cas, par exemple, des applications Xamarin et plateforme Windows universelle. Dans ce cas, vous pouvez créer un projet d’application console .NET Core dont le seul but est d’agir comme projet de démarrage pour les outils. Le projet peut être un projet factice sans code réel &mdash;, il n’est nécessaire que pour fournir une cible pour les outils.
 
 Pourquoi un projet factice est-il nécessaire ? Comme mentionné précédemment, les outils doivent exécuter le code de l’application au moment de la conception. Pour ce faire, ils doivent utiliser le Runtime .NET Core. Lorsque le modèle de EF Core se trouve dans un projet qui cible .NET Core ou .NET Framework, les outils de EF Core empruntent le runtime du projet. Ils ne peuvent pas le faire si le modèle de EF Core se trouve dans une bibliothèque de classes .NET Standard. Le .NET Standard n’est pas une implémentation .NET réelle. Il s’agit d’une spécification d’un ensemble d’API que les implémentations .NET doivent prendre en charge. Par conséquent, .NET Standard n’est pas suffisant pour que les outils de EF Core exécutent le code d’application. Le projet factice que vous créez à utiliser comme projet de démarrage fournit une plateforme cible concrète dans laquelle les outils peuvent charger la bibliothèque de classes .NET Standard.
 
@@ -200,34 +200,34 @@ dotnet ef database update 20180904195021_InitialCreate
 
 ## <a name="dotnet-ef-dbcontext-info"></a>informations sur la DbContext dotnet EF
 
-Obtient des informations sur `DbContext` un type.
+Obtient des informations sur un type `DbContext`.
 
 ## <a name="dotnet-ef-dbcontext-list"></a>liste de DbContext EF dotnet
 
-Répertorie `DbContext` les types disponibles.
+Répertorie les types `DbContext` disponibles.
 
 ## <a name="dotnet-ef-dbcontext-scaffold"></a>structure de l’DbContext dotnet EF
 
-Génère du code pour `DbContext` les types d’entité et pour une base de données. Pour que cette commande génère un type d’entité, la table de base de données doit avoir une clé primaire.
+Génère du code pour un `DbContext` et des types d’entités pour une base de données. Pour que cette commande génère un type d’entité, la table de base de données doit avoir une clé primaire.
 
 Arguments :
 
 | Argument       | Description                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | Chaîne de connexion à la base de données. Pour les projets ASP.net Core 2. x, la valeur peut être *name\<= Name of Connection String >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
-| `<PROVIDER>`   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par `Microsoft.EntityFrameworkCore.SqlServer`exemple :.                                                                                           |
+| `<CONNECTION>` | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *Name = \<Nom of connection string >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
+| `<PROVIDER>`   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`.                                                                                           |
 
 Options :
 
 |                 | Option                                   | Description                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-d</nobr> | `--data-annotations`                     | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si cette option est omise, seule l’API Fluent est utilisée.                                                                |
-| `-c`            | `--context <NAME>`                       | Nom de la `DbContext` classe à générer.                                                                                                                                 |
-|                 | `--context-dir <PATH>`                   | Répertoire dans lequel placer le `DbContext` fichier de classe. Les chemins d’accès sont relatifs au répertoire du projet. Les espaces de noms sont dérivés des noms de dossiers.                                 |
+| `-c`            | `--context <NAME>`                       | Nom de la classe `DbContext` à générer.                                                                                                                                 |
+|                 | `--context-dir <PATH>`                   | Répertoire dans lequel placer le fichier de classe `DbContext`. Les chemins d’accès sont relatifs au répertoire du projet. Les espaces de noms sont dérivés des noms de dossiers.                                 |
 | `-f`            | `--force`                                | Remplacer les fichiers existants.                                                                                                                                                      |
 | `-o`            | `--output-dir <PATH>`                    | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
-|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` l’opération pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
-| `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, `-t` Répétez `--table` ou pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
+|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` pour chacun d’eux. Si cette option est omise, tous les schémas sont inclus.          |
+| `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
 |                 | `--use-database-names`                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour C# être plus conformes aux conventions de style de nom. |
 
 L’exemple suivant génère la structure de tous les schémas et tables et place les nouveaux fichiers dans le dossier *Models* .

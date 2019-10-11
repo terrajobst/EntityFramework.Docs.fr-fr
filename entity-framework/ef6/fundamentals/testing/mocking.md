@@ -1,51 +1,51 @@
 ---
-title: Test avec une infrastructure de simulation - EF6
+title: Test avec un Framework fictif-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 3d39b41018beb70b72105dfb2fe4d61afc0b0525
-ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
+ms.openlocfilehash: 790e077c5b30c4a68a96b3c1a99b40893b2bbe55
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58319203"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181573"
 ---
-# <a name="testing-with-a-mocking-framework"></a>Test avec une infrastructure de simulation
+# <a name="testing-with-a-mocking-framework"></a>Test avec un Framework fictif
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Lors de l’écriture de tests pour votre application, il est souvent souhaitable d’éviter d’atteindre la base de données.  Entity Framework vous permet de pour y parvenir en créant un contexte : avec le comportement défini par vos tests, qui utilise des données en mémoire.  
+Lors de l’écriture de tests pour votre application, il est souvent préférable d’éviter d’atteindre la base de données.  Entity Framework vous permet d’y parvenir en créant un contexte, avec un comportement défini par vos tests, qui utilise des données en mémoire.  
 
 ## <a name="options-for-creating-test-doubles"></a>Options de création de doubles de test  
 
-Il existe deux approches différentes qui peuvent être utilisés pour créer une version en mémoire de votre contexte.  
+Il existe deux approches différentes qui peuvent être utilisées pour créer une version en mémoire de votre contexte.  
 
-- **Créer votre propre doubles de test** – cette approche implique d’écrire votre propre implémentation en mémoire de votre contexte et de DbSets. Cela vous donne un grand nombre de contrôle sur la façon dont les classes se comportent mais peuvent impliquer écriture et qui possède une quantité raisonnable de code.  
-- **Utiliser une infrastructure de simulation pour créer des doubles de test** – à l’aide d’une infrastructure de simulation (par exemple, Moq), vous pouvez avoir les implémentations en mémoire de votre contexte et de jeux créés dynamiquement lors de l’exécution pour vous.  
+- **Créer vos propres doubles de test** : cette approche implique l’écriture de votre propre implémentation en mémoire de votre contexte et DbSets. Cela vous donne un grand contrôle sur la façon dont les classes se comportent, mais peut impliquer l’écriture et la possession d’une quantité raisonnable de code.  
+- **Utilisez une infrastructure fictive pour créer des doubles de test** : à l’aide d’une infrastructure fictive (telle que MOQ), vous pouvez avoir les implémentations en mémoire de votre contexte et les jeux créés dynamiquement au moment de l’exécution.  
 
-Cet article traitera d’à l’aide d’une infrastructure de simulation. Pour créer votre propre doubles de test, consultez [test avec votre propre Doubles de Test](writing-test-doubles.md).  
+Cet article traite de l’utilisation d’un Framework fictif. Pour créer vos propres doubles de test, consultez [test avec vos propres doubles de test](writing-test-doubles.md).  
 
-Pour illustrer l’utilisation d’EF avec une infrastructure de simulation, nous allons utiliser Moq. Le moyen le plus simple d’obtenir Moq consiste à installer le [Moq un package à partir de NuGet](http://nuget.org/packages/Moq/).  
+Pour illustrer l’utilisation d’EF avec une infrastructure fictive, nous allons utiliser MOQ. Le moyen le plus simple d’utiliser MOQ consiste à installer le [package MOQ à partir de NuGet](https://nuget.org/packages/Moq/).  
 
-## <a name="testing-with-pre-ef6-versions"></a>Test avec les versions pre-EF6  
+## <a name="testing-with-pre-ef6-versions"></a>Test avec les versions antérieures à EF6  
 
-Le scénario illustré dans cet article dépend de certaines modifications que nous avons apporté à DbSet dans EF6. Pour le test avec EF5 et version antérieure, consultez [test avec un contexte fictif](http://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
+Le scénario présenté dans cet article dépend de certaines modifications apportées à DbSet dans EF6. Pour tester avec EF5 et les versions antérieures, consultez [test avec un contexte factice](https://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
 
-## <a name="limitations-of-ef-in-memory-test-doubles"></a>Limitations EF en mémoire des doubles de test  
+## <a name="limitations-of-ef-in-memory-test-doubles"></a>Limitations des doubles de test en mémoire EF  
 
-Les doubles de test en mémoire peut être un bon moyen de fournir une couverture au niveau des bits de votre application qui utilisent Entity Framework de test unitaire. Toutefois, lors de cette opération vous utilisez LINQ to Objects pour exécuter des requêtes sur les données en mémoire. Cela peut entraîner un comportement différent par rapport à l’aide du fournisseur LINQ d’Entity Framework (LINQ to Entities) pour traduire des requêtes dans SQL est exécutée sur votre base de données.  
+Les doubles de test en mémoire peuvent être un bon moyen de fournir une couverture de niveau test unitaire des bits de votre application qui utilisent EF. Toutefois, lorsque vous procédez ainsi, vous utilisez LINQ to Objects pour exécuter des requêtes sur des données en mémoire. Cela peut entraîner un comportement différent de celui de l’utilisation du fournisseur LINQ d’EF (LINQ to Entities) pour convertir les requêtes en SQL exécuté sur votre base de données.  
 
-Un exemple de cette différence est le chargement des données connexes. Si vous créez une série de Blogs que chaque ont billets de blog, puis lors de l’utilisation des données en mémoire les messages liés sont toujours chargés pour chaque Blog. Toutefois, lors de l’exécution par rapport à une base de données les données sont chargées uniquement si vous utilisez la méthode Include.  
+Le chargement de données associées est un exemple de cette différence. Si vous créez une série de blogs qui ont chacun des publications associées, lorsque vous utilisez des données en mémoire, les publications associées sont toujours chargées pour chaque blog. Toutefois, lors de l’exécution sur une base de données, les données sont chargées uniquement si vous utilisez la méthode Include.  
 
-Pour cette raison, il est recommandé de toujours inclure un niveau de bout en bout à tester (en plus de vos tests unitaires) pour s’assurer de votre application fonctionne correctement sur une base de données.  
+Pour cette raison, il est recommandé de toujours inclure un certain niveau de test de bout en bout (en plus de vos tests unitaires) pour garantir le bon fonctionnement de votre application sur une base de données.  
 
-## <a name="following-along-with-this-article"></a>Poursuivez la procédure avec cet article  
+## <a name="following-along-with-this-article"></a>Suivre les étapes de cet article  
 
-Cet article donne des listes de code complet, vous pouvez copier dans Visual Studio pour suivre la procédure si vous le souhaitez. Il est plus facile de créer un **projet de Test unitaire** et vous devez à la cible **.NET Framework 4.5** pour terminer les sections qui utilisent async.  
+Cet article fournit des listes de code complètes que vous pouvez copier dans Visual Studio pour suivre la procédure si vous le souhaitez. Il est plus facile de créer un **projet de test unitaire** et vous devrez cibler **.NET Framework 4,5** pour terminer les sections qui utilisent Async.  
 
 ## <a name="the-ef-model"></a>Le modèle EF  
 
-Le service que nous allons tester utilise une EF modèle constitué de le BloggingContext et les classes de Blog et Post. Ce code peut avoir été généré par le Concepteur EF ou être un modèle Code First.  
+Le service que nous allons tester utilise un modèle EF constitué du BloggingContext et du blog et des classes de publication. Ce code peut avoir été généré par le concepteur EF ou être un modèle de Code First.  
 
 ``` csharp
 using System.Collections.Generic;
@@ -80,11 +80,11 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="virtual-dbset-properties-with-ef-designer"></a>Propriétés DbSet virtuel avec Entity Framework Designer  
+### <a name="virtual-dbset-properties-with-ef-designer"></a>Propriétés DbSet virtuelles avec le concepteur EF  
 
-Notez que les propriétés DbSet sur le contexte sont marquées comme virtuelles. Ainsi, l’infrastructure de simulation dériver à partir de notre contexte et en remplaçant ces propriétés avec une implémentation factice.  
+Notez que les propriétés DbSet sur le contexte sont marquées comme virtuelles. Cela permettra à l’infrastructure factice de dériver de notre contexte et de remplacer ces propriétés par une implémentation fictive.  
 
-Si vous utilisez Code First vous pouvez modifier vos classes directement. Si vous utilisez le Concepteur EF vous devrez modifier le modèle T4 qui génère votre contexte. Ouvrez le \<model_name\>. Fichier context.tt qui est imbriqué sous vous edmx le fichier, recherchez le fragment de code suivant et ajoutez le mot clé virtuel comme indiqué.  
+Si vous utilisez Code First vous pouvez modifier vos classes directement. Si vous utilisez le concepteur EF, vous devez modifier le modèle T4 qui génère votre contexte. Ouvrez le \<model_name @ no__t-1. Fichier Context.tt imbriqué sous votre fichier edmx, recherchez le fragment de code suivant et ajoutez le mot clé Virtual comme indiqué.  
 
 ``` csharp
 public string DbSet(EntitySet entitySet)
@@ -100,7 +100,7 @@ public string DbSet(EntitySet entitySet)
 
 ## <a name="service-to-be-tested"></a>Service à tester  
 
-Pour illustrer le test avec des doubles de test en mémoire, nous allons écrire quelques tests pour un BlogService. Le service est capable de créer de nouveaux blogs (AddBlog) et retour de tous les Blogs classés par nom (GetAllBlogs). En plus de GetAllBlogs, nous vous proposons également une méthode qui sera obtenir de façon asynchrone tous les blogs sont classés par nom (GetAllBlogsAsync).  
+Pour illustrer le test avec des doubles de test en mémoire, nous allons écrire deux tests pour un BlogService. Le service est en charge de la création de nouveaux blogs (AddBlog) et de la restauration de tous les blogs classés par nom (GetAllBlogs). En plus de GetAllBlogs, nous avons également fourni une méthode qui permet d’obtenir de façon asynchrone tous les blogs classés par nom (GetAllBlogsAsync).  
 
 ``` csharp
 using System.Collections.Generic;
@@ -148,9 +148,9 @@ namespace TestingDemo
 }
 ```  
 
-## <a name="testing-non-query-scenarios"></a>Requête non scénarios de test  
+## <a name="testing-non-query-scenarios"></a>Test des scénarios non-requête  
 
-C’est tout que nous devons faire pour commencer à tester des méthodes de requête non. Le test suivant utilise Moq pour créer un contexte. Il crée ensuite un DbSet\<Blog\> et relie à retourner à partir de la propriété de Blogs du contexte. Ensuite, le contexte est utilisé pour créer un nouveau BlogService qui est ensuite utilisé pour créer un nouveau blog – à l’aide de la méthode AddBlog. Enfin, le test vérifie que le service ajouté un nouveau Blog et appelé SaveChanges sur le contexte.  
+C’est tout ce dont nous avons besoin pour commencer à tester des méthodes qui ne sont pas des requêtes. Le test suivant utilise MOQ pour créer un contexte. Il crée ensuite un DbSet @ no__t-0Blog @ no__t-1 et le lie à la propriété blogs du contexte. Ensuite, le contexte est utilisé pour créer un nouveau BlogService qui est ensuite utilisé pour créer un nouveau blog, à l’aide de la méthode AddBlog. Enfin, le test vérifie que le service a ajouté un nouveau blog et a appelé SaveChanges dans le contexte.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -180,11 +180,11 @@ namespace TestingDemo
 }
 ```  
 
-## <a name="testing-query-scenarios"></a>Scénarios de requête de test  
+## <a name="testing-query-scenarios"></a>Test des scénarios de requête  
 
-Pour pouvoir exécuter des requêtes sur notre double de test DbSet, nous devons configurer une implémentation d’IQueryable. La première étape consiste à créer des données en mémoire – nous utilisons une liste\<Blog\>. Ensuite, nous permet de créer un contexte et le DBSet\<Blog\> puis rattachez l’implémentation d’IQueryable pour le DbSet – ils simplement délégation pour le fournisseur LINQ to Objects qui fonctionne avec la liste\<T\>.  
+Pour pouvoir exécuter des requêtes sur notre double de test DbSet, nous devons configurer une implémentation de IQueryable. La première étape consiste à créer des données en mémoire : nous utilisons une liste @ no__t-0Blog @ no__t-1. Ensuite, nous créons un contexte et DBSet @ no__t-0Blog @ no__t-1, puis nous mettons en place l’implémentation IQueryable pour le DbSet : ils délèguent simplement au fournisseur LINQ to Objects qui fonctionne avec List @ no__t-2T @ no__t-3.  
 
-Nous pouvons ensuite créer un BlogService selon notre doubles de test et vous assurer que les données que nous obtenons à partir de GetAllBlogs sont triées par nom.  
+Nous pouvons ensuite créer un BlogService basé sur nos doubles de test et vous assurer que les données que nous obtenons de GetAllBlogs sont classées par nom.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -229,17 +229,17 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="testing-with-async-queries"></a>Test avec des requêtes asynchrones
+### <a name="testing-with-async-queries"></a>Test avec des requêtes Async
 
-Entity Framework 6 a introduit un ensemble de méthodes d’extension qui peut être utilisé pour exécuter de façon asynchrone une requête. ToListAsync, FirstAsync, ForEachAsync, etc. sont des exemples de ces méthodes.  
+Entity Framework 6 a introduit un ensemble de méthodes d’extension qui peuvent être utilisées pour exécuter une requête de manière asynchrone. ToListAsync, FirstAsync, ForEachAsync, etc. sont des exemples de ces méthodes.  
 
-Étant donné que les requêtes Entity Framework utiliser LINQ, les méthodes d’extension sont définies sur IQueryable et IEnumerable. Toutefois, car ils sont uniquement conçus pour être utilisé avec Entity Framework, vous pouvez recevoir l’erreur suivante si vous tentez de les utiliser sur une requête LINQ qui n’est pas une requête Entity Framework :
+Étant donné que les requêtes de Entity Framework utilisent LINQ, les méthodes d’extension sont définies sur IQueryable et IEnumerable. Toutefois, étant donné qu’elles sont uniquement conçues pour être utilisées avec Entity Framework vous pouvez recevoir l’erreur suivante si vous essayez de les utiliser sur une requête LINQ qui n’est pas une requête Entity Framework :
 
-> La source IQueryable n’implémente pas IDbAsyncEnumerable{0}. Uniquement les sources qui implémentent IDbAsyncEnumerable peuvent être utilisées pour les opérations asynchrones d’Entity Framework. Pour plus d’informations, consultez [ http://go.microsoft.com/fwlink/?LinkId=287068 ](https://go.microsoft.com/fwlink/?LinkId=287068).  
+> L’IQueryable source n’implémente pas IDbAsyncEnumerable @ no__t-0. Seules les sources qui implémentent IDbAsyncEnumerable peuvent être utilisées pour Entity Framework opérations asynchrones. Pour plus d’informations [, consultez http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068).  
 
-Tandis que les méthodes asynchrones sont uniquement pris en charge en cours d’exécution par rapport à une requête Entity Framework, vous souhaiterez utilisez-les dans votre test unitaire en cours d’exécution par rapport à une mémoire tester double d’un DbSet.  
+Alors que les méthodes Async sont uniquement prises en charge lors d’une exécution sur une requête EF, vous pouvez les utiliser dans votre test unitaire en cas d’exécution sur un double de test en mémoire d’un DbSet.  
 
-Pour pouvoir utiliser les méthodes asynchrones, nous devons créer un DbAsyncQueryProvider en mémoire pour traiter la requête asynchrone. Tout en il serait possible de configurer un fournisseur de requête à l’aide de Moq, il est beaucoup plus facile de créer une implémentation de doubles de test dans le code. Le code pour cette implémentation est la suivante :  
+Pour pouvoir utiliser les méthodes Async, nous devons créer un DbAsyncQueryProvider en mémoire pour traiter la requête asynchrone. Bien qu’il soit possible de configurer un fournisseur de requêtes à l’aide de MOQ, il est beaucoup plus facile de créer une implémentation de double de test dans le code. Le code pour cette implémentation est le suivant :  
 
 ``` csharp
 using System.Collections.Generic;
@@ -349,7 +349,7 @@ namespace TestingDemo
 }
 ```  
 
-Maintenant que nous disposons d’un fournisseur de requête async, nous pouvons écrire un test unitaire pour notre nouvelle méthode GetAllBlogsAsync.  
+Maintenant que nous disposons d’un fournisseur de requêtes asynchrones, nous pouvons écrire un test unitaire pour notre nouvelle méthode GetAllBlogsAsync.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;

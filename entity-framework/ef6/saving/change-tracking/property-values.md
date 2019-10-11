@@ -1,30 +1,30 @@
 ---
-title: Utilisation de valeurs de propriété - EF6
+title: Utilisation des valeurs de propriété-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
-ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
+ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/27/2019
-ms.locfileid: "67416672"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182141"
 ---
-# <a name="working-with-property-values"></a>Utilisation de valeurs de propriété
-La plupart du temps Entity Framework se chargera de suivi de l’état, les valeurs d’origine et les valeurs actuelles des propriétés de vos instances d’entité. Toutefois, il peut être certains cas, par exemple les scénarios déconnectés - où vous souhaitez afficher ou manipuler les informations QU'EF a les propriétés. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
+# <a name="working-with-property-values"></a>Utilisation des valeurs de propriété
+Dans la plupart des Entity Framework effectuent le suivi de l’État, les valeurs d’origine et les valeurs actuelles des propriétés de vos instances d’entité. Toutefois, il peut y avoir certains cas, tels que des scénarios déconnectés, où vous souhaitez afficher ou manipuler les informations d’EF sur les propriétés. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
 
-Entity Framework effectue le suivi de deux valeurs pour chaque propriété d’une entité suivie. La valeur actuelle est, comme son nom l’indique, la valeur actuelle de la propriété dans l’entité. La valeur d’origine est la valeur de la propriété avait lorsque l’entité a été interrogée à partir de la base de données ou attachée au contexte.  
+Entity Framework effectue le suivi de deux valeurs pour chaque propriété d’une entité suivie. La valeur actuelle est, comme le nom l’indique, la valeur actuelle de la propriété dans l’entité. La valeur d’origine est la valeur que la propriété avait lorsque l’entité était interrogée à partir de la base de données ou attachée au contexte.  
 
 Il existe deux mécanismes généraux pour l’utilisation des valeurs de propriété :  
 
 - La valeur d’une propriété unique peut être obtenue de manière fortement typée à l’aide de la méthode de propriété.  
-- Valeurs pour toutes les propriétés d’une entité peuvent être lues dans un objet DbPropertyValues. DbPropertyValues agit alors comme un objet de type dictionnaire permettant d’autoriser les valeurs de propriété à lire et à définir. Les valeurs dans un objet DbPropertyValues peuvent être définies à partir des valeurs dans un autre objet DbPropertyValues ou à partir des valeurs dans un autre objet, par exemple une autre copie de l’entité ou un objet de transfert de données simple (DTO).  
+- Les valeurs de toutes les propriétés d’une entité peuvent être lues dans un objet DbPropertyValues. DbPropertyValues agit ensuite comme un objet de type dictionnaire pour permettre la lecture et la définition des valeurs de propriété. Les valeurs d’un objet DbPropertyValues peuvent être définies à partir de valeurs dans un autre objet DbPropertyValues ou à partir de valeurs d’un autre objet, comme une autre copie de l’entité ou un objet de transfert de données simple (DTO).  
 
-Les sections ci-dessous montrent des exemples d’utilisation à la fois des mécanismes ci-dessus.  
+Les sections ci-dessous présentent des exemples d’utilisation des deux mécanismes ci-dessus.  
 
 ## <a name="getting-and-setting-the-current-or-original-value-of-an-individual-property"></a>Obtention et définition de la valeur actuelle ou d’origine d’une propriété individuelle  
 
-L’exemple ci-dessous montre comment la valeur actuelle d’une propriété peut être lu et puis définissez une nouvelle valeur :  
+L’exemple ci-dessous montre comment la valeur actuelle d’une propriété peut être lue, puis définie sur une nouvelle valeur :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -45,17 +45,17 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Utilisez la propriété OriginalValue au lieu de la propriété CurrentValue pour lire ou définir la valeur d’origine.  
+Utilisez la propriété OriginalValue à la place de la propriété CurrentValue pour lire ou définir la valeur d’origine.  
 
-Notez que la valeur retournée est typée en tant que « objet » lorsqu’une chaîne est utilisée pour spécifier le nom de propriété. En revanche, la valeur retournée est fortement typée si une expression lambda est utilisée.  
+Notez que la valeur retournée est de type « Object » lorsqu’une chaîne est utilisée pour spécifier le nom de la propriété. En revanche, la valeur retournée est fortement typée si une expression lambda est utilisée.  
 
-Définition de la valeur de propriété comme ceci uniquement marque la propriété comme modifiée si la nouvelle valeur est différente de l’ancienne valeur.  
+La définition de la valeur de propriété comme celle-ci marquera uniquement la propriété comme modifiée si la nouvelle valeur est différente de l’ancienne valeur.  
 
-Lorsqu’une valeur de propriété est définie de cette façon la modification est détectée automatiquement même si AutoDetectChanges est désactivée.  
+Quand une valeur de propriété est définie de cette façon, la modification est détectée automatiquement, même si AutoDetectChanges est désactivé.  
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Obtention et définition de la valeur actuelle d’une propriété non mappée  
 
-La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lu. Un exemple d’une propriété non mappée peut être une propriété RssLink sur le Blog. Cette valeur peut être calculée en fonction de la BlogId et par conséquent n’a pas besoin être stockées dans la base de données. Par exemple :  
+La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lue. Un exemple de propriété non mappée peut être une propriété RssLink sur le blog. Cette valeur peut être calculée en fonction du BlogId et ne doit donc pas être stockée dans la base de données. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -69,9 +69,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-La valeur actuelle peut également indiquer si la propriété expose une méthode setter.  
+La valeur actuelle peut également être définie si la propriété expose un accesseur Set.  
 
-Il est utile de lire les valeurs des propriétés non mappées lors de la validation d’Entity Framework de propriétés non mappées. Pour la même raison les valeurs actuelles peuvent lire et définir des propriétés d’entités qui ne sont pas actuellement suivies par le contexte. Exemple :  
+La lecture des valeurs des propriétés non mappées est utile lors de l’exécution de Entity Framework validation des propriétés non mappées. Pour la même raison, les valeurs actuelles peuvent être lues et définies pour les propriétés des entités qui ne sont pas actuellement suivies par le contexte. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -87,9 +87,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que les valeurs d’origine ne sont pas disponibles pour les propriétés non mappées ou pour les propriétés d’entités qui ne sont pas suivies par le contexte.  
+Notez que les valeurs d’origine ne sont pas disponibles pour les propriétés non mappées ou pour les propriétés des entités qui ne font pas l’objet d’un suivi par le contexte.  
 
-## <a name="checking-whether-a-property-is-marked-as-modified"></a>Vérifier si une propriété est marquée comme modifiée  
+## <a name="checking-whether-a-property-is-marked-as-modified"></a>Vérification de la présence d’une propriété comme étant modifiée  
 
 L’exemple ci-dessous montre comment vérifier si une propriété individuelle est marquée comme modifiée :  
 
@@ -105,7 +105,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Les valeurs des propriétés modifiées sont envoyées en tant que mises à jour à la base de données lorsque SaveChanges est appelée.  
+Les valeurs des propriétés modifiées sont envoyées en tant que mises à jour de la base de données lorsque SaveChanges est appelé.  
 
 ##  <a name="marking-a-property-as-modified"></a>Marquage d’une propriété comme modifiée  
 
@@ -123,11 +123,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Marquage d’une propriété comme modifiée force une mise à jour à envoyer à la base de données pour la propriété lorsque SaveChanges est appelée même si la valeur actuelle de la propriété est identique à sa valeur d’origine.  
+Le marquage d’une propriété comme modifiée force l’envoi d’une mise à jour à la base de données pour la propriété lorsque SaveChanges est appelé, même si la valeur actuelle de la propriété est identique à sa valeur d’origine.  
 
-Il n’est pas encore possible de réinitialiser une propriété individuelle ne pas modifiables après que qu’il a été marquée comme modifiée. C’est quelque chose que nous prévoyons de prendre en charge dans une version ultérieure.  
+Il n’est pas possible actuellement de réinitialiser une propriété individuelle pour qu’elle ne soit pas modifiée une fois qu’elle a été marquée comme modifiée. C’est ce que nous envisageons de prendre en charge dans une prochaine version.  
 
-## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a>En cours de lecture, d’origine et les valeurs de base de données pour toutes les propriétés d’une entité  
+## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a>Lecture des valeurs actuelles, d’origine et de la base de données pour toutes les propriétés d’une entité  
 
 L’exemple ci-dessous montre comment lire les valeurs actuelles, les valeurs d’origine et les valeurs réellement dans la base de données pour toutes les propriétés mappées d’une entité.  
 
@@ -163,11 +163,11 @@ public static void PrintValues(DbPropertyValues values)
 }
 ```  
 
-Les valeurs actuelles sont les valeurs contenant les propriétés de l’entité actuellement. Les valeurs d’origine sont les valeurs qui ont été lus à partir de la base de données lors de l’entité a été interrogée. Les valeurs de la base de données sont les valeurs qu’ils sont actuellement stockés dans la base de données. Obtenir les valeurs de la base de données est utile lorsque les valeurs dans la base de données a peut-être modifié depuis l’entité a été interrogée telles que lorsqu’une simultanées modifier à la base de données a été effectuée par un autre utilisateur.  
+Les valeurs actuelles sont les valeurs que les propriétés de l’entité contiennent actuellement. Les valeurs d’origine sont les valeurs qui ont été lues à partir de la base de données lors de l’interrogation de l’entité. Les valeurs de base de données sont les valeurs telles qu’elles sont actuellement stockées dans la base de données. L’obtention des valeurs de la base de données est utile lorsque les valeurs de la base de données peuvent avoir changé depuis l’interrogation de l’entité, par exemple lorsqu’une modification simultanée de la base de données a été effectuée par un autre utilisateur.  
 
 ## <a name="setting-current-or-original-values-from-another-object"></a>Définition des valeurs actuelles ou d’origine à partir d’un autre objet  
 
-Les valeurs d’origine ou en cours d’une entité de suivi peuvent être mis à jour en copiant les valeurs d’un autre objet. Exemple :  
+Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un autre objet. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -196,9 +196,9 @@ public class BlogDto
 }
 ```  
 
-Exécution du code ci-dessus imprimera :  
+L’exécution du code ci-dessus imprime :  
 
-```  
+```console
 Current values:
 Property Id has value 1
 Property Name has value My Cool Blog
@@ -208,13 +208,13 @@ Property Id has value 1
 Property Name has value My Boring Blog
 ```  
 
-Cette technique est parfois utilisée lors de la mise à jour une entité avec les valeurs obtenues à partir d’un appel de service ou un client dans une application multicouche. Notez que l’objet utilisé ne devra pas être du même type que l’entité afin qu’il dispose des propriétés dont les noms correspondent à ceux de l’entité. Dans l’exemple ci-dessus, une instance de BlogDTO est utilisée pour mettre à jour les valeurs d’origine.  
+Cette technique est parfois utilisée lors de la mise à jour d’une entité avec des valeurs obtenues à partir d’un appel de service ou d’un client dans une application multiniveau. Notez que l’objet utilisé n’a pas besoin d’être du même type que l’entité, à condition qu’il possède des propriétés dont les noms correspondent à ceux de l’entité. Dans l’exemple ci-dessus, une instance de BlogDTO est utilisée pour mettre à jour les valeurs d’origine.  
 
-Notez que seules les propriétés qui sont définies sur des valeurs différentes lorsque copiés à partir de l’autre objet seront marquées comme modifié.  
+Notez que seules les propriétés qui sont définies sur des valeurs différentes lorsqu’elles sont copiées à partir de l’autre objet sont marquées comme modifiées.  
 
-## <a name="setting-current-or-original-values-from-a-dictionary"></a>Définition des valeurs d’origine ou en cours d’un dictionnaire  
+## <a name="setting-current-or-original-values-from-a-dictionary"></a>Définition des valeurs actuelles ou d’origine à partir d’un dictionnaire  
 
-Les valeurs d’origine ou en cours d’une entité de suivi peuvent être mis à jour en copiant les valeurs d’un dictionnaire ou une autre structure de données. Exemple :  
+Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un dictionnaire ou d’une autre structure de données. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -242,7 +242,7 @@ Utilisez la propriété OriginalValues au lieu de la propriété CurrentValues p
 
 ## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>Définition des valeurs actuelles ou d’origine à partir d’un dictionnaire à l’aide de la propriété  
 
-Une alternative à l’aide de CurrentValues ou OriginalValues comme indiqué ci-dessus est d’utiliser la méthode de propriété pour définir la valeur de chaque propriété. Cela peut être préférable lorsque vous avez besoin définir les valeurs de propriétés complexes. Exemple :  
+Une alternative à l’utilisation de CurrentValues ou OriginalValues, comme indiqué ci-dessus, consiste à utiliser la méthode Property pour définir la valeur de chaque propriété. Cela peut être préférable lorsque vous devez définir les valeurs des propriétés complexes. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -266,11 +266,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Dans l’exemple ci-dessus des propriétés complexes sont accessibles à l’aide de noms en pointillés. Pour d’autres façons d’accéder aux propriétés complexes, consultez les deux sections plus loin dans cette rubrique en particulier sur les propriétés complexes.  
+Dans l’exemple ci-dessus, les propriétés complexes sont accessibles à l’aide de noms en pointillés. Pour d’autres méthodes d’accès aux propriétés complexes, consultez les deux sections plus loin dans cette rubrique, en particulier sur les propriétés complexes.  
 
-## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Création d’un objet cloné contenant actuel, d’origine ou les valeurs de base de données  
+## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Création d’un objet cloné contenant les valeurs actuelles, d’origine ou de base de données  
 
-L’objet DbPropertyValues retournée à partir de CurrentValues, OriginalValues, ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone doit contenir les valeurs de propriété à partir de l’objet DbPropertyValues utilisé pour le créer. Par exemple :  
+L’objet DbPropertyValues retourné par CurrentValues, OriginalValues ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone contient les valeurs de propriété de l’objet DbPropertyValues utilisé pour le créer. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -281,13 +281,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que l’objet retourné n’est pas l’entité et qu’il n’est pas suivie par le contexte. L’objet retourné n’a pas plus de toutes les relations définies à d’autres objets.  
+Notez que l’objet retourné n’est pas l’entité et qu’il n’est pas suivi par le contexte. L’objet retourné n’a pas non plus de relations définies sur d’autres objets.  
 
-L’objet cloné peut être utile pour la résolution des problèmes liés aux mises à jour simultanées à la base de données, en particulier dans lequel une interface utilisateur qui implique la liaison de données aux objets d’un certain type est utilisée.  
+L’objet cloné peut être utile pour résoudre les problèmes liés aux mises à jour simultanées de la base de données, notamment lorsqu’une interface utilisateur qui implique la liaison de données à des objets d’un certain type est utilisée.  
 
-## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Obtention et définition des valeurs actuelles ou d’origine de propriétés complexes  
+## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Obtention et définition des valeurs actuelles ou d’origine des propriétés complexes  
 
-La valeur d’un objet complexe entier peut être lu et défini à l’aide de la méthode de propriété comme il peut être pour une propriété primitive. En outre vous pouvez examiner l’objet complexe et lecture ou définies les propriétés de cet objet, ou même un objet imbriqué. Voici quelques exemples :  
+La valeur d’un objet complexe entier peut être lue et définie à l’aide de la méthode Property, tout comme pour une propriété primitive. En outre, vous pouvez accéder à l’objet complexe et lire ou définir les propriétés de cet objet, ou même un objet imbriqué. Voici quelques exemples :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -334,13 +334,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Utilisez la propriété OriginalValue au lieu de la propriété CurrentValue à obtenir ou définir une valeur d’origine.  
+Utilisez la propriété OriginalValue à la place de la propriété CurrentValue pour récupérer ou définir une valeur d’origine.  
 
-Notez que la propriété ou la méthode ComplexProperty peut être utilisée pour accéder à une propriété complexe. Toutefois, la méthode ComplexProperty doit être utilisée si vous souhaitez approfondir l’objet complexe avec une propriété supplémentaire ou ComplexProperty appelle.  
+Notez que la propriété ou la méthode ComplexProperty peut être utilisée pour accéder à une propriété complexe. Toutefois, la méthode ComplexProperty doit être utilisée si vous souhaitez accéder à l’objet complexe avec des appels de propriété ou de ComplexProperty supplémentaires.  
 
-## <a name="using-dbpropertyvalues-to-access-complex-properties"></a>À l’aide de DbPropertyValues pour accéder aux propriétés complexes  
+## <a name="using-dbpropertyvalues-to-access-complex-properties"></a>Utilisation de DbPropertyValues pour accéder à des propriétés complexes  
 
-Lorsque vous utilisez CurrentValues, OriginalValues ou GetDatabaseValues pour obtenir tous les cours, d’origine, ou les valeurs de base de données pour une entité, les valeurs de toutes les propriétés complexes sont retournées en tant qu’objets DbPropertyValues imbriqués. Ces imbriqué des objets peut alors être utilisées pour obtenir les valeurs de l’objet complexe. Par exemple, la méthode suivante affiche les valeurs de toutes les propriétés, y compris les valeurs de toutes les propriétés complexes et des propriétés complexes imbriquées.  
+Quand vous utilisez CurrentValues, OriginalValues ou GetDatabaseValues pour obtenir toutes les valeurs actuelles, d’origine ou de base de données pour une entité, les valeurs de toutes les propriétés complexes sont retournées en tant qu’objets DbPropertyValues imbriqués. Ces objets imbriqués peuvent ensuite être utilisés pour récupérer les valeurs de l’objet complexe. Par exemple, la méthode suivante affiche les valeurs de toutes les propriétés, y compris les valeurs des propriétés complexes et des propriétés complexes imbriquées.  
 
 ``` csharp
 public static void WritePropertyValues(string parentPropertyName, DbPropertyValues propertyValues)
@@ -362,7 +362,7 @@ public static void WritePropertyValues(string parentPropertyName, DbPropertyValu
 }
 ```  
 
-Pour imprimer toutes les valeurs de propriété actuelles la méthode est appelée comme suit :  
+Pour imprimer toutes les valeurs de propriété actuelles, la méthode est appelée comme suit :  
 
 ``` csharp
 using (var context = new BloggingContext())

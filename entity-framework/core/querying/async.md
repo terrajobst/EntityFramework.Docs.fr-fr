@@ -1,26 +1,26 @@
 ---
 title: 'Requêtes asynchrones : EF Core'
-author: rowanmiller
-ms.date: 01/24/2017
+author: smitpatel
+ms.date: 10/03/2019
 ms.assetid: b6429b14-cba0-4af4-878f-b829777c89cb
 uid: core/querying/async
-ms.openlocfilehash: 415c57df599f1cb1a255f01d1072890fedfd6d2b
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: ce26db32a616dac5edac2a8451014ae63cbfc12d
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921690"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181819"
 ---
 # <a name="asynchronous-queries"></a>Requêtes asynchrones
 
-Les requêtes asynchrones évitent de bloquer un thread pendant que la requête est exécutée dans la base de données. Cela peut être utile pour éviter le gel de l’interface utilisateur d’une application client lourde. Les opérations asynchrones peuvent également augmenter le débit dans une application web, où le thread peut être libéré pour d’autres demandes de service lors de la fin de l’opération de base de données. Pour plus d’informations sur la programmation asynchrone, consultez [Programmation asynchrone en C#](https://docs.microsoft.com/dotnet/csharp/async).
+Les requêtes asynchrones évitent de bloquer un thread pendant que la requête est exécutée dans la base de données. Les requêtes Async sont importantes pour conserver une interface utilisateur réactive dans des applications clientes lourdes. Ils peuvent également augmenter le débit dans les applications Web où ils libèrent le thread pour traiter d’autres requêtes dans des applications Web. Pour plus d’informations sur la programmation asynchrone, consultez [Programmation asynchrone en C#](/dotnet/csharp/async).
 
 > [!WARNING]  
-> EF Core ne prend pas en charge les opérations parallèles multiples en cours d’exécution sur la même instance de contexte. Vous devez toujours attendre qu’opération se termine avant de commencer l’opération suivante. Cela est généralement effectué à l’aide du mot-clé `await` sur chaque opération asynchrone.
+> EF Core ne prend pas en charge l’exécution de plusieurs opérations parallèles sur la même instance de contexte. Vous devez toujours attendre qu’opération se termine avant de commencer l’opération suivante. Cela s’effectue généralement en utilisant le mot clé `await` sur chaque opération asynchrone.
 
-Entity Framework Core fournit un ensemble de méthodes d’extension asynchrone qui peuvent être utilisées comme alternative pour les méthodes LINQ qui provoquent l’exécution d’une requête et le retour de résultats. Par exemple, `ToListAsync()`, `ToArrayAsync()`, `SingleAsync()`, etc. Il n’existe pas de versions asynchrones des opérateurs LINQ comme `Where(...)`, `OrderBy(...)`, etc., car ces méthodes construisent uniquement l’arborescence de l’expression LINQ et n’entraînent pas l’exécution de la requête dans la base de données.
+Entity Framework Core fournit un ensemble de méthodes d’extension Async similaires aux méthodes LINQ, qui exécutent une requête et retournent des résultats. Exemples : `ToListAsync()`, `ToArrayAsync()`, `SingleAsync()`. Il n’existe aucune version asynchrone de certains opérateurs LINQ, tels que `Where(...)` ou `OrderBy(...)`, car ces méthodes génèrent uniquement l’arborescence de l’expression LINQ et n’entraînent pas l’exécution de la requête dans la base de données.
 
 > [!IMPORTANT]  
 > Les méthodes d’extension EF Core asynchrones sont définies dans l’espace de noms `Microsoft.EntityFrameworkCore`. Cet espace de noms doit être importé pour que les méthodes soient disponibles.
 
-[!code-csharp[Main](../../../samples/core/Querying/Async/Sample.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Querying/Async/Sample.cs#ToListAsync)]

@@ -1,80 +1,80 @@
 ---
-title: Le modèle de fournisseur Entity Framework 6 - EF6
+title: Modèle de fournisseur Entity Framework 6-EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: 8cbf6f87e0936f374c3d8a0c15a0e1d9c828f764
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: 8bda3f51e8934f2add862c30e60f1185f068c515
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668750"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181613"
 ---
-# <a name="the-entity-framework-6-provider-model"></a>Le modèle de fournisseur Entity Framework 6
+# <a name="the-entity-framework-6-provider-model"></a>Modèle de fournisseur Entity Framework 6
 
-Le modèle de fournisseur Entity Framework permet à Entity Framework à utiliser avec différents types de serveur de base de données. Par exemple, un seul fournisseur peut être branché pour permettre d’EF être exploitée dans Microsoft SQL Server, tandis qu’un autre fournisseur peut être raccordé à pour permettre d’EF être exploitée dans Microsoft SQL Server Compact Edition. Vous trouverez les fournisseurs pour EF6 que nous sommes conscients de sur le [fournisseurs d’Entity Framework](~/ef6/fundamentals/providers/index.md) page.
+Le modèle de fournisseur Entity Framework permet d’utiliser des Entity Framework avec différents types de serveur de base de données. Par exemple, un fournisseur peut être connecté pour permettre l’utilisation d’EF sur Microsoft SQL Server, alors qu’un autre fournisseur peut être connecté pour permettre l’utilisation d’EF sur Microsoft SQL Server Compact édition. Les fournisseurs de EF6 que nous avons pris en charge sont disponibles sur la page [fournisseurs de Entity Framework](~/ef6/fundamentals/providers/index.md) .
 
-Certaines modifications étaient nécessaires à la façon dont EF interagit avec les fournisseurs d’Entity Framework pour être commercialisées sous une licence open source. Ces modifications exigent une reconstruction de fournisseurs EF sur les assemblys EF6 ainsi que de nouveaux mécanismes pour l’inscription du fournisseur.
+Certaines modifications ont été apportées à la façon dont EF interagit avec les fournisseurs pour permettre la libération d’EF sous une licence Open source. Ces modifications nécessitent la régénération des fournisseurs EF sur les assemblys EF6 avec de nouveaux mécanismes d’inscription du fournisseur.
 
 ## <a name="rebuilding"></a>La reconstruction
 
-Avec EF6 code principal qui faisait précédemment partie du .NET Framework est désormais fourni en tant que les assemblys hors-bande (OOB). Vous trouverez plus d’informations sur la façon de créer des applications dans EF6 sur le [mise à jour des applications pour EF6](~/ef6/what-is-new/upgrading-to-ef6.md) page. Fournisseurs devez également être reconstruits à l’aide de ces instructions.
+Avec EF6, le code de base qui faisait précédemment partie du .NET Framework est désormais fourni en tant qu’assemblys hors bande (OOB). Vous trouverez plus d’informations sur la création d’applications sur EF6 sur la page [mise à jour des applications pour EF6](~/ef6/what-is-new/upgrading-to-ef6.md) . Les fournisseurs devront également être reconstruits à l’aide de ces instructions.
 
-## <a name="provider-types-overview"></a>Vue d’ensemble des types de fournisseur
+## <a name="provider-types-overview"></a>Vue d’ensemble des types de fournisseurs
 
-Un fournisseur EF est vraiment une collection de services spécifiques au fournisseur définis par les types CLR que ces services étendre à partir de (pour une classe de base) ou implémentent (pour une interface). Deux de ces services sont fondamentaux et nécessaire pour Entity Framework de fonctionner tout. D’autres sont facultatifs et uniquement besoin d’être implémentée si une fonctionnalité spécifique est requise et/ou les implémentations par défaut de ces services ne fonctionne pas pour le serveur de base de données spécifique qui est ciblé.
+Un fournisseur EF est en fait une collection de services spécifiques au fournisseur définis par les types CLR que ces services étendent (pour une classe de base) ou implémentent (pour une interface). Deux de ces services sont essentiels et nécessaires au fonctionnement d’EF. D’autres sont facultatifs et doivent être implémentés uniquement si une fonctionnalité spécifique est requise et/ou si les implémentations par défaut de ces services ne fonctionnent pas pour le serveur de base de données spécifique ciblé.
 
 ## <a name="fundamental-provider-types"></a>Types de fournisseurs fondamentaux
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF dépend d’un type dérivé [System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour l’exécution de tous les accès de bas niveau de la base de données. DbProviderFactory ne faisant pas partie d’EF mais est plutôt une classe dans le .NET Framework qui fait Office de point d’entrée pour les fournisseurs ADO.NET qui peut être utilisée par Entity Framework, autres O/RMs, ou directement par une application pour obtenir des instances de connexions, les commandes, les paramètres et autres abstractions ADO.NET dans un fournisseur de façon indépendante. Vous trouverez plus d’informations sur DbProviderFactory dans le [documentation MSDN pour ADO.NET](https://msdn.microsoft.com/library/a6cd7c08.aspx).
+EF dépend d’un type dérivé de [System. Data. Common. DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour effectuer tous les accès aux bases de données de bas niveau. DbProviderFactory ne fait pas réellement partie d’EF mais est une classe du .NET Framework qui sert de point d’entrée pour les fournisseurs ADO.NET qui peuvent être utilisés par EF, autre O/RMs ou directement par une application pour obtenir des instances de connexions, commandes, paramètres et autres abstractions ADO.NET de manière agnostique du fournisseur. Vous trouverez plus d’informations sur DbProviderFactory dans la [documentation MSDN relative à ADO.net](https://msdn.microsoft.com/library/a6cd7c08.aspx).
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
-EF dépend d’avoir un type dérivé DbProviderServices de fournir des fonctionnalités supplémentaires requises par Entity Framework en haut de la fonctionnalité déjà fournie par le fournisseur ADO.NET. Dans les versions antérieures d’EF la classe DbProviderServices faisait partie du .NET Framework et a été trouvée dans l’espace de noms System.Data.Common. EF6 compter de cette classe est désormais partie de l’EntityFramework.dll et est dans l’espace de noms System.Data.Entity.Core.Common.
+EF dépend d’un type dérivé de DbProviderServices pour fournir des fonctionnalités supplémentaires requises par EF sur les fonctionnalités déjà fournies par le fournisseur ADO.NET. Dans les versions antérieures d’EF, la classe DbProviderServices faisait partie du .NET Framework et a été trouvée dans l’espace de noms System. Data. Common. À partir de EF6, cette classe fait désormais partie d’EntityFramework. dll et se trouve dans l’espace de noms System. Data. Entity. Core. Common.
 
-Vous trouverez plus d’informations sur la fonctionnalité fondamentale d’une implémentation DbProviderServices sur [MSDN](https://msdn.microsoft.com/library/ee789835.aspx). Toutefois, notez qu’au moment de l’écriture de ces informations n'est pas mis à jour pour EF6 bien que la plupart des concepts est toujours valide. Les implémentations de SQL Server et SQL Server Compact de DbProviderServices sont également archivées dans à la [codebase open source](https://github.com/aspnet/EntityFramework6/) et peuvent servir de référence utile pour d’autres implémentations.
+Vous trouverez plus d’informations sur les fonctionnalités fondamentales d’une implémentation de DbProviderServices sur [MSDN](https://msdn.microsoft.com/library/ee789835.aspx). Toutefois, Notez qu’au moment de la rédaction de ces informations n’est pas mis à jour pour EF6, bien que la plupart des concepts soient toujours valides. Les implémentations SQL Server et SQL Server Compact de DbProviderServices sont également consignées dans le code [base open source](https://github.com/aspnet/EntityFramework6/) et peuvent servir de références utiles pour d’autres implémentations.
 
-Dans les versions antérieures d’EF implémentation DbProviderServices à utiliser a été obtenue directement à partir d’un fournisseur ADO.NET. Cela a été effectuée en effectuant un cast de DbProviderFactory de IServiceProvider en appelant la méthode GetService. Cela étroitement le fournisseur EF DbProviderFactory. Ce couplage bloqué EF enlève le .NET Framework et pour EF6 ce couplage étroit a donc été supprimé et une implémentation de DbProviderServices est maintenant inscrit directement dans le fichier de configuration de l’application ou dans la base de code configuration comme décrit plus en détail la _DbProviderServices inscription_ section ci-dessous.
+Dans les versions antérieures d’EF, l’implémentation de DbProviderServices à utiliser a été obtenue directement à partir d’un fournisseur ADO.NET. Cela a été fait en convertissant DbProviderFactory en IServiceProvider et en appelant la méthode GetService. Cela a étroitement couplé le fournisseur EF à DbProviderFactory. Cela a pour effet d’empêcher le déplacement du EF bloqué de la .NET Framework. par conséquent, pour EF6, ce couplage étroit a été supprimé et une implémentation de DbProviderServices est maintenant inscrite directement dans le fichier de configuration de l’application ou dans un code configuration comme décrit plus en détail la section _inscription de DbProviderServices_ ci-dessous.
 
 ## <a name="additional-services"></a>Services supplémentaires
 
-En plus des services fondamentaux décrits ci-dessus, il existe également beaucoup d’autres services utilisés par Entity Framework qui est systématiquement ou parfois spécifiques au fournisseur. Les implémentations spécifiques au fournisseur par défaut de ces services peuvent être fournies par une implémentation DbProviderServices. Les applications peuvent également remplacer les implémentations de ces services ou fournir des implémentations lorsqu’un type DbProviderServices ne fournit pas de valeur par défaut. Cette opération est décrite plus en détail dans le _des services supplémentaires de résolution_ section ci-dessous.
+Outre les services fondamentaux décrits ci-dessus, il existe également de nombreux autres services utilisés par EF, qui sont toujours ou parfois spécifiques au fournisseur. Les implémentations spécifiques au fournisseur par défaut de ces services peuvent être fournies par une implémentation de DbProviderServices. Les applications peuvent également substituer les implémentations de ces services ou fournir des implémentations lorsqu’un type DbProviderServices ne fournit pas de valeur par défaut. Cela est décrit plus en détail dans la section _résolution des services supplémentaires_ ci-dessous.
 
-Les types de service supplémentaires un fournisseur peut-être être utiles à un fournisseur sont répertoriées ci-dessous. Vous trouverez plus d’informations sur chacun de ces types de service dans la documentation de l’API.
+Les types de service supplémentaires qu’un fournisseur peut présenter un intérêt pour un fournisseur sont répertoriés ci-dessous. Vous trouverez plus d’informations sur chacun de ces types de service dans la documentation de l’API.
 
 ### <a name="idbexecutionstrategy"></a>IDbExecutionStrategy
 
-Il s’agit d’un service facultatif qui permet à un fournisseur implémenter les nouvelles tentatives ou un autre comportement lorsque les requêtes et les commandes sont exécutées sur la base de données. Si aucune implémentation n’est fournie, puis EF sera simplement exécuter les commandes et propager toutes les exceptions levées. Pour SQL Server ce service est utilisé pour fournir une stratégie de nouvelle tentative, ce qui est particulièrement utile lors de l’exécution par rapport à des serveurs de base de données basée sur le cloud, tels que SQL Azure.
+Il s’agit d’un service facultatif qui permet à un fournisseur d’implémenter de nouvelles tentatives ou un autre comportement lorsque des requêtes et des commandes sont exécutées sur la base de données. Si aucune implémentation n’est fournie, EF exécute simplement les commandes et propage toutes les exceptions levées. Par SQL Server ce service est utilisé pour fournir une stratégie de nouvelle tentative qui est particulièrement utile lors de l’exécution sur des serveurs de base de données basés sur le Cloud, tels que des SQL Azure.
 
 ### <a name="idbconnectionfactory"></a>IDbConnectionFactory
 
-Il s’agit d’un service facultatif qui permet à un fournisseur créer des objets de DbConnection par convention donné uniquement un nom de la base de données. Notez que bien que ce service peut être résolu par une implémentation DbProviderServices il était présente depuis EF 4.1 et peut également être explicitement définie dans le fichier de configuration ou dans le code. Le fournisseur obtient uniquement la possibilité de résoudre ce service s’il est inscrit en tant que le fournisseur par défaut (consultez _le fournisseur par défaut_ ci-dessous) et si une fabrique de connexion par défaut n’est pas définie ailleurs.
+Il s’agit d’un service facultatif qui permet à un fournisseur de créer des objets DbConnection par Convention lorsque seul un nom de base de données est fourni. Notez que même si ce service peut être résolu par une implémentation de DbProviderServices, il est présent depuis EF 4,1 et peut également être défini explicitement dans le fichier de configuration ou dans le code. Le fournisseur n’aura la possibilité de résoudre ce service que s’il est inscrit en tant que fournisseur par défaut (voir _le fournisseur par défaut_ ci-dessous) et si une fabrique de connexion par défaut n’a pas été définie ailleurs.
 
 ### <a name="dbspatialservices"></a>DbSpatialServices
 
-Il s’agit d’un services facultatif qui permet à un fournisseur à ajouter la prise en charge pour les types geography et geometry spatiaux. Une implémentation de ce service doit être fournie pour une application à utiliser EF avec des types spatiaux. DbSptialServices est invité à entrer de deux manières. Tout d’abord, spécifique au fournisseur de services spatiaux sont demandés à l’aide d’un objet DbProviderInfo (qui contient l’invariant jeton de nom et le manifest) en tant que clé. En second lieu, DbSpatialServices peuvent être demandées sans clé. Cela permet de résoudre le « spatial mondial » qui est utilisé lors de la création des types de DbGeography ou DbGeometry autonomes.
+Il s’agit d’un service facultatif qui permet à un fournisseur d’ajouter la prise en charge des types spatiaux Geography et Geometry. Une implémentation de ce service doit être fournie pour qu’une application puisse utiliser EF avec des types spatiaux. DbSptialServices est demandé de deux manières. Tout d’abord, les services spatiaux spécifiques au fournisseur sont demandés à l’aide d’un objet DbProviderInfo (qui contient le nom invariant et le jeton de manifeste) en tant que clé. Deuxièmement, DbSpatialServices peut être demandé sans clé. Utilisé pour résoudre le « fournisseur spatial global » utilisé lors de la création de types DbGeography ou DbGeometry autonomes.
 
 ### <a name="migrationsqlgenerator"></a>MigrationSqlGenerator
 
-Il s’agit d’un service facultatif qui permet des Migrations Entity Framework à utiliser pour la génération de la session SQL utilisée dans la création et modification des schémas de base de données par Code First. Une implémentation est requise pour prendre en charge les Migrations. Si une implémentation est fournie, il sera également utiliser lors de la création de bases de données à l’aide d’initialiseurs de base de données ou la méthode Database.Create.
+Il s’agit d’un service facultatif qui permet d’utiliser des migrations EF pour la génération de SQL utilisée pour la création et la modification de schémas de base de données par Code First. Une implémentation est requise pour prendre en charge les migrations. Si une implémentation est fournie, elle est également utilisée lors de la création de bases de données à l’aide d’initialiseurs de base de données ou de la méthode Database. Create.
 
-### <a name="funcdbconnection-string-historycontextfactory"></a>Func<DbConnection, string, HistoryContextFactory>
+### <a name="funcdbconnection-string-historycontextfactory"></a>Func < DbConnection, String, HistoryContextFactory >
 
-Il s’agit d’un service facultatif qui permet à un fournisseur configurer le mappage de la HistoryContext à la `__MigrationHistory` table utilisée par des Migrations Entity Framework. Le HistoryContext est un Code premier DbContext et peut être configuré à l’aide de l’API fluent normale pour modifier des éléments tels que le nom de la table et les spécifications de mappage de colonne. L’implémentation par défaut de ce service retourné par EF pour tous les fournisseurs peut-être fonctionner pour un serveur de base de données donné si tous les mappages table et de colonne par défaut sont pris en charge par le fournisseur. Dans ce cas le fournisseur est inutile de fournir une implémentation de ce service.
+Il s’agit d’un service facultatif qui permet à un fournisseur de configurer le mappage du HistoryContext à la table `__MigrationHistory` utilisée par les migrations EF. Le HistoryContext est un Code First DbContext et peut être configuré à l’aide de l’API Fluent normale pour modifier des éléments tels que le nom de la table et les spécifications de mappage de colonne. L’implémentation par défaut de ce service retournée par EF pour tous les fournisseurs peut fonctionner pour un serveur de base de données donné si tous les mappages de tables et de colonnes par défaut sont pris en charge par ce fournisseur. Dans ce cas, le fournisseur n’a pas besoin de fournir une implémentation de ce service.
 
 ### <a name="idbproviderfactoryresolver"></a>IDbProviderFactoryResolver
 
-Il s’agit d’un service facultatif pour l’obtention du DbProviderFactory correct à partir d’un objet DbConnection donné. L’implémentation par défaut de ce service retourné par EF pour tous les fournisseurs est destinée à fonctionner pour tous les fournisseurs. Toutefois, lors de l’exécution sur .NET 4, DbProviderFactory n’est pas accessible publiquement à partir d’un seul si son DbConnections. Par conséquent, EF utilise quelques méthodes heuristiques pour rechercher les fournisseurs inscrits pour rechercher une correspondance. Il est possible que pour certains fournisseurs ces heuristiques échouera et dans ce cas, le fournisseur doit fournir une nouvelle implémentation.
+Il s’agit d’un service facultatif permettant d’obtenir le DbProviderFactory approprié à partir d’un objet DbConnection donné. L’implémentation par défaut de ce service retournée par EF pour tous les fournisseurs est conçue pour fonctionner pour tous les fournisseurs. Toutefois, en cas d’exécution sur .NET 4, DbProviderFactory n’est pas accessible publiquement à partir de l’un de ses DbConnections. Par conséquent, EF utilise des heuristiques pour rechercher des correspondances dans les fournisseurs inscrits. Il est possible que pour certains fournisseurs, ces heuristiques échouent et, dans de telles situations, le fournisseur doit fournir une nouvelle implémentation.
 
-## <a name="registering-dbproviderservices"></a>L’inscription DbProviderServices
+## <a name="registering-dbproviderservices"></a>Inscription de DbProviderServices
 
-Implémentation DbProviderServices à utiliser peut être inscrits dans l’application à l’aide de la configuration basée sur le code ou de fichier de configuration (app.config ou web.config). Dans les deux cas, l’inscription utilise le nom du fournisseur « indifférent » en tant que clé. Cela permet à plusieurs fournisseurs être enregistrés et utilisés dans une application unique. Le nom invariant est utilisé pour les inscriptions d’EF est la même que le nom invariant utilisé pour les chaînes de l’inscription et connexion de fournisseur ADO.NET. Par exemple, pour SQL Server, le nom invariant « System.Data.SqlClient » est utilisé.
+L’implémentation de DbProviderServices à utiliser peut être inscrite dans le fichier de configuration de l’application (App. config ou Web. config) ou à l’aide d’une configuration basée sur le code. Dans les deux cas, l’inscription utilise le « nom invariant » du fournisseur comme clé. Cela permet d’inscrire plusieurs fournisseurs et de les utiliser dans une même application. Le nom invariant utilisé pour les inscriptions EF est le même que le nom invariant utilisé pour l’inscription du fournisseur ADO.NET et les chaînes de connexion. Par exemple, pour SQL Server le nom invariant « System. Data. SqlClient » est utilisé.
 
 ### <a name="config-file-registration"></a>Inscription dans le fichier config
 
-Le type DbProviderServices à utiliser est enregistré comme un élément de fournisseur dans la liste des fournisseurs de la section entityFramework de fichier de configuration de l’application. Exemple :
+Le type DbProviderServices à utiliser est inscrit en tant qu’élément de fournisseur dans la liste des fournisseurs de la section entityFramework du fichier de configuration de l’application. Exemple :
 
 ``` xml
 <entityFramework>
@@ -84,11 +84,11 @@ Le type DbProviderServices à utiliser est enregistré comme un élément de fou
 </entityFramework>
 ```
 
-Le _type_ chaîne doit être le nom de type qualifié d’assembly de l’implémentation DbProviderServices à utiliser.
+Le _type_ chaîne doit être le nom de type qualifié par un assembly de l’implémentation DbProviderServices à utiliser.
 
 ### <a name="code-based-registration"></a>Inscription basée sur le code
 
-En commençant par les fournisseurs de EF6 peut aussi être inscrits à l’aide de code. Ainsi, un fournisseur EF utilisable sans aucune modification au fichier de configuration de l’application. Pour utiliser la configuration basée sur le code une application doit créer une classe DbConfiguration, comme décrit dans la [documentation de configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit appeler SetProviderServices pour inscrire le fournisseur Entity Framework. Exemple :
+Le démarrage des fournisseurs EF6 peut également être inscrit à l’aide de code. Cela permet l’utilisation d’un fournisseur EF sans aucune modification du fichier de configuration de l’application. Pour utiliser la configuration basée sur le code, une application doit créer une classe DbConfiguration comme décrit dans la [documentation relative à la configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit ensuite appeler SetProviderServices pour inscrire le fournisseur EF. Exemple :
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -100,11 +100,11 @@ public class MyConfiguration : DbConfiguration
 }
 ```
 
-## <a name="resolving-additional-services"></a>Résoudre des services supplémentaires
+## <a name="resolving-additional-services"></a>Résolution de services supplémentaires
 
-Comme indiqué plus haut dans la _présentation des types de fournisseur_ section, un DbProviderServices classe peut également être utilisée pour résoudre des services supplémentaires. Cela est possible car DbProviderServices implémente IDbDependencyResolver et chaque type DbProviderServices enregistré est ajouté comme un « programme de résolution par défaut ». Le mécanisme de IDbDpendencyResolver est décrite plus en détail dans [résolution des dépendances](~/ef6/fundamentals/configuring/dependency-resolution.md). Toutefois, il n’est pas nécessaire de comprendre tous les concepts dans cette spécification pour résoudre des services supplémentaires dans un fournisseur.
+Comme indiqué ci-dessus dans la section _vue d’ensemble des types de fournisseurs_ , une classe DbProviderServices peut également être utilisée pour résoudre des services supplémentaires. Cela est possible car DbProviderServices implémente IDbDependencyResolver et chaque type de DbProviderServices inscrit est ajouté comme « programme de résolution par défaut ». Le mécanisme IDbDpendencyResolver est décrit plus en détail dans [résolution des dépendances](~/ef6/fundamentals/configuring/dependency-resolution.md). Toutefois, il n’est pas nécessaire de comprendre tous les concepts de cette spécification pour résoudre des services supplémentaires dans un fournisseur.
 
-La méthode la plus courante pour un fournisseur résoudre des services supplémentaires consiste à appeler DbProviderServices.AddDependencyResolver pour chaque service dans le constructeur de la classe DbProviderServices. Par exemple, SqlProviderServices (le fournisseur Entity Framework pour SQL Server) a code similaire à celui-ci pour l’initialisation :
+La façon la plus courante pour un fournisseur de résoudre des services supplémentaires consiste à appeler DbProviderServices. AddDependencyResolver pour chaque service dans le constructeur de la classe DbProviderServices. Par exemple, SqlProviderServices (fournisseur EF pour SQL Server) a du code similaire à celui-ci pour l’initialisation :
 
 ``` csharp
 private SqlProviderServices()
@@ -131,10 +131,10 @@ private SqlProviderServices()
 
 Ce constructeur utilise les classes d’assistance suivantes :
 
-*   SingletonDependencyResolver : fournit un moyen simple pour résoudre des services de Singleton, autrement dit, les services pour lesquels la même instance est retournée chaque fois que GetService est appelée. Services transitoires sont souvent enregistrés comme une fabrique de singleton qui servira à créer des instances temporaires à la demande.
-*   ExecutionStrategyResolver : un programme de résolution spécifique pour retourner des implémentations de IExecutionStrategy.
+*   SingletonDependencyResolver : fournit un moyen simple de résoudre les services Singleton, autrement dit, les services pour lesquels la même instance est retournée chaque fois que GetService est appelé. Les services temporaires sont souvent inscrits en tant que fabrique singleton qui sera utilisée pour créer des instances transitoires à la demande.
+*   ExecutionStrategyResolver : programme de résolution spécifique pour retourner des implémentations de IExecutionStrategy.
 
-Au lieu d’utiliser DbProviderServices.AddDependencyResolver, il est également possible de remplacer DbProviderServices.GetService et résoudre des services supplémentaires directement. Cette méthode est appelée quand EF a besoin d’un service défini par un certain type et, dans certains cas, pour une clé donnée. La méthode doit retourner le service s’il peut, ou retournez null pour les annulations de retourner le service et permettre à la place une autre classe résoudre le problème. Par exemple, pour résoudre la fabrique de connexion par défaut le code dans GetService peut ressembler à ceci :
+Au lieu d’utiliser DbProviderServices. AddDependencyResolver, il est également possible de remplacer DbProviderServices. GetService et de résoudre directement les services supplémentaires. Cette méthode est appelée quand EF a besoin d’un service défini par un certain type et, dans certains cas, pour une clé donnée. La méthode doit retourner le service si possible, ou retourner la valeur null pour refuser le retour du service et autoriser à la place une autre classe à le résoudre. Par exemple, pour résoudre la fabrique de connexion par défaut, le code de GetService peut se présenter comme suit :
 
 ``` csharp
 public override object GetService(Type type, object key)
@@ -149,17 +149,17 @@ public override object GetService(Type type, object key)
 
 ### <a name="registration-order"></a>Ordre d’inscription
 
-Lorsque plusieurs implémentations DbProviderServices sont enregistrées dans le fichier de configuration d’une application, ils seront ajoutés en tant que programmes de résolution secondaire dans l’ordre d’apparition. Dans la mesure où les programmes de résolution soient toujours ajoutées à la partie supérieure de la chaîne de programme de résolution secondaire que cela signifie que le fournisseur à la fin de la liste obtiendront une chance à résoudre les dépendances avant les autres. (Cela peut sembler un peu intuitif dans un premier temps, mais il est judicieux si vous imaginez en prenant chaque fournisseur de la liste et leur empilement par-dessus les fournisseurs existants).
+Lorsque plusieurs implémentations de DbProviderServices sont inscrites dans le fichier de configuration d’une application, elles sont ajoutées en tant que programmes de résolution secondaires dans l’ordre dans lequel elles sont répertoriées. Étant donné que les programmes de résolution sont toujours ajoutés en haut de la chaîne de résolution secondaire, cela signifie que le fournisseur à la fin de la liste aura la possibilité de résoudre les dépendances avant les autres. (Cela peut paraître un peu intuitif dans un premier temps, mais il est judicieux de faire en sorte que chaque fournisseur soit sorti de la liste et qu’il soit empilé par-dessus les fournisseurs existants.)
 
-Ce classement généralement peu, car la plupart des services de fournisseur sont spécifiques au fournisseur et à la clé par le nom invariant du fournisseur. Toutefois, pour les services qui ne sont pas indexés par nom invariant du fournisseur ou certaines autres spécifique au fournisseur clé que le service sera résolu en fonction de cet ordre. Par exemple, si il n'est pas explicitement défini différemment à un endroit ; sinon, la fabrique de connexion par défaut proviendront à partir du fournisseur au premier plan dans la chaîne.
+Ce classement n’a généralement pas d’importance, car la plupart des services de fournisseur sont spécifiques au fournisseur et indexés par nom invariant du fournisseur. Toutefois, pour les services qui ne sont pas indexés par le nom invariant du fournisseur ou une autre clé spécifique au fournisseur, le service est résolu en fonction de ce classement. Par exemple, s’il n’est pas explicitement défini différemment à un autre endroit, la fabrique de connexion par défaut proviendra du fournisseur le plus élevé dans la chaîne.
 
-## <a name="additional-config-file-registrations"></a>Enregistrements de fichier de configuration supplémentaires
+## <a name="additional-config-file-registrations"></a>Inscriptions de fichier de configuration supplémentaires
 
-Il est possible de s’inscrire explicitement les services de fournisseur supplémentaires décrites ci-dessus directement dans le fichier de configuration d’une application. Lorsque cette opération s’effectue l’inscription dans le fichier de configuration sera utilisé au lieu de quoi que ce soit retourné par la méthode GetService de l’implémentation DbProviderServices.
+Il est possible d’inscrire explicitement certains des services de fournisseur supplémentaires décrits ci-dessus directement dans le fichier de configuration d’une application. Une fois cette opération effectuée, l’enregistrement dans le fichier de configuration sera utilisé à la place de tout ce qui est retourné par la méthode GetService de l’implémentation DbProviderServices.
 
 ### <a name="registering-the-default-connection-factory"></a>Inscription de la fabrique de connexion par défaut
 
-Démarrage avec EF5 du package EntityFramework NuGet automatiquement inscrit la fabrique de connexion SQL Express ou de la fabrique de connexion de base de données locale dans le fichier de configuration.
+À compter de EF5, le package NuGet EntityFramework a inscrit automatiquement la fabrique de connexion SQL Express ou la fabrique de connexion de la base de données locale dans le fichier de configuration.
 
 Exemple :
 
@@ -171,46 +171,46 @@ Exemple :
 
 Le _type_ est le nom de type qualifié d’assembly pour la fabrique de connexion par défaut, qui doit implémenter IDbConnectionFactory.
 
-Il est recommandé qu’un package NuGet du fournisseur défini la fabrique de connexion par défaut de cette manière lors de l’installation. Consultez _les Packages NuGet pour les fournisseurs_ ci-dessous.
+Il est recommandé qu’un package NuGet de fournisseur définisse la fabrique de connexion par défaut de cette manière lors de son installation. Consultez _packages NuGet pour les fournisseurs_ ci-dessous.
 
 ## <a name="additional-ef6-provider-changes"></a>Modifications supplémentaires du fournisseur EF6
 
-### <a name="spatial-provider-changes"></a>Modifications de fournisseur spatial
+### <a name="spatial-provider-changes"></a>Modifications du fournisseur spatial
 
-Fournisseurs qui prennent en charge les types de données spatiales doivent maintenant implémenter des méthodes supplémentaires sur les classes dérivées de DbSpatialDataReader :
+Les fournisseurs qui prennent en charge les types spatiaux doivent maintenant implémenter des méthodes supplémentaires sur les classes dérivant de DbSpatialDataReader :
 
 *   `public abstract bool IsGeographyColumn(int ordinal)`
 *   `public abstract bool IsGeometryColumn(int ordinal)`
 
-Il existe également des nouvelles versions asynchrones des méthodes existantes qui sont recommandées pour être remplacée car les implémentations par défaut délèguent aux méthodes synchrones et par conséquent ne pas exécuter de façon asynchrone :
+Il existe également de nouvelles versions asynchrones des méthodes existantes qui sont recommandées pour être substituées, car les implémentations par défaut délèguent aux méthodes synchrones et ne s’exécutent donc pas de façon asynchrone :
 
 *   `public virtual Task<DbGeography> GetGeographyAsync(int ordinal, CancellationToken cancellationToken)`
 *   `public virtual Task<DbGeometry> GetGeometryAsync(int ordinal, CancellationToken cancellationToken)`
 
-### <a name="native-support-for-enumerablecontains"></a>Prise en charge native pour Enumerable.Contains
+### <a name="native-support-for-enumerablecontains"></a>Prise en charge native de Enumerable. Contains
 
-EF6 introduit un nouveau type d’expression, DbInExpression, ce qui a été ajouté pour résoudre les problèmes de performances autour de l’utilisation de Enumerable.Contains dans les requêtes LINQ. La classe DbProviderManifest a une nouvelle méthode virtuelle, SupportsInExpression, qui est appelée par EF pour déterminer si un fournisseur gère le nouveau type d’expression. Pour la compatibilité avec les implémentations de fournisseur existantes, la méthode retourne false. Pour tirer parti de cette amélioration, un fournisseur d’EF6 pouvez ajouter du code pour gérer les DbInExpression et substituer SupportsInExpression pour retourner true. Une instance de DbInExpression peut être créée en appelant la méthode DbExpressionBuilder.In. Une instance de DbInExpression est composée d’une DbExpression, représentant généralement une colonne de table et une liste de DbConstantExpression à tester pour une correspondance.
+EF6 introduit un nouveau type d’expression, DbInExpression, qui a été ajouté pour résoudre les problèmes de performances liés à l’utilisation de Enumerable. Contains dans les requêtes LINQ. La classe DbProviderManifest a une nouvelle méthode virtuelle, SupportsInExpression, qui est appelée par EF pour déterminer si un fournisseur gère le nouveau type d’expression. Pour la compatibilité avec les implémentations de fournisseur existantes, la méthode retourne false. Pour tirer parti de cette amélioration, un fournisseur EF6 peut ajouter du code pour gérer DbInExpression et remplacer SupportsInExpression pour retourner la valeur true. Une instance de DbInExpression peut être créée en appelant la méthode DbExpressionBuilder.In. Une instance DbInExpression est composée d’un DbExpression, représentant généralement une colonne de table et d’une liste de DbConstantExpression à tester pour rechercher une correspondance.
 
 ## <a name="nuget-packages-for-providers"></a>Packages NuGet pour les fournisseurs
 
-Première à proposer un fournisseur d’EF6 consiste à libérer sous forme de package NuGet. À l’aide d’un package NuGet présente les avantages suivants :
+L’une des façons de rendre un fournisseur EF6 disponible est de le publier en tant que package NuGet. L’utilisation d’un package NuGet présente les avantages suivants :
 
-*   Il est facile à utiliser NuGet pour ajouter l’inscription du fournisseur de fichier de configuration de l’application
-*   Des modifications supplémentaires peuvent porter sur le fichier de configuration pour définir la fabrique de connexion par défaut afin que les connexions établies par convention utilise le fournisseur enregistré
-*   NuGet gère l’ajout des redirections de liaison afin que le fournisseur EF6 doit continuer à fonctionner même après la publication d’un nouveau package EF
+*   Il est facile d’utiliser NuGet pour ajouter l’inscription du fournisseur au fichier de configuration de l’application
+*   Des modifications supplémentaires peuvent être apportées au fichier de configuration pour définir la fabrique de connexion par défaut afin que les connexions établies par convention utilisent le fournisseur inscrit
+*   NuGet gère l’ajout de redirections de liaison afin que le fournisseur EF6 doit continuer à fonctionner même après la publication d’un nouveau package EF
 
-Un exemple de ceci est le package EntityFramework.SqlServerCompact qui est inclus dans le [open source codebase](http://github.com/aspnet/entityframework6). Ce package fournit un bon modèle pour créer des packages NuGet fournisseur EF.
+Par exemple, le package EntityFramework. SqlServerCompact inclus dans le code [base open source](https://github.com/aspnet/entityframework6). Ce package fournit un bon modèle pour créer des packages NuGet du fournisseur EF.
 
 ### <a name="powershell-commands"></a>Commandes PowerShell
 
-Lorsque le package EntityFramework NuGet est installé, il inscrit un module PowerShell qui contient les deux commandes sont très utiles pour les packages de fournisseur :
+Quand le package NuGet EntityFramework est installé, il inscrit un module PowerShell qui contient deux commandes qui sont très utiles pour les packages de fournisseur :
 
-*   EFProvider ajouter ajoute une nouvelle entité pour le fournisseur dans le fichier de configuration du projet cible et s’assure qu’il est à la fin de la liste des fournisseurs inscrits.
-*   EFDefaultConnectionFactory ajouter ajoute ou met à jour l’inscription defaultconnectionfactory que dans le fichier de configuration du projet cible.
+*   Add-EFProvider ajoute une nouvelle entité pour le fournisseur dans le fichier de configuration du projet cible et vérifie qu’il se trouve à la fin de la liste des fournisseurs inscrits.
+*   Add-EFDefaultConnectionFactory ajoute ou met à jour l’inscription de defaultConnectionFactory dans le fichier de configuration du projet cible.
 
-Ces deux commandes s’occuper de l’ajout d’une section entityFramework au fichier de configuration et l’ajout d’une collection de fournisseurs si nécessaire.
+Ces deux commandes prennent en charge l’ajout d’une section entityFramework au fichier de configuration et l’ajout d’une collection de fournisseurs si nécessaire.
 
-Il est prévu que ces commandes être appelée à partir du script de NuGet Install.ps1. Par exemple, Install.ps1 pour le fournisseur SQL Compact ressemble à ceci :
+Il est prévu que ces commandes soient appelées à partir du script NuGet install. ps1. Par exemple, install. ps1 pour le fournisseur SQL Compact se présente comme suit :
 
 ``` powershell
 param($installPath, $toolsPath, $package, $project)
@@ -218,13 +218,13 @@ Add-EFDefaultConnectionFactory $project 'System.Data.Entity.Infrastructure.SqlCe
 Add-EFProvider $project 'System.Data.SqlServerCe.4.0' 'System.Data.Entity.SqlServerCompact.SqlCeProviderServices, EntityFramework.SqlServerCompact'</pre>
 ```
 
-Plus d’informations sur ces commandes peuvent être obtenus à l’aide de get-help dans la fenêtre de Console du Gestionnaire de Package.
+Pour plus d’informations sur ces commandes, consultez l’aide de la commande obtenir-aide dans la fenêtre de la console du gestionnaire de package.
 
-## <a name="wrapping-providers"></a>Fournisseurs d’habillage
+## <a name="wrapping-providers"></a>Encapsuler des fournisseurs
 
-Un fournisseur de retour à la ligne est un fournisseur EF et/ou ADO.NET qui encapsule un fournisseur existant à l’étendre avec d’autres fonctionnalités telles que le profilage ou le suivi des fonctionnalités. Fournisseurs d’habillage peut être inscrit de façon normale, mais il est souvent plus pratique pour configurer le fournisseur d’habillage lors de l’exécution en interceptant la résolution de liée au fournisseur de services. L’événement statique OnLockingConfiguration sur la classe DbConfiguration peut être utilisé pour ce faire.
+Un fournisseur d’encapsulation est un fournisseur EF et/ou ADO.NET qui encapsule un fournisseur existant pour l’étendre avec d’autres fonctionnalités telles que les fonctionnalités de profilage ou de suivi. Les fournisseurs d’encapsulation peuvent être enregistrés de manière normale, mais il est souvent plus pratique de configurer le fournisseur d’encapsulation au moment de l’exécution en interceptant la résolution des services liés au fournisseur. L’événement statique OnLockingConfiguration sur la classe DbConfiguration peut être utilisé pour effectuer cette opération.
 
-OnLockingConfiguration est appelée après que EF a déterminé où toute la configuration EF pour le domaine d’application est obtenus depuis mais avant d’être verrouillé pour une utilisation. Au démarrage de l’application (avant EF est utilisé) l’application doit s’inscrire un gestionnaire d’événements pour cet événement. (Nous envisageons d’ajouter la prise en charge de l’inscription de ce gestionnaire dans le fichier de configuration, mais cela n’est pas encore possible.) Le Gestionnaire d’événements doit ensuite effectuer un appel à ReplaceService pour chaque service qui doit être incluse.  
+OnLockingConfiguration est appelé une fois que EF a déterminé où toutes les configurations EF pour le domaine d’application seront obtenues à partir de, mais avant qu’il ne soit verrouillé pour utilisation. Au démarrage de l’application (avant l’utilisation d’EF), l’application doit inscrire un gestionnaire d’événements pour cet événement. (Nous envisageons d’ajouter la prise en charge de l’inscription de ce gestionnaire dans le fichier de configuration, mais cela n’est pas encore pris en charge.) Le gestionnaire d’événements doit ensuite effectuer un appel à ReplaceService pour chaque service qui doit être encapsulé.  
 
 Par exemple, pour encapsuler IDbConnectionFactory et DbProviderService, un gestionnaire comme celui-ci doit être inscrit :
 
@@ -240,26 +240,26 @@ DbConfiguration.OnLockingConfiguration +=
     };
 ```
 
-Le service qui a été résolu et doit maintenant être encapsulé avec la clé qui a été utilisée pour résoudre le service sont passés au gestionnaire. Le gestionnaire peut encapsuler ce service, puis remplacez le service retourné par la version encapsulée.
+Le service qui a été résolu et doit maintenant être encapsulé avec la clé qui a été utilisée pour résoudre le service est passé au gestionnaire. Le gestionnaire peut ensuite encapsuler ce service et remplacer le service retourné par la version encapsulée.
 
-## <a name="resolving-a-dbproviderfactory-with-ef"></a>Résolution d’un DbProviderFactory avec Entity Framework
+## <a name="resolving-a-dbproviderfactory-with-ef"></a>Résolution d’un DbProviderFactory avec EF
 
-DbProviderFactory est un des types de fournisseurs fondamentales nécessaires par Entity Framework, comme décrit dans la _présentation des types de fournisseur_ section ci-dessus. Comme déjà mentionné, il n’est pas un type EF et l’inscription est généralement pas partie de la configuration d’EF, mais à la place l’inscription du fournisseur ADO.NET normale dans le fichier machine.config et/ou le fichier de configuration de l’application.
+DbProviderFactory est l’un des types de fournisseurs fondamentaux nécessaires à EF, comme décrit dans la section _vue d’ensemble des types de fournisseurs_ ci-dessus. Comme mentionné précédemment, il ne s’agit pas d’un type EF et l’inscription ne fait généralement pas partie de la configuration d’EF, mais plutôt de l’inscription normale du fournisseur ADO.NET dans le fichier machine. config et/ou le fichier de configuration de l’application.
 
-Malgré cette EF utilise toujours son mécanisme de résolution de dépendance normale lorsque vous recherchez un DbProviderFactory à utiliser. Le résolveur par défaut utilise l’inscription ADO.NET normale dans les fichiers de configuration et c’est généralement transparente. En raison de la résolution de dépendance normale mécanisme est utilisé, mais cela signifie qu’un IDbDependencyResolver peut être utilisé pour résoudre un DbProviderFactory même lorsque l’enregistrement normal de ADO.NET n’a pas été effectuée.
+Bien que ce système EF utilise toujours son mécanisme de résolution de dépendance normal lorsqu’il recherche un DbProviderFactory à utiliser. Le programme de résolution par défaut utilise l’inscription normale ADO.NET dans les fichiers de configuration, ce qui est généralement transparent. Toutefois, étant donné que le mécanisme de résolution de dépendances normal est utilisé, cela signifie qu’un IDbDependencyResolver peut être utilisé pour résoudre un DbProviderFactory même lorsque l’inscription de ADO.NET normale n’a pas été effectuée.
 
-Résolution DbProviderFactory de cette manière a plusieurs conséquences :
+La résolution de DbProviderFactory de cette manière a plusieurs implications :
 
-*   Une application à l’aide de la configuration basée sur le code peut ajouter des appels dans leur classe DbConfiguration pour inscrire la DbProviderFactory approprié. Cela est particulièrement utile pour les applications qui ne souhaitent pas (ou ne peut pas) rendre tout utiliser de n’importe quelle configuration basée sur le fichier.
-*   Le service peut être encapsulé ou remplacé à l’aide de ReplaceService comme décrit dans la _encapsulant des fournisseurs_ section ci-dessus
-*   En théorie, une implémentation DbProviderServices pu résoudre un DbProviderFactory.
+*   Une application utilisant la configuration basée sur du code peut ajouter des appels dans sa classe DbConfiguration pour inscrire le DbProviderFactory approprié. Cela s’avère particulièrement utile pour les applications qui ne veulent pas (ou ne peuvent pas) utiliser une configuration basée sur des fichiers.
+*   Le service peut être encapsulé ou remplacé à l’aide de ReplaceService, comme décrit dans la section _fournisseurs d’encapsulation_ ci-dessus.
+*   En théorie, une implémentation de DbProviderServices peut résoudre un DbProviderFactory.
 
-Le point important à noter concernant effectuant l’une de ces éléments est qu’ils affectent uniquement la recherche de DbProviderFactory par Entity Framework. Tout autre code non-EF peut s’attendent le fournisseur ADO.NET pour être inscrit de façon normale et risquent d’échouer si l’inscription est introuvable. Pour cette raison, il est normalement préférable d’un DbProviderFactory à inscrire dans ADO.NET normalement.
+Le point important à prendre en compte dans ces cas de figure est qu’ils n’affectent que la recherche de DbProviderFactory par EF. D’autres codes non EF peuvent toujours s’attendre à ce que le fournisseur ADO.NET soit enregistré de manière normale et risque d’échouer si l’inscription est introuvable. Pour cette raison, il est généralement préférable d’inscrire un DbProviderFactory en mode ADO.NET normal.
 
-### <a name="related-services"></a>Services associés
+### <a name="related-services"></a>Services connexes
 
-Si Entity Framework est utilisé pour résoudre un DbProviderFactory, il doit également résoudre les services IProviderInvariantName et IDbProviderFactoryResolver.
+Si EF est utilisé pour résoudre un DbProviderFactory, il doit également résoudre les services IProviderInvariantName et IDbProviderFactoryResolver.
 
-IProviderInvariantName est un service qui est utilisé pour déterminer un nom invariant du fournisseur pour un type donné de DbProviderFactory. L’implémentation par défaut de ce service utilise l’inscription du fournisseur ADO.NET. Cela signifie que si le fournisseur ADO.NET n’est pas inscrit de façon normale, car DbProviderFactory est résolue par Entity Framework, puis il sera également nécessaire pour résoudre ce service. Notez qu’un programme de résolution de ce service est automatiquement ajouté lorsque vous utilisez la méthode DbConfiguration.SetProviderFactory.
+IProviderInvariantName est un service utilisé pour déterminer un nom invariant de fournisseur pour un type donné de DbProviderFactory. L’implémentation par défaut de ce service utilise l’inscription du fournisseur ADO.NET. Cela signifie que si le fournisseur ADO.NET n’est pas enregistré de manière normale, car DbProviderFactory est résolu par EF, il est également nécessaire de résoudre ce service. Notez qu’un programme de résolution pour ce service est automatiquement ajouté lors de l’utilisation de la méthode DbConfiguration. SetProviderFactory.
 
-Comme décrit dans la _présentation des types de fournisseur_ ci-dessus, le IDbProviderFactoryResolver est utilisé pour obtenir la DbProviderFactory correct à partir d’un objet DbConnection donné. L’implémentation par défaut de ce service lors de l’exécution sur .NET 4 utilise l’inscription du fournisseur ADO.NET. Cela signifie que si le fournisseur ADO.NET n’est pas inscrit de façon normale, car DbProviderFactory est résolue par Entity Framework, puis il sera également nécessaire pour résoudre ce service.
+Comme décrit dans la section _vue d’ensemble des types de fournisseurs_ ci-dessus, IDbProviderFactoryResolver est utilisé pour obtenir le DbProviderFactory approprié à partir d’un objet DbConnection donné. L’implémentation par défaut de ce service lors de l’exécution sur .NET 4 utilise l’inscription du fournisseur ADO.NET. Cela signifie que si le fournisseur ADO.NET n’est pas enregistré de manière normale, car DbProviderFactory est résolu par EF, il est également nécessaire de résoudre ce service.

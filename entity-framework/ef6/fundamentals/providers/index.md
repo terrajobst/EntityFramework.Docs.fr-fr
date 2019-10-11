@@ -3,12 +3,12 @@ title: Fournisseurs Entity Framework - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: f6e34d1273bd1004ce9d1610ce3613068088eb5e
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: bf07296503e4bb5d1e13f5f6f29e7118cbbde61d
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668737"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181692"
 ---
 # <a name="entity-framework-6-providers"></a>Fournisseurs Entity Framework 6
 > [!NOTE]
@@ -21,15 +21,15 @@ Entity Framework est maintenant développé sous une licence open source, et EF6
 Les fournisseurs regénérés pour EF6 dont nous avons connaissance sont notamment :
 
 *   **Fournisseur Microsoft SQL Server**
-    *   Généré à partir de la [base de code open source Entity Framework](http://github.com/aspnet/EntityFramework6)
-    *   Partie intégrante du [package NuGet EntityFramework](http://nuget.org/packages/EntityFramework)
+    *   Généré à partir de la [base de code open source Entity Framework](https://github.com/aspnet/EntityFramework6)
+    *   Partie intégrante du [package NuGet EntityFramework](https://nuget.org/packages/EntityFramework)
 *   **Fournisseur de l’édition Microsoft SQL Server Compact**
-    *   Généré à partir de la [base de code open source Entity Framework](http://github.com/aspnet/EntityFramework6)
-    *   Partie intégrante du [package NuGet EntityFramework.SqlServerCompact](http://nuget.org/packages/EntityFramework.SqlServerCompact)
-*   [**Fournisseurs de données Devart dotConnect** ](http://www.devart.com/dotconnect/)
-    *   Il existe des fournisseurs tiers de [Devart](http://www.devart.com/) pour diverses bases de données, notamment Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2 et SQL Server
-*   [**Fournisseurs de logiciels CData**](http://www.cdata.com/ado/)
-    *   Il existe des fournisseurs tiers de [logiciels CData](http://www.cdata.com/ado/) pour divers magasin de données, notamment Salesforce, Stockage Table Azure, MySql et bien plus encore
+    *   Généré à partir de la [base de code open source Entity Framework](https://github.com/aspnet/EntityFramework6)
+    *   Partie intégrante du [package NuGet EntityFramework.SqlServerCompact](https://nuget.org/packages/EntityFramework.SqlServerCompact)
+*   [**Fournisseurs de données Devart dotConnect** ](https://www.devart.com/dotconnect/)
+    *   Il existe des fournisseurs tiers de [Devart](https://www.devart.com/) pour diverses bases de données, notamment Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2 et SQL Server
+*   [**Fournisseurs de logiciels CData**](https://www.cdata.com/ado/)
+    *   Il existe des fournisseurs tiers de [logiciels CData](https://www.cdata.com/ado/) pour divers magasin de données, notamment Salesforce, Stockage Table Azure, MySql et bien plus encore
 *   **Fournisseur Firebird**
     *   Disponible sous forme de [package NuGet](https://www.nuget.org/packages/EntityFramework.Firebird/)
 *   **Fournisseur Visual Fox Pro**
@@ -68,7 +68,7 @@ Le « type » dans cette inscription est le nom qualifié d’assembly du type d
 
 ### <a name="code-based-registration"></a>Inscription basée sur le code
 
-À partir d’Entity Framework 6, la configuration d’EF au niveau de l’application peut être spécifiée dans le code. Pour des détails complets, consultez _[Configuration d’Entity Framework basée sur le code](https://msdn.microsoft.com/data/jj680699)_. La méthode normale pour inscrire un fournisseur EF à l’aide d’une configuration basée sur le code est de créer une classe dérivant de System.Data.Entity.DbConfiguration et de la placer dans le même assembly que votre classe DbContext. Votre classe DbConfiguration doit ensuite inscrire le fournisseur dans son constructeur. Par exemple, pour inscrire le fournisseur SQL Compact, la classe DbConfiguration ressemble à ceci :
+À partir d’Entity Framework 6, la configuration d’EF au niveau de l’application peut être spécifiée dans le code. Pour des détails complets, consultez _[Configuration d’Entity Framework basée sur le code](https://msdn.microsoft.com/data/jj680699)_ . La méthode normale pour inscrire un fournisseur EF à l’aide d’une configuration basée sur le code est de créer une classe dérivant de System.Data.Entity.DbConfiguration et de la placer dans le même assembly que votre classe DbContext. Votre classe DbConfiguration doit ensuite inscrire le fournisseur dans son constructeur. Par exemple, pour inscrire le fournisseur SQL Compact, la classe DbConfiguration ressemble à ceci :
 
 ``` csharp
     public class MyConfiguration : DbConfiguration

@@ -3,12 +3,12 @@ title: Requête Async et Save-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: ae578976ffc88b407ef0aaa0017935005bedd093
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 0642dc13e7aa3906fa1495031c62701fc16f0192
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921629"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181847"
 ---
 # <a name="async-query-and-save"></a>Requête asynchrone et enregistrement
 > [!NOTE]
@@ -26,11 +26,11 @@ Dans les applications clientes (WinForms, WPF, etc.), le thread actuel peut êtr
 
 Dans la plupart des applications utilisant Async n’auront pas d’avantages significatifs et même pourrait être nuisible. Utilisez les tests, le profilage et le bon sens pour mesurer l’impact de Async dans votre scénario particulier avant de le valider.
 
-Voici d’autres ressources pour en savoir plus sur Async:
+Voici d’autres ressources pour en savoir plus sur Async :
 
 -   [Vue d’ensemble de Brandon Bray de Async/await dans .NET 4,5](https://blogs.msdn.com/b/dotnet/archive/2012/04/03/async-in-4-5-worth-the-await.aspx)
 -   Pages de [programmation asynchrones](https://msdn.microsoft.com/library/hh191443.aspx) dans MSDN Library
--   [Comment créer des applications Web ASP.net à l’aide de Async](http://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (comprend une démonstration du débit accru du serveur)
+-   [Comment créer des applications Web ASP.net à l’aide de Async](https://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (comprend une démonstration du débit accru du serveur)
 
 ## <a name="create-the-model"></a>Créer le modèle
 
@@ -82,7 +82,7 @@ Nous utiliserons le flux de travail [Code First](~/ef6/modeling/code-first/workf
 
 Maintenant que nous disposons d’un modèle EF, nous allons écrire du code qui l’utilise pour effectuer un accès aux données.
 
--   Remplacez le contenu de **Program.cs** par le code suivant:
+-   Remplacez le contenu de **Program.cs** par le code suivant :
 
 ``` csharp
     using System;
@@ -138,7 +138,7 @@ Maintenant que nous disposons d’un modèle EF, nous allons écrire du code qui
 
 Ce code appelle la méthode **PerformDatabaseOperations** qui enregistre un nouveau **blog** dans la base de données, puis récupère tous les **blogs** de la base de données et les imprime sur la **console**. Après cela, le programme écrit un guillemet du jour sur la **console**.
 
-Étant donné que le code est synchrone, nous pouvons observer le déroulement de l’exécution suivant lorsque nous exécutons le programme:
+Étant donné que le code est synchrone, nous pouvons observer le déroulement de l’exécution suivant lorsque nous exécutons le programme :
 
 1.  **SaveChanges** commence à envoyer le nouveau **blog** à la base de données
 2.  **SaveChanges** se termine
@@ -154,14 +154,14 @@ Ce code appelle la méthode **PerformDatabaseOperations** qui enregistre un nouv
 
 Maintenant que notre programme est opérationnel, nous pouvons commencer à utiliser les nouveaux mots clés Async et await. Nous avons apporté les modifications suivantes à Program.cs
 
-1.  Ligne 2: L’instruction using de l’espace de noms **System. Data. Entity** nous donne accès aux méthodes d’extension EF Async.
-2.  Ligne 4: L’instruction using pour l’espace de noms **System. Threading. Tasks** nous permet d’utiliser le type de **tâche** .
-3.  Ligne 12 & 18: Nous effectuons une capture en tant que tâche qui surveille la progression de **PerformSomeDatabaseOperations** (ligne 12), puis bloquent l’exécution du programme pour que cette tâche se termine une fois que tout le travail du programme est terminé (ligne 18).
-4.  Ligne 25: Nous mettons à jour **PerformSomeDatabaseOperations** pour qu’elle soit marquée comme **Async** et retourne une **tâche**.
-5.  Ligne 35: Nous appelons maintenant la version Async de SaveChanges et en attendant son achèvement.
-6.  Ligne 42: Nous appelons maintenant la version Async de ToList et en attendant le résultat.
+1.  Ligne 2 : L’instruction using de l’espace de noms **System. Data. Entity** nous donne accès aux méthodes d’extension EF Async.
+2.  Ligne 4 : L’instruction using pour l’espace de noms **System. Threading. Tasks** nous permet d’utiliser le type de **tâche** .
+3.  Ligne 12 & 18 : Nous effectuons une capture en tant que tâche qui surveille la progression de **PerformSomeDatabaseOperations** (ligne 12), puis bloquent l’exécution du programme pour que cette tâche se termine une fois que tout le travail du programme est terminé (ligne 18).
+4.  Ligne 25 : Nous mettons à jour **PerformSomeDatabaseOperations** pour qu’elle soit marquée comme **Async** et retourne une **tâche**.
+5.  Ligne 35 : Nous appelons maintenant la version Async de SaveChanges et en attendant son achèvement.
+6.  Ligne 42 : Nous appelons maintenant la version Async de ToList et en attendant le résultat.
 
-Pour obtenir la liste complète des méthodes d’extension disponibles dans l’espace de noms System. Data. Entity, reportez-vous à la classe QueryableExtensions. *Vous devez également ajouter «using System. Data. Entity» à vos instructions using.*
+Pour obtenir la liste complète des méthodes d’extension disponibles dans l’espace de noms System. Data. Entity, reportez-vous à la classe QueryableExtensions. *Vous devez également ajouter « using System. Data. Entity » à vos instructions using.*
 
 ``` csharp
     using System;
@@ -219,15 +219,15 @@ Pour obtenir la liste complète des méthodes d’extension disponibles dans l�
     }
 ```
 
-Maintenant que le code est asynchrone, nous pouvons observer un autre workflow d’exécution lorsque nous exécutons le programme:
+Maintenant que le code est asynchrone, nous pouvons observer un autre workflow d’exécution lorsque nous exécutons le programme :
 
 1. **SaveChanges** commence à envoyer le nouveau **blog** à la base de données  
-    *Une fois la commande envoyée à la base de données, aucune durée de calcul supplémentaire n’est nécessaire sur le thread managé actuel. La méthode **PerformDatabaseOperations** retourne (même si elle n’a pas fini de s’exécuter) et le déroulement du programme dans la méthode main se poursuit.*
+    *Once la commande est envoyée à la base de données, aucune durée de calcul supplémentaire n’est nécessaire sur le thread managé actuel. La méthode **PerformDatabaseOperations** retourne (même si elle n’a pas fini de s’exécuter) et le déroulement du programme dans la méthode main se poursuit.*
 2. **Le devis du jour est écrit dans la console**  
-    *Étant donné qu’il n’y a plus de travail à effectuer dans la méthode main, le thread managé est bloqué sur l’appel d’attente jusqu’à ce que l’opération de base de données soit terminée. Une fois l’opération terminée, le reste de notre **PerformDatabaseOperations** est exécuté.*
+    *Since il n’y a plus de travail à effectuer dans la méthode main, le thread managé est bloqué sur l’appel d’attente jusqu’à ce que l’opération de base de données se termine. Une fois l’opération terminée, le reste de notre **PerformDatabaseOperations** est exécuté.*
 3.  **SaveChanges** se termine  
 4.  La requête de tous les **blogs** est envoyée à la base de données  
-    *Là encore, le thread managé est libre d’effectuer d’autres tâches pendant le traitement de la requête dans la base de données. Étant donné que toutes les autres exécutions sont terminées, le thread s’arrêtera simplement sur l’appel d’attente.*
+    *Again, le thread managé est libre d’effectuer d’autres tâches pendant que la requête est traitée dans la base de données. Étant donné que toutes les autres exécutions sont terminées, le thread s’arrêtera simplement sur l’appel d’attente.*
 5.  La requête retourne et les résultats sont écrits dans la **console**  
 
 ![Sortie asynchrone](~/ef6/media/asyncoutput.png) 

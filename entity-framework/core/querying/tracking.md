@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: d93be5c2b727d8fbaddd103f8f367c699ae80a7c
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 588dee012039ce5ecc83f0ecf263a4ea6ca38c29
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921658"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181987"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Requêtes avec suivi ou sans suivi
 
@@ -63,7 +63,7 @@ using (var context = new BloggingContext())
 ```
 
 > [!NOTE]  
-> Les requêtes sans suivi continuent à effectuer la résolution d’identité lors de l’exécution de la requête. Si le jeu de résultats contient plusieurs fois à la même entité, la même instance de la classe d’entité s’affichera pour chaque occurrence du jeu de résultats. Toutefois, des références faibles sont utilisées pour effectuer le suivi des entités qui ont déjà été retournées. Si un résultat antérieur avec la même identité est hors de portée, et que le nettoyage de la mémoire s’exécute, vous risquez d’obtenir une nouvelle instance de l’entité. Pour plus d'informations, consultez la section [Fonctionnement d’une requête](overview.md).
+> Les requêtes sans suivi continuent à effectuer la résolution d’identité lors de l’exécution de la requête. Si le jeu de résultats contient plusieurs fois à la même entité, la même instance de la classe d’entité s’affichera pour chaque occurrence du jeu de résultats. Toutefois, des références faibles sont utilisées pour effectuer le suivi des entités qui ont déjà été retournées. Si un résultat antérieur avec la même identité est hors de portée, et que le nettoyage de la mémoire s’exécute, vous risquez d’obtenir une nouvelle instance de l’entité. Pour plus d'informations, consultez la section [Fonctionnement d’une requête](xref:core/querying/how-query-works).
 
 ## <a name="tracking-and-projections"></a>Suivi et projections
 

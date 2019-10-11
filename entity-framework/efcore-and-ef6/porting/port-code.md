@@ -1,37 +1,37 @@
 ---
-title: Portage depuis EF6 vers EF Core - portage d’un modèle basé sur le Code
+title: Portage à partir de EF6 vers EF Core-Portage d’un modèle basé sur du code-EF
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 2dce1a50-7d84-4856-abf6-2763dd9be99d
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: 2484b681d71ae8711b1b3a59bc274a0b2e403294
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 0a99eac2091c07d8bcf7d4e5e4bdc2afcaeee810
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997047"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181213"
 ---
-# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portage d’un modèle basé sur le Code EF6 vers EF Core
+# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portage d’un modèle basé sur du code EF6 vers EF Core
 
-Si vous avez lu les mises en garde et vous êtes prêt à un port, voici quelques conseils pour vous aider à commencer.
+Si vous avez lu tous les avertissements et que vous êtes prêt à utiliser le port, voici quelques conseils pour vous aider à démarrer.
 
-## <a name="install-ef-core-nuget-packages"></a>Installer les packages NuGet de EF Core
+## <a name="install-ef-core-nuget-packages"></a>Installer EF Core des packages NuGet
 
-Pour utiliser EF Core, vous installez le package NuGet pour le fournisseur de base de données que vous souhaitez utiliser. Par exemple, lors du ciblage de SQL Server, que vous installeriez `Microsoft.EntityFrameworkCore.SqlServer`. Consultez [les fournisseurs de base de données](../../core/providers/index.md) pour plus d’informations.
+Pour utiliser EF Core, vous installez le package NuGet pour le fournisseur de base de données que vous souhaitez utiliser. Par exemple, lorsque vous ciblez SQL Server, vous devez installer `Microsoft.EntityFrameworkCore.SqlServer`. Pour plus d’informations, consultez [fournisseurs de bases de données](../../core/providers/index.md) .
 
-Si vous envisagez d’utiliser des migrations, vous devez également installer le `Microsoft.EntityFrameworkCore.Tools` package.
+Si vous envisagez d’utiliser des migrations, vous devez également installer le package `Microsoft.EntityFrameworkCore.Tools`.
 
-Il est possible de laisser le package NuGet d’EF6 (Entity Framework) est installé, comme EF Core et EF6 peuvent être utilisé côté à côte dans la même application. Toutefois, si vous n’êtes pas l’intention d’utiliser EF6 dans les zones de votre application, puis la désinstallation du package vous permettent d’exercer des erreurs de compilation sur les éléments de code nécessitant votre attention.
+Il est parfait de conserver le package NuGet EF6 (EntityFramework) installé, car EF Core et EF6 peuvent être utilisés côte à côte dans la même application. Toutefois, si vous n’avez pas l’intention d’utiliser EF6 dans les zones de votre application, la désinstallation du package permet d’obtenir des erreurs de compilation sur des portions de code nécessitant votre attention.
 
-## <a name="swap-namespaces"></a>Remplacez les espaces de noms
+## <a name="swap-namespaces"></a>Permuter les espaces de noms
 
-La plupart des API que vous utilisez dans EF6 se trouvent dans le `System.Data.Entity` espace de noms (et liés sous-espaces de noms). La première modification de code est disponible pour le remplacement à la `Microsoft.EntityFrameworkCore` espace de noms. Vous commence généralement par votre fichier de code de contexte dérivé et passez ensuite à partir de là, ciblant des erreurs de compilation lorsqu’elles se produisent.
+La plupart des API que vous utilisez dans EF6 se trouvent dans l’espace de noms `System.Data.Entity` (et les sous-espaces de noms associés). La première modification du code consiste à basculer vers l’espace de noms `Microsoft.EntityFrameworkCore`. En général, vous démarrez avec votre fichier de code de contexte dérivé, puis vous travaillez à partir de là, en résolvant les erreurs de compilation à mesure qu’elles se produisent.
 
-## <a name="context-configuration-connection-etc"></a>Configuration de contexte (connexion etc.).
+## <a name="context-configuration-connection-etc"></a>Configuration du contexte (connexion, etc.)
 
-Comme décrit dans [vous assurer de EF Core sera travail pour votre Application](ensure-requirements.md), EF Core offre moins magic autour de détection pour se connecter à la base de données. Vous devrez remplacer le `OnConfiguring` méthode sur votre contexte dérivé et utiliser l’API spécifique de fournisseur de base de données pour configurer la connexion à la base de données.
+Comme décrit dans [la section s’assurer EF Core fonctionne pour votre application](ensure-requirements.md), EF Core a moins de magie pour détecter la base de données à laquelle se connecter. Vous devez remplacer la méthode `OnConfiguring` sur votre contexte dérivé et utiliser l’API spécifique du fournisseur de base de données pour configurer la connexion à la base de données.
 
-La plupart des applications EF6 stocker la chaîne de connexion dans les applications `App/Web.config` fichier. Dans EF Core, vous lisez cette chaîne de connexion à l’aide de la `ConfigurationManager` API. Vous devrez peut-être ajouter une référence à la `System.Configuration` assembly .NET framework à être en mesure d’utiliser cette API.
+La plupart des applications EF6 stockent la chaîne de connexion dans le fichier des applications `App/Web.config`. Dans EF Core, vous lisez cette chaîne de connexion à l’aide de l’API `ConfigurationManager`. Vous devrez peut-être ajouter une référence à l’assembly de Framework `System.Configuration` pour pouvoir utiliser cette API.
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -48,14 +48,14 @@ public class BloggingContext : DbContext
 
 ## <a name="update-your-code"></a>Mettre à jour votre code
 
-À ce stade, il est une question de l’adressage des erreurs de compilation et de révision de code pour voir si les modifications de comportement aura un impact sur vous.
+À ce stade, il s’agit de traiter les erreurs de compilation et de consulter le code pour voir si les changements de comportement ont un impact sur vous.
 
 ## <a name="existing-migrations"></a>Migrations existantes
 
-Il n’est pas vraiment possible permettent de déplacer des migrations EF6 existantes vers EF Core.
+Il n’existe pas vraiment un moyen pratique de porter des migrations EF6 existantes vers EF Core.
 
-Si possible, il est préférable de supposer que toutes les migrations précédentes d’EF6 ont été appliquées à la base de données et migration du schéma de celle de début pointez à l’aide d’EF Core. Pour ce faire, vous utiliseriez le `Add-Migration` commande pour ajouter une migration une fois que le modèle est déplacée vers EF Core. Puis supprimer tout le code à partir de la `Up` et `Down` méthodes de la migration du modèle généré automatiquement. Des migrations compare au modèle lors de la migration initiale a été généré automatiquement.
+Si possible, il est préférable de supposer que toutes les migrations précédentes de EF6 ont été appliquées à la base de données, puis de commencer à migrer le schéma à partir de ce point à l’aide de EF Core. Pour ce faire, vous devez utiliser la commande `Add-Migration` pour ajouter une migration une fois que le modèle est porté sur EF Core. Vous supprimez ensuite tout le code des méthodes `Up` et `Down` de la migration par génération de modèles automatique. Les migrations suivantes seront comparées au modèle lors de la génération de modèles automatique de la migration initiale.
 
-## <a name="test-the-port"></a>Le port de test
+## <a name="test-the-port"></a>Tester le port
 
-Parce que votre application est compilée, ne signifie pas qu’il est correctement déplacée vers EF Core. Vous devez tester toutes les zones de votre application pour vous assurer qu’aucun des changements de comportement ont défavorablement affectées de votre application.
+Simplement parce que votre application est compilée, ne signifie pas qu’elle est correctement reportée vers EF Core. Vous devrez tester toutes les zones de votre application pour vous assurer qu’aucune des modifications de comportement n’a un impact négatif sur votre application.

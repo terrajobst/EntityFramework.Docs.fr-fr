@@ -3,12 +3,12 @@ title: Journalisation et interception des opérations de base de données-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: be32ed114269543ac36b256a202e0494d466e4f7
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 35b0284a5ad8b2b732f074589bd458d243312575
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306532"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181659"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Journalisation et interception des opérations de base de données
 > [!NOTE]
@@ -16,7 +16,7 @@ ms.locfileid: "68306532"
 
 À partir de Entity Framework 6, chaque fois que Entity Framework envoie une commande à la base de données, cette commande peut être interceptée par le code de l’application. C’est le plus souvent utilisé pour la journalisation SQL, mais elle peut également être utilisée pour modifier ou abandonner la commande.  
 
-En particulier, EF comprend les éléments suivants:  
+En particulier, EF comprend les éléments suivants :  
 
 - Une propriété de journal pour le contexte similaire à DataContext. log dans LINQ to SQL  
 - Mécanisme de personnalisation du contenu et de la mise en forme de la sortie envoyée au Journal  
@@ -24,7 +24,7 @@ En particulier, EF comprend les éléments suivants:
 
 ## <a name="context-log-property"></a>Propriété du journal de contexte  
 
-La propriété DbContext. Database. log peut avoir pour valeur un délégué pour toute méthode qui prend une chaîne. Le plus souvent, il est utilisé avec n’importe quel TextWriter en le définissant sur la méthode «Write» de ce TextWriter. Toutes les SQL générées par le contexte actuel seront enregistrées dans ce writer. Par exemple, le code suivant consignera SQL sur la console:  
+La propriété DbContext. Database. log peut avoir pour valeur un délégué pour toute méthode qui prend une chaîne. Le plus souvent, il est utilisé avec n’importe quel TextWriter en le définissant sur la méthode « Write » de ce TextWriter. Toutes les SQL générées par le contexte actuel seront enregistrées dans ce writer. Par exemple, le code suivant consignera SQL sur la console :  
 
 ``` csharp
 using (var context = new BlogContext())
@@ -37,7 +37,7 @@ using (var context = new BlogContext())
 
 Notez ce contexte. Database. log est défini sur console. Write. C’est tout ce qui est nécessaire pour enregistrer SQL sur la console.  
 
-Nous allons ajouter un code simple de requête/insertion/mise à jour pour pouvoir voir une sortie:  
+Nous allons ajouter un code simple de requête/insertion/mise à jour pour pouvoir voir une sortie :  
 
 ``` csharp
 using (var context = new BlogContext())
@@ -54,7 +54,7 @@ using (var context = new BlogContext())
 }
 ```  
 
-La sortie suivante est générée:  
+La sortie suivante est générée :  
 
 ``` SQL
 SELECT TOP (1)
@@ -96,11 +96,11 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 (Notez qu’il s’agit de la sortie en supposant que toutes les initialisations de base de données ont déjà eu lieu. Si l’initialisation de la base de données ne s’est pas encore produite, il y aurait beaucoup plus de sortie qui indique que toutes les migrations de travail effectuées dans le cadre de la recherche ou de la création d’une nouvelle base de données.)  
 
-## <a name="what-gets-logged"></a>Qu’est-ce qui est enregistré?  
+## <a name="what-gets-logged"></a>Qu’est-ce qui est enregistré ?  
 
-Lorsque la propriété log est définie, tous les éléments suivants sont enregistrés:  
+Lorsque la propriété log est définie, tous les éléments suivants sont enregistrés :  
 
-- SQL pour tous les différents types de commandes. Par exemple :  
+- SQL pour tous les différents types de commandes. Exemple :  
     - Requêtes, y compris les requêtes LINQ normales, les requêtes eSQL et les requêtes brutes à partir de méthodes telles que SqlQuery  
     - Insertions, mises à jour et suppressions générées dans le cadre d’SaveChanges  
     - Requêtes de chargement des relations, telles que celles générées par le chargement différé  
@@ -111,14 +111,14 @@ Lorsque la propriété log est définie, tous les éléments suivants sont enreg
 - Indication de la valeur de résultat  
 - Durée approximative nécessaire à l’exécution de la commande. Notez qu’il s’agit de l’heure à partir de l’envoi de la commande pour récupérer l’objet de résultat. Elle n’inclut pas le temps nécessaire pour lire les résultats.  
 
-En examinant l’exemple de sortie ci-dessus, chacune des quatre commandes journalisées est la suivante:  
+En examinant l’exemple de sortie ci-dessus, chacune des quatre commandes journalisées est la suivante :  
 
 - Requête résultant de l’appel au contexte. Blogs.  
-    - Notez que la méthode ToString pour obtenir le SQL n’aurait pas fonctionné pour cette requête puisque «First» ne fournit pas de IQueryable sur lequel ToString pourrait être appelé  
+    - Notez que la méthode ToString pour obtenir le SQL n’aurait pas fonctionné pour cette requête puisque « First » ne fournit pas de IQueryable sur lequel ToString pourrait être appelé  
 - Requête résultant du chargement différé du blog. Publié  
     - Notez les détails des paramètres pour la valeur de clé pour laquelle le chargement différé se produit  
     - Seules les propriétés du paramètre définies à des valeurs non définies par défaut sont journalisées. Par exemple, la propriété Size s’affiche uniquement si elle est différente de zéro.  
-- Deux commandes résultant de SaveChangesAsync; une pour la mise à jour pour modifier un titre de publication, l’autre pour une insertion pour ajouter une nouvelle publication  
+- Deux commandes résultant de SaveChangesAsync ; une pour la mise à jour pour modifier un titre de publication, l’autre pour une insertion pour ajouter une nouvelle publication  
     - Notez les détails des paramètres pour les propriétés FK et title  
     - Notez que ces commandes sont exécutées de façon asynchrone  
 
@@ -126,7 +126,7 @@ En examinant l’exemple de sortie ci-dessus, chacune des quatre commandes journ
 
 Comme indiqué ci-dessus, la journalisation dans la console est très facile. Il est également facile de se connecter à la mémoire, au fichier, etc. en utilisant différents genres de [TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx).  
 
-Si vous êtes familiarisé avec LINQ to SQL vous pouvez remarquer que dans LINQ to SQL la propriété log est définie sur l’objet TextWriter réel (par exemple, console. out) alors que dans EF, la propriété log est définie sur une méthode qui accepte une chaîne (par exemple, , Console. Write ou console. out. Write). Cela consiste à découpler EF de TextWriter en acceptant tout délégué pouvant agir en tant que récepteur pour les chaînes. Par exemple, imaginez que vous disposez déjà d’une infrastructure de journalisation et qu’elle définit une méthode de journalisation comme:  
+Si vous êtes familiarisé avec LINQ to SQL vous pouvez remarquer que dans LINQ to SQL la propriété log est définie sur l’objet TextWriter réel (par exemple, console. out) alors que dans EF, la propriété log est définie sur une méthode qui accepte une chaîne (par exemple, , Console. Write ou console. out. Write). Cela consiste à découpler EF de TextWriter en acceptant tout délégué pouvant agir en tant que récepteur pour les chaînes. Par exemple, imaginez que vous disposez déjà d’une infrastructure de journalisation et qu’elle définit une méthode de journalisation comme :  
 
 ``` csharp
 public class MyLogger
@@ -138,7 +138,7 @@ public class MyLogger
 }
 ```  
 
-Cela peut être raccordé à la propriété du journal EF comme suit:  
+Cela peut être raccordé à la propriété du journal EF comme suit :  
 
 ``` csharp
 var logger = new MyLogger();
@@ -147,19 +147,19 @@ context.Database.Log = s => logger.Log("EFApp", s);
 
 ## <a name="result-logging"></a>Journalisation des résultats  
 
-L’enregistreur d’événements par défaut enregistre le texte de la commande (SQL), les paramètres et la ligne «en cours d’exécution» avec un horodateur avant que la commande ne soit envoyée à la base de données. Une ligne «terminée» contenant le temps écoulé est journalisée après l’exécution de la commande.  
+L’enregistreur d’événements par défaut enregistre le texte de la commande (SQL), les paramètres et la ligne « en cours d’exécution » avec un horodateur avant que la commande ne soit envoyée à la base de données. Une ligne « terminée » contenant le temps écoulé est journalisée après l’exécution de la commande.  
 
-Notez que, pour les commandes Async, la ligne «terminé» n’est journalisée que lorsque la tâche asynchrone se termine, échoue ou est annulée.  
+Notez que, pour les commandes Async, la ligne « terminé » n’est journalisée que lorsque la tâche asynchrone se termine, échoue ou est annulée.  
 
-La ligne «terminé» contient des informations différentes selon le type de commande et si l’exécution a réussi ou non.  
+La ligne « terminé » contient des informations différentes selon le type de commande et si l’exécution a réussi ou non.  
 
 ### <a name="successful-execution"></a>Exécution réussie  
 
-Pour les commandes qui se terminent correctement, la sortie est «terminée en x ms avec le résultat:», suivie d’une indication du résultat. Pour les commandes qui retournent un lecteur de données, l’indication du résultat est le type de [DbDataReader](https://msdn.microsoft.com/library/system.data.common.dbdatareader.aspx) retourné. Pour les commandes qui retournent une valeur entière, comme la commande de mise à jour affichée au-dessus du résultat affiché, est cet entier.  
+Pour les commandes qui se terminent correctement, la sortie est « terminée en x ms avec le résultat : », suivie d’une indication du résultat. Pour les commandes qui retournent un lecteur de données, l’indication du résultat est le type de [DbDataReader](https://msdn.microsoft.com/library/system.data.common.dbdatareader.aspx) retourné. Pour les commandes qui retournent une valeur entière, comme la commande de mise à jour affichée au-dessus du résultat affiché, est cet entier.  
 
 ### <a name="failed-execution"></a>Échec de l’exécution  
 
-Pour les commandes qui échouent en levant une exception, la sortie contient le message de l’exception. Par exemple, l’utilisation de SqlQuery pour effectuer des requêtes sur une table qui existe entraîne une sortie de journal similaire à ce qui suit:  
+Pour les commandes qui échouent en levant une exception, la sortie contient le message de l’exception. Par exemple, l’utilisation de SqlQuery pour effectuer des requêtes sur une table qui existe entraîne une sortie de journal similaire à ce qui suit :  
 
 ``` SQL
 SELECT * from ThisTableIsMissing
@@ -169,9 +169,9 @@ SELECT * from ThisTableIsMissing
 
 ### <a name="canceled-execution"></a>Exécution annulée  
 
-Pour les commandes Async où la tâche est annulée, le résultat peut être un échec avec une exception, car c’est ce que fait souvent le fournisseur ADO.NET sous-jacent lorsqu’une tentative d’annulation est effectuée. Si cela ne se produit pas et que la tâche est annulée correctement, la sortie se présente comme suit:  
+Pour les commandes Async où la tâche est annulée, le résultat peut être un échec avec une exception, car c’est ce que fait souvent le fournisseur ADO.NET sous-jacent lorsqu’une tentative d’annulation est effectuée. Si cela ne se produit pas et que la tâche est annulée correctement, la sortie se présente comme suit :  
 
-```  
+```console
 update Blogs set Title = 'No' where Id = -1
 -- Executing asynchronously at 5/13/2013 10:21:10 AM
 -- Canceled in 1 ms
@@ -183,18 +183,18 @@ En coulisses, la propriété Database. log utilise un objet DatabaseLogFormatter
 
 ### <a name="customizing-databaselogformatter"></a>Personnalisation de DatabaseLogFormatter  
 
-La modification de ce qui est enregistré et de sa mise en forme peut être obtenue en créant une nouvelle classe qui dérive de DatabaseLogFormatter et substitue les méthodes selon le cas. Les méthodes les plus courantes de remplacement sont les suivantes:  
+La modification de ce qui est enregistré et de sa mise en forme peut être obtenue en créant une nouvelle classe qui dérive de DatabaseLogFormatter et substitue les méthodes selon le cas. Les méthodes les plus courantes de remplacement sont les suivantes :  
 
-- LogCommand: remplacez cette valeur pour modifier la façon dont les commandes sont journalisées avant leur exécution. Par défaut, LogCommand appelle LogParameter pour chaque paramètre; vous pouvez choisir d’effectuer la même opération dans votre remplacement ou gérer les paramètres différemment.  
-- LogResult: remplacez cette valeur pour modifier le mode de journalisation du résultat de l’exécution d’une commande.  
-- LogParameter: remplacez cette valeur pour modifier la mise en forme et le contenu de la journalisation des paramètres.  
+- LogCommand : remplacez cette valeur pour modifier la façon dont les commandes sont journalisées avant leur exécution. Par défaut, LogCommand appelle LogParameter pour chaque paramètre ; vous pouvez choisir d’effectuer la même opération dans votre remplacement ou gérer les paramètres différemment.  
+- LogResult : remplacez cette valeur pour modifier le mode de journalisation du résultat de l’exécution d’une commande.  
+- LogParameter : remplacez cette valeur pour modifier la mise en forme et le contenu de la journalisation des paramètres.  
 
-Par exemple, supposons que nous voulions enregistrer une seule ligne avant que chaque commande ne soit envoyée à la base de données. Pour ce faire, vous pouvez utiliser deux remplacements:  
+Par exemple, supposons que nous voulions enregistrer une seule ligne avant que chaque commande ne soit envoyée à la base de données. Pour ce faire, vous pouvez utiliser deux remplacements :  
 
 - Remplacer LogCommand pour mettre en forme et écrire la ligne unique de SQL  
 - Remplacez LogResult pour ne rien faire.  
 
-Le code doit ressembler à ceci:
+Le code doit ressembler à ceci :
 
 ``` csharp
 public class OneLineFormatter : DatabaseLogFormatter
@@ -227,7 +227,7 @@ Pour consigner la sortie, appelez simplement la méthode Write qui enverra la so
 
 ### <a name="setting-the-databaselogformatter"></a>Définition de DatabaseLogFormatter  
 
-Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Par exemple :  
+Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Exemple :  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -242,9 +242,9 @@ public class MyDbConfiguration : DbConfiguration
 
 ### <a name="using-the-new-databaselogformatter"></a>Utilisation du nouveau DatabaseLogFormatter  
 
-Ce nouveau DatabaseLogFormatter sera désormais utilisé à chaque fois que Database. log est défini. Par conséquent, l’exécution du code de la partie 1 génère désormais la sortie suivante:  
+Ce nouveau DatabaseLogFormatter sera désormais utilisé à chaque fois que Database. log est défini. Par conséquent, l’exécution du code de la partie 1 génère désormais la sortie suivante :  
 
-```  
+```console
 Context 'BlogContext' is executing command 'SELECT TOP (1) [Extent1].[Id] AS [Id], [Extent1].[Title] AS [Title]FROM [dbo].[Blogs] AS [Extent1]WHERE (N'One Unicorn' = [Extent1].[Title]) AND ([Extent1].[Title] IS NOT NULL)'
 Context 'BlogContext' is executing command 'SELECT [Extent1].[Id] AS [Id], [Extent1].[Title] AS [Title], [Extent1].[BlogId] AS [BlogId]FROM [dbo].[Posts] AS [Extent1]WHERE [Extent1].[BlogId] = @EntityKeyValue1'
 Context 'BlogContext' is executing command 'update [dbo].[Posts]set [Title] = @0where ([Id] = @1)'
@@ -261,17 +261,17 @@ Le code d’interception est construit autour du concept d’interfaces d’inte
 
 ### <a name="the-interception-context"></a>Contexte d’interception  
 
-En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-\<ci, tel que DbCommandInterceptionContext\>. Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
+En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-ci, tel que DbCommandInterceptionContext @ no__t-0 @ no__t-1. Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
 
 ### <a name="result-handling"></a>Gestion des résultats  
 
-La classe\< DbCommandInterceptionContext\> contient une propriété appelée result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
+La classe DbCommandInterceptionContext @ no__t-0 @ no__t-1 contient une propriété appelée result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
 
 #### <a name="suppressing-execution"></a>Suppression de l’exécution  
 
 Si un intercepteur définit la propriété Result avant l’exécution de la commande (dans l’un des... Exécution des méthodes) ensuite, EF ne tente pas d’exécuter la commande, mais utilise simplement le jeu de résultats. En d’autres termes, l’intercepteur peut supprimer l’exécution de la commande, mais l’EF continue comme si la commande avait été exécutée.  
 
-Un exemple d’utilisation de cette méthode est le traitement par lot de commandes qui a traditionnellement été fait avec un fournisseur d’encapsulation. L’intercepteur stocke la commande en vue d’une exécution ultérieure sous la forme d’un lot, mais prétend «prétendre» à EF que la commande a été exécutée normalement. Notez qu’il faut plus que cela pour implémenter le traitement par lot, mais il s’agit d’un exemple de la façon dont la modification du résultat de l’interception peut être utilisée.  
+Un exemple d’utilisation de cette méthode est le traitement par lot de commandes qui a traditionnellement été fait avec un fournisseur d’encapsulation. L’intercepteur stocke la commande en vue d’une exécution ultérieure sous la forme d’un lot, mais prétend « prétendre » à EF que la commande a été exécutée normalement. Notez qu’il faut plus que cela pour implémenter le traitement par lot, mais il s’agit d’un exemple de la façon dont la modification du résultat de l’interception peut être utilisée.  
 
 L’exécution peut également être supprimée en définissant la propriété d’exception dans l’un des... Exécution des méthodes. EF se poursuit alors comme si l’exécution de l’opération avait échoué en levant l’exception donnée. Cela peut, bien sûr, provoquer le blocage de l’application, mais il peut également s’agir d’une exception temporaire ou d’une autre exception gérée par EF. Par exemple, il peut être utilisé dans les environnements de test pour tester le comportement d’une application lorsque l’exécution de la commande échoue.  
 
@@ -289,7 +289,7 @@ Les propriétés OriginalResult et OriginalException sont en lecture seule et ne
 
 ### <a name="registering-interceptors"></a>Inscription des intercepteurs  
 
-Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Par exemple :  
+Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Exemple :  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());
@@ -299,12 +299,12 @@ Les intercepteurs peuvent également être inscrits au niveau du domaine d’app
 
 ### <a name="example-logging-to-nlog"></a>Exemple : Journalisation dans NLog  
 
-Nous allons rassembler tout cela dans un exemple qui utilise IDbCommandInterceptor et [nlog](http://nlog-project.org/) pour:  
+Nous allons rassembler tout cela dans un exemple qui utilise IDbCommandInterceptor et [nlog](https://nlog-project.org/) pour :  
 
 - Consigne un avertissement pour toute commande exécutée de façon non asynchrone  
 - Consigner une erreur pour toute commande qui lève une exception quand elle est exécutée  
 
-Voici la classe qui effectue la journalisation, qui doit être enregistrée comme indiqué ci-dessus:  
+Voici la classe qui effectue la journalisation, qui doit être enregistrée comme indiqué ci-dessus :  
 
 ``` csharp
 public class NLogCommandInterceptor : IDbCommandInterceptor

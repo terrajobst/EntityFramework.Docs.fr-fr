@@ -3,12 +3,12 @@ title: Bien démarrer avec Entity Framework 6 - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
-ms.openlocfilehash: c25bf16bd2c39530d54b286b7743ceb83c941e4d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
-ms.translationtype: HT
+ms.openlocfilehash: bf54879ea94e597dfeac3e4bd70571dad290dd9e
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489284"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181398"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Bien démarrer avec Entity Framework 6
 
@@ -20,11 +20,11 @@ Ce guide contient un ensemble de liens vers des articles de documentation sélec
 
   Vous apprendrez ici à ajouter Entity Framework à vos applications. Par ailleurs, si vous voulez utiliser EF Designer, vérifiez qu’il est installé dans Visual Studio.
 
-* [Création d’un modèle : Code First, EF Designer et les flux de travail EF](~/ef6/modeling/index.md)
+* @no__t 0Creating un modèle : Code First, le concepteur EF et les flux de travail EF @ no__t-0
 
   Préférez-vous spécifier votre modèle EF en écrivant du code ou en traçant des zones et des lignes ?
 Allez-vous utiliser EF pour mapper vos objets à une base de données existante ou voulez-vous qu’EF crée une base de données adaptée à vos objets ?
-Vous découvrez ici deux approches différentes pour utiliser EF6 : EF Designer et Code First.
+Ici, vous en saurez plus sur deux approches différentes pour utiliser EF6 : Le concepteur EF et Code First.
 Veillez à suivre la discussion et à regarder la vidéo présentant la différence.
 
 * [Utilisation de DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
@@ -35,7 +35,7 @@ Veillez à suivre la discussion et à regarder la vidéo présentant la différe
 
   Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
 
-* [Contribuer](http://github.com/aspnet/EntityFramework6/)
+* [Contribuer](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
 
