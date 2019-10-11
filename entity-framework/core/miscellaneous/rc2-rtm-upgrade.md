@@ -1,63 +1,65 @@
 ---
-title: La mise à niveau à partir d’EF Core 1.0 RC2 vers RTM - EF Core
+title: Mise à niveau de EF Core 1,0 RC2 vers RTM-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 1b95b2ab1943dfb541b3a7c873cff3cb4c16d9c1
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e7f121d18931e26e7b5d11842da6da4a9b789efe
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998317"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181363"
 ---
-# <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a><span data-ttu-id="16fb7-102">La mise à niveau à partir d’EF Core 1.0 RC2 vers RTM</span><span class="sxs-lookup"><span data-stu-id="16fb7-102">Upgrading from EF Core 1.0 RC2 to RTM</span></span>
+# <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a><span data-ttu-id="301a2-102">Mise à niveau de EF Core 1,0 RC2 vers la version RTM</span><span class="sxs-lookup"><span data-stu-id="301a2-102">Upgrading from EF Core 1.0 RC2 to RTM</span></span>
 
-<span data-ttu-id="16fb7-103">Cet article fournit des conseils pour déplacer une application générée avec les packages de RC2 à 1.0.0 RTM.</span><span class="sxs-lookup"><span data-stu-id="16fb7-103">This article provides guidance for moving an application built with the RC2 packages to 1.0.0 RTM.</span></span>
+<span data-ttu-id="301a2-103">Cet article fournit des conseils pour déplacer une application générée avec les packages RC2 vers 1.0.0 RTM.</span><span class="sxs-lookup"><span data-stu-id="301a2-103">This article provides guidance for moving an application built with the RC2 packages to 1.0.0 RTM.</span></span>
 
-## <a name="package-versions"></a><span data-ttu-id="16fb7-104">Versions de package</span><span class="sxs-lookup"><span data-stu-id="16fb7-104">Package Versions</span></span>
+## <a name="package-versions"></a><span data-ttu-id="301a2-104">Versions de package</span><span class="sxs-lookup"><span data-stu-id="301a2-104">Package Versions</span></span>
 
-<span data-ttu-id="16fb7-105">Les noms des packages de niveau supérieur que vous installeriez en général dans une application n’a pas changé entre RC2 et RTM.</span><span class="sxs-lookup"><span data-stu-id="16fb7-105">The names of the top level packages that you would typically install into an application did not change between RC2 and RTM.</span></span>
+<span data-ttu-id="301a2-105">Les noms des packages de niveau supérieur que vous installez généralement dans une application n’ont pas changé entre RC2 et RTM.</span><span class="sxs-lookup"><span data-stu-id="301a2-105">The names of the top level packages that you would typically install into an application did not change between RC2 and RTM.</span></span>
 
-<span data-ttu-id="16fb7-106">**Vous devez mettre à niveau les packages installés pour les versions RTM :**</span><span class="sxs-lookup"><span data-stu-id="16fb7-106">**You need to upgrade the installed packages to the RTM versions:**</span></span>
+<span data-ttu-id="301a2-106">**Vous devez mettre à niveau les packages installés vers les versions RTM :**</span><span class="sxs-lookup"><span data-stu-id="301a2-106">**You need to upgrade the installed packages to the RTM versions:**</span></span>
 
-* <span data-ttu-id="16fb7-107">Packages de Runtime (par exemple, `Microsoft.EntityFrameworkCore.SqlServer`) a été remplacée par `1.0.0-rc2-final` à `1.0.0`.</span><span class="sxs-lookup"><span data-stu-id="16fb7-107">Runtime packages (for example, `Microsoft.EntityFrameworkCore.SqlServer`) changed from `1.0.0-rc2-final` to `1.0.0`.</span></span>
+* <span data-ttu-id="301a2-107">Les packages d’exécution (par exemple, `Microsoft.EntityFrameworkCore.SqlServer`) ont été modifiés de `1.0.0-rc2-final` à `1.0.0`.</span><span class="sxs-lookup"><span data-stu-id="301a2-107">Runtime packages (for example, `Microsoft.EntityFrameworkCore.SqlServer`) changed from `1.0.0-rc2-final` to `1.0.0`.</span></span>
 
-* <span data-ttu-id="16fb7-108">Le `Microsoft.EntityFrameworkCore.Tools` package a été remplacée par `1.0.0-preview1-final` à `1.0.0-preview2-final`.</span><span class="sxs-lookup"><span data-stu-id="16fb7-108">The `Microsoft.EntityFrameworkCore.Tools` package changed from `1.0.0-preview1-final` to `1.0.0-preview2-final`.</span></span> <span data-ttu-id="16fb7-109">Notez que les outils sont toujours en version préliminaire.</span><span class="sxs-lookup"><span data-stu-id="16fb7-109">Note that tooling is still pre-release.</span></span>
+* <span data-ttu-id="301a2-108">Le package `Microsoft.EntityFrameworkCore.Tools` est passé de `1.0.0-preview1-final` à `1.0.0-preview2-final`.</span><span class="sxs-lookup"><span data-stu-id="301a2-108">The `Microsoft.EntityFrameworkCore.Tools` package changed from `1.0.0-preview1-final` to `1.0.0-preview2-final`.</span></span> <span data-ttu-id="301a2-109">Notez que les outils sont toujours en version préliminaire.</span><span class="sxs-lookup"><span data-stu-id="301a2-109">Note that tooling is still pre-release.</span></span>
 
-## <a name="existing-migrations-may-need-maxlength-added"></a><span data-ttu-id="16fb7-110">Migrations existantes peut-être maxLength ajouté</span><span class="sxs-lookup"><span data-stu-id="16fb7-110">Existing migrations may need maxLength added</span></span>
+## <a name="existing-migrations-may-need-maxlength-added"></a><span data-ttu-id="301a2-110">Des migrations existantes peuvent nécessiter l’ajout de maxLength</span><span class="sxs-lookup"><span data-stu-id="301a2-110">Existing migrations may need maxLength added</span></span>
 
-<span data-ttu-id="16fb7-111">Dans RC2, la définition de colonne dans une migration ressemblait à `table.Column<string>(nullable: true)` et la longueur de la colonne a été recherchée dans des métadonnées que nous stockons dans le code-behind de la migration.</span><span class="sxs-lookup"><span data-stu-id="16fb7-111">In RC2, the column definition in a migration looked like `table.Column<string>(nullable: true)` and the length of the column was looked up in some metadata we store in the code behind the migration.</span></span> <span data-ttu-id="16fb7-112">Dans la version RTM, la longueur est désormais incluse dans le code structuré `table.Column<string>(maxLength: 450, nullable: true)`.</span><span class="sxs-lookup"><span data-stu-id="16fb7-112">In RTM, the length is now included in the scaffolded code `table.Column<string>(maxLength: 450, nullable: true)`.</span></span>
+<span data-ttu-id="301a2-111">Dans RC2, la définition de colonne dans une migration a été recherchée comme `table.Column<string>(nullable: true)` et la longueur de la colonne a été recherchée dans certaines métadonnées que nous stockons dans le code de la migration.</span><span class="sxs-lookup"><span data-stu-id="301a2-111">In RC2, the column definition in a migration looked like `table.Column<string>(nullable: true)` and the length of the column was looked up in some metadata we store in the code behind the migration.</span></span> <span data-ttu-id="301a2-112">Dans RTM, la longueur est maintenant incluse dans le code de génération de modèles automatique `table.Column<string>(maxLength: 450, nullable: true)`.</span><span class="sxs-lookup"><span data-stu-id="301a2-112">In RTM, the length is now included in the scaffolded code `table.Column<string>(maxLength: 450, nullable: true)`.</span></span>
 
-<span data-ttu-id="16fb7-113">Les migrations existantes qui ont été structurées avant d’utiliser la version RTM n’aura pas la `maxLength` argument spécifié.</span><span class="sxs-lookup"><span data-stu-id="16fb7-113">Any existing migrations that were scaffolded prior to using RTM will not have the `maxLength` argument specified.</span></span> <span data-ttu-id="16fb7-114">Cela signifie que la longueur maximale prise en charge par la base de données sera utilisée (`nvarchar(max)` sur SQL Server).</span><span class="sxs-lookup"><span data-stu-id="16fb7-114">This means the maximum length supported by the database will be used (`nvarchar(max)` on SQL Server).</span></span> <span data-ttu-id="16fb7-115">Cela peut être adaptée pour certaines colonnes, mais les colonnes qui font partie d’une clé, clé étrangère, ou les index doivent être mis à jour pour inclure une longueur maximale.</span><span class="sxs-lookup"><span data-stu-id="16fb7-115">This may be fine for some columns, but columns that are part of a key, foreign key, or index need to be updated to include a maximum length.</span></span> <span data-ttu-id="16fb7-116">Par convention, 450 correspond à la longueur maximale utilisés pour les clés, clés étrangères et les colonnes indexées.</span><span class="sxs-lookup"><span data-stu-id="16fb7-116">By convention, 450 is the maximum length used for keys, foreign keys, and indexed columns.</span></span> <span data-ttu-id="16fb7-117">Si vous avez explicitement configuré une longueur dans le modèle, vous devez utiliser cette longueur à la place.</span><span class="sxs-lookup"><span data-stu-id="16fb7-117">If you have explicitly configured a length in the model, then you should use that length instead.</span></span>
+<span data-ttu-id="301a2-113">L’argument `maxLength` n’est pas spécifié pour les migrations existantes qui ont été créées avant l’utilisation de la version RTM.</span><span class="sxs-lookup"><span data-stu-id="301a2-113">Any existing migrations that were scaffolded prior to using RTM will not have the `maxLength` argument specified.</span></span> <span data-ttu-id="301a2-114">Cela signifie que la longueur maximale prise en charge par la base de données sera utilisée (`nvarchar(max)` sur SQL Server).</span><span class="sxs-lookup"><span data-stu-id="301a2-114">This means the maximum length supported by the database will be used (`nvarchar(max)` on SQL Server).</span></span> <span data-ttu-id="301a2-115">Cela peut s’avérer parfait pour certaines colonnes, mais les colonnes qui font partie d’une clé, d’une clé étrangère ou d’un index doivent être mises à jour pour inclure une longueur maximale.</span><span class="sxs-lookup"><span data-stu-id="301a2-115">This may be fine for some columns, but columns that are part of a key, foreign key, or index need to be updated to include a maximum length.</span></span> <span data-ttu-id="301a2-116">Par Convention, 450 est la longueur maximale utilisée pour les clés, les clés étrangères et les colonnes indexées.</span><span class="sxs-lookup"><span data-stu-id="301a2-116">By convention, 450 is the maximum length used for keys, foreign keys, and indexed columns.</span></span> <span data-ttu-id="301a2-117">Si vous avez configuré explicitement une longueur dans le modèle, vous devez utiliser cette longueur à la place.</span><span class="sxs-lookup"><span data-stu-id="301a2-117">If you have explicitly configured a length in the model, then you should use that length instead.</span></span>
 
-<span data-ttu-id="16fb7-118">**ASP.NET Identity**</span><span class="sxs-lookup"><span data-stu-id="16fb7-118">**ASP.NET Identity**</span></span>
+<span data-ttu-id="301a2-118">**ASP.NET Identity**</span><span class="sxs-lookup"><span data-stu-id="301a2-118">**ASP.NET Identity**</span></span>
 
-<span data-ttu-id="16fb7-119">Cette modification a une incidence sur les projets qui utilisent ASP.NET Identity et ont été créés à partir d’un pré-RTM de modèle de projet.</span><span class="sxs-lookup"><span data-stu-id="16fb7-119">This change impacts projects that use ASP.NET Identity and were created from a pre-RTM project template.</span></span> <span data-ttu-id="16fb7-120">Le modèle de projet inclut une migration permet de créer la base de données.</span><span class="sxs-lookup"><span data-stu-id="16fb7-120">The project template includes a migration used to create the database.</span></span> <span data-ttu-id="16fb7-121">Cette migration doit être modifiée pour spécifier une longueur maximale de `256` sur les colonnes suivantes.</span><span class="sxs-lookup"><span data-stu-id="16fb7-121">This migration must be edited to specify a maximum length of `256` for the following columns.</span></span>
+<span data-ttu-id="301a2-119">Cette modification a un impact sur les projets qui utilisent ASP.NET Identity et ont été créés à partir d’un modèle de projet antérieur à la version RTM.</span><span class="sxs-lookup"><span data-stu-id="301a2-119">This change impacts projects that use ASP.NET Identity and were created from a pre-RTM project template.</span></span> <span data-ttu-id="301a2-120">Le modèle de projet comprend une migration utilisée pour créer la base de données.</span><span class="sxs-lookup"><span data-stu-id="301a2-120">The project template includes a migration used to create the database.</span></span> <span data-ttu-id="301a2-121">Cette migration doit être modifiée pour spécifier une longueur maximale de `256` pour les colonnes suivantes.</span><span class="sxs-lookup"><span data-stu-id="301a2-121">This migration must be edited to specify a maximum length of `256` for the following columns.</span></span>
 
-*  <span data-ttu-id="16fb7-122">**AspNetRoles**</span><span class="sxs-lookup"><span data-stu-id="16fb7-122">**AspNetRoles**</span></span>
+*  <span data-ttu-id="301a2-122">**AspNetRoles**</span><span class="sxs-lookup"><span data-stu-id="301a2-122">**AspNetRoles**</span></span>
 
-    * <span data-ttu-id="16fb7-123">Name</span><span class="sxs-lookup"><span data-stu-id="16fb7-123">Name</span></span>
+    * <span data-ttu-id="301a2-123">Name</span><span class="sxs-lookup"><span data-stu-id="301a2-123">Name</span></span>
 
-    * <span data-ttu-id="16fb7-124">NormalizedName</span><span class="sxs-lookup"><span data-stu-id="16fb7-124">NormalizedName</span></span>
+    * <span data-ttu-id="301a2-124">NormalizedName</span><span class="sxs-lookup"><span data-stu-id="301a2-124">NormalizedName</span></span>
 
-*  <span data-ttu-id="16fb7-125">**AspNetUsers**</span><span class="sxs-lookup"><span data-stu-id="16fb7-125">**AspNetUsers**</span></span>
+*  <span data-ttu-id="301a2-125">**AspNetUsers**</span><span class="sxs-lookup"><span data-stu-id="301a2-125">**AspNetUsers**</span></span>
 
-   * <span data-ttu-id="16fb7-126">Messagerie</span><span class="sxs-lookup"><span data-stu-id="16fb7-126">Email</span></span>
+   * <span data-ttu-id="301a2-126">Messagerie</span><span class="sxs-lookup"><span data-stu-id="301a2-126">Email</span></span>
 
-   * <span data-ttu-id="16fb7-127">NormalizedEmail</span><span class="sxs-lookup"><span data-stu-id="16fb7-127">NormalizedEmail</span></span>
+   * <span data-ttu-id="301a2-127">NormalizedEmail</span><span class="sxs-lookup"><span data-stu-id="301a2-127">NormalizedEmail</span></span>
 
-   * <span data-ttu-id="16fb7-128">NormalizedUserName</span><span class="sxs-lookup"><span data-stu-id="16fb7-128">NormalizedUserName</span></span>
+   * <span data-ttu-id="301a2-128">NormalizedUserName</span><span class="sxs-lookup"><span data-stu-id="301a2-128">NormalizedUserName</span></span>
 
-   * <span data-ttu-id="16fb7-129">UserName</span><span class="sxs-lookup"><span data-stu-id="16fb7-129">UserName</span></span>
+   * <span data-ttu-id="301a2-129">UserName</span><span class="sxs-lookup"><span data-stu-id="301a2-129">UserName</span></span>
 
-<span data-ttu-id="16fb7-130">Échec pour apporter cette modification entraîne l’exception suivante lors de la migration initiale est appliquée à une base de données.</span><span class="sxs-lookup"><span data-stu-id="16fb7-130">Failure to make this change will result in the following exception when the initial migration is applied to a database.</span></span>
+<span data-ttu-id="301a2-130">Si vous n’effectuez pas cette modification, l’exception suivante se produit lorsque la migration initiale est appliquée à une base de données.</span><span class="sxs-lookup"><span data-stu-id="301a2-130">Failure to make this change will result in the following exception when the initial migration is applied to a database.</span></span>
 
-    System.Data.SqlClient.SqlException (0x80131904): Column 'NormalizedName' in table 'AspNetRoles' is of a type that is invalid for use as a key column in an index.
+```console
+System.Data.SqlClient.SqlException (0x80131904): Column 'NormalizedName' in table 'AspNetRoles' is of a type that is invalid for use as a key column in an index.
+```
 
-## <a name="net-core-remove-imports-in-projectjson"></a><span data-ttu-id="16fb7-131">.NET core : Supprimer « imports » dans project.json</span><span class="sxs-lookup"><span data-stu-id="16fb7-131">.NET Core: Remove "imports" in project.json</span></span>
+## <a name="net-core-remove-imports-in-projectjson"></a><span data-ttu-id="301a2-131">.NET Core : Supprimer « Imports » dans Project. JSON</span><span class="sxs-lookup"><span data-stu-id="301a2-131">.NET Core: Remove "imports" in project.json</span></span>
 
-<span data-ttu-id="16fb7-132">Si vous cibliez .NET Core avec RC2, vous deviez ajouter `imports` à project.json en tant que solution de contournement temporaire pour certaines des dépendances d’EF Core prenant ne pas en charge .NET Standard.</span><span class="sxs-lookup"><span data-stu-id="16fb7-132">If you were targeting .NET Core with RC2, you needed to add `imports` to project.json as a temporary workaround for some of EF Core's dependencies not supporting .NET Standard.</span></span> <span data-ttu-id="16fb7-133">Vous pouvez maintenant en supprimer.</span><span class="sxs-lookup"><span data-stu-id="16fb7-133">These can now be removed.</span></span>
+<span data-ttu-id="301a2-132">Si vous ciblez .NET Core avec RC2, vous deviez ajouter `imports` à Project. JSON comme solution de contournement temporaire pour certaines des dépendances de EF Core ne prenant pas en charge .NET Standard.</span><span class="sxs-lookup"><span data-stu-id="301a2-132">If you were targeting .NET Core with RC2, you needed to add `imports` to project.json as a temporary workaround for some of EF Core's dependencies not supporting .NET Standard.</span></span> <span data-ttu-id="301a2-133">Vous pouvez maintenant les supprimer.</span><span class="sxs-lookup"><span data-stu-id="301a2-133">These can now be removed.</span></span>
 
 ``` json
 {
@@ -70,17 +72,19 @@ ms.locfileid: "42998317"
 ```
 
 > [!NOTE]  
-> <span data-ttu-id="16fb7-134">Depuis la version 1.0 RTM, le [du SDK .NET Core](https://www.microsoft.com/net/download/core) prend en charge n’est plus `project.json` ou que vous développez des applications .NET Core à l’aide de Visual Studio 2015.</span><span class="sxs-lookup"><span data-stu-id="16fb7-134">As of version 1.0 RTM, the [.NET Core SDK](https://www.microsoft.com/net/download/core) no longer supports `project.json` or developing .NET Core applications using Visual Studio 2015.</span></span> <span data-ttu-id="16fb7-135">Nous vous recommandons de [migrer de project.json vers csproj](https://docs.microsoft.com/dotnet/articles/core/migration/).</span><span class="sxs-lookup"><span data-stu-id="16fb7-135">We recommend you [migrate from project.json to csproj](https://docs.microsoft.com/dotnet/articles/core/migration/).</span></span> <span data-ttu-id="16fb7-136">Si vous utilisez Visual Studio, nous vous recommandons de passer à [Visual Studio 2017](https://www.visualstudio.com/downloads/).</span><span class="sxs-lookup"><span data-stu-id="16fb7-136">If you are using Visual Studio, we recommend you upgrade to [Visual Studio 2017](https://www.visualstudio.com/downloads/).</span></span>
+> <span data-ttu-id="301a2-134">Depuis la version 1,0 RTM, le [Kit SDK .net Core](https://www.microsoft.com/net/download/core) ne prend plus en charge `project.json` ou le développement d’applications .net core à l’aide de Visual Studio 2015.</span><span class="sxs-lookup"><span data-stu-id="301a2-134">As of version 1.0 RTM, the [.NET Core SDK](https://www.microsoft.com/net/download/core) no longer supports `project.json` or developing .NET Core applications using Visual Studio 2015.</span></span> <span data-ttu-id="301a2-135">Nous vous recommandons de [migrer de project.json vers csproj](https://docs.microsoft.com/dotnet/articles/core/migration/).</span><span class="sxs-lookup"><span data-stu-id="301a2-135">We recommend you [migrate from project.json to csproj](https://docs.microsoft.com/dotnet/articles/core/migration/).</span></span> <span data-ttu-id="301a2-136">Si vous utilisez Visual Studio, nous vous recommandons de mettre à niveau vers [Visual studio 2017](https://www.visualstudio.com/downloads/).</span><span class="sxs-lookup"><span data-stu-id="301a2-136">If you are using Visual Studio, we recommend you upgrade to [Visual Studio 2017](https://www.visualstudio.com/downloads/).</span></span>
 
-## <a name="uwp-add-binding-redirects"></a><span data-ttu-id="16fb7-137">UWP : Ajouter des redirections de liaison</span><span class="sxs-lookup"><span data-stu-id="16fb7-137">UWP: Add binding redirects</span></span>
+## <a name="uwp-add-binding-redirects"></a><span data-ttu-id="301a2-137">UWP Ajouter des redirections de liaison</span><span class="sxs-lookup"><span data-stu-id="301a2-137">UWP: Add binding redirects</span></span>
 
-<span data-ttu-id="16fb7-138">Tentative d’exécution des commandes EF sur les projets de plateforme universelle Windows (UWP) entraîne l’erreur suivante :</span><span class="sxs-lookup"><span data-stu-id="16fb7-138">Attempting to run EF commands on Universal Windows Platform (UWP) projects results in the following error:</span></span>
+<span data-ttu-id="301a2-138">Si vous tentez d’exécuter des commandes EF sur des projets plateforme Windows universelle (UWP), l’erreur suivante se produit :</span><span class="sxs-lookup"><span data-stu-id="301a2-138">Attempting to run EF commands on Universal Windows Platform (UWP) projects results in the following error:</span></span>
 
-    System.IO.FileLoadException: Could not load file or assembly 'System.IO.FileSystem.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference.
+```console
+System.IO.FileLoadException: Could not load file or assembly 'System.IO.FileSystem.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference.
+```
 
-<span data-ttu-id="16fb7-139">Vous devez ajouter manuellement des redirections de liaison pour le projet UWP.</span><span class="sxs-lookup"><span data-stu-id="16fb7-139">You need to manually add binding redirects to the UWP project.</span></span> <span data-ttu-id="16fb7-140">Créez un fichier nommé `App.config` dans le projet de dossier racine et ajouter des redirections vers les versions correcte de l’assembly.</span><span class="sxs-lookup"><span data-stu-id="16fb7-140">Create a file named `App.config` in the project root folder and add redirects to the correct assembly versions.</span></span>
+<span data-ttu-id="301a2-139">Vous devez ajouter manuellement les redirections de liaison au projet UWP.</span><span class="sxs-lookup"><span data-stu-id="301a2-139">You need to manually add binding redirects to the UWP project.</span></span> <span data-ttu-id="301a2-140">Créez un fichier nommé `App.config` dans le dossier racine du projet, puis ajoutez des redirections aux versions d’assembly appropriées.</span><span class="sxs-lookup"><span data-stu-id="301a2-140">Create a file named `App.config` in the project root folder and add redirects to the correct assembly versions.</span></span>
 
-``` xml
+```xml
 <configuration>
  <runtime>
    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
