@@ -1,27 +1,27 @@
 ---
-title: 'Évaluation sur le client ou le serveur : EF Core'
+title: Client et évaluation du serveur-EF Core
 author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 3d70324f0b57a0ea9b165b5140a2154001c326f4
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 5cfb05041f04246712fb699f58b407f70a75ce92
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181904"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445968"
 ---
-# <a name="client-vs-server-evaluation"></a>Évaluation sur le client ou le serveur
+# <a name="client-vs-server-evaluation"></a>Comparaison entre client et serveur
 
 En règle générale, Entity Framework Core tente d’évaluer autant que possible une requête sur le serveur. EF Core convertit des parties de la requête en paramètres, qu’elle peut évaluer côté client. Le reste de la requête (avec les paramètres générés) est donné au fournisseur de base de données pour déterminer la requête de base de données équivalente à évaluer sur le serveur. EF Core prend en charge l’évaluation partielle du client dans la projection de niveau supérieur (essentiellement, le dernier appel à `Select()`). Si la projection de niveau supérieur dans la requête ne peut pas être traduite sur le serveur, EF Core extrait toutes les données requises du serveur et évalue les autres parties de la requête sur le client. Si EF Core détecte une expression, à un emplacement autre que la projection de niveau supérieur, qui ne peut pas être traduite sur le serveur, elle lève une exception Runtime. Découvrez [Comment fonctionne la requête](xref:core/querying/how-query-works) pour comprendre comment EF Core détermine ce qui ne peut pas être traduit sur le serveur.
 
 > [!NOTE]
 > Avant la version 3,0, Entity Framework Core l’évaluation du client prise en charge n’importe où dans la requête. Pour plus d’informations, consultez la [section versions précédentes](#previous-versions).
 
-## <a name="client-evaluation-in-the-top-level-projection"></a>Évaluation du client dans la projection de niveau supérieur
-
 > [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
+
+## <a name="client-evaluation-in-the-top-level-projection"></a>Évaluation du client dans la projection de niveau supérieur
 
 Dans l’exemple suivant, une méthode d’assistance est utilisée pour normaliser les URL des blogs, qui sont retournées à partir d’une base de données SQL Server. Étant donné que le fournisseur de SQL Server n’a aucune idée de la façon dont cette méthode est implémentée, il n’est pas possible de la traduire en SQL. Tous les autres aspects de la requête sont évalués dans la base de données, mais le fait de passer le @no__t retourné-0 par le biais de cette méthode est effectué sur le client.
 
@@ -50,9 +50,9 @@ Dans ce cas, vous pouvez choisir explicitement l’évaluation du client en appe
 
 Étant donné que la traduction et la compilation des requêtes sont coûteuses, EF Core met en cache le plan de requête compilé. Le délégué mis en cache peut utiliser le code client lors de l’évaluation du client de la projection de niveau supérieur. EF Core génère des paramètres pour les parties évaluées par le client de l’arborescence et réutilise le plan de requête en remplaçant les valeurs des paramètres. Toutefois, certaines constantes de l’arborescence de l’expression ne peuvent pas être converties en paramètres. Si le délégué mis en cache contient des constantes, ces objets ne peuvent pas être récupérés par le garbage collector, car ils sont toujours référencés. Si un tel objet contient un DbContext ou d’autres services qu’il contient, cela peut entraîner une augmentation de l’utilisation de la mémoire de l’application au fil du temps. Ce comportement est généralement le signe d’une fuite de mémoire. EF Core lève une exception chaque fois qu’il s’agit d’une constante d’un type qui ne peut pas être mappé à l’aide du fournisseur de base de données actuel. Les causes courantes et leurs solutions sont les suivantes :
 
-- **Utilisation d’une méthode d’instance**: Lorsque vous utilisez des méthodes d’instance dans une projection client, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
-- **Passage des arguments constants à la méthode**: Ce cas se produit généralement à l’aide de `this` dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
-- **Autres constantes**: Si une constante est reproduite dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
+- **Utilisation d’une méthode d’instance**: lors de l’utilisation de méthodes d’instance dans une projection cliente, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
+- **Passage d’arguments de constante à la méthode**: ce cas se produit généralement en utilisant `this` dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
+- **Autres constantes**: si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
 
 ## <a name="previous-versions"></a>Versions antérieures
 

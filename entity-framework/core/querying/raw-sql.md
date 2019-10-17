@@ -4,19 +4,19 @@ author: smitpatel
 ms.date: 10/08/2019
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 33601d570fa0b7a1fcada1705843da3798c00094
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: b7087771f1a9e8ee5e044cfea367d74a0b1c1d35
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181967"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445919"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
 Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Les requêtes SQL brutes sont utiles si la requête que vous souhaitez ne peut pas être exprimée à l’aide de LINQ. Les requêtes SQL brutes sont également utilisées si une requête LINQ aboutit à une requête SQL inefficace. Les requêtes SQL brutes peuvent retourner des types d’entité standard ou des [types d’entité sans clé](xref:core/modeling/keyless-entity-types) qui font partie de votre modèle.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL/Sample.cs) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying/) sur GitHub.
 
 ## <a name="basic-raw-sql-queries"></a>Requêtes SQL brutes de base
 

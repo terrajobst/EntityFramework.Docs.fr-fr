@@ -4,18 +4,18 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: ab35e63a6eeb2f02ed07a715fd65855b4d30eaf5
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 055f492214596506ce2c28485ade359d175c4ac2
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813454"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445900"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilisation des types de référence Nullable
 
 C#8 a introduit une nouvelle fonctionnalité appelée [types de référence Nullable](/dotnet/csharp/tutorials/nullable-reference-types), ce qui permet d’annoter les types de référence, ce qui indique s’il est valide qu’ils contiennent ou non null. Si vous débutez avec cette fonctionnalité, il est recommandé de vous familiariser avec elle en lisant les C# documents.
 
-Cette page présente la prise en charge par EF Core des types de référence Nullable et décrit les meilleures pratiques pour leur utilisation.
+Cette page présente la prise en charge de EF Core pour les types de référence Nullable et décrit les pratiques recommandées pour l’utiliser.
 
 ## <a name="required-and-optional-properties"></a>Propriétés obligatoires et facultatives
 
@@ -26,7 +26,7 @@ La documentation principale sur les propriétés obligatoires et facultatives et
 
 ## <a name="dbcontext-and-dbset"></a>DbContext et DbSet
 
-Lorsque les types de référence Nullable sont activés, le C# compilateur émet des avertissements pour toute propriété non Nullable non initialisée, car celles-ci contiennent la valeur null. Par conséquent, la pratique courante de la définition d’un non Nullable `DbSet` sur un contexte génère désormais un avertissement. Toutefois, EF Core Initialise toujours toutes les `DbSet` propriétés sur les types dérivés de DbContext. il est donc garanti que ne jamais avoir la valeur null, même si le compilateur ne connaît pas ce. Par conséquent, il est recommandé de conserver `DbSet` vos propriétés qui n’acceptent pas les valeurs NULL, ce qui vous permet d’y accéder sans vérification de la valeur null, et de mettre en silence les avertissements du compilateur en leur affectant explicitement la valeur null avec l’aide de l’opérateur null-indulgent avec ( !) :
+Lorsque les types de référence Nullable sont activés, le C# compilateur émet des avertissements pour toute propriété non Nullable non initialisée, car celles-ci contiennent la valeur null. Par conséquent, la pratique courante de la définition d’un @no__t non Nullable-0 sur un contexte génère désormais un avertissement. Toutefois, EF Core Initialise toujours toutes les propriétés `DbSet` sur les types dérivés de DbContext. il est donc garanti que ne jamais avoir la valeur null, même si le compilateur ne tient pas compte de cela. Par conséquent, il est recommandé de conserver vos propriétés `DbSet` non Nullable, ce qui vous permet d’y accéder sans vérification de la valeur null, et de mettre en silence les avertissements du compilateur en les définissant explicitement sur null avec l’aide de l’opérateur null-indulgent avec ( !) :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
 
@@ -65,4 +65,4 @@ Si vous effectuez cette tâche beaucoup et que les types d’entité en question
 
 ## <a name="scaffolding"></a>Génération de modèles automatique
 
-[La C# fonctionnalité de type référence Nullable 8](/dotnet/csharp/tutorials/nullable-reference-types) n’est actuellement pas prise en charge dans l’ingénierie à rebours : EF Core génère C# toujours du code qui suppose que la fonctionnalité est désactivée. Par exemple, les colonnes de texte Nullable seront échafaudées en tant que propriété `string` de type `string?`, et non, avec l’API Fluent ou les annotations de données utilisées pour configurer si une propriété est requise ou non. Vous pouvez modifier le code de génération de modèles automatique et C# les remplacer par des annotations de possibilité de valeur null. La prise en charge de la génération de modèles automatique pour les types de référence Nullable est suivie par le problème [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
+[La C# fonctionnalité de type référence Nullable 8](/dotnet/csharp/tutorials/nullable-reference-types) n’est actuellement pas prise en charge dans l’ingénierie à C# rebours : EF Core génère toujours du code qui suppose que la fonctionnalité est désactivée. Par exemple, les colonnes de texte Nullable seront échafaudées en tant que propriété de type `string`, et non pas `string?`, avec l’API Fluent ou les annotations de données utilisées pour configurer si une propriété est requise ou non. Vous pouvez modifier le code de génération de modèles automatique et C# les remplacer par des annotations de possibilité de valeur null. La prise en charge de la génération de modèles automatique pour les types de référence Nullable est suivie par le problème [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
