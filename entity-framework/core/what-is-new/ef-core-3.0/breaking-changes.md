@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: f7f04efa8fb8ebc1eb06f256b8ccbd3110af47ab
-ms.sourcegitcommit: 705e898b4684e639a57c787fb45c932a27650c2d
+ms.openlocfilehash: 690c7828cfe5019f4e7ae904c92430fab4726cb9
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71934881"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72446019"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 Les modifications d’API et de comportement suivantes peuvent bloquer les applications existantes lors de leur mise à niveau vers 3.0.0.
@@ -17,7 +17,7 @@ Les changements qui, selon nous, auront une incidence uniquement sur les fournis
 
 ## <a name="summary"></a>Récapitulatif
 
-| **Modification avec rupture**                                                                                               | **Impact** |
+| **Modification avec rupture**                                                                                               | **Effet** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
 | [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Élevé       |
 | [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Élevé      |
@@ -185,7 +185,7 @@ Avant EF Core 3.0, ces noms de méthode étaient surchargés pour être utilis�
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, utilisez `FromSqlRaw`, `ExecuteSqlRaw` et `ExecuteSqlRawAsync` pour créer une requête paramétrable, où les paramètres sont passés séparément à partir de la chaîne de requête.
-Exemple :
+Par exemple :
 
 ```C#
 context.Products.FromSqlRaw(
@@ -194,7 +194,7 @@ context.Products.FromSqlRaw(
 ```
 
 Utilisez `FromSqlInterpolated`, `ExecuteSqlInterpolated` et `ExecuteSqlInterpolatedAsync` pour créer une requête paramétrable, où les paramètres sont passés dans le cadre d’une chaîne de requête interpolée.
-Exemple :
+Par exemple :
 
 ```C#
 context.Products.FromSqlInterpolated(
@@ -391,7 +391,7 @@ Ce changement a été apporté afin d’améliorer l’expérience de liaison de
 **Atténuations**
 
 Vous pouvez restaurer le comportement précédent par le biais des paramètres sur `context.ChangedTracker`.
-Exemple :
+Par exemple :
 
 ```C#
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -404,7 +404,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **Ancien comportement**
 
-Avant le 3,0, le chargement des navigations de collections à l’aide des opérateurs `Include` a entraîné la génération de plusieurs requêtes sur une base de données relationnelle, une pour chaque type d’entité associé.
+Avant le 3,0, le chargement des navigations de collections à l’aide d’opérateurs `Include` entraînait la génération de plusieurs requêtes sur une base de données relationnelle, une pour chaque type d’entité associée.
 
 **Nouveau comportement**
 
@@ -416,7 +416,7 @@ L’émission de plusieurs requêtes pour implémenter une seule requête LINQ a
 
 **Atténuations**
 
-Bien qu’techniquement, il ne s’agit pas d’une modification avec rupture, cela peut avoir un impact considérable sur les performances de l’application lorsqu’une seule requête contient un grand nombre d’opérateurs `Include` dans les navigations de collection. Pour plus d’informations et pour réécrire des requêtes de manière plus efficace, [consultez ce commentaire](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-537219137) .
+Bien qu’techniquement, il ne s’agit pas d’une modification avec rupture, elle peut avoir un impact considérable sur les performances de l’application lorsqu’une seule requête contient un grand nombre d' `Include` opérateur dans les navigations de collection. Pour plus d’informations et pour réécrire des requêtes de manière plus efficace, [consultez ce commentaire](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-542397085) .
 
 **
 
@@ -484,7 +484,7 @@ Avant EF Core 3.0, la configuration de la relation détenue était effectuée d
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, il existe une API Fluent afin de configurer une propriété de navigation pour le propriétaire à l’aide de `WithOwner()`.
-Exemple :
+Par exemple :
 
 ```C#
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -492,7 +492,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 La configuration liée à la relation entre le propriétaire et le détenu doit maintenant être chaînée après `WithOwner()` tout comme les autres relations.
 En revanche, la configuration du type détenu lui-même serait toujours chaînée après `OwnsOne()/OwnsMany()`.
-Exemple :
+Par exemple :
 
 ```C#
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -706,7 +706,7 @@ Toutefois, si `Order` est un type détenu, cela fait également de `CustomerId` 
 
 À compter de la version 3.0, EF Core ne tente pas d’utiliser des propriétés pour les clés étrangères par convention si elles ont le même nom que la propriété principale.
 Les modèles de nom du type de principal concaténé au nom de la propriété de principal, et de nom de navigation concaténé au nom de propriété de principal sont toujours mis en correspondance.
-Exemple :
+Par exemple :
 
 ```C#
 public class Customer
@@ -842,7 +842,7 @@ Ce changement a été apporté afin d’empêcher EF Core de déclencher par err
 **Atténuations**
 
 Vous pouvez restaurer le comportement antérieur à la version 3.0 en configurant le mode d’accès à la propriété sur `ModelBuilder`.
-Exemple :
+Par exemple :
 
 ```C#
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -1078,7 +1078,7 @@ Ce changement a été apporté afin d’améliorer le code d’application avec 
 
 En présence de cette erreur, le mieux consiste à tenter de comprendre la cause racine, et de cesser de créer autant de fournisseurs de services internes.
 Toutefois, vous pouvez reconvertir cette erreur en avertissement (ou l’ignorer) par le biais de la configuration sur le `DbContextOptionsBuilder`.
-Exemple :
+Par exemple :
 
 ```C#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1097,7 +1097,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 **Ancien comportement**
 
 Avant EF Core 3.0, la façon dont était interprété le code qui appelait `HasOne` ou `HasMany` avec une seule chaîne prêtait à confusion.
-Exemple :
+Par exemple :
 ```C#
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
@@ -1119,7 +1119,7 @@ L’ancien comportement était très déroutant, en particulier pour qui lisait 
 Seules les applications qui configurent explicitement des relations en utilisant des chaînes comme noms de type sans spécifier explicitement la propriété de navigation sont concernées,
 ce qui n’est pas courant.
 Pour revenir au comportement précédent, transmettez explicitement `null` comme nom de propriété de navigation.
-Exemple :
+Par exemple :
 
 ```C#
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1509,7 +1509,7 @@ Utilisez le nouveau nom. (Notez que le numéro d’ID événement n’a pas chan
 
 **Ancien comportement**
 
-Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Exemple :
+Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Par exemple :
 
 ```C#
 var constraintName = myForeignKey.Name;
@@ -1517,7 +1517,7 @@ var constraintName = myForeignKey.Name;
 
 **Nouveau comportement**
 
-À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Exemple :
+À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Par exemple :
 
 ```C#
 var constraintName = myForeignKey.ConstraintName;
@@ -1635,7 +1635,7 @@ NetTopologySuite version 2.0.0 inclut des changements cassants. Pour plus d’in
 
 **Ancien comportement**
 
-Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Exemple :
+Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Par exemple :
 
 ```C#
 public class User 
@@ -1658,7 +1658,7 @@ Le modèle résultant est ambigu et probablement erroné dans ce cas.
 
 **Atténuations**
 
-Utilisez la configuration complète de la relation. Exemple :
+Utilisez la configuration complète de la relation. Par exemple :
 
 ```C#
 modelBuilder
@@ -1679,7 +1679,7 @@ modelBuilder
 
 **Ancien comportement**
 
-Un DbFunction configuré avec un schéma sous forme de chaîne vide a été traité comme une fonction intégrée sans schéma. Par exemple, le code suivant `DatePart` mappera la `DATEPART` fonction CLR à la fonction intégrée sur SqlServer.
+Un DbFunction configuré avec un schéma sous forme de chaîne vide a été traité comme une fonction intégrée sans schéma. Par exemple, le code suivant mappe `DatePart` fonction CLR à `DATEPART` fonction intégrée sur SqlServer.
 
 ```C#
 [DbFunction("DATEPART", Schema = "")]
@@ -1689,7 +1689,7 @@ public static int? DatePart(string datePartArg, DateTime? date) => throw new Exc
 
 **Nouveau comportement**
 
-Tous les mappages de DbFunction sont considérés comme mappés à des fonctions définies par l’utilisateur. Par conséquent, la valeur de chaîne vide placerait la fonction dans le schéma par défaut pour le modèle. Ce peut être le schéma configuré explicitement via l’API `modelBuilder.HasDefaultSchema()` Fluent `dbo` ou sinon.
+Tous les mappages de DbFunction sont considérés comme mappés à des fonctions définies par l’utilisateur. Par conséquent, la valeur de chaîne vide placerait la fonction dans le schéma par défaut pour le modèle. Ce peut être le schéma configuré explicitement via l’API Fluent `modelBuilder.HasDefaultSchema()` ou `dbo` dans le cas contraire.
 
 **Pourquoi ?**
 
