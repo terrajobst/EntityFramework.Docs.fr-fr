@@ -175,22 +175,24 @@
           items:
             - name: Vue d'ensemble
               href: core/querying/index.md
-            - name: Chargement des données associées
-              href: core/querying/related-data.md
             - name: Évaluation sur le client ou le serveur
               href: core/querying/client-eval.md
             - name: Requêtes avec suivi ou sans suivi
               href: core/querying/tracking.md
-            - name: Requêtes SQL brutes
-              href: core/querying/raw-sql.md
+            - name: Opérateurs de requête complexes
+              href: core/querying/complex-query-operators.md
+            - name: Chargement des données associées
+              href: core/querying/related-data.md
             - name: Requêtes asynchrones
               href: core/querying/async.md
-            - name: Fonctionnement d’une requête
-              href: core/querying/how-query-works.md
+            - name: Requêtes SQL brutes
+              href: core/querying/raw-sql.md
             - name: Filtres de requête globale
               href: core/querying/filters.md
             - name: Balises de requête
               href: core/querying/tags.md
+            - name: Fonctionnement d’une requête
+              href: core/querying/how-query-works.md
         - name: Enregistrement de données
           items:
             - name: Vue d'ensemble
