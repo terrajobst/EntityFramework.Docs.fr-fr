@@ -1,26 +1,27 @@
 ---
-title: Migrations avec plusieurs fournisseurs - EF Core
+title: Migrations avec plusieurs fournisseurs-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/08/2017
-ms.openlocfilehash: 75c055221609679db3f00016b9cb44c6c8c6e473
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+uid: core/managing-schemas/migrations/providers
+ms.openlocfilehash: c9b1a2563ef548e592374f90a6242b0bd851bc98
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488775"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811962"
 ---
-<a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
-==================================
-Le [outils EF Core] [ 1] structurer uniquement les migrations pour le fournisseur active. Toutefois, vous pouvez être amené à utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Il existe deux façons de gérer cela avec des Migrations. Vous pouvez conserver les deux ensembles de migrations--un pour chaque fournisseur--ou la fusion dans une seule valeur qui peut travailler sur les deux.
+# <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 
-<a name="two-migration-sets"></a>Deux ensembles de migration
-------------------
+Les [outils de EF corent][1] uniquement les migrations de l’échafaudage pour le fournisseur actif. Toutefois, il peut arriver que vous souhaitiez utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Il existe deux façons de gérer cela avec les migrations. Vous pouvez gérer deux ensembles de migrations, un pour chaque fournisseur, ou les fusionner dans un ensemble unique qui peut fonctionner sur les deux.
+
+## <a name="two-migration-sets"></a>Deux ensembles de migration
+
 Dans la première approche, vous générez deux migrations pour chaque modification de modèle.
 
-Pour effectuer cela consiste à placer chaque ensemble de la migration [dans un assembly distinct] [ 2] et basculer manuellement le fournisseur actif (et l’assembly de migrations) entre l’ajout les deux migrations.
+Pour ce faire, vous pouvez placer chaque ensemble de migration [dans un assembly distinct][2] et basculer manuellement le fournisseur actif (et l’assembly de migration) entre l’ajout des deux migrations.
 
-Une autre approche qui facilite l’utilisation avec les outils consiste à créer un nouveau type qui dérive de votre DbContext et remplace le fournisseur actif. Ce type est utilisé lors de la conception du temps lors de l’ajout ou appliquer des migrations.
+Une autre approche qui facilite l’utilisation des outils consiste à créer un nouveau type qui dérive de votre DbContext et qui remplace le fournisseur actif. Ce type est utilisé au moment de la conception lors de l’ajout ou de l’application de migrations.
 
 ``` csharp
 class MySqliteDbContext : MyDbContext
@@ -31,27 +32,28 @@ class MySqliteDbContext : MyDbContext
 ```
 
 > [!NOTE]
-> Étant donné que chaque ensemble de migration utilise ses propres types DbContext, cette approche ne nécessite pas à l’aide d’un assembly de migrations distinctes.
+> Étant donné que chaque jeu de migration utilise ses propres types DbContext, cette approche ne nécessite pas l’utilisation d’un assembly de migrations distinct.
 
-Lorsque vous ajoutez la nouvelle migration, spécifier les types de contexte.
+Lorsque vous ajoutez une nouvelle migration, spécifiez les types de contexte.
 
 ``` powershell
 Add-Migration InitialCreate -Context MyDbContext -OutputDir Migrations\SqlServerMigrations
 Add-Migration InitialCreate -Context MySqliteDbContext -OutputDir Migrations\SqliteMigrations
 ```
+
 ``` Console
 dotnet ef migrations add InitialCreate --context MyDbContext --output-dir Migrations/SqlServerMigrations
 dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir Migrations/SqliteMigrations
 ```
 
 > [!TIP]
-> Vous n’avez pas besoin de spécifier le répertoire de sortie pour les migrations suivantes dans la mesure où ils sont créés en tant que frères au dernier signet.
+> Vous n’avez pas besoin de spécifier le répertoire de sortie pour les migrations suivantes, car elles sont créées en tant que frères au dernier.
 
-<a name="one-migration-set"></a>Migration d’un jeu
------------------
-Si vous n’aimez pas avoir deux ensembles de migrations, vous pouvez manuellement les combiner en un seul ensemble peut être appliqué pour les deux fournisseurs.
+## <a name="one-migration-set"></a>Un jeu de migration
 
-Annotations peuvent coexister dans la mesure où un fournisseur ignore toutes les annotations qui ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut ressembler à ceci.
+Si vous n’aimez pas avoir deux ensembles de migrations, vous pouvez les combiner manuellement en un seul ensemble qui peut être appliqué aux deux fournisseurs.
+
+Les annotations peuvent coexister car un fournisseur ignore les annotations qu’il ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut se présenter comme suit.
 
 ``` csharp
 Id = table.Column<int>(nullable: false)
@@ -60,7 +62,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-Si des opérations peuvent être appliquées uniquement sur un seul fournisseur (ou elles différemment entre les fournisseurs), utilisez le `ActiveProvider` propriété pour indiquer à quel fournisseur est actif.
+Si les opérations ne peuvent être appliquées que sur un fournisseur (ou si elles sont différentes entre les fournisseurs), utilisez la propriété `ActiveProvider` pour indiquer quel fournisseur est actif.
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
@@ -69,7 +71,6 @@ if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer"
         name: "EntityFrameworkHiLoSequence");
 }
 ```
-
 
   [1]: ../../miscellaneous/cli/index.md
   [2]: projects.md

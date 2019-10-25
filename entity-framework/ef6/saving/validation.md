@@ -3,24 +3,24 @@ title: Validation-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: 4162c2eb60109459c799da7cf4c1a9c8e84548b6
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 2c5e6f1b3f60862124bafcac42e8859a7591f8e6
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182131"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812152"
 ---
 # <a name="data-validation"></a>Validation de données
 > [!NOTE]
 > **EF 4.1 uniquement** : les fonctionnalités, les API, etc. présentées dans cette page ont été introduites dans Entity Framework 4,1. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas
 
-Le contenu de cette page est adapté à partir d’un article écrit à l’origine par Julie Lerman ([https://thedatafarm.com](http://thedatafarm.com)).
+Le contenu de cette page est adapté à partir d’un article écrit à l’origine par Julie Lerman ([https://thedatafarm.com](https://thedatafarm.com)).
 
 Entity Framework fournit une grande variété de fonctionnalités de validation qui peuvent être alimentées par une interface utilisateur pour la validation côté client ou être utilisées pour la validation côté serveur. Lorsque vous utilisez code First, vous pouvez spécifier des validations à l’aide d’une annotation ou de configurations d’API Fluent. Des validations supplémentaires, et plus complexes, peuvent être spécifiées dans le code et fonctionnent si votre modèle se passe d’abord par code First, Model First ou Database.
 
 ## <a name="the-model"></a>Le modèle
 
-Je vais démontrer les validations à l’aide d’une simple paire de classes : Blog et billet.
+Je vais démontrer les validations à l’aide d’une simple paire de classes : blog et billet.
 
 ``` csharp
 public class Blog
@@ -45,7 +45,7 @@ public class Post
 
 ## <a name="data-annotations"></a>Annotations de données
 
-Code First utilise des annotations de l’assembly `System.ComponentModel.DataAnnotations` comme un moyen de configurer les classes code First. Parmi ces annotations, citons celles qui fournissent des règles telles que les `Required`, `MaxLength` et `MinLength`. Plusieurs applications clientes .NET reconnaissent également ces annotations, par exemple, ASP.NET MVC. Vous pouvez réaliser la validation côté client et côté serveur avec ces annotations. Par exemple, vous pouvez forcer la propriété titre du blog à être une propriété obligatoire.
+Code First utilise des annotations de l’assembly `System.ComponentModel.DataAnnotations` comme un moyen de configurer les classes code First. Parmi ces annotations, citons celles qui fournissent des règles telles que les `Required`, les `MaxLength` et les `MinLength`. Plusieurs applications clientes .NET reconnaissent également ces annotations, par exemple, ASP.NET MVC. Vous pouvez réaliser la validation côté client et côté serveur avec ces annotations. Par exemple, vous pouvez forcer la propriété titre du blog à être une propriété obligatoire.
 
 ``` csharp
 [Required]
@@ -58,7 +58,7 @@ Sans aucune modification de code ou de balisage supplémentaire dans l’applica
 
 Dans la méthode de publication de cette vue Create View, Entity Framework est utilisé pour enregistrer le nouveau blog dans la base de données, mais la validation côté client de MVC est déclenchée avant que l’application n’atteigne ce code.
 
-Toutefois, la validation côté client n’a pas de preuve de puce. Les utilisateurs peuvent avoir un impact sur les fonctionnalités de leur navigateur ou pire encore, un pirate peut utiliser des astuces pour éviter les validations de l’interface utilisateur. Mais Entity Framework reconnaîtront également l’annotation `Required` et la validera.
+Toutefois, la validation côté client n’a pas de preuve de puce. Les utilisateurs peuvent avoir un impact sur les fonctionnalités de leur navigateur ou pire encore, un pirate peut utiliser des astuces pour éviter les validations de l’interface utilisateur. Mais Entity Framework reconnaîtront également l’annotation `Required` et la valider.
 
 Un moyen simple de tester cela consiste à désactiver la fonctionnalité de validation côté client de MVC. Vous pouvez le faire dans le fichier Web. config de l’application MVC. La section appSettings a une clé pour ClientValidationEnabled. L’affectation de la valeur false à cette clé empêchera l’interface utilisateur d’effectuer des validations.
 
@@ -69,7 +69,7 @@ Un moyen simple de tester cela consiste à désactiver la fonctionnalité de val
 </appSettings>
 ```
 
-Même si la validation côté client est désactivée, vous obtiendrez la même réponse dans votre application. Le message d’erreur « le champ titre est obligatoire » s’affiche comme avant. À ce stade, il s’agit d’un résultat de la validation côté serveur. Entity Framework effectue la validation sur l’annotation `Required` (avant même que les deux à la fois pour générer une commande `INSERT` à envoyer à la base de données) et retourner l’erreur à MVC qui affichera le message.
+Même si la validation côté client est désactivée, vous obtiendrez la même réponse dans votre application. Le message d’erreur « le champ titre est obligatoire » s’affiche comme avant. À ce stade, il s’agit d’un résultat de la validation côté serveur. Entity Framework effectue la validation sur l’annotation de `Required` (avant même que les deux à la fois pour générer une commande `INSERT` à envoyer à la base de données) et retourner l’erreur à MVC qui affichera le message.
 
 ## <a name="fluent-api"></a>API Fluent
 
@@ -122,9 +122,9 @@ La validation n’est pas renvoyée automatiquement dans la vue, c’est pourquo
 
 ## <a name="ivalidatableobject"></a>IValidatableObject
 
-`IValidatableObject` est une interface qui réside dans `System.ComponentModel.DataAnnotations`. Bien qu’il ne fasse pas partie de l’API Entity Framework, vous pouvez toujours l’utiliser pour la validation côté serveur dans vos classes Entity Framework. `IValidatableObject` fournit une méthode `Validate` que Entity Framework appellera au cours de l’SaveChanges ou vous pouvez appeler vous-même chaque fois que vous souhaitez valider les classes.
+`IValidatableObject` est une interface qui réside dans `System.ComponentModel.DataAnnotations`. Bien qu’il ne fasse pas partie de l’API Entity Framework, vous pouvez toujours l’utiliser pour la validation côté serveur dans vos classes Entity Framework. `IValidatableObject` fournit une méthode `Validate` que Entity Framework appellera au cours de l’opération SaveChanges ou vous pouvez appeler vous-même chaque fois que vous souhaitez valider les classes.
 
-Les configurations telles que `Required` et `MaxLength` effectuent la validation sur un champ unique. Dans la méthode `Validate`, vous pouvez avoir une logique encore plus complexe, par exemple, en comparant deux champs.
+Les configurations telles que `Required` et `MaxLength` effectuent la validation sur un champ unique. Dans la méthode `Validate` vous pouvez avoir une logique encore plus complexe, par exemple, en comparant deux champs.
 
 Dans l’exemple suivant, la classe `Blog` a été étendue pour implémenter `IValidatableObject`, puis fournir une règle selon laquelle les `Title` et `BloggerName` ne peuvent pas correspondre.
 
@@ -152,17 +152,17 @@ public class Blog : IValidatableObject
 }
 ```
 
-Le constructeur `ValidationResult` prend un `string` qui représente le message d’erreur et un tableau de `string` qui représentent les noms de membres associés à la validation. Étant donné que cette validation vérifie à la fois les `Title` et les `BloggerName`, les deux noms de propriété sont retournés.
+Le constructeur `ValidationResult` prend un `string` qui représente le message d’erreur et un tableau de `string`s qui représentent les noms de membres associés à la validation. Étant donné que cette validation vérifie à la fois les `Title` et les `BloggerName`, les deux noms de propriété sont retournés.
 
-Contrairement à la validation fournie par l’API Fluent, ce résultat de validation est reconnu par la vue et le gestionnaire d’exceptions que j’ai utilisé précédemment pour ajouter l’erreur à `ModelState` est inutile. Étant donné que je définis les deux noms de propriété dans le `ValidationResult`, les HtmlHelper MVC affichent le message d’erreur pour ces deux propriétés.
+Contrairement à la validation fournie par l’API Fluent, ce résultat de validation est reconnu par la vue et le gestionnaire d’exceptions que j’ai utilisé précédemment pour ajouter l’erreur dans `ModelState` n’est pas nécessaire. Étant donné que je définis les deux noms de propriété dans le `ValidationResult`, les HtmlHelper MVC affichent le message d’erreur pour ces deux propriétés.
 
 ![Figure 2](~/ef6/media/figure02.png)
 
-## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
+## <a name="dbcontextvalidateentity"></a>DbContext. ValidateEntity
 
 `DbContext` a une méthode substituable appelée `ValidateEntity`. Lorsque vous appelez `SaveChanges`, Entity Framework appelle cette méthode pour chaque entité dans son cache dont l’État n’est pas `Unchanged`. Vous pouvez placer la logique de validation directement ici ou même utiliser cette méthode pour appeler, par exemple, la méthode `Blog.Validate` ajoutée dans la section précédente.
 
-Voici un exemple de substitution `ValidateEntity` qui valide les nouvelles `Post`s pour s’assurer que le titre de publication n’a pas déjà été utilisé. Il commence par vérifier si l’entité est une publication et que son état est ajouté. Si c’est le cas, il recherche dans la base de données s’il existe déjà une publication avec le même titre. S’il existe déjà une publication existante, une nouvelle `DbEntityValidationResult` est créée.
+Voici un exemple de `ValidateEntity` remplacement qui valide les nouveaux `Post`s pour s’assurer que le titre de publication n’a pas déjà été utilisé. Il commence par vérifier si l’entité est une publication et que son état est ajouté. Si c’est le cas, il recherche dans la base de données s’il existe déjà une publication avec le même titre. S’il existe déjà une publication existante, une nouvelle `DbEntityValidationResult` est créée.
 
 `DbEntityValidationResult` héberge un `DbEntityEntry` et un `ICollection<DbValidationErrors>` pour une entité unique. Au début de cette méthode, un `DbEntityValidationResult` est instancié, puis toutes les erreurs découvertes sont ajoutées à sa collection `ValidationErrors`.
 
@@ -202,7 +202,7 @@ Un appel à `SaveChanges` déclenche toutes les validations traitées dans cet a
 
 `DbContext.GetValidationErrors` déclenchera toutes les validations, celles définies par les annotations ou l’API Fluent, la validation créée dans `IValidatableObject` (par exemple, `Blog.Validate`) et les validations effectuées dans la méthode `DbContext.ValidateEntity`.
 
-Le code suivant appellera `GetValidationErrors` sur l’instance actuelle d’un `DbContext`. `ValidationErrors` sont regroupés par type d’entité en `DbEntityValidationResult`. Le code itère d’abord par le `DbEntityValidationResult` retourné par la méthode, puis via chaque `DbValidationError` dans.
+Le code suivant appellera `GetValidationErrors` sur l’instance actuelle d’une `DbContext`. les `ValidationErrors` sont regroupés par type d’entité en `DbEntityValidationResult`. Le code itère d’abord au `DbEntityValidationResult`s retourné par la méthode, puis à travers chaque `DbValidationError` à l’intérieur de.
 
 ``` csharp
 foreach (var validationResult in db.GetValidationErrors())
@@ -223,7 +223,7 @@ Voici quelques autres points à prendre en compte lors de l’utilisation de la 
 
 - Le chargement différé est désactivé au cours de la validation
 - EF valide les annotations de données sur les propriétés non mappées (propriétés qui ne sont pas mappées à une colonne de la base de données)
-- La validation est effectuée une fois les modifications détectées pendant la `SaveChanges`. Si vous apportez des modifications au cours de la validation, il vous incombe de notifier le dispositif de suivi des modifications
+- La validation est effectuée après la détection des modifications au cours de `SaveChanges`. Si vous apportez des modifications au cours de la validation, il vous incombe de notifier le dispositif de suivi des modifications
 - `DbUnexpectedValidationException` est levée si des erreurs se produisent pendant la validation
 - Les facettes qui Entity Framework incluses dans le modèle (longueur maximale, obligatoire, etc.) entraînent la validation, même s’il n’y a pas d’annotations de données dans vos classes et/ou si vous avez utilisé le concepteur EF pour créer votre modèle
 - Règles de précédence :
@@ -233,7 +233,7 @@ Voici quelques autres points à prendre en compte lors de l’utilisation de la 
   - La validation de type se produit uniquement si la validation de la propriété a échoué
 - Si une propriété est complexe, sa validation inclut également les éléments suivants :
   - Validation au niveau de la propriété sur les propriétés de type complexe
-  - Validation au niveau du type sur le type complexe, y compris la validation `IValidatableObject` sur le type complexe
+  - Validation au niveau du type sur le type complexe, y compris `IValidatableObject` validation sur le type complexe
 
 ## <a name="summary"></a>Récapitulatif
 

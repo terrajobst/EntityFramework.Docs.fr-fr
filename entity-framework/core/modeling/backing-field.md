@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: c3ca8bb97992c192672e8c2f2040b0de029df68d
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 288440a4494117fe59d27187e24424c4d2fd44ab
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197482"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811880"
 ---
 # <a name="backing-fields"></a>Champs de stockage
 
@@ -51,16 +51,12 @@ Vous pouvez configurer le moment où EF utilise le champ ou la propriété. Cons
 
 Vous pouvez également créer une propriété conceptuelle dans votre modèle qui n’a pas de propriété CLR correspondante dans la classe d’entité, mais utilise à la place un champ pour stocker les données dans l’entité. Cela diffère des [Propriétés Shadow](shadow-properties.md), où les données sont stockées dans le dispositif de suivi des modifications. Cela est généralement utilisé si la classe d’entité utilise des méthodes pour récupérer/définir des valeurs.
 
-Vous pouvez indiquer à EF le nom du champ dans l' `Property(...)` API. S’il n’existe aucune propriété avec le nom donné, EF recherche un champ.
+Vous pouvez indiquer à EF le nom du champ dans l’API `Property(...)`. S’il n’existe aucune propriété avec le nom donné, EF recherche un champ.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
-Vous pouvez également choisir d’attribuer un nom à la propriété, autre que le nom du champ. Ce nom est ensuite utilisé lors de la création du modèle, le plus particulièrement, il sera utilisé pour le nom de colonne qui est mappé à dans la base de données.
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldConceptualProperty.cs#Sample)]
-
-Lorsqu’il n’y a aucune propriété dans la classe d’entité, vous `EF.Property(...)` pouvez utiliser la méthode dans une requête LINQ pour faire référence à la propriété qui fait partie conceptuellement du modèle.
+Lorsqu’il n’y a aucune propriété dans la classe d’entité, vous pouvez utiliser la méthode `EF.Property(...)` dans une requête LINQ pour faire référence à la propriété qui fait partie conceptuellement du modèle.
 
 ``` csharp
-var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "Url"));
+var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```
