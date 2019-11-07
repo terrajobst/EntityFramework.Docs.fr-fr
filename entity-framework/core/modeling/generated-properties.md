@@ -4,18 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 6b38fd2e540ec29674f1116e7c204052d06ca1bc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 6643d3c5c9b3363e450e820793f449a41e2eba80
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197429"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655748"
 ---
 # <a name="generated-values"></a>Valeurs générées
 
 ## <a name="value-generation-patterns"></a>Modèles de génération de valeur
 
 Il existe trois modèles de génération de valeur qui peuvent être utilisés pour les propriétés :
+
 * Aucune génération de valeur
 * Valeur générée lors de l’ajout
 * Valeur générée lors de l’ajout ou de la mise à jour
@@ -28,14 +29,14 @@ Aucune génération de valeur ne signifie que vous fournissez toujours une valeu
 
 La valeur générée lors de l’ajout signifie qu’une valeur est générée pour les nouvelles entités.
 
-Selon le fournisseur de base de données utilisé, les valeurs peuvent être générées côté client par EF ou dans la base de données. Si la valeur est générée par la base de données, EF peut affecter une valeur temporaire lorsque vous ajoutez l’entité au contexte. Cette valeur temporaire sera ensuite remplacée par la valeur générée par la base `SaveChanges()`de données pendant.
+Selon le fournisseur de base de données utilisé, les valeurs peuvent être générées côté client par EF ou dans la base de données. Si la valeur est générée par la base de données, EF peut affecter une valeur temporaire lorsque vous ajoutez l’entité au contexte. Cette valeur temporaire sera ensuite remplacée par la valeur générée par la base de données pendant `SaveChanges()`.
 
-Si vous ajoutez une entité au contexte qui a une valeur affectée à la propriété, EF tente d’insérer cette valeur au lieu d’en générer une nouvelle. Une propriété est considérée comme ayant une valeur affectée si la valeur CLR par défaut n’est pas affectée`null` ( `string` `0` pour, `int`pour `Guid.Empty` , `Guid`pour, etc.). Pour plus d’informations, consultez [valeurs explicites pour les propriétés générées](../saving/explicit-values-generated-properties.md).
+Si vous ajoutez une entité au contexte qui a une valeur affectée à la propriété, EF tente d’insérer cette valeur au lieu d’en générer une nouvelle. Une propriété est considérée comme ayant une valeur affectée si elle n’est pas affectée à la valeur CLR par défaut (`null` pour `string`, `0` pour `int`, `Guid.Empty` pour `Guid`, etc.). Pour plus d’informations, consultez [valeurs explicites pour les propriétés générées](../saving/explicit-values-generated-properties.md).
 
 > [!WARNING]  
 > La façon dont la valeur est générée pour les entités ajoutées dépend du fournisseur de base de données utilisé. Les fournisseurs de base de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
 >
-> Par exemple, lors de l’utilisation de SQL Server, les valeurs sont `GUID` générées automatiquement pour les propriétés (à l’aide de l’algorithme de GUID SQL Server séquentiel). Toutefois, si vous spécifiez qu' `DateTime` une propriété est générée lors de l’ajout, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur par défaut de `GETDATE()`, voir [valeurs par défaut](relational/default-values.md).
+> Par exemple, lors de l’utilisation de SQL Server, les valeurs sont générées automatiquement pour les propriétés de `GUID` (à l’aide de l’algorithme de GUID séquentiel SQL Server). Toutefois, si vous spécifiez qu’une propriété `DateTime` est générée lors de l’ajout, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur par défaut de `GETDATE()`, voir [valeurs par défaut](relational/default-values.md).
 
 ### <a name="value-generated-on-add-or-update"></a>Valeur générée lors de l’ajout ou de la mise à jour
 
@@ -45,9 +46,9 @@ Comme `value generated on add`, si vous spécifiez une valeur pour la propriét�
 
 > [!WARNING]
 > La façon dont la valeur est générée pour les entités ajoutées et mises à jour dépend du fournisseur de base de données utilisé. Les fournisseurs de base de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, tandis que d’autres vous obligent à configurer manuellement la façon dont la valeur est générée.
-> 
-> Par exemple, lors de l’utilisation `byte[]` de SQL Server, les propriétés définies comme générées lors de l’ajout ou de la mise à jour et marquées comme `rowversion` jetons d’accès concurrentiel sont configurées avec le type de données, de sorte que les valeurs sont générées dans la base de données. Toutefois, si vous spécifiez qu' `DateTime` une propriété est générée lors de l’ajout ou de la mise à jour, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur `GETDATE()` par défaut (voir les [valeurs par défaut](relational/default-values.md)) pour générer des valeurs pour les nouvelles lignes. Vous pouvez ensuite utiliser un déclencheur de base de données pour générer des valeurs lors des mises à jour (par exemple, le déclencheur suivant).
-> 
+>
+> Par exemple, lors de l’utilisation de SQL Server, `byte[]` propriétés définies comme générées lors de l’ajout ou de la mise à jour et marquées comme jetons d’accès concurrentiel, seront configurées avec le type de données `rowversion`-afin que les valeurs soient générées dans la base de données. Toutefois, si vous spécifiez qu’une propriété `DateTime` est générée lors de l’ajout ou de la mise à jour, vous devez configurer un moyen de générer les valeurs. Une façon de procéder consiste à configurer une valeur par défaut de `GETDATE()` (voir les [valeurs par défaut](relational/default-values.md)) pour générer des valeurs pour les nouvelles lignes. Vous pouvez ensuite utiliser un déclencheur de base de données pour générer des valeurs lors des mises à jour (par exemple, le déclencheur suivant).
+>
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.sql)]
 
 ## <a name="conventions"></a>Conventions
@@ -87,7 +88,7 @@ Vous pouvez utiliser l’API Fluent pour modifier le modèle de génération de 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs#Sample)]
 
 > [!WARNING]  
-> `ValueGeneratedOnAdd()`permet simplement à EF de savoir que les valeurs sont générées pour les entités ajoutées. cela ne garantit pas qu’EF configure le mécanisme réel pour générer des valeurs.  Pour plus d’informations, consultez la section [valeur générée sur l’ajout](#value-generated-on-add) .
+> `ValueGeneratedOnAdd()` permet simplement à EF de savoir que les valeurs sont générées pour les entités ajoutées. cela ne garantit pas qu’EF configure le mécanisme réel pour générer des valeurs.  Pour plus d’informations, consultez la section [valeur générée sur l’ajout](#value-generated-on-add) .
 
 ### <a name="value-generated-on-add-or-update-fluent-api"></a>Valeur générée lors de l’ajout ou de la mise à jour (API Fluent)
 

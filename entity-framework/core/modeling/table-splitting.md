@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: a3a2e5842a6c6b4b490084d205a0d44bb46c17ee
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149184"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656038"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
 
@@ -25,7 +25,7 @@ Pour utiliser le fractionnement de table, les types d’entités doivent être m
 
 Un scénario courant de fractionnement de table n’utilise qu’un sous-ensemble des colonnes de la table pour améliorer les performances ou l’encapsulation.
 
-Dans cet exemple `Order` , représente un sous `DetailedOrder`-ensemble de.
+Dans cet exemple `Order` représente un sous-ensemble de `DetailedOrder`.
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
@@ -40,7 +40,7 @@ Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumn
 
 ## <a name="usage"></a>Utilisation
 
-L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que pour les autres entités. Et à partir de EF Core 3,0 la référence d’entité dépendante peut être `null`. Si toutes les colonnes utilisées par l’entité dépendante `NULL` sont la base de données, aucune instance n’est créée lors de la requête. Cela se produit également si toutes les propriétés sont facultatives et ont `null`la valeur, ce qui n’est peut-être pas prévu.
+L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que pour les autres entités. Et à partir de EF Core 3,0, la référence d’entité dépendante peut être `null`. Si toutes les colonnes utilisées par l’entité dépendante sont `NULL` est la base de données, aucune instance n’est créée lors de la requête. Toutes les propriétés sont également facultatives et définies sur `null`, ce qui n’est peut-être pas prévu.
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 

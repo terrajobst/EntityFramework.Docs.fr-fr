@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: d6aa9a0a9ce34e09a39026ad7ea9195b6777858c
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: ea469b9b7199cc767b2d0da1a5999026f938d087
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197857"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656257"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Définition de valeurs explicites pour les propriétés générées
 
@@ -33,6 +33,7 @@ La propriété `Employee.EmploymentStarted` est configurée pour avoir des valeu
 [!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
 Le code suivant insère deux employés dans la base de données.
+
 * Pour le premier, aucune valeur n’est attribuée à la propriété `Employee.EmploymentStarted`, elle reste donc définie sur la valeur par défaut de CLR pour `DateTime`.
 * Pour le deuxième, nous avons défini une valeur explicite de `1-Jan-2000`.
 
@@ -73,13 +74,14 @@ La propriété `Employee.LastPayRaise` est configurée pour avoir des valeurs g�
 > Par défaut, EF Core lève une exception si vous essayez d’enregistrer une valeur explicite pour une propriété qui est configurée pour être générée pendant la mise à jour. Pour éviter ce problème, vous devez descendre au niveau de l’API de bas niveau et définir `AfterSaveBehavior` (comme indiqué ci-dessus).
 
 > [!NOTE]  
-> **Modifications apportées à EF Core 2,0 :** Dans les versions précédentes, le comportement après enregistrement était contrôlé par `IsReadOnlyAfterSave` le biais de l’indicateur. Cet indicateur est obsolète et a été remplacé par `AfterSaveBehavior`.
+> **Modifications dans EF Core 2.0 :** dans les versions précédentes, le comportement après enregistrement était contrôlé par le biais de l’indicateur `IsReadOnlyAfterSave`. Cet indicateur est obsolète et a été remplacé par `AfterSaveBehavior`.
 
 Il existe également un déclencheur dans la base de données pour générer des valeurs pour la colonne `LastPayRaise` pendant les opérations `UPDATE`.
 
 [!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
 Le code suivant augmente le salaire des deux employés dans la base de données.
+
 * Pour le premier, aucune valeur n’est attribuée à la propriété `Employee.LastPayRaise`, elle reste donc définie sur null.
 * Pour le second, nous avons défini une valeur explicite d’une semaine plus tôt (rétroactivation de l’augmentation de salaire).
 

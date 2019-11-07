@@ -4,28 +4,31 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 5f97015f0228387574e3a19fb20cae1bdb403410
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: ba3a26bcd76cd0b9615b13f32456e7280afe533a
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149175"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654841"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 
 En plus de nombreux correctifs de bogues et de petites améliorations des fonctionnalités et des performances, EF Core 2.1 inclut de nouvelles fonctionnalités intéressantes :
 
 ## <a name="lazy-loading"></a>Chargement différé
+
 EF Core contient désormais les blocs de construction nécessaires pour permettre à quiconque de créer des classes d’entité capables de charger leurs propriétés de navigation à la demande. Nous avons également introduit un nouveau package, Microsoft.EntityFrameworkCore.Proxies, qui tire parti de ces composants pour produire des classes proxy de chargement différé basées sur des classes d’entité ayant subi des modifications minimales (par exemple des classes avec des propriétés de navigation virtuelles).
 
 Pour plus d’informations sur cette rubrique, lisez la [section sur le chargement différé](xref:core/querying/related-data#lazy-loading).
 
 ## <a name="parameters-in-entity-constructors"></a>Paramètres dans les constructeurs d’entité
+
 L’un des blocs de construction nécessaires pour le chargement différé prend désormais en charge la création d’entités qui acceptent des paramètres dans leurs constructeurs. Vous pouvez utiliser des paramètres pour injecter des valeurs de propriété, des délégués de chargement différé et des services.
 
 Pour plus d’informations sur cette rubrique, lisez la [section sur le constructeur d’entité avec des paramètres](xref:core/modeling/constructors).
 
 ## <a name="value-conversions"></a>Conversions de valeurs
+
 Jusqu’à présent, EF Core pouvait uniquement mapper les propriétés de types pris en charge nativement par le fournisseur de base de données sous-jacent. Les valeurs étaient copiées entre les colonnes et les propriétés sans aucune transformation. À compter d’EF Core 2.1, les conversions de valeurs peuvent être appliquées pour transformer les valeurs obtenues à partir de colonnes avant leur application aux propriétés, et vice versa. Nous avons un certain nombre de conversions qui peuvent être appliquées par convention, le cas échéant, ainsi qu’une API de configuration explicite qui permet d’inscrire des conversions personnalisées entre des colonnes et des propriétés. Parmi les applications de cette fonctionnalité, citons les suivantes :
 
 - Stockage des enums sous forme de chaînes
@@ -35,6 +38,7 @@ Jusqu’à présent, EF Core pouvait uniquement mapper les propriétés de types
 Pour plus d’informations sur cette rubrique, lisez la [section sur les conversions de valeurs](xref:core/modeling/value-conversions).  
 
 ## <a name="linq-groupby-translation"></a>Traduction LINQ GroupBy
+
 Avant la version 2.1, l’opérateur LINQ GroupBy dans EF Core était toujours évalué en mémoire. Il est désormais possible de le traduire en clause SQL GROUP BY dans les scénarios les plus courants.
 
 Cet exemple illustre une requête avec GroupBy utilisée pour calculer différentes fonctions d’agrégation :
@@ -63,6 +67,7 @@ GROUP BY [o].[CustomerId], [o].[EmployeeId];
 ```
 
 ## <a name="data-seeding"></a>Amorçage des données
+
 Avec la nouvelle version, il sera possible de fournir des données initiales pour remplir une base de données. Contrairement à ce qui se passe dans EF6, l’amorçage des données est associé à un type d’entité dans le cadre de la configuration du modèle. Les migrations EF Core peuvent automatiquement calculer les opérations d’insertion, de mise à jour ou de suppression à appliquer au moment de la mise à niveau de la base de données vers une nouvelle version du modèle.
 
 Par exemple, utilisez ceci pour configurer les données d’amorçage d’un Post dans `OnModelCreating`:
@@ -74,6 +79,7 @@ modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 Pour plus d’informations sur cette rubrique, lisez la [section sur l’amorçage des données](xref:core/modeling/data-seeding).  
 
 ## <a name="query-types"></a>Types de requêtes
+
 Un modèle EF Core peut désormais inclure des types de requêtes. Contrairement aux types d’entités, les types de requêtes ne sont pas associés à une définition de clé et ne peuvent pas être insérés, supprimés ou mis à jour (autrement dit, ils sont en lecture seule). Toutefois, ils peuvent être retournés directement par des requêtes. Voici quelques scénarios d’usages pour les types de requêtes :
 
 - Mappage à des vues sans clés primaires
@@ -84,6 +90,7 @@ Un modèle EF Core peut désormais inclure des types de requêtes. Contrairement
 Pour plus d’informations sur cette rubrique, lisez la [section sur les types de requêtes](xref:core/modeling/keyless-entity-types).
 
 ## <a name="include-for-derived-types"></a>Include pour les types dérivés
+
 Vous pouvez désormais spécifier des propriétés de navigation définies uniquement sur des types dérivés lors de l’écriture d’expressions pour la méthode `Include`. Pour la version fortement typée de `Include`, nous prenons en charge l’utilisation d’un cast explicite ou de l’opérateur `as`. Nous prenons également en charge le référencement des noms de propriété de navigation définis sur des types dérivés dans la version chaîne de `Include` :
 
 ``` csharp
@@ -95,14 +102,17 @@ var option3 = context.People.Include("School");
 Pour plus d’informations sur cette rubrique, lisez la [section sur Include avec des types dérivés](xref:core/querying/related-data#include-on-derived-types).
 
 ## <a name="systemtransactions-support"></a>Prise en charge de System.Transactions
+
 Vous pouvez désormais utiliser les fonctionnalités System.Transactions, notamment TransactionScope. Celles-ci fonctionnent sur le .NET Framework et .NET Core avec des fournisseurs de base de données compatibles.
 
 Pour plus d’informations sur cette rubrique, lisez la [section sur System.Transactions](xref:core/saving/transactions#using-systemtransactions).
 
 ## <a name="better-column-ordering-in-initial-migration"></a>Meilleur classement des colonnes dans la migration initiale
+
 Après avoir passé en revue les commentaires des clients, nous avons mis à jour les migrations de manière à générer initialement des colonnes pour les tables dans le même ordre que les propriétés déclarées dans les classes. Notez qu’EF Core ne peut pas changer l’ordre si de nouveaux membres sont ajoutés après la création de la table initiale.
 
 ## <a name="optimization-of-correlated-subqueries"></a>Optimisation des sous-requêtes corrélées
+
 Nous avons amélioré la traduction des requêtes pour éviter l’exécution de requêtes SQL « N + 1 » dans de nombreux scénarios courants dans lesquels l’utilisation d’une propriété de navigation dans la projection débouche sur la jointure des données de la requête racine avec les données d’une sous-requête corrélée. L’optimisation nécessite la mise en mémoire tampon des résultats à partir de la sous-requête. Nous vous demandons par ailleurs de modifier la requête pour procéder à l’adhésion du nouveau comportement.
 
 Par exemple, la requête suivante est normalement traduite en une seule requête pour Customers, plus N requêtes séparées pour Orders (où « N » est le nombre de clients retournés) :
@@ -119,7 +129,7 @@ var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount).ToList());
 ```
 
-Notez que cette requête est translatée vers deux requêtes SQL seulement : Une pour les clients et celle qui suit pour les ordres.
+Notez que cette requête est traduite en deux requêtes SQL seulement : une pour Customers et la suivante pour Orders.
 
 ## <a name="owned-attribute"></a>Attribut [Owned]
 
@@ -147,6 +157,7 @@ Les commandes _ef-dotnet_ font désormais partie du SDK .NET Core. Ainsi, il n�
 Pour plus d’informations sur la façon d’activer les outils en ligne de commande pour différentes versions du SDK .NET Core et EF Core, consultez la section sur [l’installation des outils](xref:core/miscellaneous/cli/dotnet#installing-the-tools).
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Package Microsoft.EntityFrameworkCore.Abstractions
+
 Le nouveau package contient des attributs et des interfaces que vous pouvez utiliser dans vos projets pour alléger les fonctionnalités EF Core sans dépendance envers Core EF dans sa globalité. Par exemple, l’attribut [Owned] et l’interface ILazyLoader se trouvent ici.
 
 ## <a name="state-change-events"></a>Événements de changement d’état

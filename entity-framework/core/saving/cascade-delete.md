@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: af86383bad52c87d2874fa4f8eb247a656601312
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 51c8b6f4517a3f87821ed1e4e2d60549e06ed39d
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182009"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656060"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -18,9 +18,11 @@ La suppression en cascade est couramment utilisée dans la terminologie de base 
 EF Core implémente plusieurs comportements de suppression différents et permet la configuration de comportements de suppression de relations individuelles. EF Core implémente également des conventions qui configurent automatiquement les comportements de suppression par défaut utiles pour chaque relation en fonction de la [nécessité de la relation](../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Comportements de suppression
+
 Les comportements de suppression sont définis dans le type énumérateur *deleteBehavior()* et peuvent être passés à l’API Fluent *OnDelete* pour contrôler si la suppression d’une entité principale/parente ou l’interruption de la relation avec les entités dépendantes/enfant doit avoir un effet secondaire sur les entités dépendantes/enfant.
 
 Il existe trois mesures qu'EF peut prendre lorsqu’une entité principale/parent est supprimée ou que la relation avec l’enfant est interrompue :
+
 * L’entité dépendante/enfant peut être supprimée
 * Les valeurs de clé étrangère de l’enfant peuvent être définies avec la valeur null
 * L’enfant reste inchangé
@@ -28,33 +30,36 @@ Il existe trois mesures qu'EF peut prendre lorsqu’une entité principale/paren
 > [!NOTE]  
 > Le comportement de suppression configuré dans le modèle EF Core est uniquement appliqué lorsque l’entité principale est supprimée à l’aide d’EF Core et que les entités dépendantes sont chargées en mémoire (par exemple, pour les suivis dépendants). Un comportement de cascade correspondant doit être configuré dans la base de données pour s’assurer que les données qui ne sont pas suivies par le contexte disposent de la bonne action appliquée. Si vous utilisez EF Core pour créer la base de données, ce comportement en cascade sera configuré pour vous.
 
-Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère n’acceptant pas la valeur null est équivalente à une relation requise.) Dans ces cas, EF Core note que la propriété de clé étrangère a été marquée comme null jusqu'à l’appel à SaveChanges, auquel cas une exception est levée, car la modification ne peut pas être conservée dans la base de données. Cela est similaire à une violation de contrainte de la base de données.
+Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère qui n’accepte pas les valeurs NULL est équivalente à une relation obligatoire.) Dans ce cas, EF Core suit que la propriété de clé étrangère a été marquée comme Null jusqu’à ce que SaveChanges soit appelé, auquel cas une exception est levée, car la modification ne peut pas être rendue persistante dans la base de données. Cela est similaire à une violation de contrainte de la base de données.
 
 Il existe quatre comportements de suppression, répertoriés dans les tableaux ci-dessous.
 
 ### <a name="optional-relationships"></a>Relations facultatives
+
 Pour les relations facultatives (clé étrangère acceptant la valeur null) il _est_ possible d’enregistrer une valeur null de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement               | Effet sur les entités dépendantes/enfant en mémoire    | Effet sur les entités dépendantes/enfant dans la base de données  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Cascade**                 | Les entités sont supprimées                   | Les entités sont supprimées                   |
-| **ClientSetNull** (par défaut) | Les propriétés de clé étrangère sont définies avec la valeur null | Aucun.                                   |
+| **ClientSetNull** (par défaut) | Les propriétés de clé étrangère sont définies avec la valeur null | aucune.                                   |
 | **SetNull**                 | Les propriétés de clé étrangère sont définies avec la valeur null | Les propriétés de clé étrangère sont définies avec la valeur null |
-| **Restrict**                | Aucun.                                   | Aucun.                                   |
+| **Restrict**                | aucune.                                   | aucune.                                   |
 
 ### <a name="required-relationships"></a>Relations requises
+
 Pour les relations requises (clé étrangère n’acceptant pas la valeur null) il _n’est pas_ possible d’enregistrer une valeur null de clé étrangère, ce qui entraîne les conséquences suivantes :
 
 | Nom du comportement         | Effet sur les entités dépendantes/enfant en mémoire | Effet sur les entités dépendantes/enfant dans la base de données |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (par défaut) | Les entités sont supprimées                | Les entités sont supprimées                  |
-| **ClientSetNull**     | Lève une exception SaveChanges                  | Aucun.                                  |
+| **ClientSetNull**     | Lève une exception SaveChanges                  | aucune.                                  |
 | **SetNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
-| **Restrict**          | Aucun.                                | Aucun.                                  |
+| **Restrict**          | aucune.                                | aucune.                                  |
 
 Dans les tableaux ci-dessus, *Aucun* peut entraîner une violation de contrainte. Par exemple, si une entité principale/enfant est supprimée, mais qu’aucune action n’est effectuée pour modifier la clé étrangère d’une entité dépendante/enfant, la base de données lèvera probablement une exception sur SaveChanges en raison d’une violation de contrainte étrangère.
 
 À un niveau élevé :
+
 * Si vous avez des entités qui ne peuvent pas exister sans un parent, et que vous souhaitez qu’EF se charge de la suppression des enfants automatiquement, utilisez *Cascade*.
   * Les entités qui ne peuvent pas exister sans un parent utilisent généralement les relations requises, dont *Cascade* est la valeur par défaut.
 * Si vous avez des entités qui peuvent ou ne peuvent pas avoir un parent, et que vous souhaitez qu’EF prenne en charge la définition de la clé étrangère sur null pour vous, utilisez *ClientSetNull*
@@ -66,7 +71,7 @@ Dans les tableaux ci-dessus, *Aucun* peut entraîner une violation de contrainte
 > Dans EF Core, contrairement à EF6, les effets en cascade ne se produisent pas immédiatement, mais à la place uniquement lorsque SaveChanges est appelé.
 
 > [!NOTE]  
-> **Modifications apportées à EF Core 2,0 :** Dans les versions précédentes, *Limit* entraînait la définition de propriétés de clé étrangère facultatives dans les entités dépendantes suivies comme ayant la valeur null, et était le comportement de suppression par défaut pour les relations facultatives. Dans EF Core 2.0, l’option *ClientSetNull* a été introduite pour représenter ce comportement et est devenue la valeur par défaut pour les relations facultatives. Le comportement de *Restrict* a été ajusté pour ne jamais avoir d’effets sur les entités dépendantes.
+> **Changements dans EF Core 2.0 :** dans les versions précédentes, *Restrict* provoquerait la définition des propriétés de clé étrangère facultatives dans des entités dépendantes suivies sur null. C’était le comportement de suppression par défaut pour les relations optionnelles. Dans EF Core 2.0, l’option *ClientSetNull* a été introduite pour représenter ce comportement et est devenue la valeur par défaut pour les relations facultatives. Le comportement de *Restrict* a été ajusté pour ne jamais avoir d’effets sur les entités dépendantes.
 
 ## <a name="entity-deletion-examples"></a>Exemples de suppression d’entité
 
@@ -107,7 +112,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation requise
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -130,7 +135,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation facultative
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -160,7 +165,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict avec une relation obligatoire ou facultative
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -189,7 +194,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade avec une relation obligatoire ou facultative
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -217,7 +222,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation requise
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -240,7 +245,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation facultative
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -268,7 +273,7 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict avec une relation obligatoire ou facultative
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.

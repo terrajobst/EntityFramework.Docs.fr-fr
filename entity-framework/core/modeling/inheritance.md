@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 754be334-dd21-450e-9d22-2591e80012a2
 uid: core/modeling/inheritance
-ms.openlocfilehash: 1f20c455176b5922364584f8c7688c15a4c3f0f9
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: abc1caa4d3839b7cdb52b316bcfc8f648b609b70
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197287"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655687"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -19,12 +19,12 @@ L’héritage dans le modèle EF est utilisé pour contrôler le mode de représ
 
 Par Convention, il revient au fournisseur de base de données de déterminer la façon dont l’héritage sera représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour savoir comment cela est géré avec un fournisseur de base de données relationnelle.
 
-EF ne configure l’héritage que si deux ou plusieurs types hérités sont explicitement inclus dans le modèle. EF ne recherche pas les types de base ou dérivés qui n’étaient pas inclus dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet<TEntity>*  pour chaque type dans la hiérarchie d’héritage.
+EF ne configure l’héritage que si deux ou plusieurs types hérités sont explicitement inclus dans le modèle. EF ne recherche pas les types de base ou dérivés qui n’étaient pas inclus dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet\<tente >* pour chaque type dans la hiérarchie d’héritage.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceDbSets.cs?highlight=3-4&name=Model)]
 
-Si vous ne souhaitez pas exposer un *DbSet<TEntity>*  pour une ou plusieurs entités dans la hiérarchie, vous pouvez utiliser l’API Fluent pour vous assurer qu’elles sont incluses dans le modèle.
-Et si vous ne vous fiez pas aux conventions, vous pouvez spécifier explicitement le type `HasBaseType`de base à l’aide de.
+Si vous ne souhaitez pas exposer un *DbSet\<tente >* pour une ou plusieurs entités de la hiérarchie, vous pouvez utiliser l’API Fluent pour vous assurer qu’elles sont incluses dans le modèle.
+Et si vous ne vous fiez pas aux conventions, vous pouvez spécifier explicitement le type de base à l’aide de `HasBaseType`.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceModelBuilder.cs?highlight=7&name=Context)]
 

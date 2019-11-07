@@ -3,12 +3,12 @@ title: 'Gestion des conflits d’accès concurrentiel : EF Core'
 author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: 4d6ff24e58caa0b228e9c1e4313beda78d1025fc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: b72fa472698e76e18f155cf96b738b0e193eee0f
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197833"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654614"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
 
@@ -56,11 +56,9 @@ La résolution d’un conflit d’accès concurrentiel consiste à fusionner les
 
 **Il existe trois ensembles de valeurs disponibles pour résoudre un conflit d’accès concurrentiel :**
 
-* Les **Valeurs actuelles** sont les valeurs que l’application a tenté d’écrire dans la base de données.
-
-* Les **Valeurs d’origine** sont les valeurs qui ont été récupérées à l’origine à partir de la base de données, avant que les modifications soient apportées.
-
-* Les **Valeurs de base de données** sont les valeurs actuellement stockées dans la base de données.
+- Les **Valeurs actuelles** sont les valeurs que l’application a tenté d’écrire dans la base de données.
+- Les **Valeurs d’origine** sont les valeurs qui ont été récupérées à l’origine à partir de la base de données, avant que les modifications soient apportées.
+- Les **Valeurs de base de données** sont les valeurs actuellement stockées dans la base de données.
 
 L’approche générale pour gérer les conflits d’accès concurrentiel est la suivante :
 

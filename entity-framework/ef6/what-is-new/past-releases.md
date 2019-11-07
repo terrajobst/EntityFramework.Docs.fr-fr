@@ -3,12 +3,13 @@ title: Versions antérieures de Entity Framework-EF6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
-ms.openlocfilehash: 478dec6b2401efd554e84a231fe78e71dcbf5771
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+uid: ef6/what-is-new/past-releases
+ms.openlocfilehash: fada7740453cd9a55a1d0069236efcecbd9aa314
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182121"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656144"
 ---
 # <a name="past-releases-of-entity-framework"></a>Versions antérieures de Entity Framework
 
@@ -50,7 +51,7 @@ Voici une courte liste des changements les plus importants du runtime EF 6.2 :
 - Migrate.exe prend désormais en charge l’option -script [#240](https://github.com/aspnet/EntityFramework6/issues/240)
 - EF6 peut maintenant utiliser des valeurs de clé générées par une séquence dans SQL Server [#165](https://github.com/aspnet/EntityFramework6/issues/165)
 - Liste de mise à jour des erreurs temporaires pour la stratégie d’exécution de SQL Azure [#83](https://github.com/aspnet/EntityFramework6/issues/83)
-- Bogue : La réexécution des requêtes ou des commandes SQL échoue avec le message « SqlParameter est déjà contenu par un autre SqlParameterCollection » [#81](https://github.com/aspnet/EntityFramework6/issues/81)
+- Bogue : La réexécution des requêtes ou des commandes SQL échoue avec le message « SqlParameter est déjà contenu par un autre SqlParameterCollection » [#81](https://github.com/aspnet/EntityFramework6/issues/81)
 - Bogue : L’évaluation de DbQuery.ToString() expire dans le débogueur [#73](https://github.com/aspnet/EntityFramework6/issues/73)
 
 ## <a name="ef-613"></a>EF 6.1.3
@@ -58,7 +59,7 @@ Le runtime EF 6.1.3 a été publié à NuGet en octobre 2015.
 Cette version contient uniquement des correctifs pour les défauts de priorité élevée et les régressions signalées sur la version 6.1.2.
 Les correctifs sont les suivants :
 
-- Requête : Régression dans EF 6.1.2 : APPLICATION externe introduite et requêtes plus complexes pour les relations 1:1 et la clause « let »
+- Requête : régression dans EF 6.1.2 : application externe introduite et requêtes plus complexes pour les relations 1:1 et la clause « let »
 - TPT problème avec la propriété de masquage de la classe de base dans la classe héritée
 - DbMigration. SQL échoue quand le mot « Go » est contenu dans le texte
 - Créer un indicateur de compatibilité pour UnionAll insère et Intersect la prise en charge de l’aplatissement
@@ -79,7 +80,7 @@ Cette version concerne essentiellement les correctifs de bogues. Nous avons éga
 ## <a name="ef-611"></a>EF 6.1.1
 Le runtime EF 6.1.1 a été publié en version NuGet en juin de 2014.
 Cette version contient des correctifs pour les problèmes rencontrés par un certain nombre de personnes. Entre autres :
-- Définition Erreur lors de l’ouverture de EF5 edmx avec une précision décimale dans EF6 designer
+- Concepteur : erreur lors de l’ouverture de EF5 edmx avec une précision décimale dans EF6 designer
 - La logique de détection d’instance par défaut pour la base de données locale ne fonctionne pas avec SQL Server 2014
 
 ## <a name="ef-610"></a>EF 6.1.0
@@ -125,7 +126,7 @@ Les fonctionnalités suivantes fonctionnent pour les modèles créés avec Code 
 - **Enums, spatiales et meilleures performances sur .net 4,0** : en déplaçant les composants principaux qui se trouvaient dans le .NET Framework dans le package NUGET d’EF, nous pouvons désormais offrir une prise en charge des énumérations, des types de données spatiales et des améliorations des performances de EF5 sur .net 4,0.
 - **Amélioration des performances de Enumerable. Contains dans les requêtes LINQ**.
 - **Amélioration du temps de préchauffage (génération de vues)** , en particulier pour les modèles volumineux.
-- **Service de singularité de pluralisation enfichable &amp;** .
+- La **pluralisation enfichable &amp; service de singularité**.
 - Les **implémentations personnalisées de Equals ou GetHashCode** sur les classes d’entité sont désormais prises en charge.
 - **DbSet. AddRange/RemoveRange** fournit une méthode optimisée pour ajouter ou supprimer plusieurs entités d’un ensemble.
 - **DbChangeTracker. HasChanges** offre un moyen simple et efficace de déterminer si des modifications en attente doivent être enregistrées dans la base de données.
@@ -138,11 +139,11 @@ Les fonctionnalités suivantes s’appliquent à Code First uniquement :
 - Les **[scripts de migration idempotent](~/ef6/modeling/code-first/migrations/index.md)** vous permettent de générer un script SQL qui peut mettre à niveau une base de données, quelle que soit la version, jusqu’à la version la plus récente.
 - La table de l' **[historique des migrations configurables](~/ef6/modeling/code-first/migrations/history-customization.md)** vous permet de personnaliser la définition de la table d’historique des migrations. Cela s’avère particulièrement utile pour les fournisseurs de bases de données qui nécessitent des types de données appropriés, etc., à spécifier pour que la table d’historique des migrations fonctionne correctement.
 - **Plusieurs contextes par base de données** suppriment la limitation précédente d’un modèle de code First par base de données lors de l’utilisation de migrations ou lorsque code First créé automatiquement la base de données pour vous.
-- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** est une nouvelle API code First qui permet de configurer le schéma de base de données par défaut d’un modèle de code First à un seul emplacement. Précédemment, le Code First schéma par défaut a été codé en dur pour &quot;dbo @ no__t-1 et la seule façon de configurer le schéma auquel une table appartenait était via l’API ToTable.
+- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** est une nouvelle API code First qui permet de configurer le schéma de base de données par défaut d’un modèle de code First à un seul emplacement. Précédemment, le Code First schéma par défaut a été codé en dur pour &quot;&quot; DBO et la seule façon de configurer le schéma auquel une table appartenait était via l’API ToTable.
 - La **méthode DbModelBuilder. configurations. AddFromAssembly** vous permet d’ajouter facilement toutes les classes de configuration définies dans un assembly lorsque vous utilisez des classes de configuration avec l’API Fluent code First.
 - Les **[opérations de migrations personnalisées](https://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** vous ont permis d’ajouter des opérations supplémentaires à utiliser dans vos migrations basées sur le code.
 - Le **niveau d’isolation de la transaction par défaut est modifié en READ_COMMITTED_SNAPSHOT** pour les bases de données créées à l’aide de code First, ce qui permet une plus grande évolutivité et un plus petit nombre de blocages.
-- **Les types d’entité et complexes peuvent maintenant être des classes nestedinside**. |
+- **Les types d’entité et complexes peuvent maintenant être des classes nestedinside**.
 
 ## <a name="ef-50"></a>EF 5,0
 Le runtime EF 5.0.0 a été publié dans NuGet en août de 2012.
@@ -150,7 +151,7 @@ Cette version introduit de nouvelles fonctionnalités, notamment la prise en cha
 
 La Entity Framework Designer dans Visual Studio 2012 introduit également la prise en charge de plusieurs diagrammes par modèle, la coloration des formes sur l’aire de conception et l’importation par lots des procédures stockées.
 
-Voici une liste de contenu que nous avons rassemblés spécifiquement pour la version d’EF 5.
+Voici la liste des contenus que nous avons rassemblés spécifiquement pour la version d’EF 5 :
 
 -   [Publication de la publication EF 5](https://blogs.msdn.com/b/adonet/archive/2012/08/15/ef5-released.aspx)
 -   Nouvelles fonctionnalités dans EF5
@@ -217,7 +218,7 @@ Voici une liste de contenu que nous avons rassemblés spécifiquement pour la ve
 Le runtime EF 4.3.1 a été publié en NuGet en février 2012 peu après EF 4.3.0.
 Cette version de correctif incluait des correctifs de bogues pour la version d’EF 4,3 et a introduit une meilleure prise en charge de la base de données locale pour les clients utilisant EF 4,3 avec Visual Studio 2012.
 
-Voici une liste de contenu que nous avons rassemblés spécifiquement pour la version d’EF 4.3.1, la majeure partie du contenu fourni pour EF 4,1 s’applique également à EF 4,3.
+Voici une liste de contenu spécifiquement mis en place pour la version d’EF 4.3.1. la majeure partie du contenu fourni pour EF 4,1 s’applique également à EF 4,3 :
 
 -   [Billet de blog sur la version EF 4.3.1](https://blogs.msdn.com/b/adonet/archive/2012/02/29/ef4-3-1-and-ef5-beta-1-available-on-nuget.aspx)
 
@@ -235,7 +236,7 @@ Le runtime EF 4.2.0 a été publié en version NuGet en novembre 2011.
 Cette version comprend des correctifs de bogues pour la version d’EF 4.1.1.
 Étant donné que cette version ne comprenait que des correctifs de bogues, il aurait peut-être été le correctif EF 4.1.2, mais nous avons choisi de passer à 4,2 pour nous permettre de quitter les numéros de version de correctifs basés sur la date que nous avons utilisés dans les versions 4.1. x et d’adopter la norme de [version sémantique](https://semver.org) pour les contrôle de version emantic.
 
-Voici une liste de contenu spécifiquement mis en place pour la version d’EF 4,2, le contenu fourni pour EF 4,1 s’applique également à EF 4,2.
+Voici une liste de contenu spécifiquement mis en place pour la version d’EF 4,2, le contenu fourni pour EF 4,1 s’applique également à EF 4,2 :
 
 -   [Publication de la publication EF 4,2](https://blogs.msdn.com/b/adonet/archive/2011/11/01/ef-4-2-released.aspx)
 -   [Code First procédure pas à pas](https://blogs.msdn.com/b/adonet/archive/2011/09/28/ef-4-2-code-first-walkthrough.aspx)

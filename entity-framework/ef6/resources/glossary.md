@@ -1,81 +1,82 @@
 ---
-title: Entity Framework glossaire - EF6
+title: Glossaire Entity Framework-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-ms.openlocfilehash: 4e42e5870879524b814cecdc361e688d36f0180f
-ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
+uid: ef6/resources/glossary
+ms.openlocfilehash: df0da4a68b3d2c882d9673417ee5fe335eccae2b
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/18/2019
-ms.locfileid: "58131386"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656157"
 ---
-# <a name="entity-framework-glossary"></a>Entity Framework glossaire
+# <a name="entity-framework-glossary"></a>Glossaire Entity Framework
 ## <a name="code-first"></a>Code First
-Création d’un modèle Entity Framework à l’aide de code. Le modèle peut cibler une base de données existante ou une base de données.
+Création d’un modèle de Entity Framework à l’aide de code. Le modèle peut cibler une base de données existante ou une nouvelle base de données.
 
 ## <a name="context"></a>Contexte
-Une classe qui représente une session avec la base de données, ce qui vous permet d’interroger et d’enregistrer des données. Un contexte dérive de la classe DbContext ou ObjectContext.
+Classe qui représente une session avec la base de données, ce qui vous permet d’interroger et d’enregistrer des données. Un contexte dérive de la classe DbContext ou ObjectContext.
 
 ## <a name="convention-code-first"></a>Convention (Code First)
-Une règle qui utilise de Entity Framework pour déduire la forme de modèle vous à partir de vos classes.
+Règle que Entity Framework utilise pour déduire la forme de votre modèle à partir de vos classes.
 
-## <a name="database-first"></a>Tout d’abord la base de données
-Création d’un modèle Entity Framework, à l’aide du Concepteur EF, qui cible une base de données existante.
+## <a name="database-first"></a>Database First
+Création d’un modèle de Entity Framework, à l’aide du concepteur EF, ciblant une base de données existante.
 
 ## <a name="eager-loading"></a>Chargement hâtif
-Modèle de chargement des données associées dans lequel une requête pour un type d’entité charge également les entités associées dans le cadre de la requête.
+Modèle de chargement de données associées dans laquelle une requête pour un type d’entité charge également des entités associées dans le cadre de la requête.
 
 ## <a name="ef-designer"></a>EF Designer
-Un concepteur visuel dans Visual Studio qui vous permet de créer un modèle Entity Framework à l’aide de zones et des lignes.
+Concepteur visuel dans Visual Studio qui vous permet de créer un modèle de Entity Framework à l’aide de zones et de lignes.
 
 ## <a name="entity"></a>Entité
 Classe ou objet qui représente des données d'application, telles que des clients, des produits et des commandes.
 
 ## <a name="entity-data-model"></a>Entity Data Model
-Un modèle qui décrit les entités et les relations entre eux. EF utilise le modèle EDM pour décrire le modèle conceptuel par rapport à laquelle les programmes de développement. EDM s’appuie sur le modèle entité-relation introduit par la récupération d’urgence. Peter Chen. Le modèle EDM a été développé avec pour principal objectif de devenir le common data model travers une suite de technologies de serveurs et les développeurs de Microsoft. EDM est également utilisé dans le cadre du protocole OData.
+Modèle qui décrit les entités et les relations entre eux. EF utilise le modèle EDM pour décrire le modèle conceptuel sur lequel les programmes de développement sont utilisés. EDM s’appuie sur le modèle de relation d’entité introduit par Dr. Peter Chen. L’EDM a été développé à l’origine avec l’objectif principal de devenir le modèle de données commun à travers une suite de technologies de développement et de serveur de Microsoft. Le modèle EDM est également utilisé dans le cadre du protocole OData.
 
 ## <a name="explicit-loading"></a>Chargement explicite
-Modèle de chargement des données associées dans lequel les objets connexes sont chargés en appelant une API.
+Modèle de chargement de données associées où les objets connexes sont chargés en appelant une API.
 
 ## <a name="fluent-api"></a>API Fluent
-Une API qui peut être utilisée pour configurer un modèle Code First.
+API qui peut être utilisée pour configurer un modèle de Code First.
 
 ## <a name="foreign-key-association"></a>Association de clé étrangère
-Une association entre entités où une propriété qui représente la clé étrangère est incluse dans la classe de l’entité dépendante. Par exemple, le produit contient une propriété CategoryId.
+Association entre des entités où une propriété qui représente la clé étrangère est incluse dans la classe de l’entité dépendante. Par exemple, Product contient une propriété CategoryId.
 
 ## <a name="identifying-relationship"></a>Relation d’identification
 Relation où la clé primaire de l'entité principale fait également partie de la clé primaire de l'entité dépendante. Dans ce type de relation, l'entité dépendante ne peut pas exister dans l'entité principale.
 
 ## <a name="independent-association"></a>Association indépendante
-Une association entre entités où il n’existe aucune propriété qui représente la clé étrangère dans la classe de l’entité dépendante. Par exemple, une classe de produit contient une relation à la catégorie, mais aucune propriété CategoryId. Entity Framework effectue le suivi de l’état de l’association indépendamment de l’état des entités au niveau des terminaisons d’association de deux.
+Association entre des entités où il n’y a aucune propriété représentant la clé étrangère dans la classe de l’entité dépendante. Par exemple, une classe Product contient une relation à Category, mais aucune propriété CategoryId. Entity Framework effectue le suivi de l’état de l’Association indépendamment de l’état des entités aux terminaisons des deux associations.
 
 ## <a name="lazy-loading"></a>Chargement différé
-Modèle de chargement des données associées dans lequel les objets connexes sont chargés automatiquement lors de l’accès à une propriété de navigation.
+Modèle de chargement de données associées où les objets connexes sont chargés automatiquement lors de l’accès à une propriété de navigation.
 
-## <a name="model-first"></a>Tout d’abord de modèle
-Création d’un modèle Entity Framework, à l’aide du Concepteur EF, qui est ensuite utilisé pour créer une base de données.
+## <a name="model-first"></a>Model First
+Création d’un modèle de Entity Framework à l’aide du concepteur EF, qui est ensuite utilisé pour créer une nouvelle base de données.
 
 ## <a name="navigation-property"></a>Propriété de navigation
-Une propriété d’une entité qui fait référence à une autre entité. Par exemple, produit contient une propriété de navigation de catégorie et catégorie contient une propriété de navigation de produits.
+Propriété d’une entité qui référence une autre entité. Par exemple, Product contient une propriété de navigation Category et Category contient une propriété de navigation Products.
 
 ## <a name="poco"></a>POCO
-Acronyme de Plain-Old CLR Object. Une classe utilisateur simple qui n’a aucune dépendance avec n’importe quelle infrastructure. Dans le contexte d’EF, une classe d’entité qui ne dérive pas à partir d’EntityObject, implémente toutes les interfaces ou comporte des attributs définis dans EF. Ces classes d’entité sont dissociés de l’infrastructure de persistance sont dits également « ignorant la persistance ».  
+Acronyme de Plain-Old CLR Object. Classe d’utilisateur simple qui n’a pas de dépendances avec n’importe quelle infrastructure. Dans le contexte d’EF, une classe d’entité qui ne dérive pas de EntityObject, implémente toutes les interfaces ou transporte tous les attributs définis dans EF. De telles classes d’entité qui sont découplées de l’infrastructure de persistance sont également dites « ignorant la persistance ».  
 
-## <a name="relationship-inverse"></a>Inverse de la relation
-L’autre extrémité d’une relation, par exemple, le produit. Catégorie et catégorie. Produit.
+## <a name="relationship-inverse"></a>Relation inverse
+L’extrémité opposée d’une relation, par exemple Product. Catégorie et catégorie. Production.
 
 ## <a name="self-tracking-entity"></a>Entité de suivi automatique
-Entité constituée à partir d’un modèle de génération de code qui permet au développement d’applications multicouches.
+Entité générée à partir d’un modèle de génération de code qui permet le développement multicouche.
 
-## <a name="table-per-concrete-type-tpc"></a>Table-par type concret (TPC)
-Une méthode de mappage de l’héritage, où chaque type non abstrait dans la hiérarchie est mappé pour séparer la table dans la base de données.
+## <a name="table-per-concrete-type-tpc"></a>Type de table par béton (TPC)
+Méthode de mappage de l’héritage où chaque type non abstrait de la hiérarchie est mappé à une table distincte dans la base de données.
 
-## <a name="table-per-hierarchy-tph"></a>Table par hiérarchie (TPH)
-Une méthode de mappage de l’héritage où tous les types dans la hiérarchie sont mappées à la même table dans la base de données. Un ou plusieurs colonnes sont utilisé pour identifier le type de chaque ligne de discriminateur est associé.
+## <a name="table-per-hierarchy-tph"></a>TPH (table par hiérarchie)
+Méthode de mappage de l’héritage dans lequel tous les types de la hiérarchie sont mappés à la même table dans la base de données. Une ou plusieurs colonnes de discriminateur sont utilisées pour identifier le type auquel chaque ligne est associée.
 
 ## <a name="table-per-type-tpt"></a>Table par type (TPT)
-Une méthode de mappage de l’héritage dans lequel les propriétés communes de tous les types dans la hiérarchie sont mappées à la même table dans la base de données, mais les propriétés propres à chaque type sont mappées à une table distincte.
+Méthode de mappage de l’héritage où les propriétés communes de tous les types de la hiérarchie sont mappées à la même table dans la base de données, mais les propriétés propres à chaque type sont mappées à une table distincte.
 
-## <a name="type-discovery"></a>Découverte de type
-Le processus d’identification des types qui doivent faire partie d’un modèle Entity Framework.
+## <a name="type-discovery"></a>Détection de type
+Processus d’identification des types qui doivent faire partie d’un modèle de Entity Framework.

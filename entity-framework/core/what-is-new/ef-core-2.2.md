@@ -4,27 +4,28 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 5fcf7c6dfb4d8cb7928ef974af6deb52df7c63eb
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: fb9de799753bebd7b4092cd8f4af74703dee3e45
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181372"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656190"
 ---
 # <a name="new-features-in-ef-core-22"></a>Nouvelles fonctionnalités d’EF Core 2.2
 
 ## <a name="spatial-data-support"></a>Prise en charge des données spatiales
 
 Les données spatiales peuvent être utilisées pour représenter l’emplacement physique et la forme d’objets.
-Plusieurs bases de données peuvent nativement stocker, indexer et interroger des données spatiales. Les scénarios courants incluent l’interrogation d’objets dans un rayon donné et le test pour vérifier si un polygone contient un emplacement donné.
+Plusieurs bases de données peuvent nativement stocker, indexer et interroger des données spatiales.
+Les scénarios courants incluent l’interrogation d’objets dans un rayon donné et le test pour vérifier si un polygone contient un emplacement donné.
 EF Core 2.2 prend désormais en charge l’utilisation de données spatiales provenant de diverses bases de données à l’aide de types issus de la bibliothèque [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) (NTS).
 
 La prise en charge des données spatiales est implémenté sous forme d’une série de packages d’extension spécifiques à un fournisseur.
 Chacun de ces packages contribue aux mappages des types NTS et des méthodes ainsi que des types spatiaux et fonctions correspondants dans la base de données.
 Ces extensions de fournisseur sont désormais disponibles pour [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/), et [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (à partir du [projet Npgsql](https://www.npgsql.org/)).
-Les types spatiaux peuvent être utilisés directement avec le [fournisseur en mémoire EF Core](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/), sans extensions supplémentaires.
+Les types spatiaux peuvent être utilisés directement avec le [fournisseur en mémoire EF Core](xref:core/providers/in-memory/index), sans extensions supplémentaires.
 
-Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Exemple :
+Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Exemple :
 
 ``` csharp
 using NetTopologySuite.Geometries;
@@ -40,7 +41,7 @@ namespace MyApp
     public Point Location { get; set; }
   }
 }
-``` 
+```
 
 Vous pouvez alors conserver les entités avec des données spatiales :
 
@@ -56,6 +57,7 @@ using (var context = new MyDbContext())
     context.SaveChanges();
 }
 ```
+
 Et vous pouvez exécuter des requêtes de base de données basées sur des données spatiales et des opérations :
 
 ``` csharp
@@ -65,7 +67,7 @@ Et vous pouvez exécuter des requêtes de base de données basées sur des donn�
       select f).Take(5).ToList();
 ```
 
-Pour plus d’informations sur cette fonctionnalité, consultez la [documentation sur les types spatiaux](xref:core/modeling/spatial). 
+Pour plus d’informations sur cette fonctionnalité, consultez la [documentation sur les types spatiaux](xref:core/modeling/spatial).
 
 ## <a name="collections-of-owned-entities"></a>Collections d’entités détenues
 
@@ -74,7 +76,8 @@ EF Core 2.2 étend la capacité d’exprimer la propriété aux associations un-
 La propriété permet de limiter la façon dont les entités sont utilisées.
 
 Par exemple, les entités détenues :
-- Peuvent apparaître uniquement sur les propriétés de navigation d’autres types d’entités. 
+
+- Peuvent apparaître uniquement sur les propriétés de navigation d’autres types d’entités.
 - Sont automatiquement chargées et ne peut être uniquement suivies par un objet DbContext en même temps que leur propriétaire.
 
 Dans les bases de données relationnelles, les collections détenues sont mappées à des tables distinctes du propriétaire, comme des associations un-à-plusieurs standard.
@@ -112,4 +115,4 @@ FROM [Friends] AS [f]
 ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
-Pour plus d’informations, consultez la [documentation sur les balises de requête](xref:core/querying/tags). 
+Pour plus d’informations, consultez la [documentation sur les balises de requête](xref:core/querying/tags).

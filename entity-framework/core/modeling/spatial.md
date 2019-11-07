@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: cced53edadb890e4e86753ec2628218ffc4d1d5b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181393"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655610"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
@@ -101,7 +101,7 @@ var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
 
 ### <a name="longitude-and-latitude"></a>Longitude et Latitude
 
-Les coordonnées en NTS sont exprimées en valeurs X et Y. Pour représenter la longitude et la latitude, utilisez X pour la longitude et Y pour la latitude. Notez que cette valeur **est** comprise entre le format `latitude, longitude` dans lequel vous voyez généralement ces valeurs.
+Les coordonnées en NTS sont exprimées en valeurs X et Y. Pour représenter la longitude et la latitude, utilisez X pour la longitude et Y pour la latitude. Notez que **c’est à partir du format** `latitude, longitude` dans lequel vous voyez généralement ces valeurs.
 
 ### <a name="srid-ignored-during-client-operations"></a>SRID ignoré pendant les opérations du client
 
@@ -221,7 +221,7 @@ Lors de l’utilisation du type de colonne `geography`, SQL Server impose des ex
 
 ### <a name="fullglobe"></a>FullGlobe
 
-SQL Server a un type de géométrie non standard pour représenter le globe complet lors de l’utilisation du type de colonne `geography`. Il offre également un moyen de représenter les polygones en fonction du monde entier (sans anneau extérieur). Aucun de ces deux n’est pris en charge par NTS.
+SQL Server a un type Geometry non standard pour représenter le globe complet lors de l’utilisation du type de colonne `geography`. Il offre également un moyen de représenter les polygones en fonction du monde entier (sans anneau extérieur). Aucun de ces deux n’est pris en charge par NTS.
 
 > [!WARNING]
 > Les FullGlobe et les polygones basés sur ce dernier ne sont pas pris en charge par NTS.
@@ -271,7 +271,7 @@ Geometry. AsBinary () | ✔ | ✔ | ✔ | ✔
 Geometry. AsText () | ✔ | ✔ | ✔ | ✔
 Geometry. Boundary | ✔ | | ✔ | ✔
 Geometry. buffer (double) | ✔ | ✔ | ✔ | ✔
-Geometry. buffer (double, int) | | | ✔
+Geometry. buffer (double, int) | | | ✔ | ✔
 Geometry. Centre de gravité | ✔ | | ✔ | ✔
 Geometry. Contains (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. ConvexHull () | ✔ | ✔ | ✔ | ✔
@@ -287,17 +287,17 @@ Geometry. EqualsExact (Geometry) | | | | ✔
 Geometry. EqualsTopologically (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. GeometryType | ✔ | ✔ | ✔ | ✔
 Geometry. GetGeometryN (int) | ✔ | | ✔ | ✔
-Geometry. InteriorPoint | ✔ | | ✔
+Geometry. InteriorPoint | ✔ | | ✔ | ✔
 Geometry. intersection (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. intersections (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. IsEmpty | ✔ | ✔ | ✔ | ✔
 Geometry. IsSimple | ✔ | | ✔ | ✔
 Geometry. IsValid | ✔ | ✔ | ✔ | ✔
-Geometry. IsWithinDistance (Geometry, double) | ✔ | | ✔
+Geometry. IsWithinDistance (Geometry, double) | ✔ | | ✔ | ✔
 Geometry. Length | ✔ | ✔ | ✔ | ✔
 Geometry. NumGeometries | ✔ | ✔ | ✔ | ✔
 Geometry. NumPoints | ✔ | ✔ | ✔ | ✔
-Geometry. OgcGeometryType | ✔ | ✔ | ✔
+Geometry. OgcGeometryType | ✔ | ✔ | ✔ | ✔
 Geometry. chevauchements (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. PointOnSurface | ✔ | | ✔ | ✔
 Geometry. relate (Geometry, String) | ✔ | | ✔ | ✔
@@ -307,7 +307,7 @@ Geometry. SymmetricDifference (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. ToBinary () | ✔ | ✔ | ✔ | ✔
 Geometry. ToText () | ✔ | ✔ | ✔ | ✔
 Geometry. touche (Geometry) | ✔ | | ✔ | ✔
-Geometry. Union () | | | ✔
+Geometry. Union () | | | ✔ | ✔
 Geometry. Union (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. within (Geometry) | ✔ | ✔ | ✔ | ✔
 GeometryCollection. Count | ✔ | ✔ | ✔ | ✔

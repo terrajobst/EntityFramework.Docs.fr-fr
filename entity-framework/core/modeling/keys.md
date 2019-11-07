@@ -4,16 +4,16 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 8b32bf6417890a954c933a5973a2c90c609beeca
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 66c64c389294e8e109a614a2bea8311932660dea
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197271"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655950"
 ---
-# <a name="keys-primary"></a>Clés (principale)
+# <a name="keys-primary"></a>Clés (primaires)
 
-Une clé sert d’identificateur unique principal pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle, cela correspond au concept d’une *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (pour plus d’informations, consultez [autres clés](alternate-keys.md) ). 
+Une clé sert d’identificateur unique principal pour chaque instance d’entité. Lorsque vous utilisez une base de données relationnelle, cela correspond au concept d’une *clé primaire*. Vous pouvez également configurer un identificateur unique qui n’est pas la clé primaire (pour plus d’informations, consultez [autres clés](alternate-keys.md) ).
 
 L’une des méthodes suivantes peut être utilisée pour configurer/créer une clé primaire.
 
@@ -21,27 +21,9 @@ L’une des méthodes suivantes peut être utilisée pour configurer/créer une 
 
 Par Convention, une propriété nommée `Id` ou `<type name>Id` sera configurée comme clé d’une entité.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyId.cs?highlight=3)] -->
-``` csharp
-class Car
-{
-    public string Id { get; set; }
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/KeyId.cs?name=KeyId&highlight=3)]
 
-    public string Make { get; set; }
-    public string Model { get; set; }
-}
-```
-
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyTypeNameId.cs?highlight=3)] -->
-``` csharp
-class Car
-{
-    public string CarId { get; set; }
-
-    public string Make { get; set; }
-    public string Model { get; set; }
-}
-```
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/KeyTypeNameId.cs?name=KeyIdhighlight=3)]
 
 ## <a name="data-annotations"></a>Annotations de données
 

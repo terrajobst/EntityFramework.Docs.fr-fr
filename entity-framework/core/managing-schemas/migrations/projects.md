@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 0082b0af2905fe9e5c3c6509516f622c9d4f8370
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 0c08855db77470d28e23f9ef1d147497dfcdff83
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812036"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655553"
 ---
 # <a name="using-a-separate-migrations-project"></a>Utilisation d’un projet de migrations distinct
 
@@ -45,10 +45,16 @@ Pour...
 
 Si vous avez tout effectué correctement, vous devez être en mesure d’ajouter de nouvelles migrations au projet.
 
-``` powershell
-Add-Migration NewMigration -Project MyApp.Migrations
-```
+## <a name="net-core-clitabdotnet-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
 ``` Console
 dotnet ef migrations add NewMigration --project MyApp.Migrations
 ```
+
+## <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+
+``` powershell
+Add-Migration NewMigration -Project MyApp.Migrations
+```
+
+***

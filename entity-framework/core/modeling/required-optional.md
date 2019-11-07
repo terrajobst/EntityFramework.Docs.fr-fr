@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ddaa0a54-9f43-4c34-aae3-f95c96c69842
 uid: core/modeling/required-optional
-ms.openlocfilehash: fd9e96e6f79965e63b07c21217edd004fd5c4d54
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 62b2b3f5a761c0aacece986ecd0b2dd2f958d048
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197841"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655659"
 ---
 # <a name="required-and-optional-properties"></a>Propriétés obligatoires et facultatives
 
@@ -19,12 +19,12 @@ Lors du mappage à un schéma de base de données relationnelle, les propriété
 
 ## <a name="conventions"></a>Conventions
 
-Par Convention, une propriété dont le type .NET peut contenir une valeur null sera configurée comme étant facultative, alors que les propriétés dont le type .NET ne peut pas contenir de valeur null seront configurées selon les besoins. Par exemple, toutes les propriétés avec des types valeur`int`.NET `decimal`( `bool`,,, etc.) sont configurées en fonction des besoins, et toutes les propriétés avec `decimal?`des `bool?`types valeur .net Nullable (`int?`,,, etc.) sont configuré comme option facultative.
+Par Convention, une propriété dont le type .NET peut contenir une valeur null sera configurée comme étant facultative, alors que les propriétés dont le type .NET ne peut pas contenir de valeur null seront configurées selon les besoins. Par exemple, toutes les propriétés avec des types valeur .NET (`int`, `decimal`, `bool`, etc.) sont configurées en fonction des besoins, et toutes les propriétés avec des types valeur .NET Nullable (`int?`, `decimal?`, `bool?`, etc.) sont configurées comme facultatives.
 
 C#8 a introduit une nouvelle fonctionnalité appelée [types de référence Nullable](/dotnet/csharp/tutorials/nullable-reference-types), qui permet d’annoter des types de référence, ce qui indique s’il est valide qu’ils contiennent ou non des valeurs NULL. Cette fonctionnalité est désactivée par défaut et, si elle est activée, elle modifie le comportement de EF Core de la façon suivante :
 
-* Si les types de référence Nullable sont désactivés (valeur par défaut), toutes les propriétés avec des types de référence .NET sont `string`configurées comme étant facultatives par convention (par exemple,).
-* Si les types de référence Nullable sont activés, les propriétés seront configurées en fonction de la C# possibilité de `string?` valeur null de leur type .net : `string` sera configuré comme étant facultatif, tandis que sera configuré comme requis.
+* Si les types de référence Nullable sont désactivés (valeur par défaut), toutes les propriétés avec des types de référence .NET sont configurées comme étant facultatives par convention (par exemple, `string`).
+* Si les types de référence Nullable sont activés, les propriétés seront configurées en fonction de la C# possibilité de valeur null de leur type .net : `string?` sera configuré comme étant facultatif, tandis que `string` sera configuré comme requis.
 
 L’exemple suivant montre un type d’entité avec des propriétés obligatoires et facultatives, avec la fonctionnalité de référence Nullable désactivée (valeur par défaut) et activée :
 
@@ -53,7 +53,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?highlight=14)]
 
-# <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api) 
+# <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?highlight=11-13)]
 

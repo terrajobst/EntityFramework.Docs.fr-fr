@@ -1,93 +1,97 @@
 ---
-title: L’amorçage des données - EF Core
+title: Amorçage de données-EF Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1c450b142573368d043430f55a3144b6696a8691
-ms.sourcegitcommit: b4a5ed177b86bf7f81602106dab6b4acc18dfc18
+ms.openlocfilehash: 0b11b6b3104b74e09c60c9c455e22f164df493c7
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/15/2019
-ms.locfileid: "54316632"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655766"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
-L’amorçage des données est le processus de remplissage d’une base de données avec un ensemble initial de données.
+L’amorçage de données est le processus de remplissage d’une base de données avec un jeu de données initial.
 
-Il existe plusieurs façons qu'y parvenir dans EF Core :
-* Données d’amorçage de modèle
-* Personnalisation d’une migration manuelle
-* Logique d’initialisation personnalisé
+Pour ce faire, vous pouvez procéder de plusieurs façons dans EF Core :
 
-## <a name="model-seed-data"></a>Données d’amorçage de modèle
+* Données de valeur de départ du modèle
+* Personnalisation manuelle de la migration
+* Logique d’initialisation personnalisée
+
+## <a name="model-seed-data"></a>Données de valeur de départ du modèle
 
 > [!NOTE]
 > Cette fonctionnalité est une nouveauté d’EF Core 2.1.
 
-Contrairement à dans EF6, dans EF Core, l’amorçage des données peut être associé à un type d’entité dans le cadre de la configuration du modèle. Puis EF Core [migrations](xref:core/managing-schemas/migrations/index) peut calculer automatiquement les éléments insérant, mettre à jour ou supprimer la nécessité d’opérations à appliquer lors de la mise à niveau de la base de données vers une nouvelle version du modèle.
+Contrairement à EF6, dans EF Core, les données d’amorçage peuvent être associées à un type d’entité dans le cadre de la configuration du modèle. Ensuite EF Core [migrations](xref:core/managing-schemas/migrations/index) peut calculer automatiquement les opérations d’insertion, de mise à jour ou de suppression qui doivent être appliquées lors de la mise à niveau de la base de données vers une nouvelle version du modèle.
 
 > [!NOTE]
-> Migrations considère uniquement les modifications apportées au modèle pour déterminer quelle opération doit être effectuée pour obtenir les données d’amorçage dans l’état souhaité. Par conséquent, les modifications apportées aux données effectuées en dehors de migrations peuvent être perdues ou provoquer une erreur.
+> Les migrations considèrent uniquement les modifications de modèle lors de la détermination de l’opération à effectuer pour que les données de départ soient à l’état souhaité. Par conséquent, toute modification apportée aux données effectuée en dehors des migrations peut être perdue ou provoquer une erreur.
 
-Par exemple, cette opération configure les données d’amorçage pour un `Blog` dans `OnModelCreating`:
+Par exemple, cela permet de configurer les données de départ pour une `Blog` dans `OnModelCreating`:
 
 [!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
 
-Pour ajouter des entités ayant une relation de valeurs de clés étrangères doivent être spécifiés :
+Pour ajouter des entités qui ont une relation, les valeurs de clé étrangère doivent être spécifiées :
 
 [!code-csharp[PostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=PostSeed)]
 
-Si le type d’entité a des propriétés dans l’état de clichés instantanés qu'une classe anonyme peut être utilisée pour fournir les valeurs :
+Si le type d’entité a des propriétés dans l’état d’ombre, une classe anonyme peut être utilisée pour fournir les valeurs :
 
 [!code-csharp[AnonymousPostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=AnonymousPostSeed)]
 
-Détenues entité types peuvent être exécutées de manière similaire :
+Les types d’entités détenues peuvent être amorcés de la même façon :
 
 [!code-csharp[OwnedTypeSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=OwnedTypeSeed)]
 
-Consultez le [exemple complet de projet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) pour plus de contexte.
+Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) .
 
-Une fois que les données ont été ajoutées au modèle, [migrations](xref:core/managing-schemas/migrations/index) doit être utilisé pour appliquer les modifications.
+Une fois les données ajoutées au modèle, des [migrations](xref:core/managing-schemas/migrations/index) doivent être utilisées pour appliquer les modifications.
 
 > [!TIP]
-> Si vous avez besoin appliquer des migrations en tant que partie d’un déploiement automatisé, vous pouvez [créer un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) qui peuvent être visualisés avant l’exécution.
+> Si vous devez appliquer des migrations dans le cadre d’un déploiement automatisé, vous pouvez [créer un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) qui peut être visualisé avant l’exécution.
 
-Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une nouvelle base de données contenant les données d’amorçage, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non-relation. Notez que si la base de données existe déjà, `EnsureCreated()` sera ni mettre à jour les données de schéma ni de valeur initiale dans la base de données. Pour les bases de données relationnelles vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des Migrations.
+Vous pouvez également utiliser `context.Database.EnsureCreated()` pour créer une base de données contenant les données de départ, par exemple pour une base de données de test ou lorsque vous utilisez le fournisseur en mémoire ou une base de données non relation. Notez que si la base de données existe déjà, `EnsureCreated()` ne met pas à jour le schéma et n’amorce pas les données dans la base de données. Pour les bases de données relationnelles, vous ne devez pas appeler `EnsureCreated()` si vous envisagez d’utiliser des migrations.
 
-### <a name="limitations-of-model-seed-data"></a>Limitations des données de valeur initiale de modèle
+### <a name="limitations-of-model-seed-data"></a>Limitations des données de la valeur initiale du modèle
 
-Ce type de données d’amorçage est géré par des migrations et le script pour mettre à jour les données qui se trouve déjà dans la base de données doit être généré sans vous connecter à la base de données. Cela impose certaines restrictions :
-* La valeur de clé primaire doit être spécifié même s’il est généralement généré par la base de données. Il sera utilisé pour détecter des modifications de données entre des migrations.
-* Les données de départ seront supprimées si la clé primaire est modifiée en aucune façon.
+Ce type de données de départ est géré par des migrations et le script permettant de mettre à jour les données qui se trouvent déjà dans la base de données doit être généré sans connexion à la base de données. Cela impose des restrictions :
 
-Par conséquent, cette fonctionnalité est particulièrement utile pour les données statiques qui n’a pas censé modifier en dehors des migrations et ne repose pas sur rien d’autre dans la base de données, par exemple les codes postaux.
+* La valeur de clé primaire doit être spécifiée même si elle est généralement générée par la base de données. Il sera utilisé pour détecter les modifications de données entre les migrations.
+* Les données précédemment amorcées seront supprimées si la clé primaire est modifiée d’une façon ou d’une autre.
 
-Si votre scénario comprend les éléments suivants, il est recommandé d’utiliser la logique d’initialisation personnalisé décrite dans la dernière section :
+Par conséquent, cette fonctionnalité est très utile pour les données statiques qui ne sont pas censées changer en dehors des migrations et ne dépend pas d’autres éléments de la base de données, par exemple des codes POSTaux.
+
+Si votre scénario comprend l’un des éléments suivants, il est recommandé d’utiliser une logique d’initialisation personnalisée décrite dans la dernière section :
+
 * Données temporaires pour le test
-* Données qui varie selon l’état de la base de données
-* Données dont a besoin des valeurs de clé devant être généré par la base de données, y compris les entités qui utilisent des clés secondaires en tant que l’identité
-* Les données qui nécessite une transformation personnalisée (qui n’est pas gérée par [valeur conversions](xref:core/modeling/value-conversions)), par exemple un hachage de mot de passe
-* Données qui nécessite des appels d’API externe, telle que la création des rôles et les utilisateurs de ASP.NET Core Identity
+* Données qui dépendent de l’état de la base de données
+* Données qui ont besoin de valeurs clés pour être générées par la base de données, y compris les entités qui utilisent d’autres clés comme identité
+* Données qui requièrent une transformation personnalisée (qui n’est pas gérée par les [conversions de valeurs](xref:core/modeling/value-conversions)), comme un hachage de mot de passe
+* Données nécessitant des appels à l’API externe, par exemple ASP.NET Core des rôles d’identité et la création d’utilisateurs
 
-## <a name="manual-migration-customization"></a>Personnalisation d’une migration manuelle
+## <a name="manual-migration-customization"></a>Personnalisation manuelle de la migration
 
-Lorsqu’une migration est ajoutée les modifications apportées aux données spécifiées avec `HasData` sont transformées en appels à `InsertData()`, `UpdateData()`, et `DeleteData()`. Une façon de contourner certaines des limitations de `HasData` consiste à ajouter manuellement ces appels ou [opérations personnalisées](xref:core/managing-schemas/migrations/operations) pour la migration à la place.
+Lors de l’ajout d’une migration, les modifications apportées aux données spécifiées avec `HasData` sont transformées en appels à `InsertData()`, `UpdateData()`et `DeleteData()`. L’une des façons de contourner certaines des limitations de `HasData` consiste à ajouter manuellement ces appels ou [opérations personnalisées](xref:core/managing-schemas/migrations/operations) à la migration.
 
 [!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
 
-## <a name="custom-initialization-logic"></a>Logique d’initialisation personnalisé
+## <a name="custom-initialization-logic"></a>Logique d’initialisation personnalisée
 
-Un moyen simple et puissant pour effectuer l’amorçage des données consiste à utiliser [ `DbContext.SaveChanges()` ](xref:core/saving/index) avant le principal de l’application logique commence à s’exécuter.
+Une façon simple et efficace d’effectuer un amorçage de données consiste à utiliser [`DbContext.SaveChanges()`](xref:core/saving/index) avant le début de l’exécution de la logique principale de l’application.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataSeeding/Program.cs?name=CustomSeeding)]
 
 > [!WARNING]
-> Le code d’amorçage ne doit pas être de partie de l’exécution d’application normal car cela peut provoquer des problèmes d’accès concurrentiel lorsque plusieurs instances sont en cours d’exécution et qu’il nécessitent également l’application ayant l’autorisation de modifier le schéma de base de données.
+> Le code d’amorçage ne doit pas faire partie de l’exécution normale de l’application, car cela peut entraîner des problèmes de concurrence lorsque plusieurs instances sont en cours d’exécution et que l’application a également l’autorisation de modifier le schéma de la base de données.
 
-Selon les contraintes de votre déploiement, le code d’initialisation peut être exécuté de différentes façons :
-* Exécution de l’application de l’initialisation localement
-* Déploiement de l’application de l’initialisation avec l’application principale, l’appel de la routine d’initialisation et la désactivation ou la suppression de l’application de l’initialisation.
+Selon les contraintes de votre déploiement, le code d’initialisation peut être exécuté de différentes manières :
 
-Cette tâche peut généralement être automatisée à l’aide de [profils de publication](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/visual-studio-publish-profiles).
+* Exécution locale de l’application d’initialisation
+* Déploiement de l’application d’initialisation avec l’application principale, appel de la routine d’initialisation et désactivation ou suppression de l’application d’initialisation.
+
+Cela peut généralement être automatisé à l’aide de [profils de publication](/aspnet/core/host-and-deploy/visual-studio-publish-profiles).

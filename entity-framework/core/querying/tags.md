@@ -4,19 +4,20 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 73C7A627-C8E9-452D-9CD5-AFCC8FEFE395
 uid: core/querying/tags
-ms.openlocfilehash: 3a4d516cab5836c659e42d825c4f1bf89355d671
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
-ms.translationtype: HT
+ms.openlocfilehash: e8415b237df45ce652dcd152013f4f12a992aed7
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688746"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654829"
 ---
 # <a name="query-tags"></a>Balises de requête
+
 > [!NOTE]
 > Cette fonctionnalité est une nouveauté d’EF Core 2.2.
 
 Cette fonctionnalité simplifie la corrélation des requêtes LINQ dans le code avec des requêtes SQL générées et capturées dans des journaux.
-Vous annotez une requête LINQ à l’aide de la nouvelle méthode `TagWith()` : 
+Vous annotez une requête LINQ à l’aide de la nouvelle méthode `TagWith()` :
 
 ``` csharp
   var nearestFriends =
@@ -49,7 +50,7 @@ IQueryable<T> Limit<T>(IQueryable<T> source, int limit) =>
     source.TagWith("Limit").Take(limit);
 ```
 
-Cette requête :   
+Cette requête :
 
 ``` csharp
 var results = Limit(GetNearestFriends(myLocation), 25).ToList();
@@ -92,5 +93,6 @@ ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
 ## <a name="known-limitations"></a>Limitations connues
+
 **Les balises de requête ne sont pas paramétrables :** EF Core traite toujours les balises de requête dans la requête LINQ comme des opérateurs sur chaîne inclus dans l’instruction SQL générée.
 Les requêtes compilées qui utilisent des balises de requête comme paramètres ne sont pas autorisées.

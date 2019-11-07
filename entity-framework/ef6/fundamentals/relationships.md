@@ -1,41 +1,41 @@
 ---
-title: Relations, les propriétés de navigation et les clés étrangères - EF6
+title: Relations, propriétés de navigation et clés étrangères-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 8292ae7af8d760240715854611d92ab340bf1ca7
-ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
+ms.openlocfilehash: cc7160f2d0ab7ac0c6009f820441c88590cacfaf
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58319190"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655862"
 ---
-# <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, les propriétés de navigation et les clés étrangères
-Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre entités. Il fournit également des conseils sur la façon de mapper et de manipuler des relations.
+# <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, propriétés de navigation et clés étrangères
+Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre les entités. Il fournit également des conseils sur la façon de mapper et manipuler les relations.
 
 ## <a name="relationships-in-ef"></a>Relations dans EF
 
-Dans les bases de données relationnelles, les relations (également appelées associations) entre les tables sont définies via les clés étrangères. Une clé étrangère (FK) est une colonne ou une combinaison de colonnes est utilisé pour établir et conserver un lien entre les données de deux tables. Il existe généralement trois types de relations :-à-un, un-à-plusieurs et plusieurs-à-plusieurs. Dans une relation un-à-plusieurs, la clé étrangère est définie sur la table qui représente la fin de nombreux de la relation. La relation plusieurs-à-plusieurs implique la définition d’une troisième table (appelée une table de jonction ou de jointure), dont la clé primaire est composée des clés étrangères des deux tables connexes. Dans une relation un à un, la clé primaire se comporte en outre, comme une clé étrangère, et il n’existe aucune colonne de clé étrangère distinct pour des tables.
+Dans les bases de données relationnelles, les relations (également appelées associations) entre les tables sont définies via des clés étrangères. Une clé étrangère (FK) est une colonne ou une combinaison de colonnes utilisée pour établir et appliquer un lien entre les données de deux tables. Il existe généralement trois types de relations : un-à-un, un-à-plusieurs et plusieurs-à-plusieurs. Dans une relation un-à-plusieurs, la clé étrangère est définie sur la table qui représente la fin de la relation. La relation plusieurs-à-plusieurs implique la définition d’une troisième table (appelée table de jonction ou de jointure), dont la clé primaire est composée des clés étrangères des deux tables associées. Dans une relation un-à-un, la clé primaire agit en outre comme une clé étrangère et il n’existe pas de colonne clé étrangère distincte pour l’une ou l’autre des tables.
 
-L’illustration suivante montre les deux tables impliquées dans une relation un-à-plusieurs. Le **cours** table est la table dépendante, car elle contient le **DepartmentID** colonne qui lie à la **département** table.
+L’illustration suivante montre deux tables qui participent à une relation un-à-plusieurs. La table **course** est la table dépendante, car elle contient la colonne **DepartmentID** qui la lie à la table **Department** .
 
-![Tables Department et cours](~/ef6/media/database2.png)
+![Tables service et cours](~/ef6/media/database2.png)
 
-Dans Entity Framework, une entité peut être associée à d’autres entités via une association ou de la relation. Chaque relation comporte deux terminaisons qui décrivent le type d’entité et la multiplicité du type (un, zéro-ou-un ou plusieurs) pour les deux entités dans cette relation. La relation peut-être être régie par une contrainte référentielle, qui décrit quelle fin dans la relation est un rôle principal et qui est un rôle dépendant.
+Dans Entity Framework, une entité peut être associée à d’autres entités par le biais d’une association ou d’une relation. Chaque relation contient deux extrémités qui décrivent le type d’entité et la multiplicité du type (un, zéro-ou-un ou plusieurs) pour les deux entités de cette relation. La relation peut être régie par une contrainte référentielle, qui décrit la terminaison de la relation comme un rôle principal et qui est un rôle dépendant.
 
-Propriétés de navigation permettent de parcourir une association entre deux types d’entité. Chaque objet peut avoir une propriété de navigation pour chaque relation à laquelle il participe. Propriétés de navigation permettent de parcourir et de gérer les relations dans les deux directions, en retournant un objet de la référence (si la multiplicité est soit un ou zéro-ou-un) ou une collection (si la multiplicité est nombreuses). Vous pouvez également choisir d’avoir une navigation unidirectionnelle, auquel cas vous définissez la propriété de navigation sur un seul des types qui participe à la relation et non sur les deux.
+Les propriétés de navigation permettent de parcourir une association entre deux types d’entités. Chaque objet peut avoir une propriété de navigation pour chaque relation à laquelle il participe. Les propriétés de navigation vous permettent de parcourir et de gérer les relations dans les deux directions, en retournant un objet de référence (si la multiplicité est un ou zéro-ou-un) ou une collection (si la multiplicité est plusieurs). Vous pouvez également choisir d’avoir une navigation unidirectionnelle, auquel cas vous définissez la propriété de navigation sur un seul des types qui participe à la relation et non sur les deux.
 
-Il est recommandé d’inclure des propriétés dans le modèle correspondant aux clés étrangères dans la base de données. Lorsque les propriétés de clé étrangère sont incluses, vous pouvez créer ou modifier une relation en changeant la valeur de clé étrangère d'un objet dépendant. Ce type d'association s'appelle une association de clé étrangère. À l’aide de clés étrangères est encore plus indispensable lorsque vous travaillez avec des entités déconnectées. Notez que quand utilisation 1-à-1 ou 1-0... relations 1, il n’existe aucune colonne de clé étrangère distinct, agit comme la clé étrangère de la propriété de clé primaire et est toujours incluse dans le modèle.
+Il est recommandé d’inclure dans le modèle des propriétés qui mappent à des clés étrangères dans la base de données. Lorsque les propriétés de clé étrangère sont incluses, vous pouvez créer ou modifier une relation en changeant la valeur de clé étrangère d'un objet dépendant. Ce type d'association s'appelle une association de clé étrangère. L’utilisation de clés étrangères est encore plus essentielle lorsque vous travaillez avec des entités déconnectées. Notez que lors de l’utilisation de 1 à 1 ou de 1 à 0.. 1 les relations, il n’existe pas de colonne clé étrangère distincte, la propriété de clé primaire agit comme clé étrangère et est toujours incluse dans le modèle.
 
-Lorsque les colonnes clés étrangères ne sont pas inclus dans le modèle, les informations d’association sont gérées comme un objet indépendant. Les relations sont suivies par le biais des références d’objet au lieu de propriétés de clé étrangère. Ce type d’association est appelé un *association indépendante*. La méthode la plus courante pour modifier un *association indépendante* consiste à modifier les propriétés de navigation sont générées pour chaque entité qui participe à l’association.
+Lorsque les colonnes clés étrangères ne sont pas incluses dans le modèle, les informations d’association sont gérées en tant qu’objet indépendant. Les relations sont suivies via des références d’objet plutôt que des propriétés de clé étrangère. Ce type d’association s’appelle une *Association indépendante*. La méthode la plus courante pour modifier une *Association indépendante* est de modifier les propriétés de navigation générées pour chaque entité qui participe à l’Association.
 
-Vous pouvez choisir d'utiliser un type d'association dans votre modèle ou les deux à la fois. Toutefois, si vous avez une relation plusieurs-à-plusieurs pure qui est connectée par une table de jointure qui contient uniquement des clés étrangères, EF utilisera une association indépendante pour gérer cette relation plusieurs-à-plusieurs.   
+Vous pouvez choisir d'utiliser un type d'association dans votre modèle ou les deux à la fois. Toutefois, si vous avez une relation plusieurs-à-plusieurs pure qui est connectée par une table de jointure qui contient uniquement des clés étrangères, EF utilise une association indépendante pour gérer une relation plusieurs-à-plusieurs.   
 
-L’illustration suivante montre un modèle conceptuel qui a été créé avec l’Entity Framework Designer. Le modèle contient deux entités qui participent de relation un-à-plusieurs. Les deux entités ont des propriétés de navigation. **Cours** est l’entité depend et a la **DepartmentID** propriété de clé étrangère définie.
+L’illustration suivante montre un modèle conceptuel créé avec l’Entity Framework Designer. Le modèle contient deux entités qui participent à une relation un-à-plusieurs. Les deux entités ont des propriétés de navigation. **Course** est l’entité dépendante et la propriété de clé étrangère **DepartmentID** est définie.
 
-![Tables de département et de cours avec les propriétés de navigation](~/ef6/media/relationshipefdesigner.png)
+![Tables service et cours avec propriétés de navigation](~/ef6/media/relationshipefdesigner.png)
 
-L’extrait de code suivant montre le même modèle que celui qui a été créé avec Code First.
+L’extrait de code suivant montre le modèle qui a été créé avec Code First.
 
 ``` csharp
 public class Course
@@ -62,55 +62,55 @@ public class Department
 }
 ```
 
-## <a name="configuring-or-mapping-relationships"></a>Configuration ou le mappage des relations
+## <a name="configuring-or-mapping-relationships"></a>Configuration ou mappage des relations
 
-Le reste de cette page décrit comment accéder à et manipuler des données à l’aide de relations. Pour plus d’informations sur la configuration des relations dans votre modèle, consultez les pages suivantes.
+Le reste de cette page explique comment accéder aux données et les manipuler à l’aide de relations. Pour plus d’informations sur la configuration des relations dans votre modèle, consultez les pages suivantes.
 
--   Pour configurer des relations dans le Code First, voir [Annotations de données](~/ef6/modeling/code-first/data-annotations.md) et [API Fluent – relations](~/ef6/modeling/code-first/fluent/relationships.md).
--   Pour configurer des relations à l’aide d’Entity Framework Designer, consultez [relations avec le Concepteur EF](~/ef6/modeling/designer/relationships.md).
+-   Pour configurer les relations dans Code First, consultez [Annotations de données](~/ef6/modeling/code-first/data-annotations.md) et [API Fluent – relations](~/ef6/modeling/code-first/fluent/relationships.md).
+-   Pour configurer les relations à l’aide de la Entity Framework Designer, consultez [relations avec le concepteur EF](~/ef6/modeling/designer/relationships.md).
 
 ## <a name="creating-and-modifying-relationships"></a>Création et modification de relations
 
-Dans un *association de clé étrangère*, lorsque vous modifiez la relation, l’état d’un objet dépendant avec une `EntityState.Unchanged` les modifications d’état `EntityState.Modified`. Dans une relation indépendante, modification de la relation ne pas mettre à jour l’état de l’objet dépendant.
+Dans une *Association de clé étrangère*, lorsque vous modifiez la relation, l’état d’un objet dépendant avec un état de `EntityState.Unchanged` passe à `EntityState.Modified`. Dans une relation indépendante, la modification de la relation ne met pas à jour l’état de l’objet dépendant.
 
-Les exemples suivants montrent comment utiliser les propriétés de clé étrangère et les propriétés de navigation pour associer les objets connexes. Avec les associations de clé étrangère, vous pouvez utiliser soit la méthode à modifier, créer ou modifier des relations. Avec les associations indépendantes, vous ne pouvez pas utiliser la propriété de clé étrangère.
+Les exemples suivants montrent comment utiliser les propriétés de clé étrangère et les propriétés de navigation pour associer les objets connexes. Avec les associations de clé étrangère, vous pouvez utiliser l’une ou l’autre méthode pour modifier, créer ou modifier des relations. Avec les associations indépendantes, vous ne pouvez pas utiliser la propriété de clé étrangère.
 
-- En assignant une nouvelle valeur à une propriété de clé étrangère, comme dans l’exemple suivant.  
+- En affectant une nouvelle valeur à une propriété de clé étrangère, comme dans l’exemple suivant.  
   ``` csharp
   course.DepartmentID = newCourse.DepartmentID;
   ```
 
-- Le code suivant supprime une relation en définissant la clé étrangère sur **null**. Notez que la propriété de clé étrangère doit être nullable.  
+- Le code suivant supprime une relation en affectant à la clé étrangère la **valeur null**. Notez que la propriété de clé étrangère doit avoir la valeur null.  
   ``` csharp
   course.DepartmentID = null;
   ```
 
   >[!NOTE]
-  > Si la référence est dans l’état ajouté (dans cet exemple, l’objet de cours), la propriété de navigation de référence ne sera pas synchronisée avec les valeurs de clé d’un nouvel objet jusqu'à ce que SaveChanges est appelée. La synchronisation n'a pas lieu, car le contexte de l'objet ne contient pas de clés permanentes pour les objets ajoutés tant qu'ils ne sont pas enregistrés. Si vous devez disposer des nouveaux objets entièrement synchronisés dès que vous définissez la relation, utilisez une du methods.* suivant
+  > Si la référence est à l’état ajouté (dans cet exemple, l’objet course), la propriété de navigation de référence n’est pas synchronisée avec les valeurs de clé d’un nouvel objet tant que SaveChanges n’est pas appelé. La synchronisation n'a pas lieu, car le contexte de l'objet ne contient pas de clés permanentes pour les objets ajoutés tant qu'ils ne sont pas enregistrés. Si vous devez avoir de nouveaux objets synchronisés entièrement dès que vous définissez la relation, utilisez l’une des méthodes suivantes. *
 
-- En affectant un nouvel objet à une propriété de navigation. Le code suivant crée une relation entre un cours et un `department`. Si les objets sont attachés au contexte, le `course` est également ajouté à la `department.Courses` collection et la clé étrangère propriété sur le `course` objet est défini sur la valeur de propriété de clé du service.  
+- En affectant un nouvel objet à une propriété de navigation. Le code suivant crée une relation entre un cours et un `department`. Si les objets sont attachés au contexte, le `course` est également ajouté à la collection de `department.Courses`, et la propriété de clé étrangère correspondante sur l’objet `course` est définie sur la valeur de propriété de clé du service.  
   ``` csharp
   course.Department = department;
   ```
 
-- Pour supprimer la relation, définissez la propriété de navigation sur `null`. Si vous travaillez avec Entity Framework qui repose sur .NET 4.0, la terminaison connexe doit être chargé avant que vous le définissez sur null. Exemple :   
+- Pour supprimer la relation, affectez à la propriété de navigation la valeur `null`. Si vous utilisez Entity Framework qui est basé sur .NET 4,0, la terminaison connexe doit être chargée avant de lui affecter la valeur null. Exemple :   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;
   ```
 
-  En commençant par Entity Framework 5.0, qui est basé sur .NET 4.5, vous pouvez définir la relation NULL sans charger de la terminaison connexe. Vous pouvez également définir la valeur actuelle sur null à l’aide de la méthode suivante.   
+  À partir de Entity Framework 5,0, basé sur .NET 4,5, vous pouvez définir la relation sur null sans charger la terminaison connexe. Vous pouvez également définir la valeur actuelle sur null à l’aide de la méthode suivante.   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).CurrentValue = null;
   ```
 
-- En supprimant ou en ajoutant un objet dans une collection d'entités. Par exemple, vous pouvez ajouter un objet de type `Course` à la `department.Courses` collection. Cette opération crée une relation entre un particulier **cours** et un particulier `department`. Si les objets sont attachés pour le contexte, la référence de service et la propriété de clé étrangère sur la **cours** objet définira appropriés `department`.  
+- En supprimant ou en ajoutant un objet dans une collection d'entités. Par exemple, vous pouvez ajouter un objet de type `Course` à la collection de `department.Courses`. Cette opération crée une relation entre un **cours** particulier et un `department`particulier. Si les objets sont attachés au contexte, la référence de service et la propriété de clé étrangère sur l’objet **course** sont définies sur le `department`approprié.  
   ``` csharp
   department.Courses.Add(newCourse);
   ```
 
-- À l’aide de la `ChangeRelationshipState` méthode pour modifier l’état de la relation entre deux objets d’entité spécifiée. Cette méthode est couramment utilisée lorsque vous travaillez avec des applications multicouches et un *association indépendante* (il ne peut pas être utilisé avec une association de clé étrangère). En outre, pour utiliser cette méthode, vous devez supprimer jusqu'à `ObjectContext`, comme illustré dans l’exemple ci-dessous.  
-Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre formateurs et cours. Appelant le `ChangeRelationshipState` (méthode) et en passant le `EntityState.Added` vous permet de paramètre, le `SchoolContext` savoir qu’une relation a été ajoutée entre les deux objets :
+- En utilisant la méthode `ChangeRelationshipState` pour modifier l’état de la relation spécifiée entre deux objets d’entité. Cette méthode est généralement utilisée lorsque vous travaillez avec des applications multicouches et une *Association indépendante* (elle ne peut pas être utilisée avec une association de clé étrangère). En outre, pour utiliser cette méthode, vous devez dérouler jusqu’à `ObjectContext`, comme illustré dans l’exemple ci-dessous.  
+Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre les instructeurs et les cours. L’appel de la méthode `ChangeRelationshipState` et la transmission du paramètre `EntityState.Added` permettent à l' `SchoolContext` de savoir qu’une relation a été ajoutée entre les deux objets :
   ``` csharp
 
   ((IObjectContextAdapter)context).ObjectContext.
@@ -118,7 +118,7 @@ Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre fo
     ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
   ```
 
-  Notez que si vous mettez à jour (pas seulement l’ajout de) une relation, vous devez supprimer l’ancienne relation après l’ajout d’une nouvelle :
+  Notez que, si vous mettez à jour (et non pas simplement) une relation, vous devez supprimer l’ancienne relation après avoir ajouté la nouvelle.
 
   ``` csharp
   ((IObjectContextAdapter)context).ObjectContext.
@@ -128,9 +128,9 @@ Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre fo
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisation des modifications entre les clés étrangères et les propriétés de navigation
 
-Lorsque vous modifiez la relation des objets attachés au contexte en utilisant l’une des méthodes décrites ci-dessus, Entity Framework a besoin synchroniser les clés étrangères, des références et des collections. Entity Framework gère automatiquement cette synchronisation (également appelé relation correctives) pour les entités POCO avec proxys. Pour plus d’informations, consultez [utilisation de proxys](~/ef6/fundamentals/proxies.md).
+Lorsque vous modifiez la relation des objets attachés au contexte à l’aide de l’une des méthodes décrites ci-dessus, Entity Framework doit conserver les clés étrangères, les références et les collections synchronisées. Entity Framework gère automatiquement cette synchronisation (également appelée « correction des relations ») pour les entités POCO avec proxys. Pour plus d’informations, consultez [utilisation des proxies](~/ef6/fundamentals/proxies.md).
 
-Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que le **DetectChanges** méthode est appelée pour synchroniser les objets connexes dans le contexte. Notez que les API suivantes déclenchent automatiquement un **DetectChanges** appeler.
+Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que la méthode **DetectChanges** est appelée pour synchroniser les objets connexes dans le contexte. Notez que les API suivantes déclenchent automatiquement un appel **DetectChanges** .
 
 -   `DbSet.Add`
 -   `DbSet.AddRange`
@@ -143,11 +143,11 @@ Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que le *
 -   `DbContext.GetValidationErrors`
 -   `DbContext.Entry`
 -   `DbChangeTracker.Entries`
--   Exécution d’un LINQ de la requête par rapport à un `DbSet`
+-   Exécution d’une requête LINQ sur un `DbSet`
 
-## <a name="loading-related-objects"></a>Charger des objets connexes
+## <a name="loading-related-objects"></a>Chargement d’objets connexes
 
-Dans Entity Framework vous utilisez couramment des propriétés de navigation pour charger des entités qui sont liées à l’entité retournée par l’association définie. Pour plus d’informations, consultez [le chargement des objets connexes](~/ef6/querying/related-data.md).
+Dans Entity Framework vous utilisez couramment des propriétés de navigation pour charger des entités associées à l’entité retournée par l’Association définie. Pour plus d’informations, consultez [chargement d’objets connexes](~/ef6/querying/related-data.md).
 
 > [!NOTE]
 > Dans une association de clé étrangère, lorsque vous chargez une terminaison connexe d'un objet dépendant, l'objet connexe est chargé en fonction de la valeur de clé étrangère du dépendant actuellement en mémoire :
@@ -164,16 +164,16 @@ Dans Entity Framework vous utilisez couramment des propriétés de navigation po
     context.Entry(course).Reference(c => c.Department).Load();
 ```
 
-Dans une association indépendante, la terminaison connexe d'un objet dépendant est interrogée en fonction de la valeur de clé étrangère actuellement présente dans la base de données. Toutefois, si la relation a été modifiée, et la propriété de référence sur l’objet dépendant pointe vers un autre objet principal qui est chargé dans le contexte de l’objet, Entity Framework tente de créer une relation en tant qu’il est défini sur le client.
+Dans une association indépendante, la terminaison connexe d'un objet dépendant est interrogée en fonction de la valeur de clé étrangère actuellement présente dans la base de données. Toutefois, si la relation a été modifiée et que la propriété de référence sur l’objet dépendant pointe vers un objet principal différent qui est chargé dans le contexte de l’objet, Entity Framework essaiera de créer une relation, car elle est définie sur le client.
 
 ## <a name="managing-concurrency"></a>Gestion de l'accès concurrentiel
 
-Dans la clé étrangère et associations indépendantes, les contrôles d’accès concurrentiel sont basées sur les clés d’entité et d’autres propriétés d’entité qui sont définies dans le modèle. Lorsque vous utilisez le Concepteur EF pour créer un modèle, définissez le `ConcurrencyMode` attribut **fixe** pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Lorsque vous utilisez Code First pour définir un modèle, utilisez le `ConcurrencyCheck` annotation sur les propriétés que vous souhaitez être vérifiée pour l’accès concurrentiel. Lorsque vous travaillez avec Code First, vous pouvez également utiliser le `TimeStamp` annotation pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Vous pouvez avoir qu’une seule propriété d’horodatage dans une classe donnée. Tout d’abord les cartes de code cette propriété à un champ non nullable dans la base de données.
+Dans les associations de clé étrangère et indépendantes, les contrôles d’accès concurrentiel sont basés sur les clés d’entité et d’autres propriétés d’entité définies dans le modèle. Lorsque vous utilisez le concepteur EF pour créer un modèle, affectez la valeur **fixed** à l’attribut `ConcurrencyMode` pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Quand vous utilisez Code First pour définir un modèle, utilisez l’annotation `ConcurrencyCheck` sur les propriétés dont vous souhaitez vérifier l’accès concurrentiel. Lorsque vous utilisez Code First vous pouvez également utiliser l’annotation `TimeStamp` pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Vous ne pouvez avoir qu’une seule propriété Timestamp dans une classe donnée. Code First mappe cette propriété à un champ qui n’accepte pas les valeurs NULL dans la base de données.
 
-Nous recommandons de toujours utiliser l’association de clé étrangère lorsque vous travaillez avec des entités qui participent à la résolution et de contrôle d’accès concurrentiel.
+Nous vous recommandons de toujours utiliser l’Association de clé étrangère lorsque vous travaillez avec des entités qui participent à la vérification et à la résolution de l’accès concurrentiel.
 
-Pour plus d’informations, consultez [gère les conflits d’accès concurrentiel](~/ef6/saving/concurrency.md).
+Pour plus d’informations, consultez [gestion des conflits d’accès concurrentiel](~/ef6/saving/concurrency.md).
 
-## <a name="working-with-overlapping-keys"></a>Utilisation de clés qui se chevauchent
+## <a name="working-with-overlapping-keys"></a>Utilisation des touches qui se chevauchent
 
 Des clés qui se chevauchent sont des clés composites qui ont certaines propriétés en commun dans l'entité qu'elles constituent. Une association indépendante ne peut pas contenir de clés qui se chevauchent. Pour modifier une association de clé étrangère qui comporte des clés qui se chevauchent, nous vous conseillons de modifier les valeurs de clé étrangère plutôt que d'utiliser les références d'objet.

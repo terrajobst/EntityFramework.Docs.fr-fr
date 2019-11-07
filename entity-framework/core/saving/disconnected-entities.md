@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197808"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656267"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -18,11 +18,13 @@ Une instance de DbContext suit automatiquement les entités retournées à parti
 
 Toutefois, parfois, les entités sont interrogées par une instance de contexte, puis enregistrées à l’aide d’une autre instance. Cela se produit souvent dans les scénarios « déconnectés », par exemple une application web où les entités sont interrogées, envoyées au client, modifiées, envoyées sur le serveur dans une demande et puis enregistrées. Dans ce cas, la deuxième instance de contexte doit savoir si les entités sont nouvelles (doivent être insérées) ou existantes (doivent être mises à jour).
 
-> [!TIP]  
+<!-- markdownlint-disable MD028 -->
+> [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) sur GitHub.
 
 > [!TIP]
 > EF Core peut suivre une seule instance d’une entité avec une valeur de clé primaire donnée. La meilleure façon d’éviter ce problème consiste à utiliser un contexte de courte durée de vie pour chaque unité de travail, de sorte que le contexte commence vide, ait des entités associées, enregistre ces entités, puis soit supprimé.
+<!-- markdownlint-enable MD028 -->
 
 ## <a name="identifying-new-entities"></a>Identification des nouvelles entités
 
@@ -50,8 +52,9 @@ Toutefois, EF a également un moyen intégré de faire cela pour n’importe que
 ### <a name="with-other-keys"></a>Avec d’autres clés
 
 Un autre mécanisme est nécessaire pour identifier les nouvelles entités lorsque les valeurs des clés ne sont pas générées automatiquement. Il existe deux approches générales pour cela :
- * Requête pour l'entité
- * Passez un indicateur à partir du client
+
+* Requête pour l'entité
+* Passez un indicateur à partir du client
 
 Pour rechercher l’entité, utilisez simplement la méthode Find :
 
@@ -74,11 +77,12 @@ Normalement, la méthode Update marque l’entité pour la mise à jour, et non 
 > [!TIP]  
 > Ce comportement a été introduit dans EF Core 2.0. Pour les versions antérieures, il est toujours nécessaire de choisir explicitement Add ou Update.
 
-Si l’entité n’utilise pas de clés générées automatiquement, l’application doit décider si l’entité doit être insérée ou mise à jour : Par exemple :
+Si l’entité n’utilise pas les clés générées automatiquement, l’application doit décider si l’entité doit être insérée ou mise à jour. Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 Les étapes ici sont :
+
 * Si Find retourne null, la base de données ne contient pas encore le blog avec cet ID, nous appelons donc Add pour le marquer pour insertion.
 * Si la recherche retourne une entité, il existe dans la base de données et le contexte suit maintenant l’entité existante
   * Ensuite, nous utilisons SetValues pour définir les valeurs de toutes les propriétés de cette entité sur celles envoyées par le client.
@@ -127,7 +131,7 @@ Comme précédemment, lorsque vous n’utilisez pas les clés générées automa
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
