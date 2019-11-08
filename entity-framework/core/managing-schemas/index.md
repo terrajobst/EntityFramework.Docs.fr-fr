@@ -2,14 +2,15 @@
 title: Gestion des schémas de base de données - EF Core
 author: bricelam
 ms.date: 10/30/2017
-ms.openlocfilehash: c1ebe33b5575cab76a54721ef86ecbcb7ff8b98b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2da17865cb0192fb3e6e3396e4ca5f31fde9c52a
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994383"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655644"
 ---
 # <a name="managing-database-schemas"></a>Gestion des schémas de base de données
+
 EF Core propose deux méthodes pour que votre modèle EF Core et le schéma de base de données restent synchronisés. Pour choisir entre les deux, décidez si votre modèle EF Core ou le schéma de base de données est la source de vérité.
 
 Si vous souhaitez que votre modèle EF Core soit la source de vérité, utilisez [Migrations][1]. Quand vous apportez des modifications à votre modèle EF Core, cette approche applique progressivement les modifications de schéma correspondantes à votre base de données afin qu’elle reste compatible avec votre modèle EF Core.
