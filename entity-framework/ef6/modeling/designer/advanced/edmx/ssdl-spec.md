@@ -27,20 +27,20 @@ Les versions de SSDL sont différenciées par les espaces de noms XML.
 
 ## <a name="association-element-ssdl"></a>Association, élément (SSDL)
 
-Un élément **Association** en Store Schema Definition Language (SSDL) spécifie des colonnes de table qui participent à une contrainte de clé étrangère dans la base de données sous-jacente. Deux éléments end enfants requis spécifient des tables aux terminaisons de l’Association et la multiplicité à chaque extrémité. Un élément ReferentialConstraint facultatif spécifie les terminaisons principale et dépendante de l’Association ainsi que les colonnes participantes. Si aucun élément **ReferentialConstraint** n’est présent, un élément AssociationSetMapping doit être utilisé pour spécifier les mappages de colonnes pour l’Association.
+Un élément **Association** en Store Schema Definition Language (SSDL) spécifie des colonnes de table qui participent à une contrainte de clé étrangère dans la base de données sous-jacente. Deux éléments End enfants obligatoires spécifient des tables aux terminaisons de l'association et la multiplicité à chaque terminaison. Un élément ReferentialConstraint facultatif spécifie les terminaisons principales et dépendantes de l'association ainsi que les colonnes participantes. Si aucun élément **ReferentialConstraint** n’est présent, un élément AssociationSetMapping doit être utilisé pour spécifier les mappages de colonnes pour l’Association.
 
 L’élément **Association** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un)
 -   End (exactement deux)
 -   ReferentialConstraint (zéro ou un)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **Association** .
 
-| Nom d'attribut | Requis | Value                                                                            |
+| Nom d'attribut | Requis | Valeur                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la contrainte de clé étrangère correspondante dans la base de données sous-jacente. |
 
@@ -49,7 +49,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK @ no__t-3CustomerOrders** :
+L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_CustomerOrders** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -72,21 +72,21 @@ L’exemple suivant montre un élément **Association** qui utilise un élément
 
 ## <a name="associationset-element-ssdl"></a>AssociationSet, élément (SSDL)
 
-L’élément **AssociationSet** en Store Schema Definition Language (SSDL) représente une contrainte de clé étrangère entre deux tables dans la base de données sous-jacente. Les colonnes de table qui participent à la contrainte de clé étrangère sont spécifiées dans un élément Association. L’élément **Association** qui correspond à un élément **AssociationSet** donné est spécifié dans l’attribut **Association** de l’élément **AssociationSet** .
+L’élément **AssociationSet** en Store Schema Definition Language (SSDL) représente une contrainte de clé étrangère entre deux tables dans la base de données sous-jacente. Les colonnes de la table qui participent à la contrainte de clé étrangère sont spécifiées dans un élément Association. L’élément **Association** qui correspond à un élément **AssociationSet** donné est spécifié dans l’attribut **Association** de l’élément **AssociationSet** .
 
-Les ensembles d’associations SSDL sont mappés aux ensembles d’associations CSDL par un élément AssociationSetMapping. Toutefois, si l’Association CSDL pour un ensemble d’associations CSDL donné est définie à l’aide d’un élément ReferentialConstraint, aucun élément **AssociationSetMapping** correspondant n’est nécessaire. Dans ce cas, si un élément **AssociationSetMapping** est présent, les mappages qu’il définit seront remplacés par l’élément **ReferentialConstraint** .
+Les ensembles d'associations SSDL sont mappés aux ensembles d'associations CSDL par un élément AssociationSetMapping. Toutefois, si l’Association CSDL pour un ensemble d’associations CSDL donné est définie à l’aide d’un élément ReferentialConstraint, aucun élément **AssociationSetMapping** correspondant n’est nécessaire. Dans ce cas, si un élément **AssociationSetMapping** est présent, les mappages qu’il définit seront remplacés par l’élément **ReferentialConstraint** .
 
 L’élément **AssociationSet** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un)
--   End (zéro ou deux)
--   Éléments d’annotation (zéro ou plus)
+-   End (zéro ou deux éléments) ;
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **AssociationSet** .
 
-| Nom d'attribut  | Requis | Value                                                                                                |
+| Nom d'attribut  | Requis | Valeur                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Nom**        | Oui         | Nom de la contrainte de clé étrangère que l'ensemble d'associations représente.                          |
 | **Association** | Oui         | Nom de l'association qui définit les colonnes qui participent à la contrainte de clé étrangère. |
@@ -190,14 +190,14 @@ L’élément **dépendant** en Store Schema Definition Language (SSDL) est un �
 
 L’élément **dépendant** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   PropertyRef (un ou plusieurs)
--   Éléments d’annotation (zéro ou plus)
+-   PropertyRef (un ou plusieurs) ;
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **dépendant** .
 
-| Nom d'attribut | Requis | Value                                                                                                                                                       |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; dans le cas contraire, il s’agit du nom de la table qui contient la colonne de référence. |
 
@@ -206,7 +206,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK @ no__t-2CustomerOrders** . L’élément **dépendant** spécifie la colonne **CustomerID** de la table **Order** comme terminaison dépendante de la contrainte.
+L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_** . L’élément **dépendant** spécifie la colonne **CustomerID** de la table **Order** comme terminaison dépendante de la contrainte.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -233,8 +233,8 @@ L’élément **documentation** en Store Schema Definition Language (SSDL) peut 
 
 L’élément **documentation** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   **Résumé**: Brève description de l’élément parent. (zéro ou un élément).
--   **LongDescription**: Description complète de l’élément parent. (zéro ou un élément).
+-   **Summary**: brève description de l’élément parent. (zéro ou un élément).
+-   **LongDescription**: description complète de l’élément parent. (zéro ou un élément).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -276,18 +276,18 @@ Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **final** lorsqu’il est l’enfant d’un élément **Association** .
 
-| Nom d'attribut   | Requis | Value                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nom d'attribut   | Requis | Valeur                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Type**         | Oui         | Nom qualifié complet du jeu d’entités SSDL qui est à la fin de la contrainte de clé étrangère.                                                                                                                                                                                                                                                                                          |
+| **Type**         | Oui         | Nom complet du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                                                                                                                                                                                                                                                                          |
 | **Rôle**         | Non          | Valeur de l’attribut **role** dans l’élément principal ou dépendant de l’élément ReferentialConstraint correspondant (s’il est utilisé).                                                                                                                                                                                                                                             |
-| **Multiplicité** | Oui         | **1**, **0.. 1**ou **\*** en fonction du nombre de lignes qui peuvent être à la fin de la contrainte de clé étrangère. <br/> **1** indique qu’une seule ligne existe à la fin de la contrainte de clé étrangère. <br/> **0.. 1** indique qu’il existe zéro ou une ligne à la fin de la contrainte de clé étrangère. <br/> **\*** indique que zéro, une ou plusieurs lignes existent à la fin de la contrainte de clé étrangère. |
+| **Multiplicité** | Oui         | **1**, **0.. 1**ou **\*** selon le nombre de lignes qui peuvent être à la fin de la contrainte de clé étrangère. <br/> **1** indique qu’une seule ligne existe à la fin de la contrainte de clé étrangère. <br/> **0.. 1** indique qu’il existe zéro ou une ligne à la fin de la contrainte de clé étrangère. <br/> **\*** indique qu’il existe zéro, une ou plusieurs lignes à la fin de la contrainte de clé étrangère. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément de **fin** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
 #### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK @ no__t-2CustomerOrders** . Les valeurs de **multiplicité** spécifiées sur chaque élément de **fin** indiquent que de nombreuses lignes de la table **Orders** peuvent être associées à une ligne de la table **Customers** , mais qu’une seule ligne de la table **Customers** peut être associée à une ligne dans la table **Orders** . En outre, l’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
+L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK\_** . Les valeurs de **multiplicité** spécifiées sur chaque élément de **fin** indiquent que de nombreuses lignes de la table **Orders** peuvent être associées à une ligne de la table **Customers** , mais qu’une seule ligne de la table **Customers** peut être associée à une ligne dans la table **Orders** . En outre, l’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -315,15 +315,15 @@ L’élément **end** (en tant qu’enfant de l’élément **AssociationSet** )
 Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 #### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **end** lorsqu’il est l’enfant d’un élément **AssociationSet** .
 
-| Nom d'attribut | Requis | Value                                                                                                                  |
+| Nom d'attribut | Requis | Valeur                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
-| **EntitySet**  | Oui         | Nom du jeu d’entités SSDL qui est à la fin de la contrainte de clé étrangère.                                      |
+| **EntitySet**  | Oui         | Nom du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                      |
 | **Rôle**       | Non          | Valeur de l’un des attributs de **rôle** spécifiés sur un élément de **fin** de l’élément Association correspondant. |
 
 > [!NOTE]
@@ -351,7 +351,7 @@ L’exemple suivant montre un élément **EntityContainer** avec un élément **
 
 ## <a name="entitycontainer-element-ssdl"></a>EntityContainer, élément (SSDL)
 
-Un élément **EntityContainer** en Store Schema Definition Language (SSDL) décrit la structure de la source de données sous-jacente dans une application Entity Framework : Les jeux d’entités SSDL (définis dans les éléments EntitySet) représentent les tables d’une base de données, les types d’entités SSDL (définis dans les éléments EntityType) représentent les lignes d’une table, et les ensembles d’associations (définis dans les éléments AssociationSet) représentent des contraintes de clé étrangère dans un Database. Un conteneur d’entités de modèle de stockage est mappé à un conteneur d’entités de modèle conceptuel par le biais de l’élément EntityContainerMapping.
+Un élément **EntityContainer** en Store Schema Definition Language (SSDL) décrit la structure de la source de données sous-jacente dans une application Entity Framework : les jeux d’entités SSDL (définis dans les éléments EntitySet) représentent les tables d’une base de données, les types d’entités SSDL (définis dans les éléments EntityType) représentent les lignes d’une table, et les ensembles d’associations (définis dans les éléments AssociationSet) représentent des contraintes Un conteneur d'entités de modèle de stockage est mappé à un conteneur d'entités de modèle conceptuel via l'élément EntityContainerMapping.
 
 Un élément **EntityContainer** peut avoir zéro ou un élément documentation. Si un élément de **documentation** est présent, il doit précéder tous les autres éléments enfants.
 
@@ -365,7 +365,7 @@ Un élément **EntityContainer** peut avoir zéro ou plusieurs des éléments en
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **EntityContainer** .
 
-| Nom d'attribut | Requis | Value                                                                   |
+| Nom d'attribut | Requis | Valeur                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du conteneur d'entités. Ce nom ne peut pas contenir de point (.). |
 
@@ -394,7 +394,7 @@ L’exemple suivant montre un élément **EntityContainer** qui définit deux je
 
 ## <a name="entityset-element-ssdl"></a>EntitySet, élément (SSDL)
 
-Un élément **EntitySet** en Store Schema Definition Language (SSDL) représente une table ou une vue dans la base de données sous-jacente. Un élément EntityType en SSDL représente une ligne dans la table ou la vue. L’attribut **EntityType** d’un élément **EntitySet** spécifie le type d’entité SSDL particulier qui représente les lignes dans un jeu d’entités SSDL. Le mappage entre un jeu d’entités CSDL et un jeu d’entités SSDL est spécifié dans un élément EntitySetMapping.
+Un élément **EntitySet** en Store Schema Definition Language (SSDL) représente une table ou une vue dans la base de données sous-jacente. Un élément EntityType en SSDL représente une ligne dans la table ou la vue. L’attribut **EntityType** d’un élément **EntitySet** spécifie le type d’entité SSDL particulier qui représente les lignes dans un jeu d’entités SSDL. Le mappage entre un jeu d'entités CSDL et un jeu d'entités SSDL est spécifié dans un élément EntitySetMapping.
 
 L’élément **EntitySet** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
@@ -407,9 +407,9 @@ L’élément **EntitySet** peut avoir les éléments enfants suivants (dans l�
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntitySet** .
 
 > [!NOTE]
-> Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l’Assistant Mise à jour du modèle lors de la mise à jour d’un modèle.
+> Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l'Assistant Mise à jour du modèle lors de la mise à jour d'un modèle.
 
-| Nom d'attribut | Requis | Value                                                                                    |
+| Nom d'attribut | Requis | Valeur                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du jeu d'entités.                                                              |
 | **EntityType** | Oui         | Nom qualifié complet du type d'entité pour lequel le jeu d'entités contient des instances. |
@@ -441,19 +441,19 @@ L’exemple suivant montre un élément **EntityContainer** qui a deux élément
 
 ## <a name="entitytype-element-ssdl"></a>EntityType, élément (SSDL)
 
-Un élément **EntityType** en Store Schema Definition Language (SSDL) représente une ligne dans une table ou une vue de la base de données sous-jacente. Un élément EntitySet en SSDL représente la table ou la vue dans laquelle les lignes se trouvent. L’attribut **EntityType** d’un élément **EntitySet** spécifie le type d’entité SSDL particulier qui représente les lignes dans un jeu d’entités SSDL. Le mappage entre un type d’entité SSDL et un type d’entité CSDL est spécifié dans un élément EntityTypeMapping.
+Un élément **EntityType** en Store Schema Definition Language (SSDL) représente une ligne dans une table ou une vue de la base de données sous-jacente. Un élément EntitySet en SSDL représente la table ou la vue dans laquelle les lignes résultent. L’attribut **EntityType** d’un élément **EntitySet** spécifie le type d’entité SSDL particulier qui représente les lignes dans un jeu d’entités SSDL. Le mappage entre un type d'entité SSDL et un type d'entité CSDL est spécifié dans un élément EntityTypeMapping.
 
 L’élément **EntityType** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un élément)
--   Key (zéro ou un élément)
+-   Key (zéro ou un élément) ;
 -   éléments d'annotation.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **EntityType** .
 
-| Nom d'attribut | Requis | Value                                                                                                                                                                  |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du type d'entité. Cette valeur est habituellement la même que le nom de la table dans laquelle le type d'entité représente une ligne. Cette valeur ne peut pas contenir de point (.). |
 
@@ -488,7 +488,7 @@ L’élément **Function** peut avoir les éléments enfants suivants (dans l’
 -   Paramètre (zéro, un ou plusieurs)
 -   CommandText (zéro ou un)
 -   ReturnType (zéro, un ou plusieurs)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 Un type de retour pour une fonction doit être spécifié avec l’élément **ReturnType** ou l’attribut **ReturnType** (voir ci-dessous), mais pas les deux.
 
@@ -499,9 +499,9 @@ Les procédures stockées spécifiées dans le modèle de stockage peuvent être
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **Function** .
 
 > [!NOTE]
-> Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l’Assistant Mise à jour du modèle lors de la mise à jour d’un modèle.
+> Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l'Assistant Mise à jour du modèle lors de la mise à jour d'un modèle.
 
-| Nom d'attribut             | Requis | Value                                                                                                                                                                                                              |
+| Nom d'attribut             | Requis | Valeur                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                   | Oui         | Nom de la procédure stockée.                                                                                                                                                                                  |
 | **ReturnType**             | Non          | Type de retour de la procédure stockée.                                                                                                                                                                           |
@@ -545,7 +545,7 @@ L’élément **clé** en Store Schema Definition Language (SSDL) représente la
 
 L’élément **Key** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   PropertyRef (un ou plusieurs)
+-   PropertyRef (un ou plusieurs) ;
 -   éléments d'annotation.
 
 Aucun attribut n’est applicable à l’élément **Key** .
@@ -575,13 +575,13 @@ L’élément **OnDelete** en Store Schema Definition Language (SSDL) reflète l
 Un élément **OnDelete** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **OnDelete** .
 
-| Nom d'attribut | Requis | Value                                                                                               |
+| Nom d'attribut | Requis | Valeur                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Action**     | Oui         | **Cascade** ou **None**. (La valeur **Restricted** est valide mais a le même comportement qu' **aucun**.) |
 
@@ -590,7 +590,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK @ no__t-2CustomerOrders** . L’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
+L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK\_** . L’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -618,13 +618,13 @@ L’élément **Parameter** en Store Schema Definition Language (SSDL) est un en
 L’élément **Parameter** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   Documentation (zéro ou un)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Parameter** .
 
-| Nom d'attribut | Requis | Value                                                                                                                                                                                                                           |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du paramètre.                                                                                                                                                                                                      |
 | **Type**       | Oui         | Type du paramètre.                                                                                                                                                                                                             |
@@ -660,14 +660,14 @@ L’élément **principal** en Store Schema Definition Language (SSDL) est un é
 
 L’élément **principal** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   PropertyRef (un ou plusieurs)
--   Éléments d’annotation (zéro ou plus)
+-   PropertyRef (un ou plusieurs) ;
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **principal** .
 
-| Nom d'attribut | Requis | Value                                                                                                                                                      |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; Sinon, le nom de la table qui contient la colonne référencée. |
 
@@ -676,7 +676,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK @ no__t-2CustomerOrders** . L’élément **principal** spécifie la colonne **CustomerID** de la table **Customer** comme terminaison principale de la contrainte.
+L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_** . L’élément **principal** spécifie la colonne **CustomerID** de la table **Customer** comme terminaison principale de la contrainte.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -707,7 +707,7 @@ Un élément de **propriété** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **Property** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                                                                                           |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                  | Oui         | Nom de la colonne correspondante.                                                                                                                                                                                           |
 | **Type**                  | Oui         | Type de la colonne correspondante.                                                                                                                                                                                           |
@@ -747,8 +747,8 @@ L’exemple suivant montre un élément **EntityType** avec deux éléments de *
 
 L’élément **PropertyRef** en Store Schema Definition Language (SSDL) fait référence à une propriété définie sur un élément EntityType pour indiquer que la propriété effectuera l’un des rôles suivants :
 
--   Faire partie de la clé primaire de la table représentée par l' **EntityType** . Un ou plusieurs éléments **PropertyRef** peuvent être utilisés pour définir une clé primaire. Pour plus d’informations, consultez Key, élément.
--   Faire partie de la terminaison dépendante ou principale d'une contrainte référentielle. Pour plus d’informations, consultez ReferentialConstraint, élément.
+-   Faire partie de la clé primaire de la table représentée par l' **EntityType** . Un ou plusieurs éléments **PropertyRef** peuvent être utilisés pour définir une clé primaire. Pour plus d'informations, consultez Élément Key.
+-   Faire partie de la terminaison dépendante ou principale d'une contrainte référentielle. Pour plus d'informations, consultez Élément ReferentialConstraint.
 
 L’élément **PropertyRef** ne peut avoir que les éléments enfants suivants :
 
@@ -759,7 +759,7 @@ L’élément **PropertyRef** ne peut avoir que les éléments enfants suivants�
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **PropertyRef** .
 
-| Nom d'attribut | Requis | Value                                |
+| Nom d'attribut | Requis | Valeur                                |
 |:---------------|:------------|:-------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété référencée. |
 
@@ -786,16 +786,16 @@ L’exemple suivant montre un élément **PropertyRef** utilisé pour définir u
 
 ## <a name="referentialconstraint-element-ssdl"></a>ReferentialConstraint, élément (SSDL)
 
-L’élément **ReferentialConstraint** en Store Schema Definition Language (SSDL) représente une contrainte de clé étrangère (également appelée contrainte d’intégrité référentielle) dans la base de données sous-jacente. Les terminaisons principale et dépendante de la contrainte sont spécifiées par les éléments enfants principaux et dépendants, respectivement. Les colonnes qui participent au principal et les terminaisons dépendantes sont référencées avec des éléments PropertyRef.
+L’élément **ReferentialConstraint** en Store Schema Definition Language (SSDL) représente une contrainte de clé étrangère (également appelée contrainte d’intégrité référentielle) dans la base de données sous-jacente. Les terminaisons principale et dépendante de la contrainte sont spécifiées respectivement par les éléments enfants Principal et Dependent. Les colonnes qui participent aux terminaisons principale et dépendante sont référencées avec les éléments PropertyRef.
 
 L’élément **ReferentialConstraint** est un élément enfant facultatif de l’élément Association. Si un élément **ReferentialConstraint** n’est pas utilisé pour mapper la contrainte de clé étrangère spécifiée dans l’élément **Association** , un élément AssociationSetMapping doit être utilisé pour ce faire.
 
 L’élément **ReferentialConstraint** peut avoir les éléments enfants suivants :
 
 -   Documentation (zéro ou un)
--   Principal (exactement un)
+-   Principal (exactement un élément) ;
 -   Dépendant (exactement un)
--   Éléments d’annotation (zéro ou plus)
+-   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -803,7 +803,7 @@ Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés)
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK @ no__t-3CustomerOrders** :
+L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_CustomerOrders** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -866,7 +866,7 @@ Un élément **RowType** est l’élément enfant de l’élément **CollectionT
 
 Un élément **RowType** peut avoir les éléments enfants suivants :
 
-- Property (un ou plusieurs)  
+- Property (un ou plusieurs) ;  
 
 ### <a name="example"></a>Exemple
 
@@ -908,10 +908,10 @@ Un espace de noms de modèle de stockage est différent de l’espace de noms XM
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Schema** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Espace de noms**             | Oui         | Espace de noms du modèle de stockage. La valeur de l’attribut d' **espace de noms** est utilisée pour former le nom qualifié complet d’un type. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store, le nom qualifié complet de l' **EntityType** est ExampleModel. Store. Customer. <br/> Les chaînes suivantes ne peuvent pas être utilisées comme valeur pour l’attribut d' **espace de noms** : **Système**, **transitoire**ou **EDM**. La valeur de l’attribut d' **espace de noms** ne peut pas être la même que la valeur de l’attribut d' **espace de noms** dans l’élément de schéma CSDL. |
-| **Alias**                 | Non          | Identificateur utilisé à la place du nom de l'espace de noms. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store et que la valeur de l’attribut **alias** est *StorageModel*, vous pouvez utiliser StorageModel. Customer comme nom qualifié complet de la  **EntityType.**                                                                                                                                                                                                                                                                                    |
+| **Namespace**             | Oui         | Espace de noms du modèle de stockage. La valeur de l’attribut d' **espace de noms** est utilisée pour former le nom qualifié complet d’un type. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store, le nom qualifié complet de l' **EntityType** est ExampleModel. Store. Customer. <br/> Les chaînes suivantes ne peuvent pas être utilisées comme valeur pour l’attribut d' **espace de noms** : **System**, **transient**ou **EDM**. La valeur de l’attribut d' **espace de noms** ne peut pas être la même que la valeur de l’attribut d' **espace de noms** dans l’élément de schéma CSDL. |
+| **Alias**                 | Non          | Identificateur utilisé à la place du nom de l'espace de noms. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store et que la valeur de l’attribut **alias** est *StorageModel*, vous pouvez utiliser StorageModel. Customer comme nom qualifié complet de l' **EntityType.**                                                                                                                                                                                                                                                                                    |
 | **Fournisseur**              | Oui         | Fournisseur de données.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Oui         | Jeton qui indique au fournisseur quel manifeste de fournisseur retourner. Aucun format n'est défini pour le jeton. Les valeurs du jeton sont définies par le fournisseur. Pour plus d’informations sur les jetons de manifeste du fournisseur SQL Server, consultez SqlClient pour Entity Framework.                                                                                                                                                                                                                                                                                                                        |
 
@@ -1064,7 +1064,7 @@ L’exemple suivant montre un élément EntityType qui a un élément annotation
 
 ## <a name="facets-ssdl"></a>Facettes (SSDL)
 
-Les facettes en Store Schema Definition Language (SSDL) représentent des contraintes sur les types de colonnes spécifiés dans les éléments de propriété. Les facettes sont implémentées en tant qu’attributs XML sur les éléments de **propriété** .
+Les facettes en SSDL (Store Schema Definition Language) représentent des contraintes sur les types de colonne spécifiés dans les éléments Property. Les facettes sont implémentées en tant qu’attributs XML sur les éléments de **propriété** .
 
 Le tableau ci-dessous décrit les facettes prises en charge dans le langage SSDL :
 

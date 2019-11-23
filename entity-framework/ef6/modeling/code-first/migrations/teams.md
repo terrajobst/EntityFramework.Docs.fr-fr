@@ -24,7 +24,7 @@ Avant de nous plonger dans la manière de gérer la fusion des migrations géné
 
 ### <a name="each-team-member-should-have-a-local-development-database"></a>Chaque membre de l’équipe doit avoir une base de données de développement local
 
-Migrations utilise la table **\_ @ no__t-2MigrationsHistory** pour stocker les migrations qui ont été appliquées à la base de données. Si vous avez plusieurs développeurs qui génèrent des migrations différentes en tentant de cibler la même base de données (et donc partager une table **\_ @ no__t-2MigrationsHistory** ), les migrations vont être très confuses.
+Migrations utilise la table **\_\_MigrationsHistory** pour stocker les migrations qui ont été appliquées à la base de données. Si vous avez plusieurs développeurs qui génèrent des migrations différentes en tentant de cibler la même base de données (et donc partager une **\_\_table MigrationsHistory** ), les migrations seront très confuses.
 
 Bien entendu, si vous avez des membres de l’équipe qui ne génèrent pas de migrations, il n’y a aucun problème de partage d’une base de données de développement central.
 
@@ -38,11 +38,11 @@ La migration automatique vous permet de mettre à jour votre schéma de base de 
 
 Si vous préférez regarder une capture vidéo plutôt que lire cet article, les deux vidéos suivantes couvrent le même contenu que cet article.
 
-### <a name="video-one-migrations---under-the-hood"></a>Vidéo 1 : « Migrations-en coulisses »
+### <a name="video-one-migrations---under-the-hood"></a>Vidéo 1 : « migrations-en coulisses »
 
 [Cet](https://channel9.msdn.com/blogs/ef/migrations-under-the-hood) enregistrement contient des informations sur le mode de suivi et d’utilisation des informations sur le modèle pour détecter les modifications du modèle.
 
-### <a name="video-two-migrations---team-environments"></a>Vidéo 2 : « Migrations-environnements d’équipe »
+### <a name="video-two-migrations---team-environments"></a>Vidéo 2 : « migrations-environnements d’équipe »
 
 En s’appuyant sur les concepts de la vidéo précédente, [cette capture](https://channel9.msdn.com/blogs/ef/migrations-team-environments) vidéo couvre les problèmes qui surviennent dans un environnement d’équipe et comment les résoudre.
 
@@ -98,28 +98,28 @@ Nous allons suivre le modèle EF et les migrations à l’aide d’un certain no
 
 ![Point de départ](~/ef6/media/startingpoint.png)
 
-Developer \#1 et Developer \#2 modifie désormais le modèle EF dans sa base de code locale. Developer \#1 ajoute une propriété **Rating** au **blog** , et génère une migration **AddRating** pour appliquer les modifications à la base de données. Developer \#2 ajoute une propriété **Readers** au **blog** , et génère la migration **AddReaders** correspondante. Les deux développeurs exécutent **Update-Database**pour appliquer les modifications à leurs bases de données locales, puis poursuivre le développement de l’application.
+Developer \#1 et Developer \#2 modifient désormais le modèle EF dans leur base de code locale. Developer \#1 ajoute une propriété **Rating** au **blog** , et génère une migration **AddRating** pour appliquer les modifications à la base de données. Developer \#2 ajoute une propriété **Readers** au **blog** , et génère la migration **AddReaders** correspondante. Les deux développeurs exécutent **Update-Database**pour appliquer les modifications à leurs bases de données locales, puis poursuivre le développement de l’application.
 
 > [!NOTE]
-> Les migrations sont précédées d’un horodateur. notre graphique représente donc que la migration AddReaders de Developer \#2 vient après la migration AddRating de Developer \#1. Le fait que Developer \#1 ou \#2 a généré la première migration ne fait aucune différence entre les problèmes de travail d’une équipe ou le processus de fusion que nous allons examiner dans la section suivante.
+> Les migrations sont précédées d’un horodateur. par conséquent, notre graphique représente que la migration AddReaders de Developer \#2 vient après la migration AddRating de Developer \#1. Que le développeur \#1 ou le \#2 a généré la migration, il ne fait aucune différence entre les problèmes de travail d’une équipe ou le processus de fusion que nous allons examiner dans la section suivante.
 
 ![Modifications locales](~/ef6/media/localchanges.png)
 
 C’est un jour de chance pour les développeurs \#1, car ils envoient d’abord leurs modifications. Étant donné que personne d’autre n’a archivé depuis qu’il a synchronisé son référentiel, il peut simplement envoyer les modifications sans effectuer de fusion.
 
-![Envoyer](~/ef6/media/submit.png)
+![Soumettre](~/ef6/media/submit.png)
 
 Il est maintenant temps pour les développeurs \#2 de les envoyer. Ils ne sont pas si heureux. Étant donné qu’un autre utilisateur a soumis des modifications depuis qu’il a été synchronisé, il devra extraire les modifications et les fusionner. Le système de contrôle de code source sera probablement en mesure de fusionner automatiquement les modifications au niveau du code, car elles sont très simples. L’état du référentiel local du développeur \#2 après la synchronisation est illustré dans le graphique suivant. 
 
 ![Collecter](~/ef6/media/pull.png)
 
-À ce niveau, le développeur \#2 peut exécuter **Update-Database** , qui détectera la nouvelle migration **AddRating** (qui n’a pas été appliquée à la base de données du développeur \#2) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
+À ce niveau, le développeur \#2 peut exécuter **Update-Database** qui détectera la nouvelle migration **AddRating** (qui n’a pas été appliquée à la base de données du \#2 du développeur) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
 
 Toutefois, il existe quelques problèmes :
 
-1.  Bien que la **mise à jour de la base de données** applique la migration **AddRating** , elle génère également un avertissement : *Impossible de mettre à jour la base de données pour qu’elle corresponde au modèle actuel, car des modifications sont en attente et la migration automatique est désactivée...*
+1.  Bien que **Update-Database** applique la migration **AddRating** , il génère également un avertissement : *Impossible de mettre à jour la base de données pour qu’elle corresponde au modèle actuel, car des modifications sont en attente et la migration automatique est désactivée...*
     Le problème est que l’instantané de modèle stocké dans la dernière migration (**AddReader**) ne contient pas la propriété **Rating** sur le **blog** (puisqu’il ne fait pas partie du modèle lors de la création de la migration). Code First détecte que le modèle de la dernière migration ne correspond pas au modèle actuel et déclenche l’avertissement.
-2.  L’exécution de l’application génère une exception InvalidOperationException indiquant que «le modèle *The sauvegardant le contexte’BloggingContext’a changé depuis la création de la base de données. Envisagez d’utiliser Migrations Code First pour mettre à jour la base de données...»*
+2.  L’exécution de l’application génère une exception InvalidOperationException indiquant que «*le modèle sauvegardant le contexte «BloggingContext » a changé depuis la création de la base de données. Envisagez d’utiliser Migrations Code First pour mettre à jour la base de données...»*
     Là encore, le problème est que l’instantané de modèle stocké dans la dernière migration ne correspond pas au modèle actuel.
 3.  Enfin, l’exécution d' **Add-migration** génère désormais une migration vide (puisqu’il n’y a aucune modification à appliquer à la base de données). Toutefois, étant donné que migrations compare le modèle actuel à celui de la dernière migration (qui ne dispose pas de la propriété **Rating** ), il génère en réalité un autre appel **AddColumn** à ajouter dans la colonne **Rating** . Bien entendu, cette migration échouerait pendant **Update-Database** , car la colonne d' **évaluation** existe déjà.
 
@@ -129,11 +129,11 @@ La bonne nouvelle, c’est qu’il n’est pas trop difficile de gérer la fusio
 
 Il existe deux options : la plus simple consiste à générer une migration vide qui a le modèle actuel correct en tant qu’instantané. La deuxième option consiste à mettre à jour l’instantané dans la dernière migration pour avoir l’instantané de modèle approprié. La deuxième option est un peu plus difficile et ne peut pas être utilisée dans tous les scénarios, mais elle est également plus propre, car elle n’implique pas l’ajout d’une migration supplémentaire.
 
-### <a name="option-1-add-a-blank-merge-migration"></a>Option 1 : Ajouter une migration « fusionner » vide
+### <a name="option-1-add-a-blank-merge-migration"></a>Option 1 : ajouter une migration « fusionner » vide
 
 Dans cette option, nous générons une migration vierge uniquement dans le but de vérifier que la dernière migration est stockée dans l’instantané de modèle approprié.
 
-Cette option peut être utilisée, quelle que soit la personne qui a généré la dernière migration. Dans l’exemple, nous avons suivi le @no__t de développement-02 qui prend en charge la fusion et il s’est produit de générer la dernière migration. Toutefois, ces mêmes étapes peuvent être utilisées si le développeur \#1 a généré la dernière migration. Les étapes s’appliquent également si plusieurs migrations sont impliquées : nous avons juste cherché deux pour la conserver simple.
+Cette option peut être utilisée, quelle que soit la personne qui a généré la dernière migration. Dans l’exemple, nous avons suivi le \#de développement 2 pour s’occuper de la fusion et il s’est produit de générer la dernière migration. Toutefois, ces mêmes étapes peuvent être utilisées si le développeur \#1 a généré la dernière migration. Les étapes s’appliquent également si plusieurs migrations sont impliquées : nous avons juste cherché deux pour la conserver simple.
 
 Le processus suivant peut être utilisé pour cette approche, à partir du moment où vous réalisez que vous réalisez des modifications qui doivent être synchronisées à partir du contrôle de code source.
 
@@ -141,14 +141,14 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 2.  Synchroniser avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
     **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
-4.  Exécutez **Add-Migration &lt;pick @ no__t-2A @ no__t-3name @ no__t-4 – IgnoreChanges** (par exemple, **Add-migration Merge – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actuel), mais ignore toutes les modifications détectées lors de la comparaison du modèle actuel à l’instantané dans les dernières migrations (ce qui signifie que vous recevez une méthode de **mise** en forme et de **réduction** de l’espace).
+4.  Exécutez **Add-migration &lt;pick\_un nom de\_&gt; – IgnoreChanges** (par exemple, **Add-migration Merge – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actuel), mais ignore toutes les modifications détectées lors de la comparaison du modèle actuel à l’instantané dans les dernières migrations (ce qui signifie que vous recevez une méthode de **mise** en forme et de **réduction** de l’espace).
 5.  Poursuivez le développement ou envoyez-le au contrôle de code source (après avoir exécuté vos tests unitaires bien sûr).
 
 Voici l’état de la base de code local du développeur \#2 après l’utilisation de cette approche.
 
 ![Migration de fusion](~/ef6/media/mergemigration.png)
 
-### <a name="option-2-update-the-model-snapshot-in-the-last-migration"></a>Option 2 : Mettre à jour l’instantané de modèle dans la dernière migration
+### <a name="option-2-update-the-model-snapshot-in-the-last-migration"></a>Option 2 : mettre à jour l’instantané de modèle dans la dernière migration
 
 Cette option est très similaire à l’option 1, mais elle supprime la migration vide supplémentaire, car nous allons l’affronter, qui souhaite des fichiers de code supplémentaires dans leur solution.
 
@@ -162,11 +162,11 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 2.  Synchronisez avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
     **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
-4.  Exécutez **Update-Database – TargetMigration &lt;second @ no__t-2last @ no__t-3migration @ no__t-4** (dans notre exemple, nous avons effectué la commande **Update-Database – TargetMigration AddRating**). Cela fait passer la base de données à l’état de la deuxième dernière migration, en « désappliquant » la dernière migration à partir de la base de données.
-    **_Observe_** @no__t étape 0This est requise pour permettre la modification des métadonnées de la migration, car les métadonnées sont également stockées dans la \_ @ no__t-2MigrationsHistoryTable de la base de données. C’est pourquoi vous ne devez utiliser cette option que si la dernière migration est uniquement dans votre base de code locale. Si la dernière migration a été appliquée à d’autres bases de données, vous devez également les restaurer et réappliquer la dernière migration pour mettre à jour les métadonnées. * 
-5.  Exécutez **Add-Migration &lt;full @ no__t-2name @ no__t-3including @ no__t-4timestamp @ no__t-5of @ no__t-6last @ no__t-7migration**&gt; (dans notre exemple, nous avons effectué une opération similaire à **Add-migration 201311062215252 @ no__ t-10AddReaders**).
-    **_Observe_** *Vous devez inclure l’horodateur afin que les migrations sachent que vous souhaitez modifier la migration existante plutôt que d’en créer une nouvelle.*
-    Cela permet de mettre à jour les métadonnées de la dernière migration pour correspondre au modèle actuel. Une fois la commande terminée, vous obtenez l’avertissement suivant, mais c’est exactement ce que vous voulez. « *Only le code du concepteur pour la migration «201311062215252 @ no__t-1AddReaders » a été recréé. Pour regénérer la structure de l’ensemble de la migration, utilisez le paramètre-force.*
+4.  Exécutez **Update-Database – TargetMigration &lt;seconde\_dernière&gt;de migration de\_** (dans l’exemple, nous avons effectué la commande **Update-Database – TargetMigration AddRating**). Cela fait passer la base de données à l’état de la deuxième dernière migration, en « désappliquant » la dernière migration à partir de la base de données.
+    **_Remarque :_** *cette étape est requise pour permettre la modification des métadonnées de la migration, car les métadonnées sont également stockées dans le \_\_MigrationsHistoryTable de la base de données. C’est pourquoi vous ne devez utiliser cette option que si la dernière migration est uniquement dans votre base de code locale. Si la dernière migration a été appliquée à d’autres bases de données, vous devez également les restaurer et réappliquer la dernière migration pour mettre à jour les métadonnées.* 
+5.  Exécutez **Add-Migration &lt;nom complet\_\_y compris\_horodatage\_de\_dernière\_de migration**&gt; (dans notre exemple, nous avons effectué une opération similaire à **add-migration 201311062215252\_AddReaders**).
+    **_Remarque :_** *vous devez inclure l’horodateur afin que les migrations sachent que vous souhaitez modifier la migration existante plutôt que d’en créer une nouvelle.*
+    Cela permet de mettre à jour les métadonnées de la dernière migration pour correspondre au modèle actuel. Une fois la commande terminée, vous obtenez l’avertissement suivant, mais c’est exactement ce que vous voulez. «*Seul le code du concepteur pour la migration «201311062215252\_AddReaders » a été recréé. Pour regénérer la structure de l’ensemble de la migration, utilisez le paramètre-force.*
 6.  Exécutez **Update-Database** pour réappliquer la dernière migration avec les métadonnées mises à jour.
 7.  Poursuivez le développement ou envoyez-le au contrôle de code source (après avoir exécuté vos tests unitaires bien sûr).
 
@@ -174,7 +174,7 @@ Voici l’état de la base de code local du développeur \#2 après l’utilisat
 
 ![Métadonnées mises à jour](~/ef6/media/updatedmetadata.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 L’utilisation de Migrations Code First dans un environnement d’équipe présente des difficultés. Toutefois, une compréhension de base du fonctionnement des migrations et de quelques approches simples pour résoudre les conflits de fusion facilite la résolution de ces problèmes.
 

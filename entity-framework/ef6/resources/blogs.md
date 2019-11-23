@@ -15,7 +15,7 @@ Outre la documentation du produit, ces blogs peuvent être une source d’inform
 
 ## <a name="ef-team-blogs"></a>Blogs de l’équipe EF
 
-- Balise de blog [.NET : Entity Framework @ no__t-0
+- [Balise de blog .NET : Entity Framework](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
 - [Blog ADO.NET (n’est plus utilisé)](https://blogs.msdn.microsoft.com/adonet/)
 - [Blog de conception EF (n’est plus utilisé)](https://blogs.msdn.microsoft.com/efdesign/)
 

@@ -100,7 +100,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 Lorsque la propriété log est définie, tous les éléments suivants sont enregistrés :  
 
-- SQL pour tous les différents types de commandes. Exemple :  
+- SQL pour tous les différents types de commandes. Exemple :  
     - Requêtes, y compris les requêtes LINQ normales, les requêtes eSQL et les requêtes brutes à partir de méthodes telles que SqlQuery  
     - Insertions, mises à jour et suppressions générées dans le cadre d’SaveChanges  
     - Requêtes de chargement des relations, telles que celles générées par le chargement différé  
@@ -227,7 +227,7 @@ Pour consigner la sortie, appelez simplement la méthode Write qui enverra la so
 
 ### <a name="setting-the-databaselogformatter"></a>Définition de DatabaseLogFormatter  
 
-Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Exemple :  
+Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Exemple :  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -261,11 +261,11 @@ Le code d’interception est construit autour du concept d’interfaces d’inte
 
 ### <a name="the-interception-context"></a>Contexte d’interception  
 
-En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-ci, tel que DbCommandInterceptionContext @ no__t-0 @ no__t-1. Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
+En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-ci, tel que DbCommandInterceptionContext\<\>. Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
 
 ### <a name="result-handling"></a>Gestion des résultats  
 
-La classe DbCommandInterceptionContext @ no__t-0 @ no__t-1 contient une propriété appelée result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
+La classe DbCommandInterceptionContext\<\> contient des propriétés appelées result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
 
 #### <a name="suppressing-execution"></a>Suppression de l’exécution  
 
@@ -289,7 +289,7 @@ Les propriétés OriginalResult et OriginalException sont en lecture seule et ne
 
 ### <a name="registering-interceptors"></a>Inscription des intercepteurs  
 
-Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Exemple :  
+Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Exemple :  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());
@@ -297,7 +297,7 @@ DbInterception.Add(new NLogCommandInterceptor());
 
 Les intercepteurs peuvent également être inscrits au niveau du domaine d’application à l’aide du mécanisme de configuration basé sur le code DbConfiguration.  
 
-### <a name="example-logging-to-nlog"></a>Exemple : Journalisation dans NLog  
+### <a name="example-logging-to-nlog"></a>Exemple : journalisation dans NLog  
 
 Nous allons rassembler tout cela dans un exemple qui utilise IDbCommandInterceptor et [nlog](https://nlog-project.org/) pour :  
 

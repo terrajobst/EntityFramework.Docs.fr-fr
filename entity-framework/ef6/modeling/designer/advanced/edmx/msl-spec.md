@@ -37,7 +37,7 @@ L’élément **alias** ne peut pas avoir d’éléments enfants.
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **alias** .
 
-| Nom d'attribut | Requis | Value                                                                     |
+| Nom d'attribut | Requis | Valeur                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
 | **Key**        | Oui         | Alias de l’espace de noms spécifié par l’attribut **value** . |
 | **Valeur**      | Oui         | Espace de noms pour lequel la valeur de l’élément **Key** est un alias.     |
@@ -81,7 +81,7 @@ L’exemple suivant montre un élément d' **alias** qui définit un alias, `c`,
 
 L’élément **AssociationEnd** en Mapping Specification Language (MSL) est utilisé lorsque les fonctions de modification d’un type d’entité dans le modèle conceptuel sont mappées aux procédures stockées dans la base de données sous-jacente. Si une procédure stockée de modification accepte un paramètre dont la valeur est conservée dans une propriété Association, l’élément **AssociationEnd** mappe la valeur de la propriété au paramètre. Pour plus d'informations, voir l'exemple ci-dessous.
 
-Pour plus d’informations sur le mappage des fonctions de modification de types d’entité aux procédures stockées, consultez l’élément ModificationFunctionMapping (MSL) et la procédure pas à pas : Mappage d’une entité à des procédures stockées.
+Pour plus d’informations sur le mappage des fonctions de modification de types d’entité aux procédures stockées, consultez l’élément ModificationFunctionMapping (MSL) et procédure pas à pas : mappage d’une entité à des procédures stockées.
 
 L’élément **AssociationEnd** peut avoir les éléments enfants suivants :
 
@@ -91,7 +91,7 @@ L’élément **AssociationEnd** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **AssociationEnd** .
 
-| Nom d'attribut     | Requis | Value                                                                                                                                                                             |
+| Nom d'attribut     | Requis | Valeur                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet** | Oui         | Nom de l'association mappée.                                                                                                                                 |
 | **From**           | Oui         | Valeur de l’attribut **FromRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL). |
@@ -146,7 +146,7 @@ Pour mapper la fonction de mise à jour de l’entité `Course` à cette procéd
  </AssociationSetMapping>
 ```
 
-Le code suivant montre l’élément **AssociationEnd** utilisé pour mapper la propriété **DepartmentID** de l’Association **FK @ no__t-3Course @ no__t-4Department** à la procédure stockée **UpdateCourse** (à laquelle la fonction de mise à jour de l’élément Le type d’entité **course** est mappé) :
+Le code suivant montre l’élément **AssociationEnd** utilisé pour mapper la propriété **DepartmentID** de l’association **FK\_course\_Department** à la procédure stockée **UpdateCourse** (à laquelle la fonction de mise à jour du type d’entité **course** est mappée) :
 
 ``` xml
  <EntitySetMapping Name="Courses">
@@ -182,7 +182,7 @@ Le code suivant montre l’élément **AssociationEnd** utilisé pour mapper la 
 
 L’élément **AssociationSetMapping** en Mapping Specification Language (MSL) définit le mappage entre une association dans le modèle conceptuel et les colonnes de table dans la base de données sous-jacente.
 
-Les associations dans le modèle conceptuel sont des types dont les propriétés représentent des colonnes de clé primaire et de clé étrangère dans la base de données sous-jacente. L’élément **AssociationSetMapping** utilise deux éléments EndProperty pour définir les mappages entre les propriétés de type d’association et les colonnes de la base de données. Vous pouvez placer des conditions sur ces mappages avec l’élément condition. Mappez les fonctions Insert, Update et Delete pour les associations à des procédures stockées dans la base de données avec l’élément ModificationFunctionMapping. Définir des mappages en lecture seule entre des associations et des colonnes de table à l’aide d’une chaîne de Entity SQL dans un élément QueryView.
+Les associations dans le modèle conceptuel sont des types dont les propriétés représentent des colonnes de clé primaire et de clé étrangère dans la base de données sous-jacente. L’élément **AssociationSetMapping** utilise deux éléments EndProperty pour définir les mappages entre les propriétés de type d’association et les colonnes de la base de données. Vous pouvez placer des conditions sur ces mappages avec l'élément Condition. Mappez les fonctions d'insertion, de mise à jour et de suppression pour les associer aux procédures stockées dans la base de données avec l'élément ModificationFunctionMapping. Définir des mappages en lecture seule entre des associations et des colonnes de table à l’aide d’une chaîne de Entity SQL dans un élément QueryView.
 
 > [!NOTE]
 > Si une contrainte référentielle est définie pour une association dans le modèle conceptuel, l’Association n’a pas besoin d’être mappée avec un élément **AssociationSetMapping** . Si un élément **AssociationSetMapping** est présent pour une association qui a une contrainte référentielle, les mappages définis dans l’élément **AssociationSetMapping** seront ignorés. Pour plus d’informations, consultez ReferentialConstraint, élément (CSDL).
@@ -190,7 +190,7 @@ Les associations dans le modèle conceptuel sont des types dont les propriétés
 L’élément **AssociationSetMapping** peut avoir les éléments enfants suivants
 
 -   QueryView (zéro ou un)
--   EndProperty (zéro ou deux)
+-   EndProperty (zéro ou deux éléments)
 -   Condition (zéro, un ou plusieurs)
 -   ModificationFunctionMapping (zéro ou un)
 
@@ -198,7 +198,7 @@ L’élément **AssociationSetMapping** peut avoir les éléments enfants suivan
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut     | Requis | Value                                                                                       |
+| Nom d'attribut     | Requis | Valeur                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Nom**           | Oui         | Nom de l'ensemble d'associations du modèle conceptuel mappé.                      |
 | **TypeName**       | Non          | Nom qualifié par un espace de noms du type d'association du modèle conceptuel mappé. |
@@ -206,7 +206,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association **FK @ no__t-2Course @ no__t-3Department** définie dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
+L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de **service FK\_\_de cours** définie dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -223,7 +223,7 @@ L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l�
 
 ## <a name="complexproperty-element-msl"></a>ComplexProperty, élément (MSL)
 
-Un élément **ComplexProperty** en Mapping Specification Language (MSL) définit le mappage entre une propriété de type complexe sur un type d’entité de modèle conceptuel et des colonnes de table dans la base de données sous-jacente. Les mappages de colonne-propriété sont spécifiés dans les éléments ScalarProperty enfants.
+Un élément **ComplexProperty** en Mapping Specification Language (MSL) définit le mappage entre une propriété de type complexe sur un type d’entité de modèle conceptuel et des colonnes de table dans la base de données sous-jacente. Les mappages de colonnes de propriété sont spécifiés dans des éléments ScalarProperty enfants.
 
 L’élément de propriété **complexType** peut avoir les éléments enfants suivants :
 
@@ -236,14 +236,14 @@ L’élément de propriété **complexType** peut avoir les éléments enfants s
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ComplexProperty** :
 
-| Nom d'attribut | Requis | Value                                                                                            |
+| Nom d'attribut | Requis | Valeur                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété complexe d'un type d'entité dans le modèle conceptuel mappé. |
 | **TypeName**   | Non          | Nom qualifié par un espace de noms du type de propriété de modèle conceptuel.                              |
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant est basé sur le modèle School. Le type complexe suivant a été ajouté au modèle conceptuel :
+L'exemple suivant est basé sur le modèle School. Le type complexe suivant a été ajouté au modèle conceptuel :
 
 ``` xml
  <ComplexType Name="FullName">
@@ -291,7 +291,7 @@ Le MSL suivant montre l’élément **ComplexProperty** utilisé pour mapper la 
 
 ## <a name="complextypemapping-element-msl"></a>ComplexTypeMapping, élément (MSL)
 
-L’élément **ComplexTypeMapping,** en Mapping Specification Language (MSL) est un enfant de l’élément ResultMapping et définit le mappage entre une importation de fonction dans le modèle conceptuel et une procédure stockée dans la base de données sous-jacente lorsque les éléments suivants sont vraies :
+L’élément **ComplexTypeMapping,** en Mapping Specification Language (MSL) est un enfant de l’élément ResultMapping et définit le mappage entre une importation de fonction dans le modèle conceptuel et une procédure stockée dans la base de données sous-jacente lorsque les conditions suivantes sont remplies :
 
 -   L'importation de fonction retourne un type complexe conceptuel.
 -   Les noms de colonne retournés par la procédure stockée ne correspondent pas exactement aux noms de propriété du type complexe.
@@ -306,7 +306,7 @@ L’élément **ComplexTypeMapping,** peut avoir les éléments enfants suivants
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ComplexTypeMapping,** .
 
-| Nom d'attribut | Requis | Value                                                                  |
+| Nom d'attribut | Requis | Valeur                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type complexe mappé. |
 
@@ -377,7 +377,7 @@ L’élément **condition** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **condition** :
 
-| Nom d'attribut | Requis | Value                                                                                                                                                                                                                                                                                         |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | Non          | Nom de la colonne de table dont la valeur est utilisée pour évaluer la condition.                                                                                                                                                                                                                   |
 | **IsNull**     | Non          | **True** ou **false**. Si la valeur est **true** et que la valeur de la colonne est **null**, ou si la valeur est **false** et que la valeur de la colonne n’est pas **null**, la condition est true. Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps. |
@@ -431,14 +431,14 @@ Lorsqu’il est appliqué à l’élément EntityTypeMapping, l’élément **De
 L’élément **DeleteFunction** peut avoir les éléments enfants suivants lorsqu’il est appliqué à un élément **EntityTypeMapping** :
 
 -   AssociationEnd (zéro, un ou plusieurs)
--   ComplexProperty (zéro ou plus)
+-   ComplexProperty (zéro, un ou plusieurs éléments) ;
 -   ScalarProperty (zéro ou plus)
 
 #### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à un élément **EntityTypeMapping** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -502,7 +502,7 @@ L’élément **DeleteFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -544,7 +544,7 @@ L’exemple suivant est basé sur le modèle School et montre l’élément **De
 
 ## <a name="endproperty-element-msl"></a>EndProperty, élément (MSL)
 
-L’élément **EndProperty** en Mapping Specification Language (MSL) définit le mappage entre une terminaison ou une fonction de modification d’une association de modèle conceptuel et la base de données sous-jacente. Le mappage de colonne-propriété est spécifié dans un élément ScalarProperty enfant.
+L’élément **EndProperty** en Mapping Specification Language (MSL) définit le mappage entre une terminaison ou une fonction de modification d’une association de modèle conceptuel et la base de données sous-jacente. Le mappage de colonne de propriété est spécifié dans un élément ScalarProperty enfant.
 
 Lorsqu’un élément **EndProperty** est utilisé pour définir le mappage de la fin d’une association de modèle conceptuel, il est un enfant d’un élément AssociationSetMapping. Lorsque l’élément **EndProperty** est utilisé pour définir le mappage d’une fonction de modification d’une association de modèle conceptuel, il est un enfant d’un élément InsertFunction ou d’un élément DeleteFunction.
 
@@ -556,13 +556,13 @@ L’élément **EndProperty** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **EndProperty** :
 
-| Nom d'attribut | Requis | Value                                                 |
+| Nom d'attribut | Requis | Valeur                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| Name           | Oui         | Nom de la terminaison d'association mappée. |
+| Nom           | Oui         | Nom de la terminaison d'association mappée. |
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association **FK @ no__t-2Course @ no__t-3Department** dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
+L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’association **FK\_cours\_service** dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -618,7 +618,7 @@ L’élément **EntityContainerMapping** en Mapping Specification Language (MSL)
 
 L’élément **EntityContainerMapping** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   EntitySetMapping (zéro, un ou plusieurs)
+-   EntitySetMapping (zéro, un ou plusieurs éléments) ;
 -   AssociationSetMapping (zéro, un ou plusieurs)
 -   FunctionImportMapping (zéro ou plus)
 
@@ -626,15 +626,15 @@ L’élément **EntityContainerMapping** peut avoir les éléments enfants suiva
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityContainerMapping** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | Oui         | Nom du conteneur d'entités de modèle de stockage mappé.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Oui         | Nom du conteneur d'entités de modèle conceptuel mappé.                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | Non          | **True** ou **false**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **true**. |
+| **GenerateUpdateViews**   | Non          | **True** ou **false**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **True**. |
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **EntityContainerMapping** qui mappe le conteneur **SchoolModelEntities** (le conteneur d’entités de modèle conceptuel) au conteneur **SchoolModelStoreContainer** (entité de modèle de stockage). conteneur) :
+L’exemple suivant montre un élément **EntityContainerMapping** qui mappe le conteneur **SchoolModelEntities** (le conteneur d’entités de modèle conceptuel) au conteneur **SchoolModelStoreContainer** (conteneur d’entités de modèle de stockage) :
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -665,11 +665,11 @@ L’exemple suivant montre un élément **EntityContainerMapping** qui mappe le 
 
 ## <a name="entitysetmapping-element-msl"></a>EntitySetMapping, élément (MSL)
 
-L’élément **EntitySetMapping** en Mapping Specification Language (MSL) mappe tous les types dans un jeu d’entités de modèle conceptuel aux jeux d’entités dans le modèle de stockage. Un jeu d’entités dans le modèle conceptuel est un conteneur logique pour les instances d’entités du même type (et les types dérivés). Un jeu d’entités dans le modèle de stockage représente une table ou une vue dans la base de données sous-jacente. Le jeu d’entités du modèle conceptuel est spécifié par la valeur de l’attribut **Name** de l’élément **EntitySetMapping** . La table ou la vue mappée à est spécifiée par l’attribut **StoreEntitySet** dans chaque élément MappingFragment enfant ou dans l’élément **EntitySetMapping** lui-même.
+L’élément **EntitySetMapping** en Mapping Specification Language (MSL) mappe tous les types dans un jeu d’entités de modèle conceptuel aux jeux d’entités dans le modèle de stockage. Un jeu d'entités dans le modèle conceptuel est un conteneur logique pour instances d'entités de même type (et des types dérivés). Un jeu d'entités dans le modèle de stockage représente une table ou une vue de la base de données sous-jacente. Le jeu d’entités du modèle conceptuel est spécifié par la valeur de l’attribut **Name** de l’élément **EntitySetMapping** . La table ou la vue mappée à est spécifiée par l’attribut **StoreEntitySet** dans chaque élément MappingFragment enfant ou dans l’élément **EntitySetMapping** lui-même.
 
 L’élément **EntitySetMapping** peut avoir les éléments enfants suivants :
 
--   EntityTypeMapping (zéro, un ou plusieurs)
+-   EntityTypeMapping (zéro, un ou plusieurs éléments) ;
 -   QueryView (zéro ou un)
 -   MappingFragment (zéro, un ou plusieurs)
 
@@ -677,7 +677,7 @@ L’élément **EntitySetMapping** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntitySetMapping** .
 
-| Nom d'attribut           | Requis | Value                                                                                                                                                                                                                         |
+| Nom d'attribut           | Requis | Valeur                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                 | Oui         | Nom du jeu d'entités de modèle conceptuel mappé.                                                                                                                                                             |
 | **TypeName** **1**       | Non          | Nom du type d'entité de modèle conceptuel mappé.                                                                                                                                                            |
@@ -721,9 +721,9 @@ L’exemple suivant montre un élément **EntitySetMapping** qui mappe trois typ
 
 ## <a name="entitytypemapping-element-msl"></a>EntityTypeMapping, élément (MSL)
 
-L’élément **EntityTypeMapping** en Mapping Specification Language (MSL) définit le mappage entre un type d’entité dans le modèle conceptuel et les tables ou vues dans la base de données sous-jacente. Pour plus d’informations sur les types d’entités de modèle conceptuel et les tables ou vues de base de données sous-jacentes, consultez élément EntityType (CSDL) et élément EntitySet (SSDL). Le type d’entité de modèle conceptuel qui est mappé est spécifié par l’attribut **TypeName** de l’élément **EntityTypeMapping** . La table ou la vue mappée est spécifiée par l’attribut **StoreEntitySet** de l’élément MappingFragment enfant.
+L’élément **EntityTypeMapping** en Mapping Specification Language (MSL) définit le mappage entre un type d’entité dans le modèle conceptuel et les tables ou vues dans la base de données sous-jacente. Pour plus d'informations sur les types d'entité de modèle conceptuel et les tables ou les vues de base de données sous-jacente, consultez Élément EntityType (CSDL) et Élément EntitySet (SSDL). Le type d’entité de modèle conceptuel qui est mappé est spécifié par l’attribut **TypeName** de l’élément **EntityTypeMapping** . La table ou la vue mappée est spécifiée par l’attribut **StoreEntitySet** de l’élément MappingFragment enfant.
 
-L’élément enfant ModificationFunctionMapping peut être utilisé pour mapper les fonctions d’insertion, de mise à jour ou de suppression des types d’entité aux procédures stockées dans la base de données.
+L'élément enfant ModificationFunctionMapping peut être utilisé pour mapper les fonctions d'insertion, de mise à jour ou de suppression de types d'entités aux procédures stockées de la base de données.
 
 L’élément **EntityTypeMapping** peut avoir les éléments enfants suivants :
 
@@ -743,7 +743,7 @@ L’élément **EntityTypeMapping** peut avoir les éléments enfants suivants 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityTypeMapping** .
 
-| Nom d'attribut | Requis | Value                                                                                                                                                                                                |
+| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type d'entité de modèle conceptuel mappé. <br/> Si le type correspond à un type abstrait ou dérivé, la valeur doit être `IsOfType(Namespace-qualified_type_name)`. |
 
@@ -829,14 +829,14 @@ L’élément **FunctionImportMapping** peut avoir les éléments enfants suivan
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **FunctionImportMapping** :
 
-| Nom d'attribut         | Requis | Value                                                                                   |
+| Nom d'attribut         | Requis | Valeur                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
 | **FunctionImportName** | Oui         | Nom de l'importation de fonction dans le modèle conceptuel mappé.           |
 | **FunctionName**       | Oui         | Nom qualifié par un espace de noms de la fonction dans le modèle de stockage mappé. |
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant est basé sur le modèle School. Considérez la fonction suivante dans le modèle de stockage :
+L'exemple suivant est basé sur le modèle School. Considérez la fonction suivante dans le modèle de stockage :
 
 ``` xml
  <Function Name="GetStudentGrades" Aggregate="false"
@@ -879,7 +879,7 @@ Lorsqu’il est appliqué à l’élément EntityTypeMapping, l’élément **In
 L’élément **InsertFunction** peut avoir les éléments enfants suivants lorsqu’il est appliqué à un élément **EntityTypeMapping** :
 
 -   AssociationEnd (zéro, un ou plusieurs)
--   ComplexProperty (zéro ou plus)
+-   ComplexProperty (zéro, un ou plusieurs éléments) ;
 -   ResultBinding (zéro ou un)
 -   ScalarProperty (zéro ou plus)
 
@@ -887,7 +887,7 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’ils sont appliqués à un élément **EntityTypeMapping** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -938,7 +938,7 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -989,13 +989,13 @@ L'élément de mappage peut avoir les éléments enfants suivants (dans l'ordre 
 -   Alias (zéro, un ou plusieurs)
 -   EntityContainerMapping (exactement un)
 
-Les noms de types de modèle conceptuel et de stockage référencés en MSL doivent être qualifiés par le nom de leur espace de noms respectif. Pour plus d’informations sur le nom de l’espace de noms du modèle conceptuel, consultez Schema, élément (CSDL). Pour plus d’informations sur le nom de l’espace de noms du modèle de stockage, consultez Schema, élément (SSDL). Les alias pour les espaces de noms utilisés dans MSL peuvent être définis avec l’élément alias.
+Les noms de types de modèle conceptuel et de stockage référencés en MSL doivent être qualifiés par le nom de leur espace de noms respectif. Pour plus d’informations sur le nom de l’espace de noms du modèle conceptuel, consultez Schema, élément (CSDL). Pour plus d’informations sur le nom de l’espace de noms du modèle de stockage, consultez Schema, élément (SSDL). Les alias d'espace de noms utilisés en MSL peuvent être définis avec l'élément Alias.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Mapping** .
 
-| Nom d'attribut | Requis | Value                                                 |
+| Nom d'attribut | Requis | Valeur                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | **Espace**      | Oui         | **C-S**. Il s'agit d'une valeur fixe qui ne peut pas être modifiée. |
 
@@ -1036,7 +1036,7 @@ L’exemple suivant illustre un élément de **mappage** basé sur une partie du
 
 ## <a name="mappingfragment-element-msl"></a>MappingFragment, élément (MSL)
 
-L’élément **MappingFragment** en Mapping Specification Language (MSL) définit le mappage entre les propriétés d’un type d’entité de modèle conceptuel et une table ou une vue dans la base de données. Pour plus d’informations sur les types d’entités de modèle conceptuel et les tables ou vues de base de données sous-jacentes, consultez élément EntityType (CSDL) et élément EntitySet (SSDL). L’élément **MappingFragment** peut être un élément enfant de l’élément EntityTypeMapping ou de l’élément EntitySetMapping.
+L’élément **MappingFragment** en Mapping Specification Language (MSL) définit le mappage entre les propriétés d’un type d’entité de modèle conceptuel et une table ou une vue dans la base de données. Pour plus d'informations sur les types d'entité de modèle conceptuel et les tables ou les vues de base de données sous-jacente, consultez Élément EntityType (CSDL) et Élément EntitySet (SSDL). L’élément **MappingFragment** peut être un élément enfant de l’élément EntityTypeMapping ou de l’élément EntitySetMapping.
 
 L’élément **MappingFragment** peut avoir les éléments enfants suivants :
 
@@ -1048,7 +1048,7 @@ L’élément **MappingFragment** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **MappingFragment** .
 
-| Nom d'attribut          | Requis | Value                                                                                                                                                                                                                         |
+| Nom d'attribut          | Requis | Valeur                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StoreEntitySet**      | Oui         | Nom de la table ou de la vue mappée.                                                                                                                                                                           |
 | **MakeColumnsDistinct** | Non          | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
@@ -1193,7 +1193,7 @@ L’exemple suivant montre le mappage de l’ensemble d’associations pour l’
 
 ## <a name="queryview-element-msl"></a>QueryView, élément (MSL)
 
-L’élément **QueryView** en Mapping Specification Language (MSL) définit un mappage en lecture seule entre un type d’entité ou une association dans le modèle conceptuel et une table dans la base de données sous-jacente. Le mappage est défini avec une requête Entity SQL qui est évaluée par rapport au modèle de stockage, et vous exprimez le jeu de résultats en termes d’entité ou d’association dans le modèle conceptuel. Les affichages des requêtes étant en lecture seule, les types qu'ils définissent ne peuvent pas être mis à jour au moyen des commandes de mise à jour standard. Les mises à jour de ces types peuvent être effectuées au moyen de fonctions de modification. Pour plus d'informations, consultez Guide pratique pour Mapper des fonctions de modification à des procédures stockées.
+L’élément **QueryView** en Mapping Specification Language (MSL) définit un mappage en lecture seule entre un type d’entité ou une association dans le modèle conceptuel et une table dans la base de données sous-jacente. Le mappage est défini avec une requête Entity SQL qui est évaluée par rapport au modèle de stockage, et vous exprimez le jeu de résultats en termes d’entité ou d’association dans le modèle conceptuel. Les affichages des requêtes étant en lecture seule, les types qu'ils définissent ne peuvent pas être mis à jour au moyen des commandes de mise à jour standard. Les mises à jour de ces types peuvent être effectuées au moyen de fonctions de modification. Pour plus d’informations, consultez Comment : mapper des fonctions de modification à des procédures stockées.
 
 > [!NOTE]
 > Dans l’élément **QueryView** , Entity SQL expressions qui contiennent des propriétés **GroupBy**, Group ou de navigation ne sont pas prises en charge.
@@ -1211,7 +1211,7 @@ L’élément **QueryView** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **QueryView** .
 
-| Nom d'attribut | Requis | Value                                                                         |
+| Nom d'attribut | Requis | Valeur                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **TypeName**   | Non          | Nom du type de modèle conceptuel mappé par l'affichage des requêtes. |
 
@@ -1315,7 +1315,7 @@ Vous devez tenir compte des points suivants lorsque vous définissez des afficha
 
 ## <a name="resultbinding-element-msl"></a>Élément ResultBinding (MSL)
 
-L’élément **ResultBinding** en Mapping Specification Language (MSL) mappe les valeurs de colonne retournées par les procédures stockées aux propriétés d’entité dans le modèle conceptuel lorsque les fonctions de modification de type d’entité sont mappées aux procédures stockées dans le base de données sous-jacente. Par exemple, lorsque la valeur d’une colonne d’identité est retournée par une procédure stockée Insert, l’élément **ResultBinding** mappe la valeur retournée à une propriété de type d’entité dans le modèle conceptuel.
+L’élément **ResultBinding** en Mapping Specification Language (MSL) mappe les valeurs de colonne retournées par les procédures stockées aux propriétés d’entité dans le modèle conceptuel lorsque les fonctions de modification de type d’entité sont mappées aux procédures stockées dans la base de données sous-jacente. Par exemple, lorsque la valeur d’une colonne d’identité est retournée par une procédure stockée Insert, l’élément **ResultBinding** mappe la valeur retournée à une propriété de type d’entité dans le modèle conceptuel.
 
 L’élément **ResultBinding** peut être un enfant de l’élément InsertFunction ou de l’élément UpdateFunction.
 
@@ -1325,7 +1325,7 @@ L’élément **ResultBinding** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ResultBinding** :
 
-| Nom d'attribut | Requis | Value                                                                         |
+| Nom d'attribut | Requis | Valeur                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété d'entité dans le modèle conceptuel mappé. |
 | **ColumnName** | Oui         | Nom de la colonne mappée.                                          |
@@ -1398,7 +1398,7 @@ L’élément **ResultMapping** est un élément enfant de l’élément Functio
 
 L’élément **ResultMapping** peut avoir les éléments enfants suivants :
 
--   EntityTypeMapping (zéro, un ou plusieurs)
+-   EntityTypeMapping (zéro, un ou plusieurs éléments) ;
 -   ComplexTypeMapping
 
 Aucun attribut n’est applicable à l’élément **ResultMapping** .
@@ -1477,14 +1477,14 @@ Les attributs qui s’appliquent à l’élément **ScalarProperty** varient en 
 
 Le tableau suivant décrit les attributs qui s’appliquent lorsque l’élément **ScalarProperty** est utilisé pour mapper une propriété de modèle conceptuel à une colonne de la base de données :
 
-| Nom d'attribut | Requis | Value                                                           |
+| Nom d'attribut | Requis | Valeur                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété de modèle conceptuel mappée. |
 | **ColumnName** | Oui         | Nom de la colonne de table mappée.              |
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ScalarProperty** lorsqu’il est utilisé pour mapper une propriété de modèle conceptuel à un paramètre de procédure stockée :
 
-| Nom d'attribut    | Requis | Value                                                                                                                                           |
+| Nom d'attribut    | Requis | Valeur                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**          | Oui         | Nom de la propriété de modèle conceptuel mappée.                                                                                 |
 | **ParameterName** | Oui         | Nom du paramètre mappé.                                                                                                 |
@@ -1587,7 +1587,7 @@ L’élément **UpdateFunction** peut être un enfant de l’élément Modificat
 L’élément **UpdateFunction** peut avoir les éléments enfants suivants :
 
 -   AssociationEnd (zéro, un ou plusieurs)
--   ComplexProperty (zéro ou plus)
+-   ComplexProperty (zéro, un ou plusieurs éléments) ;
 -   ResultBinding (zéro ou un)
 -   ScalarProperty (zéro ou plus)
 
@@ -1595,7 +1595,7 @@ L’élément **UpdateFunction** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **UpdateFunction** .
 
-| Nom d'attribut            | Requis | Value                                                                                                                                                    |
+| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de mise à jour est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |

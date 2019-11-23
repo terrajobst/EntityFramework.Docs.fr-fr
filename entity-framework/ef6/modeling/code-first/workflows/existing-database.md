@@ -22,14 +22,14 @@ Pour effectuer cette procédure pas à pas, vous devez avoir installé **Visual 
 
 Vous aurez également besoin de la version **6,1** (ou ultérieure) du **Entity Framework Tools pour Visual Studio** . Consultez [obtenir des Entity Framework](~/ef6/fundamentals/install.md) pour plus d’informations sur l’installation de la dernière version du Entity Framework Tools.
 
-## <a name="1-create-an-existing-database"></a>1. Créer une base de données existante
+## <a name="1-create-an-existing-database"></a>1. créer une base de données existante
 
 En général, lorsque vous ciblez une base de données existante, elle est déjà créée, mais pour cette procédure pas à pas, nous devons créer une base de données à laquelle accéder.
 
 Commençons par générer la base de données.
 
--   Ouvrir Visual Studio
--   **Affichage-&gt; Explorateur de serveurs**
+-   Ouvrez Visual Studio
+-   **Vue-&gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de **Explorateur de serveurs** avant de devoir sélectionner **Microsoft SQL Server** comme source de données
 
@@ -70,19 +70,19 @@ INSERT INTO [dbo].[Blogs] ([Name],[Url])
 VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 ```
 
-## <a name="2-create-the-application"></a>2. Création de l’application
+## <a name="2-create-the-application"></a>2. créer l’application
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données :
 
--   Ouvrir Visual Studio
--   **Fichier-&gt; nouveau-&gt; projet...**
+-   Ouvrez Visual Studio
+-   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstExistingDatabaseSample** comme nom
 -   Sélectionnez **OK**.
 
  
 
-## <a name="3-reverse-engineer-model"></a>3. Modèle d’ingénierie à rebours
+## <a name="3-reverse-engineer-model"></a>3. modèle d’ingénierie à rebours
 
 Nous allons utiliser le Entity Framework Tools pour Visual Studio pour nous aider à générer du code initial à mapper à la base de données. Ces outils génèrent simplement du code que vous pouvez également taper manuellement si vous préférez.
 
@@ -117,12 +117,12 @@ Un fichier app. config a été ajouté au projet, ce fichier contient la chaîne
 </connectionStrings>
 ```
 
-*You’ll remarquez certains autres paramètres dans le fichier de configuration. il s’agit de paramètres EF par défaut qui indiquent à Code First où créer les bases de données. Étant donné que nous allons mapper à une base de données existante, ces paramètres seront ignorés dans notre application.*
+*Vous remarquerez également d’autres paramètres dans le fichier de configuration. il s’agit de paramètres EF par défaut qui indiquent Code First où créer les bases de données. Étant donné que nous allons mapper à une base de données existante, ces paramètres seront ignorés dans notre application.*
 
 ### <a name="derived-context"></a>Contexte dérivé
 
 Une classe **BloggingContext** a été ajoutée au projet. Le contexte représente une session avec la base de données, ce qui nous permet d’interroger et d’enregistrer des données.
-Le contexte expose un **DbSet @ no__t-1TEntity @ no__t-2** pour chaque type dans notre modèle. Vous remarquerez également que le constructeur par défaut appelle un constructeur de base à l’aide de la syntaxe **Name =** . Cela indique Code First que la chaîne de connexion à utiliser pour ce contexte doit être chargée à partir du fichier de configuration.
+Le contexte expose un **DbSet&lt;tente&gt;** pour chaque type dans notre modèle. Vous remarquerez également que le constructeur par défaut appelle un constructeur de base à l’aide de la syntaxe **Name =** . Cela indique Code First que la chaîne de connexion à utiliser pour ce contexte doit être chargée à partir du fichier de configuration.
 
 ``` csharp
 public partial class BloggingContext : DbContext
@@ -141,7 +141,7 @@ public partial class BloggingContext : DbContext
     }
 ```
 
-*You doit toujours utiliser la syntaxe **Name =** lorsque vous utilisez une chaîne de connexion dans le fichier de configuration. Cela garantit que si la chaîne de connexion n’est pas présente, Entity Framework lève une exception au lieu de créer une nouvelle base de données par Convention.*
+*Vous devez toujours utiliser la syntaxe **Name =** lorsque vous utilisez une chaîne de connexion dans le fichier de configuration. Cela garantit que si la chaîne de connexion n’est pas présente, Entity Framework lève une exception au lieu de créer une nouvelle base de données par Convention.*
 
 ### <a name="model-classes"></a>Classes de modèle
 
@@ -167,7 +167,7 @@ public partial class Blog
 }
 ```
 
-## <a name="4-reading--writing-data"></a>4. Lecture & écriture de données
+## <a name="4-reading--writing-data"></a>4. lecture & écriture de données
 
 Maintenant que nous avons un modèle, il est temps de l’utiliser pour accéder à certaines données. Implémentez la méthode **main** dans **Program.cs** comme indiqué ci-dessous. Ce code crée une nouvelle instance de notre contexte, puis l’utilise pour insérer un nouveau **blog**. Il utilise ensuite une requête LINQ pour récupérer tous les **blogs** de la base de données classée par ordre alphabétique par **titre**.
 
@@ -223,6 +223,6 @@ L’Assistant Code First à la base de données est conçu pour générer un ens
 
 Si vous souhaitez utiliser Migrations Code First avec une base de données existante, consultez [migrations code First à une base de données existante](~/ef6/modeling/code-first/migrations/existing-database.md).
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons examiné Code First développement à l’aide d’une base de données existante. Nous avons utilisé le Entity Framework Tools pour Visual Studio pour rétroconcevoir un ensemble de classes mappées à la base de données et pouvant être utilisé pour stocker et récupérer des données.

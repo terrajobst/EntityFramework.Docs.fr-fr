@@ -13,12 +13,12 @@ ms.locfileid: "72182483"
 # <a name="designer-query-stored-procedures"></a>Procédures stockées de requête du concepteur
 Cette procédure pas à pas explique comment utiliser le Entity Framework Designer (concepteur EF) pour importer des procédures stockées dans un modèle, puis appeler les procédures stockées importées pour récupérer les résultats. 
 
-Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
+Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Configuration requise
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
@@ -29,8 +29,8 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 
 -   Ouvrez Visual Studio 2012.
 -   Sélectionnez **fichier-&gt; nouveau-&gt; projet**
--   Dans le volet gauche, cliquez sur **Visual C @ no__t-1**, puis sélectionnez le modèle **console** .
--   Entrez **EFwithSProcsSample** AS le nom.
+-   Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
+-   Entrez **EFwithSProcsSample** comme nom.
 -   Sélectionnez **OK**.
 
 ## <a name="create-a-model"></a>Créer un modèle
@@ -40,14 +40,14 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 -   Entrez **EFwithSProcsModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
 -   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant**.
 -   Cliquez sur **nouvelle connexion**.  
-    Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **(1mssqllocaldb @no__t)** , sélectionnez la méthode d’authentification, tapez **School** for le nom de la base de données, puis cliquez sur **OK**.  
+    Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, (base de données locale **)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis cliquez sur **OK**.  
     La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
--   Dans la boîte de dialogue choisir vos objets de base de données, vérifiez les **tables** checkbox pour sélectionner toutes les tables.  
+-   Dans la boîte de dialogue choisir vos objets de base de données, activez la case à cocher **Tables** pour sélectionner toutes les tables.  
     En outre, sélectionnez les procédures stockées suivantes sous le nœud **procédures stockées et fonctions** : **GetStudentGrades** et **GetDepartmentName**. 
 
     ![Import](~/ef6/media/import.jpg)
 
-    *Starting avec Visual Studio 2012 le concepteur EF prend en charge l’importation en bloc des procédures stockées. L' **importation des procédures stockées et des fonctions sélectionnées dans le modèle theentity** est activée par défaut.*
+    *À compter de Visual Studio 2012, le concepteur EF prend en charge l’importation en bloc des procédures stockées. L' **importation des procédures stockées et des fonctions sélectionnées dans le modèle theentity** est activée par défaut.*
 -   Cliquez sur **Terminer**.
 
 Par défaut, la forme de résultat de chaque procédure stockée ou fonction importée qui retourne plusieurs colonnes devient automatiquement un nouveau type complexe. Dans cet exemple, nous voulons mapper les résultats de la fonction **GetStudentGrades** à l’entité **StudentGrade** et les résultats du **GetDepartmentName** à **None** (**None** est la valeur par défaut).
@@ -56,8 +56,8 @@ Pour qu’une importation de fonction retourne un type d’entité, les colonnes
 
 -   Cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Explorateur de modèles**.
 -   Dans l' **Explorateur de modèles**, sélectionnez importation de **fonction**, puis double-cliquez sur la fonction **GetStudentGrades** .
--   Dans la boîte de dialogue Modifier l’importation de fonction, sélectionnez **entités** And choisissez **StudentGrade**.  
-    l’importation de **fonction @no__t 0The est composable** . la case à cocher en haut de la boîte de dialogue **importations** de fonctions vous permet de mapper à des fonctions composables. Si vous activez cette case à cocher, seules les fonctions composables (fonctions table) s’affichent dans la liste déroulante nom de la **procédure stockée/fonction** . Si vous n’activez pas cette case à cocher, seules les fonctions non composables seront affichées dans la liste. *
+-   Dans la boîte de dialogue Modifier l’importation de fonction, sélectionnez **entités** , puis choisissez **StudentGrade**.  
+    *La case **Importer une fonction peut être composable** en haut de la boîte de dialogue **importations** de fonctions, qui vous permet de mapper à des fonctions composables. Si vous activez cette case à cocher, seules les fonctions composables (fonctions table) s’affichent dans la liste déroulante nom de la **procédure stockée/fonction** . Si vous n’activez pas cette case à cocher, seules les fonctions non composables seront affichées dans la liste.*
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 

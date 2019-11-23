@@ -27,9 +27,9 @@ Il existe deux types de données spatiales principales : Geography et Geometry.
 ## <a name="watch-the-video"></a>Regarder la vidéo
 Cette vidéo montre comment mapper des types spatiaux avec l’Entity Framework Designer. Il montre également comment utiliser une requête LINQ pour rechercher une distance entre deux emplacements.
 
-**Présenté par**: Kornich Julia
+**Présenté par**: Julia Kornich
 
-**Vidéo**: [WMV](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.wmv) | [MP4](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-mp4video-spatialwithdesigner.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.zip)
+**Vidéo**: [wmv](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.wmv) | [MP4](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-mp4video-spatialwithdesigner.m4v) | [WMV (zip)](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.zip)
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
@@ -39,7 +39,7 @@ Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual St
 
 1.  Ouvrir Visual Studio 2012
 2.  Dans le menu **fichier** , pointez sur **nouveau**, puis cliquez sur **projet** .
-3.  Dans le volet gauche, cliquez sur **Visual C @ no__t-1**, puis sélectionnez le modèle **console** .
+3.  Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
 4.  Entrez **SpatialEFDesigner** comme nom du projet, puis cliquez sur **OK** .
 
 ## <a name="create-a-new-model-using-the-ef-designer"></a>Créer un nouveau modèle à l’aide du concepteur EF
@@ -60,10 +60,10 @@ L'assistant exécute les actions suivantes :
 
 ## <a name="add-a-new-entity-type"></a>Ajouter un nouveau type d’entité
 
-1.  Cliquez avec le bouton droit sur une zone vide de l’aire de conception, sélectionnez **Add-&gt; Entity**, la boîte de dialogue nouvelle entité s’affiche.
+1.  Cliquez avec le bouton droit sur une zone vide de l’aire de conception, sélectionnez **Ajouter-&gt; entité**, la boîte de dialogue nouvelle entité s’affiche.
 2.  Spécifiez **University** comme nom de type et spécifiez **UniversityID** pour le nom de la propriété de clé, laissez le type **Int32**
 3.  Cliquez sur **OK**.
-4.  Cliquez avec le bouton droit sur l’entité, puis sélectionnez **Ajouter une nouvelle &gt; propriété scalaire**
+4.  Cliquez avec le bouton droit sur l’entité, puis sélectionnez **Ajouter une nouvelle&gt; propriété scalaire**
 5.  Renommez la nouvelle propriété en **Name**
 6.  Ajoutez une autre propriété scalaire et renommez-la **emplacement** ouvrir le fenêtre Propriétés et remplacez le type de la nouvelle propriété par **Geography**
 7.  Enregistrer le modèle et générer le projet
@@ -75,11 +75,11 @@ L'assistant exécute les actions suivantes :
 Nous pouvons maintenant générer une base de données basée sur le modèle.
 
 1.  Cliquez avec le bouton droit sur un espace vide sur l’aire de Entity Designer et sélectionnez **générer la base de données à partir du modèle** .
-2.  La boîte de dialogue choisir votre connexion de données de l’Assistant Création d’une base de données s’affiche. cliquez sur le bouton **nouvelle connexion** , spécifiez (base de données locale **) \\mssqllocaldb** pour le nom du serveur et l' **Université** pour la base de données, puis cliquez sur **OK.**
+2.  La boîte de dialogue choisir votre connexion de données de l’Assistant Création d’une base de données s’affiche. cliquez sur le bouton **nouvelle connexion** , spécifiez (base de données locale **)\\mssqllocaldb** pour le nom du serveur et l' **Université** pour la base de données, puis cliquez sur **OK** .
 3.  Une boîte de dialogue vous demandant si vous souhaitez créer une nouvelle base de données s’affiche, cliquez sur **Oui**.
-4.  Cliquez sur **suivant** . l’Assistant Création d’une base de données génère le langage de définition de données (DDL) pour la création d’une base de données. la DDL générée est affichée dans la boîte de dialogue Résumé et paramètres. Notez que le DDL ne contient pas de définition pour une table mappée au type d’énumération
+4.  Cliquez sur **suivant** pour que l’Assistant Création d’une base de données génère le langage de définition de données (DDL) pour la création d’une base de données. la DDL générée est affichée dans la boîte de dialogue Résumé et paramètres. Notez que le DDL ne contient pas de définition pour une table qui correspond au type d’énumération.
 5.  Cliquez sur **Terminer** pour ne pas exécuter le script DDL.
-6.  L’Assistant Création d’une base de données effectue les opérations suivantes : Ouvre **UniversityModel. edmx. SQL** dans l’éditeur T-SQL génère le schéma de stockage et les sections de mappage du fichier edmx ajoute les informations de chaîne de connexion au fichier app. config.
+6.  L’Assistant Création d’une base de données effectue les opérations suivantes : ouvre **UniversityModel. edmx. SQL** dans l’éditeur T-SQL génère les sections de schéma de stockage et de mappage du fichier edmx ajoute les informations de chaîne de connexion au fichier app. config.
 7.  Cliquez sur le bouton droit de la souris dans l’éditeur T-SQL et sélectionnez **exécuter** la boîte de dialogue se connecter au serveur, entrez les informations de connexion de l’étape 2, puis cliquez sur **se connecter** .
 8.  Pour afficher le schéma généré, cliquez avec le bouton droit sur le nom de la base de données dans Explorateur d’objets SQL Server puis sélectionnez **Actualiser** .
 
@@ -126,6 +126,6 @@ The closest University to you is: School of Fine Art.
 
 Pour afficher les données de la base de données, cliquez avec le bouton droit sur le nom de la base de données dans Explorateur d’objets SQL Server, puis sélectionnez **Actualiser**. Ensuite, cliquez sur le bouton droit de la souris sur la table et sélectionnez **afficher les données**.
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons vu comment mapper des types spatiaux à l’aide de la Entity Framework Designer et comment utiliser des types spatiaux dans le code. 

@@ -18,7 +18,7 @@ Cela doit être simple pour les applications qui utilisent DbContext comme fourn
 
 Voici une liste de contrôle des éléments que vous devez effectuer pour mettre à niveau une application existante vers EF6.
 
-## <a name="1-install-the-ef6-nuget-package"></a>1. Installer le package NuGet EF6
+## <a name="1-install-the-ef6-nuget-package"></a>1. installer le package NuGet EF6
 
 Vous devez effectuer une mise à niveau vers le nouveau runtime Entity Framework 6.
 
@@ -33,18 +33,18 @@ Vous pouvez également exécuter la commande suivante à partir de la console du
 Install-Package EntityFramework
 ```
 
-## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2. Vérifier que les références d’assembly à System. Data. Entity. dll sont supprimées
+## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2. Vérifiez que les références d’assembly à System. Data. Entity. dll sont supprimées
 
 L’installation du package NuGet EF6 doit supprimer automatiquement toutes les références à System. Data. Entity de votre projet.
 
-## <a name="3-swap-any-ef-designer-edmx-models-to-use-ef-6x-code-generation"></a>3. Permuter n’importe quel modèle EF Designer (EDMX) pour utiliser la génération de code EF 6. x
+## <a name="3-swap-any-ef-designer-edmx-models-to-use-ef-6x-code-generation"></a>3. permuter n’importe quel modèle EF Designer (EDMX) pour utiliser la génération de code EF 6. x
 
 Si vous avez créé des modèles avec le concepteur EF, vous devrez mettre à jour les modèles de génération de code pour générer du code compatible EF6.
 
 > [!NOTE]
 > Il n’existe actuellement que les modèles de générateur de DbContext EF 6. x disponibles pour Visual Studio 2012 et 2013.
 
-1. Supprimer les modèles de génération de code existants. Ces fichiers sont généralement nommés **@no__t -1edmx_file_name\>.tt** et **\<edmx_file_name @ no__t-5. Context.tt** et sont imbriqués sous votre fichier edmx dans Explorateur de solutions. Vous pouvez sélectionner les modèles dans Explorateur de solutions et appuyer sur la touche **Suppr** pour les supprimer.  
+1. Supprimer les modèles de génération de code existants. Ces fichiers sont généralement nommés **\<edmx_file_name\>. TT** et **\<edmx_file_name\>. Context.tt** et sont imbriqués sous votre fichier edmx dans Explorateur de solutions. Vous pouvez sélectionner les modèles dans Explorateur de solutions et appuyer sur la touche **Suppr** pour les supprimer.  
    > [!NOTE]
    > Dans les projets de site Web, les modèles ne sont pas imbriqués sous votre fichier edmx, mais sont listés en même temps dans Explorateur de solutions.  
 
@@ -58,19 +58,19 @@ Si vous avez créé des modèles avec le concepteur EF, vous devrez mettre à jo
     - Si vous utilisez l’API ObjectContext, vous devrez sélectionner l’onglet **Online** et rechercher le **Générateur EntityObject EF 6. x**.  
 3. Si vous avez appliqué des personnalisations aux modèles de génération de code, vous devez les réappliquer aux modèles mis à jour.
 
-## <a name="4-update-namespaces-for-any-core-ef-types-being-used"></a>4. Mettre à jour les espaces de noms pour tous les types EF de base utilisés
+## <a name="4-update-namespaces-for-any-core-ef-types-being-used"></a>4. mettre à jour les espaces de noms pour tous les types EF de base utilisés
 
 Les espaces de noms pour DbContext et les types Code First n’ont pas changé. Cela signifie que pour de nombreuses applications qui utilisent EF 4,1 ou une version ultérieure, vous n’aurez pas besoin de modifier quoi que ce soit.
 
 Les types tels que ObjectContext qui étaient précédemment dans System. Data. Entity. dll ont été déplacés vers de nouveaux espaces de noms. Cela signifie que vous devrez peut-être mettre à jour vos directives *using* ou *Import* pour créer des EF6.
 
-La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Exemple :
+La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Exemple :
 
 - System. Data. EntityException = > System. Data. **Entity. Core**. EntityException  
 - System. Data. Objects. ObjectContext = > System. Data. **Entity. Core**. Objects. ObjectContext  
 - System. Data. Objects. DataClasses. RelationshipManager = > System. Data. **Entity. Core**. Objets. DataClasses. RelationshipManager  
 
-Ces types se trouvent dans les espaces de noms de *base* , car ils ne sont pas utilisés directement pour la plupart des applications basées sur DbContext. Certains types qui faisaient partie de System. Data. Entity. dll sont toujours utilisés communément et directement pour les applications basées sur DbContext et n’ont donc pas été déplacés dans les espaces de noms de *base* . Ces équivalents sont :
+Ces types se trouvent dans les espaces de noms de *base* , car ils ne sont pas utilisés directement pour la plupart des applications basées sur DbContext. Certains types qui faisaient partie de System. Data. Entity. dll sont toujours utilisés communément et directement pour les applications basées sur DbContext et n’ont donc pas été déplacés dans les espaces de noms de *base* . Il s'agit des paramètres suivants :
 
 - System. Data. EntityState = > System. Data. **Entité**. EntityState  
 - System. Data. Objects. DataClasses. EdmFunctionAttribute = > System. Data. **Entité. DbFunctionAttribute**  

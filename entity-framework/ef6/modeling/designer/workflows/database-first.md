@@ -16,9 +16,9 @@ Cette vidéo et la procédure pas à pas fournissent une introduction au dévelo
 ## <a name="watch-the-video"></a>Regarder la vidéo
 Cette vidéo fournit une introduction au développement Database First à l’aide de Entity Framework. Database First vous permet de rétroconcevoir un modèle à partir d’une base de données existante. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
 
-**Présenté par**: [Rowan Miller](https://romiller.com/)
+**Présentée par** : [Rowan Miller](https://romiller.com/)
 
-**Vidéo**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**Vidéo**: [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
@@ -28,7 +28,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
  
 
-## <a name="1-create-an-existing-database"></a>1. Créer une base de données existante
+## <a name="1-create-an-existing-database"></a>1. créer une base de données existante
 
 En général, lorsque vous ciblez une base de données existante, elle est déjà créée, mais pour cette procédure pas à pas, nous devons créer une base de données à laquelle accéder.
 
@@ -41,8 +41,8 @@ Le serveur de base de données installé avec Visual Studio diffère selon la ve
 
 Commençons par générer la base de données.
 
--   Ouvrir Visual Studio
--   **Affichage-&gt; Explorateur de serveurs**
+-   Ouvrez Visual Studio
+-   **Vue-&gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner Microsoft SQL Server comme source de données
 
@@ -79,19 +79,19 @@ CREATE TABLE [dbo].[Posts] (
 );
 ```
 
-## <a name="2-create-the-application"></a>2. Création de l’application
+## <a name="2-create-the-application"></a>2. créer l’application
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Database First pour effectuer l’accès aux données :
 
--   Ouvrir Visual Studio
--   **Fichier-&gt; nouveau-&gt; projet...**
+-   Ouvrez Visual Studio
+-   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **DatabaseFirstSample** comme nom
 -   Sélectionnez **OK**.
 
  
 
-## <a name="3-reverse-engineer-model"></a>3. Modèle d’ingénierie à rebours
+## <a name="3-reverse-engineer-model"></a>3. modèle d’ingénierie à rebours
 
 Nous allons utiliser Entity Framework Designer, inclus dans le cadre de Visual Studio, pour créer notre modèle.
 
@@ -133,13 +133,13 @@ Ensuite, nous devons permuter notre modèle pour générer le code qui utilise l
 
 -   Cliquez avec le bouton droit sur une zone vide de votre modèle dans le concepteur EF, puis sélectionnez **Ajouter un élément de génération de code...**
 -   Sélectionnez **modèles en ligne** dans le menu de gauche et recherchez **DbContext**
--   Sélectionnez le **Générateur de DBCONTEXT EF 5. x pour C @ no__t-1**, entrez **BloggingModel** comme nom et cliquez sur **Ajouter** .
+-   Sélectionnez le **Générateur de DBCONTEXT EF 5. x pour C\#** , entrez **BloggingModel** comme nom et cliquez sur **Ajouter** .
 
     ![DbContext (modèle)](~/ef6/media/dbcontexttemplate.png)
 
  
 
-## <a name="4-reading--writing-data"></a>4. Lecture & écriture de données
+## <a name="4-reading--writing-data"></a>4. lecture & écriture de données
 
 Maintenant que nous avons un modèle, il est temps de l’utiliser pour accéder à certaines données. Les classes que nous allons utiliser pour accéder aux données sont générées automatiquement pour vous en fonction du fichier EDMX.
 
@@ -194,7 +194,7 @@ Press any key to exit...
 ```
  
 
-## <a name="5-dealing-with-database-changes"></a>5. Traitement des modifications de la base de données
+## <a name="5-dealing-with-database-changes"></a>5. traitement des modifications de la base de données
 
 À présent, il est temps d’apporter des modifications à notre schéma de base de données, lorsque nous effectuons ces modifications, nous devons également mettre à jour notre modèle pour refléter ces modifications.
 
@@ -215,7 +215,7 @@ Maintenant que le schéma est mis à jour, il est temps de mettre à jour le mod
 
 -   Cliquez avec le bouton droit sur une zone vide de votre modèle dans le concepteur EF et sélectionnez mettre à jour le modèle à partir de la base de données. cette opération lance l’Assistant Mise à jour.
 -   Dans l’onglet ajouter de l’Assistant Mise à jour, activez la case à cocher en regard de tables. cela indique que nous souhaitons ajouter de nouvelles tables à partir du schéma.
-    l’onglet d’actualisation *The affiche toutes les tables existantes dans le modèle dont les modifications sont recherchées pendant la mise à jour. Les onglets supprimer affichent toutes les tables qui ont été supprimées du schéma et sont également supprimées du modèle dans le cadre de la mise à jour. Les informations de ces deux onglets sont automatiquement détectées et sont fournies à titre d’information uniquement, vous ne pouvez pas modifier les paramètres.*
+    *L’onglet actualiser affiche toutes les tables existantes dans le modèle dont les modifications sont recherchées pendant la mise à jour. Les onglets supprimer affichent toutes les tables qui ont été supprimées du schéma et sont également supprimées du modèle dans le cadre de la mise à jour. Les informations de ces deux onglets sont automatiquement détectées et sont fournies à titre d’information uniquement, vous ne pouvez pas modifier les paramètres.*
 
     ![Actualiser l’Assistant](~/ef6/media/refreshwizard.png)
 
@@ -227,6 +227,6 @@ Le modèle est maintenant mis à jour pour inclure une nouvelle entité utilisat
 
 ![Modèle mis à jour](~/ef6/media/modelupdated.png)
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons examiné Database First développement, ce qui nous a permis de créer un modèle dans le concepteur EF basé sur une base de données existante. Nous avons ensuite utilisé ce modèle pour lire et écrire des données de la base de données. Enfin, nous avons mis à jour le modèle pour refléter les modifications que nous avons apportées au schéma de base de données.

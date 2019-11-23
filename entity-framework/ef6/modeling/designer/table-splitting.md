@@ -19,7 +19,7 @@ L’illustration suivante montre les fenêtres principales qui sont utilisées l
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Configuration requise
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
@@ -32,7 +32,7 @@ Cette procédure pas à pas utilise Visual Studio 2012.
 
 -   Ouvrez Visual Studio 2012.
 -   Dans le menu **Fichier** , pointez sur **Nouveau**, puis cliquez sur **Projet**.
--   Dans le volet gauche, cliquez sur Visual\#C, puis sélectionnez le modèle application console.
+-   Dans le volet gauche, cliquez sur Visual C\#, puis sélectionnez le modèle application console.
 -   Entrez **TableSplittingSample** comme nom du projet, puis cliquez sur **OK**.
 
 ## <a name="create-a-model-based-on-the-school-database"></a>Créer un modèle basé sur la base de données School
@@ -41,12 +41,12 @@ Cette procédure pas à pas utilise Visual Studio 2012.
 -   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
 -   Entrez **TableSplittingModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
 -   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant.**
--   Cliquez sur nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **(mssqllocaldb)\\** , sélectionnez la méthode d’authentification, tapez **School** comme nom de la base de données, puis cliquez sur **OK**.
+-   Cliquez sur nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, (base de données locale **)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis cliquez sur **OK**.
     La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
--   Dans la boîte de dialogue choisir vos objets de base de données, dérouler le nœud **tables** et vérifier la table **Person** . Cette opération ajoute la table spécifiée au modèle **School** .
+-   Dans la boîte de dialogue choisir vos objets de base de données, dérouler les **Tables** nœud et vérifier la table **Person** . Cette opération ajoute la table spécifiée au modèle **School** .
 -   Cliquez sur **Terminer**.
 
-Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché. Tous les objets que vous avez sélectionnés dans la boîte de dialogue **choisir vos objets de base de données**sont ajoutés au modèle.
+Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché. Tous les objets que vous avez sélectionnés dans la boîte **de dialogue choisir vos objets de base de données** sont ajoutés au modèle.
 
 ## <a name="map-two-entities-to-a-single-table"></a>Mapper deux entités à une table unique
 
@@ -56,21 +56,21 @@ Dans cette section, vous allez fractionner l’entité **Person** en deux entit�
 > L’entité **Person** ne contient pas de propriétés pouvant contenir une grande quantité de données ; elle est utilisée à titre d’exemple.
 
 -   Cliquez avec le bouton droit sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **entité**.
-    La boîte **de dialogue nouvelle entité** s’affiche.
+    La boîte **de dialogue nouvelle** d’entité s’affiche.
 -   Tapez **HireInfo** pour le nom de l' **entité** et **PersonID** pour le nom de la **propriété de clé** .
 -   Cliquez sur **OK**.
 -   Un nouveau type d'entité est créé et affiché sur l'aire de conception.
--   Sélectionnez la ****  propriété HireDate du type d’entité **Person** et appuyez sur les touches **CTRL + X** .
+-   Sélectionnez la propriété **hiredate** de la **personne** type d’entité, puis appuyez sur **CTRL + X** .
 -   Sélectionnez l’entité **HireInfo** et appuyez sur les touches **Ctrl + V** .
 -   Créer une association entre **Person** et **HireInfo**. Pour ce faire, cliquez avec le bouton droit sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **Association**.
--   La boîte de dialogue **Ajouter une association** s’affiche. Le nom **PersonHireInfo** est donné par défaut.
+-   La boîte de dialogue Ajouter un d' **Association** s’affiche. Le nom **PersonHireInfo** est donné par défaut.
 -   Spécifiez la multiplicité **1 (un)** aux deux extrémités de la relation.
 -   Appuyez sur **OK**.
 
-L’étape suivante nécessite la fenêtre **Détails** de mappage. Si vous ne voyez pas cette fenêtre, cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Détails de mapping**.
+L’étape suivante nécessite la fenêtre **Détails de mappage** . Si vous ne voyez pas cette fenêtre, cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Détails de mapping**.
 
--   Sélectionnez le type d’entité **HireInfo** , puis cliquez sur **&lt;ajouter une&gt;table ou une vue** dans la fenêtre **Détails** de mappage.
--   Sélectionnez **Person** dans la  **&lt;&gt;** liste déroulante Ajouter un champ de table ou de vue. La liste contient les tables ou les vues auxquelles l’entité sélectionnée peut être mappée.
+-   Sélectionnez le type d’entité **HireInfo** , puis cliquez sur **&lt;ajouter une table ou une vue&gt;**  dans la fenêtre des **Détails de mappage** .
+-   Sélectionnez **Person** dans la liste déroulante **&lt;ajouter une table ou une vue&gt;**  champ. La liste contient les tables ou les vues auxquelles l’entité sélectionnée peut être mappée.
     Les propriétés appropriées doivent être mappées par défaut.
 
     ![Mappage](~/ef6/media/mapping.png)
@@ -126,7 +126,7 @@ Les instructions T-SQL suivantes ont été exécutées sur la base de données *
 
 -   L' **instruction INSERT** suivante a été exécutée à la suite de l’exécution du contexte. SaveChanges () et combine les données des entités **Person** et **HireInfo**
 
-    ![Insert](~/ef6/media/insert.png)
+    ![Insertion](~/ef6/media/insert.png)
 
 -   La commande **Select** suivante a été exécutée à la suite de l’exécution du contexte. People. FirstOrDefault () et sélectionne uniquement les colonnes mappées à **Person**
 

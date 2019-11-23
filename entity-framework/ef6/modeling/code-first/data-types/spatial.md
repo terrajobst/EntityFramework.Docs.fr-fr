@@ -27,9 +27,9 @@ Il existe deux types de données spatiales principales : Geography et Geometry.
 ## <a name="watch-the-video"></a>Regarder la vidéo
 Cette vidéo montre comment mapper des types spatiaux avec Entity Framework Code First. Il montre également comment utiliser une requête LINQ pour rechercher une distance entre deux emplacements.
 
-**Présenté par**: Kornich Julia
+**Présenté par**: Julia Kornich
 
-**Vidéo**: [WMV](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
+**Vidéo**: [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
@@ -39,7 +39,7 @@ Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual St
 
 1.  Ouvrir Visual Studio 2012
 2.  Dans le menu **fichier** , pointez sur **nouveau**, puis cliquez sur **projet** .
-3.  Dans le volet gauche, cliquez sur **Visual C @ no__t-1**, puis sélectionnez le modèle **console** .
+3.  Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
 4.  Entrez **SpatialCodeFirst** comme nom du projet, puis cliquez sur **OK** .
 
 ## <a name="define-a-new-model-using-code-first"></a>Définir un nouveau modèle à l’aide de Code First
@@ -67,7 +67,7 @@ public class University
 
 ## <a name="define-the-dbcontext-derived-type"></a>Définir le type dérivé DbContext
 
-En plus de définir des entités, vous devez définir une classe qui dérive de DbContext et expose les propriétés DbSet @ no__t-0TEntity @ no__t-1. Les propriétés DbSet @ no__t-0TEntity @ no__t-1 permettent au contexte de savoir quels types vous souhaitez inclure dans le modèle.
+En plus de définir des entités, vous devez définir une classe qui dérive de DbContext et expose les propriétés DbSet&lt;TEntity&gt;. Les propriétés DbSet&lt;TEntity&gt; permettent au contexte de savoir quels types vous souhaitez inclure dans le modèle.
 
 Une instance du type dérivé DbContext gère les objets d’entité au moment de l’exécution, ce qui comprend le remplissage des objets avec les données d’une base de données, le suivi des modifications et la persistance des données dans la base de données.
 
@@ -144,12 +144,12 @@ Notez que si vous apportez des modifications à votre modèle après la créatio
 
 Pour afficher la base de données et les données, procédez comme suit :
 
-1.  Dans le menu principal de Visual Studio 2012, sélectionnez **afficher** - @ no__t-2 **Explorateur d’objets SQL Server**.
+1.  Dans le menu principal de Visual Studio 2012, sélectionnez **afficher** -&gt; **Explorateur d’objets SQL Server**.
 2.  Si la base de données locale ne figure pas dans la liste des serveurs, cliquez sur le bouton droit de la souris sur **SQL Server** et sélectionnez **ajouter SQL Server** utiliser l' **authentification Windows** par défaut pour vous connecter à l’instance de base de données locale.
 3.  Développez le nœud de base de données locale
 4.  Dérouler le dossier **bases de données** pour afficher la nouvelle base de données et accéder à la table **universités**
 5.  Pour afficher les données, cliquez avec le bouton droit sur la table et sélectionnez **afficher les données** .
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 Dans cette procédure pas à pas, nous avons vu comment utiliser des types spatiaux avec Entity Framework Code First. 

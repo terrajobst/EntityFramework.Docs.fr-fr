@@ -102,7 +102,7 @@ namespace TestingDemo
 
 Notez que notre contexte implémente l’interface IBloggingContext.  
 
-Si vous utilisez Code First vous pouvez modifier votre contexte directement pour implémenter l’interface. Si vous utilisez le concepteur EF, vous devez modifier le modèle T4 qui génère votre contexte. Ouvrez le \<model_name @ no__t-1. Fichier Context.tt imbriqué sous votre fichier edmx, recherchez le fragment de code suivant et ajoutez-le dans l’interface, comme indiqué.  
+Si vous utilisez Code First vous pouvez modifier votre contexte directement pour implémenter l’interface. Si vous utilisez le concepteur EF, vous devez modifier le modèle T4 qui génère votre contexte. Ouvrez le\>de model_name \<. Fichier Context.tt imbriqué sous votre fichier edmx, recherchez le fragment de code suivant et ajoutez-le dans l’interface, comme indiqué.  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext

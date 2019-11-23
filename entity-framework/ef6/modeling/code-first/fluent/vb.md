@@ -11,7 +11,7 @@ ms.lasthandoff: 10/09/2019
 ms.locfileid: "72182672"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent avec VB.NET
-Code First vous permet de définir votre modèle à l’aide de classes C @ no__t-0 ou VB.NET. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent. Cette procédure pas à pas montre comment effectuer la configuration de l’API Fluent à l’aide de VB.NET.
+Code First vous permet de définir votre modèle à l’aide de classes C\# ou VB.NET. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent. Cette procédure pas à pas montre comment effectuer la configuration de l’API Fluent à l’aide de VB.NET.
 
 Cette page suppose que vous avez une compréhension de base des Code First. Pour plus d’informations sur Code First, consultez les procédures pas à pas suivantes :
 
@@ -28,8 +28,8 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données.
 
--   Ouvrir Visual Studio
--   **Fichier-&gt; nouveau-&gt; projet...**
+-   Ouvrez Visual Studio
+-   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstVBSample** comme nom
 -   Sélectionnez **OK**.
@@ -144,7 +144,7 @@ Nous sommes sur le début de l’utilisation des types du Entity Framework donc 
 -   Sélectionner le package **EntityFramework**
 -   Cliquez sur **installer**
 
-À présent, il est temps de définir un contexte dérivé, qui représente une session avec la base de données, ce qui nous permet d’interroger et d’enregistrer des données. Nous définissons un contexte qui dérive de System. Data. Entity. DbContext et expose un DbSet @ no__t-0TEntity @ no__t-1 typé pour chaque classe dans notre modèle.
+À présent, il est temps de définir un contexte dérivé, qui représente une session avec la base de données, ce qui nous permet d’interroger et d’enregistrer des données. Nous définissons un contexte qui dérive de System. Data. Entity. DbContext et expose un DbSet de type&lt;tente de&gt; typé pour chaque classe dans notre modèle.
 
 -   Ajoutez une nouvelle classe au projet, entrez **SchoolContext** pour le nom de la classe
 -   Remplacez le contenu de la nouvelle classe par le code suivant :
@@ -171,7 +171,7 @@ Nous sommes sur le début de l’utilisation des types du Entity Framework donc 
 
 ## <a name="configuring-with-the-fluent-api"></a>Configuration avec l’API Fluent
 
-Cette section montre comment utiliser les API Fluent pour configurer les types de mappage des tables, des propriétés sur les colonnes et des relations entre les tables @ no__t-0Type dans votre modèle. L’API Fluent est exposée via le type **DbModelBuilder** et est généralement accessible en remplaçant la méthode **OnModelCreating** sur **DbContext**.
+Cette section montre comment utiliser les API Fluent pour configurer les types de mappage des tables, des propriétés sur les colonnes et des relations entre les tables\\type dans votre modèle. L’API Fluent est exposée via le type **DbModelBuilder** et est généralement accessible en remplaçant la méthode **OnModelCreating** sur **DbContext**.
 
 -   Copiez le code suivant et ajoutez-le à la méthode **OnModelCreating** définie sur la classe **SchoolContext** . les commentaires expliquent ce que fait chaque mappage
 
