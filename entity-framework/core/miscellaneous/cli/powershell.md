@@ -13,17 +13,17 @@ ms.locfileid: "72811900"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Référence des outils de Entity Framework Core-console du gestionnaire de package dans Visual Studio
 
-Les outils de la console du gestionnaire de package (PMC) pour Entity Framework Core effectuer des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes s’exécutent dans Visual Studio à l’aide de la [console du gestionnaire de package](/nuget/tools/package-manager-console). Ces outils fonctionnent avec les projets .NET Framework et .NET Core.
+Les outils de la console du gestionnaire de package (PMC) pour Entity Framework Core effectuent des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes s’exécutent dans Visual Studio à l’aide de la [console du gestionnaire de package](/nuget/tools/package-manager-console). Ces outils fonctionnent avec les projets .NET Framework et .NET Core.
 
-Si vous n’utilisez pas Visual Studio, nous vous recommandons d’utiliser les [outils en ligne de commande EF Core à](dotnet.md) la place. Les outils CLI sont inter-plateformes et s’exécutent à l’intérieur d’une invite de commandes.
+Si vous n’utilisez pas Visual Studio, nous vous recommandons d’utiliser les [outils en ligne de commande EF Core](dotnet.md) à la place. Les outils CLI sont inter-plateformes et s’exécutent à l’intérieur d’une invite de commandes.
 
 ## <a name="installing-the-tools"></a>Installation des outils
 
-Les procédures d’installation et de mise à jour des outils diffèrent entre ASP.NET Core 2.1 + et les versions antérieures ou d’autres types de projets.
+Les procédures d’installation et de mise à jour des outils diffèrent entre ASP.NET Core 2.1+ et les versions antérieures ou d’autres types de projets.
 
 ### <a name="aspnet-core-version-21-and-later"></a>ASP.NET Core version 2,1 et versions ultérieures
 
-Les outils sont inclus automatiquement dans un projet ASP.NET Core 2.1 +, car le package `Microsoft.EntityFrameworkCore.Tools` est inclus dans le [AspNetCore](/aspnet/core/fundamentals/metapackage-app).
+Les outils sont inclus automatiquement dans un projet ASP.NET Core 2.1+, car le package `Microsoft.EntityFrameworkCore.Tools` est inclus dans le [métapackage Microsoft.AspNetCore.App](/aspnet/core/fundamentals/metapackage-app).
 
 Par conséquent, vous n’avez rien à faire pour installer les outils, mais vous devez effectuer les opérations suivantes :
 
@@ -32,7 +32,7 @@ Par conséquent, vous n’avez rien à faire pour installer les outils, mais vou
 
 Pour vous assurer que vous obtenez la version la plus récente des outils, nous vous recommandons également d’effectuer les étapes suivantes :
 
-* Modifiez votre fichier *. csproj* et ajoutez une ligne spécifiant la dernière version du package [Microsoft. EntityFrameworkCore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) . Par exemple, le fichier *. csproj* peut inclure une `ItemGroup` qui ressemble à ceci :
+* Modifiez votre fichier *. csproj* et ajoutez une ligne spécifiant la dernière version du package [Microsoft.EntityFrameworkCore.Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/). Par exemple, le fichier *. csproj* peut inclure une `ItemGroup` qui ressemble à ceci :
 
   ```xml
   <ItemGroup>
@@ -133,9 +133,9 @@ Le tableau suivant montre les paramètres qui sont communs à toutes les command
 
 | Paramètre                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Context \<chaîne >        | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
-| -Project \<chaîne >        | Projet cible. Si ce paramètre est omis, le **projet par défaut** pour la **console du gestionnaire de package** est utilisé comme projet cible.                                                                             |
-| -StartupProject \<chaîne > | Projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans les propriétés de la **solution** est utilisé comme projet cible.                                                                                 |
+| -Context \<chaîne>        | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
+| -Project \<chaîne>        | Projet cible. Si ce paramètre est omis, le **projet par défaut** pour la **console du gestionnaire de package** est utilisé comme projet cible.                                                                             |
+| -StartupProject \<chaîne> | Projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans les propriétés de la **solution** est utilisé comme projet cible.                                                                                 |
 | -Verbose                  | Affichez la sortie détaillée.                                                                                                                                                                                                 |
 
 Pour afficher des informations d’aide sur une commande, utilisez la commande `Get-Help` de PowerShell.
@@ -143,7 +143,7 @@ Pour afficher des informations d’aide sur une commande, utilisez la commande `
 > [!TIP]
 > Les paramètres Context, Project et StartupProject prennent en charge l’expansion de tabulation.
 
-## <a name="add-migration"></a>Ajouter une migration
+## <a name="add-migration"></a>Add-Migration
 
 Ajoute une nouvelle migration.
 
@@ -151,10 +151,10 @@ Paramètres :
 
 | Paramètre                         | Description                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| Nom de <nobr>\<chaîne ><nobr>       | Nom de la migration. Il s’agit d’un paramètre positionnel qui est obligatoire.                                              |
-| <nobr>-OutputDir \<chaîne ></nobr> | Répertoire (et sous-espace de noms) à utiliser. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
+| -Name <nobr>\<chaîne><nobr>       | Nom de la migration. Il s’agit d’un paramètre positionnel qui est obligatoire.                                              |
+| <nobr>-OutputDir \<chaîne></nobr> | Répertoire (et sous-espace de noms) à utiliser. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
 
-## <a name="drop-database"></a>Supprimer la base de données
+## <a name="drop-database"></a>Drop-Database
 
 Supprime la base de données.
 
@@ -164,7 +164,7 @@ Paramètres :
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | Affichez la base de données qui sera supprimée, mais ne la supprimez pas. |
 
-## <a name="get-dbcontext"></a>Acquérir-DbContext
+## <a name="get-dbcontext"></a>Get-DbContext
 
 Obtient des informations sur un type de `DbContext`.
 
@@ -178,7 +178,7 @@ Paramètres :
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | Rétablissez la migration (annulez les modifications qui ont été appliquées à la base de données). |
 
-## <a name="scaffold-dbcontext"></a>Génération de modèles automatique-DbContext
+## <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
 Génère du code pour une `DbContext` et des types d’entités pour une base de données. Pour que `Scaffold-DbContext` génère un type d’entité, la table de base de données doit avoir une clé primaire.
 
@@ -186,11 +186,11 @@ Paramètres :
 
 | Paramètre                          | Description                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Connection \<chaîne ></nobr> | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *Name =\<nom de la chaîne de connexion >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. Il s’agit d’un paramètre positionnel qui est obligatoire. |
-| <nobr>-Provider \<chaîne ></nobr>   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Il s’agit d’un paramètre positionnel qui est obligatoire.                                                                                           |
-| -OutputDir \<chaîne >               | Répertoire dans lequel placer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                                             |
-| -ContextDir \<chaîne >              | Répertoire dans lequel placer le fichier `DbContext`. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                              |
-| -Context \<chaîne >                 | Nom de la classe `DbContext` à générer.                                                                                                                                                                                                                          |
+| <nobr>-Connection \<chaîne></nobr> | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2.x, la valeur peut être *Name =\<nom de la chaîne de connexion >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. Il s’agit d’un paramètre positionnel qui est obligatoire. |
+| <nobr>-Provider \<chaîne></nobr>   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Il s’agit d’un paramètre positionnel qui est obligatoire.                                                                                           |
+| -OutputDir \<chaîne>               | Répertoire dans lequel placer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                                             |
+| -ContextDir \<chaîne>              | Répertoire dans lequel placer le fichier `DbContext`. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                              |
+| -Context \<chaîne>                 | Nom de la classe `DbContext` à générer.                                                                                                                                                                                                                          |
 | -Schemas \<String [] >               | Schémas des tables pour lesquelles générer des types d’entité. Si ce paramètre est omis, tous les schémas sont inclus.                                                                                                                                                             |
 | -Tables \<String [] >                | Tables pour lesquelles générer des types d’entité. Si ce paramètre est omis, toutes les tables sont incluses.                                                                                                                                                                         |
 | -DataAnnotations                   | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si ce paramètre est omis, seule l’API Fluent est utilisée.                                                                                                                                                      |
@@ -209,7 +209,7 @@ Exemple qui génère uniquement les tables sélectionnées et crée le contexte 
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables "Blog","Post" -ContextDir Context -Context BlogContext
 ```
 
-## <a name="script-migration"></a>Script-migration
+## <a name="script-migration"></a>Script-Migration
 
 Génère un script SQL qui applique toutes les modifications d’une migration sélectionnée à une autre migration sélectionnée.
 
@@ -217,8 +217,8 @@ Paramètres :
 
 | Paramètre                | Description                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-From* \<chaîne >        | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
-| *-To* \<chaîne >          | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                                                                                      |
+| *-From* \<chaîne>        | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
+| *-To* \<chaîne>          | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                                                                                      |
 | <nobr>-Idempotent</nobr> | Générez un script qui peut être utilisé sur une base de données lors d’une migration.                                                                                                                                                         |
 | -Output \<String >        | Fichier dans lequel écrire le résultat. Si ce paramètre est omis, le fichier est créé avec un nom généré dans le même dossier que celui dans lequel les fichiers d’exécution de l’application sont créés, par exemple : */obj/Debug/netcoreapp2.1/ghbkztfz.SQL/* . |
 
@@ -237,13 +237,13 @@ L’exemple suivant crée un script pour toutes les migrations après la migrati
 Script-Migration -From 20180904195021_InitialCreate
 ```
 
-## <a name="update-database"></a>Mettre à jour-base de données
+## <a name="update-database"></a>Update-Database
 
 Met à jour la base de données jusqu’à la dernière migration ou à une migration spécifiée.
 
 | Paramètre                           | Description                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr> *-Migration* \<chaîne ></nobr> | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
+| <nobr> *-Migration* \<chaîne></nobr> | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
 
 > [!TIP]
 > Le paramètre de migration prend en charge l’expansion de tabulation.
