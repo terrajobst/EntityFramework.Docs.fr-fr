@@ -133,9 +133,9 @@ Le tableau suivant montre les paramètres qui sont communs à toutes les command
 
 | Paramètre                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Context \<chaîne >        | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
-| -Project \<chaîne >        | Projet cible. Si ce paramètre est omis, le **projet par défaut** pour la **console du gestionnaire de package** est utilisé comme projet cible.                                                                             |
-| -StartupProject \<chaîne > | Projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans les propriétés de la **solution** est utilisé comme projet cible.                                                                                 |
+| -Context \<chaîne>        | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si ce paramètre est omis, EF Core recherche la classe de contexte. S’il existe plusieurs classes de contexte, ce paramètre est obligatoire. |
+| -Project \<chaîne>        | Projet cible. Si ce paramètre est omis, le **projet par défaut** pour la **console du gestionnaire de package** est utilisé comme projet cible.                                                                             |
+| -StartupProject \<chaîne> | Projet de démarrage. Si ce paramètre est omis, le **projet de démarrage** dans les propriétés de la **solution** est utilisé comme projet cible.                                                                                 |
 | -Verbose                  | Affichez la sortie détaillée.                                                                                                                                                                                                 |
 
 Pour afficher des informations d’aide sur une commande, utilisez la commande `Get-Help` de PowerShell.
@@ -151,8 +151,8 @@ Paramètres :
 
 | Paramètre                         | Description                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| Nom de <nobr>\<chaîne ><nobr>       | Nom de la migration. Il s’agit d’un paramètre positionnel qui est obligatoire.                                              |
-| <nobr>-OutputDir \<chaîne ></nobr> | Répertoire (et sous-espace de noms) à utiliser. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
+| Nom de <nobr>\<chaîne><nobr>       | Nom de la migration. Il s’agit d’un paramètre positionnel qui est obligatoire.                                              |
+| <nobr>-OutputDir \<chaîne></nobr> | Répertoire (et sous-espace de noms) à utiliser. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
 
 ## <a name="drop-database"></a>Drop-Database
 
@@ -186,11 +186,11 @@ Paramètres :
 
 | Paramètre                          | Description                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Connection \<chaîne ></nobr> | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *Name =\<nom de la chaîne de connexion >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. Il s’agit d’un paramètre positionnel qui est obligatoire. |
-| <nobr>-Provider \<chaîne ></nobr>   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Il s’agit d’un paramètre positionnel qui est obligatoire.                                                                                           |
-| -OutputDir \<chaîne >               | Répertoire dans lequel placer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                                             |
-| -ContextDir \<chaîne >              | Répertoire dans lequel placer le fichier `DbContext`. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                              |
-| -Context \<chaîne >                 | Nom de la classe `DbContext` à générer.                                                                                                                                                                                                                          |
+| <nobr>-Connection \<chaîne></nobr> | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *Name =\<nom de la chaîne de connexion >* . Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. Il s’agit d’un paramètre positionnel qui est obligatoire. |
+| <nobr>-Provider \<chaîne></nobr>   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer`. Il s’agit d’un paramètre positionnel qui est obligatoire.                                                                                           |
+| -OutputDir \<chaîne>               | Répertoire dans lequel placer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                                             |
+| -ContextDir \<chaîne>              | Répertoire dans lequel placer le fichier `DbContext`. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                                                                                                              |
+| -Context \<chaîne>                 | Nom de la classe `DbContext` à générer.                                                                                                                                                                                                                          |
 | -Schemas \<String [] >               | Schémas des tables pour lesquelles générer des types d’entité. Si ce paramètre est omis, tous les schémas sont inclus.                                                                                                                                                             |
 | -Tables \<String [] >                | Tables pour lesquelles générer des types d’entité. Si ce paramètre est omis, toutes les tables sont incluses.                                                                                                                                                                         |
 | -DataAnnotations                   | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si ce paramètre est omis, seule l’API Fluent est utilisée.                                                                                                                                                      |
@@ -217,8 +217,8 @@ Paramètres :
 
 | Paramètre                | Description                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-From* \<chaîne >        | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
-| *-To* \<chaîne >          | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                                                                                      |
+| *-From* \<chaîne>        | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0.                                                              |
+| *-To* \<chaîne>          | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                                                                                      |
 | <nobr>-Idempotent</nobr> | Générez un script qui peut être utilisé sur une base de données lors d’une migration.                                                                                                                                                         |
 | -Output \<String >        | Fichier dans lequel écrire le résultat. Si ce paramètre est omis, le fichier est créé avec un nom généré dans le même dossier que celui dans lequel les fichiers d’exécution de l’application sont créés, par exemple : */obj/Debug/netcoreapp2.1/ghbkztfz.SQL/* . |
 
@@ -243,7 +243,7 @@ Met à jour la base de données jusqu’à la dernière migration ou à une migr
 
 | Paramètre                           | Description                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr> *-Migration* \<chaîne ></nobr> | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
+| <nobr> *-Migration* \<chaîne></nobr> | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
 
 > [!TIP]
 > Le paramètre de migration prend en charge l’expansion de tabulation.
