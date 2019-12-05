@@ -1,15 +1,16 @@
 ---
 title: Héritage-EF Core
-author: rowanmiller
+description: Comment configurer l’héritage de type d’entité à l’aide de Entity Framework Core
+author: AndriySvyryd
+ms.author: ansvyryd
 ms.date: 10/27/2016
-ms.assetid: 754be334-dd21-450e-9d22-2591e80012a2
 uid: core/modeling/inheritance
-ms.openlocfilehash: abc1caa4d3839b7cdb52b316bcfc8f648b609b70
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 4d43a432174c92ab7f3f9d78a234aefb0a4a17e8
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655687"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824677"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -17,7 +18,7 @@ L’héritage dans le modèle EF est utilisé pour contrôler le mode de représ
 
 ## <a name="conventions"></a>Conventions
 
-Par Convention, il revient au fournisseur de base de données de déterminer la façon dont l’héritage sera représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour savoir comment cela est géré avec un fournisseur de base de données relationnelle.
+Par défaut, il revient au fournisseur de base de données de déterminer la façon dont l’héritage sera représenté dans la base de données. Consultez [héritage (base de données relationnelle)](relational/inheritance.md) pour savoir comment cela est géré avec un fournisseur de base de données relationnelle.
 
 EF ne configure l’héritage que si deux ou plusieurs types hérités sont explicitement inclus dans le modèle. EF ne recherche pas les types de base ou dérivés qui n’étaient pas inclus dans le modèle. Vous pouvez inclure des types dans le modèle en exposant un *DbSet\<tente >* pour chaque type dans la hiérarchie d’héritage.
 

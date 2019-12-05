@@ -1,15 +1,15 @@
 ---
 title: Relations-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
+description: Comment configurer des relations entre des types d’entités lors de l’utilisation de Entity Framework Core
+author: AndriySvyryd
+ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 1e59ce9e19c12aa5564bc8467dcfcb3be8ee8996
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 452169c902d56fda0a65a5c2846a9b42c80640fd
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655677"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824759"
 ---
 # <a name="relationships"></a>Relations
 
@@ -22,23 +22,27 @@ Une relation définit la relation entre deux entités. Dans une base de données
 
 Il existe un certain nombre de termes utilisés pour décrire les relations
 
-* **Entité dépendante :** Il s’agit de l’entité qui contient la ou les propriétés de clé étrangère. Parfois appelé « enfant » de la relation.
+* **Entité dépendante :** Il s’agit de l’entité qui contient les propriétés de clé étrangère. Parfois appelé « enfant » de la relation.
 
-* **Entité principale :** Il s’agit de l’entité qui contient la ou les propriétés de clé primaire/secondaire. Parfois appelé « parent » de la relation.
+* **Entité principale :** Il s’agit de l’entité qui contient les propriétés de clé primaire/secondaire. Parfois appelé « parent » de la relation.
 
-* **Clé étrangère :** Propriété (s) de l’entité dépendante utilisée pour stocker les valeurs de la propriété de clé principale à laquelle l’entité est associée.
+* **Clé étrangère :** Propriétés de l’entité dépendante utilisées pour stocker les valeurs de clé principale de l’entité associée.
 
-* **Clé principale :** La ou les propriétés qui identifient de façon unique l’entité principale. Il peut s’agir de la clé primaire ou d’une clé secondaire.
+* **Clé principale :** Propriétés qui identifient de façon unique l’entité principale. Il peut s’agir de la clé primaire ou d’une clé secondaire.
 
-* **Propriété de navigation :** Propriété définie sur le principal et/ou l’entité dépendante qui contient une ou plusieurs références aux entités associées.
+* **Propriété de navigation :** Propriété définie sur le principal et/ou sur l’entité dépendante qui référence l’entité associée.
 
   * **Propriété de navigation de la collection :** Propriété de navigation qui contient des références à de nombreuses entités associées.
 
   * **Propriété de navigation de référence :** Propriété de navigation qui contient une référence à une entité associée unique.
 
   * **Propriété de navigation inverse :** Lorsque vous discutez d’une propriété de navigation particulière, ce terme fait référence à la propriété de navigation à l’autre extrémité de la relation.
+  
+* **Relation à référence automatique :** Relation dans laquelle les types d’entités dependent et principal sont identiques.
 
-La liste de code suivante montre une relation un-à-plusieurs entre `Blog` et `Post`
+Le code suivant illustre une relation un-à-plusieurs entre `Blog` et `Post`
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
 
 * `Post` est l’entité dépendante
 
@@ -54,11 +58,9 @@ La liste de code suivante montre une relation un-à-plusieurs entre `Blog` et `P
 
 * `Post.Blog` est la propriété de navigation inverse de `Blog.Posts` (et vice versa)
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
-
 ## <a name="conventions"></a>Conventions
 
-Par Convention, une relation est créée lorsqu’une propriété de navigation est détectée sur un type. Une propriété est considérée comme une propriété de navigation si le type vers lequel elle pointe ne peut pas être mappé en tant que type scalaire par le fournisseur de base de données actuel.
+Par défaut, une relation est créée lorsqu’une propriété de navigation est détectée sur un type. Une propriété est considérée comme une propriété de navigation si le type vers lequel elle pointe ne peut pas être mappé en tant que type scalaire par le fournisseur de base de données actuel.
 
 > [!NOTE]  
 > Les relations découvertes par convention cibleront toujours la clé primaire de l’entité principale. Pour cibler une clé secondaire, une configuration supplémentaire doit être effectuée à l’aide de l’API Fluent.
@@ -69,24 +71,42 @@ Le modèle le plus courant pour les relations est d’avoir des propriétés de 
 
 * Si une paire de propriétés de navigation est trouvée entre deux types, ils sont configurés en tant que propriétés de navigation inverse de la même relation.
 
-* Si l’entité dépendante contient une propriété nommée `<primary key property name>`, `<navigation property name><primary key property name>`ou `<principal entity name><primary key property name>`, elle est configurée en tant que clé étrangère.
+* Si l’entité dépendante contient une propriété avec un nom, l’un de ces modèles est alors configuré comme clé étrangère :
+  * `<navigation property name><principal key property name>`
+  * `<navigation property name>Id`
+  * `<principal entity name><principal key property name>`
+  * `<principal entity name>Id`
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
 
-> [!WARNING]  
-> S’il existe plusieurs propriétés de navigation définies entre deux types (autrement dit, plusieurs paires distinctes de navigation qui pointent les unes vers les autres), aucune relation ne sera créée par Convention et vous devrez les configurer manuellement pour identifier la façon dont le les propriétés de navigation sont couplées.
+Dans cet exemple, les propriétés mises en surbrillance sont utilisées pour configurer la relation.
+
+> [!NOTE]
+> Si la propriété est la clé primaire ou si elle est d’un type qui n’est pas compatible avec la clé principale, elle ne sera pas configurée en tant que clé étrangère.
+
+> [!NOTE]
+> Avant le EF Core 3,0, la propriété nommée exactement comme la propriété de clé principale [était également mise en correspondance comme clé étrangère](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
 
 ### <a name="no-foreign-key-property"></a>Aucune propriété de clé étrangère
 
-Bien qu’il soit recommandé d’avoir une propriété de clé étrangère définie dans la classe d’entité dépendante, elle n’est pas obligatoire. Si aucune propriété de clé étrangère n’est trouvée, une propriété de clé étrangère Shadow est introduite avec le nom `<navigation property name><principal key property name>` (pour plus d’informations, consultez [Propriétés Shadow](shadow-properties.md) ).
+Bien qu’il soit recommandé d’avoir une propriété de clé étrangère définie dans la classe d’entité dépendante, elle n’est pas obligatoire. Si aucune propriété de clé étrangère n’est trouvée, une [propriété de clé étrangère Shadow](shadow-properties.md) est introduite avec le nom `<navigation property name><principal key property name>` ou `<principal entity name><principal key property name>` si aucune navigation n’est présente sur le type dépendant.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
+
+Dans cet exemple, la clé étrangère Shadow est `BlogId` car l’attente du nom de navigation est redondante.
+
+> [!NOTE]
+> Si une propriété du même nom existe déjà, le nom de la propriété Shadow sera suivi d’un nombre.
 
 ### <a name="single-navigation-property"></a>Propriété de navigation unique
 
 L’inclusion d’une seule propriété de navigation (aucune navigation inverse et aucune propriété de clé étrangère) suffit à avoir une relation définie par Convention. Vous pouvez également avoir une propriété de navigation unique et une propriété de clé étrangère.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
+
+### <a name="limitations"></a>Limitations
+
+Lorsqu’il existe plusieurs propriétés de navigation définies entre deux types (autrement dit, plusieurs paires de navigation qui pointent les unes vers les autres), les relations représentées par les propriétés de navigation sont ambiguës. Vous devrez les configurer manuellement pour résoudre l’ambiguïté.
 
 ### <a name="cascade-delete"></a>Suppression en cascade
 
@@ -96,30 +116,27 @@ Consultez la section [relations obligatoires et facultatives](#required-and-opti
 
 Pour plus d’informations sur les différents comportements de suppression et les valeurs par défaut utilisées par Convention, consultez [suppression en cascade](../saving/cascade-delete.md) .
 
-## <a name="data-annotations"></a>Annotations de données
+## <a name="manual-configuration"></a>Configuration manuelle
 
-Il existe deux annotations de données qui peuvent être utilisées pour configurer des relations, des `[ForeignKey]` et des `[InverseProperty]`. Celles-ci sont disponibles dans l’espace de noms `System.ComponentModel.DataAnnotations.Schema`.
+#### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
 
-### <a name="foreignkey"></a>ForeignKey
+Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne` ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne` sont utilisés pour les propriétés de navigation de référence et `HasMany`/`WithMany` sont utilisés pour les propriétés de navigation de collection.
 
-Vous pouvez utiliser les annotations de données pour configurer la propriété à utiliser comme propriété de clé étrangère pour une relation donnée. Cela s’effectue généralement lorsque la propriété de clé étrangère n’est pas détectée par Convention.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
-
-> [!TIP]  
-> L’annotation `[ForeignKey]` peut être placée sur l’une des propriétés de navigation de la relation. Elle n’a pas besoin de se trouver dans la propriété de navigation de la classe d’entité dépendante.
-
-### <a name="inverseproperty"></a>[InverseProperty]
+#### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
 
 Vous pouvez utiliser les annotations de données pour configurer la combinaison des propriétés de navigation sur les entités dépendantes et principales. Cela s’effectue généralement quand il existe plusieurs paires de propriétés de navigation entre deux types d’entités.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?highlight=33,36)]
 
-## <a name="fluent-api"></a>API Fluent
+> [!NOTE]
+> Vous pouvez uniquement utiliser [required] sur les propriétés de l’entité dépendante pour avoir un impact sur la nécessité de la relation. [Obligatoire] dans la navigation de l’entité principale, est généralement ignoré, mais l’entité peut devenir la dépendante.
 
-Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne` ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne` sont utilisés pour les propriétés de navigation de référence et `HasMany`/`WithMany` sont utilisés pour les propriétés de navigation de collection.
+> [!NOTE]
+> Les annotations de données `[ForeignKey]` et `[InverseProperty]` sont disponibles dans l’espace de noms `System.ComponentModel.DataAnnotations.Schema`. `[Required]` est disponible dans l’espace de noms `System.ComponentModel.DataAnnotations`.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
+---
 
 ### <a name="single-navigation-property"></a>Propriété de navigation unique
 
@@ -129,11 +146,27 @@ Si vous n’avez qu’une seule propriété de navigation, il y a des surcharges
 
 ### <a name="foreign-key"></a>Clé étrangère
 
+#### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
+
 Vous pouvez utiliser l’API Fluent pour configurer la propriété à utiliser comme propriété de clé étrangère pour une relation donnée.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?highlight=17)]
 
-La liste de code suivante montre comment configurer une clé étrangère composite.
+#### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+Vous pouvez utiliser les annotations de données pour configurer la propriété à utiliser comme propriété de clé étrangère pour une relation donnée. Cela s’effectue généralement lorsque la propriété de clé étrangère n’est pas détectée par Convention.
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
+
+> [!TIP]  
+> L’annotation `[ForeignKey]` peut être placée sur l’une des propriétés de navigation de la relation. Elle n’a pas besoin de se trouver dans la propriété de navigation de la classe d’entité dépendante.
+
+> [!NOTE]
+> La propriété spécifiée à l’aide de `[ForeignKey]` sur une propriété de navigation n’a pas besoin d’exister le type dépendant. Dans ce cas, le nom spécifié est utilisé pour créer une clé étrangère cachée.
+
+---
+
+Le code suivant montre comment configurer une clé étrangère composite.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?highlight=20)]
 
@@ -149,11 +182,11 @@ Vous n’avez pas nécessairement besoin de fournir une propriété de navigatio
 
 ### <a name="principal-key"></a>Clé principale
 
-Si vous souhaitez que la clé étrangère fasse référence à une propriété autre que la clé primaire, vous pouvez utiliser l’API Fluent pour configurer la propriété de clé principale de la relation. La propriété que vous configurez comme clé principale est automatiquement configurée en tant que clé secondaire (pour plus d’informations, consultez [clés alternatives](alternate-keys.md) ).
+Si vous souhaitez que la clé étrangère fasse référence à une propriété autre que la clé primaire, vous pouvez utiliser l’API Fluent pour configurer la propriété de clé principale de la relation. La propriété que vous configurez en tant que clé principale est automatiquement configurée en tant que [clé secondaire](alternate-keys.md).
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?name=PrincipalKey&highlight=11)]
 
-L’exemple de code suivant montre comment configurer une clé principale composite.
+Le code suivant montre comment configurer une clé principale composite.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=Composite&highlight=11)]
 
@@ -166,17 +199,20 @@ Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligato
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=11)]
 
+> [!NOTE]
+> L’appel de `IsRequired(false)` rend également la propriété de clé étrangère facultative, sauf si elle est configurée dans le cas contraire.
+
 ### <a name="cascade-delete"></a>Suppression en cascade
 
 Vous pouvez utiliser l’API Fluent pour configurer explicitement le comportement de suppression en cascade pour une relation donnée.
 
-Pour une présentation détaillée de chaque option, consultez [suppression en cascade](../saving/cascade-delete.md) dans la section enregistrement des données.
+Pour une présentation détaillée de chaque option, consultez [suppression en cascade](../saving/cascade-delete.md) .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?name=CascadeDelete&highlight=11)]
 
 ## <a name="other-relationship-patterns"></a>Autres modèles de relation
 
-### <a name="one-to-one"></a>Un-à-un
+### <a name="one-to-one"></a>Un à un
 
 Les relations un-à-un ont une propriété de navigation de référence des deux côtés. Ils suivent les mêmes conventions que les relations un-à-plusieurs, mais un index unique est introduit sur la propriété de clé étrangère pour s’assurer qu’un seul dépendant est lié à chaque principal.
 

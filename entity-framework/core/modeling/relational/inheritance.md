@@ -1,15 +1,16 @@
 ---
 title: Héritage (base de données relationnelle)-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
+description: Comment configurer l’héritage de type d’entité dans une base de données relationnelle à l’aide de Entity Framework Core
+author: AndriySvyryd
+ms.author: ansvyryd
+ms.date: 11/06/2019
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: 381d1878007bb78b359eb49649f4356f1e5eb04a
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 30e25aa2968ceab03404baddb46e0ae59fc3ea6b
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655627"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824747"
 ---
 # <a name="inheritance-relational-database"></a>Héritage (base de données relationnelle)
 
@@ -23,7 +24,7 @@ L’héritage dans le modèle EF est utilisé pour contrôler le mode de représ
 
 ## <a name="conventions"></a>Conventions
 
-Par Convention, l’héritage est mappé à l’aide du modèle TPH (table par hiérarchie). TPH utilise une table unique pour stocker les données de tous les types dans la hiérarchie. Une colonne de discriminateur est utilisée pour identifier le type représenté par chaque ligne.
+Par défaut, l’héritage est mappé à l’aide du modèle TPH (table par hiérarchie). TPH utilise une table unique pour stocker les données de tous les types dans la hiérarchie. Une colonne de discriminateur est utilisée pour identifier le type représenté par chaque ligne.
 
 EF Core configure l’héritage uniquement si au moins deux types hérités sont explicitement inclus dans le modèle (pour plus d’informations, consultez [héritage](../inheritance.md) ).
 
@@ -50,48 +51,14 @@ Vous pouvez utiliser l’API Fluent pour configurer le nom et le type de la colo
 
 Dans les exemples ci-dessus, le discriminateur est créé en tant que [propriété Shadow](xref:core/modeling/shadow-properties) sur l’entité de base de la hiérarchie. Étant donné qu’il s’agit d’une propriété dans le modèle, elle peut être configurée comme d’autres propriétés. Par exemple, pour définir la longueur maximale lorsque le discriminateur par défaut par convention est utilisé :
 
-```C#
-modelBuilder.Entity<Blog>()
-    .Property("Discriminator")
-    .HasMaxLength(200);
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/DefaultDiscriminator.cs#DiscriminatorConfiguration)]
 
-Le discriminateur peut également être mappé à une propriété CLR réelle dans votre entité. Exemple :
+Le discriminateur peut également être mappé à une propriété .NET dans votre entité et le configurer. Par exemple :
 
-```C#
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs#NonShadowDiscriminator)]
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .HasDiscriminator<string>("BlogType");
-    }
-}
+## <a name="shared-columns"></a>Colonnes partagées
 
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-    public string BlogType { get; set; }
-}
+Lorsque deux types d’entités frères ont une propriété portant le même nom, ils sont mappés à deux colonnes distinctes par défaut. Mais s’ils sont compatibles, ils peuvent être mappés à la même colonne :
 
-public class RssBlog : Blog
-{
-    public string RssUrl { get; set; }
-}
-```
-
-Pour combiner ces deux éléments, il est possible de mapper le discriminateur à une véritable propriété et de le configurer :
-
-```C#
-modelBuilder.Entity<Blog>(b =>
-{
-    b.HasDiscriminator<string>("BlogType");
-
-    b.Property(e => e.BlogType)
-        .HasMaxLength(200)
-        .HasColumnName("blog_type");
-});
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/SharedTPHColumns.cs#SharedTPHColumns)]

@@ -1,16 +1,16 @@
 ---
 title: Fractionnement de table-EF Core
+description: Comment configurer le fractionnement de table à l’aide de Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 04/10/2019
-ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: a3a2e5842a6c6b4b490084d205a0d44bb46c17ee
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 0e48c516de43cdc2b54c56f1a96f5e01f9fbbbc4
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656038"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824556"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
 
@@ -38,7 +38,7 @@ Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumn
 > [!TIP]
 > Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Utilisation
+## <a name="usage"></a>Contrôle
 
 L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que pour les autres entités. Et à partir de EF Core 3,0, la référence d’entité dépendante peut être `null`. Si toutes les colonnes utilisées par l’entité dépendante sont `NULL` est la base de données, aucune instance n’est créée lors de la requête. Toutes les propriétés sont également facultatives et définies sur `null`, ce qui n’est peut-être pas prévu.
 

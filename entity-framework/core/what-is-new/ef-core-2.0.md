@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 72393e96c195af1df5a169025ca2ce7a7acb16bb
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656221"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824876"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -91,12 +91,12 @@ public class BloggingContext : DbContext
     {
         modelBuilder.Entity<Post>().HasQueryFilter(
             p => !p.IsDeleted
-            && p.TenantId == this.TenantId );
+            && p.TenantId == this.TenantId);
     }
 }
 ```
 
-Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité `Post`. Notez l’utilisation d’une propriété de niveau instance DbContext : `TenantId`. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
+Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité `Post`. Notez l’utilisation d’un `DbContext` propriété au niveau de l’instance : `TenantId`. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur IgnoreQueryFilters().
 
@@ -119,7 +119,7 @@ public class BloggingContext : DbContext
     [DbFunction]
     public static int PostReadCount(int blogId)
     {
-        throw new Exception();
+        throw new NotImplementedException();
     }
 }
 ```
@@ -135,9 +135,9 @@ var query =
 
 Quelques points à noter :
 
-- Par convention, le nom de la méthode est utilisé comme nom de fonction (dans ce cas, une fonction définie par l’utilisateur) au moment de la génération du code SQL, mais vous pouvez remplacer le nom et le schéma durant l’inscription de la méthode.
-- Seules les fonctions scalaires sont prises en charge.
-- Vous devez créer la fonction mappée dans la base de données. Les migrations EF Core ne se chargent pas de opération.
+- Par Convention, le nom de la méthode est utilisé comme nom d’une fonction (dans ce cas, une fonction définie par l’utilisateur) lors de la génération du SQL, mais vous pouvez remplacer le nom et le schéma lors de l’inscription de la méthode.
+- Actuellement, seules les fonctions scalaires sont prises en charge.
+- Vous devez créer la fonction mappée dans la base de données. EF Core migrations ne prend pas en charge la création.
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Configuration du type autonome pour Code First
 
@@ -146,11 +146,11 @@ Dans EF6, il était possible d’encapsuler la configuration Code First d’un t
 ``` csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
-  public void Configure(EntityTypeBuilder<Customer> builder)
-  {
-     builder.HasKey(c => c.AlternateKey);
-     builder.Property(c => c.Name).HasMaxLength(200);
-   }
+    public void Configure(EntityTypeBuilder<Customer> builder)
+    {
+        builder.HasKey(c => c.AlternateKey);
+        builder.Property(c => c.Name).HasMaxLength(200);
+    }
 }
 
 ...
@@ -213,7 +213,7 @@ EF Core prend en charge la génération automatique des valeurs de clés par le 
 
 ## <a name="query"></a>Query
 
-### <a name="improved-linq-translation"></a>Conversion LINQ améliorée
+### <a name="improved-linq-translation"></a>Traduction LINQ améliorée
 
 Permet l’exécution de davantage de requêtes, avec davantage de logique évaluée dans la base de données (plutôt qu’en mémoire) et moins de données inutilement récupérées de la base de données.
 
@@ -223,7 +223,7 @@ Le SQL généré pour les jonctions de groupes est amélioré. Les jonctions de 
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>Interpolation de chaîne dans FromSql et ExecuteSqlCommand
 
-C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : `FromSql` et `ExecuteSqlCommand`. Avec cette nouvelle prise en charge, l’interpolation de chaîne C# peut être utilisée de manière « sécurisée », c’est-à-dire d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire pendant la construction dynamique du code SQL au moment de l’exécution.
+C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : `FromSql` et `ExecuteSqlCommand`. Cette nouvelle prise en C# charge permet d’utiliser l’interpolation de chaîne en mode « sécurisé ». c’est-à-dire d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire pendant la construction dynamique du code SQL au moment de l’exécution.
 
 Voici un exemple :
 
@@ -270,7 +270,7 @@ Notez que Like() est fourni avec une implémentation en mémoire, ce qui peut ê
 
 ## <a name="database-management"></a>Gestion de base de données
 
-### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>Dispositif de pluralisation pour structurer un DbContext
+### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>Crochet de pluralisation pour la génération de modèles de DbContext
 
 EF Core 2.0 introduit un nouveau service *IPluralizer* qui est utilisé pour singulariser les noms des types d’entité et pluraliser les noms DbSet. L’implémentation par défaut étant l’absence d’opération, il s’agit simplement d’un dispositif permettant à l’utilisateur d’incorporer facilement son propre pluraliseur.
 
@@ -311,7 +311,7 @@ Renforce considérablement les possibilités d’interaction des fournisseurs av
 
 EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Il en résulte une simplification des API de métadonnées de niveau inférieur, au point que tout accès aux *concepts de métadonnées relationnelles communs* est toujours établi par le biais d’un appel à `.Relational` au lieu de `.SqlServer`, `.Sqlite`, etc.
 
-### <a name="consolidated-logging-and-diagnostics"></a>Journalisation consolidée et diagnostics
+### <a name="consolidated-logging-and-diagnostics"></a>Journalisation et diagnostics consolidés
 
 Les mécanismes de journalisation (basés sur ILogger) et de diagnostics (basés sur DiagnosticSource) partagent désormais plus de code.
 

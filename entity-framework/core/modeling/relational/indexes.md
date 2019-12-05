@@ -1,15 +1,15 @@
 ---
 title: Index (base de données relationnelle)-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
+author: AndriySvyryd
+ms.author: ansvyryd
+ms.date: 11/05/2019
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 7bb74d0bfa6090b597eb988a46f00494e25f233e
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: e14615275f85ee9b6b32d080905465d33963feca
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813629"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824576"
 ---
 # <a name="indexes-relational-database"></a>Index (base de données relationnelle)
 
@@ -20,7 +20,7 @@ Un index dans une base de données relationnelle est mappé au même concept qu�
 
 ## <a name="conventions"></a>Conventions
 
-Par Convention, les index sont nommés `IX_<type name>_<property name>`. Pour les index `<property name>` composites devient une liste de noms de propriétés séparés par un trait de soulignement.
+Par Convention, les index sont nommés `IX_<type name>_<property name>`. Pour les index composites `<property name>` devient une liste de noms de propriétés séparés par un trait de soulignement.
 
 ## <a name="data-annotations"></a>Annotations de données
 
@@ -36,7 +36,7 @@ Vous pouvez également spécifier un filtre.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexFilter.cs?name=Model&highlight=9)]
 
-Lorsque vous utilisez le SQL Server le fournisseur EF ajoute un filtre’IS NOT NULL’pour toutes les colonnes Nullable qui font partie d’un index unique. Pour remplacer cette Convention, vous pouvez fournir une `null` valeur.
+Lorsque vous utilisez le SQL Server le fournisseur EF ajoute un filtre `'IS NOT NULL'` pour toutes les colonnes Nullable qui font partie d’un index unique. Pour remplacer cette Convention, vous pouvez fournir une valeur `null`.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexNoFilter.cs?name=Model&highlight=10)]
 
@@ -44,4 +44,4 @@ Lorsque vous utilisez le SQL Server le fournisseur EF ajoute un filtre’IS NOT 
 
 Vous pouvez configurer [des index avec des colonnes incluses](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns) pour améliorer considérablement les performances des requêtes lorsque toutes les colonnes de la requête sont incluses dans l’index en tant que colonnes clés ou non-clés.
 
-[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/ForSqlServerHasIndex.cs?name=Model)]
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexInclude.cs?name=Model)]

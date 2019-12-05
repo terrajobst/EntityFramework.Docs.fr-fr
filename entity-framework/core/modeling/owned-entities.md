@@ -1,16 +1,16 @@
 ---
 title: Types d’entités détenues-EF Core
+description: Comment configurer des agrégats ou des types d’entités détenus lors de l’utilisation de Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 02/26/2018
-ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
+ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a0665bfa27134b8dc3eba854ff3f7b1af4b69217
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655938"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824594"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -19,7 +19,7 @@ ms.locfileid: "73655938"
 
 EF Core vous permet de modéliser des types d’entité qui peuvent uniquement apparaître dans les propriétés de navigation d’autres types d’entités. Il s’agit de _types d’entités détenues_. L’entité contenant un type d’entité détenu est son _propriétaire_.
 
-Les entités détenues sont essentiellement une partie du propriétaire et ne peuvent pas exister sans elles, elles sont conceptuellement similaires aux [agrégats](https://martinfowler.com/bliki/DDD_Aggregate.html).
+Les entités détenues sont essentiellement une partie du propriétaire et ne peuvent pas exister sans elles, elles sont conceptuellement similaires aux [agrégats](https://martinfowler.com/bliki/DDD_Aggregate.html). Cela signifie que le type détenu est par définition sur le côté dépendant de la relation avec le propriétaire.
 
 ## <a name="explicit-configuration"></a>Configuration explicite
 
@@ -74,7 +74,7 @@ Pour configurer un autre appel de PK `HasKey`:
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
 > [!NOTE]
-> Avant de EF Core 3,0 `WithOwner()` méthode n’existait pas, cet appel doit être supprimé.
+> Avant de EF Core 3,0 `WithOwner()` méthode n’existait pas, cet appel doit être supprimé. En outre, la clé primaire n’a pas été détectée automatiquement. elle a donc toujours été spécifiée.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mappage de types détenus avec le fractionnement de table
 
@@ -85,6 +85,9 @@ Par défaut, EF Core nommera les colonnes de base de données pour les propriét
 Vous pouvez utiliser la méthode `HasColumnName` pour renommer ces colonnes :
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
+
+> [!NOTE]
+> La plupart des méthodes de configuration de type d’entité normales telles que [ignore](/dotnet/api/microsoft.entityframeworkcore.metadata.builders.ownednavigationbuilder.ignore) peuvent être appelées de la même façon.
 
 ## <a name="sharing-the-same-net-type-among-multiple-owned-types"></a>Partage du même type .NET entre plusieurs types détenus
 
@@ -106,6 +109,8 @@ Dans cet exemple `OrderDetails` possède `BillingAddress` et `ShippingAddress`, 
 
 [!code-csharp[OrderStatus](../../../samples/core/Modeling/OwnedEntities/OrderStatus.cs?name=OrderStatus)]
 
+Chaque navigation vers un type détenu définit un type d’entité distinct avec une configuration totalement indépendante.
+
 En plus des types détenus imbriqués, un type détenu peut faire référence à une entité normale, il peut s’agir du propriétaire ou d’une entité différente tant que l’entité qui en est la propriété est sur le côté dépendant. Cette fonctionnalité définit les types d’entités détenues, à l’exception des types complexes dans EF6.
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
@@ -114,15 +119,17 @@ Il est possible de chaîner la méthode `OwnsOne` dans un appel Fluent pour conf
 
 [!code-csharp[OwnsOneNested](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneNested)]
 
-Notez le `WithOwner` appel utilisé pour configurer la propriété de navigation qui pointe vers le propriétaire.
+Notez le `WithOwner` appel utilisé pour configurer la propriété de navigation qui pointe vers le propriétaire. Pour configurer une navigation vers le type d’entité propriétaire qui ne fait pas partie de la relation de propriété `WithOwner()` devez être appelé sans argument.
 
-Il est possible d’obtenir le résultat à l’aide de `OwnedAttribute` à la fois sur `OrderDetails` et `StreetAdress`.
+Il est possible d’obtenir le résultat à l’aide de `OwnedAttribute` à la fois sur `OrderDetails` et `StreetAddress`.
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Stockage des types détenus dans des tables distinctes
 
 Contrairement aux types complexes EF6, les types détenus peuvent être stockés dans une table distincte du propriétaire. Pour remplacer la Convention qui mappe un type détenu à la même table que le propriétaire, vous pouvez simplement appeler `ToTable` et fournir un autre nom de table. L’exemple suivant mappe `OrderDetails` et ses deux adresses à une table distincte à partir de `DetailedOrder`:
 
 [!code-csharp[OwnsOneTable](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneTable)]
+
+Il est également possible d’utiliser le `TableAttribute` pour y parvenir, mais notez que cela échouera s’il existe plusieurs navigations dans le type détenu dans la mesure où, dans ce cas, plusieurs types d’entité seraient mappés à la même table.
 
 ## <a name="querying-owned-types"></a>Interrogation des types détenus
 
@@ -141,7 +148,7 @@ Certaines de ces limitations sont essentielles à la façon dont les types d’e
 
 ### <a name="current-shortcomings"></a>Lacunes actuelles
 
-- Les hiérarchies d’héritage qui incluent des types d’entités détenus ne sont pas prises en charge
+- Les types d’entités détenues ne peuvent pas avoir de hiérarchies d’héritage
 - Les navigations de référence vers les types d’entité détenus ne peuvent pas avoir la valeur null, sauf si elles sont explicitement mappées à une table distincte du propriétaire
 - Les instances de types d’entité possédées ne peuvent pas être partagées par plusieurs propriétaires (il s’agit d’un scénario connu pour les objets de valeur qui ne peuvent pas être implémentés à l’aide des types d’entités détenus)
 

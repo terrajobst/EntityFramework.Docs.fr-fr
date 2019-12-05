@@ -5,23 +5,23 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 6cac695288d9ba84968b7fab6361f55e9b51be67
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 162e5d387bcbfbf1e90baf27fc62dd2ed562ae58
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656090"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824545"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Fournisseur Azure Cosmos DB EF Core
 
->[!NOTE]
+> [!NOTE]
 > Ce fournisseur est nouveau dans EF Core 3.0.
 
 Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec Azure Cosmos DB. Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
 
 Avant de lire cette section, il est fortement recommandé de vous familiariser avec la documentation d’[Azure Cosmos DB](/azure/cosmos-db/introduction).
 
->[!NOTE]
+> [!NOTE]
 > Ce fournisseur fonctionne uniquement avec l’API SQL d’Azure Cosmos DB.
 
 ## <a name="install"></a>Installez
@@ -30,7 +30,7 @@ Installez le [package NuGet Microsoft.EntityFrameworkCore.Cosmos](https://www.nu
 
 ## <a name="net-core-clitabdotnet-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
-``` console
+```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 ```
 
@@ -89,7 +89,7 @@ Par défaut EF Core crée des conteneurs avec la clé de partition définie sur 
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PartitionKey)]
 
->[!NOTE]
+> [!NOTE]
 >La propriété de clé de partition peut être de n’importe quel type tant qu’elle est [convertie en chaîne](xref:core/modeling/value-conversions).
 
 Une fois configurée, la propriété de clé de partition doit toujours avoir une valeur non Null. Lors de l’émission d’une requête, une condition peut être ajoutée pour qu’elle soit à partition unique.

@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 29434c26a503fabb16b43ee8f0c36136a0b5b745
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 5686d28e6847797130476cd858bd3fb611620140
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811973"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824483"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Informations de référence sur les outils Entity Framework Core-CLI .NET
 
@@ -33,17 +33,17 @@ La procédure d’installation dépend du type et de la version du projet :
 
 * `dotnet ef` doit être installé en tant qu’outil Global ou local. La plupart des développeurs installent `dotnet ef` comme un outil global avec la commande suivante :
 
-  ``` console
+  ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
   Vous pouvez également utiliser `dotnet ef` en tant qu’outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
 
-* Installez le [kit SDK .NET Core 3,0](https://dotnet.microsoft.com/download/dotnet-core/3.0)). Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
+* Installez le [kit SDK .NET Core 3,0](https://dotnet.microsoft.com/download/dotnet-core/3.0). Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
 
 * Installez le dernier package de `Microsoft.EntityFrameworkCore.Design`.
 
-  ``` Console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
@@ -61,7 +61,7 @@ Les commandes `dotnet ef` sont incluses dans le kit SDK .NET Core, mais pour act
 
 * Installez le dernier package `Microsoft.EntityFrameworkCore.Design` stable.
 
-  ``` Console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
@@ -75,7 +75,7 @@ Les commandes `dotnet ef` sont incluses dans le kit SDK .NET Core, mais pour act
 
 * Installez la dernière version 1. x du package `Microsoft.EntityFrameworkCore.Design`, par exemple :
 
-  ```console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
   ```
 
@@ -101,11 +101,11 @@ Les commandes `dotnet ef` sont incluses dans le kit SDK .NET Core, mais pour act
 
   Une référence de package avec `PrivateAssets="All"` n’est pas exposée aux projets qui font référence à ce projet. Cette restriction est particulièrement utile pour les packages qui sont généralement utilisés uniquement pendant le développement.
 
-### <a name="verify-installation"></a>Vérifier l’installation
+### <a name="verify-installation"></a>Vérifier l'installation
 
 Exécutez les commandes suivantes pour vérifier que EF Core outils CLI sont correctement installés :
 
-  ``` Console
+  ```dotnetcli
   dotnet restore
   dotnet ef
   ```
@@ -155,7 +155,7 @@ Pourquoi un projet factice est-il nécessaire ? Comme mentionné précédemment
 
 Pour spécifier l’environnement pour les projets ASP.NET Core, définissez la variable d’environnement **ASPNETCORE_ENVIRONMENT** avant d’exécuter les commandes.
 
-## <a name="common-options"></a>Options communes
+## <a name="common-options"></a>Options courantes
 
 |                   | Option                            | Description                                                                                                                                                                                                                                                   |
 |:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -194,7 +194,7 @@ Arguments :
 
 Les exemples suivants mettent à jour la base de données vers une migration spécifiée. Le premier utilise le nom de la migration et le second utilise l’ID de migration :
 
-```console
+```dotnetcli
 dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate
 ```
@@ -228,18 +228,18 @@ Options :
 | `-f`            | `--force`                                | Remplacer les fichiers existants.                                                                                                                                                      |
 | `-o`            | `--output-dir <PATH>`                    | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
 |                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
-| `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
+| `-t`            | `--table <TABLE_NAME>`... »                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
 |                 | `--use-database-names`                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour C# être plus conformes aux conventions de style de nom. |
 
 L’exemple suivant génère la structure de tous les schémas et tables et place les nouveaux fichiers dans le dossier *Models* .
 
-```console
+```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
 ```
 
 L’exemple suivant génère uniquement les tables sélectionnées et crée le contexte dans un dossier distinct avec un nom spécifié :
 
-```console
+```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext
 ```
 
@@ -281,7 +281,7 @@ Arguments :
 
 | Argument | Description                                                                                                                                                   |
 |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<FROM>` | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0. |
+| `<FROM>` | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0. |
 | `<TO>`   | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                         |
 
 Options :
@@ -293,13 +293,13 @@ Options :
 
 L’exemple suivant crée un script pour la migration InitialCreate :
 
-```console
+```dotnetcli
 dotnet ef migrations script 0 InitialCreate
 ```
 
 L’exemple suivant crée un script pour toutes les migrations après la migration de InitialCreate.
 
-```console
+```dotnetcli
 dotnet ef migrations script 20180904195021_InitialCreate
 ```
 
