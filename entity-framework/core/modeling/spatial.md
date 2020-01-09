@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 8dae1ab949c77ffa08904b12a5716b729e6913a1
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655610"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502238"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
@@ -19,7 +19,7 @@ ms.locfileid: "73655610"
 
 Les données spatiales représentent l’emplacement physique et la forme des objets. De nombreuses bases de données prennent en charge ce type de données afin qu’elles puissent être indexées et interrogées avec d’autres données. Les scénarios courants incluent l’interrogation d’objets situés à une distance donnée à partir d’un emplacement ou la sélection de l’objet dont la bordure contient un emplacement donné. EF Core prend en charge le mappage aux types de données spatiales à l’aide de la bibliothèque spatiale [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) .
 
-## <a name="installing"></a>Installation de
+## <a name="installing"></a>Installation de .
 
 Pour pouvoir utiliser les données spatiales avec EF Core, vous devez installer le package NuGet de prise en charge approprié. Le package que vous devez installer dépend du fournisseur que vous utilisez.
 
@@ -30,7 +30,7 @@ Microsoft.EntityFrameworkCore.Sqlite    | [Microsoft. EntityFrameworkCore. sqlit
 Microsoft.EntityFrameworkCore.InMemory  | [NetTopologySuite](https://www.nuget.org/packages/NetTopologySuite)
 Npgsql.EntityFrameworkCore.PostgreSQL   | [Npgsql. EntityFrameworkCore. PostgreSQL. NetTopologySuite](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite)
 
-## <a name="reverse-engineering"></a>Rétroconception
+## <a name="reverse-engineering"></a>Reconstitution de la logique des produits
 
 Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](../managing-schemas/scaffolding.md) avec des propriétés spatiales, mais vous devez installer le package ***avant*** d’exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold`. Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
 
@@ -48,8 +48,8 @@ optionsBuilder.UseSqlServer(
 
 Il existe plusieurs types de données spatiales. Le type que vous utilisez dépend des types de formes que vous souhaitez autoriser. Voici la hiérarchie des types NTS que vous pouvez utiliser pour les propriétés de votre modèle. Ils sont situés dans l’espace de noms `NetTopologySuite.Geometries`.
 
-* Geometr
-  * Point
+* Géométrie
+  * rapport
   * LineString
   * Polygone
   * GeometryCollection
@@ -213,7 +213,7 @@ Si vous utilisez SQL Server, vous devez connaître certaines choses supplémenta
 
 ### <a name="geography-or-geometry"></a>Geography ou Geometry
 
-Par défaut, les propriétés spatiales sont mappées à des colonnes `geography` dans SQL Server. Pour utiliser `geometry`, [configurez le type de colonne](xref:core/modeling/relational/data-types) dans votre modèle.
+Par défaut, les propriétés spatiales sont mappées à des colonnes `geography` dans SQL Server. Pour utiliser `geometry`, [configurez le type de colonne](xref:core/modeling/entity-properties#column-data-types) dans votre modèle.
 
 ### <a name="geography-polygon-rings"></a>Anneaux de polygone Geography
 
@@ -232,7 +232,7 @@ Voici quelques informations supplémentaires pour celles qui utilisent SQLite.
 
 ### <a name="installing-spatialite"></a>Installation de SpatiaLite
 
-Sur Windows, la bibliothèque mod_spatialite native est distribuée en tant que dépendance de package NuGet. D’autres plateformes doivent l’installer séparément. Cette opération s’effectue généralement à l’aide d’un gestionnaire de package logiciel. Par exemple, vous pouvez utiliser la fonction APT sur Ubuntu et homebrew sur MacOS.
+Sur Windows, la bibliothèque de mod_spatialite native est distribuée en tant que dépendance de package NuGet. D’autres plateformes doivent l’installer séparément. Cette opération s’effectue généralement à l’aide d’un gestionnaire de package logiciel. Par exemple, vous pouvez utiliser la fonction APT sur Ubuntu et homebrew sur MacOS.
 
 ``` sh
 # Ubuntu
