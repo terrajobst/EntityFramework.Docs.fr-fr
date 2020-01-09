@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 055f492214596506ce2c28485ade359d175c4ac2
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: 0d05902566b6b166f1267915d9f698ed29dff588
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445900"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502065"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilisation des types de référence Nullable
 
@@ -19,7 +19,7 @@ Cette page présente la prise en charge de EF Core pour les types de référence
 
 ## <a name="required-and-optional-properties"></a>Propriétés obligatoires et facultatives
 
-La documentation principale sur les propriétés obligatoires et facultatives et leur interaction avec les types de référence Nullable sont les pages de [Propriétés obligatoires et facultatives](xref:core/modeling/required-optional) . Il est recommandé de commencer par lire cette page en premier.
+La documentation principale sur les propriétés obligatoires et facultatives et leur interaction avec les types de référence Nullable sont les pages de [Propriétés obligatoires et facultatives](xref:core/modeling/entity-properties#required-and-optional-properties) . Il est recommandé de commencer par lire cette page en premier.
 
 > [!NOTE]
 > Soyez prudent lorsque vous activez les types de référence Nullable sur un projet existant : les propriétés de type de référence qui ont été précédemment configurées comme étant facultatives sont maintenant configurées comme obligatoires, sauf si elles sont explicitement annotées comme nullables. Lors de la gestion d’un schéma de base de données relationnelle, des migrations peuvent être générées, ce qui modifie la possibilité de valeur null de la colonne de base de données.
