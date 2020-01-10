@@ -1,26 +1,34 @@
 ---
 title: Alternance entre plusieurs modèles avec le même type DbContext-EF Core
 author: AndriySvyryd
-ms.date: 12/10/2017
+ms.date: 01/03/2020
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/dynamic-model
-ms.openlocfilehash: 034076b1595894e80b98467354f6c9f139bd7426
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 156d5666cbd9352b274ddc70c99704ca62aeb1fd
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655723"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781129"
 ---
-# <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a><span data-ttu-id="bee6b-102">Alternance entre plusieurs modèles ayant le même type DbContext</span><span class="sxs-lookup"><span data-stu-id="bee6b-102">Alternating between multiple models with the same DbContext type</span></span>
+# <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a><span data-ttu-id="ca627-102">Alternance entre plusieurs modèles ayant le même type DbContext</span><span class="sxs-lookup"><span data-stu-id="ca627-102">Alternating between multiple models with the same DbContext type</span></span>
 
-<span data-ttu-id="bee6b-103">Le modèle intégré `OnModelCreating` peut utiliser une propriété sur le contexte pour modifier la façon dont le modèle est généré.</span><span class="sxs-lookup"><span data-stu-id="bee6b-103">The model built in `OnModelCreating` could use a property on the context to change how the model is built.</span></span> <span data-ttu-id="bee6b-104">Par exemple, il peut être utilisé pour exclure une certaine propriété :</span><span class="sxs-lookup"><span data-stu-id="bee6b-104">For example it could be used to exclude a certain property:</span></span>
+<span data-ttu-id="ca627-103">Le modèle intégré `OnModelCreating` peut utiliser une propriété du contexte pour modifier la façon dont le modèle est généré.</span><span class="sxs-lookup"><span data-stu-id="ca627-103">The model built in `OnModelCreating` can use a property on the context to change how the model is built.</span></span> <span data-ttu-id="ca627-104">Par exemple, supposons que vous souhaitiez configurer une entité différemment en fonction de certaines propriétés :</span><span class="sxs-lookup"><span data-stu-id="ca627-104">For example, suppose you wanted to configure an entity differently based on some property:</span></span>
 
-[!code-csharp[Main](../../../samples/core/DynamicModel/DynamicContext.cs?name=Class)]
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicContext.cs?name=OnModelCreating)]
 
-## <a name="imodelcachekeyfactory"></a><span data-ttu-id="bee6b-105">IModelCacheKeyFactory</span><span class="sxs-lookup"><span data-stu-id="bee6b-105">IModelCacheKeyFactory</span></span>
+<span data-ttu-id="ca627-105">Malheureusement, ce code ne fonctionnerait pas tel quel, car EF génère le modèle et s’exécute `OnModelCreating` une seule fois, en mettant en cache le résultat pour des raisons de performances.</span><span class="sxs-lookup"><span data-stu-id="ca627-105">Unfortunately, this code wouldn't work as-is, since EF builds the model and runs `OnModelCreating` only once, caching the result for performance reasons.</span></span> <span data-ttu-id="ca627-106">Toutefois, vous pouvez vous connecter au mécanisme de mise en cache du modèle pour que EF prenne en charge la propriété qui produit des modèles différents.</span><span class="sxs-lookup"><span data-stu-id="ca627-106">However, you can hook into the model caching mechanism to make EF aware of the property producing different models.</span></span>
 
-<span data-ttu-id="bee6b-106">Toutefois, si vous avez essayé d’effectuer les opérations ci-dessus sans modification supplémentaire, vous obtiendriez le même modèle chaque fois qu’un nouveau contexte est créé pour une valeur de `IgnoreIntProperty`.</span><span class="sxs-lookup"><span data-stu-id="bee6b-106">However if you tried doing the above without additional changes you would get the same model every time a new context is created for any value of `IgnoreIntProperty`.</span></span> <span data-ttu-id="bee6b-107">Cela est dû au fait que le mécanisme de mise en cache du modèle EF utilise pour améliorer les performances en appelant uniquement `OnModelCreating` une fois et en mettant en cache le modèle.</span><span class="sxs-lookup"><span data-stu-id="bee6b-107">This is caused by the model caching mechanism EF uses to improve the performance by only invoking `OnModelCreating` once and caching the model.</span></span>
+## <a name="imodelcachekeyfactory"></a><span data-ttu-id="ca627-107">IModelCacheKeyFactory</span><span class="sxs-lookup"><span data-stu-id="ca627-107">IModelCacheKeyFactory</span></span>
 
-<span data-ttu-id="bee6b-108">Par défaut, EF suppose que, pour un type de contexte donné, le modèle sera le même.</span><span class="sxs-lookup"><span data-stu-id="bee6b-108">By default EF assumes that for any given context type the model will be the same.</span></span> <span data-ttu-id="bee6b-109">Pour ce faire, l’implémentation par défaut de `IModelCacheKeyFactory` retourne une clé qui contient simplement le type de contexte.</span><span class="sxs-lookup"><span data-stu-id="bee6b-109">To accomplish this the default implementation of `IModelCacheKeyFactory` returns a key that just contains the context type.</span></span> <span data-ttu-id="bee6b-110">Pour changer cela, vous devez remplacer le service `IModelCacheKeyFactory`.</span><span class="sxs-lookup"><span data-stu-id="bee6b-110">To change this you need to replace the `IModelCacheKeyFactory` service.</span></span> <span data-ttu-id="bee6b-111">La nouvelle implémentation doit retourner un objet qui peut être comparé à d’autres clés de modèle à l’aide de la méthode `Equals` qui prend en compte toutes les variables qui affectent le modèle :</span><span class="sxs-lookup"><span data-stu-id="bee6b-111">The new implementation needs to return an object that can be compared to other model keys using the `Equals` method that takes into account all the variables that affect the model:</span></span>
+<span data-ttu-id="ca627-108">EF utilise la `IModelCacheKeyFactory` pour générer des clés de cache pour les modèles ; par défaut, EF suppose que, pour tout type de contexte donné, le modèle sera le même, l’implémentation par défaut de ce service retourne donc une clé qui contient simplement le type de contexte.</span><span class="sxs-lookup"><span data-stu-id="ca627-108">EF uses the `IModelCacheKeyFactory` to generate cache keys for models; by default, EF assumes that for any given context type the model will be the same, so the default implementation of this service returns a key that just contains the context type.</span></span> <span data-ttu-id="ca627-109">Pour produire différents modèles à partir du même type de contexte, vous devez remplacer le service `IModelCacheKeyFactory` par l’implémentation correcte. la clé générée est comparée à d’autres clés de modèle à l’aide de la méthode `Equals`, en tenant compte de toutes les variables qui affectent le modèle :</span><span class="sxs-lookup"><span data-stu-id="ca627-109">To produce different models from the same context type, you need to replace the `IModelCacheKeyFactory` service with the correct  implementation; the generated key will be compared to other model keys using the `Equals` method, taking into account all the variables that affect the model:</span></span>
 
-[!code-csharp[Main](../../../samples/core/DynamicModel/DynamicModelCacheKeyFactory.cs?name=Class)]
+<span data-ttu-id="ca627-110">L’implémentation suivante prend en compte les `IgnoreIntProperty` lors de la génération d’une clé de cache de modèle :</span><span class="sxs-lookup"><span data-stu-id="ca627-110">The following implementation takes the `IgnoreIntProperty` into account when producing a model cache key:</span></span>
+
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicModelCacheKeyFactory.cs?name=DynamicModel)]
+
+<span data-ttu-id="ca627-111">Enfin, inscrivez votre nouveau `IModelCacheKeyFactory` dans le `OnConfiguring`de votre contexte :</span><span class="sxs-lookup"><span data-stu-id="ca627-111">Finally, register your new `IModelCacheKeyFactory` in your context's `OnConfiguring`:</span></span>
+
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicContext.cs?name=OnConfiguring)]
+
+<span data-ttu-id="ca627-112">Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DynamicModel) .</span><span class="sxs-lookup"><span data-stu-id="ca627-112">See the [full sample project](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DynamicModel) for more context.</span></span>

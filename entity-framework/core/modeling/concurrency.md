@@ -1,57 +1,47 @@
 ---
 title: Jetons d’accès concurrentiel-EF Core
-author: rowanmiller
-ms.date: 03/03/2018
+author: AndriySvyryd
+ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: db768c1de99000be91d33764ccd3c3924237f8bb
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8a5f3aa09c2a83d5be0998a11ef2ee8100437514
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197454"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781142"
 ---
-# <a name="concurrency-tokens"></a><span data-ttu-id="b8e37-102">Jetons d'accès concurrentiel</span><span class="sxs-lookup"><span data-stu-id="b8e37-102">Concurrency Tokens</span></span>
+# <a name="concurrency-tokens"></a><span data-ttu-id="8698d-102">Jetons d'accès concurrentiel</span><span class="sxs-lookup"><span data-stu-id="8698d-102">Concurrency Tokens</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="b8e37-103">Cette page décrit comment configurer des jetons d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="b8e37-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="b8e37-104">Consultez [gestion des conflits d’accès concurrentiel](../saving/concurrency.md) pour obtenir une explication détaillée du fonctionnement du contrôle d’accès concurrentiel sur EF Core et des exemples montrant comment gérer les conflits d’accès concurrentiel dans votre application.</span><span class="sxs-lookup"><span data-stu-id="b8e37-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
+> <span data-ttu-id="8698d-103">Cette page décrit comment configurer des jetons d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="8698d-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="8698d-104">Consultez [gestion des conflits d’accès concurrentiel](../saving/concurrency.md) pour obtenir une explication détaillée du fonctionnement du contrôle d’accès concurrentiel sur EF Core et des exemples montrant comment gérer les conflits d’accès concurrentiel dans votre application.</span><span class="sxs-lookup"><span data-stu-id="8698d-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
 
-<span data-ttu-id="b8e37-105">Les propriétés configurées en tant que jetons d’accès concurrentiel permettent d’implémenter le contrôle d’accès concurrentiel optimiste.</span><span class="sxs-lookup"><span data-stu-id="b8e37-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
+<span data-ttu-id="8698d-105">Les propriétés configurées en tant que jetons d’accès concurrentiel permettent d’implémenter le contrôle d’accès concurrentiel optimiste.</span><span class="sxs-lookup"><span data-stu-id="8698d-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
 
-## <a name="conventions"></a><span data-ttu-id="b8e37-106">Conventions</span><span class="sxs-lookup"><span data-stu-id="b8e37-106">Conventions</span></span>
+## <a name="configuration"></a><span data-ttu-id="8698d-106">Configuration</span><span class="sxs-lookup"><span data-stu-id="8698d-106">Configuration</span></span>
 
-<span data-ttu-id="b8e37-107">Par Convention, les propriétés ne sont jamais configurées comme des jetons d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="b8e37-107">By convention, properties are never configured as concurrency tokens.</span></span>
+### <a name="data-annotationstabdata-annotations"></a>[<span data-ttu-id="8698d-107">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="8698d-107">Data Annotations</span></span>](#tab/data-annotations)
 
-## <a name="data-annotations"></a><span data-ttu-id="b8e37-108">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="b8e37-108">Data Annotations</span></span>
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-<span data-ttu-id="b8e37-109">Vous pouvez utiliser les annotations de données pour configurer une propriété comme un jeton d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="b8e37-109">You can use the Data Annotations to configure a property as a concurrency token.</span></span>
+### <a name="fluent-apitabfluent-api"></a>[<span data-ttu-id="8698d-108">API Fluent</span><span class="sxs-lookup"><span data-stu-id="8698d-108">Fluent API</span></span>](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs#ConfigureConcurrencyAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
-## <a name="fluent-api"></a><span data-ttu-id="b8e37-110">API Fluent</span><span class="sxs-lookup"><span data-stu-id="b8e37-110">Fluent API</span></span>
+***
 
-<span data-ttu-id="b8e37-111">Vous pouvez utiliser l’API Fluent pour configurer une propriété comme un jeton d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="b8e37-111">You can use the Fluent API to configure a property as a concurrency token.</span></span>
+## <a name="timestamprowversion"></a><span data-ttu-id="8698d-109">Horodateur/rowversion</span><span class="sxs-lookup"><span data-stu-id="8698d-109">Timestamp/rowversion</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs#ConfigureConcurrencyFluent)]
+<span data-ttu-id="8698d-110">Un timestamp/rowversion est une propriété pour laquelle une nouvelle valeur est générée automatiquement par la base de données chaque fois qu’une ligne est insérée ou mise à jour.</span><span class="sxs-lookup"><span data-stu-id="8698d-110">A timestamp/rowversion is a property for which a new value is automatically generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="8698d-111">La propriété est également traitée comme un jeton d’accès concurrentiel, s’assurant que vous recevez une exception si une ligne que vous mettez à jour a changé depuis que vous l’avez interrogée.</span><span class="sxs-lookup"><span data-stu-id="8698d-111">The property is also treated as a concurrency token, ensuring that you get an exception if a row you are updating has changed since you queried it.</span></span> <span data-ttu-id="8698d-112">Les détails précis dépendent du fournisseur de base de données utilisé ; par SQL Server, une propriété *Byte []* est généralement utilisée, qui sera configurée en tant que colonne *rowversion* dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="8698d-112">The precise details depend on the database provider being used; for SQL Server, a *byte[]* property is usually used, which will be set up as a *ROWVERSION* column in the database.</span></span>
 
-## <a name="timestamprow-version"></a><span data-ttu-id="b8e37-112">Horodateur/version de ligne</span><span class="sxs-lookup"><span data-stu-id="b8e37-112">Timestamp/row version</span></span>
+<span data-ttu-id="8698d-113">Vous pouvez configurer une propriété pour qu’elle soit de type timestamp/rowversion comme suit :</span><span class="sxs-lookup"><span data-stu-id="8698d-113">You can configure a property to be a timestamp/rowversion as follows:</span></span>
 
-<span data-ttu-id="b8e37-113">Un horodatage est une propriété où une nouvelle valeur est générée par la base de données chaque fois qu’une ligne est insérée ou mise à jour.</span><span class="sxs-lookup"><span data-stu-id="b8e37-113">A timestamp is a property where a new value is generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="b8e37-114">La propriété est également traitée comme un jeton d’accès concurrentiel.</span><span class="sxs-lookup"><span data-stu-id="b8e37-114">The property is also treated as a concurrency token.</span></span> <span data-ttu-id="b8e37-115">Cela garantit que vous obtiendrez une exception si quiconque a modifié une ligne que vous essayez de mettre à jour depuis que vous avez interrogé les données.</span><span class="sxs-lookup"><span data-stu-id="b8e37-115">This ensures you will get an exception if anyone else has modified a row that you are trying to update since you queried for the data.</span></span>
+### <a name="data-annotationstabdata-annotations"></a>[<span data-ttu-id="8698d-114">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="8698d-114">Data Annotations</span></span>](#tab/data-annotations)
 
-<span data-ttu-id="b8e37-116">La façon dont cela est accompli est le fournisseur de base de données qui est utilisé.</span><span class="sxs-lookup"><span data-stu-id="b8e37-116">How this is achieved is up to the database provider being used.</span></span> <span data-ttu-id="b8e37-117">Par SQL Server, timestamp est généralement utilisé sur une propriété *Byte []* , qui est configurée en tant que colonne *rowversion* dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="b8e37-117">For SQL Server, timestamp is usually used on a *byte[]* property, which will be setup as a *ROWVERSION* column in the database.</span></span>
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="conventions"></a><span data-ttu-id="b8e37-118">Conventions</span><span class="sxs-lookup"><span data-stu-id="b8e37-118">Conventions</span></span>
+### <a name="fluent-apitabfluent-api"></a>[<span data-ttu-id="8698d-115">API Fluent</span><span class="sxs-lookup"><span data-stu-id="8698d-115">Fluent API</span></span>](#tab/fluent-api)
 
-<span data-ttu-id="b8e37-119">Par Convention, les propriétés ne sont jamais configurées comme horodateurs.</span><span class="sxs-lookup"><span data-stu-id="b8e37-119">By convention, properties are never configured as timestamps.</span></span>
+<span data-ttu-id="8698d-116">[ ! code-CSharp [main] (.. /.. /.. /samples/core/Modeling/FluentAPI/Timestamp.cs ? Name = horodatage & en surbrillance = 9, 17]</span><span class="sxs-lookup"><span data-stu-id="8698d-116">[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs?name=Timestamp&highlight=9,17]</span></span>
 
-### <a name="data-annotations"></a><span data-ttu-id="b8e37-120">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="b8e37-120">Data Annotations</span></span>
-
-<span data-ttu-id="b8e37-121">Vous pouvez utiliser des annotations de données pour configurer une propriété en tant qu’horodateur.</span><span class="sxs-lookup"><span data-stu-id="b8e37-121">You can use Data Annotations to configure a property as a timestamp.</span></span>
-
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs#ConfigureTimestampAnnotations)]
-
-### <a name="fluent-api"></a><span data-ttu-id="b8e37-122">API Fluent</span><span class="sxs-lookup"><span data-stu-id="b8e37-122">Fluent API</span></span>
-
-<span data-ttu-id="b8e37-123">Vous pouvez utiliser l’API Fluent pour configurer une propriété en tant qu’horodateur.</span><span class="sxs-lookup"><span data-stu-id="b8e37-123">You can use the Fluent API to configure a property as a timestamp.</span></span>
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs#ConfigureTimestampFluent)]
+***
