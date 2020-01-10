@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 9fe4905de5bd81fce083d620724b7fad4c6dd11b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 62f7da64bbb6289edd38b877af71fc126e03d0f6
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182051"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502287"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparer EF Core et EF6
 
@@ -30,7 +30,7 @@ EF Core a été conçu pour fournir une expérience de développement similaire 
 
 ## <a name="feature-comparison"></a>Comparaison des fonctionnalités
 
-EF Core offre de nouvelles fonctionnalités qui ne seront pas implémentées dans EF6 (telles que les [clés secondaires](xref:core/modeling/alternate-keys), les [mises à jour par lot](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements) et l’[évaluation mixte client/base de données dans les requêtes LINQ](xref:core/querying/client-eval). Mais comme il s’agit d’une nouvelle base de code, il manque également certaines fonctionnalités présentes dans EF6.
+EF Core offre de nouvelles fonctionnalités qui ne seront pas implémentées dans EF6 (telles que les [clés secondaires](xref:core/modeling/keys#alternate-keys), les [mises à jour par lot](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements) et l’[évaluation mixte client/base de données dans les requêtes LINQ](xref:core/querying/client-eval). Mais comme il s’agit d’une nouvelle base de code, il manque également certaines fonctionnalités présentes dans EF6.
 
 Les tableaux suivants comparent les fonctionnalités disponibles dans EF Core et EF6. Il s’agit d’une comparaison générale qui ne répertorie pas toutes les fonctionnalités et n’explique pas les différences entre la même fonctionnalité dans les différentes versions d’EF.
 

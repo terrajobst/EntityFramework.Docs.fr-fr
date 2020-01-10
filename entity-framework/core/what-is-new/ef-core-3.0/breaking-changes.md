@@ -3,12 +3,12 @@ title: Changements cassants dans EF Core 3.0 - EF Core
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: d614103169837238810fabd0a8889043c851ef14
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
-ms.translationtype: MT
+ms.openlocfilehash: cac166e9e194e512de7d730d27c061e6deaf5191
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824868"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502225"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 
@@ -17,25 +17,25 @@ Les changements qui, selon nous, auront une incidence uniquement sur les fournis
 
 ## <a name="summary"></a>Récapitulatif
 
-| **Modification avec rupture**                                                                                               | **Impact** |
+| **Modification critique**                                                                                               | **Impact** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Élevé       |
-| [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Élevé      |
-| [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Élevé      |
-| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Élevé      |
-| [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Élevé      |
-| [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Élevé      |
-| [Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core](#no-longer) | Moyenne      |
-| [Les suppressions en cascade se produisent désormais immédiatement par défaut](#cascade) | Moyenne      |
-| [Le chargement hâtif des entités associées se produit désormais dans une seule requête](#eager-loading-single-query) | Moyenne      |
-| [La sémantique de DeleteBehavior.Restrict est désormais plus propre](#deletebehavior) | Moyenne      |
-| [L’API de configuration pour les relations de type détenu a changé](#config) | Moyenne      |
-| [Chaque propriété utilise la génération indépendante de clé de type entier en mémoire](#each) | Moyenne      |
-| [Les requêtes sans suivi ne procèdent plus à la résolution de l’identité](#notrackingresolution) | Moyenne      |
-| [Changements apportés à l’API de métadonnées](#metadata-api-changes) | Moyenne      |
-| [Modifications de l’API de métadonnées spécifiques au fournisseur](#provider) | Moyenne      |
-| [UseRowNumberForPaging a été supprimé](#urn) | Moyenne      |
-| [La méthode FromSql quand elle est utilisée avec une procédure stockée ne peut pas être composée](#fromsqlsproc) | Moyenne      |
+| [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Élevée       |
+| [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Élevée      |
+| [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Élevée      |
+| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Élevée      |
+| [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Élevée      |
+| [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Élevée      |
+| [Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core](#no-longer) | Moyen      |
+| [Les suppressions en cascade se produisent désormais immédiatement par défaut](#cascade) | Moyen      |
+| [Le chargement hâtif des entités associées se produit désormais dans une seule requête](#eager-loading-single-query) | Moyen      |
+| [La sémantique de DeleteBehavior.Restrict est désormais plus propre](#deletebehavior) | Moyen      |
+| [L’API de configuration pour les relations de type détenu a changé](#config) | Moyen      |
+| [Chaque propriété utilise la génération indépendante de clé de type entier en mémoire](#each) | Moyen      |
+| [Les requêtes sans suivi ne procèdent plus à la résolution de l’identité](#notrackingresolution) | Moyen      |
+| [Changements apportés à l’API de métadonnées](#metadata-api-changes) | Moyen      |
+| [Modifications de l’API de métadonnées spécifiques au fournisseur](#provider) | Moyen      |
+| [UseRowNumberForPaging a été supprimé](#urn) | Moyen      |
+| [La méthode FromSql quand elle est utilisée avec une procédure stockée ne peut pas être composée](#fromsqlsproc) | Moyen      |
 | [Les méthodes FromSql peuvent uniquement être spécifiées sur les racines de requête](#fromsql) | Faible      |
 | [~~L’exécution de requêtes est enregistrée au niveau du débogage ~~Rétabli](#qe) | Faible      |
 | [Les valeurs de clés temporaires ne sont plus définies sur les instances d’entités](#tkv) | Faible      |
@@ -188,7 +188,7 @@ Avant EF Core 3.0, ces noms de méthode étaient surchargés pour être utilis�
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, utilisez `FromSqlRaw`, `ExecuteSqlRaw` et `ExecuteSqlRawAsync` pour créer une requête paramétrable, où les paramètres sont passés séparément à partir de la chaîne de requête.
-Par exemple :
+Par exemple :
 
 ```csharp
 context.Products.FromSqlRaw(
@@ -197,7 +197,7 @@ context.Products.FromSqlRaw(
 ```
 
 Utilisez `FromSqlInterpolated`, `ExecuteSqlInterpolated` et `ExecuteSqlInterpolatedAsync` pour créer une requête paramétrable, où les paramètres sont passés dans le cadre d’une chaîne de requête interpolée.
-Par exemple :
+Par exemple :
 
 ```csharp
 context.Products.FromSqlInterpolated(
@@ -273,7 +273,7 @@ Les appels `FromSql` doivent être déplacés pour être directement sur le `DbS
 
 **Ancien comportement**
 
-Avant EF Core 3.0, la même instance d’entité était utilisée pour chaque occurrence d’une entité avec un type et un ID donnés. Cela correspond au comportement des requêtes de suivi. Par exemple, la requête suivante :
+Avant EF Core 3.0, la même instance d’entité était utilisée pour chaque occurrence d’une entité avec un type et un ID donnés. Cela correspond au comportement des requêtes de suivi. Par exemple, cette requête :
 
 ```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
@@ -389,12 +389,12 @@ Par exemple, si vous appelez `context.Remove()` pour supprimer une entité princ
 
 **Pourquoi ?**
 
-Ce changement a été apporté afin d’améliorer l’expérience de liaison de données et les scénarios d’audit où il est important de comprendre quelles entités seront supprimées _avant_ l’appel à `SaveChanges`.
+Cette modification a été apportée pour améliorer l’expérience des scénarios de liaison de données et d’audit dans lesquels il est important de comprendre les entités qui seront supprimées _avant_ l’appel de `SaveChanges`.
 
 **Atténuations**
 
-Vous pouvez restaurer le comportement précédent par le biais des paramètres sur `context.ChangedTracker`.
-Par exemple :
+Vous pouvez restaurer le comportement précédent par le biais des paramètres sur `context.ChangeTracker`.
+Par exemple :
 
 ```csharp
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -487,7 +487,7 @@ Avant EF Core 3.0, la configuration de la relation détenue était effectuée d
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, il existe une API Fluent afin de configurer une propriété de navigation pour le propriétaire à l’aide de `WithOwner()`.
-Par exemple :
+Par exemple :
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -495,7 +495,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 La configuration liée à la relation entre le propriétaire et le détenu doit maintenant être chaînée après `WithOwner()` tout comme les autres relations.
 En revanche, la configuration du type détenu lui-même serait toujours chaînée après `OwnsOne()/OwnsMany()`.
-Par exemple :
+Par exemple :
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -741,7 +741,7 @@ Toutefois, si `Order` est un type détenu, cela fait également de `CustomerId` 
 
 À compter de la version 3.0, EF Core ne tente pas d’utiliser des propriétés pour les clés étrangères par convention si elles ont le même nom que la propriété principale.
 Les modèles de nom du type de principal concaténé au nom de la propriété de principal, et de nom de navigation concaténé au nom de propriété de principal sont toujours mis en correspondance.
-Par exemple :
+Par exemple :
 
 ```csharp
 public class Customer
@@ -877,7 +877,7 @@ Ce changement a été apporté afin d’empêcher EF Core de déclencher par err
 **Atténuations**
 
 Vous pouvez restaurer le comportement antérieur à la version 3.0 en configurant le mode d’accès à la propriété sur `ModelBuilder`.
-Par exemple :
+Par exemple :
 
 ```csharp
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -1137,7 +1137,7 @@ Ce changement a été apporté afin d’améliorer le code d’application avec 
 
 En présence de cette erreur, le mieux consiste à tenter de comprendre la cause racine, et de cesser de créer autant de fournisseurs de services internes.
 Toutefois, vous pouvez reconvertir cette erreur en avertissement (ou l’ignorer) par le biais de la configuration sur le `DbContextOptionsBuilder`.
-Par exemple :
+Par exemple :
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1156,7 +1156,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 **Ancien comportement**
 
 Avant EF Core 3.0, la façon dont était interprété le code qui appelait `HasOne` ou `HasMany` avec une seule chaîne prêtait à confusion.
-Par exemple :
+Par exemple :
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
@@ -1178,7 +1178,7 @@ L’ancien comportement était très déroutant, en particulier pour qui lisait 
 Seules les applications qui configurent explicitement des relations en utilisant des chaînes comme noms de type sans spécifier explicitement la propriété de navigation sont concernées,
 ce qui n’est pas courant.
 Pour revenir au comportement précédent, transmettez explicitement `null` comme nom de propriété de navigation.
-Par exemple :
+Par exemple :
 
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1568,7 +1568,7 @@ Utilisez le nouveau nom. (Notez que le numéro d’ID événement n’a pas chan
 
 **Ancien comportement**
 
-Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Par exemple :
+Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Par exemple :
 
 ```csharp
 var constraintName = myForeignKey.Name;
@@ -1576,7 +1576,7 @@ var constraintName = myForeignKey.Name;
 
 **Nouveau comportement**
 
-À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Par exemple :
+À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Par exemple :
 
 ```csharp
 var constraintName = myForeignKey.ConstraintName;
@@ -1624,7 +1624,7 @@ Avant EF Core 3.0, Microsoft.EntityFrameworkCore.Design était un package NuGet 
 
 **Nouveau comportement**
 
-À compter d’EF Core 3.0, il s’agit d’un package DevelopmentDependency. Ce qui signifie que la dépendance ne circule pas de manière transitive dans d’autres projets et que vous ne pouvez plus, par défaut, faire référence à son assembly.
+À compter d’EF Core 3.0, il s’agit d’un package DevelopmentDependency. Cela signifie que la dépendance ne sera pas transitive dans d’autres projets, et que vous ne pouvez plus, par défaut, référencer son assembly.
 
 **Pourquoi ?**
 
@@ -1632,7 +1632,7 @@ Ce package est uniquement destiné à être utilisé au moment du design. Les ap
 
 **Atténuations**
 
-Si vous devez référencer ce package pour écraser le comportement au moment du design d’EF Core, vous pouvez mettre à jour des métadonnées d’élément PackageReference dans votre projet. Si le package est référencé de manière transitive via Microsoft.EntityFrameworkCore.Tools, vous devez ajouter un PackageReference explicite au package pour modifier ses métadonnées.
+Si vous avez besoin de référencer ce package pour remplacer le comportement de EF Core au moment de la conception, vous pouvez mettre à jour les métadonnées de l’élément PackageReference dans votre projet.
 
 ``` xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
@@ -1641,6 +1641,8 @@ Si vous devez référencer ce package pour écraser le comportement au moment du
   <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
 </PackageReference>
 ```
+
+Si le package est référencé de manière transitive via Microsoft.EntityFrameworkCore.Tools, vous devez ajouter un PackageReference explicite au package pour modifier ses métadonnées. Une telle référence explicite doit être ajoutée à n’importe quel projet où les types du package sont nécessaires.
 
 <a name="SQLitePCL"></a>
 
@@ -1717,7 +1719,7 @@ Si votre code prend une dépendance directe sur System. Data. SqlClient, vous de
 
 **Ancien comportement**
 
-Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Par exemple :
+Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Par exemple :
 
 ```csharp
 public class User 
@@ -1740,7 +1742,7 @@ Le modèle résultant est ambigu et probablement erroné dans ce cas.
 
 **Atténuations**
 
-Utilisez la configuration complète de la relation. Par exemple :
+Utilisez la configuration complète de la relation. Par exemple :
 
 ```csharp
 modelBuilder
