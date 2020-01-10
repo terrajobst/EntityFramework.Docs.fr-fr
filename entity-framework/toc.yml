@@ -53,7 +53,7 @@
               href: core/get-started/index.md
             - name: Installation d’EF Core
               href: core/get-started/install/index.md
-            - name: ⤤ Tutoriel ASP.NET Core
+            - name: Tutoriel ASP.NET Core >>
               href: /aspnet/core/data/ef-rp/intro
         - name: Notions de base
           items:
@@ -118,10 +118,6 @@
             - name: Données spatiales
               displayName: GIS
               href: core/modeling/spatial.md
-            - name: Modélisation de base de données relationnelle
-              items:
-                - name: Vue d'ensemble
-                  href: core/modeling/relational/index.md
         - name: Gestion des schémas de base de données
           items:
             - name: Vue d'ensemble
@@ -234,8 +230,8 @@
               href: core/miscellaneous/cli/dbcontext-creation.md
             - name: Services à la conception
               href: core/miscellaneous/cli/services.md
-        - name: ⤤ Informations de référence de l’API EF Core
-          href: 'https://docs.microsoft.com/dotnet/api/?view=efcore-2.1'
+        - name: Informations de référence sur l’API EF Core >>
+          href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
       items:
         - name: Vue d'ensemble
@@ -542,5 +538,5 @@
                       href: ef6/resources/licenses/ef6/kor.md
                     - name: Russe
                       href: ef6/resources/licenses/ef6/rus.md
-        - name: ⤤ Informations de référence sur les API EF6
+        - name: Informations de référence sur les API EF6 >>
           href: 'https://docs.microsoft.com/dotnet/api/?view=entity-framework-6.2.0'
