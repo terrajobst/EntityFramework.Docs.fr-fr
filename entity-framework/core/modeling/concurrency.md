@@ -1,15 +1,15 @@
 ---
 title: Jetons d’accès concurrentiel-EF Core
-author: rowanmiller
-ms.date: 03/03/2018
+author: AndriySvyryd
+ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: db768c1de99000be91d33764ccd3c3924237f8bb
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8a5f3aa09c2a83d5be0998a11ef2ee8100437514
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197454"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781142"
 ---
 # <a name="concurrency-tokens"></a>Jetons d'accès concurrentiel
 
@@ -18,40 +18,30 @@ ms.locfileid: "71197454"
 
 Les propriétés configurées en tant que jetons d’accès concurrentiel permettent d’implémenter le contrôle d’accès concurrentiel optimiste.
 
-## <a name="conventions"></a>Conventions
+## <a name="configuration"></a>Configuration
 
-Par Convention, les propriétés ne sont jamais configurées comme des jetons d’accès concurrentiel.
+### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-## <a name="data-annotations"></a>Annotations de données
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-Vous pouvez utiliser les annotations de données pour configurer une propriété comme un jeton d’accès concurrentiel.
+### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs#ConfigureConcurrencyAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
-## <a name="fluent-api"></a>API Fluent
+***
 
-Vous pouvez utiliser l’API Fluent pour configurer une propriété comme un jeton d’accès concurrentiel.
+## <a name="timestamprowversion"></a>Horodateur/rowversion
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs#ConfigureConcurrencyFluent)]
+Un timestamp/rowversion est une propriété pour laquelle une nouvelle valeur est générée automatiquement par la base de données chaque fois qu’une ligne est insérée ou mise à jour. La propriété est également traitée comme un jeton d’accès concurrentiel, s’assurant que vous recevez une exception si une ligne que vous mettez à jour a changé depuis que vous l’avez interrogée. Les détails précis dépendent du fournisseur de base de données utilisé ; par SQL Server, une propriété *Byte []* est généralement utilisée, qui sera configurée en tant que colonne *rowversion* dans la base de données.
 
-## <a name="timestamprow-version"></a>Horodateur/version de ligne
+Vous pouvez configurer une propriété pour qu’elle soit de type timestamp/rowversion comme suit :
 
-Un horodatage est une propriété où une nouvelle valeur est générée par la base de données chaque fois qu’une ligne est insérée ou mise à jour. La propriété est également traitée comme un jeton d’accès concurrentiel. Cela garantit que vous obtiendrez une exception si quiconque a modifié une ligne que vous essayez de mettre à jour depuis que vous avez interrogé les données.
+### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-La façon dont cela est accompli est le fournisseur de base de données qui est utilisé. Par SQL Server, timestamp est généralement utilisé sur une propriété *Byte []* , qui est configurée en tant que colonne *rowversion* dans la base de données.
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="conventions"></a>Conventions
+### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
 
-Par Convention, les propriétés ne sont jamais configurées comme horodateurs.
+[ ! code-CSharp [main] (.. /.. /.. /samples/core/Modeling/FluentAPI/Timestamp.cs ? Name = horodatage & en surbrillance = 9, 17]
 
-### <a name="data-annotations"></a>Annotations de données
-
-Vous pouvez utiliser des annotations de données pour configurer une propriété en tant qu’horodateur.
-
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs#ConfigureTimestampAnnotations)]
-
-### <a name="fluent-api"></a>API Fluent
-
-Vous pouvez utiliser l’API Fluent pour configurer une propriété en tant qu’horodateur.
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs#ConfigureTimestampFluent)]
+***

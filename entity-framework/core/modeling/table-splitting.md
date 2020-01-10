@@ -3,19 +3,16 @@ title: Fractionnement de table-EF Core
 description: Comment configurer le fractionnement de table à l’aide de Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 04/10/2019
+ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 0e48c516de43cdc2b54c56f1a96f5e01f9fbbbc4
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: c38d3ee0efa82f84a1051017ae40c9f3fdd57f1f
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824556"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781168"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
-
->[!NOTE]
-> Cette fonctionnalité est une nouveauté de EF Core 2,0.
 
 EF Core permet de mapper deux entités ou plus sur une seule ligne. C’est ce que l’on appelle le _fractionnement de table_ ou le _partage de table_.
 
@@ -33,21 +30,28 @@ Dans cet exemple `Order` représente un sous-ensemble de `DetailedOrder`.
 
 Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumnName("Status")` pour mapper `DetailedOrder.Status` à la même colonne que `Order.Status`.
 
-[!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
+[!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
 > Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
 ## <a name="usage"></a>Contrôle
 
-L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que pour les autres entités. Et à partir de EF Core 3,0, la référence d’entité dépendante peut être `null`. Si toutes les colonnes utilisées par l’entité dépendante sont `NULL` est la base de données, aucune instance n’est créée lors de la requête. Toutes les propriétés sont également facultatives et définies sur `null`, ce qui n’est peut-être pas prévu.
+L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que les autres entités :
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 
+## <a name="optional-dependent-entity"></a>Entité dépendante facultative
+
+> [!NOTE]
+> Cette fonctionnalité a été introduite dans EF Core 3,0.
+
+Si toutes les colonnes utilisées par une entité dépendante sont `NULL` dans la base de données, aucune instance n’est créée lors de la requête. Cela permet de modéliser une entité dépendante facultative, où la propriété de relation sur le principal est null. Notez que cela se produit également lorsque toutes les propriétés dépendantes sont facultatives et définies sur `null`, ce qui n’est peut-être pas prévu.
+
 ## <a name="concurrency-tokens"></a>Jetons d’accès concurrentiel
 
-Si l’un des types d’entité partageant une table a un jeton d’accès concurrentiel, il doit être inclus dans tous les autres types d’entité pour éviter une valeur de jeton d’accès concurrentiel obsolète lorsqu’une seule des entités mappées à la même table est mise à jour.
+Si l’un des types d’entité partageant une table a un jeton d’accès concurrentiel, il doit également être inclus dans tous les autres types d’entités. Cela est nécessaire pour éviter une valeur de jeton d’accès concurrentiel obsolète lorsqu’une seule des entités mappées à la même table est mise à jour.
 
-Pour éviter de l’exposer au code consommateur, il est possible d’en créer un dans l’État Shadow.
+Pour éviter d’exposer le jeton d’accès concurrentiel au code consommateur, il est possible de créer un en tant que [propriété Shadow](xref:core/modeling/shadow-properties):
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=ConcurrencyToken&highlight=2)]

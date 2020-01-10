@@ -5,17 +5,14 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 30b91b6e66b6c0f516d1ba12485304b52770cbef
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824594"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781233"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
-
-> [!NOTE]
-> Cette fonctionnalité est une nouveauté de EF Core 2,0.
 
 EF Core vous permet de modéliser des types d’entité qui peuvent uniquement apparaître dans les propriétés de navigation d’autres types d’entités. Il s’agit de _types d’entités détenues_. L’entité contenant un type d’entité détenu est son _propriétaire_.
 
@@ -56,7 +53,7 @@ Pour comprendre comment EF Core effectue le suivi de ces objets, il est utile de
 
 Pour configurer une collection de types détenus, utilisez `OwnsMany` dans `OnModelCreating`.
 
-Les types détenus nécessitent une clé primaire. S’il n’existe aucune propriété candidate correcte sur le type .NET, EF Core pouvez essayer d’en créer un. Toutefois, lorsque des types détenus sont définis via une collection, il ne suffit pas de créer une propriété Shadow pour agir à la fois comme clé étrangère dans le propriétaire et la clé primaire de l’instance appartenant, comme nous le faisons pour `OwnsOne`: il peut y avoir plusieurs instances de type détenu pour chaque propriétaire, et par conséquent, la clé du propriétaire n’est pas suffisante pour fournir une identité unique pour chaque instance détenue.
+Les types détenus nécessitent une clé primaire. S’il n’existe aucune propriété candidate correcte sur le type .NET, EF Core pouvez essayer d’en créer un. Toutefois, lorsque des types détenus sont définis par le biais d’une collection, il suffit de créer une propriété Shadow pour agir à la fois comme clé étrangère dans le propriétaire et la clé primaire de l’instance appartenant, comme nous le faisons pour `OwnsOne`: il peut y avoir plusieurs instances de type détenu pour chaque propriétaire et, par conséquent, la clé du propriétaire n’est pas suffisante pour fournir une identité unique pour
 
 Les deux solutions les plus simples à ce niveau sont les suivantes :
 
