@@ -3,12 +3,12 @@ title: Changements cassants dans EF Core 3.0 - EF Core
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: cac166e9e194e512de7d730d27c061e6deaf5191
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
-ms.translationtype: HT
+ms.openlocfilehash: 0626ffe98843fbf5ee0e2de4b269da6c395c07f6
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502225"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781220"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 
@@ -1028,7 +1028,7 @@ Ce changement a été apporté afin d’améliorer les performances par défaut 
 
 **Atténuations**
 
-Appelez `ChgangeTracker.DetectChanges()` explicitement avant d’appeler `Entry` pour garantir le comportement antérieur à la version 3.0.
+Appelez `ChangeTracker.DetectChanges()` explicitement avant d’appeler `Entry` pour garantir le comportement antérieur à la version 3.0.
 
 ### <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>Les clés de tableaux d’octets et de chaînes ne sont pas générés par client par défaut
 
