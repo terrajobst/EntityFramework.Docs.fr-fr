@@ -1,82 +1,52 @@
 ---
-title: Nouveautés – EF Core
-author: divega
-ms.date: 02/20/2018
+title: Mise en production et planification d’EF Core
+author: ajcvickers
+ms.date: 01/14/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 2ca4915fca515b4bdbfeb77bc7b02f15ce1704b6
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8d74c24021fd62c5c5d944eaf3973b344fdb1e9c
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197725"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124403"
 ---
-# <a name="whats-new-in-ef-core"></a>Nouveautés dans EF Core
+# <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
-## <a name="recent-releases"></a>Versions récentes
+## <a name="stable-releases"></a>Versions stables
 
-- **EF Core 3.0** (dernière version stable) 
-  - [Nouvelles fonctionnalités](xref:core/what-is-new/ef-core-3.0/index) 
-  - [Changements cassants](xref:core/what-is-new/ef-core-3.0/breaking-changes) dont vous devez être conscient lors de la mise à niveau
-- [EF Core 2.2](xref:core/what-is-new/ef-core-2.2)
-- [EF Core 2.1](xref:core/what-is-new/ef-core-2.1) (dernière version de support à long terme)
+| Édition | Framework cible | Fin de prise en charge | Liens
+|:--------|------------------|-----------------|------
+| [EF Core 3.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.1) | .NET Standard 2.0 | 3 décembre 2022 (LTS) | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/)
+| [EF Core 3.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.1) | .NET Standard 2.1 | 3 mars 2020 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/) / [Changements cassants](ef-core-3.0/breaking-changes.md)
+| ~~[EF Core 2.2](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.2.6)~~ | .NET Standard 2.0 | Expiration le 23 décembre 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-2/)
+| [EF Core 2.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.1.14) | .NET Standard 2.0 | 21 août 2021 (LTS) | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-1/)
+| ~~[EF Core 2.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.0.3)~~ | .NET Standard 2.0 | Expiration le 1er octobre 2018 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-0/)
+| ~~[EF Core 1.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.1.6)~~ | .NET Standard 1.3 | Expiration le 27 juin 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-1-1/)
+| ~~[EF Core 1.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.0.6)~~ | .NET Standard 1.3 | Expiration le 27 juin 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/entity-framework-core-1-0-0-available/)
 
-## <a name="product-roadmap"></a>Feuille de route du produit
+Pour plus d’informations sur les plateformes prises en charge par chacune des versions d’EF Core, voir [Plateformes prises en charge](../platforms/index.md).
 
-> [!IMPORTANT]
-> Notez que les fonctionnalités et les plannings des versions ultérieures sont susceptibles de changer à tout moment, et même si cette page est régulièrement mise à jour, elle risque de ne pas toujours refléter nos projets les plus récents.
+Pour plus d’informations sur les versions à expiration du support et les versions LTS (support à long terme), voir [Stratégie de support .NET](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
-### <a name="future-releases"></a>Versions futures
+## <a name="guidance-on-updating-to-new-releases"></a>Aide sur la mise à jour vers les nouvelles versions
 
-- **EF Core 3.1**  
-  - En développement actif
-  - Contiendra de [petites améliorations en matière de performances, de qualité et de stabilité](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.1.0+sort%3Areactions-desc)
-  - Planifiée en tant que version de support à long terme (LTS)
-  - Actuellement planifiée pour décembre 2019
-- **EF Core « vNext »**   
-  - Prochaine version majeure d’EF Core à être fournie avec .NET 5
-  - La planification de cette version n’a pas encore été définie et aucune fonctionnalité n’a été annoncée.  
+* La sécurité et d’autres bogues critiques sont corrigés dans les versions prises en charge. Utilisez toujours le dernier correctif d’une version donnée (par exemple, 2.1.14 pour EF Core 2.1).
+* Les mises à jour de versions majeures (par exemple, de EF Core 2 à EF Core 3) présentent souvent des changements cassants. Un test approfondi est recommandé dans ce cas de figure. Suivez les liens ci-dessus pour savoir comment gérer les changements cassants.
+* Les mises à jour de versions mineures ne contiennent généralement pas de changements cassants. Toutefois, des tests poussés sont toujours recommandés, car les nouvelles fonctionnalités sont susceptibles d’introduire des régressions.
 
-### <a name="schedule"></a>Planification
+## <a name="ef-core-50"></a>EF Core 5.0
 
-La planification de la version d’EF Core est synchronisée avec la [planification de la version de .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
+Les versions d’EF Core s’alignent sur la [planification d’expédition .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md). La prochaine version stable planifiée est **EF Core 5.0**, prévue pour novembre 2020.
 
-### <a name="backlog"></a>Backlog
+Un [plan global pour EF Core 5.0](ef-core-5.0/plan.md) a été créé en suivant le [processus de planification des versions](release-planning.md) documenté.
 
-Le [jalon Backlog](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3ABacklog+sort%3Areactions-%2B1-desc) dans notre suivi de problème contient les problèmes sur lesquels nous prévoyons de travailler un jour ou susceptibles selon nous d’être traités par la communauté.
-Les clients sont invités à envoyer leurs commentaires et leurs votes concernant ces problèmes.
-Les collaborateurs qui souhaitent travailler sur un de ces problèmes sont encouragés à lancer dans un premier temps une discussion sur la façon d’approcher un problème.
+Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite intégrées dans le processus de planification de la prochaine version.
 
-Il n’est jamais garanti que nous allons travailler sur une fonctionnalité donnée dans une version spécifique d’EF Core.
-Comme dans tous les projets de logiciels, les priorités, les calendriers de publication et les ressources disponibles peuvent changer à tout moment.
-Mais si nous avons l’intention de résoudre un problème dans un laps de temps défini, nous lui attribuerons un jalon de version plutôt qu’un jalon de type backlog.
-Nous déplaçons régulièrement des problèmes entre les jalons backlog et de mise en production dans le cadre de notre [processus de planification de mise en production](#release-planning-process).
+### <a name="get-it-now"></a>Télécharger maintenant
 
-Nous fermons généralement un problème si nous ne prévoyons pas de le résoudre.
-Mais nous pouvons reconsidérer un problème que nous avions fermé si nous obtenons de nouvelles informations à ce sujet.
+Les packages EF Core 5.0 sont **disponibles maintenant** sous forme de [builds quotidiens](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md). 
 
-### <a name="release-planning-process"></a>Processus de planning des versions
+Les builds quotidiens représentent un excellent moyen de trouver des problèmes et de fournir un retour d’expérience le plus tôt possible. Plus tôt nous recevons ces commentaires, plus ils ont de chances d’être exploitables avant la version officielle suivante. Nous faisons tout notre possible pour que les builds quotidiens fonctionnent correctement, en exécutant pour chacun plus de 55 000 tests par plateforme.
 
-On nous demande souvent comment nous choisissons les fonctionnalités qui seront intégrées dans une version donnée.
-Notre backlog ne se traduit pas du tout automatiquement en plannings de versions.
-De plus, la présence d’une fonctionnalité dans EF6 ne signifie pas automatiquement qu’elle doit être implémentée dans EF Core.
-
-Il est difficile de détailler l’ensemble du processus que nous mettons en place pour planifier une mise en production.
-Une grande partie de ce processus se résume est étudier les fonctionnalités, les opportunités et les priorités spécifiques, et le processus lui-même évolue également avec chaque nouvelle version.
-Mais il est relativement facile de récapituler les questions courantes auxquelles nous essayons de répondre quand nous choisissons les éléments sur lesquels nous allons travailler :
-
-1. **Combien de développeurs vont utiliser la fonctionnalité selon nous et dans quelle mesure va-t-elle améliorer leurs applications ou leur expérience ?** Pour répondre à cette question, nous recueillons les commentaires provenant de nombreuses sources (les commentaires et votes sur les problèmes en sont une).
-
-2. **Quelles sont les solutions de contournement possibles si nous n’implémentons pas encore cette fonctionnalité ?** Par exemple, de nombreux développeurs peuvent mapper une table de jointure afin de pallier l’absence de prise en charge native du mappage plusieurs-à-plusieurs. Évidemment, tous les développeurs ne peuvent pas le faire, mais beaucoup en sont capables, ce qui constitue un facteur important dans notre décision.
-
-3. **L’implémentation de cette fonctionnalité fait-elle évoluer l’architecture d’EF Core de telle manière que l’implémentation d’autres fonctionnalités s’en voit facilitée ou plus probable ?** Nous avons tendance à privilégier les fonctionnalités qui agissent comme blocs de construction pour d’autres fonctionnalités. Par exemple, les entités de sac de propriétés peuvent faciliter le passage à la prise en charge du mappage plusieurs-à-plusieurs et les constructeurs d’entité permettent la prise en charge de notre chargement différé.
-
-4. **La fonctionnalité est-elle un point d’extensibilité ?** Nous avons tendance aussi à favoriser les points d’extensibilité au détriment des fonctionnalités standard, car ils permettent aux développeurs de raccorder leurs propres comportements et d’obtenir ainsi une compensation pour certaines fonctionnalités manquantes.
-
-5. **Quelle est la synergie de la fonctionnalité quand elle est utilisée conjointement avec d’autres produits ?** Nous favorisons les fonctionnalités qui permettent ou améliorent considérablement l’utilisation d’EF Core avec d’autres produits, comme .NET Core, la dernière version de Visual Studio, Microsoft Azure et ainsi de suite.
-
-6. **Quelles sont les compétences des personnes disponibles pour travailler sur une fonctionnalité, et comment exploiter au mieux ces ressources ?** Chaque membre de l’équipe EF et nos collaborateurs de la Communauté ont différents niveaux d’expérience dans différents domaines, et nous devons donc planifier en conséquence. Même si nous souhaitions faire appel en même temps à toutes ces ressources pour travailler sur une fonctionnalité spécifique telle que les traductions GroupBy ou le mappage plusieurs-à-plusieurs, ce ne serait pas pratique.
-
-Comme mentionné précédemment, le processus évolue à chaque version.
-À l’avenir, nous essaierons d’ajouter davantage d’opportunités pour les membres de la communauté de fournir des entrées dans nos plans de mise en production.
-Par exemple, nous aimerions faciliter le processus de révision de nos ébauches de fonctionnalités et du plan de mise en production lui-même.
+Les packages en préversion seront expédiés à NuGet plus tard dans l’année.
