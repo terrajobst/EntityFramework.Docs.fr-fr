@@ -1,36 +1,32 @@
 ---
-title: Comparer Entity Framework 6 et Entity Framework Core - EF
-description: Fournit des conseils sur la façon de choisir entre Entity Framework 6 et Entity Framework Core.
-author: rowanmiller
-ms.date: 10/27/2016
+title: Comparer EF6 et EF Core
+description: Conseils pour choisir entre EF6 et EF Core.
+author: ajcvickers
+ms.date: 01/23/2019
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 62f7da64bbb6289edd38b877af71fc126e03d0f6
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: e28c7d0299e5089f56fb0795d00917cfc30f5cf1
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502287"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888146"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparer EF Core et EF6
 
-Entity Framework est un mappeur objet-relationnel (ORM) pour .NET. Cet article compare les deux versions : Entity Framework 6 et Entity Framework Core.
+## <a name="ef-core"></a>EF Core
 
-## <a name="entity-framework-6"></a>Entity Framework 6
+Entity Framework Core ([EF Core](../core/index.md)) est un mappeur de base de données objet moderne pour .NET. Il prend en charge les requêtes LINQ, le suivi des modifications, les mises à jour et les migrations de schéma.
 
-Entity Framework 6 (EF6) est une technologie d’accès aux données éprouvée. Il a été publié pour la première fois en 2008, dans le cadre de .NET Framework 3.5 SP1 et de Visual Studio 2008 SP1. À compter de la version 4.1, il est fourni en tant que package NuGet [EntityFramework](https://www.nuget.org/packages/EntityFramework/). EF6 s’exécute sur .NET Framework 4.x et .NET Core à partir de 3.0.
+EF Core fonctionne avec SQL Server/SQL Azure, SQLite, Azure Cosmos DB, MySQL, PostgreSQL et de nombreuses autres bases de données via un [modèle de plug-in de fournisseur de base de données](../core/providers/index.md).
 
-EF6 continue d’être un produit pris en charge et de bénéficier de correctifs de bogues et d’améliorations mineures.
+## <a name="ef6"></a>EF6
 
-## <a name="entity-framework-core"></a>Entity Framework Core
-
-Entity Framework Core (EF Core) est une réécriture complète d’EF6 publiée en 2016. Il est fourni dans des packages Nuget, le principal étant [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/). EF Core est un produit multiplateforme qui s’exécute sur .NET Core.
-
-EF Core a été conçu pour fournir une expérience de développement similaire à EF6. La plupart des API de niveau supérieur restent les mêmes ; EF Core semblera donc familier aux développeurs EF6.
+Entity Framework 6 ([EF6](../ef6/index.md)) est un mappeur relationnel objet conçu pour .NET Framework, mais avec une prise en charge de .NET Core. EF6 est un produit stable et pris en charge, mais il n’est plus développé de façon active.
 
 ## <a name="feature-comparison"></a>Comparaison des fonctionnalités
 
-EF Core offre de nouvelles fonctionnalités qui ne seront pas implémentées dans EF6 (telles que les [clés secondaires](xref:core/modeling/keys#alternate-keys), les [mises à jour par lot](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements) et l’[évaluation mixte client/base de données dans les requêtes LINQ](xref:core/querying/client-eval). Mais comme il s’agit d’une nouvelle base de code, il manque également certaines fonctionnalités présentes dans EF6.
+EF Core offre de nouvelles fonctionnalités qui ne seront pas implémentées dans EF6. Cependant, toutes les fonctionnalités de EF6 ne sont pas implémentées actuellement dans EF Core.
 
 Les tableaux suivants comparent les fonctionnalités disponibles dans EF Core et EF6. Il s’agit d’une comparaison générale qui ne répertorie pas toutes les fonctionnalités et n’explique pas les différences entre la même fonctionnalité dans les différentes versions d’EF.
 
@@ -38,45 +34,46 @@ La colonne EF Core indique la version du produit dans laquelle la fonctionnalit�
 
 ### <a name="creating-a-model"></a>Création d’un modèle
 
-| **Fonctionnalité**                                           | **EF 6** | **EF Core**                           |
+| **Fonctionnalité**                                           | **EF6.4**| **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | Mappage des classes de base                                   | Oui      | 1.0                                   |
 | Constructeurs avec des paramètres                          |          | 2.1                                   |
 | Conversions de valeurs de propriété                            |          | 2.1                                   |
 | Types mappés sans clé                             |          | 2.1                                   |
 | Conventions                                           | Oui      | 1.0                                   |
-| Conventions personnalisées                                    | Oui      | 1.0 (partiel)                         |
+| Conventions personnalisées                                    | Oui      | 1.0 (partielle ; [#214](https://github.com/dotnet/efcore/issues/214)) |
 | Annotations de données                                      | Oui      | 1.0                                   |
 | API Fluent                                            | Oui      | 1.0                                   |
 | Héritage : table par hiérarchie (TPH)                | Oui      | 1.0                                   |
-| Héritage : table par type (TPT)                     | Oui      |                                       |
-| Héritage : table par classe concrète (TPC)           | Oui      |                                       |
+| Héritage : table par type (TPT)                     | Oui      | Prévu pour 5.0 ([#2266](https://github.com/dotnet/efcore/issues/2266)) |
+| Héritage : table par classe concrète (TPC)           | Oui      | Stretch pour 5.0 ([#3170](https://github.com/dotnet/efcore/issues/3170)) <sup>(1)</sup> |
 | Propriétés d’état de clichés instantanés                               |          | 1.0                                   |
 | Clés secondaires                                        |          | 1.0                                   |
-| Plusieurs-à-plusieurs sans entité de jonction                      | Oui      |                                       |
+| Navigations plusieurs-à-plusieurs                              | Oui      | Prévu pour 5.0 ([#19003](https://github.com/dotnet/efcore/issues/19003)) |
+| Plusieurs-à-plusieurs sans entité de jonction                      | Oui      | Dans le journal des travaux en souffrance ([#1368](https://github.com/dotnet/efcore/issues/1368)) |
 | Génération de la clé : Base de données                              | Oui      | 1.0                                   |
 | Génération de la clé : Client                                |          | 1.0                                   |
 | Types complexes/détenus                                   | Oui      | 2.0                                   |
 | Données spatiales                                          | Oui      | 2.2                                   |
-| Visualisation graphique de modèle                      | Oui      |                                       |
-| Éditeur de modèle graphique                                | Oui      |                                       |
 | Format de modèle : Code                                    | Oui      | 1.0                                   |
-| Format de modèle : EDMX (XML)                              | Oui      |                                       |
 | Créer un modèle à partir d’une base de données : Ligne de commande              | Oui      | 1.0                                   |
-| Créer un modèle à partir d’une base de données : Assistant VS                 | Oui      |                                       |
-| Mise à jour d’un modèle à partir d’une base de données                            | Partial  |                                       |
+| Mise à jour d’un modèle à partir d’une base de données                            | Partial  | Dans le journal des travaux en souffrance ([#831](https://github.com/dotnet/efcore/issues/831)) |
 | Filtres de requête globale                                  |          | 2.0                                   |
 | Fractionnement de table                                       | Oui      | 2.0                                   |
-| Fractionnement d'entité                                      | Oui      |                                       |
+| Fractionnement d'entité                                      | Oui      | Stretch pour 5.0 ([#620](https://github.com/dotnet/efcore/issues/620)) <sup>(1)</sup> |
 | Mappage de fonctions scalaires de base de données                      | Médiocre     | 2.0                                   |
 | Mappage de champs                                         |          | 1.1                                   |
 | Types références Nullables (C# 8.0)                     |          | 3.0                                   |
+| Visualisation graphique de modèle                      | Oui      | Aucune prise en charge planifiée <sup>(2)</sup>     |
+| Éditeur de modèle graphique                                | Oui      | Aucune prise en charge planifiée <sup>(2)</sup>     |
+| Format de modèle : EDMX (XML)                              | Oui      | Aucune prise en charge planifiée <sup>(2)</sup>     |
+| Créer un modèle à partir d’une base de données : Assistant VS                 | Oui      | Aucune prise en charge planifiée <sup>(2)</sup>     |
 
 ### <a name="querying-data"></a>Interrogation des données
 
-| **Fonctionnalité**                                           | **EF6**  | **EF Core**                           |
+| **Fonctionnalité**                                           | **EF6.4**| **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
-| Requêtes LINQ                                          | Oui      | 1.0 (en cours pour les requêtes complexes) |
+| Requêtes LINQ                                          | Oui      | 1.0                                   |
 | Code SQL généré lisible                                | Médiocre     | 1.0                                   |
 | Traduction GroupBy                                   | Oui      | 2.1                                   |
 | Chargement des données associées : hâtif                           | Oui      | 1.0                                   |
@@ -87,79 +84,78 @@ La colonne EF Core indique la version du produit dans laquelle la fonctionnalit�
 | Requêtes SQL brutes : Types d’entité sans clé                 | Oui      | 2.1                                   |
 | Requêtes SQL brutes : Composition avec LINQ                  |          | 1.0                                   |
 | Requêtes compilées explicitement                           | Médiocre     | 2.0                                   |
-| Langage de requête textuel (Entity SQL)                | Oui      |                                       |
 | await foreach (C# 8.0)                                |          | 3.0                                   |
+| Langage de requête textuel (Entity SQL)                | Oui      | Aucune prise en charge planifiée <sup>(2)</sup>     |
 
 ### <a name="saving-data"></a>Enregistrement de données
 
-| **Fonctionnalité**                                           | **EF6**  | **EF Core**                           |
+| **Fonctionnalité**                                           | **EF6.4**| **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | Suivi des modifications : Instantané                             | Oui      | 1.0                                   |
 | Suivi des modifications : Notification                         | Oui      | 1.0                                   |
-| Suivi des modifications : Serveurs proxy                              | Oui      |                                       |
+| Suivi des modifications : Serveurs proxy                              | Oui      | Fusionné pour 5.0 ([#10949](https://github.com/dotnet/efcore/issues/10949)) |
 | État du suivi de l’accès                               | Oui      | 1.0                                   |
 | Accès concurrentiel optimiste                                | Oui      | 1.0                                   |
 | Transactions                                          | Oui      | 1.0                                   |
 | Traitement par lot d’instructions                                |          | 1.0                                   |
-| Mappage de procédure stockée                              | Oui      |                                       |
+| Mappage de procédure stockée                              | Oui      | Dans le journal des travaux en souffrance ([#245](https://github.com/dotnet/efcore/issues/245)) |
 | API de bas niveau à graphes déconnectés                     | Médiocre     | 1.0                                   |
-| De bout en bout à graphes déconnectés                         |          | 1.0 (partiel)                         |
+| De bout en bout à graphes déconnectés                         |          | 1.0 (partielle ; [#5536](https://github.com/dotnet/efcore/issues/5536)) |
 
 ### <a name="other-features"></a>Autres fonctionnalités
 
-| **Fonctionnalité**                                           | **EF6**  | **EF Core**                           |
+| **Fonctionnalité**                                           | **EF6.4**| **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | Migrations                                            | Oui      | 1.0                                   |
 | API de création/suppression de base de données                       | Oui      | 1.0                                   |
 | Données seed                                             | Oui      | 2.1                                   |
 | Résilience de la connexion                                 | Oui      | 1.1                                   |
-| Raccordements de cycle de vie (événements, interception)                | Oui      |                                       |
-| Journalisation simple (Database.Log)                         | Oui      |                                       |
+| Intercepteurs                                          | Oui      | 3.0                                   |
+| Événements                                                | Oui      | 3.0 (partielle ; [#626](https://github.com/dotnet/efcore/issues/626)) |
+| Journalisation simple (Database.Log)                         | Oui      | Fusionné pour 5.0 ([#1199](https://github.com/dotnet/efcore/issues/1199)) |
 | Regroupement DbContext                                     |          | 2.0                                   |
 
-### <a name="database-providers"></a>Fournisseurs de bases de données
+### <a name="database-providers-sup3sup"></a>Fournisseurs de bases de données <sup>(3)</sup>
 
-| **Fonctionnalité**                                           | **EF6**  | **EF Core**                           |
+| **Fonctionnalité**                                           | **EF6.4**| **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | SQL Server                                            | Oui      | 1.0                                   |
 | MySQL                                                 | Oui      | 1.0                                   |
 | PostgreSQL                                            | Oui      | 1.0                                   |
 | Oracle                                                | Oui      | 1.0                                   |
 | SQLite                                                | Oui      | 1.0                                   |
-| SQL Server Compact                                    | Oui      | 1.0 <sup>(1)</sup>                    |
+| SQL Server Compact                                    | Oui      | 1.0 <sup>(4)</sup>                    |
 | DB2                                                   | Oui      | 1.0                                   |
 | Firebird                                              | Oui      | 2.0                                   |
-| Jet (Microsoft Access)                                |          | 2.0 <sup>(1)</sup>                    |
-| Cosmos DB                                             |          | 3.0                                   |
+| Jet (Microsoft Access)                                |          | 2.0 <sup>(4)</sup>                    |
+| Azure Cosmos DB                                       |          | 3.0                                   |
 | In-memory (pour les tests)                               |          | 1.0                                   |
 
-<sup>1</sup> Les fournisseurs SQL Server Compact et Jet fonctionnent uniquement sur le .NET Framework (et non sur .NET Core).
+<sup>1</sup> Les objectifs Stretch ne seront probablement pas atteints pour une version donnée. Toutefois, si les choses se déroulent correctement, nous tenterons de le faire.
 
-### <a name="net-implementations"></a>Implémentations de .NET
+<sup>2</sup> Certaines fonctionnalités EF6 ne seront pas implémentées dans EF Core. Ces fonctionnalités dépendent de l’Entity Data Model (EDM) sous-jacent de EF6 et/ou constituent des fonctionnalités complexes avec un retour sur investissement relativement faible. Vos commentaires sont toujours les bienvenus, mais même si EF Core permet d’effectuer de nombreuses opérations irréalisables dans EF6, à l'inverse, EF Core ne prend pas en charge toutes les fonctionnalités de EF6.
 
-| **Fonctionnalité**                                           | **EF6**            | **EF Core**                           |
-|:------------------------------------------------------|:-------------------|:--------------------------------------|
-| .NET Framework                                        | Oui                | 1.0 (supprimé dans 3.0)                  |
-| .NET Core                                             | Oui (ajouté dans 6.3) | 1.0                                   |
-| Mono & Xamarin                                        |                    | 1.0 (en cours)                     |
-| UWP                                                   |                    | 1.0 (en cours)                     |
+<sup>3</sup> Les fournisseurs de bases de données EF Core implémentés par des tiers peuvent être retardés lors de la mise à jour vers de nouvelles versions majeures de EF Core. Consultez [Fournisseurs de bases de données](../core/providers/index.md) pour plus d’informations.
+
+<sup>4</sup> Les fournisseurs SQL Server Compact et Jet fonctionnent uniquement sur le .NET Framework (et non sur .NET Core).
+
+### <a name="supported-platforms"></a>Plateformes prises en charge
+
+EF Core 3.1 s’exécute sur .NET Core et .NET Framework, à l’aide de .NET Standard 2.0. Toutefois, EF Core 5.0 ne s’exécutera pas sur .NET Framework. Consultez [Plateformes](../core/platforms/index.md) pour plus d’informations.
+
+EF 6.4 s’exécute sur .NET Core et .NET Framework, via le multi-ciblage.
 
 ## <a name="guidance-for-new-applications"></a>Conseils pour les nouvelles applications
 
-Utilisez plutôt EF Core pour une nouvelle application si les deux conditions suivantes sont remplies :
-* L’application a besoin des fonctionnalités de .NET Core. Pour plus d’informations, consultez [Choix entre .NET Core et .NET Framework pour les applications serveur](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
-* EF Core prend en charge toutes les fonctionnalités requises par l’application. Si une fonctionnalité souhaitée est manquante, consultez la [feuille de route EF Core](xref:core/what-is-new/index) pour savoir si sa prise en charge est prévue à l’avenir. 
-
-Utilisez plutôt EF6 si les deux conditions suivantes sont remplies :
-* L’application s’exécutera sur Windows et .NET Framework 4.0 ou version ultérieure.
-* EF6 prend en charge toutes les fonctionnalités requises par l’application.
+Utilisez EF Core sur .NET Core pour toutes les nouvelles applications, sauf si l’application a besoin d’une fonctionnalité [uniquement prise en charge sur .NET Framework](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
 
 ## <a name="guidance-for-existing-ef6-applications"></a>Conseils pour les applications EF6 existantes
 
-En raison des modifications importantes apportées à EF Core, nous vous déconseillons de migrer une application EF6 vers EF Core, à moins d’avoir une raison justifiant réellement ce changement. Si vous souhaitez passer à EF Core pour utiliser de nouvelles fonctionnalités, vérifiez bien ses limitations. Pour plus d’informations, consultez [Portage d’EF6 vers EF Core](porting/index.md). **Le déplacement d’EF6 vers EF Core est plus un portage qu’une mise à niveau.**
+EF Core n’est pas un remplacement immédiat de EF6. Le passage de EF6 à EF Core nécessitera probablement des modifications de votre application.
 
-## <a name="next-steps"></a>Étapes suivantes
+Lors du déplacement d’une application EF6 vers .NET Core :
+* Continuez à utiliser EF6 si le code d’accès aux données est stable et n’est pas susceptible d’évoluer ou de nécessiter de nouvelles fonctionnalités.
+* Effectuez un portage vers EF Core si le code d’accès aux données est en cours d’évolution ou si l’application a besoin de nouvelles fonctionnalités uniquement disponibles dans EF Core.
+* Le portage vers EF Core est également souvent effectué pour améliorer les performances. Toutefois, tous les scénarios n’étant pas forcément plus rapides, procédez d’abord à un profilage.
 
-Pour plus d’informations, consultez la documentation :
-* <xref:core/index>
-* <xref:ef6/index>
+Pour plus d’informations, consultez [Portage d’EF6 vers EF Core](porting/index.md).

@@ -1,15 +1,15 @@
 ---
 title: Mise en production et planification d’EF Core
 author: ajcvickers
-ms.date: 01/14/2020
+ms.date: 01/29/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 8d74c24021fd62c5c5d944eaf3973b344fdb1e9c
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: 0704b624a50d0736fefbb5633e9e7e657499a703
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124403"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888077"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -35,18 +35,32 @@ Pour plus d’informations sur les versions à expiration du support et les vers
 * Les mises à jour de versions majeures (par exemple, de EF Core 2 à EF Core 3) présentent souvent des changements cassants. Un test approfondi est recommandé dans ce cas de figure. Suivez les liens ci-dessus pour savoir comment gérer les changements cassants.
 * Les mises à jour de versions mineures ne contiennent généralement pas de changements cassants. Toutefois, des tests poussés sont toujours recommandés, car les nouvelles fonctionnalités sont susceptibles d’introduire des régressions.
 
+## <a name="release-planning-and-schedules"></a>Planification et planification des versions
+
+Les versions d’EF Core s’alignent sur la [planification d’expédition .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
+
+Les mises à jour correctives sont généralement envoyées tous les mois, mais avec un délai assez long.
+Nous nous efforçons d’améliorer ce point.
+
+Pour plus d’informations sur la façon dont nous sélectionnons les éléments à envoyer dans chaque version, consultez le [processus de planification des versions](release-planning.md).
+En règle générale, nous ne procédons pas à une planification détaillée au-delà de la prochaine version majeure ou mineure.
+
 ## <a name="ef-core-50"></a>EF Core 5.0
 
-Les versions d’EF Core s’alignent sur la [planification d’expédition .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md). La prochaine version stable planifiée est **EF Core 5.0**, prévue pour novembre 2020.
+La prochaine version stable planifiée est **EF Core 5.0**, prévue pour novembre 2020.
 
 Un [plan global pour EF Core 5.0](ef-core-5.0/plan.md) a été créé en suivant le [processus de planification des versions](release-planning.md) documenté.
 
-Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite intégrées dans le processus de planification de la prochaine version.
+Vos commentaires sur la planification sont importants.
+La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut 👍) pour ce problème sur GitHub.
+Ces données sont ensuite intégrées dans le processus de planification de la prochaine version.
 
 ### <a name="get-it-now"></a>Télécharger maintenant
 
 Les packages EF Core 5.0 sont **disponibles maintenant** sous forme de [builds quotidiens](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md). 
 
-Les builds quotidiens représentent un excellent moyen de trouver des problèmes et de fournir un retour d’expérience le plus tôt possible. Plus tôt nous recevons ces commentaires, plus ils ont de chances d’être exploitables avant la version officielle suivante. Nous faisons tout notre possible pour que les builds quotidiens fonctionnent correctement, en exécutant pour chacun plus de 55 000 tests par plateforme.
+Les builds quotidiens représentent un excellent moyen de trouver des problèmes et de fournir un retour d’expérience le plus tôt possible.
+Plus tôt nous recevons ces commentaires, plus ils ont de chances d’être exploitables avant la version officielle suivante.
+Nous faisons tout notre possible pour que les builds quotidiens fonctionnent correctement, en exécutant pour chacun plus de 56 000 tests par plateforme.
 
 Les packages en préversion seront expédiés à NuGet plus tard dans l’année.
