@@ -3,12 +3,12 @@ title: Changements cassants dans EF Core 3.0 - EF Core
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 0626ffe98843fbf5ee0e2de4b269da6c395c07f6
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: 6e0c17a22b56b206f18e47f678e3e237d5c42375
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781220"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888107"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Dernières modifications incluses dans EF Core 3,0
 
@@ -109,6 +109,9 @@ Si une requête ne peut pas être entièrement traduite, réécrivez-la sous une
 
 [Suivi de problème no 15498](https://github.com/aspnet/EntityFrameworkCore/issues/15498)
 
+> [!IMPORTANT] 
+> EF Core 3,1 cible .NET Standard 2,0. La prise en charge de .NET Framework est alors rétablie.
+
 **Ancien comportement**
 
 Avant la version 3.0, EF Core ciblait .NET Standard 2.0 et s’exécutait sur toutes les plateformes qui prennent en charge cette norme, y compris .NET Framework.
@@ -123,7 +126,7 @@ Cela fait partie d’une décision stratégique dans les technologies .NET de co
 
 **Atténuations**
 
-Envisagez de passer à une plateforme .NET moderne. Si ce n’est pas possible, continuez à utiliser EF Core 2.1 ou EF Core 2.2, qui prennent tous deux en charge .NET Framework.
+Utilisez EF Core 3,1.
 
 <a name="no-longer"></a>
 ### <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core

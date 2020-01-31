@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: 0bfccbfd3af6e209967004752b5a3947d644544b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 69f979d46174ff56310b334f28438ac271f45155
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655516"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888094"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>Utilisation de données non structurées dans EF Core fournisseur Azure Cosmos DB
 
@@ -55,11 +55,11 @@ Pour découpler complètement de EF Core récupérez l’objet [CosmosClient](/d
 
 ## <a name="missing-property-values"></a>Valeurs de propriété manquantes
 
-Dans l’exemple précédent, nous avons supprimé la propriété `"TrackingNumber"` de la commande. En raison du fonctionnement de l’indexation dans Cosmos DB, les requêtes qui font référence à la propriété manquante ailleurs que dans la projection peuvent retourner des résultats inattendus. Exemple :
+Dans l’exemple précédent, nous avons supprimé la propriété `"TrackingNumber"` de la commande. En raison du fonctionnement de l’indexation dans Cosmos DB, les requêtes qui font référence à la propriété manquante ailleurs que dans la projection peuvent retourner des résultats inattendus. Par exemple :
 
 [!code-csharp[MissingProperties](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?name=MissingProperties)]
 
 En fait, la requête triée ne retourne aucun résultat. Cela signifie qu’il faut veiller à toujours remplir les propriétés mappées par EF Core quand vous travaillez directement avec le magasin.
 
 > [!NOTE]
-> Ce comportement peut changer dans les versions ultérieures de Cosmos. Par exemple, si la stratégie d’indexation définit l’index composite {ID/ ? ASC, TrackingNumber/ ? ASC)}, une requête dont le a’ORDER BY c.Id ASC, c. discriminateur __ASC’retourne__ des éléments pour lesquels la propriété `"TrackingNumber"` est manquante.
+> Ce comportement peut changer dans les versions ultérieures de Cosmos. Par exemple, si la stratégie d’indexation définit l’index composite {ID/ ? ASC, TrackingNumber/ ? ASC)}, une requête qui a’ORDER BY c.Id ASC, c. discriminant __ASC’retourne__ des éléments pour lesquels la propriété `"TrackingNumber"` est manquante.
