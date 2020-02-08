@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 6b3e0636bfa266b78baafe1b6e318c9707294560
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 6d68e813cec6c989e8e4cb848f8740489645c65c
+ms.sourcegitcommit: 89567d08c9d8bf9c33bb55a62f17067094a4065a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502186"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77051405"
 ---
 # <a name="relationships"></a>Relations
 
@@ -26,9 +26,9 @@ Il existe un certain nombre de termes utilisés pour décrire les relations
 
 * **Entité principale :** Il s’agit de l’entité qui contient les propriétés de clé primaire/secondaire. Parfois appelé « parent » de la relation.
 
-* **Clé étrangère :** Propriétés de l’entité dépendante utilisées pour stocker les valeurs de clé principale de l’entité associée.
-
 * **Clé principale :** Propriétés qui identifient de façon unique l’entité principale. Il peut s’agir de la clé primaire ou d’une clé secondaire.
+
+* **Clé étrangère :** Propriétés de l’entité dépendante utilisées pour stocker les valeurs de clé principale de l’entité associée.
 
 * **Propriété de navigation :** Propriété définie sur le principal et/ou sur l’entité dépendante qui référence l’entité associée.
 
@@ -48,9 +48,9 @@ Le code suivant illustre une relation un-à-plusieurs entre `Blog` et `Post`
 
 * `Blog` est l’entité principale
 
-* `Post.BlogId` est la clé étrangère
-
 * `Blog.BlogId` est la clé principale (dans le cas présent, il s’agit d’une clé primaire plutôt que d’une clé secondaire)
+
+* `Post.BlogId` est la clé étrangère
 
 * `Post.Blog` est une propriété de navigation de référence
 
@@ -104,7 +104,7 @@ L’inclusion d’une seule propriété de navigation (aucune navigation inverse
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=OneNavigation&highlight=6)]
 
-### <a name="limitations"></a>Limitations
+### <a name="limitations"></a>Limites
 
 Lorsqu’il existe plusieurs propriétés de navigation définies entre deux types (autrement dit, plusieurs paires de navigation qui pointent les unes vers les autres), les relations représentées par les propriétés de navigation sont ambiguës. Vous devrez les configurer manuellement pour résoudre l’ambiguïté.
 
@@ -228,7 +228,7 @@ Pour une présentation détaillée de chaque option, consultez [suppression en c
 
 ## <a name="other-relationship-patterns"></a>Autres modèles de relation
 
-### <a name="one-to-one"></a>Un-à-un
+### <a name="one-to-one"></a>Un à un
 
 Les relations un-à-un ont une propriété de navigation de référence des deux côtés. Ils suivent les mêmes conventions que les relations un-à-plusieurs, mais un index unique est introduit sur la propriété de clé étrangère pour s’assurer qu’un seul dépendant est lié à chaque principal.
 
@@ -243,7 +243,7 @@ Quand vous configurez la clé étrangère, vous devez spécifier le type d’ent
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?name=OneToOne&highlight=11)]
 
-### <a name="many-to-many"></a>Plusieurs-à-plusieurs
+### <a name="many-to-many"></a>Plusieurs à plusieurs
 
 Les relations plusieurs-à-plusieurs sans classe d’entité pour représenter la table de jointure ne sont pas encore prises en charge. Toutefois, vous pouvez représenter une relation plusieurs-à-plusieurs en incluant une classe d’entité pour la table de jointure et en mappant deux relations un-à-plusieurs distinctes.
 

@@ -19,9 +19,9 @@
       items:
         - name: Vue d'ensemble
           href: core/index.md
-        - name: Mise en production et planification
+        - name: Mises en production et planification (feuille de route)
           items:
-            - name: Mises en production actuelles et planifiées (plan)
+            - name: Mises en production actuelles et planifiées
               href: core/what-is-new/index.md
             - name: Processus de planning des versions
               href: core/what-is-new/release-planning.md
@@ -29,6 +29,8 @@
               items:
                 - name: Plan global
                   href: core/what-is-new/ef-core-5.0/plan.md
+                - name: Nouveautés
+                  href: core/what-is-new/ef-core-5.0/whatsnew.md
             - name: EF Core 3.0
               items:
                 - name: Nouvelles fonctionnalités
