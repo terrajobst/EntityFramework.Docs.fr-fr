@@ -5,11 +5,11 @@ ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
 ms.openlocfilehash: 28a13879416a52cbe8035c23013f16390c75c4c9
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656178"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412754"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) est un mappeur Objet Relationnel (O/RM) éprouvé pour .NET qui bénéficie de nombreuses années de développement de fonctionnalités et de stabilisation.
@@ -40,7 +40,7 @@ EF Core est le résultat d’une réécriture complète et contient de nombreuse
 Si l’ensemble des fonctionnalités correspond à vos besoins, vous pouvez utiliser EF Core dans les nouvelles applications.
 La section [Comparer EF Core et EF6](xref:efcore-and-ef6/index) examine ce choix plus en détail.
 
-## <a name="get-startedxrefef6get-started"></a>[Bien démarrer](xref:ef6/get-started)
+## <a name="get-started"></a>[Bien démarrer](xref:ef6/get-started)
 
 Ajoutez le package NuGet EntityFramework à votre projet ou installez [Entity Framework Tools pour Visual Studio](https://aka.ms/AA6i8c5). Ensuite, regardez les vidéos, lisez les tutoriels et la documentation avancée pour vous aider à tirer le meilleur parti d’EF6.
 

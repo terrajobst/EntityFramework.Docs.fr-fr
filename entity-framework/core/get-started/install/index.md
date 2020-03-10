@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 1121b2bde1ada74ee189287501bc770aeb65e358
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 987b6f38954c291f88b5167fa9b061853b15a6cb
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824439"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412854"
 ---
 # <a name="installing-entity-framework-core"></a>Installation d’Entity Framework Core
 
@@ -98,8 +98,6 @@ Les commandes `dotnet ef` sont incluses dans les versions actuelles du SDK .NET 
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
-
-Pour les applications ASP.NET Core, ce package est inclus automatiquement.
 
 > [!IMPORTANT]
 > Utilisez toujours la version des packages d’outils qui correspond à la version principale des packages du runtime.
