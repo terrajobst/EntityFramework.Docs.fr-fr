@@ -5,176 +5,176 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
 ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655856"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417523"
 ---
-# <a name="features-included-in-ef-core-10"></a><span data-ttu-id="6cca2-102">Fonctionnalités incluses dans EF Core 1.0</span><span class="sxs-lookup"><span data-stu-id="6cca2-102">Features included in EF Core 1.0</span></span>
+# <a name="features-included-in-ef-core-10"></a><span data-ttu-id="dc341-102">Fonctionnalités incluses dans EF Core 1.0</span><span class="sxs-lookup"><span data-stu-id="dc341-102">Features included in EF Core 1.0</span></span>
 
-## <a name="platforms"></a><span data-ttu-id="6cca2-103">Plateformes</span><span class="sxs-lookup"><span data-stu-id="6cca2-103">Platforms</span></span>
+## <a name="platforms"></a><span data-ttu-id="dc341-103">Plateformes</span><span class="sxs-lookup"><span data-stu-id="dc341-103">Platforms</span></span>
 
-### <a name="net-framework-451"></a><span data-ttu-id="6cca2-104">.NET Framework 4.5.1</span><span class="sxs-lookup"><span data-stu-id="6cca2-104">.NET Framework 4.5.1</span></span>
+### <a name="net-framework-451"></a><span data-ttu-id="dc341-104">.NET Framework 4.5.1</span><span class="sxs-lookup"><span data-stu-id="dc341-104">.NET Framework 4.5.1</span></span>
 
-<span data-ttu-id="6cca2-105">Inclut la console, WPF, WinForms, ASP.NET 4, etc.</span><span class="sxs-lookup"><span data-stu-id="6cca2-105">Includes Console, WPF, WinForms, ASP.NET 4, etc.</span></span>
+<span data-ttu-id="dc341-105">Inclut la console, WPF, WinForms, ASP.NET 4, etc.</span><span class="sxs-lookup"><span data-stu-id="dc341-105">Includes Console, WPF, WinForms, ASP.NET 4, etc.</span></span>
 
-### <a name="net-standard-13"></a><span data-ttu-id="6cca2-106">.NET Standard 1.3</span><span class="sxs-lookup"><span data-stu-id="6cca2-106">.NET Standard 1.3</span></span>
+### <a name="net-standard-13"></a><span data-ttu-id="dc341-106">.NET Standard 1.3</span><span class="sxs-lookup"><span data-stu-id="dc341-106">.NET Standard 1.3</span></span>
 
-<span data-ttu-id="6cca2-107">Inclut ASP.NET Core ciblant à la fois .NET Framework et .NET Core sur Windows, OSX et Linux.</span><span class="sxs-lookup"><span data-stu-id="6cca2-107">Including ASP.NET Core targeting both .NET Framework and .NET Core on Windows, OSX, and Linux.</span></span>
+<span data-ttu-id="dc341-107">Inclut ASP.NET Core ciblant à la fois .NET Framework et .NET Core sur Windows, OSX et Linux.</span><span class="sxs-lookup"><span data-stu-id="dc341-107">Including ASP.NET Core targeting both .NET Framework and .NET Core on Windows, OSX, and Linux.</span></span>
 
-## <a name="modelling"></a><span data-ttu-id="6cca2-108">Modélisation</span><span class="sxs-lookup"><span data-stu-id="6cca2-108">Modelling</span></span>
+## <a name="modelling"></a><span data-ttu-id="dc341-108">Modélisation</span><span class="sxs-lookup"><span data-stu-id="dc341-108">Modelling</span></span>
 
-### <a name="basic-modelling"></a><span data-ttu-id="6cca2-109">Modélisation de base</span><span class="sxs-lookup"><span data-stu-id="6cca2-109">Basic modelling</span></span>
+### <a name="basic-modelling"></a><span data-ttu-id="dc341-109">Modélisation de base</span><span class="sxs-lookup"><span data-stu-id="dc341-109">Basic modelling</span></span>
 
-<span data-ttu-id="6cca2-110">Basée sur les entités OCT avec des propriétés get/set de types scalaires communs (`int`, `string`, etc.).</span><span class="sxs-lookup"><span data-stu-id="6cca2-110">Based on POCO entities with get/set properties of common scalar types (`int`, `string`, etc.).</span></span>
+<span data-ttu-id="dc341-110">Basée sur les entités OCT avec des propriétés get/set de types scalaires communs (`int`, `string`, etc.).</span><span class="sxs-lookup"><span data-stu-id="dc341-110">Based on POCO entities with get/set properties of common scalar types (`int`, `string`, etc.).</span></span>
 
-### <a name="relationships-and-navigation-properties"></a><span data-ttu-id="6cca2-111">Relations et propriétés de navigation</span><span class="sxs-lookup"><span data-stu-id="6cca2-111">Relationships and navigation properties</span></span>
+### <a name="relationships-and-navigation-properties"></a><span data-ttu-id="dc341-111">Relations et propriétés de navigation</span><span class="sxs-lookup"><span data-stu-id="dc341-111">Relationships and navigation properties</span></span>
 
-<span data-ttu-id="6cca2-112">Les relations un-à-plusieurs et un-à-zéro-ou un-à-un peuvent être spécifiées dans le modèle en fonction d’une clé étrangère.</span><span class="sxs-lookup"><span data-stu-id="6cca2-112">One-to-many and One-to-zero-or-one relationships can be specified in the model based on a foreign key.</span></span> <span data-ttu-id="6cca2-113">Les propriétés de navigation de types de collection ou de référence simples peuvent être associées à ces relations.</span><span class="sxs-lookup"><span data-stu-id="6cca2-113">Navigation properties of simple collection or reference types can be associated with these relationships.</span></span>
+<span data-ttu-id="dc341-112">Les relations un-à-plusieurs et un-à-zéro-ou un-à-un peuvent être spécifiées dans le modèle en fonction d’une clé étrangère.</span><span class="sxs-lookup"><span data-stu-id="dc341-112">One-to-many and One-to-zero-or-one relationships can be specified in the model based on a foreign key.</span></span> <span data-ttu-id="dc341-113">Les propriétés de navigation de types de collection ou de référence simples peuvent être associées à ces relations.</span><span class="sxs-lookup"><span data-stu-id="dc341-113">Navigation properties of simple collection or reference types can be associated with these relationships.</span></span>
 
-### <a name="built-in-conventions"></a><span data-ttu-id="6cca2-114">Conventions intégrées</span><span class="sxs-lookup"><span data-stu-id="6cca2-114">Built-in conventions</span></span>
+### <a name="built-in-conventions"></a><span data-ttu-id="dc341-114">Conventions intégrées</span><span class="sxs-lookup"><span data-stu-id="dc341-114">Built-in conventions</span></span>
 
-<span data-ttu-id="6cca2-115">Ces conventions génèrent un modèle initial basé sur la forme des classes d’entité.</span><span class="sxs-lookup"><span data-stu-id="6cca2-115">These build an initial model based on the shape of the entity classes.</span></span>
+<span data-ttu-id="dc341-115">Ces conventions génèrent un modèle initial basé sur la forme des classes d’entité.</span><span class="sxs-lookup"><span data-stu-id="dc341-115">These build an initial model based on the shape of the entity classes.</span></span>
 
-### <a name="fluent-api"></a><span data-ttu-id="6cca2-116">API Fluent</span><span class="sxs-lookup"><span data-stu-id="6cca2-116">Fluent API</span></span>
+### <a name="fluent-api"></a><span data-ttu-id="dc341-116">API Fluent</span><span class="sxs-lookup"><span data-stu-id="dc341-116">Fluent API</span></span>
 
-<span data-ttu-id="6cca2-117">Permet de remplacer la méthode `OnModelCreating` sur votre contexte pour configurer davantage le modèle détecté par convention.</span><span class="sxs-lookup"><span data-stu-id="6cca2-117">Allows you to override the `OnModelCreating` method on your context to further configure the model that was discovered by convention.</span></span>
+<span data-ttu-id="dc341-117">Permet de remplacer la méthode `OnModelCreating` sur votre contexte pour configurer davantage le modèle détecté par convention.</span><span class="sxs-lookup"><span data-stu-id="dc341-117">Allows you to override the `OnModelCreating` method on your context to further configure the model that was discovered by convention.</span></span>
 
-### <a name="data-annotations"></a><span data-ttu-id="6cca2-118">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-118">Data annotations</span></span>
+### <a name="data-annotations"></a><span data-ttu-id="dc341-118">Annotations de données</span><span class="sxs-lookup"><span data-stu-id="dc341-118">Data annotations</span></span>
 
-<span data-ttu-id="6cca2-119">Il s’agit d’attributs qui peuvent être ajoutés à vos propriétés/classes d’entité et qui influenceront le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="6cca2-119">Are attributes that can be added to your entity classes/properties and will influence the EF model.</span></span> <span data-ttu-id="6cca2-120">Par exemple, l’ajout de la mention `[Required]` informera EF qu’une propriété est obligatoire.</span><span class="sxs-lookup"><span data-stu-id="6cca2-120">For example, adding `[Required]` will let EF know that a property is required.</span></span>
+<span data-ttu-id="dc341-119">Il s’agit d’attributs qui peuvent être ajoutés à vos propriétés/classes d’entité et qui influenceront le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="dc341-119">Are attributes that can be added to your entity classes/properties and will influence the EF model.</span></span> <span data-ttu-id="dc341-120">Par exemple, l’ajout de la mention `[Required]` informera EF qu’une propriété est obligatoire.</span><span class="sxs-lookup"><span data-stu-id="dc341-120">For example, adding `[Required]` will let EF know that a property is required.</span></span>
 
-### <a name="relational-table-mapping"></a><span data-ttu-id="6cca2-121">Mappage de tables relationnelles</span><span class="sxs-lookup"><span data-stu-id="6cca2-121">Relational Table mapping</span></span>
+### <a name="relational-table-mapping"></a><span data-ttu-id="dc341-121">Mappage de tables relationnelles</span><span class="sxs-lookup"><span data-stu-id="dc341-121">Relational Table mapping</span></span>
 
-<span data-ttu-id="6cca2-122">Permet de mapper des entités à des tables ou des colonnes.</span><span class="sxs-lookup"><span data-stu-id="6cca2-122">Allows entities to be mapped to tables/columns.</span></span>
+<span data-ttu-id="dc341-122">Permet de mapper des entités à des tables ou des colonnes.</span><span class="sxs-lookup"><span data-stu-id="dc341-122">Allows entities to be mapped to tables/columns.</span></span>
 
-### <a name="key-value-generation"></a><span data-ttu-id="6cca2-123">Génération de valeur de clé</span><span class="sxs-lookup"><span data-stu-id="6cca2-123">Key value generation</span></span>
+### <a name="key-value-generation"></a><span data-ttu-id="dc341-123">Génération de valeur de clé</span><span class="sxs-lookup"><span data-stu-id="dc341-123">Key value generation</span></span>
 
-<span data-ttu-id="6cca2-124">Inclut la génération côté client et la génération de base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-124">Including client-side generation and database generation.</span></span>
+<span data-ttu-id="dc341-124">Inclut la génération côté client et la génération de base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-124">Including client-side generation and database generation.</span></span>
 
-### <a name="database-generated-values"></a><span data-ttu-id="6cca2-125">Valeurs générées de base de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-125">Database generated values</span></span>
+### <a name="database-generated-values"></a><span data-ttu-id="dc341-125">Valeurs générées de base de données</span><span class="sxs-lookup"><span data-stu-id="dc341-125">Database generated values</span></span>
 
-<span data-ttu-id="6cca2-126">Permet à la base de données de générer des valeurs par insertion (valeurs par défaut) ou par mise à jour (colonnes calculées).</span><span class="sxs-lookup"><span data-stu-id="6cca2-126">Allows for values to be generated by the database on insert (default values) or update (computed columns).</span></span>
+<span data-ttu-id="dc341-126">Permet à la base de données de générer des valeurs par insertion (valeurs par défaut) ou par mise à jour (colonnes calculées).</span><span class="sxs-lookup"><span data-stu-id="dc341-126">Allows for values to be generated by the database on insert (default values) or update (computed columns).</span></span>
 
-### <a name="sequences-in-sql-server"></a><span data-ttu-id="6cca2-127">Séquences dans SQL Server</span><span class="sxs-lookup"><span data-stu-id="6cca2-127">Sequences in SQL Server</span></span>
+### <a name="sequences-in-sql-server"></a><span data-ttu-id="dc341-127">Séquences dans SQL Server</span><span class="sxs-lookup"><span data-stu-id="dc341-127">Sequences in SQL Server</span></span>
 
-<span data-ttu-id="6cca2-128">Permet de définir des objets de la séquence dans le modèle.</span><span class="sxs-lookup"><span data-stu-id="6cca2-128">Allows for sequence objects to be defined in the model.</span></span>
+<span data-ttu-id="dc341-128">Permet de définir des objets de la séquence dans le modèle.</span><span class="sxs-lookup"><span data-stu-id="dc341-128">Allows for sequence objects to be defined in the model.</span></span>
 
-### <a name="unique-constraints"></a><span data-ttu-id="6cca2-129">Contraintes uniques</span><span class="sxs-lookup"><span data-stu-id="6cca2-129">Unique constraints</span></span>
+### <a name="unique-constraints"></a><span data-ttu-id="dc341-129">Contraintes uniques</span><span class="sxs-lookup"><span data-stu-id="dc341-129">Unique constraints</span></span>
 
-<span data-ttu-id="6cca2-130">Permet de définir d’autres clés ainsi que les relations ciblant ces clés.</span><span class="sxs-lookup"><span data-stu-id="6cca2-130">Allows for the definition of alternate keys and the ability to define relationships that target that key.</span></span>
+<span data-ttu-id="dc341-130">Permet de définir d’autres clés ainsi que les relations ciblant ces clés.</span><span class="sxs-lookup"><span data-stu-id="dc341-130">Allows for the definition of alternate keys and the ability to define relationships that target that key.</span></span>
 
-### <a name="indexes"></a><span data-ttu-id="6cca2-131">Index</span><span class="sxs-lookup"><span data-stu-id="6cca2-131">Indexes</span></span>
+### <a name="indexes"></a><span data-ttu-id="dc341-131">Index</span><span class="sxs-lookup"><span data-stu-id="dc341-131">Indexes</span></span>
 
-<span data-ttu-id="6cca2-132">La définition d’index dans le modèle introduit automatiquement les index dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-132">Defining indexes in the model automatically introduces indexes in the database.</span></span> <span data-ttu-id="6cca2-133">Les index uniques sont également pris en charge.</span><span class="sxs-lookup"><span data-stu-id="6cca2-133">Unique indexes are also supported.</span></span>
+<span data-ttu-id="dc341-132">La définition d’index dans le modèle introduit automatiquement les index dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-132">Defining indexes in the model automatically introduces indexes in the database.</span></span> <span data-ttu-id="dc341-133">Les index uniques sont également pris en charge.</span><span class="sxs-lookup"><span data-stu-id="dc341-133">Unique indexes are also supported.</span></span>
 
-### <a name="shadow-state-properties"></a><span data-ttu-id="6cca2-134">Propriétés d’état de clichés instantanés</span><span class="sxs-lookup"><span data-stu-id="6cca2-134">Shadow state properties</span></span>
+### <a name="shadow-state-properties"></a><span data-ttu-id="dc341-134">Propriétés d’état de clichés instantanés</span><span class="sxs-lookup"><span data-stu-id="dc341-134">Shadow state properties</span></span>
 
-<span data-ttu-id="6cca2-135">Permet de définir dans le modèle des propriétés qui ne sont pas déclarées ni stockées dans la classe .NET, mais qui peuvent être suivies et mises à jour par EF Core.</span><span class="sxs-lookup"><span data-stu-id="6cca2-135">Allows for properties to be defined in the model that are not declared and are not stored in the .NET class but can be tracked and updated by EF Core.</span></span> <span data-ttu-id="6cca2-136">Elles sont couramment utilisées pour les propriétés de clé étrangère quand l’exposition de ces dernières dans l’objet n’est pas souhaitée.</span><span class="sxs-lookup"><span data-stu-id="6cca2-136">Commonly used for foreign key properties when exposing these in the object is not desired.</span></span>
+<span data-ttu-id="dc341-135">Permet de définir dans le modèle des propriétés qui ne sont pas déclarées ni stockées dans la classe .NET, mais qui peuvent être suivies et mises à jour par EF Core.</span><span class="sxs-lookup"><span data-stu-id="dc341-135">Allows for properties to be defined in the model that are not declared and are not stored in the .NET class but can be tracked and updated by EF Core.</span></span> <span data-ttu-id="dc341-136">Elles sont couramment utilisées pour les propriétés de clé étrangère quand l’exposition de ces dernières dans l’objet n’est pas souhaitée.</span><span class="sxs-lookup"><span data-stu-id="dc341-136">Commonly used for foreign key properties when exposing these in the object is not desired.</span></span>
 
-### <a name="table-per-hierarchy-inheritance-pattern"></a><span data-ttu-id="6cca2-137">Modèle d'héritage de table par hiérarchie</span><span class="sxs-lookup"><span data-stu-id="6cca2-137">Table-Per-Hierarchy inheritance pattern</span></span>
+### <a name="table-per-hierarchy-inheritance-pattern"></a><span data-ttu-id="dc341-137">Modèle d'héritage de table par hiérarchie</span><span class="sxs-lookup"><span data-stu-id="dc341-137">Table-Per-Hierarchy inheritance pattern</span></span>
 
-<span data-ttu-id="6cca2-138">Permet d’enregistrer les entités d’une hiérarchie d’héritage dans une table unique à l’aide d’une colonne de discriminateur pour identifier le type d’entité pour un enregistrement donné dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-138">Allows entities in an inheritance hierarchy to be saved to a single table using a discriminator column to identify they entity type for a given record in the database.</span></span>
+<span data-ttu-id="dc341-138">Permet d’enregistrer les entités d’une hiérarchie d’héritage dans une table unique à l’aide d’une colonne de discriminateur pour identifier le type d’entité pour un enregistrement donné dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-138">Allows entities in an inheritance hierarchy to be saved to a single table using a discriminator column to identify they entity type for a given record in the database.</span></span>
 
-### <a name="model-validation"></a><span data-ttu-id="6cca2-139">Validation de modèle</span><span class="sxs-lookup"><span data-stu-id="6cca2-139">Model validation</span></span>
+### <a name="model-validation"></a><span data-ttu-id="dc341-139">Validation du modèle</span><span class="sxs-lookup"><span data-stu-id="dc341-139">Model validation</span></span>
 
-<span data-ttu-id="6cca2-140">Détecte les modèles non valides dans le modèle et fournit des messages d’erreur utiles.</span><span class="sxs-lookup"><span data-stu-id="6cca2-140">Detects invalid patterns in the model and provides helpful error messages.</span></span>
+<span data-ttu-id="dc341-140">Détecte les modèles non valides dans le modèle et fournit des messages d’erreur utiles.</span><span class="sxs-lookup"><span data-stu-id="dc341-140">Detects invalid patterns in the model and provides helpful error messages.</span></span>
 
-## <a name="change-tracking"></a><span data-ttu-id="6cca2-141">Change tracking</span><span class="sxs-lookup"><span data-stu-id="6cca2-141">Change tracking</span></span>
+## <a name="change-tracking"></a><span data-ttu-id="dc341-141">Suivi des modifications</span><span class="sxs-lookup"><span data-stu-id="dc341-141">Change tracking</span></span>
 
-### <a name="snapshot-change-tracking"></a><span data-ttu-id="6cca2-142">Suivi des modifications par instantané</span><span class="sxs-lookup"><span data-stu-id="6cca2-142">Snapshot change tracking</span></span>
+### <a name="snapshot-change-tracking"></a><span data-ttu-id="dc341-142">Suivi des modifications par instantané</span><span class="sxs-lookup"><span data-stu-id="dc341-142">Snapshot change tracking</span></span>
 
-<span data-ttu-id="6cca2-143">Permet de détecter automatiquement les modifications apportées aux entités en comparant l’état actuel avec une copie (instantané) de l’état d’origine.</span><span class="sxs-lookup"><span data-stu-id="6cca2-143">Allows changes in entities to be detected automatically by comparing current state against a copy (snapshot) of the original state.</span></span>
+<span data-ttu-id="dc341-143">Permet de détecter automatiquement les modifications apportées aux entités en comparant l’état actuel avec une copie (instantané) de l’état d’origine.</span><span class="sxs-lookup"><span data-stu-id="dc341-143">Allows changes in entities to be detected automatically by comparing current state against a copy (snapshot) of the original state.</span></span>
 
-### <a name="notification-change-tracking"></a><span data-ttu-id="6cca2-144">Suivi des modifications par notification</span><span class="sxs-lookup"><span data-stu-id="6cca2-144">Notification change tracking</span></span>
+### <a name="notification-change-tracking"></a><span data-ttu-id="dc341-144">Suivi des modifications par notification</span><span class="sxs-lookup"><span data-stu-id="dc341-144">Notification change tracking</span></span>
 
-<span data-ttu-id="6cca2-145">Permet aux entités d’avertir le traceur de modifications dès que des valeurs de propriété sont modifiées.</span><span class="sxs-lookup"><span data-stu-id="6cca2-145">Allows your entities to notify the change tracker when property values are modified.</span></span>
+<span data-ttu-id="dc341-145">Permet aux entités d’avertir le traceur de modifications dès que des valeurs de propriété sont modifiées.</span><span class="sxs-lookup"><span data-stu-id="dc341-145">Allows your entities to notify the change tracker when property values are modified.</span></span>
 
-### <a name="accessing-tracked-state"></a><span data-ttu-id="6cca2-146">État du suivi de l’accès</span><span class="sxs-lookup"><span data-stu-id="6cca2-146">Accessing tracked state</span></span>
+### <a name="accessing-tracked-state"></a><span data-ttu-id="dc341-146">État du suivi de l’accès</span><span class="sxs-lookup"><span data-stu-id="dc341-146">Accessing tracked state</span></span>
 
-<span data-ttu-id="6cca2-147">Via `DbContext.Entry` et `DbContext.ChangeTracker`.</span><span class="sxs-lookup"><span data-stu-id="6cca2-147">Via `DbContext.Entry` and `DbContext.ChangeTracker`.</span></span>
+<span data-ttu-id="dc341-147">Via `DbContext.Entry` et `DbContext.ChangeTracker`.</span><span class="sxs-lookup"><span data-stu-id="dc341-147">Via `DbContext.Entry` and `DbContext.ChangeTracker`.</span></span>
 
-### <a name="attaching-detached-entitiesgraphs"></a><span data-ttu-id="6cca2-148">Attachement d’entités/graphes détachés</span><span class="sxs-lookup"><span data-stu-id="6cca2-148">Attaching detached entities/graphs</span></span>
+### <a name="attaching-detached-entitiesgraphs"></a><span data-ttu-id="dc341-148">Attachement d’entités/graphes détachés</span><span class="sxs-lookup"><span data-stu-id="dc341-148">Attaching detached entities/graphs</span></span>
 
-<span data-ttu-id="6cca2-149">La nouvelle API `DbContext.AttachGraph` permet de rattacher des entités à un contexte pour pouvoir enregistrer des entités modifiées ou de nouvelles entités.</span><span class="sxs-lookup"><span data-stu-id="6cca2-149">The new `DbContext.AttachGraph` API helps re-attach entities to a context in order to save new/modified entities.</span></span>
+<span data-ttu-id="dc341-149">La nouvelle API `DbContext.AttachGraph` permet de rattacher des entités à un contexte pour pouvoir enregistrer des entités modifiées ou de nouvelles entités.</span><span class="sxs-lookup"><span data-stu-id="dc341-149">The new `DbContext.AttachGraph` API helps re-attach entities to a context in order to save new/modified entities.</span></span>
 
-## <a name="saving-data"></a><span data-ttu-id="6cca2-150">Enregistrement de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-150">Saving data</span></span>
+## <a name="saving-data"></a><span data-ttu-id="dc341-150">Enregistrement des données</span><span class="sxs-lookup"><span data-stu-id="dc341-150">Saving data</span></span>
 
-### <a name="basic-save-functionality"></a><span data-ttu-id="6cca2-151">Fonctionnalité d’enregistrement de base</span><span class="sxs-lookup"><span data-stu-id="6cca2-151">Basic save functionality</span></span>
+### <a name="basic-save-functionality"></a><span data-ttu-id="dc341-151">Fonctionnalité d’enregistrement de base</span><span class="sxs-lookup"><span data-stu-id="dc341-151">Basic save functionality</span></span>
 
-<span data-ttu-id="6cca2-152">Permet de conserver les modifications apportées aux instances dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-152">Allows changes to entity instances to be persisted to the database.</span></span>
+<span data-ttu-id="dc341-152">Permet de conserver les modifications apportées aux instances dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-152">Allows changes to entity instances to be persisted to the database.</span></span>
 
-### <a name="optimistic-concurrency"></a><span data-ttu-id="6cca2-153">Accès concurrentiel optimiste</span><span class="sxs-lookup"><span data-stu-id="6cca2-153">Optimistic Concurrency</span></span>
+### <a name="optimistic-concurrency"></a><span data-ttu-id="dc341-153">Accès concurrentiel optimiste</span><span class="sxs-lookup"><span data-stu-id="dc341-153">Optimistic Concurrency</span></span>
 
-<span data-ttu-id="6cca2-154">Évite le remplacement de modifications apportées par un autre utilisateur, sachant que les données ont été extraites de la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-154">Protects against overwriting changes made by another user since data was fetched from the database.</span></span>
+<span data-ttu-id="dc341-154">Évite le remplacement de modifications apportées par un autre utilisateur, sachant que les données ont été extraites de la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-154">Protects against overwriting changes made by another user since data was fetched from the database.</span></span>
 
-### <a name="async-savechanges"></a><span data-ttu-id="6cca2-155">SaveChanges asynchrone</span><span class="sxs-lookup"><span data-stu-id="6cca2-155">Async SaveChanges</span></span>
+### <a name="async-savechanges"></a><span data-ttu-id="dc341-155">SaveChanges asynchrone</span><span class="sxs-lookup"><span data-stu-id="dc341-155">Async SaveChanges</span></span>
 
-<span data-ttu-id="6cca2-156">Peut libérer le thread actuel pour traiter d’autres requêtes pendant que la base de données traite les commandes émises à partir de `SaveChanges`.</span><span class="sxs-lookup"><span data-stu-id="6cca2-156">Can free up the current thread to process other requests while the database processes the commands issued from `SaveChanges`.</span></span>
+<span data-ttu-id="dc341-156">Peut libérer le thread actuel pour traiter d’autres requêtes pendant que la base de données traite les commandes émises à partir de `SaveChanges`.</span><span class="sxs-lookup"><span data-stu-id="dc341-156">Can free up the current thread to process other requests while the database processes the commands issued from `SaveChanges`.</span></span>
 
-### <a name="database-transactions"></a><span data-ttu-id="6cca2-157">Transactions de base de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-157">Database Transactions</span></span>
+### <a name="database-transactions"></a><span data-ttu-id="dc341-157">Transactions de base de données</span><span class="sxs-lookup"><span data-stu-id="dc341-157">Database Transactions</span></span>
 
-<span data-ttu-id="6cca2-158">Signifie que `SaveChanges` est toujours atomique (en d’autres termes, soit sa réussite est complète, soit aucune modification n’est apportée à la base de données).</span><span class="sxs-lookup"><span data-stu-id="6cca2-158">Means that `SaveChanges` is always atomic (meaning it either completely succeeds, or no changes are made to the database).</span></span> <span data-ttu-id="6cca2-159">Il existe également des API liées aux transactions pour autoriser le partage de transactions entre des instances de contexte, etc.</span><span class="sxs-lookup"><span data-stu-id="6cca2-159">There are also transaction related APIs to allow sharing transactions between context instances etc.</span></span>
+<span data-ttu-id="dc341-158">Signifie que `SaveChanges` est toujours atomique (en d’autres termes, soit sa réussite est complète, soit aucune modification n’est apportée à la base de données).</span><span class="sxs-lookup"><span data-stu-id="dc341-158">Means that `SaveChanges` is always atomic (meaning it either completely succeeds, or no changes are made to the database).</span></span> <span data-ttu-id="dc341-159">Il existe également des API liées aux transactions pour autoriser le partage de transactions entre des instances de contexte, etc.</span><span class="sxs-lookup"><span data-stu-id="dc341-159">There are also transaction related APIs to allow sharing transactions between context instances etc.</span></span>
 
-### <a name="relational-batching-of-statements"></a><span data-ttu-id="6cca2-160">Relationnel : traitement par lot d’instructions</span><span class="sxs-lookup"><span data-stu-id="6cca2-160">Relational: Batching of statements</span></span>
+### <a name="relational-batching-of-statements"></a><span data-ttu-id="dc341-160">Relationnel : traitement par lot d’instructions</span><span class="sxs-lookup"><span data-stu-id="dc341-160">Relational: Batching of statements</span></span>
 
-<span data-ttu-id="6cca2-161">Offre de meilleures performances en regroupant les différentes commandes INSERT/UPDATE/DELETE dans une seule boucle pour la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-161">Provides better performance by batching up multiple INSERT/UPDATE/DELETE commands into a single roundtrip to the database.</span></span>
+<span data-ttu-id="dc341-161">Offre de meilleures performances en regroupant les différentes commandes INSERT/UPDATE/DELETE dans une seule boucle pour la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-161">Provides better performance by batching up multiple INSERT/UPDATE/DELETE commands into a single roundtrip to the database.</span></span>
 
-## <a name="query"></a><span data-ttu-id="6cca2-162">Query</span><span class="sxs-lookup"><span data-stu-id="6cca2-162">Query</span></span>
+## <a name="query"></a><span data-ttu-id="dc341-162">Requête</span><span class="sxs-lookup"><span data-stu-id="dc341-162">Query</span></span>
 
-### <a name="basic-linq-support"></a><span data-ttu-id="6cca2-163">Prise en charge de base de LINQ</span><span class="sxs-lookup"><span data-stu-id="6cca2-163">Basic LINQ support</span></span>
+### <a name="basic-linq-support"></a><span data-ttu-id="dc341-163">Prise en charge de base de LINQ</span><span class="sxs-lookup"><span data-stu-id="dc341-163">Basic LINQ support</span></span>
 
-<span data-ttu-id="6cca2-164">Offre la possibilité d’utiliser LINQ pour récupérer des données à partir de la base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-164">Provides the ability to use LINQ to retrieve data from the database.</span></span>
+<span data-ttu-id="dc341-164">Offre la possibilité d’utiliser LINQ pour récupérer des données à partir de la base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-164">Provides the ability to use LINQ to retrieve data from the database.</span></span>
 
-### <a name="mixed-clientserver-evaluation"></a><span data-ttu-id="6cca2-165">Évaluation du client/serveur mixte</span><span class="sxs-lookup"><span data-stu-id="6cca2-165">Mixed client/server evaluation</span></span>
+### <a name="mixed-clientserver-evaluation"></a><span data-ttu-id="dc341-165">Évaluation du client/serveur mixte</span><span class="sxs-lookup"><span data-stu-id="dc341-165">Mixed client/server evaluation</span></span>
 
-<span data-ttu-id="6cca2-166">Permet aux requêtes de contenir la logique qui ne peut pas être évaluée dans la base de données et qui doit par conséquent être évaluée une fois les données récupérées dans la mémoire.</span><span class="sxs-lookup"><span data-stu-id="6cca2-166">Enables queries to contain logic that cannot be evaluated in the database, and must therefore be evaluated after the data is retrieved into memory.</span></span>
+<span data-ttu-id="dc341-166">Permet aux requêtes de contenir la logique qui ne peut pas être évaluée dans la base de données et qui doit par conséquent être évaluée une fois les données récupérées dans la mémoire.</span><span class="sxs-lookup"><span data-stu-id="dc341-166">Enables queries to contain logic that cannot be evaluated in the database, and must therefore be evaluated after the data is retrieved into memory.</span></span>
 
-### <a name="notracking"></a><span data-ttu-id="6cca2-167">NoTracking</span><span class="sxs-lookup"><span data-stu-id="6cca2-167">NoTracking</span></span>
+### <a name="notracking"></a><span data-ttu-id="dc341-167">NoTracking</span><span class="sxs-lookup"><span data-stu-id="dc341-167">NoTracking</span></span>
 
-<span data-ttu-id="6cca2-168">Permet d’accélérer l’exécution des requêtes quand le contexte n’a pas besoin de surveiller les changements apportés aux instances d’entité (cela s’avère utile si les résultats en lecture seule).</span><span class="sxs-lookup"><span data-stu-id="6cca2-168">Queries enables quicker query execution when the context does not need to monitor for changes to the entity instances (this is useful if the results are read-only).</span></span>
+<span data-ttu-id="dc341-168">Permet d’accélérer l’exécution des requêtes quand le contexte n’a pas besoin de surveiller les changements apportés aux instances d’entité (cela s’avère utile si les résultats en lecture seule).</span><span class="sxs-lookup"><span data-stu-id="dc341-168">Queries enables quicker query execution when the context does not need to monitor for changes to the entity instances (this is useful if the results are read-only).</span></span>
 
-### <a name="eager-loading"></a><span data-ttu-id="6cca2-169">Chargement hâtif</span><span class="sxs-lookup"><span data-stu-id="6cca2-169">Eager loading</span></span>
+### <a name="eager-loading"></a><span data-ttu-id="dc341-169">Chargement hâtif</span><span class="sxs-lookup"><span data-stu-id="dc341-169">Eager loading</span></span>
 
-<span data-ttu-id="6cca2-170">Fournit les méthodes `Include` et `ThenInclude` pour identifier les données associées qui doivent également être extraites durant l’interrogation.</span><span class="sxs-lookup"><span data-stu-id="6cca2-170">Provides the `Include` and `ThenInclude` methods to identify related data that should also be fetched when querying.</span></span>
+<span data-ttu-id="dc341-170">Fournit les méthodes `Include` et `ThenInclude` pour identifier les données associées qui doivent également être extraites durant l’interrogation.</span><span class="sxs-lookup"><span data-stu-id="dc341-170">Provides the `Include` and `ThenInclude` methods to identify related data that should also be fetched when querying.</span></span>
 
-### <a name="async-query"></a><span data-ttu-id="6cca2-171">Requête asynchrone</span><span class="sxs-lookup"><span data-stu-id="6cca2-171">Async query</span></span>
+### <a name="async-query"></a><span data-ttu-id="dc341-171">Requête asynchrone</span><span class="sxs-lookup"><span data-stu-id="dc341-171">Async query</span></span>
 
-<span data-ttu-id="6cca2-172">Peut libérer le thread actuel (et ses ressources associées) pour traiter d’autres requêtes pendant que la base de données traite la requête.</span><span class="sxs-lookup"><span data-stu-id="6cca2-172">Can free up the current thread (and it's associated resources) to process other requests while the database processes the query.</span></span>
+<span data-ttu-id="dc341-172">Peut libérer le thread actuel (et ses ressources associées) pour traiter d’autres requêtes pendant que la base de données traite la requête.</span><span class="sxs-lookup"><span data-stu-id="dc341-172">Can free up the current thread (and it's associated resources) to process other requests while the database processes the query.</span></span>
 
-### <a name="raw-sql-queries"></a><span data-ttu-id="6cca2-173">Requêtes SQL brutes</span><span class="sxs-lookup"><span data-stu-id="6cca2-173">Raw SQL queries</span></span>
+### <a name="raw-sql-queries"></a><span data-ttu-id="dc341-173">Requêtes SQL brutes</span><span class="sxs-lookup"><span data-stu-id="dc341-173">Raw SQL queries</span></span>
 
-<span data-ttu-id="6cca2-174">Fournit la méthode `DbSet.FromSql` pour utiliser des requêtes SQL brutes pour extraire des données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-174">Provides the `DbSet.FromSql` method to use raw SQL queries to fetch data.</span></span> <span data-ttu-id="6cca2-175">Ces requêtes peuvent également être composées à l’aide de LINQ.</span><span class="sxs-lookup"><span data-stu-id="6cca2-175">These queries can also be composed on using LINQ.</span></span>
+<span data-ttu-id="dc341-174">Fournit la méthode `DbSet.FromSql` pour utiliser des requêtes SQL brutes pour extraire des données.</span><span class="sxs-lookup"><span data-stu-id="dc341-174">Provides the `DbSet.FromSql` method to use raw SQL queries to fetch data.</span></span> <span data-ttu-id="dc341-175">Ces requêtes peuvent également être composées à l’aide de LINQ.</span><span class="sxs-lookup"><span data-stu-id="dc341-175">These queries can also be composed on using LINQ.</span></span>
 
-## <a name="database-schema-management"></a><span data-ttu-id="6cca2-176">Gestion du schéma de base de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-176">Database schema management</span></span>
+## <a name="database-schema-management"></a><span data-ttu-id="dc341-176">Gestion du schéma de base de données</span><span class="sxs-lookup"><span data-stu-id="dc341-176">Database schema management</span></span>
 
-### <a name="database-creationdeletion-apis"></a><span data-ttu-id="6cca2-177">API de création/suppression de base de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-177">Database creation/deletion APIs</span></span>
+### <a name="database-creationdeletion-apis"></a><span data-ttu-id="dc341-177">API de création/suppression de base de données</span><span class="sxs-lookup"><span data-stu-id="dc341-177">Database creation/deletion APIs</span></span>
 
-<span data-ttu-id="6cca2-178">Elles sont principalement conçues tester l’emplacement où vous souhaitez créer/supprimer rapidement la base de données sans utiliser de migrations.</span><span class="sxs-lookup"><span data-stu-id="6cca2-178">Are mostly designed for testing where you want to quickly create/delete the database without using migrations.</span></span>
+<span data-ttu-id="dc341-178">Elles sont principalement conçues tester l’emplacement où vous souhaitez créer/supprimer rapidement la base de données sans utiliser de migrations.</span><span class="sxs-lookup"><span data-stu-id="dc341-178">Are mostly designed for testing where you want to quickly create/delete the database without using migrations.</span></span>
 
-### <a name="relational-database-migrations"></a><span data-ttu-id="6cca2-179">Migrations de base de données relationnelle</span><span class="sxs-lookup"><span data-stu-id="6cca2-179">Relational database migrations</span></span>
+### <a name="relational-database-migrations"></a><span data-ttu-id="dc341-179">Migrations de base de données relationnelle</span><span class="sxs-lookup"><span data-stu-id="dc341-179">Relational database migrations</span></span>
 
-<span data-ttu-id="6cca2-180">Permet à un schéma de base de données relationnelle d’évoluer à travers le temps au fur et à mesure que votre modèle change.</span><span class="sxs-lookup"><span data-stu-id="6cca2-180">Allow a relational database schema to evolve overtime as your model changes.</span></span>
+<span data-ttu-id="dc341-180">Permet à un schéma de base de données relationnelle d’évoluer à travers le temps au fur et à mesure que votre modèle change.</span><span class="sxs-lookup"><span data-stu-id="dc341-180">Allow a relational database schema to evolve overtime as your model changes.</span></span>
 
-### <a name="reverse-engineer-from-database"></a><span data-ttu-id="6cca2-181">Ingénierie à rebours à partir de la base de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-181">Reverse engineer from database</span></span>
+### <a name="reverse-engineer-from-database"></a><span data-ttu-id="dc341-181">Ingénierie à rebours à partir de la base de données</span><span class="sxs-lookup"><span data-stu-id="dc341-181">Reverse engineer from database</span></span>
 
-<span data-ttu-id="6cca2-182">Permet de générer automatiquement un modèle EF basé sur un schéma de base de données relationnelle existante.</span><span class="sxs-lookup"><span data-stu-id="6cca2-182">Scaffolds an EF model based on an existing relational database schema.</span></span>
+<span data-ttu-id="dc341-182">Permet de générer automatiquement un modèle EF basé sur un schéma de base de données relationnelle existante.</span><span class="sxs-lookup"><span data-stu-id="dc341-182">Scaffolds an EF model based on an existing relational database schema.</span></span>
 
-## <a name="database-providers"></a><span data-ttu-id="6cca2-183">Fournisseurs de bases de données</span><span class="sxs-lookup"><span data-stu-id="6cca2-183">Database providers</span></span>
+## <a name="database-providers"></a><span data-ttu-id="dc341-183">Fournisseurs de bases de données</span><span class="sxs-lookup"><span data-stu-id="dc341-183">Database providers</span></span>
 
-### <a name="sql-server"></a><span data-ttu-id="6cca2-184">SQL Server</span><span class="sxs-lookup"><span data-stu-id="6cca2-184">SQL Server</span></span>
+### <a name="sql-server"></a><span data-ttu-id="dc341-184">SQL Server</span><span class="sxs-lookup"><span data-stu-id="dc341-184">SQL Server</span></span>
 
-<span data-ttu-id="6cca2-185">Se connecte à Microsoft SQL Server 2008 et versions ultérieures.</span><span class="sxs-lookup"><span data-stu-id="6cca2-185">Connects to Microsoft SQL Server 2008 onwards.</span></span>
+<span data-ttu-id="dc341-185">Se connecte à Microsoft SQL Server 2008 et versions ultérieures.</span><span class="sxs-lookup"><span data-stu-id="dc341-185">Connects to Microsoft SQL Server 2008 onwards.</span></span>
 
-### <a name="sqlite"></a><span data-ttu-id="6cca2-186">SQLite</span><span class="sxs-lookup"><span data-stu-id="6cca2-186">SQLite</span></span>
+### <a name="sqlite"></a><span data-ttu-id="dc341-186">SQLite</span><span class="sxs-lookup"><span data-stu-id="dc341-186">SQLite</span></span>
 
-<span data-ttu-id="6cca2-187">Se connecte à une base de données SQLite 3.</span><span class="sxs-lookup"><span data-stu-id="6cca2-187">Connects to a SQLite 3 database.</span></span>
+<span data-ttu-id="dc341-187">Se connecte à une base de données SQLite 3.</span><span class="sxs-lookup"><span data-stu-id="dc341-187">Connects to a SQLite 3 database.</span></span>
 
-### <a name="in-memory"></a><span data-ttu-id="6cca2-188">En mémoire</span><span class="sxs-lookup"><span data-stu-id="6cca2-188">In-Memory</span></span>
+### <a name="in-memory"></a><span data-ttu-id="dc341-188">En mémoire</span><span class="sxs-lookup"><span data-stu-id="dc341-188">In-Memory</span></span>
 
-<span data-ttu-id="6cca2-189">Fonctionnalité conçue pour tester facilement sans vous connecter à une base de données réelle.</span><span class="sxs-lookup"><span data-stu-id="6cca2-189">Is designed to easily enable testing without connecting to a real database.</span></span>
+<span data-ttu-id="dc341-189">Fonctionnalité conçue pour tester facilement sans vous connecter à une base de données réelle.</span><span class="sxs-lookup"><span data-stu-id="dc341-189">Is designed to easily enable testing without connecting to a real database.</span></span>
 
-### <a name="3rd-party-providers"></a><span data-ttu-id="6cca2-190">Fournisseurs tiers</span><span class="sxs-lookup"><span data-stu-id="6cca2-190">3rd party providers</span></span>
+### <a name="3rd-party-providers"></a><span data-ttu-id="dc341-190">Fournisseurs tiers</span><span class="sxs-lookup"><span data-stu-id="dc341-190">3rd party providers</span></span>
 
-<span data-ttu-id="6cca2-191">Plusieurs fournisseurs sont disponibles pour d’autres moteurs de base de données.</span><span class="sxs-lookup"><span data-stu-id="6cca2-191">Several providers are available for other database engines.</span></span> <span data-ttu-id="6cca2-192">Consultez [Fournisseurs de bases de données](../providers/index.md) pour en obtenir la liste complète.</span><span class="sxs-lookup"><span data-stu-id="6cca2-192">See [Database Providers](../providers/index.md) for a complete list.</span></span>
+<span data-ttu-id="dc341-191">Plusieurs fournisseurs sont disponibles pour d’autres moteurs de base de données.</span><span class="sxs-lookup"><span data-stu-id="dc341-191">Several providers are available for other database engines.</span></span> <span data-ttu-id="dc341-192">Consultez [Fournisseurs de bases de données](../providers/index.md) pour en obtenir la liste complète.</span><span class="sxs-lookup"><span data-stu-id="dc341-192">See [Database Providers](../providers/index.md) for a complete list.</span></span>
