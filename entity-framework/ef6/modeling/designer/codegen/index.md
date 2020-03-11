@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 ms.openlocfilehash: e4e99a86e7c273682c85eba06042af9a2a837d12
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283860"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413284"
 ---
 # <a name="designer-code-generation-templates"></a>Modèles de génération de code de concepteur
 Quand vous créez un modèle à l’aide d’Entity Framework Designer, vos classes et le contexte dérivé sont générés automatiquement pour vous. En plus de la génération de code par défaut, nous fournissons également un nombre de modèles pouvant servir à personnaliser le code généré. Ces modèles sont fournis sous forme de modèles de texte T4, ce qui vous permet de les personnaliser si nécessaire.
@@ -30,11 +30,11 @@ Les modèles suivants sont fournis par l’équipe Entity Framework :
 
 Ce modèle génère des classes d’entité OCT simples et un contexte qui dérive de DbContext à l’aide d’EF6.
 Il s’agit du modèle recommandé, sauf si vous avez besoin d’utiliser un des autres modèles répertoriés ci-dessous.
-C’est également le modèle de génération de code que vous obtenez par défaut si vous utilisez les versions récentes de Visual Studio (Visual Studio 2013 et versions ultérieures) : quand vous créez un modèle, ce modèle est utilisé par défaut et les fichiers T4 (.tt) sont imbriqués sous votre fichier .edmx.
+C’est également le modèle de génération de code que vous recevez par défaut si vous utilisez des versions récentes de Visual Studio (Visual Studio 2013 et ultérieur) : Lorsque vous créez un nouveau modèle, ce modèle est utilisé par défaut et les fichiers T4 (.tt) sont imbriqués sous votre fichier .edmx.
 
 #### <a name="older-versions-of-visual-studio"></a>Versions précédentes de Visual Studio
-- **Visual Studio 2012 :** Pour obtenir les modèles **EF 6.x DbContextGenerator**, vous devez installer la dernière version **d’Entity Framework Tools pour Visual Studio** (consultez la page [Obtenir Entity Framework](~/ef6/fundamentals/install.md) pour plus d’informations).
-- **Visual Studio 2010 :** Les modèles **EF 6.x DbContextGenerator** ne sont pas disponibles pour Visual Studio 2010.
+- **Visual Studio 2012 :** Pour obtenir les modèles **EF 6.x DbContextGenerator**, vous devez installer la dernière version **d’Entity Framework Tools pour Visual Studio**. Consultez la page [Obtenir Entity Framework](~/ef6/fundamentals/install.md) pour plus d’informations.
+- **Visual Studio 2010 :** Les modèles **EF 6.x DbContextGenerator** ne sont pas disponibles pour Visual Studio 2010.
 
 #### <a name="dbcontext-generator-for-ef-5x"></a>DbContext Generator pour EF 5.x
 
@@ -145,11 +145,11 @@ Vous devez sélectionner l’onglet **En ligne** quand vous ajoutez le modèle p
 
 ### <a name="what-are-the-web-sites-templates"></a>Que sont les modèles « Web Sites »
 
-Les modèles « Web Sites » (par ex., **EF 5.x DbContext Generator for C\# Web Sites**) sont destinés aux projets de site web créés via **Fichier -&gt; Nouveau -&gt; Site web...**. Ils diffèrent des applications web, créées via **Fichier -&gt; Nouveau -&gt; Projet...**, qui utilisent les modèles standard. Nous fournissons des modèles distincts, car le système de modèle d’élément dans Visual Studio le demande.
+Les modèles « Web Sites » (par ex., **EF 5.x DbContext Generator for C\# Web Sites**) sont destinés aux projets de site web créés via **Fichier -&gt; Nouveau -&gt; Site web...** . Ils diffèrent des applications web, créées via **Fichier -&gt; Nouveau -&gt; Projet...** , qui utilisent les modèles standard. Nous fournissons des modèles distincts, car le système de modèle d’élément dans Visual Studio le demande.
 
 ## <a name="using-a-template"></a>Utilisation d’un modèle
 
-Pour commencer à utiliser un modèle de génération de code, cliquez avec le bouton droit sur un emplacement vide dans l’aire de conception dans EF Designer et sélectionnez **Ajouter un élément de génération de code...**.
+Pour commencer à utiliser un modèle de génération de code, cliquez avec le bouton droit sur un emplacement vide dans l’aire de conception dans EF Designer et sélectionnez **Ajouter un élément de génération de code...** .
 
 ![Ajouter un élément de génération de code](~/ef6/media/add-code-gen-item.png)
 
@@ -159,15 +159,15 @@ Si vous avez déjà installé le modèle à utiliser (ou qu’il a été inclus 
 
 Si vous n’avez pas installé le modèle, sélectionnez **En ligne** dans le menu à gauche et recherchez le modèle souhaité.
 
-![Rechercher](~/ef6/media/search.png) 
+![Rechercher](~/ef6/media/search.png) 
 
 Si vous utilisez Visual Studio 2012, les nouveaux fichiers .tt sont imbriqués sous le fichier .edmx.*
 
 > [!NOTE]
-> Pour les modèles créés dans Visual Studio 2012, vous devez supprimer les modèles utilisés pour la génération de code par défaut, sinon vous obtenez des classes et un contexte en double. Les fichiers par défaut sont **&lt;nom du modèle&gt;.tt** et **&lt;nom du modèle&gt;.context.tt**. 
+> Pour les modèles créés dans Visual Studio 2012, vous devez supprimer les modèles utilisés pour la génération de code par défaut, sinon vous obtenez des classes et un contexte en double. Les fichiers par défaut sont **&lt;nom du modèle&gt;.tt** et **&lt;nom du modèle&gt;.context.tt**. 
 
 ![Modèles Visual Studio 2012](~/ef6/media/vs2012-templates.png)
 
-Si vous utilisez Visual Studio 2010, les fichiers tt sont ajoutés directement à votre projet.  
+Si vous utilisez Visual Studio 2010, les fichiers tt sont ajoutés directement à votre projet.  
 
 ![Modèles Visual Studio 2010](~/ef6/media/vs2010-templates.png)
