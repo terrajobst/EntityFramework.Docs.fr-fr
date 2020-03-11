@@ -4,21 +4,21 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
 ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182483"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418391"
 ---
 # <a name="designer-query-stored-procedures"></a>Procédures stockées de requête du concepteur
 Cette procédure pas à pas explique comment utiliser le Entity Framework Designer (concepteur EF) pour importer des procédures stockées dans un modèle, puis appeler les procédures stockées importées pour récupérer les résultats. 
 
-Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
+Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Par exemple :
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
 
-## <a name="prerequisites"></a>Configuration requise
+## <a name="prerequisites"></a>Conditions préalables requises
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
@@ -33,7 +33,7 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 -   Entrez **EFwithSProcsSample** comme nom.
 -   Sélectionnez **OK**.
 
-## <a name="create-a-model"></a>Créer un modèle
+## <a name="create-a-model"></a>Création d'un modèle
 
 -   Dans Explorateur de solutions, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter-&gt; nouvel élément**.
 -   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
@@ -45,7 +45,7 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 -   Dans la boîte de dialogue choisir vos objets de base de données, activez la case à cocher **Tables** pour sélectionner toutes les tables.  
     En outre, sélectionnez les procédures stockées suivantes sous le nœud **procédures stockées et fonctions** : **GetStudentGrades** et **GetDepartmentName**. 
 
-    ![Import](~/ef6/media/import.jpg)
+    ![Importer](~/ef6/media/import.jpg)
 
     *À compter de Visual Studio 2012, le concepteur EF prend en charge l’importation en bloc des procédures stockées. L' **importation des procédures stockées et des fonctions sélectionnées dans le modèle theentity** est activée par défaut.*
 -   Cliquez sur **Terminer**.

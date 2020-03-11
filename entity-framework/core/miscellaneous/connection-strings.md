@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
 ms.openlocfilehash: ed89d6d09b15b0dea7fd8bc3ff3e3f631495ecb7
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149123"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416588"
 ---
 # <a name="connection-strings"></a>Chaînes de connexion
 
@@ -31,9 +31,9 @@ Les applications WinForms, WPF et ASP.NET 4 ont un modèle de chaîne de connexi
 ```
 
 > [!TIP]  
-> Le `providerName` paramètre n’est pas requis sur les chaînes de connexion EF Core stockées dans App. config, car le fournisseur de base de données est configuré par le biais du code.
+> Le paramètre `providerName` n’est pas requis sur EF Core chaînes de connexion stockées dans App. config, car le fournisseur de base de données est configuré par le biais du code.
 
-Vous pouvez ensuite lire la chaîne de connexion à `ConfigurationManager` l’aide de l’API `OnConfiguring` dans la méthode de votre contexte. Vous devrez peut-être ajouter une référence à `System.Configuration` l’assembly de Framework pour pouvoir utiliser cette API.
+Vous pouvez ensuite lire la chaîne de connexion à l’aide de l’API `ConfigurationManager` dans la méthode `OnConfiguring` de votre contexte. Vous devrez peut-être ajouter une référence à l’assembly du Framework `System.Configuration` pour pouvoir utiliser cette API.
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -67,7 +67,7 @@ public class BloggingContext : DbContext
 
 ## <a name="aspnet-core"></a>ASP.NET Core
 
-Dans ASP.net core le système de configuration est très flexible, et la chaîne de connexion peut être `appsettings.json`stockée dans, une variable d’environnement, le magasin des secrets de l’utilisateur ou une autre source de configuration. Pour plus d’informations, consultez la [section Configuration de la documentation de ASP.net Core](https://docs.asp.net/en/latest/fundamentals/configuration.html) . L’exemple suivant illustre la chaîne de connexion stockée dans `appsettings.json`.
+Dans ASP.NET Core le système de configuration est très flexible, et la chaîne de connexion peut être stockée dans `appsettings.json`, une variable d’environnement, le magasin des secrets de l’utilisateur ou une autre source de configuration. Pour plus d’informations, consultez la [section Configuration de la documentation de ASP.net Core](https://docs.asp.net/en/latest/fundamentals/configuration.html) . L’exemple suivant illustre la chaîne de connexion stockée dans `appsettings.json`.
 
 ``` json
 {
@@ -77,7 +77,7 @@ Dans ASP.net core le système de configuration est très flexible, et la chaîne
 }
 ```
 
-Le contexte est généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé `ConnectionStrings:<connection string name>`est. Vous devez importer l’espace de noms [Microsoft. extensions. Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
+Le contexte est généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Notez que la méthode `GetConnectionString()` recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>`. Vous devez importer l’espace de noms [Microsoft. extensions. Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

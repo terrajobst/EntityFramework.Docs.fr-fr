@@ -1,38 +1,38 @@
 ---
-title: Procédures stockées avec plusieurs jeux de résultats - EF6
+title: Procédures stockées avec plusieurs jeux de résultats-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
 ms.openlocfilehash: 098ed88ba52e211965baf3660f0e51bd74c71efd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489308"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418703"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procédures stockées avec plusieurs jeux de résultats
-Parfois, lorsque vous utilisez stockées procédures, vous devez retourner plusieurs résultats définissent. Ce scénario est couramment utilisé pour réduire le nombre de base de données allers-retours requis pour composer un seul écran. Avant d’EF5, Entity Framework permettrait la procédure stockée à appeler, mais ne renvoie que le premier jeu de résultats au code appelant.
+Parfois, lorsque vous utilisez des procédures stockées, vous devez retourner plusieurs jeux de résultats. Ce scénario est couramment utilisé pour réduire le nombre d’allers-retours de base de données requis pour composer un seul écran. Avant EF5, Entity Framework autoriserait l’appel de la procédure stockée, mais retournerait uniquement le premier jeu de résultats au code appelant.
 
-Cet article vous montrera deux méthodes que vous pouvez utiliser pour accéder à plus d’un jeu de résultats à partir d’une procédure stockée dans Entity Framework. Une qui utilise seulement le code et fonctionne avec les deux du Code tout d’abord et le Concepteur EF et une qui ne fonctionne qu’avec le Concepteur EF. Les outils et la prise en charge de l’API pour cela doivent améliorer dans les futures versions d’Entity Framework.
+Cet article vous montre deux façons de vous permettre d’accéder à plusieurs jeux de résultats à partir d’une procédure stockée dans Entity Framework. Une qui utilise simplement le code et fonctionne avec code First et le concepteur EF et une qui fonctionne uniquement avec le concepteur EF. Les outils et la prise en charge de l’API pour cela doivent s’améliorer dans les futures versions de Entity Framework.
 
 ## <a name="model"></a>Modèle
 
-Les exemples de cet article utilisent un Blog de base et modèle de billets où un blog a un billet et nombreuses publications appartient à un blog unique. Nous allons utiliser une procédure stockée dans la base de données qui retourne tous les blogs et des publications, quelque chose comme suit :
+Les exemples de cet article utilisent un blog de base et publient un modèle dans lequel un blog contient de nombreuses publications et une publication appartient à un blog unique. Nous allons utiliser une procédure stockée dans la base de données qui retourne tous les blogs et toutes les publications, comme suit :
 
 ``` SQL
     CREATE PROCEDURE [dbo].[GetAllBlogsAndPosts]
     AS
-        SELECT * FROM dbo.Blogs
-        SELECT * FROM dbo.Posts
+        SELECT * FROM dbo.Blogs
+        SELECT * FROM dbo.Posts
 ```
 
-## <a name="accessing-multiple-result-sets-with-code"></a>L’accès aux résultats multiples définit avec le Code
+## <a name="accessing-multiple-result-sets-with-code"></a>Accès à plusieurs jeux de résultats avec du code
 
-Nous pouvons exécuter du code utilisé pour émettre une commande SQL brutes pour exécuter notre procédure stockée. L’avantage de cette approche est qu’elle fonctionne avec les deux Code tout d’abord et le Concepteur EF.
+Nous pouvons exécuter le code d’utilisation pour émettre une commande SQL brute afin d’exécuter notre procédure stockée. L’avantage de cette approche est qu’elle fonctionne avec le code First et le concepteur EF.
 
-Afin d’obtenir des résultats multiples définit le travail que nous devons supprimer à l’API ObjectContext à l’aide de l’interface IObjectContextAdapter.
+Pour obtenir plusieurs jeux de résultats fonctionnels, nous devons supprimer l’API ObjectContext à l’aide de l’interface IObjectContextAdapter.
 
-Une fois que nous avons un ObjectContext nous pouvons utiliser la méthode Translate pour traduire les résultats de notre procédure stockée dans les entités qui peuvent être suivies et utilisées dans EF comme d’habitude. L’exemple de code suivant illustre cela en action.
+Une fois que nous avons un ObjectContext, nous pouvons utiliser la méthode Translate pour traduire les résultats de notre procédure stockée en entités qui peuvent être suivies et utilisées dans EF comme normal. L’exemple de code suivant illustre cela en action.
 
 ``` csharp
     using (var db = new BloggingContext())
@@ -82,33 +82,33 @@ Une fois que nous avons un ObjectContext nous pouvons utiliser la méthode Trans
     }
 ```
 
-La méthode Translate accepte le lecteur que nous avons reçu lorsque nous avons exécuté la procédure, un nom de l’EntitySet et une MergeOption. Le nom EntitySet sera identique à la propriété DbSet sur votre contexte dérivé. L’énumération MergeOption contrôle la gestion des résultats si la même entité existe déjà dans la mémoire.
+La méthode Translate accepte le lecteur que nous avons reçu lors de l’exécution de la procédure, un nom EntitySet et un MergeOption. Le nom de l’EntitySet sera le même que la propriété DbSet de votre contexte dérivé. L’énumération MergeOption contrôle la manière dont les résultats sont gérés si la même entité existe déjà en mémoire.
 
-Ici, nous itérer dans la collection de blogs avant l’appel NextResult, il est important étant donné le code ci-dessus, car le premier jeu de résultats doit être utilisé avant de passer au jeu de résultats suivant.
+Ici, nous parcourons la collection de blogs avant d’appeler NextResult, ce qui est important étant donné le code ci-dessus car le premier jeu de résultats doit être consommé avant de passer au jeu de résultats suivant.
 
-Une fois traduire les deux méthodes sont appelées les entités de Blog et Post sont suivies par Entity Framework de la même façon que toute autre entité puis donc peut être modifié ou supprimé et enregistré comme d’habitude.
-
->[!NOTE]
-> Entity Framework ne prend pas en compte un mappage de lorsqu’il crée des entités à l’aide de la méthode Translate. Elle correspondra simplement des noms de colonnes dans le jeu de résultats avec des noms de propriété de vos classes.
+Une fois que les deux méthodes translate sont appelées, le blog et les entités de publication sont suivis par EF de la même façon que n’importe quelle autre entité et peuvent donc être modifiés ou supprimés et enregistrés normalement.
 
 >[!NOTE]
-> Que si vous avez activé, le chargement différé en accédant à la propriété de billets sur l’une des entités blog puis EF se connectera à la base de données charger en différé toutes ses publications, même si nous avons déjà chargé tous les. Il s’agit, car Entity Framework ne peut pas savoir si vous avez chargé tous les billets ou s’il en existe plus dans la base de données. Si vous souhaitez éviter ce problème vous devrez désactiver le chargement différé.
-
-## <a name="multiple-result-sets-with-configured-in-edmx"></a>Plusieurs jeux de résultats avec EDMX configuré dans
+> EF ne prend pas de mappage en compte lorsqu’il crée des entités à l’aide de la méthode Translate. Il correspond simplement aux noms de colonnes dans le jeu de résultats avec des noms de propriété sur vos classes.
 
 >[!NOTE]
-> Vous devez cibler .NET Framework 4.5 pour être en mesure de configurer plusieurs jeux de résultats dans EDMX. Si vous ciblez le .NET 4.0, vous pouvez utiliser la méthode basée sur le code indiquée dans la section précédente.
+> Si le chargement différé est activé, en accédant à la propriété posts sur l’une des entités de blog, EF se connecte à la base de données pour charger de manière différée toutes les publications, même si nous les avons déjà chargées. Cela est dû au fait que EF ne peut pas savoir si vous avez chargé ou non toutes les publications ou s’il en existe plus dans la base de données. Si vous souhaitez éviter cela, vous devrez désactiver le chargement différé.
 
-Si vous utilisez le Concepteur EF, vous pouvez également modifier votre modèle afin qu’il sache sur les jeux de résultats qui seront renvoyées. Une chose à savoir avant de la main est que les outils ne sont pas plusieurs résultats défini prenant en charge, vous devez modifier manuellement le fichier edmx. Modification du fichier edmx que cela fonctionne, mais elle entraîne également l’arrêt la validation du modèle dans Visual Studio. Par conséquent, si vous validez votre modèle vous obtiendrez toujours des erreurs.
+## <a name="multiple-result-sets-with-configured-in-edmx"></a>Plusieurs jeux de résultats avec configurés dans EDMX
 
--   Pour ce faire, vous devez ajouter la procédure stockée à votre modèle comme vous le feriez pour une requête de jeu de résultats unique.
--   Une fois que vous avez obtenu cela, vous devez cliquez avec le bouton droit sur votre modèle et sélectionnez **ouvrir avec...** puis **Xml**
+>[!NOTE]
+> Vous devez cibler .NET Framework 4,5 pour pouvoir configurer plusieurs jeux de résultats dans EDMX. Si vous ciblez .NET 4,0, vous pouvez utiliser la méthode basée sur du code présentée dans la section précédente.
 
-    ![Ouvrez en tant que](~/ef6/media/openas.png)
+Si vous utilisez le concepteur EF, vous pouvez également modifier votre modèle afin qu’il sache les différents jeux de résultats qui seront renvoyés. Il est important de savoir avant que les outils ne prennent pas en charge le jeu de résultats. vous devrez donc modifier manuellement le fichier edmx. La modification du fichier edmx comme celui-ci fonctionnera, mais la validation du modèle sera également rompue dans Visual Studio. Par conséquent, si vous validez votre modèle, vous obtiendrez toujours des erreurs.
 
-Une fois que le modèle ouvert en tant que XML, vous devez procédez comme suit :
+-   Pour ce faire, vous devez ajouter la procédure stockée à votre modèle comme vous le feriez pour une seule requête de jeu de résultats.
+-   Une fois que vous avez effectué cette opération, vous devez cliquer avec le bouton droit sur votre modèle et sélectionner **Ouvrir avec.** ensuite **XML**
 
--   Rechercher l’importation de fonction et de type complexe dans votre modèle :
+    ![Ouvrir en tant que](~/ef6/media/openas.png)
+
+Une fois le modèle ouvert en XML, vous devez effectuer les étapes suivantes :
+
+-   Recherchez le type complexe et l’importation de fonction dans votre modèle :
 
 ``` xml
     <!-- CSDL content -->
@@ -131,10 +131,10 @@ Une fois que le modèle ouvert en tant que XML, vous devez procédez comme suit�
     </edmx:ConceptualModels>
 ```
 
- 
+ 
 
 -   Supprimer le type complexe
--   Mettre à jour de l’importation de fonction afin qu’elle correspond à vos entités, dans notre cas, qu'il doit ressembler à ce qui suit :
+-   Mettez à jour l’importation de fonction pour qu’elle soit mappée à vos entités. dans le cas présent, elle ressemble à ce qui suit :
 
 ``` xml
     <FunctionImport Name="GetAllBlogsAndPosts">
@@ -143,7 +143,7 @@ Une fois que le modèle ouvert en tant que XML, vous devez procédez comme suit�
     </FunctionImport>
 ```
 
-Cela indique le modèle que la procédure stockée retourne deux collections, une des entrées de blog et celui de la validation d’entrées.
+Cela indique au modèle que la procédure stockée renverra deux collections, l’une d’entre elles et l’autre les entrées de publication.
 
 -   Recherchez l’élément de mappage de fonction :
 
@@ -168,7 +168,7 @@ Cela indique le modèle que la procédure stockée retourne deux collections, un
     </edmx:Mappings>
 ```
 
--   Remplacez le mappage de résultat avec l’un pour chaque entité renvoyée, tels que les éléments suivants :
+-   Remplacez le mappage de résultats par un mappage pour chaque entité retournée, comme suit :
 
 ``` xml
     <ResultMapping>
@@ -188,9 +188,9 @@ Cela indique le modèle que la procédure stockée retourne deux collections, un
     </ResultMapping>
 ```
 
-Il est également possible de mapper les jeux de résultats à des types complexes, tel que celui créé par défaut. Pour ce faire, vous créez un nouveau type complexe, au lieu de les supprimer et utilisez les types complexes partout que que vous aviez utilisé les noms d’entité dans les exemples ci-dessus.
+Il est également possible de mapper les jeux de résultats à des types complexes, tels que celui créé par défaut. Pour ce faire, vous créez un nouveau type complexe, au lieu de le supprimer, et vous utilisez les types complexes partout où vous aviez utilisé les noms d’entités dans les exemples ci-dessus.
 
-Une fois que ces mappages ont été modifiées, vous pouvez enregistrer le modèle et exécutez le code suivant pour utiliser la procédure stockée :
+Une fois ces mappages modifiés, vous pouvez enregistrer le modèle et exécuter le code suivant pour utiliser la procédure stockée :
 
 ``` csharp
     using (var db = new BlogEntities())
@@ -214,8 +214,8 @@ Une fois que ces mappages ont été modifiées, vous pouvez enregistrer le modè
 ```
 
 >[!NOTE]
-> Si vous modifiez manuellement le fichier edmx pour votre modèle, il sera remplacé si vous régénérez jamais le modèle à partir de la base de données.
+> Si vous modifiez manuellement le fichier edmx pour votre modèle, il sera remplacé si vous régénérez le modèle à partir de la base de données.
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
-Ici, nous avons décrit deux méthodes d’accès aux résultats multiples définit à l’aide d’Entity Framework. Les deux d'entre eux sont valides en fonction de votre situation et préférences et vous devez choisir celui qui semble mieux à votre situation. Il est prévu que la prise en charge pour résultat plusieurs jeux sera améliorée dans les futures versions d’Entity Framework et que les étapes dans ce document ne sera plus nécessaire.
+Ici, nous avons présenté deux méthodes différentes d’accès à plusieurs jeux de résultats à l’aide de Entity Framework. Ils sont tous deux valides en fonction de votre situation et de vos préférences, et vous devez choisir celui qui convient le mieux à vos circonstances. Il est prévu que la prise en charge de plusieurs jeux de résultats sera améliorée dans les futures versions de Entity Framework et que l’exécution des étapes décrites dans ce document ne sera plus nécessaire.

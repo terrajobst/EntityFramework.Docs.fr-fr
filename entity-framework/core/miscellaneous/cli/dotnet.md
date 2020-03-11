@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 5686d28e6847797130476cd858bd3fb611620140
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 7dc7a4404820a7c935648169cc6ff8d0f0118d87
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824483"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416748"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Informations de référence sur les outils Entity Framework Core-CLI .NET
 
@@ -39,7 +39,7 @@ La procédure d’installation dépend du type et de la version du projet :
 
   Vous pouvez également utiliser `dotnet ef` en tant qu’outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
 
-* Installez le [kit SDK .NET Core 3,0](https://dotnet.microsoft.com/download/dotnet-core/3.0). Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
+* Installez le [kit de développement logiciel (SDK) .NET Core](https://www.microsoft.com/net/download/core).
 
 * Installez le dernier package de `Microsoft.EntityFrameworkCore.Design`.
 
@@ -186,7 +186,7 @@ Options :
 
 Met à jour la base de données jusqu’à la dernière migration ou à une migration spécifiée.
 
-Arguments :
+Arguments :
 
 | Argument      | Description                                                                                                                                                                                                                                                     |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -211,7 +211,7 @@ Répertorie les types de `DbContext` disponibles.
 
 Génère du code pour une `DbContext` et des types d’entités pour une base de données. Pour que cette commande génère un type d’entité, la table de base de données doit avoir une clé primaire.
 
-Arguments :
+Arguments :
 
 | Argument       | Description                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -228,7 +228,7 @@ Options :
 | `-f`            | `--force`                                | Remplacer les fichiers existants.                                                                                                                                                      |
 | `-o`            | `--output-dir <PATH>`                    | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
 |                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
-| `-t`            | `--table <TABLE_NAME>`... »                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
+| `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
 |                 | `--use-database-names`                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour C# être plus conformes aux conventions de style de nom. |
 
 L’exemple suivant génère la structure de tous les schémas et tables et place les nouveaux fichiers dans le dossier *Models* .
@@ -247,7 +247,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 Ajoute une nouvelle migration.
 
-Arguments :
+Arguments :
 
 | Argument | Description                |
 |:---------|:---------------------------|
@@ -277,7 +277,7 @@ Options :
 
 Génère un script SQL à partir des migrations.
 
-Arguments :
+Arguments :
 
 | Argument | Description                                                                                                                                                   |
 |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -5,11 +5,11 @@ ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
 ms.openlocfilehash: fb9de799753bebd7b4092cd8f4af74703dee3e45
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656190"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417446"
 ---
 # <a name="new-features-in-ef-core-22"></a>Nouvelles fonctionnalités d’EF Core 2.2
 
@@ -25,7 +25,7 @@ Chacun de ces packages contribue aux mappages des types NTS et des méthodes ain
 Ces extensions de fournisseur sont désormais disponibles pour [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/), et [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (à partir du [projet Npgsql](https://www.npgsql.org/)).
 Les types spatiaux peuvent être utilisés directement avec le [fournisseur en mémoire EF Core](xref:core/providers/in-memory/index), sans extensions supplémentaires.
 
-Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Exemple :
+Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Par exemple :
 
 ``` csharp
 using NetTopologySuite.Geometries;

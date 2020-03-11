@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 66988f936ab75e17620398c8f21e4a32bbc950bd
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: a6c71c12f429f1324abe91d1b2cef96312bec051
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445954"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417648"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Suivi et requêtes sans suivi
 
@@ -19,7 +19,7 @@ Suivi des contrôles de comportement si Entity Framework Core conservera des inf
 > Les [types d’entité sans clé](xref:core/modeling/keyless-entity-types) ne sont jamais suivis. Chaque fois que cet article mentionne des types d’entités, il fait référence aux types d’entité qui ont une clé définie.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
 
 ## <a name="tracking-queries"></a>Requêtes avec suivi
 
@@ -55,7 +55,7 @@ Si le jeu de résultats ne contient aucun type d’entité, aucun suivi n’est 
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
 
- EF Core prend en charge l’évaluation du client dans la projection de niveau supérieur. Si EF Core matérialise une instance d’entité pour l’évaluation du client, elle est suivie. Ici, puisque nous passons les entités `blog` à la méthode client `StandardizeURL`, EF Core effectuera le suivi des instances de blog.
+ EF Core prend en charge l’évaluation du client dans la projection de niveau supérieur. Si EF Core matérialise une instance d’entité pour l’évaluation du client, elle est suivie. Ici, étant donné que nous passons `blog` entités à la méthode client `StandardizeURL`, EF Core effectuera le suivi des instances de blog.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
@@ -65,7 +65,7 @@ EF Core n’effectue pas le suivi des instances d’entité keymoins contenues d
 
 Certaines des règles ci-dessus ont fonctionné différemment avant EF Core 3,0. Pour plus d’informations, consultez [versions précédentes](#previous-versions).
 
-## <a name="previous-versions"></a>Versions antérieures
+## <a name="previous-versions"></a>Versions précédentes
 
 Avant la version 3,0, les EF Core présentaient certaines différences quant à la façon dont le suivi a été effectué. Les différences notables sont les suivantes :
 

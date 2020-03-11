@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: c38d3ee0efa82f84a1051017ae40c9f3fdd57f1f
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781168"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417397"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
 
@@ -33,9 +33,9 @@ Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumn
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
-> Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
+> Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Contrôle
+## <a name="usage"></a>Usage
 
 L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que les autres entités :
 

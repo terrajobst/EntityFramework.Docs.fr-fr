@@ -7,11 +7,11 @@ ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
 ms.openlocfilehash: b911a2da493e20c4e4ce6f1e25024bd0efd38b44
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656126"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417821"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 
@@ -25,7 +25,7 @@ Notez que la plupart des [modifications avec rupture au niveau](../what-is-new/e
 
 * <https://github.com/aspnet/EntityFrameworkCore/pull/14022>
   * Suppression des API obsolètes et des surcharges de paramètre facultatives réduites
-  * Suppression de DatabaseColumn. GetUnderlyingStoreType ()
+  * Removed DatabaseColumn.GetUnderlyingStoreType()
 * <https://github.com/aspnet/EntityFrameworkCore/pull/14589>
   * Suppression des API obsolètes
 * <https://github.com/aspnet/EntityFrameworkCore/pull/15044>
@@ -65,7 +65,7 @@ Notez que la plupart des [modifications avec rupture au niveau](../what-is-new/e
 * <https://github.com/aspnet/EntityFrameworkCore/pull/15288>
   * L’amorçage des données a été refactorisé dans une API publique pour éviter d’avoir à utiliser des types internes. Cela ne doit avoir d’impact que sur les fournisseurs non relationnels, car l’amorçage est géré par la classe relationnelle de base pour tous les fournisseurs relationnels.
 
-## <a name="21-----22"></a>2,1---> 2,2
+## <a name="21-----22"></a>2.1 ---> 2.2
 
 ### <a name="test-only-changes"></a>Modifications de test uniquement
 

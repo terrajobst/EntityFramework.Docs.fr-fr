@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 11/07/2018
 uid: core/managing-schemas/ensure-created
 ms.openlocfilehash: 32ac6cd043df73cd041780ec4c8805675adc5ab1
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811784"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416869"
 ---
 # <a name="create-and-drop-apis"></a>Créer et supprimer des API
 

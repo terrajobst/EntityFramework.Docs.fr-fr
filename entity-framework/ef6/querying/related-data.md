@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
 ms.openlocfilehash: c359d8d32a88049213fd5e98e99fe49d7e3121a3
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005479"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417087"
 ---
 # <a name="loading-related-entities"></a>Chargement des entités associées
 
@@ -102,7 +102,7 @@ public class Blog
 
 ### <a name="turn-lazy-loading-off-for-serialization"></a>Désactivation du chargement différé pour la sérialisation
 
-Le chargement différé et la sérialisation ne sont pas bien confondus. Si vous n’êtes pas prudent, vous pouvez terminer l’interrogation de votre base de données tout simplement parce que le chargement différé est activé. La plupart des sérialiseurs fonctionnent en accédant à chaque propriété sur une instance d’un type. L’accès aux propriétés déclenche un chargement différé, si bien que davantage d’entités sont sérialisées. Sur ces entités, les propriétés sont accessibles, et d’autres entités sont chargées. Il est recommandé de désactiver le chargement différé avant de sérialiser une entité. Les sections suivantes montrent comment procéder.
+Le chargement différé et la sérialisation ne sont pas bien confondus. Si vous n’êtes pas prudent, vous pouvez terminer l’interrogation de votre base de données tout simplement parce que le chargement différé est activé. La plupart des sérialiseurs fonctionnent en accédant à chaque propriété sur une instance d’un type. L’accès aux propriétés déclenche un chargement différé, si bien que davantage d’entités sont sérialisées. Sur ces entités, les propriétés sont accessibles, et d’autres entités sont chargées. Il est recommandé de désactiver le chargement différé avant de sérialiser une entité. Les sections suivantes montrent comment effectuer cette opération.
 
 ### <a name="turning-off-lazy-loading-for-specific-navigation-properties"></a>Désactivation du chargement différé pour des propriétés de navigation spécifiques
 

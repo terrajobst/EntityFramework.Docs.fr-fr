@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
 ms.openlocfilehash: 8990d1373ea2121ce11337a43dbcdf3b9e1532bd
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182553"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418731"
 ---
 # <a name="msl-specification"></a>Spécification MSL
 Le langage MSL (Mapping Specification Language) est un langage basé sur XML qui décrit le mappage entre le modèle conceptuel et le modèle de stockage d’une application Entity Framework.
@@ -37,9 +37,9 @@ L’élément **alias** ne peut pas avoir d’éléments enfants.
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **alias** .
 
-| Nom d'attribut | Requis | Valeur                                                                     |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
-| **Key**        | Oui         | Alias de l’espace de noms spécifié par l’attribut **value** . |
+| **Clé**        | Oui         | Alias de l’espace de noms spécifié par l’attribut **value** . |
 | **Valeur**      | Oui         | Espace de noms pour lequel la valeur de l’élément **Key** est un alias.     |
 
 ### <a name="example"></a>Exemple
@@ -91,11 +91,11 @@ L’élément **AssociationEnd** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **AssociationEnd** .
 
-| Nom d'attribut     | Requis | Valeur                                                                                                                                                                             |
+| Nom de l'attribut     | Est obligatoire | Valeur                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet** | Oui         | Nom de l'association mappée.                                                                                                                                 |
 | **From**           | Oui         | Valeur de l’attribut **FromRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL). |
-| **Pour**             | Oui         | Valeur de l’attribut **ToRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL).   |
+| **To**             | Oui         | Valeur de l’attribut **ToRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL).   |
 
 ### <a name="example"></a>Exemple
 
@@ -198,7 +198,7 @@ L’élément **AssociationSetMapping** peut avoir les éléments enfants suivan
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut     | Requis | Valeur                                                                                       |
+| Nom de l'attribut     | Est obligatoire | Valeur                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Nom**           | Oui         | Nom de l'ensemble d'associations du modèle conceptuel mappé.                      |
 | **TypeName**       | Non          | Nom qualifié par un espace de noms du type d'association du modèle conceptuel mappé. |
@@ -236,7 +236,7 @@ L’élément de propriété **complexType** peut avoir les éléments enfants s
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ComplexProperty** :
 
-| Nom d'attribut | Requis | Valeur                                                                                            |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété complexe d'un type d'entité dans le modèle conceptuel mappé. |
 | **TypeName**   | Non          | Nom qualifié par un espace de noms du type de propriété de modèle conceptuel.                              |
@@ -306,13 +306,13 @@ L’élément **ComplexTypeMapping,** peut avoir les éléments enfants suivants
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ComplexTypeMapping,** .
 
-| Nom d'attribut | Requis | Valeur                                                                  |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type complexe mappé. |
 
 ### <a name="example"></a>Exemple
 
-Considérons la procédure stockée suivante :
+Examinez la procédure stockée suivante :
 
 ``` SQL
  CREATE PROCEDURE [dbo].[GetGrades]
@@ -377,10 +377,10 @@ L’élément **condition** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **condition** :
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                                                                                                         |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | Non          | Nom de la colonne de table dont la valeur est utilisée pour évaluer la condition.                                                                                                                                                                                                                   |
-| **IsNull**     | Non          | **True** ou **false**. Si la valeur est **true** et que la valeur de la colonne est **null**, ou si la valeur est **false** et que la valeur de la colonne n’est pas **null**, la condition est true. Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps. |
+| **IsNull**     | Non          | **True** ou **False**. Si la valeur est **true** et que la valeur de la colonne est **null**, ou si la valeur est **false** et que la valeur de la colonne n’est pas **null**, la condition est true. Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps. |
 | **Valeur**      | Non          | Valeur à laquelle la valeur de colonne est comparée. Si les valeurs sont identiques, la condition est vérifiée (True). Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps.                                                                       |
 | **Nom**       | Non          | Nom de la propriété d'entité de modèle conceptuel dont la valeur est utilisée pour évaluer la condition. <br/> Cet attribut n’est pas applicable si l’élément **condition** est utilisé dans un élément FunctionImportMapping.                                                                           |
 
@@ -438,7 +438,7 @@ L’élément **DeleteFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à un élément **EntityTypeMapping** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -502,7 +502,7 @@ L’élément **DeleteFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -556,9 +556,9 @@ L’élément **EndProperty** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **EndProperty** :
 
-| Nom d'attribut | Requis | Valeur                                                 |
+| Nom de l'attribut | Est obligatoire | Valeur                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| Nom           | Oui         | Nom de la terminaison d'association mappée. |
+| Name           | Oui         | Nom de la terminaison d'association mappée. |
 
 ### <a name="example"></a>Exemple
 
@@ -626,11 +626,11 @@ L’élément **EntityContainerMapping** peut avoir les éléments enfants suiva
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityContainerMapping** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | Oui         | Nom du conteneur d'entités de modèle de stockage mappé.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Oui         | Nom du conteneur d'entités de modèle conceptuel mappé.                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | Non          | **True** ou **false**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **True**. |
+| **GenerateUpdateViews**   | Non          | **True** ou **False**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **True**. |
 
 ### <a name="example"></a>Exemple
 
@@ -677,7 +677,7 @@ L’élément **EntitySetMapping** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntitySetMapping** .
 
-| Nom d'attribut           | Requis | Valeur                                                                                                                                                                                                                         |
+| Nom de l'attribut           | Est obligatoire | Valeur                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                 | Oui         | Nom du jeu d'entités de modèle conceptuel mappé.                                                                                                                                                             |
 | **TypeName** **1**       | Non          | Nom du type d'entité de modèle conceptuel mappé.                                                                                                                                                            |
@@ -743,7 +743,7 @@ L’élément **EntityTypeMapping** peut avoir les éléments enfants suivants 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityTypeMapping** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type d'entité de modèle conceptuel mappé. <br/> Si le type correspond à un type abstrait ou dérivé, la valeur doit être `IsOfType(Namespace-qualified_type_name)`. |
 
@@ -829,7 +829,7 @@ L’élément **FunctionImportMapping** peut avoir les éléments enfants suivan
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **FunctionImportMapping** :
 
-| Nom d'attribut         | Requis | Valeur                                                                                   |
+| Nom de l'attribut         | Est obligatoire | Valeur                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
 | **FunctionImportName** | Oui         | Nom de l'importation de fonction dans le modèle conceptuel mappé.           |
 | **FunctionName**       | Oui         | Nom qualifié par un espace de noms de la fonction dans le modèle de stockage mappé. |
@@ -887,7 +887,7 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’ils sont appliqués à un élément **EntityTypeMapping** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -938,7 +938,7 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
@@ -995,7 +995,7 @@ Les noms de types de modèle conceptuel et de stockage référencés en MSL doiv
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Mapping** .
 
-| Nom d'attribut | Requis | Valeur                                                 |
+| Nom de l'attribut | Est obligatoire | Valeur                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | **Espace**      | Oui         | **C-S**. Il s'agit d'une valeur fixe qui ne peut pas être modifiée. |
 
@@ -1048,7 +1048,7 @@ L’élément **MappingFragment** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **MappingFragment** .
 
-| Nom d'attribut          | Requis | Valeur                                                                                                                                                                                                                         |
+| Nom de l'attribut          | Est obligatoire | Valeur                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StoreEntitySet**      | Oui         | Nom de la table ou de la vue mappée.                                                                                                                                                                           |
 | **MakeColumnsDistinct** | Non          | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
@@ -1211,7 +1211,7 @@ L’élément **QueryView** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **QueryView** .
 
-| Nom d'attribut | Requis | Valeur                                                                         |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **TypeName**   | Non          | Nom du type de modèle conceptuel mappé par l'affichage des requêtes. |
 
@@ -1325,7 +1325,7 @@ L’élément **ResultBinding** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ResultBinding** :
 
-| Nom d'attribut | Requis | Valeur                                                                         |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété d'entité dans le modèle conceptuel mappé. |
 | **ColumnName** | Oui         | Nom de la colonne mappée.                                          |
@@ -1405,7 +1405,7 @@ Aucun attribut n’est applicable à l’élément **ResultMapping** .
 
 ### <a name="example"></a>Exemple
 
-Considérons la procédure stockée suivante :
+Examinez la procédure stockée suivante :
 
 ``` SQL
  CREATE PROCEDURE [dbo].[GetGrades]
@@ -1477,14 +1477,14 @@ Les attributs qui s’appliquent à l’élément **ScalarProperty** varient en 
 
 Le tableau suivant décrit les attributs qui s’appliquent lorsque l’élément **ScalarProperty** est utilisé pour mapper une propriété de modèle conceptuel à une colonne de la base de données :
 
-| Nom d'attribut | Requis | Valeur                                                           |
+| Nom de l'attribut | Est obligatoire | Valeur                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété de modèle conceptuel mappée. |
 | **ColumnName** | Oui         | Nom de la colonne de table mappée.              |
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ScalarProperty** lorsqu’il est utilisé pour mapper une propriété de modèle conceptuel à un paramètre de procédure stockée :
 
-| Nom d'attribut    | Requis | Valeur                                                                                                                                           |
+| Nom de l'attribut    | Est obligatoire | Valeur                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**          | Oui         | Nom de la propriété de modèle conceptuel mappée.                                                                                 |
 | **ParameterName** | Oui         | Nom du paramètre mappé.                                                                                                 |
@@ -1595,7 +1595,7 @@ L’élément **UpdateFunction** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **UpdateFunction** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de mise à jour est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
 | **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |

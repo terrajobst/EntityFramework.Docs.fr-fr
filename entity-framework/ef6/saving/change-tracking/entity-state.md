@@ -1,44 +1,44 @@
 ---
-title: Utilisation des États de l’entité - EF6
+title: Utilisation des États d’entité-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
 ms.openlocfilehash: ef0e8d5a5a9d66adab7046088c49d8cd472edc8a
-ms.sourcegitcommit: e5f9ca4aa41e64141fa63a1e5fcf4d4775d67d24
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52899650"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419698"
 ---
-# <a name="working-with-entity-states"></a>Utilisation des États des entités
-Cette section explique comment ajouter et joindre des entités à un contexte et comment Entity Framework traite ces pendant SaveChanges.
-Entity Framework effectue le suivi de l’état des entités pendant qu’ils sont connectés à un contexte, mais dans les scénarios déconnectés ou applications multicouches vous pouvez laisser EF savoir quel état vos entités doit être dans.
+# <a name="working-with-entity-states"></a>Utilisation des États d’entité
+Cette rubrique explique comment ajouter et attacher des entités à un contexte et comment Entity Framework les traite au cours de l’opération SaveChanges.
+Entity Framework effectue le suivi de l’état des entités pendant qu’elles sont connectées à un contexte, mais dans les scénarios déconnectés ou multiniveaux, vous pouvez laisser EF déterminer l’état de vos entités.
 Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
 
-## <a name="entity-states-and-savechanges"></a>États des entités et SaveChanges
+## <a name="entity-states-and-savechanges"></a>États d’entité et SaveChanges
 
-Une entité peut avoir l’un des cinq états tel que défini par l’énumération de l’état d’entité. Ces États sont :  
+Une entité peut être dans l’un des cinq États définis par l’énumération EntityState. Ces états sont :  
 
-- Ajout : l’entité est suivie par le contexte, mais n’existe pas encore dans la base de données  
-- Unchanged : l’entité est suivie par le contexte et existe dans la base de données et ses valeurs de propriété n’ont pas changé à partir des valeurs dans la base de données  
-- Modifié : l’entité est suivie par le contexte et existe dans la base de données, et tout ou partie de ses valeurs de propriété ont été modifiées.  
-- Supprimé : l’entité est suivie par le contexte et existe dans la base de données, mais a été marquée pour suppression à partir de la base de données lors du prochain qu'appel de SaveChanges  
-- Détaché : l’entité n'est pas suivie par le contexte  
+- Ajouté : l’entité fait l’objet d’un suivi par le contexte, mais n’existe pas encore dans la base de données  
+- Inchangé : l’entité fait l’objet d’un suivi par le contexte et existe dans la base de données, et ses valeurs de propriété n’ont pas changé par rapport aux valeurs de la base de données.  
+- Modifié : l’entité fait l’objet d’un suivi par le contexte et existe dans la base de données, et une partie ou la totalité de ses valeurs de propriété a été modifiée.  
+- Supprimé : l’entité est suivie par le contexte et existe dans la base de données, mais elle a été marquée pour suppression de la base de données la prochaine fois que SaveChanges est appelé  
+- Détaché : l’entité n’est pas suivie par le contexte  
 
-SaveChanges effectue des opérations différentes pour les entités dans différents états :  
+SaveChanges effectue différentes opérations pour les entités dans différents États :  
 
-- Entités inchangées ne sont pas touchées par SaveChanges. Mises à jour ne sont pas envoyées à la base de données pour les entités dans un état Unchanged.  
-- Ajouté des entités sont insérées dans la base de données et devient inchangées lorsque SaveChanges retourne.  
-- Entités modifiées sont mises à jour dans la base de données et devenir inchangées lorsque SaveChanges retourne.  
-- Entités supprimées sont supprimées de la base de données et sont ensuite détachées à partir du contexte.  
+- Les entités inchangées ne sont pas touchées par SaveChanges. Les mises à jour ne sont pas envoyées à la base de données pour les entités à l’État inchangé.  
+- Les entités ajoutées sont insérées dans la base de données, puis deviennent inchangées lorsque SaveChanges retourne.  
+- Les entités modifiées sont mises à jour dans la base de données, puis deviennent inchangées lorsque SaveChanges retourne.  
+- Les entités supprimées sont supprimées de la base de données et sont ensuite détachées du contexte.  
 
-Les exemples suivants montrent des façons dans lequel l’état d’une entité ou un graphique d’entité peut être modifié.  
+Les exemples suivants montrent comment l’état d’une entité ou d’un graphique d’entité peut être modifié.  
 
 ## <a name="adding-a-new-entity-to-the-context"></a>Ajout d’une nouvelle entité au contexte  
 
 Une nouvelle entité peut être ajoutée au contexte en appelant la méthode Add sur DbSet.
-Cela place l’entité dans l’état Added, ce qui signifie qu’elle sera insérée dans la base de données la prochaine fois que SaveChanges est appelée.
-Exemple :  
+L’état de l’entité est alors ajouté, ce qui signifie qu’elle sera insérée dans la base de données la prochaine fois que SaveChanges sera appelé.
+Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -49,7 +49,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Une autre façon d’ajouter une nouvelle entité au contexte consiste à modifier son état Added. Exemple :  
+Une autre façon d’ajouter une nouvelle entité au contexte consiste à changer son état en ajouté. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -60,8 +60,8 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Enfin, vous pouvez ajouter une nouvelle entité au contexte par elle liant à une autre entité qui est déjà suivie.
-Il peut s’agir en ajoutant la nouvelle entité à la propriété de navigation de collection d’une autre entité ou en définissant une propriété de navigation de référence d’une autre entité pour pointer vers la nouvelle entité. Exemple :  
+Enfin, vous pouvez ajouter une nouvelle entité au contexte en la raccordant à une autre entité qui fait déjà l’objet d’un suivi.
+Cela peut être en ajoutant la nouvelle entité à la propriété de navigation de collection d’une autre entité ou en définissant une propriété de navigation de référence d’une autre entité pour pointer vers la nouvelle entité. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -77,11 +77,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que, pour tous ces exemples, si l’entité en cours d’ajout a des références à d’autres entités qui ne sont pas encore suivies ensuite ces nouvelles entités est également ajouté au contexte et sera insérée dans la base de données la prochaine fois que SaveChanges est appelée.  
+Notez que pour tous ces exemples, si l’entité ajoutée a des références à d’autres entités qui ne sont pas encore suivies, ces nouvelles entités seront également ajoutées au contexte et seront insérées dans la base de données la prochaine fois que SaveChanges sera appelé.  
 
 ## <a name="attaching-an-existing-entity-to-the-context"></a>Attachement d’une entité existante au contexte  
 
-Si vous avez une entité dont vous savez déjà existe dans la base de données mais qui n’est pas actuellement en cours suivi par le contexte vous pouvez indiquer le contexte pour effectuer le suivi de l’entité à l’aide de la méthode d’attachement sur DbSet. L’entité sera à l’état inchangé dans le contexte. Exemple :  
+Si vous avez une entité que vous connaissez déjà dans la base de données mais qui n’est pas actuellement suivie par le contexte, vous pouvez indiquer au contexte d’effectuer le suivi de l’entité à l’aide de la méthode Attach sur DbSet. L’entité sera à l’État inchangé dans le contexte. Par exemple :  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -96,9 +96,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez qu’aucune modification n’est apportées à la base de données si SaveChanges est appelée sans effectuer toute autre manipulation de l’entité attachée. Il s’agit, car l’entité est à l’état inchangé.  
+Notez qu’aucune modification n’est apportée à la base de données si SaveChanges est appelé sans effectuer d’autres manipulations de l’entité attachée. Cela est dû au fait que l’entité est dans l’État inchangé.  
 
-Une autre façon d’attacher une entité existante au contexte consiste à modifier son état à « Unchanged ». Exemple :  
+Une autre façon d’attacher une entité existante au contexte est de changer son état en inchangé. Par exemple :  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -113,12 +113,12 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que pour ces deux exemples si l’entité qui est attachée a des références à d’autres entités qui ne sont pas encore suivies ensuite ces nouvelles entités seront également attachés au contexte à l’état inchangé.  
+Notez que, pour ces deux exemples, si l’entité attachée a des références à d’autres entités qui ne sont pas encore suivies, ces nouvelles entités seront également attachées au contexte dans l’État inchangé.  
 
-## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>Attachement d’un existant mais l’entité modifiée au contexte  
+## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>Attachement d’une entité existante mais modifiée au contexte  
 
-Si vous avez une entité dont vous savez déjà existe dans la base de données, mais pour les modifications qui ont été apportées vous pouvez indiquer le contexte pour attacher l’entité et de définir son état sur Modified.
-Exemple :  
+Si vous avez une entité que vous connaissez déjà dans la base de données mais dans laquelle des modifications ont pu être apportées, vous pouvez indiquer au contexte d’attacher l’entité et de définir son état sur modifié.
+Par exemple :  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -133,14 +133,14 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Lorsque vous modifiez l’état Modified toutes les propriétés de l’entité seront marquées comme modifiée et toutes les valeurs de propriété seront envoyés à la base de données lorsque SaveChanges est appelée.  
+Lorsque vous remplacez l’État par modifié, toutes les propriétés de l’entité sont marquées comme étant modifiées et toutes les valeurs de propriété sont envoyées à la base de données lorsque SaveChanges est appelé.  
 
-Notez que si l’entité qui est attachée a des références à d’autres entités qui ne sont pas encore suivies, ces nouvelles entités sera attaché au contexte dans un état Unchanged, celles-ci ne sont pas automatiquement converties Modified.
-Si vous disposez de plusieurs entités qui doivent être marqués Modified vous devez définir l’état pour chacune de ces entités individuellement.  
+Notez que si l’entité attachée a des références à d’autres entités qui ne sont pas encore suivies, ces nouvelles entités seront attachées au contexte à l’État inchangé, elles ne seront pas automatiquement modifiées.
+Si vous avez plusieurs entités qui doivent être marquées comme étant modifiées, vous devez définir l’état de chacune de ces entités individuellement.  
 
-## <a name="changing-the-state-of-a-tracked-entity"></a>Modification de l’état d’une entité de suivi  
+## <a name="changing-the-state-of-a-tracked-entity"></a>Modification de l’état d’une entité suivie  
 
-Vous pouvez modifier l’état d’une entité est déjà suivie en définissant la propriété d’état sur son entrée. Exemple :  
+Vous pouvez modifier l’état d’une entité qui fait déjà l’objet d’un suivi en définissant la propriété State sur son entrée. Par exemple :  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -156,13 +156,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Notez que l’appel Add ou attacher pour une entité qui est déjà suivie peut également servir pour modifier l’état d’entité. Par exemple, attacher l’appel d’une entité qui se trouve actuellement dans l’état Added modifie son état à « Unchanged ».  
+Notez que l’appel de Add ou Attach pour une entité déjà suivie peut également être utilisé pour modifier l’état de l’entité. Par exemple, l’appel de Attach pour une entité qui est actuellement à l’état Added passe à l’État inchangé.  
 
-## <a name="insert-or-update-pattern"></a>Insérer ou mettre à jour de modèle  
+## <a name="insert-or-update-pattern"></a>Insérer ou mettre à jour le modèle  
 
-Un modèle courant pour certaines applications consiste à ajouter une entité en tant que nouveau (ce qui entraîne l’insertion d’une base de données) ou attacher une entité comme existante et la marquer comme modifié (ce qui entraîne une mise à jour de la base de données) en fonction de la valeur de la clé primaire.
-Par exemple, lors de l’utilisation de clés primaires de base de données générée entier, il est courant de traiter une entité avec une clé en tant que nouvelle de zéro et une entité avec une clé différente de zéro comme existant.
-Ce modèle peut être obtenu en définissant l’état d’entité selon une vérification de la valeur de clé primaire. Exemple :  
+Un modèle commun pour certaines applications consiste à ajouter une entité en tant que nouvelle (ce qui entraîne l’insertion d’une base de données) ou à attacher une entité comme existante et à la marquer comme modifiée (entraînant une mise à jour de la base de données) en fonction de la valeur de la clé primaire.
+Par exemple, lorsque vous utilisez des clés primaires entières générées par la base de données, il est courant de traiter une entité avec une clé de zéro comme nouvelle et une entité avec une clé non nulle comme existante.
+Ce modèle peut être obtenu en définissant l’état de l’entité sur la base d’une vérification de la valeur de la clé primaire. Par exemple :  
 
 ``` csharp
 public void InsertOrUpdate(Blog blog)
@@ -178,4 +178,4 @@ public void InsertOrUpdate(Blog blog)
 }
 ```  
 
-Notez que lorsque vous modifiez l’état Modified toutes les propriétés de l’entité seront marquées comme modifiée et toutes les valeurs de propriété seront envoyés à la base de données lorsque SaveChanges est appelée.  
+Notez que lorsque vous remplacez l’État par modifié, toutes les propriétés de l’entité sont marquées comme étant modifiées et toutes les valeurs de propriété sont envoyées à la base de données lorsque SaveChanges est appelé.  

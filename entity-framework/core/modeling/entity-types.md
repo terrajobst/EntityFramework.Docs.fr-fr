@@ -6,11 +6,11 @@ ms.date: 12/03/2019
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
 ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502452"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417232"
 ---
 # <a name="entity-types"></a>Types d'entité
 
@@ -32,27 +32,27 @@ Dans l’exemple de code ci-dessous, tous les types sont inclus :
 
 Si vous ne souhaitez pas qu’un type soit inclus dans le modèle, vous pouvez l’exclure :
 
-### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?name=IgnoreType&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
 ***
 
-## <a name="table-name"></a>Nom du tableau
+## <a name="table-name"></a>Nom de la table
 
 Par Convention, chaque type d’entité sera configuré pour être mappé à une table de base de données portant le même nom que la propriété DbSet qui expose l’entité. S’il n’existe aucun DbSet pour l’entité donnée, le nom de la classe est utilisé.
 
 Vous pouvez configurer manuellement le nom de la table :
 
-### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableName.cs?Name=TableName&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
@@ -64,11 +64,11 @@ Lorsque vous utilisez une base de données relationnelle, les tables sont par co
 
 Vous pouvez configurer des tables à créer dans un schéma spécifique comme suit :
 
-### <a name="data-annotationstabdata-annotations"></a>[Annotations de données](#tab/data-annotations)
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API Fluent](#tab/fluent-api)
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 

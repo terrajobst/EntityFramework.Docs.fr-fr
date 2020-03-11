@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: d617aed1-15f2-48a9-b187-186991c666e3
 ms.openlocfilehash: 018f480c1f0f1e74fc9f7a8950a6880e96f1facc
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182651"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419100"
 ---
 # <a name="spatial---code-first"></a>Code First spatial
 > [!NOTE]
@@ -31,7 +31,7 @@ Cette vidéo montre comment mapper des types spatiaux avec Entity Framework Code
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual Studio 2012, Ultimate, Premium, Professional ou Web Express Edition.
 
@@ -76,7 +76,7 @@ Les types DbContext et DbSet sont définis dans l’assembly EntityFramework. No
 1.  Dans Explorateur de solutions, cliquez avec le bouton droit sur le nom du projet.
 2.  Sélectionnez **gérer les packages NuGet...**
 3.  Dans la boîte de dialogue gérer les packages NuGet, sélectionnez l’onglet **en ligne** et choisissez le package **EntityFramework** .
-4.  Cliquez sur **installer**
+4.  Cliquez sur **Installer**.
 
 Notez qu’en plus de l’assembly EntityFramework, une référence à l’assembly System. ComponentModel. DataAnnotations est également ajoutée.
 

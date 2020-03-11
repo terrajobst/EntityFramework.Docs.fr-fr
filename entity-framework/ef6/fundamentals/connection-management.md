@@ -1,35 +1,35 @@
 ---
-title: Gestion des connexions - EF6
+title: Gestion des connexions-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
 ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489334"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417986"
 ---
 # <a name="connection-management"></a>Gestion des connexions
-Cette page décrit le comportement d’Entity Framework en ce qui concerne le passage de connexions pour le contexte et les fonctionnalités de la **Database.Connection.Open()** API.  
+Cette page décrit le comportement de Entity Framework en ce qui concerne le passage des connexions au contexte et les fonctionnalités de l’API **Database. Connection. Open ()** .  
 
-## <a name="passing-connections-to-the-context"></a>Connexions passant au contexte  
+## <a name="passing-connections-to-the-context"></a>Transmission des connexions au contexte  
 
-### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportement de EF5 et versions antérieures  
+### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportement pour EF5 et les versions antérieures  
 
-Il existe deux constructeurs qui acceptent les connexions :  
+Deux constructeurs acceptent les connexions :  
 
 ``` csharp
 public DbContext(DbConnection existingConnection, bool contextOwnsConnection)
 public DbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
 ```  
 
-Il est possible de les utiliser, mais vous devez contourner quelques limitations :  
+Il est possible d’utiliser ces éléments, mais vous devez contourner deux limitations :  
 
-1. Si vous passez une connexion ouverte à une de ces puis la première fois que l’infrastructure essaie d’utiliser qu'une exception InvalidOperationException est levée indiquant que le programme ne peut pas rouvrir une connexion déjà ouverte.  
-2. L’indicateur contextOwnsConnection est interprété comme si la connexion à la banque sous-jacente doit être supprimée lorsque le contexte est supprimé ou non. Toutefois, indépendamment de ce paramètre, le magasin de connexion est toujours fermé lorsque le contexte est supprimé. Donc si vous avez plusieurs DbContext avec la même connexion quelle que soit la contexte est supprimé tout d’abord fermera la connexion (même si vous avez mélangé une connexion ADO.NET existante avec un DbContext, DbContext sera toujours fermer la connexion lorsqu’il est supprimé) .  
+1. Si vous transmettez une connexion ouverte à l’un de ces deux, la première fois que l’infrastructure tente de l’utiliser, une exception InvalidOperationException est levée, indiquant qu’elle ne peut pas rouvrir une connexion déjà ouverte.  
+2. L’indicateur contextOwnsConnection est interprété pour indiquer si la connexion de la banque sous-jacente doit être supprimée lorsque le contexte est supprimé. Toutefois, quelle que soit la valeur de ce paramètre, la connexion du magasin est toujours fermée lorsque le contexte est supprimé. Par conséquent, si vous avez plusieurs DbContext avec la même connexion quel que soit le contexte supprimé en premier, la connexion est fermée (de même si vous avez mélangé une connexion ADO.NET existante à un DbContext, DbContext fermera toujours la connexion lorsqu’elle sera supprimée) .  
 
-Il est possible de contourner la limitation première ci-dessus en passant d’une connexion fermée et seulement l’exécution de code qui ouvrirait une fois que tous les contextes ont été créés :  
+Il est possible de contourner la première limitation ci-dessus en passant une connexion fermée et en exécutant uniquement le code qui l’ouvre une fois que tous les contextes ont été créés :  
 
 ``` csharp
 using System.Collections.Generic;
@@ -71,11 +71,11 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-La deuxième limite signifie simplement que vous devez éviter de supprimer un de vos objets DbContext jusqu'à ce que vous êtes prêt pour la connexion à fermer.  
+La deuxième limitation signifie simplement que vous devez vous abstenir de supprimer les objets DbContext jusqu’à ce que vous soyez prêt à fermer la connexion.  
 
-### <a name="behavior-in-ef6-and-future-versions"></a>Comportement dans EF6 et versions ultérieures  
+### <a name="behavior-in-ef6-and-future-versions"></a>Comportement dans EF6 et les versions ultérieures  
 
-Dans EF6 et les versions futures DbContext a les deux constructeurs mêmes mais ne nécessite plus que la connexion passée au constructeur fermée lorsqu’elle est reçue. Par conséquent, vous pouvez désormais :  
+Dans EF6 et les versions ultérieures, DbContext a les deux constructeurs, mais n’exige plus que la connexion passée au constructeur soit fermée lors de sa réception. C’est maintenant possible :  
 
 ``` csharp
 using System.Collections.Generic;
@@ -123,24 +123,24 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-L’indicateur contextOwnsConnection maintenant contrôle également ou non la connexion est fermée et supprimée lorsque la classe DbContext est supprimé. Donc dans l’exemple ci-dessus la connexion n’est pas fermée lorsque le contexte est supprimé (ligne 32) comme il aurait été dans les versions précédentes d’EF, mais lors de la connexion elle-même soit libérée (ligne 40).  
+En outre, l’indicateur contextOwnsConnection contrôle désormais si la connexion est fermée et supprimée lorsque DbContext est supprimé. Ainsi, dans l’exemple ci-dessus, la connexion n’est pas fermée lorsque le contexte est supprimé (ligne 32) comme c’était le cas dans les versions précédentes d’EF, mais plutôt lorsque la connexion elle-même est supprimée (ligne 40).  
 
-Bien sûr, il est toujours possible pour la classe DbContext prendre le contrôle de la connexion (simplement ensemble contextOwnsConnection sur true ou utilisez un des autres constructeurs) si vous le souhaitez.  
+Bien entendu, il est toujours possible pour DbContext de prendre le contrôle de la connexion (il suffit de définir contextOwnsConnection sur true ou d’utiliser l’un des autres constructeurs) si vous le souhaitez.  
 
 > [!NOTE]
-> Il existe certaines considérations supplémentaires lors de l’utilisation de transactions avec ce nouveau modèle. Pour plus d’informations, consultez [utilisation de Transactions](~/ef6/saving/transactions.md).  
+> Des considérations supplémentaires sont à prendre en compte lors de l’utilisation de transactions avec ce nouveau modèle. Pour plus d’informations, consultez [utilisation des transactions](~/ef6/saving/transactions.md).  
 
-## <a name="databaseconnectionopen"></a>Database.Connection.Open()  
+## <a name="databaseconnectionopen"></a>Database. Connection. Open ()  
 
-### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportement de EF5 et versions antérieures  
+### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportement pour EF5 et les versions antérieures  
 
-Dans EF5 et versions antérieures, il existe un bogue telles que la **ObjectContext.Connection.State** n’a pas mis à jour pour refléter l’état réel de la connexion à la banque sous-jacente. Par exemple, si vous avez exécuté le code suivant vous pouvez affichera l’état **fermé** même si en fait sous-jacent connexion à la banque est **Open**.  
+Dans EF5 et les versions antérieures, il existe un bogue tel que **ObjectContext. Connection. State** n’a pas été mis à jour pour refléter l’état réel de la connexion du magasin sous-jacent. Par exemple, si vous avez exécuté le code suivant, vous pouvez retourner l’état **Closed** même si la connexion à la banque sous-jacente est **ouverte**.  
 
 ``` csharp
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-Séparément, si vous ouvrez la connexion de base de données en appelant Database.Connection.Open() il sera ouverte jusqu'à ce que la prochaine fois que vous exécutez une requête ou appeler tout ce qui requiert une connexion de base de données (par exemple, SaveChanges()) mais après que sous-jacent stocke connexion va être fermée. Le contexte sera puis ouvrez à nouveau et ré-fermer la connexion chaque fois qu’une autre opération de base de données est requise :  
+Séparément, si vous ouvrez la connexion à la base de données en appelant Database. Connection. Open (), elle est ouverte jusqu’à la prochaine exécution d’une requête ou l’appel de tout ce qui nécessite une connexion à la base de données (par exemple, SaveChanges ()) mais après que le magasin sous-jacent la connexion va être fermée. Le contexte réouvre et referme la connexion chaque fois qu’une opération de base de données est requise :  
 
 ``` csharp
 using System;
@@ -184,14 +184,14 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-### <a name="behavior-in-ef6-and-future-versions"></a>Comportement dans EF6 et versions ultérieures  
+### <a name="behavior-in-ef6-and-future-versions"></a>Comportement dans EF6 et les versions ultérieures  
 
-Pour EF6 et les versions futures nous avons adopté l’approche que si le code appelant choisit d’ouvrir la connexion par le contexte d’appel. Database.Connection.Open(), il a une bonne raison de le faire et le framework suppose qu’il souhaite contrôler ouverture et fermeture de la connexion et n’est plus automatiquement ferme la connexion.  
+Pour les versions EF6 et futures, nous avons pris l’approche selon laquelle le code appelant choisit d’ouvrir la connexion en appelant Context. Database. Connection. Open () ensuite, il a une bonne raison de le faire et le Framework suppose qu’il souhaite contrôler l’ouverture et la fermeture de la connexion et ne fermera plus la connexion automatiquement.  
 
 > [!NOTE]
-> Cela peut potentiellement entraîner aux connexions qui sont ouverts pour un certain temps, par conséquent, utilisez avec précaution.  
+> Cela peut aboutir à des connexions qui sont ouvertes pendant une longue période. Utilisez-les avec précaution.  
 
-Nous avons également mis à jour le code afin que ObjectContext.Connection.State maintenant effectue le suivi de l’état de la connexion sous-jacente correctement.  
+Nous avons également mis à jour le code afin qu’ObjectContext. Connection. State effectue désormais le suivi correct de l’état de la connexion sous-jacente.  
 
 ``` csharp
 using System;

@@ -3,20 +3,20 @@ title: Code First à une base de données existante-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 61980bbd1f236f496a9d4fd92aa52264f1454615
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 0a51f826422d7e2bff33b968605eace1e754c425
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182618"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418874"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First à une base de données existante
-Cette vidéo et la procédure pas à pas fournissent une introduction au développement Code First ciblant une base de données existante. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Éventuellement, une configuration supplémentaire peut être effectuée à l’aide d’attributs sur vos classes et propriétés ou à l’aide d’une API Fluent.
+Cette vidéo et la procédure pas à pas fournissent une introduction au développement Code First ciblant une base de données existante. Code First vous permet de définir votre modèle à l’aide de classes C\# ou VB.Net. Éventuellement, une configuration supplémentaire peut être effectuée à l’aide d’attributs sur vos classes et propriétés ou à l’aide d’une API Fluent.
 
 ## <a name="watch-the-video"></a>Regarder la vidéo
 Cette vidéo est [désormais disponible sur Channel 9](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez avoir installé **Visual Studio 2012** ou **Visual Studio 2013** .
 
@@ -28,7 +28,7 @@ En général, lorsque vous ciblez une base de données existante, elle est déj�
 
 Commençons par générer la base de données.
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Vue-&gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de **Explorateur de serveurs** avant de devoir sélectionner **Microsoft SQL Server** comme source de données
@@ -74,7 +74,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstExistingDatabaseSample** comme nom
@@ -84,7 +84,7 @@ Pour simplifier les choses, nous allons créer une application console de base q
 
 ## <a name="3-reverse-engineer-model"></a>3. modèle d’ingénierie à rebours
 
-Nous allons utiliser le Entity Framework Tools pour Visual Studio pour nous aider à générer du code initial à mapper à la base de données. Ces outils génèrent simplement du code que vous pouvez également taper manuellement si vous préférez.
+Nous utiliserons le Entity Framework Tools pour Visual Studio pour nous aider à générer du code initial à mapper à la base de données. Ces outils génèrent simplement du code que vous pouvez également taper manuellement si vous préférez.
 
 -   **Projet-&gt; ajouter un nouvel élément...**
 -   Sélectionnez **données** dans le menu de gauche, puis **ADO.NET Entity Data Model**
@@ -104,7 +104,7 @@ Nous allons utiliser le Entity Framework Tools pour Visual Studio pour nous aide
 
 Une fois que le processus d’ingénierie à rebours est terminé, un certain nombre d’éléments ont été ajoutés au projet, examinons ce qui a été ajouté.
 
-### <a name="configuration-file"></a>fichier de configuration
+### <a name="configuration-file"></a>Fichier de configuration
 
 Un fichier app. config a été ajouté au projet, ce fichier contient la chaîne de connexion à la base de données existante.
 

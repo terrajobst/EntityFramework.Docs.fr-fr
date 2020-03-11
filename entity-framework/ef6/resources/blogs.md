@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f8fcfb34-35de-4e82-b419-8f99fd2eb92a
 ms.openlocfilehash: 6900ce3d139f4ae017edc764d55a7b746561a226
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182412"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417073"
 ---
 # <a name="entity-framework-blogs"></a>Blogs Entity Framework
 Outre la documentation du produit, ces blogs peuvent être une source d’informations utiles sur Entity Framework :

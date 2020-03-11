@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: 6d75b229-cc79-4d08-88cd-3a1c1b24d88f
 uid: core/miscellaneous/rc1-rc2-upgrade
 ms.openlocfilehash: 887b7cd539b9c0f5a680398f5039757420228710
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181287"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416609"
 ---
 # <a name="upgrading-from-ef-core-10-rc1-to-10-rc2"></a>Mise à niveau de EF Core 1,0 RC1 vers 1,0 RC2
 
@@ -17,7 +17,7 @@ Cet article fournit des conseils pour déplacer une application générée avec 
 
 ## <a name="package-names-and-versions"></a>Noms et versions des packages
 
-Entre RC1 et RC2, nous avons changé de « Entity Framework 7 » en « Entity Framework Core ». Pour plus d’informations sur les raisons de cette modification, consultez le [billet de blog de Scott Hanselman](https://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx). En raison de cette modification, le nom de nos packages est passé de `EntityFramework.*` à `Microsoft.EntityFrameworkCore.*` et nos versions de `7.0.0-rc1-final` à `1.0.0-rc2-final` (ou `1.0.0-preview1-final` pour les outils).
+Entre RC1 et RC2, nous avons changé de « Entity Framework 7 » en « Entity Framework Core ». Pour plus d’informations sur les raisons de cette modification, consultez le [billet de blog de Scott Hanselman](https://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx). En raison de cette modification, les noms des packages ont été modifiés de `EntityFramework.*` à `Microsoft.EntityFrameworkCore.*` et de nos versions de `7.0.0-rc1-final` à `1.0.0-rc2-final` (ou `1.0.0-preview1-final` pour les outils).
 
 **Vous devrez supprimer complètement les packages RC1, puis installer les packages RC2.** Voici le mappage de certains packages courants.
 
@@ -25,7 +25,7 @@ Entre RC1 et RC2, nous avons changé de « Entity Framework 7 » en « Entity
 |:----------------------------------------------------------|:---------------------------------------------------------------------|
 | EntityFramework. MicrosoftSqlServer 7.0.0-RC1-final | Microsoft.EntityFrameworkCore.SqlServer         1.0.0-rc2-final      |
 | EntityFramework. SQLite 7.0.0-RC1-final | Microsoft.EntityFrameworkCore.Sqlite            1.0.0-rc2-final      |
-| EntityFramework7. npgsql 3.1.0-RC1-3     | NpgSql.EntityFrameworkCore.Postgres             <to be advised>      |
+| EntityFramework7. npgsql 3.1.0-RC1-3     | NpgSql. EntityFrameworkCore. postgres <to be advised>      |
 | EntityFramework.SqlServerCompact35        7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact35          1.0.0-rc2-final      |
 | EntityFramework.SqlServerCompact40        7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact40          1.0.0-rc2-final      |
 | EntityFramework. InMemory 7.0.0-RC1-final | Microsoft. EntityFrameworkCore. InMemory 1.0.0-RC2-final      |
@@ -54,7 +54,7 @@ Si vous souhaitez adopter la nouvelle stratégie de nommage, nous vous recommand
 
 ## <a name="adddbcontext--startupcs-changes-aspnet-core-projects-only"></a>Modifications de AddDbContext/Startup.cs (projets ASP.NET Core uniquement)
 
-Dans RC1, vous deviez ajouter des services Entity Framework au fournisseur de services d’application-dans `Startup.ConfigureServices(...)` :
+Dans RC1, vous deviez ajouter des services Entity Framework au fournisseur de services d’application-dans `Startup.ConfigureServices(...)`:
 
 ``` csharp
 services.AddEntityFramework()
@@ -81,7 +81,7 @@ public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 
 ## <a name="passing-in-an-iserviceprovider"></a>Passage d’un IServiceProvider
 
-Si vous avez du code RC1 qui passe un `IServiceProvider` au contexte, cette valeur a été déplacée vers `DbContextOptions`, au lieu d’être un paramètre de constructeur séparé. Utilisez `DbContextOptionsBuilder.UseInternalServiceProvider(...)` pour définir le fournisseur de services.
+Si vous disposez d’un code RC1 qui transmet un `IServiceProvider` au contexte, celui-ci a été déplacé vers `DbContextOptions`plutôt que comme un paramètre de constructeur séparé. Utilisez `DbContextOptionsBuilder.UseInternalServiceProvider(...)` pour définir le fournisseur de services.
 
 ### <a name="testing"></a>Test
 
@@ -103,9 +103,9 @@ services.AddEntityFrameworkSqlServer()
 
 ## <a name="dnx-commands--net-cli-aspnet-core-projects-only"></a>Commandes DNX = > CLI .NET (projets ASP.NET Core uniquement)
 
-Si vous avez précédemment utilisé les commandes `dnx ef` pour les projets ASP.NET 5, ceux-ci ont été déplacés vers les commandes de `dotnet ef`. La même syntaxe de commande s’applique toujours. Vous pouvez utiliser `dotnet ef --help` pour les informations de syntaxe.
+Si vous avez précédemment utilisé les commandes `dnx ef` pour les projets ASP.NET 5, celles-ci sont désormais déplacées vers `dotnet ef` commandes. La même syntaxe de commande s’applique toujours. Vous pouvez utiliser `dotnet ef --help` pour obtenir des informations de syntaxe.
 
-La façon dont les commandes sont inscrites a changé en RC2, en raison du remplacement de DNX par l’interface CLI .NET. Les commandes sont maintenant inscrites dans une section `tools` dans `project.json` :
+La façon dont les commandes sont inscrites a changé en RC2, en raison du remplacement de DNX par l’interface CLI .NET. Les commandes sont désormais inscrites dans une section `tools` dans `project.json`:
 
 ``` json
 "tools": {

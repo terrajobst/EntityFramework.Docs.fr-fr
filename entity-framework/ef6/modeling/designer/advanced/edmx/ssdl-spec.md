@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182549"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418724"
 ---
 # <a name="ssdl-specification"></a>Spécification SSDL
 SSDL (Store Schema Definition Language) est un langage basé sur XML qui décrit le modèle de stockage d'une application Entity Framework.
@@ -40,7 +40,7 @@ L’élément **Association** peut avoir les éléments enfants suivants (dans l
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **Association** .
 
-| Nom d'attribut | Requis | Valeur                                                                            |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la contrainte de clé étrangère correspondante dans la base de données sous-jacente. |
 
@@ -86,7 +86,7 @@ L’élément **AssociationSet** peut avoir les éléments enfants suivants (dan
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **AssociationSet** .
 
-| Nom d'attribut  | Requis | Valeur                                                                                                |
+| Nom de l'attribut  | Est obligatoire | Valeur                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Nom**        | Oui         | Nom de la contrainte de clé étrangère que l'ensemble d'associations représente.                          |
 | **Association** | Oui         | Nom de l'association qui définit les colonnes qui participent à la contrainte de clé étrangère. |
@@ -197,7 +197,7 @@ L’élément **dépendant** peut avoir les éléments enfants suivants (dans l�
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **dépendant** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                       |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; dans le cas contraire, il s’agit du nom de la table qui contient la colonne de référence. |
 
@@ -276,7 +276,7 @@ Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **final** lorsqu’il est l’enfant d’un élément **Association** .
 
-| Nom d'attribut   | Requis | Valeur                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nom de l'attribut   | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Type**         | Oui         | Nom complet du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                                                                                                                                                                                                                                                                          |
 | **Rôle**         | Non          | Valeur de l’attribut **role** dans l’élément principal ou dépendant de l’élément ReferentialConstraint correspondant (s’il est utilisé).                                                                                                                                                                                                                                             |
@@ -321,7 +321,7 @@ Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **end** lorsqu’il est l’enfant d’un élément **AssociationSet** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                  |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
 | **EntitySet**  | Oui         | Nom du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                      |
 | **Rôle**       | Non          | Valeur de l’un des attributs de **rôle** spécifiés sur un élément de **fin** de l’élément Association correspondant. |
@@ -359,13 +359,13 @@ Un élément **EntityContainer** peut avoir zéro ou plusieurs des éléments en
 
 -   EntitySet ;
 -   AssociationSet ;
--   éléments d'annotation.
+-   Éléments Annotation
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **EntityContainer** .
 
-| Nom d'attribut | Requis | Valeur                                                                   |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du conteneur d'entités. Ce nom ne peut pas contenir de point (.). |
 
@@ -400,7 +400,7 @@ L’élément **EntitySet** peut avoir les éléments enfants suivants (dans l�
 
 -   Documentation (zéro ou un élément)
 -   DefiningQuery (zéro ou un élément)
--   éléments d'annotation.
+-   Éléments Annotation
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -409,7 +409,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 > [!NOTE]
 > Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l'Assistant Mise à jour du modèle lors de la mise à jour d'un modèle.
 
-| Nom d'attribut | Requis | Valeur                                                                                    |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du jeu d'entités.                                                              |
 | **EntityType** | Oui         | Nom qualifié complet du type d'entité pour lequel le jeu d'entités contient des instances. |
@@ -447,15 +447,15 @@ L’élément **EntityType** peut avoir les éléments enfants suivants (dans l�
 
 -   Documentation (zéro ou un élément)
 -   Key (zéro ou un élément) ;
--   éléments d'annotation.
+-   Éléments Annotation
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **EntityType** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                                  |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nom**       | Oui         | Nom du type d'entité. Cette valeur est habituellement la même que le nom de la table dans laquelle le type d'entité représente une ligne. Cette valeur ne peut pas contenir de point (.). |
+| **Nom**       | Oui         | Le nom du type d’entité. Cette valeur est habituellement la même que le nom de la table dans laquelle le type d'entité représente une ligne. Cette valeur ne peut pas contenir de point (.). |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **EntityType** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
@@ -501,11 +501,11 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 > [!NOTE]
 > Certains attributs (non répertoriés ici) peuvent être qualifiés avec l’alias du **magasin** . Ces attributs sont utilisés par l'Assistant Mise à jour du modèle lors de la mise à jour d'un modèle.
 
-| Nom d'attribut             | Requis | Valeur                                                                                                                                                                                                              |
+| Nom de l'attribut             | Est obligatoire | Valeur                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                   | Oui         | Nom de la procédure stockée.                                                                                                                                                                                  |
 | **ReturnType**             | Non          | Type de retour de la procédure stockée.                                                                                                                                                                           |
-| **Aggregate**              | Non          | **True** si la procédure stockée retourne une valeur d’agrégation ; Sinon, **false**.                                                                                                                                  |
+| **Agrégat**              | Non          | **True** si la procédure stockée retourne une valeur d’agrégation ; Sinon, **false**.                                                                                                                                  |
 | **Intégrée**                | Non          | **True** si la fonction est une fonction intégrée<sup>1</sup> ; Sinon, **false**.                                                                                                                                  |
 | **StoreFunctionName**      | Non          | Nom de la procédure stockée.                                                                                                                                                                                  |
 | **NiladicFunction**        | Non          | **True** si la fonction est une fonction niladic<sup>2</sup> ; **False** dans le cas contraire.                                                                                                                                   |
@@ -546,7 +546,7 @@ L’élément **clé** en Store Schema Definition Language (SSDL) représente la
 L’élément **Key** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   PropertyRef (un ou plusieurs) ;
--   éléments d'annotation.
+-   Éléments Annotation
 
 Aucun attribut n’est applicable à l’élément **Key** .
 
@@ -581,7 +581,7 @@ Un élément **OnDelete** peut avoir les éléments enfants suivants (dans l’o
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **OnDelete** .
 
-| Nom d'attribut | Requis | Valeur                                                                                               |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Action**     | Oui         | **Cascade** ou **None**. (La valeur **Restricted** est valide mais a le même comportement qu' **aucun**.) |
 
@@ -624,14 +624,14 @@ L’élément **Parameter** peut avoir les éléments enfants suivants (dans l�
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Parameter** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                                                                                           |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nom**       | Oui         | Nom du paramètre.                                                                                                                                                                                                      |
-| **Type**       | Oui         | Type du paramètre.                                                                                                                                                                                                             |
+| **Nom**       | Oui         | Le nom du paramètre.                                                                                                                                                                                                      |
+| **Type**       | Oui         | Le type du paramètre.                                                                                                                                                                                                             |
 | **Mode**       | Non          | **In**, **out**ou **INOUT** selon que le paramètre est un paramètre d’entrée, de sortie ou d’entrée/sortie.                                                                                                                |
 | **MaxLength**  | Non          | Longueur maximale du paramètre.                                                                                                                                                                                            |
-| **Précision**  | Non          | Précision du paramètre.                                                                                                                                                                                                 |
-| **Échelle**      | Non          | Échelle du paramètre.                                                                                                                                                                                                     |
+| **Précision**  | Non          | La précision du paramètre.                                                                                                                                                                                                 |
+| **Mettre à l'échelle**      | Non          | L’échelle du paramètre.                                                                                                                                                                                                     |
 | **SRID**       | Non          | Identificateur de référence système spatial. Valide uniquement pour les paramètres des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
 > [!NOTE]
@@ -667,7 +667,7 @@ L’élément **principal** peut avoir les éléments enfants suivants (dans l�
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **principal** .
 
-| Nom d'attribut | Requis | Valeur                                                                                                                                                      |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; Sinon, le nom de la table qui contient la colonne référencée. |
 
@@ -707,7 +707,7 @@ Un élément de **propriété** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **Property** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                           |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                  | Oui         | Nom de la colonne correspondante.                                                                                                                                                                                           |
 | **Type**                  | Oui         | Type de la colonne correspondante.                                                                                                                                                                                           |
@@ -716,9 +716,9 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 | **MaxLength**             | Non          | Longueur maximale de la colonne correspondante.                                                                                                                                                                                 |
 | **Multiple**           | Non          | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne de longueur fixe.                                                                                                              |
 | **Précision**             | Non          | Précision de la colonne correspondante.                                                                                                                                                                                      |
-| **Échelle**                 | Non          | Échelle de la colonne correspondante.                                                                                                                                                                                          |
+| **Mettre à l'échelle**                 | Non          | Échelle de la colonne correspondante.                                                                                                                                                                                          |
 | **Unicode**               | Non          | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne Unicode.                                                                                                                   |
-| **Classement**             | Non          | Chaîne qui spécifie l'ordre de tri à utiliser dans la source de données.                                                                                                                                                   |
+| **Classement**             | Non          | Chaîne qui spécifie l’ordre de tri à utiliser dans la source de données.                                                                                                                                                   |
 | **SRID**                  | Non          | Identificateur de référence système spatial. Valide uniquement pour les propriétés des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **StoreGeneratedPattern** | Non          | **None**, **Identity** (si la valeur de colonne correspondante est une identité générée dans la base de données) ou **calculée** (si la valeur de colonne correspondante est calculée dans la base de données). Non valide pour les propriétés RowType. |
 
@@ -753,13 +753,13 @@ L’élément **PropertyRef** en Store Schema Definition Language (SSDL) fait r�
 L’élément **PropertyRef** ne peut avoir que les éléments enfants suivants :
 
 -   Documentation (zéro ou un)
--   éléments d'annotation.
+-   Éléments Annotation
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **PropertyRef** .
 
-| Nom d'attribut | Requis | Valeur                                |
+| Nom de l'attribut | Est obligatoire | Valeur                                |
 |:---------------|:------------|:-------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété référencée. |
 
@@ -908,9 +908,9 @@ Un espace de noms de modèle de stockage est différent de l’espace de noms XM
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Schema** .
 
-| Nom d'attribut            | Requis | Valeur                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Namespace**             | Oui         | Espace de noms du modèle de stockage. La valeur de l’attribut d' **espace de noms** est utilisée pour former le nom qualifié complet d’un type. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store, le nom qualifié complet de l' **EntityType** est ExampleModel. Store. Customer. <br/> Les chaînes suivantes ne peuvent pas être utilisées comme valeur pour l’attribut d' **espace de noms** : **System**, **transient**ou **EDM**. La valeur de l’attribut d' **espace de noms** ne peut pas être la même que la valeur de l’attribut d' **espace de noms** dans l’élément de schéma CSDL. |
+| **Espace de noms**             | Oui         | Espace de noms du modèle de stockage. La valeur de l’attribut d' **espace de noms** est utilisée pour former le nom qualifié complet d’un type. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store, le nom qualifié complet de l' **EntityType** est ExampleModel. Store. Customer. <br/> Les chaînes suivantes ne peuvent pas être utilisées comme valeur pour l’attribut d' **espace de noms** : **System**, **transient**ou **EDM**. La valeur de l’attribut d' **espace de noms** ne peut pas être la même que la valeur de l’attribut d' **espace de noms** dans l’élément de schéma CSDL. |
 | **Alias**                 | Non          | Identificateur utilisé à la place du nom de l'espace de noms. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store et que la valeur de l’attribut **alias** est *StorageModel*, vous pouvez utiliser StorageModel. Customer comme nom qualifié complet de l' **EntityType.**                                                                                                                                                                                                                                                                                    |
 | **Fournisseur**              | Oui         | Fournisseur de données.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Oui         | Jeton qui indique au fournisseur quel manifeste de fournisseur retourner. Aucun format n'est défini pour le jeton. Les valeurs du jeton sont définies par le fournisseur. Pour plus d’informations sur les jetons de manifeste du fournisseur SQL Server, consultez SqlClient pour Entity Framework.                                                                                                                                                                                                                                                                                                                        |
@@ -1074,5 +1074,5 @@ Le tableau ci-dessous décrit les facettes prises en charge dans le langage SSDL
 | **Multiple** | Spécifie si la longueur de la valeur de colonne peut varier.                                                                                                                                                                                                  |
 | **MaxLength**   | Spécifie la longueur maximale de la valeur de colonne.                                                                                                                                                                                                           |
 | **Précision**   | Pour les propriétés de type **Decimal**, spécifie le nombre de chiffres qu’une valeur de propriété peut avoir. Pour les propriétés de type **Time**, **DateTime**et **DateTimeOffset**, spécifie le nombre de chiffres pour la partie fractionnaire des secondes de la valeur de colonne. |
-| **Échelle**       | Spécifie le nombre de chiffres à droite de la virgule décimale pour la valeur de colonne.                                                                                                                                                                      |
+| **Mettre à l'échelle**       | Spécifie le nombre de chiffres à droite de la virgule décimale pour la valeur de colonne.                                                                                                                                                                      |
 | **Unicode**     | Indique si la valeur de colonne est stockée au format Unicode.                                                                                                                                                                                                    |

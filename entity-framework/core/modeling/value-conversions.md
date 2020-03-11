@@ -5,11 +5,11 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
 ms.openlocfilehash: 93774bc1bc3887f982faeac151825a6643c1107c
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654793"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417201"
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -63,7 +63,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>La classe ValueConverter
 
-L’appel de `HasConversion` comme indiqué ci-dessus crée une instance `ValueConverter` et la définit sur la propriété. Le `ValueConverter` peut à la place être créé explicitement. Exemple :
+L’appel de `HasConversion` comme indiqué ci-dessus crée une instance `ValueConverter` et la définit sur la propriété. Le `ValueConverter` peut à la place être créé explicitement. Par exemple :
 
 ``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
@@ -83,7 +83,7 @@ Cela peut être utile lorsque plusieurs propriétés utilisent la même conversi
 
 ## <a name="built-in-converters"></a>Convertisseurs intégrés
 
-EF Core est fourni avec un ensemble de classes de `ValueConverter` prédéfinies, qui se trouvent dans l’espace de noms `Microsoft.EntityFrameworkCore.Storage.ValueConversion`. Ces équivalents sont :
+EF Core est fourni avec un ensemble de classes de `ValueConverter` prédéfinies, qui se trouvent dans l’espace de noms `Microsoft.EntityFrameworkCore.Storage.ValueConversion`. Ces règles sont les suivantes :
 
 * `BoolToZeroOneConverter`-bool à zéro et un
 * `BoolToStringConverter`-bool à des chaînes telles que « Y » et « N »
@@ -145,7 +145,7 @@ public class Rider
 
 Les valeurs enum sont ensuite enregistrées sous forme de chaînes dans la base de données sans aucune configuration supplémentaire dans `OnModelCreating`.
 
-## <a name="limitations"></a>Limitations
+## <a name="limitations"></a>Limites
 
 Il existe quelques limitations actuelles connues du système de conversion de valeurs :
 

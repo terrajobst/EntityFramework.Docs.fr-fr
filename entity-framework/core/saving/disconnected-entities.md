@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656267"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417596"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -20,7 +20,7 @@ Toutefois, parfois, les entités sont interrogées par une instance de contexte,
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) sur GitHub.
 
 > [!TIP]
 > EF Core peut suivre une seule instance d’une entité avec une valeur de clé primaire donnée. La meilleure façon d’éviter ce problème consiste à utiliser un contexte de courte durée de vie pour chaque unité de travail, de sorte que le contexte commence vide, ait des entités associées, enregistre ces entités, puis soit supprimé.
@@ -131,7 +131,7 @@ Comme précédemment, lorsque vous n’utilisez pas les clés générées automa
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

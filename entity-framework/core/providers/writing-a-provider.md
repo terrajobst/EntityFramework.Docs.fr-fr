@@ -4,19 +4,19 @@ author: anmiller
 ms.date: 10/27/2016
 ms.assetid: 1165e2ec-e421-43fc-92ab-d92f9ab3c494
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: 9d52a8581772cc5405e94966fa7ebdff4128c252
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 2d9e4a6cdfda80d7dfcfb6e7bf0480eb49f8e057
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654774"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417882"
 ---
 # <a name="writing-a-database-provider"></a>Écriture d’un fournisseur de base de données
 
 Pour plus d’informations sur l’écriture d’un fournisseur de base de données Entity Framework Core, consultez. pour [ce faire, vous devez écrire un fournisseur EF Core](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/) par [Arthur Vickers](https://github.com/ajcvickers).
 
 > [!NOTE]
-> Ces publications n’ont pas été mises à jour depuis EF Core 1,1 et des modifications significatives ont été apportées depuis le moment où le [problème 681](https://github.com/aspnet/EntityFramework.Docs/issues/681) est le suivi des mises à jour de cette documentation.
+> Ces publications n’ont pas été mises à jour depuis EF Core 1,1 et des modifications significatives ont été apportées depuis le moment où le [problème 681](https://github.com/dotnet/EntityFramework.Docs/issues/681) est le suivi des mises à jour de cette documentation.
 
 La base de code EF Core est open source et contient plusieurs fournisseurs de bases de données qui peuvent être utilisés comme référence. Vous pouvez trouver le code source à <https://github.com/aspnet/EntityFrameworkCore>. Il peut également être utile d’examiner le code pour les fournisseurs tiers couramment utilisés, tels que [npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL), [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)et [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact). En particulier, ces projets sont configurés pour étendre et exécuter des tests fonctionnels que nous publions sur NuGet. Ce type d’installation est fortement recommandé.
 
@@ -32,7 +32,7 @@ Nous vous suggérons d’utiliser le nom suivant pour les packages NuGet. Cela e
 
 `<Optional project/company name>.EntityFrameworkCore.<Database engine name>`
 
-Exemple :
+Par exemple :
 
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Npgsql.EntityFrameworkCore.PostgreSQL`

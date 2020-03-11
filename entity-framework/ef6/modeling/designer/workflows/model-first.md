@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
 ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182443"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418104"
 ---
 # <a name="model-first"></a>Model First
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Model First à l’aide de Entity Framework. Model First vous permet de créer un nouveau modèle à l’aide du Entity Framework Designer puis de générer un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
@@ -20,7 +20,7 @@ Cette vidéo et la procédure pas à pas fournissent une introduction au dévelo
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual Studio 2010 ou Visual Studio 2012.
 
@@ -30,7 +30,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Model First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **ModelFirstSample** comme nom
@@ -87,7 +87,7 @@ Tout d’abord, nous devons récupérer la dernière version de Entity Framework
     *si vous n’avez pas l’option **gérer les packages NuGet...** vous devez installer la [dernière version de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   Sélectionner l’onglet **en ligne**
 -   Sélectionner le package **EntityFramework**
--   Cliquez sur **installer**
+-   Cliquez sur **Installer**.
 
 Ensuite, nous devons permuter notre modèle pour générer le code qui utilise l’API DbContext, qui a été introduite dans les versions ultérieures de Entity Framework.
 
@@ -104,7 +104,7 @@ Ensuite, nous devons permuter notre modèle pour générer le code qui utilise l
 Le serveur de base de données installé avec Visual Studio diffère selon la version de Visual Studio que vous avez installée :
 
 -   Si vous utilisez Visual Studio 2010, vous allez créer une base de données SQL Express.
--   Si vous utilisez Visual Studio 2012, vous allez créer une base de données de [base de données locale](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx).
+-   Si vous utilisez Visual Studio 2012, vous allez créer une base de [données de base](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) de données locale.
 
 Commençons par générer la base de données.
 

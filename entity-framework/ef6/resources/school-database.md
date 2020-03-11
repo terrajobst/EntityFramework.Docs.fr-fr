@@ -1,39 +1,39 @@
 ---
-title: Base de données School exemple - EF6
+title: Exemple de base de données School-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
 ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490712"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416997"
 ---
-# <a name="school-sample-database"></a>Base de données exemple School
-Cette rubrique contient le schéma et les données pour la base de données School. La base de données School est utilisé dans divers emplacements de la documentation d’Entity Framework.  
+# <a name="school-sample-database"></a>Exemple de base de données School
+Cette rubrique contient le schéma et les données de la base de données School. L’exemple de base de données School est utilisé à différents emplacements dans la documentation de Entity Framework.  
 
 > [!NOTE]
-> Le serveur de base de données qui est installé avec Visual Studio est différent selon la version de Visual Studio que vous utilisez. Consultez [Visual Studio versions](~/ef6/what-is-new/visual-studio.md) pour plus d’informations sur les éléments à utiliser.  
+> Le serveur de base de données installé avec Visual Studio est différent selon la version de Visual Studio que vous utilisez. Pour plus d’informations sur les éléments à utiliser, consultez la page [versions de Visual Studio](~/ef6/what-is-new/visual-studio.md) .  
 
-Voici les étapes pour créer la base de données :
+Pour créer la base de données, procédez comme suit :
 
-- Ouvrir Visual Studio  
-- **Vue** -> **Explorateur de serveurs**  
-- Cliquez avec le bouton droit sur **des connexions de données** -> **ajouter une connexion...**  
-- Si vous n’avez pas connecté à une base de données à partir de l’Explorateur de serveurs avant que vous devrez sélectionner **Microsoft SQL Server** comme source de données  
-- Se connecter à la base de données locale ou de SQL Express, en fonction de celles que vous avez installé  
-- Entrez **School** en tant que le nom de la base de données  
-- Sélectionnez **OK** et vous demandera si vous souhaitez créer une base de données, sélectionnez **Oui**  
-- La nouvelle base de données s’affiche désormais dans l’Explorateur de serveurs  
-- Si vous utilisez Visual Studio 2012 ou version ultérieure
-    - Avec le bouton droit sur la base de données dans l’Explorateur de serveurs, puis sélectionnez **nouvelle requête**  
-    - Copiez le code SQL suivant dans la nouvelle requête, puis avec le bouton droit sur la requête, puis sélectionnez **Execute**  
+- Ouvrez Visual Studio.  
+- **Afficher** -> **Explorateur de serveurs**  
+- Cliquez avec le bouton droit sur **connexions de données** -> **Ajouter une connexion...**  
+- Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner **Microsoft SQL Server** comme source de données  
+- Connectez-vous à la base de données locale ou SQL Express, en fonction de celle que vous avez installée  
+- Entrer **School** comme nom de la base de données  
+- Sélectionnez **OK** . vous serez invité à créer une nouvelle base de données, sélectionnez **Oui** .  
+- La nouvelle base de données s’affiche à présent dans Explorateur de serveurs  
+- Si vous utilisez Visual Studio 2012 ou une version plus récente
+    - Dans Explorateur de serveurs, cliquez avec le bouton droit sur la base de données, puis sélectionnez **nouvelle requête** .  
+    - Copiez le code SQL suivant dans la nouvelle requête, cliquez avec le bouton droit sur la requête et sélectionnez **exécuter** .  
 - Si vous utilisez Visual Studio 2010  
-    - Sélectionnez **données** -> **Transact SQL éditeur** -> **nouvelle connexion à la requête...**  
-    - Entrez **. \SQLEXPRESS** en tant que nom du serveur et cliquez sur **OK**  
-    - Sélectionnez le **STESample** de base de données dans la liste déroulante vers le bas en haut de l’éditeur de requête  
-    - Copiez le code SQL suivant dans la nouvelle requête, puis avec le bouton droit sur la requête, puis sélectionnez **exécuter SQL**  
+    - Sélectionner les **données** -> l' **éditeur Transact SQL** -> **nouvelle connexion à la requête...**  
+    - Entrez **.\SQLEXPRESS** comme nom de serveur, puis cliquez sur **OK** .  
+    - Sélectionnez la base de données **STESample** dans la liste déroulante en haut de l’éditeur de requête.  
+    - Copiez le code SQL suivant dans la nouvelle requête, cliquez avec le bouton droit sur la requête et sélectionnez **Exécuter SQL** .  
 
 ``` SQL  
 SET ANSI_NULLS ON

@@ -1,31 +1,31 @@
 ---
-title: Utilisation de DbContext - EF6
+title: Utilisation de DbContext-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
 ms.openlocfilehash: d961ffd8bed7f5b2f82dcfa30fc0241b7437be50
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489061"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416321"
 ---
 # <a name="working-with-dbcontext"></a>Utilisation de DbContext
 
-Pour utiliser Entity Framework pour interroger, insérer, mettre à jour et supprimer des données à l’aide d’objets .NET, vous devez d’abord [créer un modèle](~/ef6/modeling/index.md) qui mappe les entités et les relations qui sont définies dans votre modèle à des tables dans une base de données.
+Pour pouvoir utiliser Entity Framework pour interroger, insérer, mettre à jour et supprimer des données à l’aide d’objets .NET, vous devez d’abord [créer un modèle](~/ef6/modeling/index.md) qui mappe les entités et les relations définies dans votre modèle aux tables d’une base de données.
 
-Une fois que vous avez un modèle, la classe principale, votre application interagit avec est `System.Data.Entity.DbContext` (souvent appelé la classe de contexte). Vous pouvez utiliser un DbContext associé à un modèle pour :
+Une fois que vous disposez d’un modèle, la classe principale avec laquelle votre application interagit est `System.Data.Entity.DbContext` (souvent appelée classe de contexte). Vous pouvez utiliser un DbContext associé à un modèle pour effectuer les opérations suivantes :
 - Écrire et exécuter des requêtes   
-- Matérialiser les résultats de la requête en tant qu’objets d’entité
-- Le suivi des modifications apportées à ces objets.
-- Conserver les modifications de l’objet dans la base de données
-- Lier des objets en mémoire pour les contrôles d’interface utilisateur
+- Matérialiser les résultats d’une requête en tant qu’objets entité
+- Suivre les modifications apportées à ces objets
+- Conserver les modifications des objets sur la base de données
+- Lier des objets en mémoire à des contrôles d’interface utilisateur
 
-Cette page fournit des conseils sur la gestion de la classe de contexte.  
+Cette page fournit des conseils sur la façon de gérer la classe de contexte.  
 
-## <a name="defining-a-dbcontext-derived-class"></a>Définition d’une classe DbContext dérivée  
+## <a name="defining-a-dbcontext-derived-class"></a>Définition d’une classe dérivée DbContext  
 
-La méthode recommandée pour travailler avec contexte consiste à définir une classe qui dérive de DbContext et expose les propriétés DbSet qui représentent des collections d’entités dans le contexte spécifiées. Si vous travaillez avec le Concepteur EF, le contexte sera généré pour vous. Si vous utilisez Code First, vous allez généralement écrire le contexte vous-même.  
+La méthode recommandée pour utiliser le contexte consiste à définir une classe qui dérive de DbContext et expose des propriétés DbSet qui représentent des collections des entités spécifiées dans le contexte. Si vous utilisez le concepteur EF, le contexte est généré pour vous. Si vous utilisez Code First, vous écrivez généralement le contexte vous-même.  
 
 ``` csharp
 public class ProductContext : DbContext
@@ -35,16 +35,16 @@ public class ProductContext : DbContext
 }
 ```  
 
-Une fois que vous disposez d’un contexte, vous interroger, ajouter (à l’aide de `Add` ou `Attach` méthodes) ou supprimer (à l’aide de `Remove`) les entités dans le contexte via ces propriétés. L’accès à un `DbSet` propriété sur un objet de contexte représentent une requête initiale qui retourne toutes les entités du type spécifié. Notez que l’accès à une propriété pas exécute la requête. Une requête est exécutée lorsque :  
+Une fois que vous avez un contexte, vous pouvez rechercher, ajouter (à l’aide des méthodes `Add` ou `Attach`) ou supprimer (à l’aide d' `Remove`) des entités dans le contexte via ces propriétés. L’accès à une propriété de `DbSet` sur un objet de contexte représente une requête de démarrage qui retourne toutes les entités du type spécifié. Notez que l’accès à une propriété n’exécute pas la requête. Une requête est exécutée dans les cas suivants :  
 
 - elle est énumérée par une instruction `foreach` (C#) ou `For Each` (Visual Basic) ;  
-- Elle est énumérée par une opération de collection comme `ToArray`, `ToDictionary`, ou `ToList`.  
-- Les opérateurs LINQ, tels que `First` ou `Any` sont spécifiés dans la partie la plus extérieure de la requête.  
-- Une des méthodes suivantes sont appelées : le `Load` méthode d’extension, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`, et `DbSet<T>.Find`, si une entité avec la clé spécifiée se trouve pas déjà chargée dans le contexte.  
+- Elle est énumérée par une opération de collection comme `ToArray`, `ToDictionary`ou `ToList`.  
+- Les opérateurs LINQ tels que `First` ou `Any` sont spécifiés dans la partie la plus à l’extérieur de la requête.  
+- L’une des méthodes suivantes est appelée : la méthode d’extension `Load`, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`et `DbSet<T>.Find`, si une entité avec la clé spécifiée est introuvable déjà chargée dans le contexte.  
 
 ## <a name="lifetime"></a>Durée de vie  
 
-La durée de vie du contexte commence lorsque l’instance est créée et se termine lorsque l’instance est supprimée ou opération de garbage collection. Utilisez **à l’aide de** si vous voulez que toutes les ressources contrôlées par le contexte soient supprimées à la fin du bloc. Lorsque vous utilisez **à l’aide de**, le compilateur crée automatiquement un bloc try/finally et appelle la méthode dispose dans le **enfin** bloc.  
+La durée de vie du contexte commence lorsque l’instance est créée et se termine lorsque l’instance est supprimée ou récupérée par le garbage collector. Utilisez **si vous** souhaitez que toutes les ressources qui contrôlent le contexte soient supprimées à la fin du bloc. Lorsque vous utilisez **, le**compilateur crée automatiquement un bloc try/finally et appelle dispose dans le bloc **finally** .  
 
 ``` csharp
 public void UseProducts()
@@ -56,20 +56,20 @@ public void UseProducts()
 }
 ```  
 
-Voici quelques instructions générales lorsque vous décidez de la durée de vie du contexte :  
+Voici quelques recommandations générales pour décider de la durée de vie du contexte :  
 
-- Lorsque vous travaillez avec les applications Web, utilisez une instance de contexte par demande.  
-- Lorsque vous travaillez avec Windows Presentation Foundation (WPF) ou Windows Forms, utilisez une instance de contexte par formulaire. Cela vous permet d’utiliser des fonctionnalités de suivi des modifications fournit ce contexte.  
-- Si l’instance de contexte est créée par un conteneur d’injection de dépendance, il est généralement la responsabilité du conteneur à supprimer le contexte.
-- Si le contexte est créé dans le code d’application, pensez à supprimer le contexte lorsqu’il n’est plus nécessaire.  
-- Lorsque vous travaillez avec le contexte d’exécution longue, considérez les points suivants :  
-    - Comme vous chargez des objets et leurs références dans la mémoire, du contexte de la consommation de mémoire peut augmenter rapidement. Cela peut provoquer des problèmes de performances.  
-    - Le contexte n’est pas thread-safe, par conséquent, il ne doit pas être partagé entre plusieurs threads travailler simultanément sur celui-ci.
-    - Si une exception provoque le contexte dans un état irrécupérable, l’application entière peut mettre fin.  
+- Lorsque vous travaillez avec des applications Web, utilisez une instance de contexte par demande.  
+- Lorsque vous travaillez avec Windows Presentation Foundation (WPF) ou Windows Forms, utilisez une instance de contexte par formulaire. Cela vous permet d’utiliser la fonctionnalité de suivi des modifications fournie par le contexte.  
+- Si l’instance de contexte est créée par un conteneur d’injection de dépendance, il incombe généralement au conteneur de supprimer le contexte.
+- Si le contexte est créé dans le code de l’application, n’oubliez pas de supprimer le contexte lorsqu’il n’est plus nécessaire.  
+- Lorsque vous travaillez avec un contexte de longue durée, tenez compte des points suivants :  
+    - Lorsque vous chargez plus d’objets et leurs références dans la mémoire, la consommation de mémoire du contexte peut augmenter rapidement. Cela peut provoquer des problèmes de performances.  
+    - Le contexte n’est pas thread-safe. par conséquent, il ne doit pas être partagé entre plusieurs threads qui y travaillent simultanément.
+    - Si une exception fait que le contexte est dans un État irrécupérable, l’application entière peut se terminer.  
     - Les risques liés à l'exécution dans un état d'accès concurrentiel augmentent à mesure que l'intervalle entre le moment où les données sont interrogées et mises à jour s'allonge.  
 
 ## <a name="connections"></a>Connexions  
 
-Par défaut, le contexte gère les connexions à la base de données. Le contexte s’ouvre et ferme les connexions en fonction des besoins. Par exemple, le contexte ouvre une connexion pour exécuter une requête, puis ferme la connexion lorsque tous les jeux de résultats ont été traitées.  
+Par défaut, le contexte gère les connexions à la base de données. Le contexte ouvre et ferme les connexions en fonction des besoins. Par exemple, le contexte ouvre une connexion pour exécuter une requête, puis ferme la connexion lorsque tous les jeux de résultats ont été traités.  
 
-Dans certains cas, vous souhaiterez avoir davantage de contrôle sur l'ouverture et la fermeture des connexions. Par exemple, lorsque vous travaillez avec SQL Server Compact, il est souvent recommandé de maintenir une connexion à la base de données ouverte distincte pour la durée de vie de l’application pour améliorer les performances. Vous pouvez gérer ce processus manuellement à l'aide de la propriété `Connection`.  
+Dans certains cas, vous souhaiterez avoir davantage de contrôle sur l'ouverture et la fermeture des connexions. Par exemple, lors de l’utilisation de SQL Server Compact, il est souvent recommandé de conserver une connexion ouverte distincte à la base de données pendant toute la durée de vie de l’application afin d’améliorer les performances. Vous pouvez gérer ce processus manuellement à l'aide de la propriété `Connection`.  

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
 ms.openlocfilehash: 28ec5446ce9faf98fb8fff141832236d70b29daf
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181586"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416449"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testabilité et Entity Framework 4,0
 Scott Allen
@@ -196,13 +196,13 @@ Une fois les POCO en place, nous pouvons créer un Entity Data Model (EDM) dans 
 
 ![test_01 EF](~/ef6/media/eftest-01.jpg)
 
-**Figure 1**
+**Figure 1**
 
 Remarque : Si vous souhaitez développer le modèle EDM en premier, il est possible de générer du code POCO propre à partir du modèle EDM. Vous pouvez le faire avec une extension Visual Studio 2010 fournie par l’équipe de programmabilité des données. Pour télécharger l’extension, lancez le gestionnaire d’extensions à partir du menu outils de Visual Studio et recherchez « POCO » dans la galerie en ligne de modèles (voir figure 2). Plusieurs modèles POCO sont disponibles pour EF. Pour plus d’informations sur l’utilisation du modèle, consultez la rubrique « [procédure pas à pas : modèle POCO pour le Entity Framework](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)».
 
 ![test_02 EF](~/ef6/media/eftest-02.png)
 
-**Figure 2**
+**Figure 2**
 
 À partir de ce point de départ POCO, nous explorerons deux approches différentes du code testable. La première approche que j’appelle l’approche EF, c’est qu’elle tire parti des abstractions de l’API Entity Framework pour implémenter des unités de travail et des dépôts. Dans la deuxième approche, nous allons créer nos propres abstractions de référentiel personnalisées, puis voir les avantages et les inconvénients de chaque approche. Nous allons commencer par explorer l’approche EF.  
 
@@ -417,13 +417,13 @@ Nous pouvons utiliser EmployeeControllerTestBase comme classe de base pour un ce
 
 ![test_03 EF](~/ef6/media/eftest-03.png)
 
-**Figure 3**
+**Figure 3**
 
 La Convention d’affectation de noms et le style de test présentés ici ne sont pas requis pour le code testable, il s’agit d’une seule approche. La figure 4 montre les tests en cours d’exécution dans le plug-in Test Runner de jet cerveau pour Visual Studio 2010.
 
 ![test_04 EF](~/ef6/media/eftest-04.png)
 
-**Figure 4**
+**Figure 4**
 
 Avec une classe de base pour gérer le code d’installation partagé, les tests unitaires pour chaque action du contrôleur sont petits et faciles à écrire. Les tests s’exécuteront rapidement (puisque nous effectuons des opérations en mémoire) et ne devraient pas échouer en raison d’une infrastructure ou de problèmes environnementaux non liés (car nous avons isolé l’unité testée).
 
@@ -917,7 +917,7 @@ Vous pouvez utiliser différentes techniques pour tester des logiciels avec des 
 -   Vérifiez que le modèle contient une liste de tous les employés après l’exécution de l’index.
 -   Vérifiez que le dépôt ne contient pas d’employé donné après l’exécution de la suppression.
 
-Une autre approche que vous verrez avec les objets factices consiste à vérifier les *interactions*. Bien que le test basé sur l’État fasse des assertions sur l’état des objets, le test basé sur l’interaction fait des assertions sur la manière dont les objets interagissent. Exemple :
+Une autre approche que vous verrez avec les objets factices consiste à vérifier les *interactions*. Bien que le test basé sur l’État fasse des assertions sur l’état des objets, le test basé sur l’interaction fait des assertions sur la manière dont les objets interagissent. Par exemple :
 
 -   Vérifiez que le contrôleur appelle la méthode Add du référentiel lorsque Create s’exécute.
 -   Vérifiez que le contrôleur appelle la méthode FindAll du référentiel lorsque l’index s’exécute.
@@ -971,7 +971,7 @@ Dans ce document, nous avons présenté plusieurs approches pour créer du code 
 -   Eric Evans, « [conception pilotée par domaine](https://books.google.com/books?id=7dlaMs0SECsC&printsec=frontcover&dq=evans%20domain%20driven%20design&hl=en&ei=cHztS6C8KIaglAfA_dS1CA&sa=X&oi=book_result&ct=result&resnum=1&ved=0CCoQ6AEwAA)»
 -   Martin Fowler, « les [simulacres ne sont pas des stubs](https://martinfowler.com/articles/mocksArentStubs.html)»
 -   Martin Fowler, « [test double](https://martinfowler.com/bliki/TestDouble.html)»
--   [Moq](https://code.google.com/p/moq/)
+-   [MOQ](https://code.google.com/p/moq/)
 
 ### <a name="biography"></a>Biographie
 

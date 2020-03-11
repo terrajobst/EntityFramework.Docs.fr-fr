@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
 ms.openlocfilehash: 841aec645abdb2a56076d0b70bfb2614b0acafb4
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445997"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419460"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>Amélioration des performances de démarrage avec NGen
 > [!NOTE]
@@ -56,7 +56,7 @@ Lorsqu’il s’agit de déterminer les assemblys pour lesquels générer des im
 
 - **L’assembly principal du runtime EF, EntityFramework. dll**: une application EF classique exécute une quantité significative de code à partir de cet assembly au démarrage ou lors de son premier accès à la base de données. Par conséquent, la création d’images natives de cet assembly produit les plus grandes améliorations des performances de démarrage.  
 - **Tout assembly de fournisseur EF utilisé par votre application : le**temps de démarrage peut également tirer parti de la génération d’images natives. Par exemple, si l’application utilise le fournisseur EF pour SQL Server vous souhaiterez générer une image native pour EntityFramework. SqlServer. dll.  
-- Les **assemblys et autres dépendances de votre application**: la [documentation de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) couvre les critères généraux permettant de choisir les assemblys pour lesquels générer des images natives et l’impact des images natives sur la sécurité, des options avancées telles que «Hard Binding», des scénarios tels que l’utilisation d’images natives dans des scénarios de débogage et de profilage, etc.  
+- Les **assemblys de votre application et les autres dépendances**: la [documentation de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) traite des critères généraux permettant de choisir les assemblys pour lesquels générer des images natives et l’impact des images natives sur la sécurité, des options avancées telles que la « liaison matérielle », des scénarios tels que l’utilisation d’images natives dans des scénarios de débogage et de profilage, etc.  
 
 > [!TIP]
 > Veillez à mesurer avec soin l’impact de l’utilisation d’images natives sur les performances de démarrage et les performances globales de votre application, et comparez-les aux exigences réelles. Bien que les images natives permettent généralement d’améliorer les performances de démarrage et, dans certains cas, de réduire l’utilisation de la mémoire, tous les scénarios ne sont pas avantageux. Par exemple, lors d’une exécution stable de l’État (autrement dit, une fois que toutes les méthodes utilisées par l’application ont été appelées au moins une fois), le code généré par le compilateur JIT peut, en fait, produire des performances légèrement meilleures que les images natives.  

@@ -5,11 +5,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
 ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811893"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417328"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entité avec constructeurs
 
@@ -48,7 +48,7 @@ public class Post
 }
 ```
 
-Lorsque EF Core crée des instances de ces types, par exemple pour les résultats d’une requête, il commence par appeler le constructeur sans paramètre par défaut, puis affecte à chaque propriété la valeur de la base de données. Toutefois, si EF Core trouve un constructeur paramétrable avec des noms et des types de paramètres qui correspondent à ceux des propriétés mappées, il appellera plutôt le constructeur paramétrable avec des valeurs pour ces propriétés et ne définira pas explicitement chaque propriété. Exemple :
+Lorsque EF Core crée des instances de ces types, par exemple pour les résultats d’une requête, il commence par appeler le constructeur sans paramètre par défaut, puis affecte à chaque propriété la valeur de la base de données. Toutefois, si EF Core trouve un constructeur paramétrable avec des noms et des types de paramètres qui correspondent à ceux des propriétés mappées, il appellera plutôt le constructeur paramétrable avec des valeurs pour ces propriétés et ne définira pas explicitement chaque propriété. Par exemple :
 
 ``` csharp
 public class Blog
@@ -87,7 +87,7 @@ public class Post
 }
 ```
 
-Voici quelques points à noter :
+Quelques éléments à prendre en compte :
 
 * Toutes les propriétés ne doivent pas avoir de paramètres de constructeur. Par exemple, la propriété poster. Content n’est pas définie par un paramètre de constructeur, donc EF Core la définira après avoir appelé le constructeur de manière normale.
 * Les types et les noms de paramètres doivent correspondre aux types de propriétés et aux noms, à ceci près que les propriétés peuvent respecter la casse Pascal alors que les paramètres sont en casse mixte.
@@ -101,7 +101,7 @@ Une fois les propriétés définies par le biais du constructeur, il peut être 
 * Les propriétés sans Setter ne sont pas mappées par Convention. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
 * L’utilisation de valeurs de clés générées automatiquement nécessite une propriété de clé en lecture-écriture, puisque la valeur de clé doit être définie par le générateur de clé lors de l’insertion de nouvelles entités.
 
-Un moyen simple d’éviter ces choses consiste à utiliser des accesseurs set privés. Exemple :
+Un moyen simple d’éviter ces choses consiste à utiliser des accesseurs set privés. Par exemple :
 
 ``` csharp
 public class Blog
@@ -202,7 +202,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-Points à noter :
+Points à noter :
 
 * La clé « Property » est désormais un champ. Ce n’est pas un champ `readonly` afin que les clés générées par le magasin puissent être utilisées.
 * Les autres propriétés sont des propriétés en lecture seule définies uniquement dans le constructeur.

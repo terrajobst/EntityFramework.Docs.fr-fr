@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
 ms.openlocfilehash: 92a763b84a04d3ce7ec0853ef2a4852356cf7997
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182518"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418566"
 ---
 # <a name="enum-support---ef-designer"></a>Prise en charge d’enum-concepteur EF
 > [!NOTE]
@@ -29,7 +29,7 @@ Cette vidéo montre comment utiliser les types ENUM avec l’Entity Framework De
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.wmv) | [MP4](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-mp4video-enumwithdesiger.m4v) | [WMV (zip)](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual Studio 2012, Ultimate, Premium, Professional ou Web Express Edition.
 
@@ -60,7 +60,7 @@ L'assistant exécute les actions suivantes :
 
 1.  Cliquez avec le bouton droit sur une zone vide de l’aire de conception, sélectionnez **Ajouter-&gt; entité**, la boîte de dialogue nouvelle entité s’affiche.
 2.  Spécifiez **Department** comme nom de type et spécifiez **DepartmentID** pour le nom de la propriété de clé, laissez le type **Int32**
-3.  Cliquez sur **OK**.
+3.  Cliquez sur **OK**
 4.  Cliquez avec le bouton droit sur l’entité, puis sélectionnez **Ajouter une nouvelle&gt; propriété scalaire**
 5.  Renommez la nouvelle propriété en **Name**
 6.  Remplacez le type de la nouvelle propriété par **Int32** (par défaut, la nouvelle propriété est de type chaîne) pour modifier le type, ouvrez le fenêtre Propriétés et remplacez la propriété type par **Int32** .

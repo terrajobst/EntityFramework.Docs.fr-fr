@@ -5,11 +5,11 @@ ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
 ms.openlocfilehash: 2f80dc195265787318ac4925dd937da45ffad011
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179772"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417773"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitations du fournisseur de base de données SQLite EF Core
 
@@ -34,7 +34,7 @@ SQLite ne prend pas en charge en mode natif les types de données suivants. EF C
 
 Au lieu de `DateTimeOffset`, nous vous recommandons d’utiliser des valeurs DateTime. Lors de la gestion de plusieurs fuseaux horaires, nous vous recommandons de convertir les valeurs en temps UTC avant de les enregistrer, puis de les reconvertir dans le fuseau horaire approprié.
 
-Le type `Decimal` offre un niveau élevé de précision. Toutefois, si vous n’avez pas besoin de ce niveau de précision, nous vous recommandons d’utiliser à la place un double. Vous pouvez utiliser un [convertisseur de valeur](../../modeling/value-conversions.md) pour continuer à utiliser Decimal dans vos classes.
+Le type de `Decimal` fournit un niveau élevé de précision. Toutefois, si vous n’avez pas besoin de ce niveau de précision, nous vous recommandons d’utiliser à la place un double. Vous pouvez utiliser un [convertisseur de valeur](../../modeling/value-conversions.md) pour continuer à utiliser Decimal dans vos classes.
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -44,9 +44,9 @@ modelBuilder.Entity<MyEntity>()
 
 ## <a name="migrations-limitations"></a>Limitations des migrations
 
-Le moteur de base de données SQLite ne prend pas en charge un certain nombre d’opérations de schéma prises en charge par la plupart des autres bases de données relationnelles. Si vous tentez d’appliquer l’une des opérations non prises en charge à une base de données SQLite, une `NotSupportedException` sera levée.
+Le moteur de base de données SQLite ne prend pas en charge un certain nombre d’opérations de schéma prises en charge par la plupart des autres bases de données relationnelles. Si vous tentez d’appliquer l’une des opérations non prises en charge à une base de données SQLite, une `NotSupportedException` est levée.
 
-| Opération            | Géré? | Version requise |
+| Opération            | Pris en charge ? | Version requise |
 |:---------------------|:-----------|:-----------------|
 | AddColumn            | ✔          | 1.0              |
 | AddForeignKey        | ✗          |                  |
@@ -57,18 +57,18 @@ Le moteur de base de données SQLite ne prend pas en charge un certain nombre d�
 | CreateTable          | ✔          | 1.0              |
 | DropColumn           | ✗          |                  |
 | DropForeignKey       | ✗          |                  |
-| DropIndex            | ✔          | 1.0              |
+| DROP index            | ✔          | 1.0              |
 | DropPrimaryKey       | ✗          |                  |
 | DropTable            | ✔          | 1.0              |
 | DropUniqueConstraint | ✗          |                  |
 | RenameColumn         | ✔          | 2.2.2            |
 | RenameIndex          | ✔          | 2.1              |
 | RenameTable          | ✔          | 1.0              |
-| EnsureSchema         | ✔ (aucune opération)  | 2.0              |
-| DropSchema           | ✔ (aucune opération)  | 2.0              |
-| Insert               | ✔          | 2.0              |
-| Mise à jour               | ✔          | 2.0              |
-| Supprimer               | ✔          | 2.0              |
+| EnsureSchema         | ✔ (aucune opération)  | 2              |
+| DropSchema           | ✔ (aucune opération)  | 2              |
+| Insérer               | ✔          | 2              |
+| Update               | ✔          | 2              |
+| DELETE               | ✔          | 2              |
 
 ## <a name="migrations-limitations-workaround"></a>Solution de contournement des limitations des migrations
 

@@ -1,24 +1,24 @@
 ---
-title: Première insertion de code, mettre à jour et supprimer des procédures stockées - EF6
+title: Code First des procédures stockées INSERT, Update et Delete-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
 ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489620"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419086"
 ---
-# <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code première insertion, de mettre à jour et supprimer des procédures stockées
+# <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code First des procédures stockées INSERT, Update et Delete
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Par défaut, Code First configure toutes les entités pour effectuer l’insertion, de mettre à jour et de supprimer des commandes à l’aide de l’accès direct à la table. En commençant dans EF6, vous pouvez configurer votre modèle Code First pour utiliser des procédures stockées pour certaines ou toutes les entités dans votre modèle.  
+Par défaut, Code First configurera toutes les entités pour exécuter des commandes INSERT, Update et Delete à l’aide d’un accès direct à la table. À partir de EF6, vous pouvez configurer votre modèle de Code First pour utiliser des procédures stockées pour une partie ou l’ensemble des entités de votre modèle.  
 
 ## <a name="basic-entity-mapping"></a>Mappage d’entité de base  
 
-Vous pouvez opter pour l’utilisation de procédures stockées pour insérer, mettre à jour et supprimer à l’aide de l’API Fluent.  
+Vous pouvez choisir d’utiliser des procédures stockées pour l’insertion, la mise à jour et la suppression à l’aide de l’API Fluent.  
 
 ``` csharp
 modelBuilder
@@ -26,17 +26,17 @@ modelBuilder
   .MapToStoredProcedures();
 ```  
 
-Cela provoquera Code First utiliser certaines conventions pour créer la forme attendue des procédures stockées dans la base de données.  
+Dans ce cas, Code First utilise des conventions pour générer la forme attendue des procédures stockées dans la base de données.  
 
-- Trois procédures nommé  **\<type_name\>_Insérer**,  **\<type_name\>_mettre à jour** et  **\<type_ nom\>_Supprimer** (par exemple, Blog_Insert, Blog_Update et Blog_Delete).  
-- Noms de paramètres correspondent aux noms de propriété.  
+- Trois procédures stockées nommées **\<type_name\>_INSERT**, **\<** type_name\>_UPDATE et **\<** type_name\>_Delete (par exemple, Blog_Insert, Blog_Update et Blog_Delete).  
+- Les noms de paramètres correspondent aux noms de propriété.  
   > [!NOTE]
-  > Si vous utilisez HasColumnName() ou l’attribut de colonne pour renommer la colonne pour une propriété donnée ce nom est utilisé pour les paramètres au lieu du nom de propriété.  
-- **La procédure stockée insert** aura un paramètre pour chaque propriété, à l’exception de celles qui sont marquées comme magasin généré (identité ou calculée). La procédure stockée doit retourner un jeu de résultats avec une colonne pour chaque propriété de base généré.  
-- **La mise à jour de procédure stockée** aura un paramètre pour chaque propriété, à l’exception de celles qui sont marquées avec un modèle de magasin généré de « Calculé ». Bien que certains jetons d’accès concurrentiel requièrent un paramètre pour la valeur d’origine, consultez la *jetons d’accès concurrentiel* section ci-dessous pour plus d’informations. La procédure stockée doit retourner un jeu de résultats avec une colonne pour chaque propriété calculée.  
-- **La suppression d’une procédure stockée** doit avoir un paramètre pour la valeur de clé de l’entité (ou plusieurs paramètres si l’entité a une clé composite). En outre, la procédure de suppression doit également avoir des paramètres pour toutes les clés étrangères association indépendante sur la table cible (les relations qui n’ont pas de propriétés de clé étrangère correspondantes déclarées dans l’entité). Bien que certains jetons d’accès concurrentiel requièrent un paramètre pour la valeur d’origine, consultez la *jetons d’accès concurrentiel* section ci-dessous pour plus d’informations.  
+  > Si vous utilisez HasColumnName () ou l’attribut de colonne pour renommer la colonne pour une propriété donnée, ce nom est utilisé pour les paramètres au lieu du nom de la propriété.  
+- **La procédure stockée Insert** aura un paramètre pour chaque propriété, à l’exception de celles marquées comme Store generated (Identity ou computeed). La procédure stockée doit retourner un jeu de résultats avec une colonne pour chaque propriété générée par le magasin.  
+- **La procédure stockée de mise à jour** aura un paramètre pour chaque propriété, à l’exception de celles marquées avec un modèle généré par le magasin « calculé ». Certains jetons d’accès concurrentiel requièrent un paramètre pour la valeur d’origine. pour plus d’informations, consultez la section *jetons d’accès concurrentiel* ci-dessous. La procédure stockée doit retourner un jeu de résultats avec une colonne pour chaque propriété calculée.  
+- **La procédure stockée Delete** doit avoir un paramètre pour la valeur de clé de l’entité (ou plusieurs paramètres si l’entité a une clé composite). En outre, la procédure de suppression doit également avoir des paramètres pour toutes les clés étrangères d’association indépendantes sur la table cible (relations qui n’ont pas de propriétés de clé étrangère correspondantes déclarées dans l’entité). Certains jetons d’accès concurrentiel requièrent un paramètre pour la valeur d’origine. pour plus d’informations, consultez la section *jetons d’accès concurrentiel* ci-dessous.  
 
-À l’aide de la classe suivante comme exemple :  
+En utilisant la classe suivante comme exemple :  
 
 ``` csharp
 public class Blog  
@@ -47,7 +47,7 @@ public class Blog
 }
 ```  
 
-La valeur par défaut des procédures stockées serait :  
+Les procédures stockées par défaut sont les suivantes :  
 
 ``` SQL
 CREATE PROCEDURE [dbo].[Blog_Insert]  
@@ -75,11 +75,11 @@ AS
   WHERE BlogId = @BlogId
 ```  
 
-### <a name="overriding-the-defaults"></a>Substituer les valeurs par défaut  
+### <a name="overriding-the-defaults"></a>Remplacement des valeurs par défaut  
 
-Vous pouvez remplacer tout ou partie de ce qui a été configuré par défaut.  
+Vous pouvez remplacer tout ou partie des éléments configurés par défaut.  
 
-Vous pouvez modifier le nom d’une ou plusieurs procédures stockées. Cet exemple renomme la procédure stockée update uniquement.  
+Vous pouvez modifier le nom d’une ou de plusieurs procédures stockées. Cet exemple renomme la procédure stockée de mise à jour uniquement.  
 
 ``` csharp
 modelBuilder  
@@ -88,7 +88,7 @@ modelBuilder
     s.Update(u => u.HasName("modify_blog")));
 ```  
 
-Cet exemple renomme tous les trois procédures stockées.  
+Cet exemple renomme les trois procédures stockées.  
 
 ``` csharp
 modelBuilder  
@@ -99,7 +99,7 @@ modelBuilder
      .Insert(i => i.HasName("insert_blog")));
 ```  
 
-Dans ces exemples, les appels sont chaînées ensemble, mais vous pouvez également utiliser la syntaxe de bloc d’expression lambda.  
+Dans ces exemples, les appels sont chaînés ensemble, mais vous pouvez également utiliser la syntaxe de bloc lambda.  
 
 ``` csharp
 modelBuilder  
@@ -112,7 +112,7 @@ modelBuilder
     });
 ```  
 
-Cet exemple renomme le paramètre pour la propriété BlogId sur la procédure stockée update.  
+Cet exemple renomme le paramètre de la propriété BlogId sur la procédure stockée Update.  
 
 ``` csharp
 modelBuilder  
@@ -121,7 +121,7 @@ modelBuilder
     s.Update(u => u.Parameter(b => b.BlogId, "blog_id")));
 ```  
 
-Ces appels sont enchaînées et composable. Voici un exemple qui renomme les trois procédures stockées et leurs paramètres.  
+Ces appels sont tous chaînés et composables. Voici un exemple qui renomme les trois procédures stockées et leurs paramètres.  
 
 ``` csharp
 modelBuilder  
@@ -138,7 +138,7 @@ modelBuilder
                    .Parameter(b => b.Url, "blog_url")));
 ```  
 
-Vous pouvez également modifier le nom des colonnes du jeu de résultats qui contient des valeurs de la base de données générée.  
+Vous pouvez également modifier le nom des colonnes dans le jeu de résultats qui contient des valeurs générées par la base de données.  
 
 ``` csharp
 modelBuilder
@@ -160,11 +160,11 @@ BEGIN
 END
 ```  
 
-## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relations sans une clé étrangère dans la classe (Associations indépendantes)  
+## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relations sans clé étrangère dans la classe (associations indépendantes)  
 
-Lorsqu’une propriété de clé étrangère est incluse dans la définition de classe, le paramètre correspondant peut être renommé dans la même façon que toute autre propriété. Lorsqu’il existe une relation sans une propriété de clé étrangère dans la classe, le nom de paramètre par défaut est  **\<navigation_property_name\>_\<primary_key_name\>**.  
+Lorsqu’une propriété de clé étrangère est incluse dans la définition de classe, le paramètre correspondant peut être renommé de la même façon que n’importe quelle autre propriété. Lorsqu’il existe une relation sans propriété de clé étrangère dans la classe, le nom de paramètre par défaut est **\<navigation_property_name\>_\<primary_key_name** .\>  
 
-Par exemple, les définitions de classe suivantes entraînerait un paramètre Blog_BlogId qui est attendu dans les procédures stockées pour insérer et mettre à jour des publications.  
+Par exemple, les définitions de classe suivantes aboutissent à un paramètre Blog_BlogId attendu dans les procédures stockées pour insérer et mettre à jour des publications.  
 
 ``` csharp
 public class Blog  
@@ -186,9 +186,9 @@ public class Post
 }
 ```  
 
-### <a name="overriding-the-defaults"></a>Substituer les valeurs par défaut  
+### <a name="overriding-the-defaults"></a>Remplacement des valeurs par défaut  
 
-Vous pouvez modifier les paramètres pour les clés étrangères qui ne figurent pas dans la classe en fournissant le chemin d’accès à la propriété de clé primaire à la méthode de paramètre.  
+Vous pouvez modifier les paramètres des clés étrangères qui ne sont pas incluses dans la classe en fournissant le chemin d’accès de la propriété de clé primaire à la méthode de paramètre.  
 
 ``` csharp
 modelBuilder
@@ -197,7 +197,7 @@ modelBuilder
     s.Insert(i => i.Parameter(p => p.Blog.BlogId, "blog_id")));
 ```  
 
-Si vous n’avez pas une propriété de navigation sur l’entité dépendante (ex.) aucune propriété Post.Blog) vous pouvez ensuite utiliser la méthode d’Association pour identifier l’autre extrémité de la relation, puis configurer les paramètres qui correspondent à chacune des propriétés de clé ne.  
+Si vous n’avez pas de propriété de navigation sur l’entité dépendante (c.-à-d. aucune propriété poster. blog) vous pouvez alors utiliser la méthode d’association pour identifier l’autre terminaison de la relation, puis configurer les paramètres qui correspondent à chacune des propriétés de clé.  
 
 ``` csharp
 modelBuilder
@@ -210,15 +210,15 @@ modelBuilder
 
 ## <a name="concurrency-tokens"></a>Jetons d'accès concurrentiel  
 
-Mise à jour et supprimer les procédures serez peut-être amené à gérer avec l’accès concurrentiel :  
+Les procédures stockées de mise à jour et de suppression peuvent également avoir besoin de gérer la concurrence :  
 
-- Si l’entité contient des jetons d’accès concurrentiel, la procédure stockée peut éventuellement avoir un paramètre de sortie qui retourne le nombre de lignes mises à jour/supprimées (lignes affectées). Un tel paramètre doit être configuré à l’aide de la méthode RowsAffectedParameter.  
-Par défaut, EF utilise la valeur de retour à partir de la méthode ExecuteNonQuery pour déterminer combien de lignes ont été affectés. Spécification d’un paramètre de sortie de lignes affectées est utile si vous effectuez une logique dans votre procédure stockée qui entraînerait la valeur de retour de ExecuteNonQuery qui est incorrect (du point de vue d’Entity Framework) à la fin de l’exécution.  
-- Pour chaque d’accès concurrentiel, il le jeton sera un paramètre nommé  **\<property_name\>_Original** (par exemple, Timestamp_Original). Cela recevront la valeur d’origine de cette propriété : la valeur lorsqu’il est interrogé à partir de la base de données.  
-    - Les jetons d’accès concurrentiel qui sont calculées par la base de données – tels que les horodatages – a uniquement un paramètre de valeur d’origine.  
-    - Propriétés non calculées qui sont définies en tant que jetons d’accès concurrentiel aura également un paramètre pour la nouvelle valeur dans la procédure de mise à jour. Cet exemple utilise les conventions d’affectation de noms déjà vu pour les nouvelles valeurs. Un exemple de ce jeton serait être à l’aide URL d’un Blog sous forme d’un jeton d’accès concurrentiel, la nouvelle valeur est requise, car cela peut être mis à jour vers une nouvelle valeur par votre code (contrairement à un jeton de l’horodatage qui est uniquement mis à jour par la base de données).  
+- Si l’entité contient des jetons d’accès concurrentiel, la procédure stockée peut éventuellement avoir un paramètre de sortie qui retourne le nombre de lignes mises à jour/supprimées (lignes affectées). Ce paramètre doit être configuré à l’aide de la méthode RowsAffectedParameter.  
+Par défaut, EF utilise la valeur de retour de ExecuteNonQuery pour déterminer le nombre de lignes affectées. La spécification d’un paramètre de sortie de lignes affectées est utile si vous exécutez une logique dans votre procédure stockée, qui aurait pour résultat que la valeur de retour de ExecuteNonQuery est incorrecte (de la perspective d’EF) à la fin de l’exécution.  
+- Pour chaque jeton d’accès concurrentiel, il y aura un paramètre nommé **\<property_name\>_original** (par exemple, Timestamp_Original). La valeur d’origine de cette propriété sera passée, à savoir la valeur lors de la requête à partir de la base de données.  
+    - Les jetons d’accès concurrentiel calculés par la base de données, tels que les horodateurs, n’ont qu’un paramètre de valeur d’origine.  
+    - Les propriétés non calculées définies comme jetons d’accès concurrentiel comporteront également un paramètre pour la nouvelle valeur dans la procédure de mise à jour. Cela utilise les conventions d’affectation des noms déjà évoquées pour les nouvelles valeurs. Un exemple de ce type de jeton consisterait à utiliser l’URL d’un blog comme un jeton d’accès concurrentiel, la nouvelle valeur est nécessaire car elle peut être mise à jour vers une nouvelle valeur par votre code (contrairement à un jeton d’horodatage qui est uniquement mis à jour par la base de données).  
 
-Il s’agit d’un exemple de classe et de mettre à jour de la procédure stockée avec un jeton d’accès concurrentiel d’horodatage.  
+Il s’agit d’un exemple de classe et d’une procédure stockée de mise à jour avec un jeton d’accès concurrentiel d’horodatage.  
 
 ``` csharp
 public class Blog  
@@ -243,7 +243,7 @@ AS
   WHERE BlogId = @BlogId AND [Timestamp] = @Timestamp_Original
 ```  
 
-Voici un exemple de classe et de mettre à jour de la procédure stockée avec un jeton d’accès concurrentiel de non calculée.  
+Voici un exemple de classe et une procédure stockée de mise à jour avec un jeton d’accès concurrentiel non calculé.  
 
 ``` csharp
 public class Blog  
@@ -267,9 +267,9 @@ AS
   WHERE BlogId = @BlogId AND [Url] = @Url_Original
 ```  
 
-### <a name="overriding-the-defaults"></a>Substituer les valeurs par défaut  
+### <a name="overriding-the-defaults"></a>Remplacement des valeurs par défaut  
 
-Vous pouvez éventuellement introduire un paramètre des lignes affectées.  
+Vous pouvez éventuellement introduire un paramètre Rows touched.  
 
 ``` csharp
 modelBuilder  
@@ -278,7 +278,7 @@ modelBuilder
     s.Update(u => u.RowsAffectedParameter("rows_affected")));
 ```  
 
-Pour les jetons d’accès concurrentiel calculée de la base de données – où seule la valeur d’origine est passée : vous pouvez simplement utiliser le mécanisme de changement de nom de paramètre standard pour renommer le paramètre pour la valeur d’origine.  
+Pour les jetons d’accès concurrentiel calculés de base de données, où seule la valeur d’origine est passée, vous pouvez simplement utiliser le mécanisme de changement de nom de paramètre standard pour renommer le paramètre de la valeur d’origine.  
 
 ``` csharp
 modelBuilder  
@@ -287,7 +287,7 @@ modelBuilder
     s.Update(u => u.Parameter(b => b.Timestamp, "blog_timestamp")));
 ```  
 
-Pour les jetons d’accès concurrentiel de non calculée – où est passée à la fois la valeur d’origine et nouvelle – vous pouvez utiliser une surcharge de paramètre qui vous permet de fournir un nom pour chaque paramètre.  
+Pour les jetons d’accès concurrentiel non calculés, où la valeur d’origine et la nouvelle valeur sont passées, vous pouvez utiliser une surcharge de paramètre qui vous permet de fournir un nom pour chaque paramètre.  
 
 ``` csharp
 modelBuilder
@@ -318,7 +318,7 @@ public class Tag
 }
 ```  
 
-Plusieurs à plusieurs relations peuvent être mappées à des procédures stockées avec la syntaxe suivante.  
+Les relations plusieurs-à-plusieurs peuvent être mappées à des procédures stockées avec la syntaxe suivante.  
 
 ``` csharp
 modelBuilder  
@@ -328,12 +328,12 @@ modelBuilder
   .MapToStoredProcedures();
 ```  
 
-Si aucune autre configuration n’est pas fournie la forme de procédure stockée suivante est utilisée par défaut.  
+Si aucune autre configuration n’est fournie, la forme de procédure stockée suivante est utilisée par défaut.  
 
-- Deux procédures nommés stockées  **\<type_one\>\<type_two\>_Insérer** et  **\<type_one\>\<type_two \>_Supprimer** (par exemple, PostTag_Insert et PostTag_Delete).  
-- Les paramètres seront les valeurs de clés pour chaque type. Le nom de chaque paramètre en cours **\<type_name\>_\<property_name\>** (par exemple, Post_PostId et Tag_TagId).
+- Deux procédures stockées nommées **\<type_one\>\<type_two\>** _Insert et **\<** type_one\>\<type_two\>_Delete (par exemple, PostTag_Insert et PostTag_Delete).  
+- Les paramètres sont les valeurs de clé pour chaque type. Nom de chaque paramètre **\<type_name\>_\<** property_name\>(par exemple, Post_PostId et Tag_TagId).
 
-Voici des exemples insérer et mettre à jour des procédures stockées.  
+Voici des exemples de procédures stockées INSERT et Update.  
 
 ``` SQL
 CREATE PROCEDURE [dbo].[PostTag_Insert]  
@@ -350,9 +350,9 @@ AS
   WHERE Post_PostId = @Post_PostId AND Tag_TagId = @Tag_TagId
 ```  
 
-### <a name="overriding-the-defaults"></a>Substituer les valeurs par défaut  
+### <a name="overriding-the-defaults"></a>Remplacement des valeurs par défaut  
 
-Les noms de procédure et le paramètre peuvent être configurés de manière similaire aux procédures de l’entité stockée.  
+Les noms de procédure et de paramètre peuvent être configurés de la même façon que les procédures stockées d’entité.  
 
 ``` csharp
 modelBuilder  

@@ -1,29 +1,29 @@
 ---
-title: Conventions Code First - EF6
+title: Conventions de Code First EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bc644573-c2b2-4ed7-8745-3c37c41058ad
 ms.openlocfilehash: 4d03a32db5d84eb37c22617a95005b272172a65d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490998"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419289"
 ---
-# <a name="code-first-conventions"></a>Conventions Code First
-Code First vous permet de décrire un modèle à l’aide de classes C# ou Visual Basic .NET. La forme de base du modèle est détectée à l’aide des conventions. Conventions des ensembles de règles qui sont utilisés pour configurer automatiquement un modèle conceptuel basé sur les définitions de classe lorsque vous travaillez avec Code First. Les conventions sont définies dans l’espace de noms System.Data.Entity.ModelConfiguration.Conventions.  
+# <a name="code-first-conventions"></a>Conventions de Code First
+Code First vous permet de décrire un modèle à l' C# aide de ou Visual Basic des classes .net. La forme de base du modèle est détectée à l’aide de conventions. Les conventions sont des ensembles de règles utilisés pour configurer automatiquement un modèle conceptuel basé sur les définitions de classe lors de l’utilisation de Code First. Les conventions sont définies dans l’espace de noms System. Data. Entity. ModelConfiguration. conventions.  
 
-Vous pouvez configurer davantage de votre modèle à l’aide des annotations de données ou l’API fluent. La priorité est donnée à la configuration via l’API fluent, suivi de conventions et des annotations de données. Pour plus d’informations, consultez [Annotations de données](~/ef6/modeling/code-first/data-annotations.md), [API Fluent - relations](~/ef6/modeling/code-first/fluent/relationships.md), [API Fluent - Types de & propriétés](~/ef6/modeling/code-first/fluent/types-and-properties.md) et [API Fluent avec VB.NET](~/ef6/modeling/code-first/fluent/vb.md).  
+Vous pouvez configurer davantage votre modèle à l’aide d’annotations de données ou de l’API Fluent. La priorité est donnée à la configuration via l’API Fluent, suivie d’annotations de données, puis de conventions. Pour plus d’informations, consultez [Annotations de données](~/ef6/modeling/code-first/data-annotations.md), [Fluent API-Relationships](~/ef6/modeling/code-first/fluent/relationships.md), [Fluent API-types & Properties](~/ef6/modeling/code-first/fluent/types-and-properties.md) and [Fluent API with VB.net](~/ef6/modeling/code-first/fluent/vb.md).  
 
-Une liste détaillée des conventions Code First est disponible dans le [Documentation de l’API](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx). Cette rubrique fournit une vue d’ensemble des conventions utilisées par Code First.  
+Une liste détaillée des conventions de Code First est disponible dans la documentation de l' [API](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx). Cette rubrique fournit une vue d’ensemble des conventions utilisées par Code First.  
 
-## <a name="type-discovery"></a>Découverte de type  
+## <a name="type-discovery"></a>Détection de type  
 
-Lors de l’utilisation du développement Code First vous commencez généralement par écriture de classes .NET Framework qui définissent votre modèle conceptuel (domaine). En plus de définir les classes, vous devez également communiquer à **DbContext** connaître les types que vous souhaitez inclure dans le modèle. Pour ce faire, vous définissez une classe de contexte qui dérive de **DbContext** et expose **DbSet** propriétés pour les types que vous souhaitez faire partie du modèle. Code inclut tout d’abord ces types et également permet d’extraire tous les types référencés, même si les types référencés sont définis dans un autre assembly.  
+Lors de l’utilisation de Code First développement, vous commencez généralement par écrire des classes .NET Framework qui définissent votre modèle conceptuel (domaine). En plus de définir les classes, vous devez également laisser **DbContext** savoir quels types vous souhaitez inclure dans le modèle. Pour ce faire, vous définissez une classe de contexte qui dérive de **DbContext** et expose des propriétés **DbSet** pour les types que vous souhaitez faire partie du modèle. Code First inclura ces types et effectuera également l’extraction de tous les types référencés, même si les types référencés sont définis dans un assembly différent.  
 
-Si vos types de participent à une hiérarchie d’héritage, il suffit de définir un **DbSet** propriété pour la classe de base et les types dérivés qui sera incluse automatiquement, si elles se trouvent dans le même assembly que la classe de base.  
+Si vos types participent à une hiérarchie d’héritage, il suffit de définir une propriété **DbSet** pour la classe de base, et les types dérivés seront inclus automatiquement, s’ils se trouvent dans le même assembly que la classe de base.  
 
-Dans l’exemple suivant, il existe un seul **DbSet** propriété définie sur le **SchoolEntities** classe (**départements**). Code utilise cette propriété pour découvrir et d’extraire tous les types référencés.  
+Dans l’exemple suivant, une seule propriété **DbSet** est définie sur la classe **SchoolEntities** (**Departments**). Code First utilise cette propriété pour découvrir et extraire les types référencés.  
 
 ``` csharp
 public class SchoolEntities : DbContext
@@ -69,7 +69,7 @@ public partial class OnsiteCourse : Course
 }
 ```  
 
-Si vous souhaitez exclure un type à partir du modèle, utilisez le **NotMapped** attribut ou le **DbModelBuilder.Ignore** API fluent.  
+Si vous souhaitez exclure un type du modèle, utilisez l’attribut **NotMapped** ou l’API Fluent **DbModelBuilder. ignore** .  
 
 ```  csharp
 modelBuilder.Ignore<Department>();
@@ -77,7 +77,7 @@ modelBuilder.Ignore<Department>();
 
 ## <a name="primary-key-convention"></a>Convention de clé primaire  
 
-Code déduit tout d’abord qu’une propriété est une clé primaire si une propriété sur une classe est nommée « ID » (non sensible à la casse), ou le nom de classe suivie de « ID ». Si le type de la propriété de clé primaire est numérique ou le GUID sera configuré comme une colonne d’identité.  
+Code First déduit qu’une propriété est une clé primaire si une propriété d’une classe est nommée « ID » (sans respect de la casse), ou le nom de la classe suivi de « ID ». Si le type de la propriété de clé primaire est numérique ou GUID, il est configuré en tant que colonne d’identité.  
 
 ``` csharp
 public class Department
@@ -92,13 +92,13 @@ public class Department
 
 ## <a name="relationship-convention"></a>Convention de relation  
 
-Dans Entity Framework, les propriétés de navigation permettent de naviguer d’une relation entre deux types d’entités. Chaque objet peut avoir une propriété de navigation pour chaque relation à laquelle il participe. Propriétés de navigation permettent de parcourir et de gérer les relations dans les deux directions, en retournant un objet de la référence (si la multiplicité est soit un ou zéro-ou-un) ou une collection (si la multiplicité est nombreuses). Code déduit tout d’abord les relations basées sur les propriétés de navigation définies sur vos types.  
+Dans Entity Framework, les propriétés de navigation offrent un moyen de naviguer dans une relation entre deux types d’entités. Chaque objet peut avoir une propriété de navigation pour chaque relation à laquelle il participe. Les propriétés de navigation vous permettent de parcourir et de gérer les relations dans les deux directions, en retournant un objet de référence (si la multiplicité est un ou zéro-ou-un) ou une collection (si la multiplicité est plusieurs). Code First déduit les relations en fonction des propriétés de navigation définies sur vos types.  
 
-En plus des propriétés de navigation, nous vous recommandons d’inclure des propriétés de clé étrangère sur les types qui représentent des objets dépendants. N’importe quelle propriété avec le même type de données en tant que propriété de clé primaire principal et avec un nom qui suit l’un des formats suivants représente une clé étrangère pour la relation : «\<nom de propriété de navigation\>\<principal nom de propriété de clé primaire\>','\<nom de la classe principal\>\<nom de propriété de clé primaire\>», ou «\<nom de propriété de clé primaire principal\>». Si plusieurs correspondances sont trouvées priorité est donnée dans l’ordre indiqué ci-dessus. La détection de clé étrangère n’est pas sensible à la casse. Lorsqu’une propriété de clé étrangère est détectée, Code First déduit la multiplicité de la relation en fonction de la possibilité de valeur de la clé étrangère. Si la propriété est nullable, la relation est enregistrée comme étant facultatifs ; Sinon, la relation est inscrit en fonction des besoins.  
+En plus des propriétés de navigation, nous vous recommandons d’inclure les propriétés de clé étrangère sur les types qui représentent des objets dépendants. Toute propriété ayant le même type de données que la propriété de clé primaire principale et dont le nom suit un des formats suivants représente une clé étrangère pour la relation : '\<nom de la propriété de navigation\>\<nom de la propriété de la clé primaire du principal\>', '\<nom de la classe principale\>\<nom de la propriété de la clé primaire du principal\>'.\<\> Si plusieurs correspondances sont trouvées, la priorité est donnée dans l’ordre indiqué ci-dessus. La détection de clé étrangère ne tient pas compte de la casse. Lorsqu’une propriété de clé étrangère est détectée, Code First déduit la multiplicité de la relation en fonction de la possibilité de valeur null de la clé étrangère. Si la propriété a la valeur null, la relation est inscrite comme facultative ; dans le cas contraire, la relation est inscrite en fonction des besoins.  
 
-Si une clé étrangère sur l’entité dépendante n’est pas nullable, Code First définit ensuite suppression en cascade sur la relation. Si une clé étrangère sur l’entité dépendante est nullable, Code First ne définit pas suppression en cascade sur la relation, et lorsque le principal est supprimé la clé étrangère sera définie sur null. La multiplicité et cascade delete comportement détecté par convention peut être substituée à l’aide de l’API fluent.  
+Si une clé étrangère sur l’entité dépendante n’accepte pas la valeur null, Code First définit la suppression en cascade sur la relation. Si une clé étrangère sur l’entité dépendante accepte la valeur null, Code First ne définit pas la suppression en cascade sur la relation et, lorsque le principal est supprimé, la clé étrangère est définie sur null. La multiplicité et le comportement de suppression en cascade détectés par la Convention peuvent être remplacés à l’aide de l’API Fluent.  
 
-Dans l’exemple suivant, les propriétés de navigation et une clé étrangère sont utilisés pour définir la relation entre les classes de service et un cours.  
+Dans l’exemple suivant, les propriétés de navigation et une clé étrangère sont utilisées pour définir la relation entre les classes Department et course.  
 
 ``` csharp
 public class Department
@@ -128,11 +128,11 @@ public class Course
 ```  
 
 > [!NOTE]
-> Si vous avez plusieurs relations entre les mêmes types (par exemple, supposons que vous définissiez le **personne** et **livre** classes, où le **personne** classe contient le  **ReviewedBooks** et **AuthoredBooks** propriétés de navigation et la **livre** classe contient le **auteur** et  **Réviseur** propriétés de navigation) vous devez configurer manuellement les relations à l’aide des Annotations de données ou l’API fluent. Pour plus d’informations, consultez [Annotations de données - relations](~/ef6/modeling/code-first/data-annotations.md) et [API Fluent - relations](~/ef6/modeling/code-first/fluent/relationships.md).  
+> Si vous avez plusieurs relations entre les mêmes types (par exemple, supposons que vous définissiez les classes **Person** et **Book** , où la classe **Person** contient les propriétés de navigation **ReviewedBooks** et **AuthoredBooks** et que la classe **Book** contient les propriétés de navigation **auteur** et **réviseur** ), vous devez configurer manuellement les relations à l’aide d’annotations de données ou de l’API Fluent. Pour plus d’informations, consultez [Annotations de données-relations](~/ef6/modeling/code-first/data-annotations.md) et [API Fluent-relations](~/ef6/modeling/code-first/fluent/relationships.md).  
 
-## <a name="complex-types-convention"></a>Convention de Types complexes  
+## <a name="complex-types-convention"></a>Convention sur les types complexes  
 
-Lorsque Code First détecte une définition de classe où une clé primaire ne peut pas être déduite, et aucune clé primaire n’est inscrit par le biais des annotations de données ou l’API fluent, puis le type est automatiquement enregistré comme un type complexe. Détection de type complexe requiert également que le type n’a pas de propriétés qui référencent des types d’entités et ne sont pas référencées à partir d’une propriété de collection sur un autre type. Compte tenu des définitions de classe suivant Code First serait déduire que **détails** est un type complexe, car il n’a aucune clé primaire.  
+Lorsque Code First découvre une définition de classe dans laquelle une clé primaire ne peut pas être déduite et qu’aucune clé primaire n’est inscrite via des annotations de données ou l’API Fluent, le type est automatiquement inscrit en tant que type complexe. La détection de type complexe requiert également que le type n’ait pas de propriétés qui référencent des types d’entité et n’est pas référencée à partir d’une propriété de collection sur un autre type. Étant donné les définitions de classe suivantes Code First déduire que les **Détails** sont un type complexe, car il n’a pas de clé primaire.  
 
 ``` csharp
 public partial class OnsiteCourse : Course
@@ -155,11 +155,11 @@ public class Details
 
 ## <a name="connection-string-convention"></a>Convention de chaîne de connexion  
 
-Pour en savoir plus sur les conventions que DbContext utilise pour détecter la connexion à utiliser voir [connexions et des modèles](~/ef6/fundamentals/configuring/connection-strings.md).  
+Pour en savoir plus sur les conventions que DbContext utilise pour découvrir la connexion à utiliser [, consultez connexions et modèles](~/ef6/fundamentals/configuring/connection-strings.md).  
 
-## <a name="removing-conventions"></a>Suppression des Conventions  
+## <a name="removing-conventions"></a>Suppression de conventions  
 
-Vous pouvez supprimer une des conventions définies dans l’espace de noms System.Data.Entity.ModelConfiguration.Conventions. L’exemple suivant supprime **PluralizingTableNameConvention**.  
+Vous pouvez supprimer les conventions définies dans l’espace de noms System. Data. Entity. ModelConfiguration. conventions. L’exemple suivant supprime **PluralizingTableNameConvention**.  
 
 ``` csharp
 public class SchoolEntities : DbContext
@@ -178,4 +178,4 @@ public class SchoolEntities : DbContext
 
 ## <a name="custom-conventions"></a>Conventions personnalisées  
 
-Conventions personnalisées sont prises en charge dans EF6 et versions ultérieures. Pour plus d’informations, consultez [Conventions Code First personnalisées](~/ef6/modeling/code-first/conventions/custom.md).
+Les conventions personnalisées sont prises en charge dans EF6. Pour plus d’informations, consultez [conventions de code First personnalisées](~/ef6/modeling/code-first/conventions/custom.md).

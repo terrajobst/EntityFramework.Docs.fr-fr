@@ -1,43 +1,43 @@
 ---
-title: Mode de mappage prégénéré - EF6
+title: Affichages de mappage prégénérés-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
 ms.openlocfilehash: 1fda9fe9638adce9b24a6b81aa081effeb0def81
-ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/30/2018
-ms.locfileid: "47459524"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419390"
 ---
-# <a name="pre-generated-mapping-views"></a>Vues prégénérées mappage
-Avant de l’Entity Framework peut exécuter une requête ou enregistrer les modifications apportées à la source de données, il doit générer un ensemble de vues de mappage pour accéder à la base de données. Ces vues de mappage sont un ensemble de l’instruction Entity SQL qui représentent la base de données de manière abstraite et font partie des métadonnées qui sont mis en cache par domaine d’application. Si vous créez plusieurs instances du même contexte dans le même domaine d’application, elles réutiliseront les vues de mappage depuis les métadonnées mises en cache au lieu de les régénérer. Étant donné que la génération de vues de mappage constitue une partie significative du coût total de l’exécution de la première requête, Entity Framework vous permet de prégénérer des vues de mappage et de les inclure dans le projet compilé. Pour plus d’informations, consultez [considérations sur les performances (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
+# <a name="pre-generated-mapping-views"></a>Affichages de mappage prégénérés
+Avant que le Entity Framework puisse exécuter une requête ou enregistrer les modifications apportées à la source de données, il doit générer un ensemble de vues de mappage pour accéder à la base de données. Ces vues de mappage sont un ensemble d’Entity SQL instruction qui représentent la base de données d’une manière abstraite et font partie des métadonnées qui sont mises en cache par domaine d’application. Si vous créez plusieurs instances du même contexte dans le même domaine d’application, elles réutiliseront les vues de mappage des métadonnées mises en cache au lieu de les régénérer. Étant donné que la génération de vues de mappage représente une part importante du coût global d’exécution de la première requête, la Entity Framework vous permet de prégénérer des vues de mappage et de les inclure dans le projet compilé. Pour plus d’informations, consultez  [Considérations sur les performances (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
 
-## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Génération de mappage des vues avec l’édition Community EF Power Tools
+## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Génération de vues de mappage avec EF Power Tools Community Edition
 
-Pour prégénérer des vues le plus simple consiste à utiliser le [EF Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition). Une fois que vous avez installé les outils Power avoir une option de menu pour générer des vues, comme indiqué ci-dessous.
+Le moyen le plus simple de prégénérer des vues consiste à utiliser [EF Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition). Une fois que les outils Power Tools sont installés, vous disposez d’une option de menu pour générer des vues, comme indiqué ci-dessous.
 
--   Pour **Code First** modèles avec le bouton droit sur le fichier de code qui contient votre classe DbContext.
--   Pour **Entity Framework Designer** modèles avec le bouton droit sur votre fichier EDMX.
+-   Pour **Code First** modèles, cliquez avec le bouton droit sur le fichier de code qui contient votre classe DbContext.
+-   Pour les modèles du **Concepteur EF** , cliquez avec le bouton droit sur votre fichier edmx.
 
 ![générer des vues](~/ef6/media/generateviews.png)
 
-Une fois le processus est terminé vous offrira une classe similaire à ce qui suit généré
+Une fois le processus terminé, vous disposez d’une classe similaire à la suivante : générée
 
 ![Vues générées](~/ef6/media/generatedviews.png)
 
-Désormais, lorsque vous exécutez votre application EF utilise cette classe pour charger des vues en fonction des besoins. Si votre modèle change et vous ne ré-générez pas de cette classe EF lève une exception.
+Désormais, lorsque vous exécutez votre application EF, vous utilisez cette classe pour charger les affichages selon les besoins. Si votre modèle est modifié et que vous ne générez pas à nouveau cette classe, EF lèvera une exception.
 
-## <a name="generating-mapping-views-from-code---ef6-onwards"></a>Génération de mappage des vues à partir du Code - EF6 et versions ultérieures
+## <a name="generating-mapping-views-from-code---ef6-onwards"></a>Génération de vues de mappage à partir du code-EF6
 
-Les autres pour générer des vues consiste à utiliser les API Entity Framework fournit. Lorsque vous utilisez cette méthode que vous avez la possibilité de sérialiser les vues mais vous le souhaitez, mais vous devez également charger les vues vous-même.
+L’autre façon de générer des vues consiste à utiliser les API fournies par EF. Lorsque vous utilisez cette méthode, vous avez la possibilité de sérialiser les vues comme vous le souhaitez, mais vous devez également charger les vues vous-même.
 
 > [!NOTE]
-> **EF6 et versions ultérieures uniquement** -les API présentés dans cette section ont été introduits dans Entity Framework 6. Si vous utilisez une version antérieure, que ces informations ne s’applique pas.
+> **EF6 uniquement** : les API présentées dans cette section ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, ces informations ne s’appliquent pas.
 
 ### <a name="generating-views"></a>Génération de vues
 
-Les API pour générer des vues se trouvent sur la classe System.Data.Entity.Core.Mapping.StorageMappingItemCollection. Vous pouvez récupérer une StorageMappingCollection pour un contexte à l’aide d’un ObjectContext MetadataWorkspace. Si vous utilisez la nouvelle API DbContext, puis vous pouvez y accéder à l’aide de la IObjectContextAdapter comme ci-dessous, dans ce code, nous avons une instance de votre DbContext dérivée appelée dbContext :
+Les API permettant de générer des vues se trouvent sur la classe System. Data. Entity. Core. Mapping. StorageMappingItemCollection. Vous pouvez récupérer un StorageMappingCollection pour un contexte à l’aide du MetadataWorkspace d’un ObjectContext. Si vous utilisez l’API DbContext plus récente, vous pouvez y accéder à l’aide du IObjectContextAdapter comme ci-dessous. dans ce code, nous disposons d’une instance de votre DbContext dérivée appelée dbContext :
 
 ``` csharp
     var objectContext = ((IObjectContextAdapter) dbContext).ObjectContext;
@@ -45,31 +45,31 @@ Les API pour générer des vues se trouvent sur la classe System.Data.Entity.Cor
                                                                         .GetItemCollection(DataSpace.CSSpace);
 ```
 
-Une fois que vous avez StorageMappingItemCollection puis vous pouvez accéder aux méthodes GenerateViews et ComputeMappingHashValue.
+Une fois que vous avez le StorageMappingItemCollection, vous pouvez accéder aux méthodes GenerateViews et ComputeMappingHashValue.
 
 ``` csharp
     public Dictionary\<EntitySetBase, DbMappingView> GenerateViews(IList<EdmSchemaError> errors)
     public string ComputeMappingHashValue()
 ```
 
-La première méthode crée un dictionnaire avec une entrée pour chaque vue dans le mappage de conteneur. La deuxième méthode calcule une valeur de hachage pour le mappage de conteneur unique et est utilisée lors de l’exécution pour valider que le modèle n’a pas changé dans la mesure où les vues ont été préalablement générés. Remplacements des deux méthodes sont fournies pour les scénarios complexes impliquant plusieurs mappages de conteneur.
+La première méthode crée un dictionnaire avec une entrée pour chaque vue dans le mappage de conteneur. La deuxième méthode calcule une valeur de hachage pour le mappage de conteneur unique et est utilisée au moment de l’exécution pour valider le fait que le modèle n’a pas été modifié depuis que les vues ont été prégénérées. Les substitutions des deux méthodes sont fournies pour les scénarios complexes impliquant plusieurs mappages de conteneur.
 
-Lors de la génération de vues vous appelez la méthode GenerateViews, puis écrire EntitySetBase et DbMappingView résultants. Vous devez également stocker le hachage généré par la méthode ComputeMappingHashValue.
+Lors de la génération d’affichages, vous devez appeler la méthode GenerateViews, puis écrire les EntitySetBase et DbMappingView résultants. Vous devrez également stocker le hachage généré par la méthode ComputeMappingHashValue.
 
 ### <a name="loading-views"></a>Chargement des vues
 
-Pour charger les vues générées par la méthode GenerateViews, vous pouvez fournir EF avec une classe qui hérite de la classe abstraite DbMappingViewCache. DbMappingViewCache spécifie deux méthodes que vous devez implémenter :
+Afin de charger les vues générées par la méthode GenerateViews, vous pouvez fournir EF avec une classe qui hérite de la classe abstraite DbMappingViewCache. DbMappingViewCache spécifie deux méthodes que vous devez implémenter :
 
 ``` csharp
     public abstract string MappingHashValue { get; }
     public abstract DbMappingView GetView(EntitySetBase extent);
 ```
 
-La propriété MappingHashValue doit retourner le hachage généré par la méthode ComputeMappingHashValue. Lorsque EF est accédant à poser pour les vues, il sera tout d’abord générer et comparer la valeur de hachage du modèle avec le hachage retourné par cette propriété. Si elles ne correspondent pas EF lève une exception EntityCommandCompilationException.
+La propriété MappingHashValue doit retourner le hachage généré par la méthode ComputeMappingHashValue. Quand EF va demander des vues, il commence par générer et comparer la valeur de hachage du modèle avec le hachage retourné par cette propriété. Si elles ne correspondent pas, EF lèvera une exception EntityCommandCompilationException.
 
-La méthode GetView acceptera une EntitySetBase et vous devez renvoyer un DbMappingVIew contenant EntitySql qui a été généré pour qui a été associé à la EntitySetBase donné dans le dictionnaire généré par la méthode GenerateViews. Si la demande à EF pour une vue que vous n’avez pas puis GetView doit retourner null.
+La méthode GetView accepte un EntitySetBase et vous devez retourner un DbMappingVIew contenant le EntitySql généré pour qui était associé à l’EntitySetBase donné dans le dictionnaire généré par la méthode GenerateViews. Si EF demande une vue que vous n’avez pas, GetView doit retourner la valeur null.
 
-Voici un extrait de DbMappingViewCache qui est généré avec les outils Power Tools, comme décrit ci-dessus, que nous voyons comment stocker et récupérer le EntitySql requis.
+Voici un extrait du DbMappingViewCache généré avec les Power Tools comme décrit ci-dessus. dans ce cas, nous voyons un moyen de stocker et de récupérer les EntitySql requis.
 
 ``` csharp
     public override string MappingHashValue
@@ -117,10 +117,10 @@ Voici un extrait de DbMappingViewCache qui est généré avec les outils Power T
     }
 ```
 
-Pour que l’utilisation d’EF votre DbMappingViewCache vous ajouter utilisent le DbMappingViewCacheTypeAttribute, en spécifiant le contexte dans lequel il a été créé pour. Dans le code ci-dessous, nous associons la BlogContext avec la classe MyMappingViewCache.
+Pour que EF utilise votre DbMappingViewCache, ajoutez use the DbMappingViewCacheTypeAttribute, en spécifiant le contexte pour lequel il a été créé. Dans le code ci-dessous, nous associons BlogContext à la classe MyMappingViewCache.
 
 ``` csharp
     [assembly: DbMappingViewCacheType(typeof(BlogContext), typeof(MyMappingViewCache))]
 ```
 
-Pour des scénarios plus complexes, les instances de cache de vue de mappage peuvent être fournis en spécifiant une fabrique de cache de vue de mappage. Cela est possible en implémentant la classe abstraite System.Data.Entity.Infrastructure.MappingViews.DbMappingViewCacheFactory. L’instance de la fabrique de cache de vue de mappage qui est utilisée peut être récupérée ou définie à l’aide de la StorageMappingItemCollection.MappingViewCacheFactoryproperty.
+Pour les scénarios plus complexes, vous pouvez fournir des instances de cache de vue de mappage en spécifiant une fabrique de cache de vue de mappage. Pour ce faire, vous pouvez implémenter la classe abstraite System. Data. Entity. infrastructure. MappingViews. DbMappingViewCacheFactory. L’instance de la vue de mise en cache de la vue de mappage qui est utilisée peut être extraite ou définie à l’aide de StorageMappingItemCollection. MappingViewCacheFactoryproperty.

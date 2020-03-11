@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: ea469b9b7199cc767b2d0da1a5999026f938d087
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656257"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417568"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Définition de valeurs explicites pour les propriétés générées
 
@@ -18,7 +18,7 @@ Une propriété générée est une propriété dont la valeur est générée (so
 Il peut arriver que vous souhaitiez définir une valeur explicite pour une propriété générée, au lieu d’en générer une.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) sur GitHub.
 
 ## <a name="the-model"></a>Le modèle
 

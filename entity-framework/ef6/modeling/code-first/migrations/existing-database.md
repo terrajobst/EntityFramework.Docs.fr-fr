@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
 ms.openlocfilehash: eb7948eafb1322cabcf69b47bd5411f762fe8498
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182583"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418992"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>Migrations Code First avec une base de données existante
 > [!NOTE]
@@ -67,7 +67,7 @@ Dans ce scénario, nous avons besoin de migrations pour pouvoir créer la totali
 3.  Exécutez la commande **Update-Database** dans la console du gestionnaire de package. Cette opération applique la migration InitialCreate à la base de données. Dans la mesure où la migration réelle ne contient pas de modifications (car nous les commentons temporairement), elle ajoute simplement une ligne au \_\_table MigrationsHistory indiquant que cette migration a déjà été appliquée.
 4.  Annulez les marques de commentaire du code dans la méthode up. Cela signifie que lorsque cette migration est appliquée aux bases de données futures, le schéma qui existait déjà dans la base de données locale sera créé par les migrations.
 
-## <a name="things-to-be-aware-of"></a>Éléments à connaître
+## <a name="things-to-be-aware-of"></a>Éléments à prendre en considération
 
 Vous devez connaître quelques éléments à prendre en compte lors de l’utilisation de migrations sur une base de données existante.
 

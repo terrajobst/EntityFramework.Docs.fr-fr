@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
 ms.openlocfilehash: 4b3eee20ff238864b94ef4edfb97c1bae0713300
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181789"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419602"
 ---
 # <a name="databinding-with-winforms"></a>Liaison de liaison avec WinForms
 Cette procédure pas à pas montre comment lier des types POCO à des contrôles Windows Forms (WinForms) dans un formulaire maître/détail. L’application utilise Entity Framework pour remplir les objets avec les données de la base de données, effectuer le suivi des modifications et conserver les données dans la base de données.
@@ -17,7 +17,7 @@ Le modèle définit deux types qui participent à une relation un-à-plusieurs 
 
 Les captures d’écran et les listes de codes de cette procédure pas à pas sont extraites de Visual Studio 2013 mais vous pouvez effectuer cette procédure pas à pas avec Visual Studio 2012 ou Visual Studio 2010.
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez installer Visual Studio 2013, Visual Studio 2012 ou Visual Studio 2010.
 
@@ -25,7 +25,7 @@ Si vous utilisez Visual Studio 2010, vous devez également installer NuGet. Pour
 
 ## <a name="create-the-application"></a>Création de l’application
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **fenêtres** dans le volet gauche et **Windows FormsApplication** dans le volet droit
 -   Entrez **WinFormswithEFSample** comme nom
@@ -36,7 +36,7 @@ Si vous utilisez Visual Studio 2010, vous devez également installer NuGet. Pour
 -   Dans Explorateur de solutions, cliquez avec le bouton droit sur le projet **WinFormswithEFSample**
 -   Sélectionnez **gérer les packages NuGet...**
 -   Dans la boîte de dialogue gérer les packages NuGet, sélectionnez l’onglet **en ligne** et choisissez le package **EntityFramework** .
--   Cliquez sur **installer**  
+-   Cliquez sur **Installer**.  
     > [!NOTE]
     > En plus de l’assembly EntityFramework, une référence à System. ComponentModel. DataAnnotations est également ajoutée. Si le projet a une référence à System. Data. Entity, il sera supprimé lors de l’installation du package EntityFramework. L’assembly System. Data. Entity n’est plus utilisé pour les applications Entity Framework 6.
 
@@ -171,7 +171,7 @@ En général, lorsque vous ciblez une base de données existante, elle est déj�
 Le serveur de base de données installé avec Visual Studio diffère selon la version de Visual Studio que vous avez installée :
 
 -   Si vous utilisez Visual Studio 2010, vous allez créer une base de données SQL Express.
--   Si vous utilisez Visual Studio 2012, vous allez créer une base de données de [base de données locale](https://msdn.microsoft.com/library/hh510202.aspx).
+-   Si vous utilisez Visual Studio 2012, vous allez créer une base de [données de base](https://msdn.microsoft.com/library/hh510202.aspx) de données locale.
 
 Commençons par générer la base de données.
 
@@ -278,9 +278,9 @@ Ajoutez les classes définies dans le modèle en tant que sources de données po
 -   Dans la fenêtre choisir un type de source de données, sélectionnez **objet** , puis cliquez sur **suivant** .
 -   Dans la boîte de dialogue Sélectionner les objets de données, dérouler les **WinFormswithEFSample** deux fois et sélectionner une **catégorie** il n’est pas nécessaire de sélectionner la source de données du produit, car nous y accéderons via la propriété du produit sur la source de données de catégorie.
 
-    ![Source de données](~/ef6/media/datasource.png)
+    ![source de données](~/ef6/media/datasource.png)
 
--   Cliquez sur **Terminer**.
+-   Cliquez sur **Terminer.**
     Si la fenêtre sources de données ne s’affiche pas, sélectionnez **Afficher-&gt; autres sources de données Windows-&gt;**
 -   Appuyez sur l’icône d’épingle pour que la fenêtre sources de données ne soit pas masquée automatiquement. Vous devrez peut-être cliquer sur le bouton Actualiser si la fenêtre était déjà visible.
 

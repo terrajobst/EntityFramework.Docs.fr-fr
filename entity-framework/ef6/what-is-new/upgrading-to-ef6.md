@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 29958ae5-85d3-4585-9ba6-550b8ec9393a
 ms.openlocfilehash: 4395a9c117a6cf38e7fc08f11ee689d6fffa6fed
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182100"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419653"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>Mise à niveau vers Entity Framework 6
 
@@ -64,13 +64,13 @@ Les espaces de noms pour DbContext et les types Code First n’ont pas changé. 
 
 Les types tels que ObjectContext qui étaient précédemment dans System. Data. Entity. dll ont été déplacés vers de nouveaux espaces de noms. Cela signifie que vous devrez peut-être mettre à jour vos directives *using* ou *Import* pour créer des EF6.
 
-La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Exemple :
+La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Par exemple :
 
 - System. Data. EntityException = > System. Data. **Entity. Core**. EntityException  
 - System. Data. Objects. ObjectContext = > System. Data. **Entity. Core**. Objects. ObjectContext  
 - System. Data. Objects. DataClasses. RelationshipManager = > System. Data. **Entity. Core**. Objets. DataClasses. RelationshipManager  
 
-Ces types se trouvent dans les espaces de noms de *base* , car ils ne sont pas utilisés directement pour la plupart des applications basées sur DbContext. Certains types qui faisaient partie de System. Data. Entity. dll sont toujours utilisés communément et directement pour les applications basées sur DbContext et n’ont donc pas été déplacés dans les espaces de noms de *base* . Il s'agit des paramètres suivants :
+Ces types se trouvent dans les espaces de noms de *base* , car ils ne sont pas utilisés directement pour la plupart des applications basées sur DbContext. Certains types qui faisaient partie de System. Data. Entity. dll sont toujours utilisés communément et directement pour les applications basées sur DbContext et n’ont donc pas été déplacés dans les espaces de noms de *base* . Ces règles sont les suivantes :
 
 - System. Data. EntityState = > System. Data. **Entité**. EntityState  
 - System. Data. Objects. DataClasses. EdmFunctionAttribute = > System. Data. **Entité. DbFunctionAttribute**  

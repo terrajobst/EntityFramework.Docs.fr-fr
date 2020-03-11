@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
 ms.openlocfilehash: f44f0648678af5a70e5171d69692bde1c1d5e0eb
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655526"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416741"
 ---
 # <a name="design-time-dbcontext-creation"></a>Création de DbContext au moment de la conception
 
@@ -36,14 +36,14 @@ Si DbContext ne peut pas être obtenu à partir du fournisseur de services d’a
 
 ## <a name="from-a-design-time-factory"></a>À partir d’une fabrique au moment de la conception
 
-Vous pouvez également indiquer aux outils comment créer votre DbContext en implémentant l’interface `IDesignTimeDbContextFactory<TContext>` : si une classe qui implémente cette interface est trouvée dans le même projet que le `DbContext` dérivé ou dans le projet de démarrage de l’application, les outils ignorent l’autre méthodes de création de DbContext et d’utilisation de la fabrique au moment du Design.
+Vous pouvez également indiquer aux outils comment créer votre DbContext en implémentant l’interface `IDesignTimeDbContextFactory<TContext>` : si une classe qui implémente cette interface est trouvée dans le même projet que le `DbContext` dérivé ou dans le projet de démarrage de l’application, les outils ignorent les autres méthodes de création de DbContext et utilisent la fabrique au moment du Design.
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/CommandLine/BloggingContextFactory.cs)]
 
 > [!NOTE]
 > Le paramètre `args` est actuellement inutilisé. [Un problème][8] est survenu lors du suivi de la capacité à spécifier des arguments au moment du design à partir des outils.
 
-Une fabrique au moment de la conception peut être particulièrement utile si vous devez configurer la DbContext différemment pour le moment de la conception plutôt qu’au moment de l’exécution, si le constructeur `DbContext` prend des paramètres supplémentaires qui ne sont pas inscrits dans DI, si vous n’utilisez pas de DI du tout ou si, pour une raison quelconque, vous préférez ne pas avoir de méthode `BuildWebHost` dans la classe `Main` de votre application ASP.NET Core.
+Une fabrique au moment de la conception peut être particulièrement utile si vous devez configurer l’DbContext différemment pour le moment de la conception plutôt qu’au moment de l’exécution, si le constructeur `DbContext` prend des paramètres supplémentaires qui ne sont pas inscrits dans DI, si vous n’utilisez pas de DI du tout ou si vous préférez ne pas avoir de méthode `BuildWebHost` dans la classe `Main` de votre application ASP.NET Core.
 
   [1]: xref:core/managing-schemas/migrations/index
   [2]: xref:core/miscellaneous/configuring-dbcontext

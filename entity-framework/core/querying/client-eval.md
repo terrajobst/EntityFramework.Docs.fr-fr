@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 5cfb05041f04246712fb699f58b407f70a75ce92
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: e01bd146c4dfe7a8d36b641cb52ae366fddd8239
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445968"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417759"
 ---
 # <a name="client-vs-server-evaluation"></a>Comparaison entre client et serveur
 
@@ -19,7 +19,7 @@ En règle générale, Entity Framework Core tente d’évaluer autant que possib
 > Avant la version 3,0, Entity Framework Core l’évaluation du client prise en charge n’importe où dans la requête. Pour plus d’informations, consultez la [section versions précédentes](#previous-versions).
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Évaluation du client dans la projection de niveau supérieur
 
@@ -54,7 +54,7 @@ Dans ce cas, vous pouvez choisir explicitement l’évaluation du client en appe
 - **Passage d’arguments de constante à la méthode**: ce cas se produit généralement à l’aide de `this` dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
 - **Autres constantes**: si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
 
-## <a name="previous-versions"></a>Versions antérieures
+## <a name="previous-versions"></a>Versions précédentes
 
 La section suivante s’applique aux versions de EF Core antérieures à 3,0.
 

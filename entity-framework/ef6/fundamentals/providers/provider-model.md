@@ -4,11 +4,11 @@ author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
 ms.openlocfilehash: 8bda3f51e8934f2add862c30e60f1185f068c515
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181613"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419359"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Modèle de fournisseur Entity Framework 6
 
@@ -16,7 +16,7 @@ Le modèle de fournisseur Entity Framework permet d’utiliser des Entity Framew
 
 Certaines modifications ont été apportées à la façon dont EF interagit avec les fournisseurs pour permettre la libération d’EF sous une licence Open source. Ces modifications nécessitent la régénération des fournisseurs EF sur les assemblys EF6 avec de nouveaux mécanismes d’inscription du fournisseur.
 
-## <a name="rebuilding"></a>La reconstruction
+## <a name="rebuilding"></a>Reconstruction
 
 Avec EF6, le code de base qui faisait précédemment partie du .NET Framework est désormais fourni en tant qu’assemblys hors bande (OOB). Vous trouverez plus d’informations sur la création d’applications sur EF6 sur la page [mise à jour des applications pour EF6](~/ef6/what-is-new/upgrading-to-ef6.md) . Les fournisseurs devront également être reconstruits à l’aide de ces instructions.
 
@@ -28,7 +28,7 @@ Un fournisseur EF est en fait une collection de services spécifiques au fournis
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF dépend d’un type dérivé de [System. Data. Common. DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour effectuer tous les accès aux bases de données de bas niveau. DbProviderFactory ne fait pas réellement partie d’EF mais est une classe du .NET Framework qui sert de point d’entrée pour les fournisseurs ADO.NET qui peuvent être utilisés par EF, autre O/RMs ou directement par une application pour obtenir des instances de connexions, commandes, paramètres et autres abstractions ADO.NET de manière agnostique du fournisseur. Vous trouverez plus d’informations sur DbProviderFactory dans la [documentation MSDN relative à ADO.net](https://msdn.microsoft.com/library/a6cd7c08.aspx).
+EF dépend d’un type dérivé de [System. Data. Common. DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) pour effectuer tous les accès aux bases de données de bas niveau. DbProviderFactory ne fait pas réellement partie d’EF mais est une classe du .NET Framework qui sert de point d’entrée pour les fournisseurs ADO.NET qui peuvent être utilisés par EF, other O/RMs ou directement par une application pour obtenir des instances de connexions, des commandes, des paramètres et d’autres abstractions ADO.NET de manière indépendante du fournisseur. Vous trouverez plus d’informations sur DbProviderFactory dans la [documentation MSDN relative à ADO.net](https://msdn.microsoft.com/library/a6cd7c08.aspx).
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
@@ -36,7 +36,7 @@ EF dépend d’un type dérivé de DbProviderServices pour fournir des fonctionn
 
 Vous trouverez plus d’informations sur les fonctionnalités fondamentales d’une implémentation de DbProviderServices sur [MSDN](https://msdn.microsoft.com/library/ee789835.aspx). Toutefois, Notez qu’au moment de la rédaction de ces informations n’est pas mis à jour pour EF6, bien que la plupart des concepts soient toujours valides. Les implémentations SQL Server et SQL Server Compact de DbProviderServices sont également consignées dans le code [base open source](https://github.com/aspnet/EntityFramework6/) et peuvent servir de références utiles pour d’autres implémentations.
 
-Dans les versions antérieures d’EF, l’implémentation de DbProviderServices à utiliser a été obtenue directement à partir d’un fournisseur ADO.NET. Cela a été fait en convertissant DbProviderFactory en IServiceProvider et en appelant la méthode GetService. Cela a étroitement couplé le fournisseur EF à DbProviderFactory. Cela a pour effet d’empêcher le déplacement du EF bloqué de la .NET Framework. par conséquent, pour EF6, ce couplage étroit a été supprimé et une implémentation de DbProviderServices est maintenant inscrite directement dans le fichier de configuration de l’application ou dans un code configuration comme décrit plus en détail la section _inscription de DbProviderServices_ ci-dessous.
+Dans les versions antérieures d’EF, l’implémentation de DbProviderServices à utiliser a été obtenue directement à partir d’un fournisseur ADO.NET. Cela a été fait en convertissant DbProviderFactory en IServiceProvider et en appelant la méthode GetService. Cela a étroitement couplé le fournisseur EF à DbProviderFactory. L’EF bloqué empêchant d’être déplacé hors du .NET Framework et par conséquent, pour EF6, ce couplage étroit a été supprimé et une implémentation de DbProviderServices est maintenant inscrite directement dans le fichier de configuration de l’application ou dans une configuration basée sur le code, comme décrit plus en détail la section _Registering DbProviderServices_ ci-dessous.
 
 ## <a name="additional-services"></a>Services supplémentaires
 
@@ -74,7 +74,7 @@ L’implémentation de DbProviderServices à utiliser peut être inscrite dans l
 
 ### <a name="config-file-registration"></a>Inscription dans le fichier config
 
-Le type DbProviderServices à utiliser est inscrit en tant qu’élément de fournisseur dans la liste des fournisseurs de la section entityFramework du fichier de configuration de l’application. Exemple :
+Le type DbProviderServices à utiliser est inscrit en tant qu’élément de fournisseur dans la liste des fournisseurs de la section entityFramework du fichier de configuration de l’application. Par exemple :
 
 ``` xml
 <entityFramework>
@@ -88,7 +88,7 @@ Le _type_ chaîne doit être le nom de type qualifié par un assembly de l’imp
 
 ### <a name="code-based-registration"></a>Inscription basée sur le code
 
-Le démarrage des fournisseurs EF6 peut également être inscrit à l’aide de code. Cela permet l’utilisation d’un fournisseur EF sans aucune modification du fichier de configuration de l’application. Pour utiliser la configuration basée sur le code, une application doit créer une classe DbConfiguration comme décrit dans la [documentation relative à la configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit ensuite appeler SetProviderServices pour inscrire le fournisseur EF. Exemple :
+Le démarrage des fournisseurs EF6 peut également être inscrit à l’aide de code. Cela permet l’utilisation d’un fournisseur EF sans aucune modification du fichier de configuration de l’application. Pour utiliser la configuration basée sur le code, une application doit créer une classe DbConfiguration comme décrit dans la [documentation relative à la configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit ensuite appeler SetProviderServices pour inscrire le fournisseur EF. Par exemple :
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -161,7 +161,7 @@ Il est possible d’inscrire explicitement certains des services de fournisseur 
 
 À compter de EF5, le package NuGet EntityFramework a inscrit automatiquement la fabrique de connexion SQL Express ou la fabrique de connexion de la base de données locale dans le fichier de configuration.
 
-Exemple :
+Par exemple :
 
 ``` xml
 <entityFramework>

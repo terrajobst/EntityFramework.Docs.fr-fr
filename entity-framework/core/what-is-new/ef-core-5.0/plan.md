@@ -3,12 +3,12 @@ title: Planifier Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 01/14/2020
 uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: 0472841fdcd105ec8ea38db062c6768510b8735d
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: c5b7300c61c2f668b6f9393ae51bf9ebddf330a7
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76125381"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417875"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Planifier Entity Framework Core 5,0
 
@@ -27,7 +27,7 @@ EF Core 5,0 est planifiée pour s’exécuter sur toute plateforme .NET 5,0 bas�
 
 EF Core 5,0 ne s’exécutera pas sur .NET Framework.
 
-### <a name="breaking-changes"></a>Modifications avec rupture
+### <a name="breaking-changes"></a>Changements cassants
 
 EF Core 5,0 contiendra des modifications avec rupture, mais celles-ci seront bien moins sévères que dans le cas de EF Core 3,0. Notre objectif est de permettre la mise à jour sans interruption de la grande majorité des applications.
 
@@ -47,11 +47,13 @@ Taille de T-shirt : L
 
 État : en cours
 
-Plusieurs-à-plusieurs est la fonctionnalité la plus demandée (environ 407 votes) sur le backlog GitHub. La prise en charge des relations plusieurs-à-plusieurs peut être divisée en trois domaines principaux :
+Plusieurs-à-plusieurs est la [fonctionnalité la plus demandée](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (environ 407 votes) sur le backlog github.
 
-* Ignore les propriétés de navigation. Celles-ci permettent d’utiliser le modèle pour les requêtes, etc. sans référence à l’entité de table de jointure sous-jacente.
-* Types d’entité de conteneur de propriétés. Celles-ci permettent l’utilisation d’un type CLR standard (par exemple, `Dictionary`) pour les instances d’entité, de sorte qu’un type CLR explicite n’est pas nécessaire pour chaque type d’entité.
-* Sucre pour une configuration facile des relations plusieurs-à-plusieurs.
+La prise en charge des relations plusieurs-à-plusieurs dans leur intégralité est suivie comme [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508). Cela peut être divisé en trois zones principales :
+
+* Ignore les propriétés de navigation. Celles-ci permettent d’utiliser le modèle pour les requêtes, etc. sans référence à l’entité de table de jointure sous-jacente. ([#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003))
+* Types d’entité de conteneur de propriétés. Celles-ci permettent l’utilisation d’un type CLR standard (par exemple, `Dictionary`) pour les instances d’entité, de sorte qu’un type CLR explicite n’est pas nécessaire pour chaque type d’entité. (Stretch pour 5,0 : [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914).)
+* Sucre pour une configuration facile des relations plusieurs-à-plusieurs. (Stretch pour 5,0.)
 
 Nous pensons que le bloqueur le plus significatif pour ceux qui souhaitent une prise en charge de type plusieurs-à-plusieurs ne peut pas utiliser les relations « naturelles », sans faire référence à la table de jointure, dans une logique métier telle que des requêtes. Le type d’entité de la table de jointure peut encore exister, mais il ne doit pas être dans la logique métier. C’est pourquoi nous avons choisi de traiter les propriétés de navigation ignorées pour 5,0.
 
@@ -178,7 +180,7 @@ Dans le cadre de ce travail, nous prévoyons également d’ajouter des compteur
 
 Document en chef : @ajcvickers
 
-Suivi par [#1920](https://github.com/aspnet/EntityFramework.Docs/issues/1920)
+Suivi par [#1920](https://github.com/dotnet/EntityFramework.Docs/issues/1920)
 
 Taille de T-shirt : L
 
@@ -194,7 +196,7 @@ L’idée ici est de faciliter la compréhension de ce qui se passe dans les él
 
 Document en chef : @bricelam
 
-Suivi par [#1675](https://github.com/aspnet/EntityFramework.Docs/issues/1675)
+Suivi par [#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)
 
 Taille de T-shirt : M
 
@@ -206,7 +208,7 @@ L’équipe EF possède également le fournisseur ADO.NET de Microsoft. Data. sq
 
 Document en chef : @ajcvickers
 
-Suivi par des [problèmes dans la documentation référentiel dans le jalon 5,0](https://github.com/aspnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)
+Suivi par des [problèmes dans la documentation référentiel dans le jalon 5,0](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)
 
 Taille de T-shirt : L
 
@@ -254,4 +256,4 @@ En outre, nous considérons toujours les [problèmes les plus votés](https://gi
 
 ## <a name="feedback"></a>Commentaires
 
-Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (thumbs-up) pour ce problème sur GitHub. Ces données sont ensuite chargées dans le [processus de planification](../release-planning.md) de la prochaine version.
+Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite chargées dans le [processus de planification](../release-planning.md) de la prochaine version.

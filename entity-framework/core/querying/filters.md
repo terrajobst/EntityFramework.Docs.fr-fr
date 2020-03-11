@@ -3,12 +3,12 @@ title: 'Filtres de requête globale : EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f4ee9b77411290249e763f9cb8492eea61803e91
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: 9262ff7970b0502945480c673315071cbc3f44b9
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124390"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417728"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -25,7 +25,7 @@ Les filtres de requête globale permet aux prédicats de requête LINQ (expressi
 L’exemple suivant montre comment utiliser les filtres de requête globale pour implémenter des comportements de suppression réversible et d’architecture multilocataire dans un modèle de création de blogs simple.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) sur GitHub.
 
 Tout d’abord définissez les entités :
 
@@ -51,7 +51,7 @@ Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à 
 
 [!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#IgnoreFilters)]
 
-## <a name="limitations"></a>Limitations
+## <a name="limitations"></a>Limites
 
 Les filtres de requête globale présentent les limitations suivantes :
 

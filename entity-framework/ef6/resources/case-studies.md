@@ -1,56 +1,56 @@
 ---
-title: Études de cas pour Entity Framework - EF6
+title: Études de cas pour Entity Framework-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
 ms.openlocfilehash: d7982a3f89ac1e57b48039d828f287adf6dc5068
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490874"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417080"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Études de cas Microsoft pour Entity Framework
-Les études de cas sur cette page mettre en évidence quelques projets de production réel qui employaient Entity Framework.
+Les études de cas sur cette page mettent en évidence quelques projets de production réels qui ont employé Entity Framework.
 > [!NOTE]
-> Les versions détaillées de ces études de cas ne sont plus disponibles sur le site Web Microsoft. Par conséquent, les liens ont été supprimés.
+> Les versions détaillées de ces études de cas ne sont plus disponibles sur le site Web de Microsoft. Par conséquent, les liens ont été supprimés.
 
-## <a name="epicor"></a>Epicor
-Epicor est une société de logiciels d’envergure mondiale (avec les développeurs plus de 400) qui développe des solutions de planification ERP (Enterprise Resource) pour les entreprises dans plus de 150 pays.
-Produit phare, Epicor 9, est basé sur une Architecture orientée services (SOA) à l’aide de .NET Framework.
-Face à nombreuses demandes de client pour fournir la prise en charge de requête LINQ (Language Integrated) et qui veulent également à réduire la charge sur leurs serveurs principaux SQL Server, l’équipe a décidé de mettre à niveau vers Visual Studio 2010 et .NET Framework 4.0.
-À l’aide d’Entity Framework 4.0, ils pouvaient atteindre ces objectifs et de simplifier considérablement le développement et maintenance.
-En particulier, riche T4 prise en charge d’Entity Framework leur permettait de prendre le contrôle de leur code généré et générer automatiquement des fonctionnalités de l’enregistrement des performances telles que les requêtes précompilées et la mise en cache.
+## <a name="epicor"></a>Epicor espèrent accélérer
+Epic est une grande entreprise de logiciels internationale (avec plus de 400 développeurs) qui développe des solutions ERP (Enterprise Resource Planning) pour les entreprises dans plus de 150 pays.
+Leur produit phare, Epicy 9, est basé sur une architecture orientée service (SOA) à l’aide de l' .NET Framework.
+Face à de nombreuses demandes des clients pour assurer la prise en charge de LINQ (Language-Integrated Query) et à réduire la charge sur leurs serveurs SQL principaux, l’équipe a décidé de mettre à niveau vers Visual Studio 2010 et le .NET Framework 4,0.
+À l’aide de la Entity Framework 4,0, ils ont pu atteindre ces objectifs et simplifier de manière considérable le développement et la maintenance.
+En particulier, la prise en charge de T4 enrichie de Entity Framework leur a permis de prendre le contrôle total de leur code généré et de créer automatiquement des fonctionnalités d’économie de performances telles que les requêtes précompilées et la mise en cache.
 
-> « Nous avons effectué des tests de performances récemment avec le code existant, et nous avons pu réduire les demandes vers SQL Server 90 %.
-Cela est dû à ADO.NET Entity Framework 4. » – Études de produits Erik Johnson, vice-président,  
+> «Nous avons récemment effectué des tests de performances avec le code existant et nous avons pu réduire les demandes à SQL Server de 90%.
+Cela est dû à la ADO.NET Entity Framework 4». – Erik Johnson, Vice-Président, recherche de produits  
 
-## <a name="veracity-solutions"></a>Solutions de la véracité
-Avoir acquis un système de logiciels de planification d’événements qui devait être difficiles à maintenir et à étendre à long terme, les Solutions véracité utilisé Visual Studio 2010 au pour réécrire comme une Application d’Internet riche puissante et facile à utiliser basé sur Silverlight 4.
-À l’aide des Services RIA .NET, ils ont été en mesure de générer rapidement une couche de service sur Entity Framework qui éviter la duplication de code et d’autorisation pour la validation courants et de la logique d’authentification au sein des niveaux.  
+## <a name="veracity-solutions"></a>Solutions de véracité
+Après avoir acquis un système logiciel de planification d’événements qui devait être difficile à gérer et s’étendre sur les solutions de véracité à long terme, a utilisé Visual Studio 2010 pour le réécrire sous la forme d’une application Internet puissante et facile à utiliser, basée sur Silverlight 4.
+En utilisant les services RIA .NET, ils pouvaient créer rapidement une couche de service sur les Entity Framework qui ont évité la duplication de code et étaient autorisées pour la logique de validation et d’authentification commune à travers les niveaux.  
 
-> « Nous étions vendues sur Entity Framework lors de sa première apparition et Entity Framework 4 s’est avérée être encore meilleures.
-Outils a été amélioré, et il est plus facile à manipuler les fichiers .edmx qui définissent le modèle conceptuel, le modèle de stockage et le mappage entre ces modèles... Avec Entity Framework, je peux obtenir cette couche d’accès aux données fonctionne en une journée et générez-le out en entrant le long.
-Entity Framework est notre couche d’accès aux données de fait ; Je ne sais pas pourquoi tout le monde n’aurait pas l’utiliser. » – Joe McBride, Senior Developer
+> «Nous avons été vendus sur le Entity Framework lors de sa première introduction, et le Entity Framework 4 s’est encore mieux amélioré.
+Les outils sont améliorés et il est plus facile de manipuler les fichiers. edmx qui définissent le modèle conceptuel, le modèle de stockage et le mappage entre ces modèles... Avec la Entity Framework, je peux faire en sorte que cette couche d’accès aux données fonctionne dans une journée, et la mettre en œuvre pendant que je passe.
+La Entity Framework est notre couche d’accès aux données de facto ; Je ne sais pas pourquoi quiconque ne l’utiliserait pas.» – Joe McBride, développeur senior
 
-## <a name="nec-display-solutions-of-america"></a>Solutions NEC affichage d’Amérique
-NEC souhaitait accéder au marché à des fins publicitaires en fonction du lieu de numérique avec une solution à bénéficier des annonceurs et propriétaires de réseau et à augmenter sa propre chiffre d’affaires.
-Pour ce faire, il lancé une paire d’applications web qui automatisent les processus manuels requis dans une campagne de publicité traditionnel.
-Les sites ont été créés à l’aide d’ASP.NET, Silverlight 3, AJAX et WCF, ainsi que de Entity Framework dans la couche d’accès aux données pour communiquer avec SQL Server 2008.
+## <a name="nec-display-solutions-of-america"></a>Solutions d’affichage NEC d’Amérique
+NEC souhaite accéder au marché pour la publicité sur place numérique, avec une solution pour tirer parti des annonceurs et des propriétaires de réseaux et augmenter ses revenus.
+Pour ce faire, il a lancé une paire d’applications Web qui automatisent les processus manuels requis dans une campagne ad traditionnelle.
+Les sites ont été créés à l’aide de ASP.NET, Silverlight 3, AJAX et WCF, ainsi que les Entity Framework dans la couche d’accès aux données pour communiquer avec SQL Server 2008.
 
-> « Avec SQL Server, nous avons pensé nous aurions pu obtenir le débit que nous avions besoin pour traiter les annonceurs et les réseaux avec des informations en temps réel et la fiabilité afin de garantir que les informations contenues dans nos applications critiques sont toujours accessibles »-Mike Corcoran, Directeur informatique
+> « Avec SQL Server, nous avons pensé que nous pourrions obtenir le débit nécessaire pour servir les annonceurs et les réseaux avec des informations en temps réel et la fiabilité pour s’assurer que les informations de nos applications stratégiques seraient toujours disponibles »-Mike Corcoran, Directeur informatique
 
-## <a name="darwin-dimensions"></a>Dimensions de Darwin
-À l’aide d’une large gamme de produits Microsoft, l’équipe de Darwin la valeur pour Evolver - un portail en ligne avatar que les clients peuvent utiliser pour créer les avatars étonnantes, plus réalistes pour une utilisation dans les pages de mise en réseau sociales, des animations et des jeux de créer.
-Les avantages de productivité d’Entity Framework et en extrayant des composants tels que Windows Workflow Foundation (WF) et Windows Server AppFabric (un cache d’application hautement évolutive en mémoire), l’équipe a été en mesure de livrer un produit incroyable dans moins de 35 % temps de développement.
-En dépit de membres de l’équipe divisé en plusieurs pays, l’équipe suivant un processus de développement agile avec les versions hebdomadaires.
+## <a name="darwin-dimensions"></a>Dimensions Darwin
+À l’aide d’un large éventail de technologies Microsoft, l’équipe de Darwin a défini la création d’un portail d’avatar en ligne que les consommateurs pourraient utiliser pour créer des avatars époustouflants et réalistes à utiliser dans les jeux, les animations et les pages de réseaux sociaux.
+Avec les avantages de productivité de la Entity Framework et l’extraction de composants tels que Windows Workflow Foundation (WF) et Windows Server AppFabric (cache d’application en mémoire hautement évolutif), l’équipe a pu fournir un produit étonnant en moins de 35% heure du développement.
+Bien que les membres de l’équipe soient répartis sur plusieurs pays, l’équipe suit un processus de développement agile avec des versions hebdomadaires.
 
- > « Nous essayer de ne pas créer de technologie considèrent. En tant que start-up, il est essentiel que nous exploiter la technologie qui enregistre le temps et argent.
- .NET a le choix pour le développement rapide et économique. » – Zachary Olsen, architecte  
+ > «Nous essayons de ne pas créer de technologie pour les besoins de la technologie. Au démarrage, il est essentiel de tirer parti de la technologie qui permet de gagner du temps et de l’argent.
+ .NET était le choix idéal pour un développement rapide et rentable.» – Zachary Olsen, architecte  
 
-## <a name="silverware"></a>Argenterie
-Avec plus de 15 ans d’expérience dans le développement de point de vente (PDV) solutions pour les groupes de restaurant petites et moyennes entreprises, l’équipe de développement chez argenterie entrepris d’améliorer leur produit avec davantage de fonctionnalités de niveau entreprise afin d’attirer plus grande chaînes de restaurant.
-À l’aide de la dernière version des outils de développement de Microsoft, ils ont été en mesure de générer la nouvelle solution quatre fois plus rapidement que jamais.
-Nouvelles fonctionnalités clés telles que LINQ et Entity Framework simplifié la déplacer à partir de Crystal Reports vers SQL Server 2008 et SQL Server Reporting Services (SSRS) pour le stockage de leurs données et besoins de rapport.
+## <a name="silverware"></a>Silver
+Avec plus de 15 ans d’expérience dans le développement de solutions de point de vente (POS) pour les groupes de restaurants de petite et moyenne taille, l’équipe de développement de Silver est chargée d’améliorer son produit avec davantage de fonctionnalités de niveau entreprise afin d’attirer davantage chaînes de restaurant.
+À l’aide de la dernière version des outils de développement de Microsoft, ils ont pu créer la nouvelle solution quatre fois plus rapidement qu’auparavant.
+Les nouvelles fonctionnalités clés telles que LINQ et le Entity Framework simplifient le passage de Crystal Reports à SQL Server 2008 et SQL Server Reporting Services (SSRS) pour leurs besoins en matière de stockage de données et de création de rapports.
 
-> « Gestion des données efficace est essentielle à la réussite d’argenterie – et c’est pourquoi nous avons décidé d’adopter SQL Reporting ». -Nicholas Romanidis, directeur informatique / d’ingénierie logicielle
+> « La gestion efficace des données est essentielle au succès des Silvers, et c’est pourquoi nous avons décidé d’adopter SQL Reporting ». -Étant Nicholas Romanidis, directeur informatique/génie logiciel

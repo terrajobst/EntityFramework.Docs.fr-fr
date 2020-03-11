@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
 ms.openlocfilehash: 9bd644461f50a7eff1006cb8866ca9a3b08b6b8d
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181717"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419532"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>Procédure pas à pas des entités de suivi automatique
 > [!IMPORTANT]
@@ -29,7 +29,7 @@ Cette procédure pas à pas effectue les actions suivantes :
 
 Nous allons utiliser Database First dans cette procédure pas à pas, mais les mêmes techniques s’appliquent également à Model First.
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous avez besoin d’une version récente de Visual Studio.
 
@@ -42,7 +42,7 @@ Le serveur de base de données installé avec Visual Studio diffère selon la ve
 
 Commençons par générer la base de données.
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Vue-&gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner **Microsoft SQL Server** comme source de données

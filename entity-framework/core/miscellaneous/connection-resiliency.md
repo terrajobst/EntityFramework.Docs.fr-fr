@@ -1,27 +1,27 @@
 ---
-title: Résilience des connexions - EF Core
+title: Résilience de connexion-EF Core
 author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 6d8cf117dfd94524a53e10bb4a23c2a44c4c8e7b
-ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
+ms.openlocfilehash: 07646e6ead845c38537945a03367ac7f50784236
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56459170"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416640"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
-Résilience des connexions retente automatiquement les commandes de base de données ayant échoué. La fonctionnalité peut être utilisée avec une base de données en fournissant une « stratégie d’exécution », qui encapsule la logique nécessaire pour détecter les erreurs et réessayez les commandes. Fournisseurs EF Core peuvent fournir des stratégies d’exécution adaptées à leurs conditions d’échec de la base de données spécifique et les stratégies de nouvelle tentative optimal.
+La résilience des connexions réessaie automatiquement les commandes de base de données ayant échoué. La fonctionnalité peut être utilisée avec n’importe quelle base de données en fournissant une « stratégie d’exécution », qui encapsule la logique nécessaire pour détecter les échecs et les commandes de nouvelle tentative. Les fournisseurs de EF Core peuvent fournir des stratégies d’exécution adaptées à leurs conditions d’échec de base de données spécifiques et aux stratégies de nouvelle tentative optimales.
 
-Par exemple, le fournisseur SQL Server inclut une stratégie d’exécution qui est conçu spécialement pour SQL Server (y compris SQL Azure). Il connaît les types d’exception qui peuvent être retentées et a des valeurs par défaut sensibles pour le nombre maximal de tentatives, délai entre les nouvelles tentatives, etc.
+Par exemple, le fournisseur SQL Server inclut une stratégie d’exécution spécifiquement adaptée à SQL Server (y compris SQL Azure). Il reconnaît les types d’exception qui peuvent être retentés et qui ont des valeurs par défaut sensibles pour les nouvelles tentatives, le délai entre les nouvelles tentatives, etc.
 
-Une stratégie d’exécution est spécifiée lorsque vous configurez les options pour votre contexte. Il s’agit généralement dans le `OnConfiguring` méthode de votre contexte dérivé :
+Une stratégie d’exécution est spécifiée lors de la configuration des options de votre contexte. En général, il s’agit de la méthode `OnConfiguring` de votre contexte dérivé :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#OnConfiguring)]
 
-ou dans `Startup.cs` pour une application ASP.NET Core :
+ou `Startup.cs` pour une application ASP.NET Core :
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
@@ -35,7 +35,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="custom-execution-strategy"></a>Stratégie d’exécution personnalisée
 
-Il existe un mécanisme pour inscrire une stratégie d’exécution personnalisée de votre choix si vous souhaitez modifier les valeurs par défaut.
+Il existe un mécanisme permettant d’inscrire votre propre stratégie d’exécution personnalisée si vous souhaitez modifier les valeurs par défaut.
 
 ``` csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,15 +47,15 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 }
 ```
 
-## <a name="execution-strategies-and-transactions"></a>Transactions et les stratégies d’exécution
+## <a name="execution-strategies-and-transactions"></a>Stratégies et transactions d’exécution
 
-Une stratégie d’exécution qui réessaie automatiquement en cas d’échec doit être en mesure de lire chaque opération dans un bloc de nouvelle tentative échoue. Lorsque de nouvelles tentatives sont activées, chaque opération que vous effectuez par le biais de EF Core devient sa propre opération de nouvelle tentative. Autrement dit, chaque requête et chaque appel à `SaveChanges()` va être retentée en tant qu’unité si une défaillance passagère se produit.
+Une stratégie d’exécution qui effectue automatiquement de nouvelles tentatives en cas de défaillance doit pouvoir lire chaque opération dans un bloc de nouvelle tentative qui échoue. Lorsque les nouvelles tentatives sont activées, chaque opération que vous effectuez via EF Core devient sa propre opération reproductibles. Autrement dit, chaque requête et chaque appel à `SaveChanges()` sont retentés en tant qu’unité en cas de défaillance temporaire.
 
-Toutefois, si votre code lance une transaction à l’aide de `BeginTransaction()` vous définissez votre propre groupe d’opérations qui doivent être traités en tant qu’unité, et tous les éléments à l’intérieur de la transaction doit être lu une défaillance intervient. Vous recevrez une exception semblable à ce qui suit si vous essayez d’effectuer lors de l’utilisation d’une stratégie d’exécution :
+Toutefois, si votre code lance une transaction à l’aide de `BeginTransaction()` vous définissez votre propre groupe d’opérations qui doivent être traitées comme une unité, et tout ce qui se trouve à l’intérieur de la transaction doit être lu en cas de défaillance. Si vous tentez d’effectuer cette opération lors de l’utilisation d’une stratégie d’exécution, vous recevrez une exception semblable à la suivante :
 
-> InvalidOperationException: La stratégie d’exécution configurée « SqlServerRetryingExecutionStrategy » ne prend pas en charge les transactions lancées par l’utilisateur. Utilisez la stratégie d’exécution retournée par « DbContext.Database.CreateExecutionStrategy() » pour exécuter toutes les opérations de la transaction en tant qu’ensemble pouvant être retenté.
+> InvalidOperationException : la stratégie d’exécution configurée’SqlServerRetryingExecutionStrategy’ne prend pas en charge les transactions initiées par l’utilisateur. Utilisez la stratégie d’exécution retournée par « DbContext.Database.CreateExecutionStrategy() » pour exécuter toutes les opérations de la transaction en tant qu’ensemble pouvant être retenté.
 
-La solution consiste à appeler manuellement la stratégie d’exécution avec un délégué représentant tout ce qui doit être exécutée. Si une défaillance passagère se produit, la stratégie d’exécution appelle à nouveau le délégué.
+La solution consiste à appeler manuellement la stratégie d’exécution avec un délégué représentant tout ce qui doit être exécuté. En cas d’échec passager, la stratégie d’exécution appelle de nouveau le délégué.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#ManualTransaction)]
 
@@ -63,47 +63,47 @@ Cette approche peut également être utilisée avec les transactions ambiantes.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#AmbientTransaction)]
 
-## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Échec de validation de transaction et le problème de l’idempotence
+## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Échec de validation de transaction et problème idempotence
 
-En règle générale, en cas d’échec de la connexion la transaction en cours est annulée. Toutefois, si la connexion est perdue pendant la transaction étant validées résultant état de la transaction est inconnu. Consultez ce [billet de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) pour plus d’informations.
+En général, en cas d’échec de la connexion, la transaction actuelle est annulée. Toutefois, si la connexion est abandonnée pendant la validation de la transaction, l’état résultant de la transaction est inconnu. 
 
-Par défaut, la stratégie d’exécution va retenter l’opération comme si la transaction a été annulée, mais si elle n’est pas le cas cela entraîne une exception si le nouvel état de la base de données n’est pas compatible ou pourrait entraîner **une altération des données** si le opération ne repose pas sur un état particulier, par exemple lors de l’insertion d’une nouvelle ligne avec les valeurs de clé généré automatiquement.
+Par défaut, la stratégie d’exécution retentera l’opération comme si la transaction était restaurée, mais si ce n’est pas le cas, cela entraînera une exception si le nouvel état de la base de données est incompatible ou risque d' **endommager les données** si l’opération ne repose pas sur un état particulier, par exemple lors de l’insertion d’une nouvelle ligne avec des valeurs de clé générées
 
-Il existe plusieurs façons de gérer cela.
+Il existe plusieurs façons de traiter ce problème.
 
-### <a name="option-1---do-almost-nothing"></a>Option 1 - (presque) nothing
+### <a name="option-1---do-almost-nothing"></a>Option 1-do (presque) Nothing
 
-La probabilité d’un échec de connexion lors de la validation de transaction est faible, elle peut être acceptable pour votre application de simplement échouer si cette condition se produit réellement.
+La probabilité d’un échec de connexion pendant la validation de la transaction est faible, ce qui peut être acceptable pour votre application d’échouer si cette condition se produit réellement.
 
-Toutefois, vous devez éviter d’utiliser des clés générées par le magasin afin de garantir qu’une exception est levée au lieu d’ajouter une ligne en double. Envisagez d’utiliser une valeur GUID générée par le client ou un générateur de valeur de côté client.
+Toutefois, vous devez éviter d’utiliser des clés générées par le magasin afin de garantir qu’une exception est levée au lieu d’ajouter une ligne dupliquée. Envisagez d’utiliser une valeur de GUID générée par le client ou un générateur de valeur côté client.
 
-### <a name="option-2---rebuild-application-state"></a>Option 2 : état de l’application reconstruction
+### <a name="option-2---rebuild-application-state"></a>Option 2-reconstruire l’état de l’application
 
-1. Ignorer actuel `DbContext`.
-2. Créer un nouveau `DbContext` et restaurer l’état de votre application à partir de la base de données.
-3. Informer l’utilisateur que la dernière opération ne peut-être pas terminée avec succès.
+1. Ignore le `DbContext`actif.
+2. Créez un nouveau `DbContext` et restaurez l’état de votre application à partir de la base de données.
+3. Informe l’utilisateur que la dernière opération n’a peut-être pas été effectuée avec succès.
 
-### <a name="option-3---add-state-verification"></a>Option 3 : ajouter la vérification de l’état
+### <a name="option-3---add-state-verification"></a>Option 3-Ajouter une vérification de l’État
 
-Pour la plupart des opérations qui modifient l’état de la base de données, il est possible d’ajouter du code qui vérifie si elle a réussi. Entity Framework fournit une méthode d’extension pour simplifier ce processus - `IExecutionStrategy.ExecuteInTransaction`.
+Pour la plupart des opérations qui modifient l’état de la base de données, il est possible d’ajouter du code qui vérifie si elle a réussi. EF fournit une méthode d’extension pour faciliter ce `IExecutionStrategy.ExecuteInTransaction`.
 
-Cette méthode commence une transaction est validée et accepte également une fonction dans le `verifySucceeded` paramètre qui est appelé lorsqu’une erreur temporaire se produit pendant la validation de transaction.
+Cette méthode commence et valide une transaction et accepte également une fonction dans le paramètre `verifySucceeded` qui est appelée lorsqu’une erreur temporaire se produit pendant la validation de la transaction.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#Verification)]
 
 > [!NOTE]
-> Ici `SaveChanges` est appelé avec `acceptAllChangesOnSuccess` définie sur `false` afin d’éviter la modification de l’état de la `Blog` entité à `Unchanged` si `SaveChanges` réussit. Cela permet de retenter l’opération même si la validation échoue et la transaction est restaurée.
+> Ici `SaveChanges` est appelée avec `acceptAllChangesOnSuccess` défini sur `false` pour éviter de modifier l’état de l’entité `Blog` à `Unchanged` si la `SaveChanges` est réussie. Cela permet à de retenter la même opération si la validation échoue et que la transaction est restaurée.
 
 ### <a name="option-4---manually-track-the-transaction"></a>Option 4 : suivre manuellement la transaction
 
-Si vous avez besoin d’utiliser des clés générées par le magasin ou besoin d’un moyen générique de gestion des échecs de validation qui ne dépend de l’opération effectuée chaque transaction peut être attribuée à un ID qui est vérifié lors de la validation échoue.
+Si vous devez utiliser des clés générées par le magasin ou si vous avez besoin d’une méthode générique pour gérer les échecs de validation qui ne dépendent pas de l’opération effectuée, il se peut qu’un ID qui est vérifié lorsque la validation échoue.
 
-1. Ajouter une table à la base de données utilisé pour suivre l’état des transactions.
-2. Insérer une ligne dans la table au début de chaque transaction.
-3. Si la connexion échoue lors de la validation, vérifier la présence de la ligne correspondante dans la base de données.
-4. Si la validation est réussie, supprimez la ligne correspondante pour éviter la croissance de la table.
+1. Ajoutez une table à la base de données utilisée pour suivre l’état des transactions.
+2. Insérez une ligne dans la table au début de chaque transaction.
+3. Si la connexion échoue pendant la validation, vérifiez la présence de la ligne correspondante dans la base de données.
+4. Si la validation réussit, supprimez la ligne correspondante pour éviter la croissance de la table.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#Tracking)]
 
 > [!NOTE]
-> Vérifiez que le contexte utilisé pour la vérification a une stratégie d’exécution définie comme la connexion est susceptible d’échouer lors de la vérification en cas d’échec lors de la validation de transaction.
+> Assurez-vous que le contexte utilisé pour la vérification a une stratégie d’exécution définie, car la connexion risque d’échouer à nouveau lors de la vérification en cas d’échec lors de la validation de la transaction.

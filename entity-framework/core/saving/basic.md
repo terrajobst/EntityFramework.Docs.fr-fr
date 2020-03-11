@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 6f72458504a9dbe99038af7cfd23b6991258f6b8
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 066d67d6104316832a33f5a3648f1f2fa6cc9c50
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197778"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417634"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
 Découvrez comment ajouter, modifier et supprimer des données à l’aide de vos classes de contexte et d’entité.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) sur GitHub.
 
 ## <a name="adding-data"></a>Ajout de données
 
@@ -25,7 +25,7 @@ Utilisez la méthode *DbSet.Add* pour ajouter de nouvelles instances de vos clas
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](related-data.md). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
+> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](related-data.md). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Mise à jour des données
 

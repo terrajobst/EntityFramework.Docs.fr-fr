@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
 ms.openlocfilehash: b3c4c35d636caf4ddd251dd78e026587abc57d42
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182613"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418888"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrations Code First dans les environnements d’équipe
 > [!NOTE]
@@ -107,11 +107,11 @@ Developer \#1 et Developer \#2 modifient désormais le modèle EF dans leur base
 
 C’est un jour de chance pour les développeurs \#1, car ils envoient d’abord leurs modifications. Étant donné que personne d’autre n’a archivé depuis qu’il a synchronisé son référentiel, il peut simplement envoyer les modifications sans effectuer de fusion.
 
-![Soumettre](~/ef6/media/submit.png)
+![Submit](~/ef6/media/submit.png)
 
 Il est maintenant temps pour les développeurs \#2 de les envoyer. Ils ne sont pas si heureux. Étant donné qu’un autre utilisateur a soumis des modifications depuis qu’il a été synchronisé, il devra extraire les modifications et les fusionner. Le système de contrôle de code source sera probablement en mesure de fusionner automatiquement les modifications au niveau du code, car elles sont très simples. L’état du référentiel local du développeur \#2 après la synchronisation est illustré dans le graphique suivant. 
 
-![Collecter](~/ef6/media/pull.png)
+![Extraction](~/ef6/media/pull.png)
 
 À ce niveau, le développeur \#2 peut exécuter **Update-Database** qui détectera la nouvelle migration **AddRating** (qui n’a pas été appliquée à la base de données du \#2 du développeur) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
 

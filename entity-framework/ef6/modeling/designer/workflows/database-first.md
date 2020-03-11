@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
 ms.openlocfilehash: d40cff4ddccf43a394ef4f244653372a5a89b05a
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182448"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418356"
 ---
 # <a name="database-first"></a>Database First
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Database First à l’aide de Entity Framework. Database First vous permet de rétroconcevoir un modèle à partir d’une base de données existante. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
@@ -20,7 +20,7 @@ Cette vidéo fournit une introduction au développement Database First à l’ai
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Vous devez avoir au moins Visual Studio 2010 ou Visual Studio 2012 installé pour effectuer cette procédure pas à pas.
 
@@ -35,13 +35,13 @@ En général, lorsque vous ciblez une base de données existante, elle est déj�
 Le serveur de base de données installé avec Visual Studio diffère selon la version de Visual Studio que vous avez installée :
 
 -   Si vous utilisez Visual Studio 2010, vous allez créer une base de données SQL Express.
--   Si vous utilisez Visual Studio 2012, vous allez créer une base de données de [base de données locale](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx).
+-   Si vous utilisez Visual Studio 2012, vous allez créer une base de [données de base](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) de données locale.
 
  
 
 Commençons par générer la base de données.
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Vue-&gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner Microsoft SQL Server comme source de données
@@ -83,7 +83,7 @@ CREATE TABLE [dbo].[Posts] (
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Database First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **DatabaseFirstSample** comme nom
@@ -127,7 +127,7 @@ Tout d’abord, nous devons récupérer la dernière version de Entity Framework
     *si vous n’avez pas l’option **gérer les packages NuGet...** vous devez installer la [dernière version de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   Sélectionner l’onglet **en ligne**
 -   Sélectionner le package **EntityFramework**
--   Cliquez sur **installer**
+-   Cliquez sur **Installer**.
 
 Ensuite, nous devons permuter notre modèle pour générer le code qui utilise l’API DbContext, qui a été introduite dans les versions ultérieures de Entity Framework.
 

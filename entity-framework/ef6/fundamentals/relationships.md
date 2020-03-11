@@ -3,19 +3,20 @@ title: Relations, propriétés de navigation et clés étrangères-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: cc7160f2d0ab7ac0c6009f820441c88590cacfaf
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 892e872e3cb11ea95084cf6d9ab43c8d500bc0de
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655862"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419352"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, propriétés de navigation et clés étrangères
-Cette rubrique donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre les entités. Il fournit également des conseils sur la façon de mapper et manipuler les relations.
+
+Cet article donne une vue d’ensemble de la façon dont Entity Framework gère les relations entre les entités. Il fournit également des conseils sur la façon de mapper et manipuler les relations.
 
 ## <a name="relationships-in-ef"></a>Relations dans EF
 
-Dans les bases de données relationnelles, les relations (également appelées associations) entre les tables sont définies via des clés étrangères. Une clé étrangère (FK) est une colonne ou une combinaison de colonnes utilisée pour établir et appliquer un lien entre les données de deux tables. Il existe généralement trois types de relations : un-à-un, un-à-plusieurs et plusieurs-à-plusieurs. Dans une relation un-à-plusieurs, la clé étrangère est définie sur la table qui représente la fin de la relation. La relation plusieurs-à-plusieurs implique la définition d’une troisième table (appelée table de jonction ou de jointure), dont la clé primaire est composée des clés étrangères des deux tables associées. Dans une relation un-à-un, la clé primaire agit en outre comme une clé étrangère et il n’existe pas de colonne clé étrangère distincte pour l’une ou l’autre des tables.
+Dans les bases de données relationnelles, les relations (également appelées associations) entre les tables sont définies via des clés étrangères. On appelle « clé étrangère » une colonne ou une combinaison de colonnes utilisée pour établir et conserver une liaison entre les données de deux tables. Il existe généralement trois types de relations : un-à-un, un-à-plusieurs et plusieurs-à-plusieurs. Dans une relation un-à-plusieurs, la clé étrangère est définie sur la table qui représente la fin de la relation. La relation plusieurs-à-plusieurs implique la définition d’une troisième table (appelée table de jonction ou de jointure), dont la clé primaire est composée des clés étrangères des deux tables associées. Dans une relation un-à-un, la clé primaire agit en outre comme une clé étrangère et il n’existe pas de colonne clé étrangère distincte pour l’une ou l’autre des tables.
 
 L’illustration suivante montre deux tables qui participent à une relation un-à-plusieurs. La table **course** est la table dépendante, car elle contient la colonne **DepartmentID** qui la lie à la table **Department** .
 
@@ -93,7 +94,7 @@ Les exemples suivants montrent comment utiliser les propriétés de clé étrang
   course.Department = department;
   ```
 
-- Pour supprimer la relation, affectez à la propriété de navigation la valeur `null`. Si vous utilisez Entity Framework qui est basé sur .NET 4,0, la terminaison connexe doit être chargée avant de lui affecter la valeur null. Exemple :   
+- Pour supprimer la relation, affectez à la propriété de navigation la valeur `null`. Si vous utilisez Entity Framework qui est basé sur .NET 4,0, la terminaison connexe doit être chargée avant de lui affecter la valeur null. Par exemple :   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;
@@ -166,7 +167,7 @@ Dans Entity Framework vous utilisez couramment des propriétés de navigation po
 
 Dans une association indépendante, la terminaison connexe d'un objet dépendant est interrogée en fonction de la valeur de clé étrangère actuellement présente dans la base de données. Toutefois, si la relation a été modifiée et que la propriété de référence sur l’objet dépendant pointe vers un objet principal différent qui est chargé dans le contexte de l’objet, Entity Framework essaiera de créer une relation, car elle est définie sur le client.
 
-## <a name="managing-concurrency"></a>Gestion de l'accès concurrentiel
+## <a name="managing-concurrency"></a>Gérer l'accès concurrentiel
 
 Dans les associations de clé étrangère et indépendantes, les contrôles d’accès concurrentiel sont basés sur les clés d’entité et d’autres propriétés d’entité définies dans le modèle. Lorsque vous utilisez le concepteur EF pour créer un modèle, affectez la valeur **fixed** à l’attribut `ConcurrencyMode` pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Quand vous utilisez Code First pour définir un modèle, utilisez l’annotation `ConcurrencyCheck` sur les propriétés dont vous souhaitez vérifier l’accès concurrentiel. Lorsque vous utilisez Code First vous pouvez également utiliser l’annotation `TimeStamp` pour spécifier que la propriété doit être vérifiée pour l’accès concurrentiel. Vous ne pouvez avoir qu’une seule propriété Timestamp dans une classe donnée. Code First mappe cette propriété à un champ qui n’accepte pas les valeurs NULL dans la base de données.
 

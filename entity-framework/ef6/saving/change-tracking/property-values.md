@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
 ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182141"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416966"
 ---
 # <a name="working-with-property-values"></a>Utilisation des valeurs de propriété
 Dans la plupart des Entity Framework effectuent le suivi de l’État, les valeurs d’origine et les valeurs actuelles des propriétés de vos instances d’entité. Toutefois, il peut y avoir certains cas, tels que des scénarios déconnectés, où vous souhaitez afficher ou manipuler les informations d’EF sur les propriétés. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -55,7 +55,7 @@ Quand une valeur de propriété est définie de cette façon, la modification es
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Obtention et définition de la valeur actuelle d’une propriété non mappée  
 
-La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lue. Un exemple de propriété non mappée peut être une propriété RssLink sur le blog. Cette valeur peut être calculée en fonction du BlogId et ne doit donc pas être stockée dans la base de données. Exemple :  
+La valeur actuelle d’une propriété qui n’est pas mappée à la base de données peut également être lue. Un exemple de propriété non mappée peut être une propriété RssLink sur le blog. Cette valeur peut être calculée en fonction du BlogId et ne doit donc pas être stockée dans la base de données. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -71,7 +71,7 @@ using (var context = new BloggingContext())
 
 La valeur actuelle peut également être définie si la propriété expose un accesseur Set.  
 
-La lecture des valeurs des propriétés non mappées est utile lors de l’exécution de Entity Framework validation des propriétés non mappées. Pour la même raison, les valeurs actuelles peuvent être lues et définies pour les propriétés des entités qui ne sont pas actuellement suivies par le contexte. Exemple :  
+La lecture des valeurs des propriétés non mappées est utile lors de l’exécution de Entity Framework validation des propriétés non mappées. Pour la même raison, les valeurs actuelles peuvent être lues et définies pour les propriétés des entités qui ne sont pas actuellement suivies par le contexte. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -167,7 +167,7 @@ Les valeurs actuelles sont les valeurs que les propriétés de l’entité conti
 
 ## <a name="setting-current-or-original-values-from-another-object"></a>Définition des valeurs actuelles ou d’origine à partir d’un autre objet  
 
-Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un autre objet. Exemple :  
+Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un autre objet. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -214,7 +214,7 @@ Notez que seules les propriétés qui sont définies sur des valeurs différente
 
 ## <a name="setting-current-or-original-values-from-a-dictionary"></a>Définition des valeurs actuelles ou d’origine à partir d’un dictionnaire  
 
-Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un dictionnaire ou d’une autre structure de données. Exemple :  
+Les valeurs actuelles ou d’origine d’une entité suivie peuvent être mises à jour en copiant des valeurs à partir d’un dictionnaire ou d’une autre structure de données. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -242,7 +242,7 @@ Utilisez la propriété OriginalValues au lieu de la propriété CurrentValues p
 
 ## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>Définition des valeurs actuelles ou d’origine à partir d’un dictionnaire à l’aide de la propriété  
 
-Une alternative à l’utilisation de CurrentValues ou OriginalValues, comme indiqué ci-dessus, consiste à utiliser la méthode Property pour définir la valeur de chaque propriété. Cela peut être préférable lorsque vous devez définir les valeurs des propriétés complexes. Exemple :  
+Une alternative à l’utilisation de CurrentValues ou OriginalValues, comme indiqué ci-dessus, consiste à utiliser la méthode Property pour définir la valeur de chaque propriété. Cela peut être préférable lorsque vous devez définir les valeurs des propriétés complexes. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -270,7 +270,7 @@ Dans l’exemple ci-dessus, les propriétés complexes sont accessibles à l’a
 
 ## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Création d’un objet cloné contenant les valeurs actuelles, d’origine ou de base de données  
 
-L’objet DbPropertyValues retourné par CurrentValues, OriginalValues ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone contient les valeurs de propriété de l’objet DbPropertyValues utilisé pour le créer. Exemple :  
+L’objet DbPropertyValues retourné par CurrentValues, OriginalValues ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité. Ce clone contient les valeurs de propriété de l’objet DbPropertyValues utilisé pour le créer. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -287,7 +287,7 @@ L’objet cloné peut être utile pour résoudre les problèmes liés aux mises 
 
 ## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Obtention et définition des valeurs actuelles ou d’origine des propriétés complexes  
 
-La valeur d’un objet complexe entier peut être lue et définie à l’aide de la méthode Property, tout comme pour une propriété primitive. En outre, vous pouvez accéder à l’objet complexe et lire ou définir les propriétés de cet objet, ou même un objet imbriqué. Voici quelques exemples :  
+La valeur d’un objet complexe entier peut être lue et définie à l’aide de la méthode Property, tout comme pour une propriété primitive. En outre, vous pouvez accéder à l’objet complexe et lire ou définir les propriétés de cet objet, ou même un objet imbriqué. Voici quelques exemples :  
 
 ``` csharp
 using (var context = new BloggingContext())

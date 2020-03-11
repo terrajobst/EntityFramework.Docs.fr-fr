@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
 ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824830"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419058"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent avec VB.NET
 Code First vous permet de définir votre modèle à l’aide de classes C\# ou VB.NET. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent. Cette procédure pas à pas montre comment effectuer la configuration de l’API Fluent à l’aide de VB.NET.
@@ -28,7 +28,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données.
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstVBSample** comme nom

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
 ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921781"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418167"
 ---
 # <a name="designer-table-splitting"></a>Fractionnement des tables du concepteur
 Cette procédure pas à pas montre comment mapper plusieurs types d’entité à une seule table en modifiant un modèle avec le Entity Framework Designer (concepteur EF).
@@ -19,7 +19,7 @@ L’illustration suivante montre les fenêtres principales qui sont utilisées l
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>Configuration requise
+## <a name="prerequisites"></a>Conditions préalables requises
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
@@ -58,7 +58,7 @@ Dans cette section, vous allez fractionner l’entité **Person** en deux entit�
 -   Cliquez avec le bouton droit sur une zone vide de l’aire de conception, pointez sur **Ajouter nouveau**, puis cliquez sur **entité**.
     La boîte **de dialogue nouvelle** d’entité s’affiche.
 -   Tapez **HireInfo** pour le nom de l' **entité** et **PersonID** pour le nom de la **propriété de clé** .
--   Cliquez sur **OK**.
+-   Cliquez sur  **OK**.
 -   Un nouveau type d'entité est créé et affiché sur l'aire de conception.
 -   Sélectionnez la propriété **hiredate** de la **personne** type d’entité, puis appuyez sur **CTRL + X** .
 -   Sélectionnez l’entité **HireInfo** et appuyez sur les touches **Ctrl + V** .
@@ -126,7 +126,7 @@ Les instructions T-SQL suivantes ont été exécutées sur la base de données *
 
 -   L' **instruction INSERT** suivante a été exécutée à la suite de l’exécution du contexte. SaveChanges () et combine les données des entités **Person** et **HireInfo**
 
-    ![Insertion](~/ef6/media/insert.png)
+    ![Insérer](~/ef6/media/insert.png)
 
 -   La commande **Select** suivante a été exécutée à la suite de l’exécution du contexte. People. FirstOrDefault () et sélectionne uniquement les colonnes mappées à **Person**
 

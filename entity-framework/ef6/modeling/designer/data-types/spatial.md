@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
 ms.openlocfilehash: a9c54fbc14dd02ce5d4d91449a0d5f9e72f7f0f7
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182503"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418538"
 ---
 # <a name="spatial---ef-designer"></a>Concepteur spatial-EF
 > [!NOTE]
@@ -31,7 +31,7 @@ Cette vidéo montre comment mapper des types spatiaux avec l’Entity Framework 
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.wmv) | [MP4](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-mp4video-spatialwithdesigner.m4v) | [WMV (zip)](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez avoir installé Visual Studio 2012, Ultimate, Premium, Professional ou Web Express Edition.
 
@@ -62,7 +62,7 @@ L'assistant exécute les actions suivantes :
 
 1.  Cliquez avec le bouton droit sur une zone vide de l’aire de conception, sélectionnez **Ajouter-&gt; entité**, la boîte de dialogue nouvelle entité s’affiche.
 2.  Spécifiez **University** comme nom de type et spécifiez **UniversityID** pour le nom de la propriété de clé, laissez le type **Int32**
-3.  Cliquez sur **OK**.
+3.  Cliquez sur **OK**
 4.  Cliquez avec le bouton droit sur l’entité, puis sélectionnez **Ajouter une nouvelle&gt; propriété scalaire**
 5.  Renommez la nouvelle propriété en **Name**
 6.  Ajoutez une autre propriété scalaire et renommez-la **emplacement** ouvrir le fenêtre Propriétés et remplacez le type de la nouvelle propriété par **Geography**

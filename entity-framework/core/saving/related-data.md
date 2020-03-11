@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 45c7b8e4bfa4ce7967ad76ef4a7d4818b0d3aebf
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197882"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417544"
 ---
 # <a name="saving-related-data"></a>Enregistrement des données associées
 
 En plus des entités isolées, vous pouvez également utiliser les relations définies dans votre modèle.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) sur GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Ajout d’un graphique de nouvelles entités
 
@@ -27,7 +27,7 @@ Dans l’exemple suivant, le blog et trois billets associés sont tous insérés
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
+> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="adding-a-related-entity"></a>Ajout d’une entité associée
 

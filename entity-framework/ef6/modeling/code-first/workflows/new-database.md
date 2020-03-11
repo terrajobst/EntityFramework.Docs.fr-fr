@@ -4,14 +4,14 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 ms.openlocfilehash: d540fc6e84049f345ae22998f94c309e0be73fc3
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182570"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418811"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First à une nouvelle base de données
-Cette vidéo et la procédure pas à pas suivante fournissent une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent.
+Cette vidéo et la procédure pas à pas suivante fournissent une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First vous permet de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent.
 
 ## <a name="watch-the-video"></a>Regarder la vidéo
 Cette vidéo fournit une introduction au développement Code First ciblant une base de données. Ce scénario inclut une base de données cible qui n’existe pas et que Code First va créer, ou une base de données vide où Code First ajoutera des tables. Code First va tout d’abord vous permettre de définir votre modèle à l’aide de classes C\# ou VB.Net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide des attributs dans vos classes et propriétés ou à l’aide d’une API Fluent.
@@ -20,7 +20,7 @@ Cette vidéo fournit une introduction au développement Code First ciblant une b
 
 **Vidéo**: [wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [MP4](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [WMV (zip)](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Vous devez avoir au moins Visual Studio 2010 ou Visual Studio 2012 installé pour effectuer cette procédure pas à pas.
 
@@ -30,7 +30,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données.
 
--   Ouvrez Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier&gt; nouveau&gt;...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstNewDatabaseSample** comme nom
@@ -74,7 +74,7 @@ Nous commençons à utiliser les types de la Entity Framework, donc nous devons 
     Remarque : Si vous n’avez pas la **gestion des packages NuGet...** option vous devez installer la [dernière version de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   Sélectionner l’onglet **en ligne**
 -   Sélectionner le package **EntityFramework**
--   Cliquez sur **installer**
+-   Cliquez sur **Installer**.
 
 Ajoutez une instruction using pour System. Data. Entity en haut de Program.cs.
 

@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: 2dce1a50-7d84-4856-abf6-2763dd9be99d
 uid: efcore-and-ef6/porting/port-code
 ms.openlocfilehash: 0a99eac2091c07d8bcf7d4e5e4bdc2afcaeee810
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181213"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419636"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portage d’un modèle basé sur du code EF6 vers EF Core
 
@@ -25,13 +25,13 @@ Il est parfait de conserver le package NuGet EF6 (EntityFramework) installé, ca
 
 ## <a name="swap-namespaces"></a>Permuter les espaces de noms
 
-La plupart des API que vous utilisez dans EF6 se trouvent dans l’espace de noms `System.Data.Entity` (et les sous-espaces de noms associés). La première modification du code consiste à basculer vers l’espace de noms `Microsoft.EntityFrameworkCore`. En général, vous démarrez avec votre fichier de code de contexte dérivé, puis vous travaillez à partir de là, en résolvant les erreurs de compilation à mesure qu’elles se produisent.
+La plupart des API que vous utilisez dans EF6 se trouvent dans l’espace de noms `System.Data.Entity` (et les sous-espaces de noms connexes). La première modification du code consiste à basculer vers l’espace de noms `Microsoft.EntityFrameworkCore`. En général, vous démarrez avec votre fichier de code de contexte dérivé, puis vous travaillez à partir de là, en résolvant les erreurs de compilation à mesure qu’elles se produisent.
 
 ## <a name="context-configuration-connection-etc"></a>Configuration du contexte (connexion, etc.)
 
-Comme décrit dans [la section s’assurer EF Core fonctionne pour votre application](ensure-requirements.md), EF Core a moins de magie pour détecter la base de données à laquelle se connecter. Vous devez remplacer la méthode `OnConfiguring` sur votre contexte dérivé et utiliser l’API spécifique du fournisseur de base de données pour configurer la connexion à la base de données.
+Comme décrit dans [la section s’assurer EF Core fonctionne pour votre application](ensure-requirements.md), EF Core a moins de magie pour détecter la base de données à laquelle se connecter. Vous devez substituer la méthode `OnConfiguring` sur votre contexte dérivé et utiliser l’API spécifique du fournisseur de base de données pour configurer la connexion à la base de données.
 
-La plupart des applications EF6 stockent la chaîne de connexion dans le fichier des applications `App/Web.config`. Dans EF Core, vous lisez cette chaîne de connexion à l’aide de l’API `ConfigurationManager`. Vous devrez peut-être ajouter une référence à l’assembly de Framework `System.Configuration` pour pouvoir utiliser cette API.
+La plupart des applications EF6 stockent la chaîne de connexion dans le fichier d' `App/Web.config` des applications. Dans EF Core, vous lisez cette chaîne de connexion à l’aide de l’API `ConfigurationManager`. Vous devrez peut-être ajouter une référence à l’assembly du Framework `System.Configuration` pour pouvoir utiliser cette API.
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -54,7 +54,7 @@ public class BloggingContext : DbContext
 
 Il n’existe pas vraiment un moyen pratique de porter des migrations EF6 existantes vers EF Core.
 
-Si possible, il est préférable de supposer que toutes les migrations précédentes de EF6 ont été appliquées à la base de données, puis de commencer à migrer le schéma à partir de ce point à l’aide de EF Core. Pour ce faire, vous devez utiliser la commande `Add-Migration` pour ajouter une migration une fois que le modèle est porté sur EF Core. Vous supprimez ensuite tout le code des méthodes `Up` et `Down` de la migration par génération de modèles automatique. Les migrations suivantes seront comparées au modèle lors de la génération de modèles automatique de la migration initiale.
+Si possible, il est préférable de supposer que toutes les migrations précédentes de EF6 ont été appliquées à la base de données, puis de commencer à migrer le schéma à partir de ce point à l’aide de EF Core. Pour ce faire, utilisez la commande `Add-Migration` pour ajouter une migration une fois que le modèle est porté sur EF Core. Vous supprimez ensuite tout le code des méthodes `Up` et `Down` de la migration par génération de modèles automatique. Les migrations suivantes seront comparées au modèle lors de la génération de modèles automatique de la migration initiale.
 
 ## <a name="test-the-port"></a>Tester le port
 

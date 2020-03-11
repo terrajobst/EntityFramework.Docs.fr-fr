@@ -6,17 +6,17 @@ ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
 ms.openlocfilehash: 1ba9352d261f1c131b0d70f8cdad2128d9afaefe
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824466"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416762"
 ---
 # <a name="reverse-engineering"></a>Rétroconception
 
 L’ingénierie à rebours est le processus de génération de modèles automatique des classes de type d’entité et une classe DbContext basée sur un schéma de base de données. Il peut être effectué à l’aide de la commande `Scaffold-DbContext` des outils de la console du gestionnaire de package EF Core (PMC) ou de la commande `dotnet ef dbcontext scaffold` des outils de l’interface de ligne de commande (CLI) .NET.
 
-## <a name="installing"></a>Installation de .
+## <a name="installing"></a>Installation
 
 Avant l’ingénierie à rebours, vous devez installer les [Outils PMC](xref:core/miscellaneous/cli/powershell) (Visual Studio uniquement) ou les [Outils CLI](xref:core/miscellaneous/cli/dotnet). Pour plus d’informations, consultez les liens.
 
@@ -121,7 +121,7 @@ Ensuite, il utilise les informations de schéma pour créer un modèle de EF Cor
 
 Enfin, le modèle est utilisé pour générer le code. Les classes de type d’entité, l’API Fluent et les annotations de données correspondantes sont échafaudées afin de recréer le même modèle à partir de votre application.
 
-## <a name="limitations"></a>Limitations
+## <a name="limitations"></a>Limites
 
 * Tout ce qui concerne un modèle peut être représenté à l’aide d’un schéma de base de données. Par exemple, les informations sur les [**hiérarchies d’héritage**](../modeling/inheritance.md), les [**types détenus**](../modeling/owned-entities.md)et le [**fractionnement de table**](../modeling/table-splitting.md) ne sont pas présentes dans le schéma de la base de données. Pour cette raison, ces constructions ne feront jamais l’effet d’une rétroconception.
 * En outre, **certains types de colonne** peuvent ne pas être pris en charge par le fournisseur EF Core. Ces colonnes ne sont pas incluses dans le modèle.

@@ -4,17 +4,17 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
 ms.openlocfilehash: bdb0df969c33d5ad3f103bfa9af6002c9c2bb9b3
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813561"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418321"
 ---
 # <a name="designer-cud-stored-procedures"></a>Procédures stockées CUD du concepteur
 
 Cette procédure pas à pas explique comment mapper les opérations Create\\Insert, Update et Delete (CUD) d’un type d’entité aux procédures stockées à l’aide de l’Entity Framework Designer (concepteur EF).  Par défaut, le Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  
 
-Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
+Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Par exemple :
 
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
@@ -29,7 +29,7 @@ Lors du mappage des opérations CUD à des procédures stockées, les considéra
 - Si le serveur génère la valeur de clé primaire pour la ligne insérée, vous devez mapper cette valeur à la propriété de clé de l’entité. Dans l’exemple qui suit, la procédure stockée **InsertPerson** retourne la clé primaire nouvellement créée dans le cadre du jeu de résultats de la procédure stockée. La clé primaire est mappée à la clé d’entité (**PersonID**) à l’aide de la **&lt;ajouter des liaisons de résultats&gt;**  fonctionnalité du concepteur EF.
 - Les appels de procédure stockée sont mappés 1:1 avec les entités dans le modèle conceptuel. Par exemple, si vous implémentez une hiérarchie d’héritage dans votre modèle conceptuel, puis mappez les procédures stockées CUD pour les entités **parent** (base) et **enfant** (dérivées), l’enregistrement des modifications **enfants** appellera uniquement les procédures stockées de l' **enfant**, mais pas les appels des procédures stockées du **parent**.
 
-## <a name="prerequisites"></a>Configuration requise
+## <a name="prerequisites"></a>Conditions préalables requises
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
@@ -44,7 +44,7 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 - Entrez **CUDSProcsSample** comme nom.
 - Sélectionnez **OK**.
 
-## <a name="create-a-model"></a>Créer un modèle
+## <a name="create-a-model"></a>Création d'un modèle
 
 - Dans Explorateur de solutions, cliquez avec le bouton droit sur le nom du projet, puis sélectionnez **Ajouter-&gt; nouvel élément**.
 - Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.

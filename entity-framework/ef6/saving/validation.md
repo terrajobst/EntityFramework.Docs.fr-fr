@@ -4,13 +4,13 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
 ms.openlocfilehash: 2c5e6f1b3f60862124bafcac42e8859a7591f8e6
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812152"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416959"
 ---
-# <a name="data-validation"></a>Validation de données
+# <a name="data-validation"></a>Validation des données
 > [!NOTE]
 > **EF 4.1 uniquement** : les fonctionnalités, les API, etc. présentées dans cette page ont été introduites dans Entity Framework 4,1. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas
 
@@ -54,7 +54,7 @@ public string Title { get; set; }
 
 Sans aucune modification de code ou de balisage supplémentaire dans l’application, une application MVC existante effectue la validation côté client, même en générant dynamiquement un message à l’aide des noms de propriété et d’annotation.
 
-![Figure 1](~/ef6/media/figure01.png)
+![figure 1](~/ef6/media/figure01.png)
 
 Dans la méthode de publication de cette vue Create View, Entity Framework est utilisé pour enregistrer le nouveau blog dans la base de données, mais la validation côté client de MVC est déclenchée avant que l’application n’atteigne ce code.
 
@@ -158,7 +158,7 @@ Contrairement à la validation fournie par l’API Fluent, ce résultat de valid
 
 ![Figure 2](~/ef6/media/figure02.png)
 
-## <a name="dbcontextvalidateentity"></a>DbContext. ValidateEntity
+## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
 
 `DbContext` a une méthode substituable appelée `ValidateEntity`. Lorsque vous appelez `SaveChanges`, Entity Framework appelle cette méthode pour chaque entité dans son cache dont l’État n’est pas `Unchanged`. Vous pouvez placer la logique de validation directement ici ou même utiliser cette méthode pour appeler, par exemple, la méthode `Blog.Validate` ajoutée dans la section précédente.
 
@@ -235,7 +235,7 @@ Voici quelques autres points à prendre en compte lors de l’utilisation de la 
   - Validation au niveau de la propriété sur les propriétés de type complexe
   - Validation au niveau du type sur le type complexe, y compris `IValidatableObject` validation sur le type complexe
 
-## <a name="summary"></a>Récapitulatif
+## <a name="summary"></a>Résumé
 
 L’API de validation de Entity Framework s’exécute très bien avec la validation côté client dans MVC, mais vous n’avez pas à vous appuyer sur la validation côté client. Entity Framework s’occupe de la validation côté serveur pour DataAnnotations ou les configurations que vous avez appliquées avec l’API Fluent code First.
 

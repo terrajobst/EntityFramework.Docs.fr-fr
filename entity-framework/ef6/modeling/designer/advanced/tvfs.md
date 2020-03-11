@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 ms.openlocfilehash: 35684196dcd7b708a8feeb1eca3096e8d4e555ec
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182532"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418696"
 ---
 # <a name="table-valued-functions-tvfs"></a>Fonctions table (TVF)
 > [!NOTE]
@@ -28,7 +28,7 @@ Les TVF sont très similaires aux procédures stockées avec une différence cl�
 
 [Wmv](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv) | [MP4](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v) | [WMV (zip)](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
 
-## <a name="pre-requisites"></a>Conditions préalables
+## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez :
 
@@ -38,7 +38,7 @@ Pour effectuer cette procédure pas à pas, vous devez :
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
-1.  Ouvrez Visual Studio
+1.  Ouvrez Visual Studio.
 2.  Dans le menu **fichier** , pointez sur **nouveau**, puis cliquez sur **projet** .
 3.  Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
 4.  Entrez **TVF** comme nom du projet, puis cliquez sur **OK** .
@@ -72,7 +72,7 @@ RETURN
 
  
 
-## <a name="create-a-model"></a>Créer un modèle
+## <a name="create-a-model"></a>Création d'un modèle
 
 1.  Cliquez avec le bouton droit sur le nom du projet dans Explorateur de solutions, pointez sur **Ajouter**, puis cliquez sur **nouvel élément** .
 2.  Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet **modèles** .

@@ -3,12 +3,12 @@ title: 'Gestion des conflits d’accès concurrentiel : EF Core'
 author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: b72fa472698e76e18f155cf96b738b0e193eee0f
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: a1d1a5a11d482f9104691aa3c072dbd1c548e9f1
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654614"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417589"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
 
@@ -16,7 +16,7 @@ ms.locfileid: "73654614"
 > Cette page décrit le fonctionnement de l’accès concurrentiel dans EF Core et comment gérer les conflits d’accès concurrentiel dans votre application. Consultez [Jetons d’accès concurrentiel](xref:core/modeling/concurrency) pour plus d’informations sur la configuration des jetons d’accès concurrentiel dans votre modèle.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) sur GitHub.
 
 _L’accès concurrentiel à la base de données_ fait référence aux situations dans lesquelles plusieurs processus ou utilisateurs accèdent à ou modifient les mêmes données dans une base de données en même temps. Le _Contrôle d’accès concurrentiel_ fait référence à des mécanismes spécifiques permettant de garantir la cohérence des données en présence de modifications simultanées.
 

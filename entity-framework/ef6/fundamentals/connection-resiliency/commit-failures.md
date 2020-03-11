@@ -1,29 +1,29 @@
 ---
-title: Gestion des échecs de validation de transaction - EF6
+title: Gestion des échecs de validation de transaction-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
 ms.openlocfilehash: 27e75e6a1919ee2300fe76cfcdf67cceaad887b3
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283652"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417369"
 ---
 # <a name="handling-transaction-commit-failures"></a>Gestion des échecs de validation de transaction
 > [!NOTE]
-> **EF6.1 et versions ultérieures uniquement** -les fonctionnalités, API, etc. abordés dans cette page ont été introduits dans Entity Framework 6.1. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
+> **EF 6.1 uniquement** : les fonctionnalités, les API, etc. présentées dans cette page ont été introduites dans Entity Framework 6,1. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Dans le cadre de 6.1, nous vous présentons une nouvelle fonctionnalité de résilience de connexion pour Entity Framework : la possibilité de détecter et de récupérer automatiquement lorsque des échecs de connexion temporaires affectent l’accusé de réception de la transaction est validée. Des informations complètes sur le scénario sont mieux décrits dans le billet de blog [connectivité de base de données SQL et le problème de l’idempotence](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En résumé, le scénario est que lorsqu’une exception est levée pendant une validation de transaction il existe deux causes possibles :  
+Dans le cadre de 6,1, nous proposons une nouvelle fonctionnalité de résilience des connexions pour EF : la possibilité de détecter et de récupérer automatiquement quand des échecs de connexion temporaires affectent l’accusé de validation des transactions. Les détails complets du scénario sont décrits plus en détail dans le billet de blog [SQL Database connectivité et le problème idempotence](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En résumé, le scénario est que lorsqu’une exception est levée pendant une validation de transaction, deux causes sont possibles :  
 
-1. Échec de la validation de transaction sur le serveur
-2. La validation de transaction a réussi sur le serveur, mais un problème de connectivité a empêché la notification de réussite d’atteindre le client  
+1. La validation de la transaction a échoué sur le serveur
+2. La validation de la transaction a réussi sur le serveur, mais un problème de connectivité a empêché la notification de réussite d’atteindre le client  
 
-Quand le premier cas produit, l’application ou l’utilisateur pouvez retenter l’opération, mais lorsque le deuxième cas se produit nouvelles tentatives doivent être évitées et que l’application peut récupérer automatiquement. Le défi qui consiste sans la capacité à détecter quelle était la raison réelle, une exception a été signalée lors de la validation, l’application ne peut pas choisir le bon plan d’action. La nouvelle fonctionnalité dans EF 6.1 permet EF devrais vérifier de nouveau avec la base de données si la transaction a réussi et prendre en toute transparence de la ligne de conduite appropriée.  
+Lorsque la première situation se produit, l’application ou l’utilisateur peut réessayer l’opération, mais lorsque la deuxième situation se produit, les nouvelles tentatives doivent être évitées et l’application peut effectuer une récupération automatique. Le défi est que, sans la possibilité de détecter la raison pour laquelle une exception a été signalée lors de la validation, l’application ne peut pas choisir la bonne marche à suivre. La nouvelle fonctionnalité d’EF 6,1 permet à EF de double-vérifier avec la base de données si la transaction a réussi et de prendre la bonne marche de l’action en toute transparence.  
 
-## <a name="using-the-feature"></a>À l’aide de la fonctionnalité  
+## <a name="using-the-feature"></a>Utilisation de la fonctionnalité  
 
-Afin d’activer la fonctionnalité, vous devez inclure un appel à [SetTransactionHandler](https://msdn.microsoft.com/library/system.data.entity.dbconfiguration.setdefaulttransactionhandler.aspx) dans le constructeur de votre **DbConfiguration**. Si vous n’êtes pas familiarisé avec **DbConfiguration**, consultez [Configuration en fonction du Code](~/ef6/fundamentals/configuring/code-based.md). Cette fonctionnalité peut être utilisée en association avec les nouvelles tentatives automatiques qu'ont été introduits dans EF6, ce qui facilite la situation dans laquelle la transaction en fait la validation a échoué sur le serveur en raison d’une défaillance passagère :  
+Pour activer la fonctionnalité dont vous avez besoin, incluez un appel à [SetTransactionHandler](https://msdn.microsoft.com/library/system.data.entity.dbconfiguration.setdefaulttransactionhandler.aspx) dans le constructeur de votre **DbConfiguration**. Si vous n’êtes pas familiarisé avec **DbConfiguration**, consultez [configuration basée sur le code](~/ef6/fundamentals/configuring/code-based.md). Cette fonctionnalité peut être utilisée conjointement avec les nouvelles tentatives automatiques que nous avons introduites dans EF6, ce qui vous aide dans la situation dans laquelle la transaction n’a pas réellement pu être validée sur le serveur en raison d’une défaillance temporaire :  
 
 ``` csharp
 using System.Data.Entity;
@@ -42,31 +42,31 @@ public class MyConfiguration : DbConfiguration
 
 ## <a name="how-transactions-are-tracked"></a>Mode de suivi des transactions  
 
-Lorsque la fonctionnalité est activée, EF ajoute automatiquement une nouvelle table à la base de données appelée **__Transactions**. Une nouvelle ligne est insérée dans cette table chaque fois qu’une transaction est créée par Entity Framework et l’existence de cette ligne est vérification si l’échec de la transaction se produit lors de la validation.  
+Lorsque la fonctionnalité est activée, EF ajoute automatiquement une nouvelle table à la base de données appelée **__Transactions**. Une nouvelle ligne est insérée dans cette table chaque fois qu’une transaction est créée par EF et l’existence de cette ligne est vérifiée en cas d’échec de la transaction pendant la validation.  
 
-Bien que EF fera de son mieux pour nettoyer les lignes de la table lorsqu’ils ne sont plus nécessaires, la table peut atteindre si l’application se termine prématurément et c’est pourquoi que vous devrez peut-être vider la table manuellement dans certains cas.  
+Bien que EF fasse le meilleur effort pour nettoyer les lignes de la table lorsque celles-ci ne sont plus nécessaires, la table peut croître si l’application se ferme prématurément et, pour cette raison, vous devrez peut-être vider la table manuellement dans certains cas.  
 
-## <a name="how-to-handle-commit-failures-with-previous-versions"></a>Comment gérer les échecs de validation avec les Versions précédentes
+## <a name="how-to-handle-commit-failures-with-previous-versions"></a>Gestion des échecs de validation avec les versions précédentes
 
-Avant d’EF 6.1 s’est pas mécanisme permettant de gérer les échecs de validation dans le produit d’EF. Il existe plusieurs façons de gérer cette situation peut être appliquée aux versions précédentes d’EF6 :  
+Avant EF 6,1, il n’existait pas de mécanisme pour gérer les échecs de validation dans le produit EF. Il existe plusieurs façons de traiter cette situation qui peut être appliquée aux versions précédentes de EF6 :  
 
-* Option 1 : ne rien faire  
+* Option 1-ne rien faire  
 
-  La probabilité d’un échec de connexion lors de la validation de transaction est faible, elle peut être acceptable pour votre application de simplement échouer si cette condition se produit réellement.  
+  La probabilité d’un échec de connexion pendant la validation de la transaction est faible, ce qui peut être acceptable pour votre application d’échouer si cette condition se produit réellement.  
 
-* Option 2 : utiliser la base de données pour réinitialiser l’état  
+* Option 2-utiliser la base de données pour réinitialiser l’État  
 
-  1. Ignorer le DbContext actuel  
-  2. Créer un nouveau DbContext et restaurer l’état de votre application à partir de la base de données  
-  3. Informer l’utilisateur que la dernière opération ne peut-être pas terminée avec succès  
+  1. Supprimer le DbContext actuel  
+  2. Créer un DbContext et restaurer l’état de votre application à partir de la base de données  
+  3. Informe l’utilisateur que la dernière opération n’a peut-être pas été effectuée avec succès  
 
-* Option 3 - suivre manuellement la transaction  
+* Option 3 : suivre manuellement la transaction  
 
-  1. Ajouter une table non suivies à la base de données utilisé pour suivre l’état des transactions.  
-  2. Insérer une ligne dans la table au début de chaque transaction.  
-  3. Si la connexion échoue lors de la validation, vérifier la présence de la ligne correspondante dans la base de données.  
-     - Si la ligne est présente, se poursuivent normalement, car la transaction a été validée avec succès  
-     - Si la ligne est absente, utilisez une stratégie d’exécution pour retenter l’opération actuelle.  
-  4. Si la validation est réussie, supprimez la ligne correspondante pour éviter la croissance de la table.  
+  1. Ajoutez une table non suivie à la base de données utilisée pour suivre l’état des transactions.  
+  2. Insérez une ligne dans la table au début de chaque transaction.  
+  3. Si la connexion échoue pendant la validation, vérifiez la présence de la ligne correspondante dans la base de données.  
+     - Si la ligne est présente, continue normalement, car la transaction a été validée avec succès  
+     - Si la ligne est absente, utilisez une stratégie d’exécution pour retenter l’opération en cours.  
+  4. Si la validation réussit, supprimez la ligne correspondante pour éviter la croissance de la table.  
 
-[Ce billet de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contient des exemples de code pour accomplir cela sur SQL Azure.  
+[Ce](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) billet de blog contient un exemple de code pour effectuer cette réalisation sur SQL Azure.  
