@@ -4,12 +4,12 @@ author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
 uid: ef6/what-is-new/past-releases
-ms.openlocfilehash: fada7740453cd9a55a1d0069236efcecbd9aa314
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: b7181334cd125c5cbf296d5b3674c0b5f087f438
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656144"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402172"
 ---
 # <a name="past-releases-of-entity-framework"></a>Versions antérieures de Entity Framework
 
@@ -19,7 +19,7 @@ La première version de Entity Framework a été publiée dans 2008, dans le cad
 
 Entre les versions 4,1 et 5,0, le package NuGet EntityFramework étend les bibliothèques EF fournies dans le cadre de .NET Framework.
 
-À partir de la version 6, EF est devenu un projet open source et a également été déplacé complètement hors bande sous la .NET Framework.
+À partir de la version 6, EF est devenu un projet open source et est également déplacé complètement hors bande à partir de la .NET Framework.
 Cela signifie que lorsque vous ajoutez le package NuGet EntityFramework version 6 à une application, vous obtenez une copie complète de la bibliothèque EF qui ne dépend pas des bits EF fournis dans le cadre de .NET Framework.
 Cela nous a permis d’accélérer le rythme du développement et de la livraison de nouvelles fonctionnalités.
 
@@ -94,7 +94,7 @@ Cette mise à jour mineure comprend un nombre important de nouvelles fonctionnal
 - **[La possibilité de configurer des intercepteurs via le fichier app/Web. config](~/ef6/fundamentals/configuring/config-file.md)** permet d’ajouter des intercepteurs sans recompiler l’application.
 - **System. Data. Entity. infrastructure. interception. DatabaseLogger**est un nouvel intercepteur qui facilite l’enregistrement de toutes les opérations de base de données dans un fichier. En association avec la fonctionnalité précédente, cela vous permet de [basculer facilement la journalisation des opérations de base de données pour une application déployée](~/ef6/fundamentals/configuring/config-file.md), sans avoir à recompiler.
 - La **détection des modifications du modèle de migrations** a été améliorée afin que les migrations par génération de modèles automatique soient plus précises. les performances du processus de détection des modifications ont également été améliorées.
-- **Améliorations des performances** , y compris les opérations de base de données réduites pendant l’initialisation, les optimisations de comparaison d’égalité null dans les requêtes LINQ, la génération de vues plus rapide (création de modèle) dans plus de scénarios et la matérialisation plus efficace de entités suivies avec plusieurs associations.
+- **Améliorations des performances** , y compris les opérations de base de données réduites pendant l’initialisation, les optimisations pour la comparaison d’égalité null dans les requêtes LINQ, la génération d’affichages plus rapide (création de modèle) dans plus de scénarios et la matérialisation plus efficace des entités suivies avec plusieurs associations.
 
 ## <a name="ef-602"></a>EF 6.0.2
 Le runtime EF 6.0.2 a été publié en version NuGet en décembre de 2013.
@@ -121,7 +121,7 @@ Les fonctionnalités suivantes fonctionnent pour les modèles créés avec Code 
 - La **[résolution des dépendances](~/ef6/fundamentals/configuring/dependency-resolution.md)** introduit la prise en charge du modèle de localisation de service et nous avons pris en compte certains éléments de fonctionnalité qui peuvent être remplacés par des implémentations personnalisées.
 - L' **[interception/la journalisation SQL](~/ef6/fundamentals/logging-and-interception.md)** fournit des blocs de construction de bas niveau pour l’interception des opérations EF avec une simple journalisation SQL basée sur.
 - Les améliorations de la **testabilité** facilitent la création de doubles de test pour DbContext et DbSet lors de [l’utilisation d’une infrastructure fictive](~/ef6/fundamentals/testing/mocking.md) ou de [l’écriture de vos propres doubles de test](~/ef6/fundamentals/testing/writing-test-doubles.md).
-- **[DbContext peut maintenant être créé avec un DbConnection déjà ouvert,](~/ef6/fundamentals/connection-management.md)** ce qui permet des scénarios dans lesquels il serait utile de pouvoir ouvrir la connexion lors de la création du contexte (par exemple, le partage d’une connexion entre des composants où vous ne pouvez pas garantir État de la connexion).
+- **[DbContext peut maintenant être créé avec un DbConnection déjà ouvert,](~/ef6/fundamentals/connection-management.md)** ce qui permet des scénarios dans lesquels il serait utile de pouvoir ouvrir la connexion lors de la création du contexte (par exemple, le partage d’une connexion entre des composants où vous ne pouvez pas garantir l’état de la connexion).
 - La **[prise en charge améliorée des transactions](~/ef6/saving/transactions.md)** assure la prise en charge d’une transaction externe à l’infrastructure, ainsi que des méthodes améliorées de création d’une transaction dans l’infrastructure.
 - **Enums, spatiales et meilleures performances sur .net 4,0** : en déplaçant les composants principaux qui se trouvaient dans le .NET Framework dans le package NUGET d’EF, nous pouvons désormais offrir une prise en charge des énumérations, des types de données spatiales et des améliorations des performances de EF5 sur .net 4,0.
 - **Amélioration des performances de Enumerable. Contains dans les requêtes LINQ**.
@@ -142,7 +142,7 @@ Les fonctionnalités suivantes s’appliquent à Code First uniquement :
 - **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** est une nouvelle API code First qui permet de configurer le schéma de base de données par défaut d’un modèle de code First à un seul emplacement. Précédemment, le Code First schéma par défaut a été codé en dur pour &quot;&quot; DBO et la seule façon de configurer le schéma auquel une table appartenait était via l’API ToTable.
 - La **méthode DbModelBuilder. configurations. AddFromAssembly** vous permet d’ajouter facilement toutes les classes de configuration définies dans un assembly lorsque vous utilisez des classes de configuration avec l’API Fluent code First.
 - Les **[opérations de migrations personnalisées](https://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** vous ont permis d’ajouter des opérations supplémentaires à utiliser dans vos migrations basées sur le code.
-- Le **niveau d’isolation de la transaction par défaut est modifié en READ_COMMITTED_SNAPSHOT** pour les bases de données créées à l’aide de code First, ce qui permet une plus grande évolutivité et un plus petit nombre de blocages.
+- Le **niveau d’isolation de la transaction par défaut est remplacé par READ_COMMITTED_SNAPSHOT** pour les bases de données créées à l’aide de code First, ce qui permet une plus grande évolutivité et un nombre réduit de blocages.
 - **Les types d’entité et complexes peuvent maintenant être des classes nestedinside**.
 
 ## <a name="ef-50"></a>EF 5,0
@@ -165,7 +165,7 @@ Voici la liste des contenus que nous avons rassemblés spécifiquement pour la v
 -   Configuration de votre modèle
     -   [Création d'un modèle](~/ef6/modeling/index.md)
     -   [Connexions et modèles](~/ef6/fundamentals/configuring/connection-strings.md)
-    -   [Considérations sur les performances](~/ef6/fundamentals/performance/perf-whitepaper.md)
+    -   [Considérations relatives aux performances](~/ef6/fundamentals/performance/perf-whitepaper.md)
     -   [Utilisation de Microsoft SQL Azure](~/ef6/fundamentals/connection-resiliency/retry-logic.md)
     -   [Paramètres du fichier de configuration](~/ef6/fundamentals/configuring/config-file.md)
     -   [Glossaire](~/ef6/resources/glossary.md)
@@ -234,7 +234,7 @@ Voici une liste de contenu spécifiquement mis en place pour la version d’EF 4
 ## <a name="ef-42"></a>EF 4,2
 Le runtime EF 4.2.0 a été publié en version NuGet en novembre 2011.
 Cette version comprend des correctifs de bogues pour la version d’EF 4.1.1.
-Étant donné que cette version ne comprenait que des correctifs de bogues, il aurait peut-être été le correctif EF 4.1.2, mais nous avons choisi de passer à 4,2 pour nous permettre de quitter les numéros de version de correctifs basés sur la date que nous avons utilisés dans les versions 4.1. x et d’adopter la norme de [version sémantique](https://semver.org) pour les contrôle de version emantic.
+Étant donné que cette version ne comprenait que des correctifs de bogues, elle aurait pu être la version de correctif d’EF 4.1.2, mais nous avons choisi de passer à 4,2 pour nous permettre de quitter les numéros de version de correctifs basés sur la date que nous avons utilisés dans les versions 4.1. x et d’adopter la norme de [version sémantique](https://semver.org) pour le contrôle de version sémantique.
 
 Voici une liste de contenu spécifiquement mis en place pour la version d’EF 4,2, le contenu fourni pour EF 4,1 s’applique également à EF 4,2 :
 
