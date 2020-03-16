@@ -5,17 +5,17 @@ ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
 uid: ef6/resources/glossary
 ms.openlocfilehash: df0da4a68b3d2c882d9673417ee5fe335eccae2b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656157"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402200"
 ---
 # <a name="entity-framework-glossary"></a>Glossaire Entity Framework
 ## <a name="code-first"></a>Code First
 Création d’un modèle de Entity Framework à l’aide de code. Le modèle peut cibler une base de données existante ou une nouvelle base de données.
 
-## <a name="context"></a>Contexte
+## <a name="context"></a>Context
 Classe qui représente une session avec la base de données, ce qui vous permet d’interroger et d’enregistrer des données. Un contexte dérive de la classe DbContext ou ObjectContext.
 
 ## <a name="convention-code-first"></a>Convention (Code First)
@@ -78,5 +78,5 @@ Méthode de mappage de l’héritage dans lequel tous les types de la hiérarchi
 ## <a name="table-per-type-tpt"></a>Table par type (TPT)
 Méthode de mappage de l’héritage où les propriétés communes de tous les types de la hiérarchie sont mappées à la même table dans la base de données, mais les propriétés propres à chaque type sont mappées à une table distincte.
 
-## <a name="type-discovery"></a>Détection de type
+## <a name="type-discovery"></a>Découverte du type
 Processus d’identification des types qui doivent faire partie d’un modèle de Entity Framework.
