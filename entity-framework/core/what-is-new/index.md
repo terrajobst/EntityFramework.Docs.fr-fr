@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 03/03/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 2c41f65d1fead8430a39c6230a0f22506686504e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 7b58b4de0eb8d9575f77e0b147da017eabad1867
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413204"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136227"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -57,10 +57,12 @@ Ces données sont ensuite intégrées dans le processus de planification de la p
 
 ### <a name="get-it-now"></a>Télécharger maintenant
 
-Les packages EF Core 5.0 sont **disponibles maintenant** sous forme de [builds quotidiens](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md). 
+Les packages EF Core 5.0 sont **désormais disponibles**  sous forme de :
 
-Les builds quotidiens représentent un excellent moyen de trouver des problèmes et de fournir un retour d’expérience le plus tôt possible.
+* [Builds quotidiennes](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)
+  * Toutes les fonctionnalités et tous les correctifs de bogues les plus récents. Généralement très stables (plus de 57 000 séries de tests pour chaque build).
+* [Préversions NuGet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
+  * En retard par rapport aux builds quotidiennes, mais testées pour fonctionner avec les préversions correspondantes d’ASP.NET Core et de .NET Core.
+
+Les préversions et les builds quotidiennes constituent un excellent moyen de détecter des problèmes et de fournir un retour d’expérience le plus tôt possible.
 Plus tôt nous recevons ces commentaires, plus ils ont de chances d’être exploitables avant la version officielle suivante.
-Nous faisons tout notre possible pour que les builds quotidiens fonctionnent correctement, en exécutant pour chacun plus de 56 000 tests par plateforme.
-
-Les packages en préversion seront expédiés à NuGet plus tard dans l’année.

@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: dc0c1ae1a03c98c6f230557dc0bdd4d29ec191dd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 190057daed61c58c1f89ee8d775913458e413a50
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78412844"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136196"
 ---
 # <a name="migrations"></a>Migrations
 
@@ -215,15 +215,43 @@ Quand vous déboguez vos migrations ou que vous les déployez sur une base de do
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
+#### <a name="basic-usage"></a>Utilisation de base
 ```dotnetcli
 dotnet ef migrations script
 ```
 
+#### <a name="with-from-to-implied"></a>Avec From (To implicite)
+Génère un script SQL à partir de cette migration vers la dernière migration.
+```dotnetcli
+dotnet ef migrations script 20190725054716_Add_new_tables
+```
+
+#### <a name="with-from-and-to"></a>Avec From et To
+Génère un script SQL à partir de la migration `from` vers la migration `to` spécifiée.
+```dotnetcli
+dotnet ef migrations script 20190725054716_Add_new_tables 20190829031257_Add_audit_table
+```
+Vous pouvez utiliser un `from` plus récent que le `to` afin de générer un script de restauration. *Prenez note des scénarios de pertes de données potentielles.*
+
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
+#### <a name="basic-usage"></a>Utilisation de base
 ``` powershell
 Script-Migration
 ```
+
+#### <a name="with-from-to-implied"></a>Avec From (To implicite)
+Génère un script SQL à partir de cette migration vers la dernière migration.
+```powershell
+Script-Migration 20190725054716_Add_new_tables
+```
+
+#### <a name="with-from-and-to"></a>Avec From et To
+Génère un script SQL à partir de la migration `from` vers la migration `to` spécifiée.
+```powershell
+Script-Migration 20190725054716_Add_new_tables 20190829031257_Add_audit_table
+```
+Vous pouvez utiliser un `from` plus récent que le `to` afin de générer un script de restauration. *Prenez note des scénarios de pertes de données potentielles.*
 
 ***
 
