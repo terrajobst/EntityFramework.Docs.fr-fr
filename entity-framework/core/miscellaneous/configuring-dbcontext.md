@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 3ab90d46b7a4476044e5ea38eaf04f995708e7bf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 53b38f288cd45e66d68ebcc3b6066646d59b0262
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416668"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136188"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuration d’un DbContext
 
@@ -186,11 +186,11 @@ Attendez toujours EF Core les méthodes asynchrones immédiatement.
 
 La méthode d’extension [`AddDbContext`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) inscrit par défaut les types `DbContext` avec une [durée de vie limitée](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes) .
 
-Cela ne pose pas de problèmes d’accès simultané dans les applications ASP.NET Core, car il n’existe qu’un seul thread qui exécute chaque demande client à un moment donné, et parce que chaque demande obtient une étendue d’injection de dépendances distincte (et par conséquent une instance `DbContext` distincte).
+Cela ne pose pas de problèmes d’accès simultané dans la plupart des applications ASP.NET Core, car il n’existe qu’un seul thread qui exécute chaque demande client à un moment donné, et parce que chaque demande obtient une étendue d’injection de dépendances distincte (et par conséquent une instance `DbContext` distincte). Pour le modèle d’hébergement de serveur éblouissant, une demande logique est utilisée pour gérer le circuit utilisateur éblouissant, et par conséquent, une seule instance DbContext étendue est disponible par circuit utilisateur si l’étendue d’injection par défaut est utilisée.
 
-Toutefois, tout code qui exécute explicitement plusieurs threads en parallèle doit s’assurer que les instances `DbContext` ne sont jamais accessibles simultanément.
+Tout code qui exécute explicitement plusieurs threads en parallèle doit s’assurer que les instances `DbContext` ne sont jamais accessibles simultanément.
 
-Pour ce faire, vous pouvez utiliser l’injection de dépendances en inscrivant le contexte comme étant étendu et en créant des étendues (à l’aide de `IServiceScopeFactory`) pour chaque thread, ou en inscrivant le `DbContext` comme temporaire (à l’aide de la surcharge de `AddDbContext` qui accepte un paramètre `ServiceLifetime`).
+À l’aide de l’injection de dépendances, cela peut être obtenu en inscrivant le contexte comme étant étendu, en créant des étendues (à l’aide de `IServiceScopeFactory`) pour chaque thread, ou en inscrivant le `DbContext` comme transitoire (à l’aide de la surcharge de `AddDbContext` qui accepte un paramètre `ServiceLifetime`).
 
 ## <a name="more-reading"></a>Plus de lectures
 

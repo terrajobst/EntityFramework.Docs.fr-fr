@@ -1,27 +1,26 @@
 ---
 title: Nouveautés de EF Core 5,0
 author: ajcvickers
-ms.date: 01/29/2020
+ms.date: 03/15/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: 65d7bd43e8a00c77fd6091a74c677635710d03e3
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 08a93555fd76d8a9f6d3011f59d9a34f76d0b22f
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417965"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136259"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
 EF Core 5,0 est actuellement en cours de développement.
 Cette page contient une vue d’ensemble des changements intéressants introduits dans chaque version préliminaire.
-Le premier aperçu de EF Core 5,0 est provisoirement attendu dans le premier trimestre de 2020.
 
 Cette page ne duplique pas le [plan pour EF Core 5,0](plan.md).
 Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.
 
 Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.
 
-## <a name="preview-1-not-yet-shipped"></a>Version préliminaire 1 (pas encore expédiée)
+## <a name="preview-1"></a>Préversion 1
 
 ### <a name="simple-logging"></a>Journalisation simple
 
@@ -40,15 +39,22 @@ La documentation préliminaire est incluse dans l' [État EF Weekly pour le 9 ja
 
 Une documentation supplémentaire est suivie par le [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)du problème.
 
-### <a name="enhanced-debug-views"></a>Vues de débogage améliorées
+### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>Utiliser un C# attribut pour indiquer qu’une entité n’a pas de clé
 
-Les vues de débogage sont un moyen simple de consulter les éléments internes d’EF Core lors du débogage des problèmes.
-Une vue de débogage a été implémentée pour le modèle il y a quelque temps.
-Pour EF Core 5,0, nous avons facilité la lecture et l’ajout d’une nouvelle vue de débogage pour les entités suivies dans le gestionnaire d’État.
+Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute`.
+Par exemple :
 
-La documentation préliminaire est incluse dans l' [État EF Weekly pour le 12 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).
+```CSharp
+[Keyless]
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public int Zip { get; set; }
+}
+```
 
-Une documentation supplémentaire est suivie par le [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)du problème.
+La documentation est suivie d’un problème [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).
 
 ### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a>La connexion ou la chaîne de connexion peut être modifiée lors de l’DbContext initialisé
 
@@ -65,6 +71,16 @@ Celles-ci rerapportent ensuite les modifications de valeur sur les propriétés 
 Toutefois, les proxies sont fournis avec leur propre ensemble de limitations, donc ils ne le sont pas pour tout le monde.
 
 La documentation est suivie d’un problème [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).
+
+### <a name="enhanced-debug-views"></a>Vues de débogage améliorées
+
+Les vues de débogage sont un moyen simple de consulter les éléments internes d’EF Core lors du débogage des problèmes.
+Une vue de débogage a été implémentée pour le modèle il y a quelque temps.
+Pour EF Core 5,0, nous avons facilité la lecture et l’ajout d’une nouvelle vue de débogage pour les entités suivies dans le gestionnaire d’État.
+
+La documentation préliminaire est incluse dans l' [État EF Weekly pour le 12 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).
+
+Une documentation supplémentaire est suivie par le [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)du problème.
 
 ### <a name="improved-handling-of-database-null-semantics"></a>Amélioration de la gestion de la sémantique null de la base de données
 
@@ -93,10 +109,52 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'U
 
 La documentation est suivie d’un problème [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).
 
+### <a name="isrelational"></a>IsRelational
+
+Une nouvelle méthode de `IsRelational` a été ajoutée en plus des `IsSqlServer`, `IsSqlite`et `IsInMemory`existants.
+Cela peut être utilisé pour tester si DbContext utilise un fournisseur de base de données relationnelle.
+Par exemple :
+
+```CSharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    if (Database.IsRelational())
+    {
+        // Do relational-specific model configuration.
+    }
+}
+```
+
+La documentation est suivie d’un problème [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).
+
+### <a name="cosmos-optimistic-concurrency-with-etags"></a>Accès concurrentiel optimiste Cosmos avec ETags
+
+Le fournisseur de base de données Azure Cosmos DB prend désormais en charge l’accès concurrentiel optimiste à l’aide d’ETags.
+Utilisez le générateur de modèles de OnModelCreating pour configurer un ETag :
+
+```CSharp
+builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
+```
+
+SaveChanges lèvera ensuite une `DbUpdateConcurrencyException` sur un conflit d’accès concurrentiel, qui [peut être géré](https://docs.microsoft.com/ef/core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.
+
+
+La documentation est suivie d’un problème [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
+
 ### <a name="query-translations-for-more-datetime-constructs"></a>Traductions de requêtes pour d’autres constructions DateTime
 
-Les requêtes contenant la nouvelle construction DataTime sont désormais traduites.
-En outre, la fonction SQL Server DateDiffWeek est maintenant mappée.
+Les requêtes contenant la nouvelle construction DateTime sont maintenant traduites.
+
+En outre, les fonctions de SQL Server suivantes sont maintenant mappées :
+* DateDiffWeek
+* DateFromParts
+
+Par exemple :
+
+```CSharp
+var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
+
+```
 
 La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).
 
