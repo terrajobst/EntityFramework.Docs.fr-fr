@@ -5,27 +5,27 @@ ms.date: 10/27/2016
 ms.assetid: 3e2f7698-fec2-4cec-9e2d-2e3e0074120c
 uid: core/providers/sqlite/index
 ms.openlocfilehash: e8c3d675322b163fdf1e2e7e01f3815e28f427a2
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413134"
 ---
-# <a name="sqlite-ef-core-database-provider"></a><span data-ttu-id="4d27c-102">Fournisseur de base de données EF Core SQLite</span><span class="sxs-lookup"><span data-stu-id="4d27c-102">SQLite EF Core Database Provider</span></span>
+# <a name="sqlite-ef-core-database-provider"></a><span data-ttu-id="b669f-102">Fournisseur de base de données EF Core SQLite</span><span class="sxs-lookup"><span data-stu-id="b669f-102">SQLite EF Core Database Provider</span></span>
 
-<span data-ttu-id="4d27c-103">Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec SQLite.</span><span class="sxs-lookup"><span data-stu-id="4d27c-103">This database provider allows Entity Framework Core to be used with SQLite.</span></span> <span data-ttu-id="4d27c-104">Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).</span><span class="sxs-lookup"><span data-stu-id="4d27c-104">The provider is maintained as part of the [Entity Framework Core project](https://github.com/aspnet/EntityFrameworkCore).</span></span>
+<span data-ttu-id="b669f-103">Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec SQLite.</span><span class="sxs-lookup"><span data-stu-id="b669f-103">This database provider allows Entity Framework Core to be used with SQLite.</span></span> <span data-ttu-id="b669f-104">Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).</span><span class="sxs-lookup"><span data-stu-id="b669f-104">The provider is maintained as part of the [Entity Framework Core project](https://github.com/aspnet/EntityFrameworkCore).</span></span>
 
-## <a name="install"></a><span data-ttu-id="4d27c-105">Installez</span><span class="sxs-lookup"><span data-stu-id="4d27c-105">Install</span></span>
+## <a name="install"></a><span data-ttu-id="b669f-105">Installer</span><span class="sxs-lookup"><span data-stu-id="b669f-105">Install</span></span>
 
-<span data-ttu-id="4d27c-106">Installez le [package NuGet Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span><span class="sxs-lookup"><span data-stu-id="4d27c-106">Install the [Microsoft.EntityFrameworkCore.Sqlite NuGet package](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span></span>
+<span data-ttu-id="b669f-106">Installez le [package NuGet Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span><span class="sxs-lookup"><span data-stu-id="b669f-106">Install the [Microsoft.EntityFrameworkCore.Sqlite NuGet package](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span></span>
 
-### <a name="net-core-cli"></a>[<span data-ttu-id="4d27c-107">CLI .NET Core</span><span class="sxs-lookup"><span data-stu-id="4d27c-107">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+### <a name="net-core-cli"></a>[<span data-ttu-id="b669f-107">CLI .NET Core</span><span class="sxs-lookup"><span data-stu-id="b669f-107">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-### <a name="visual-studio"></a>[<span data-ttu-id="4d27c-108">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="4d27c-108">Visual Studio</span></span>](#tab/vs)
+### <a name="visual-studio"></a>[<span data-ttu-id="b669f-108">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b669f-108">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.Sqlite
@@ -33,10 +33,10 @@ Install-Package Microsoft.EntityFrameworkCore.Sqlite
 
 ***
 
-## <a name="supported-database-engines"></a><span data-ttu-id="4d27c-109">Moteurs de base de données pris en charge</span><span class="sxs-lookup"><span data-stu-id="4d27c-109">Supported Database Engines</span></span>
+## <a name="supported-database-engines"></a><span data-ttu-id="b669f-109">Moteurs de base de données pris en charge</span><span class="sxs-lookup"><span data-stu-id="b669f-109">Supported Database Engines</span></span>
 
-* <span data-ttu-id="4d27c-110">SQLite (versions 3.7 et suivantes)</span><span class="sxs-lookup"><span data-stu-id="4d27c-110">SQLite (3.7 onwards)</span></span>
+* <span data-ttu-id="b669f-110">SQLite (versions 3.7 et suivantes)</span><span class="sxs-lookup"><span data-stu-id="b669f-110">SQLite (3.7 onwards)</span></span>
 
-## <a name="limitations"></a><span data-ttu-id="4d27c-111">Limitations</span><span class="sxs-lookup"><span data-stu-id="4d27c-111">Limitations</span></span>
+## <a name="limitations"></a><span data-ttu-id="b669f-111">Limites</span><span class="sxs-lookup"><span data-stu-id="b669f-111">Limitations</span></span>
 
-<span data-ttu-id="4d27c-112">Consultez [Limitations de SQLite](limitations.md) pour connaître certaines limitations importantes du fournisseur SQLite.</span><span class="sxs-lookup"><span data-stu-id="4d27c-112">See [SQLite Limitations](limitations.md) for some important limitations of the SQLite provider.</span></span>
+<span data-ttu-id="b669f-112">Consultez [Limitations de SQLite](limitations.md) pour connaître certaines limitations importantes du fournisseur SQLite.</span><span class="sxs-lookup"><span data-stu-id="b669f-112">See [SQLite Limitations](limitations.md) for some important limitations of the SQLite provider.</span></span>
