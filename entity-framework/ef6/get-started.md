@@ -5,10 +5,10 @@ ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
 ms.openlocfilehash: 729dea2c474c35f638ccaf6673550f76e88e2667
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "80136268"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Bien démarrer avec Entity Framework 6
@@ -25,18 +25,18 @@ Ce guide contient un ensemble de liens vers des articles de documentation sélec
 
   Préférez-vous spécifier votre modèle EF en écrivant du code ou en traçant des zones et des lignes ?
 Allez-vous utiliser EF pour mapper vos objets à une base de données existante ou voulez-vous qu’EF crée une base de données adaptée à vos objets ?
-Vous découvrirez ici deux approches différentes pour utiliser EF6 : EF designer et Code First.
+Ici, vous en apprendrez plus sur deux approches différentes à utiliser EF6: EF Designer et Code First.
 Veillez à suivre la discussion et à regarder la vidéo présentant la différence.
 
 * [Utilisation de DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
 
   DbContext est le premier et le plus important type EF dont vous avez besoin pour apprendre à utiliser Entity Framework. Il sert de tremplin pour les requêtes de base de données et effectue le suivi des changements que vous apportez aux objets afin qu’ils puissent être conservés dans la base de données.
 
-* [Poser une question](~/ef6/resources/get-help.md)
+* [Posez une question](~/ef6/resources/get-help.md)
 
   Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
 
-* [Contribuer](https://github.com/aspnet/EntityFramework6/)
+* [Participez](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
 

@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
 ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417523"
 ---
 # <a name="features-included-in-ef-core-10"></a>Fonctionnalités incluses dans EF Core 1.0
@@ -77,7 +77,7 @@ Permet de définir dans le modèle des propriétés qui ne sont pas déclarées 
 
 Permet d’enregistrer les entités d’une hiérarchie d’héritage dans une table unique à l’aide d’une colonne de discriminateur pour identifier le type d’entité pour un enregistrement donné dans la base de données.
 
-### <a name="model-validation"></a>Validation du modèle
+### <a name="model-validation"></a>Validation de modèle
 
 Détecte les modèles non valides dans le modèle et fournit des messages d’erreur utiles.
 

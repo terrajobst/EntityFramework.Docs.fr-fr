@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
 ms.openlocfilehash: 915aaa41beb495a046f2d6260e9c3b174d5f3031
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417676"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
@@ -54,7 +54,7 @@ Vous pourriez souhaiter inclure plusieurs entités associées pour une entité q
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 > [!CAUTION]
-> Depuis la version 3.0.0, chaque `Include` entraîne l’ajout d’une jointure supplémentaire aux requêtes SQL générées par les fournisseurs relationnels, tandis que les versions précédentes généraient des requêtes SQL supplémentaires. Cela peut considérablement modifier les performances de vos requêtes. En particulier, les requêtes LINQ avec un nombre excessif de `Include` opérateurs peuvent devoir être décomposées en plusieurs requêtes LINQ distinctes afin d’éviter le problème d’éclatement cartésien.
+> Depuis la version 3.0.0, chacune `Include` entraînera l’ajout d’un JOIN supplémentaire aux requêtes SQL produites par les fournisseurs relationnels, alors que les versions précédentes ont généré d’autres requêtes SQL. Cela peut changer considérablement les performances de vos requêtes, pour le meilleur ou pour le pire. En particulier, les requêtes de LINQ `Include` avec un nombre extrêmement élevé d’opérateurs peuvent devoir être décomposées en multiples requêtes distinctes de LINQ afin d’éviter le problème d’explosion cartésienne.
 
 ### <a name="include-on-derived-types"></a>Inclure des types dérivés
 

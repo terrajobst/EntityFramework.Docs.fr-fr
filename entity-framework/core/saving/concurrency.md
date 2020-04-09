@@ -4,10 +4,10 @@ author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
 ms.openlocfilehash: a1d1a5a11d482f9104691aa3c072dbd1c548e9f1
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417589"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
@@ -67,6 +67,6 @@ L’approche générale pour gérer les conflits d’accès concurrentiel est la
 3. Actualisez les valeurs d’origine du jeton d’accès concurrentiel pour refléter les valeurs actuelles dans la base de données.
 4. Recommencez le processus jusqu'à ce qu’aucun conflit ne se produise.
 
-Dans l’exemple suivant, `Person.FirstName` et `Person.LastName` sont configurés en tant que jetons d’accès concurrentiel. Il existe un commentaire `// TODO:` à l’emplacement où vous incluez la logique spécifique de l’application pour choisir la valeur à enregistrer.
+Dans l’exemple `Person.FirstName` `Person.LastName` suivant, et sont mis en place comme des jetons de concurrence. Il existe un commentaire `// TODO:` à l’emplacement où vous incluez la logique spécifique de l’application pour choisir la valeur à enregistrer.
 
 [!code-csharp[Main](../../../samples/core/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]
