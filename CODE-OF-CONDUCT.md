@@ -1,0 +1,5 @@
+# <a name="code-of-conduct"></a><span data-ttu-id="10d6f-101">Code de conduite</span><span class="sxs-lookup"><span data-stu-id="10d6f-101">Code of Conduct</span></span>
+
+<span data-ttu-id="10d6f-102">Ce projet a adopté le code de conduite défini dans la charte des contributeurs afin que le comportement à observer dans notre communauté soit clair.</span><span class="sxs-lookup"><span data-stu-id="10d6f-102">This project has adopted the code of conduct defined by the Contributor Covenant to clarify expected behavior in our community.</span></span>
+
+<span data-ttu-id="10d6f-103">Pour plus d’informations, consultez le [code de conduite de .NET Foundation](https://dotnetfoundation.org/code-of-conduct).</span><span class="sxs-lookup"><span data-stu-id="10d6f-103">For more information, see the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).</span></span>
